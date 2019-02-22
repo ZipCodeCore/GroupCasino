@@ -24,14 +24,13 @@ public class GuestAccountDataBase {
      * @return the string representation of the database.
      */
     String getDatabaseOfGuestAccountsAsString() {
-        String databaseAsString = guestAccountDatabase.toString();
+        StringBuilder listOfAccounts = new StringBuilder();
 
-        // The following statements replace a bunch of stuff that is left over from the toString() method of TreeMap
-        databaseAsString = databaseAsString.replaceAll("[{,}]", "");
-        databaseAsString = databaseAsString.replace("^[1234567890]+=", "");
-        databaseAsString = databaseAsString.replaceAll("(?<=\\n)[ 1234567890]+=", "");
+        for (Integer key : this.guestAccountDatabase.keySet()) {
+            listOfAccounts.append(this.guestAccountDatabase.get(key).toString());
+        }
 
-        return databaseAsString;
+        return listOfAccounts.toString();
     }
 
     /**
@@ -45,7 +44,7 @@ public class GuestAccountDataBase {
     Integer addAccount(String name, Double startingBalance){
         Integer idOfNewlyCreatedAccount = accountIdGenerator;
 
-        GuestAccount newlyCreatedAccount = new GuestAccount(/*name, idOfNewlyCreatedAccount, startingBalance*/);
+        GuestAccount newlyCreatedAccount = new GuestAccount(name, idOfNewlyCreatedAccount, startingBalance);
         this.guestAccountDatabase.put(idOfNewlyCreatedAccount, newlyCreatedAccount);
         accountIdGenerator++;
 

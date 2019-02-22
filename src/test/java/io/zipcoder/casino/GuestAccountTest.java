@@ -124,7 +124,7 @@ public void createGuestAccountTest1() {
         String expected = "Johnny Blaze, 888, $555.00\n ";
 
         //When
-        String actual = guestAccount.toStringGuestAccount(888);
+        String actual = guestAccount.toString();
 
         //Then
         Assert.assertEquals(expected, actual);

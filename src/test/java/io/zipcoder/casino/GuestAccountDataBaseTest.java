@@ -18,7 +18,7 @@ public class GuestAccountDataBaseTest {
         // Given
         String name = "Miles";
         Double startingBalance = 1000.0;
-        String expected = "Name: Miles, ID: 1, Balance: 1000.00\n";
+        String expected = "Name: Miles, ID: 1, Balance: $1000.00\n";
 
         // When
         testDataBase.addAccount(name, startingBalance);
@@ -36,8 +36,8 @@ public class GuestAccountDataBaseTest {
         String name2 = "Sarah";
         Double startingBalance2 = 2000.0;
 
-        String expected = "Name: Miles, ID: 1, Balance: 1000.00\n" +
-                "Name: Sarah, ID: 2, Balance: 2000.00\n";
+        String expected = "Name: Miles, ID: 1, Balance: $1000.00\n" +
+                "Name: Sarah, ID: 2, Balance: $2000.00\n";
 
         // When
         testDataBase.addAccount(name1, startingBalance1);
@@ -56,7 +56,7 @@ public class GuestAccountDataBaseTest {
         String name2 = "Sarah";
         Double startingBalance2 = 2000.0;
 
-        String expected = "Name: Sarah, ID: 2, Balance: 2000.00\n";
+        String expected = "Name: Sarah, ID: 2, Balance: $2000.00\n";
 
         // When
         Integer idOfAccountToRemove = testDataBase.addAccount(name1, startingBalance1);
@@ -77,8 +77,8 @@ public class GuestAccountDataBaseTest {
         String name2 = "Sarah";
         Double startingBalance2 = 2000.0;
 
-        String expected = "Name: Miles, ID: 1, Balance: 1000.00\n" +
-                "Name: Sarah, ID: 2, Balance: 2000.00\n";
+        String expected = "Name: Miles, ID: 1, Balance: $1000.00\n" +
+                "Name: Sarah, ID: 2, Balance: $2000.00\n";
 
         Integer idOfAccountToRemove = 4;
         // When
