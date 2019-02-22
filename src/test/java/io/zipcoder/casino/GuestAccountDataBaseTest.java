@@ -105,7 +105,7 @@ public class GuestAccountDataBaseTest {
         testDataBase.addAccount(name1, startingBalance1);
         Integer idOfAccountToGet = testDataBase.addAccount(name2, startingBalance2);
 
-        GuestAccount guestAccount = testDataBase.getAnAccount(idOfAccountToGet);
+        GuestAccount guestAccount = testDataBase.getAccount(idOfAccountToGet);
 
         String actualString = guestAccount.getName();
 
@@ -127,7 +127,7 @@ public class GuestAccountDataBaseTest {
         Integer idOfAccountToGet = testDataBase.addAccount(name1, startingBalance1);
         testDataBase.addAccount(name2, startingBalance2);
 
-        GuestAccount guestAccount = testDataBase.getAnAccount(idOfAccountToGet);
+        GuestAccount guestAccount = testDataBase.getAccount(idOfAccountToGet);
 
         String actualString = guestAccount.getName();
 
@@ -152,7 +152,7 @@ public class GuestAccountDataBaseTest {
         testDataBase.addAccount(name1, startingBalance1);
         testDataBase.addAccount(name2, startingBalance2);
 
-        GuestAccount actualAccount = testDataBase.getAnAccount(idOfAccountToGet);
+        GuestAccount actualAccount = testDataBase.getAccount(idOfAccountToGet);
 
         // Then
         Assert.assertEquals(expectedAccount, actualAccount);

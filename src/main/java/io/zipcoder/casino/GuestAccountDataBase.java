@@ -25,7 +25,12 @@ public class GuestAccountDataBase {
      */
     String getDatabaseOfGuestAccountsAsString() {
         String databaseAsString = guestAccountDatabase.toString();
+
+        // The following statements replace a bunch of stuff that is left over from the toString() method of TreeMap
         databaseAsString = databaseAsString.replaceAll("[{,}]", "");
+        databaseAsString = databaseAsString.replace("^[1234567890]+=", "");
+        databaseAsString = databaseAsString.replaceAll("(?<=\\n)[ 1234567890]+=", "");
+
         return databaseAsString;
     }
 
@@ -61,7 +66,7 @@ public class GuestAccountDataBase {
      * @param id the id of the account to get
      * @return the GuestAccount associated with the specified ID
      */
-    GuestAccount getAnAccount(Integer id) {
+    GuestAccount getAccount(Integer id) {
         return this.guestAccountDatabase.get(id);
     }
 
