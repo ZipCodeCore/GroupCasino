@@ -2,19 +2,20 @@ package io.zipcoder.casino;
 
 
 public class Casino {
-    private GameTable gameTable;
-    private io.zipcoder.casino.Person.Player player;
+    private Balance balance;
 
     public static void main(String[] args) {
         // write your tests before you start fucking with this
     }
 
-    public void pickGameTable() {
-    }
-
-    public void logIn() {
+    public void pickGame() {
     }
 
     public void gameRunner() {
+//login()
+        // pickgame()
+    }
+
+    public void setBalance() {
     }
 }
