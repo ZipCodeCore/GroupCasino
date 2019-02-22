@@ -2,34 +2,67 @@ package io.zipcoder.casino;
 
 import io.zipcoder.casino.Models.GuestAccount;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.TreeMap;
 
 public class GuestAccountDataBase {
 
-    private ArrayList<GuestAccount> databaseOfGuestAccounts;
+    private TreeMap<Integer,GuestAccount> guestAccountDatabase;
     private Integer accountIdGenerator;
 
-    public GuestAccountDataBase() {
-        this.databaseOfGuestAccounts = new ArrayList<>();
+    /**
+     * This is the constructor for the database. It intializes the TreeMap that holds all of the accounts and
+     * initializes the accountIdGenerator to 1. Everytime a new account is added, that accountIdGenerator will
+     * be incremented by 1.
+     */
+    GuestAccountDataBase() {
+        this.guestAccountDatabase = new TreeMap<>();
         accountIdGenerator = 1;
     }
 
-    public String getDatabaseOfGuestAccountsAsString() {
-        return Arrays.toString(databaseOfGuestAccounts.toArray());
+    /**
+     * This method converts the entire database into a string, and returns that string.
+     * @return the string representation of the database.
+     */
+    String getDatabaseOfGuestAccountsAsString() {
+        String databaseAsString = guestAccountDatabase.toString();
+        databaseAsString = databaseAsString.replaceAll("[{,}]", "");
+        return databaseAsString;
     }
 
-    public void addAnAccount(String name, Double startingBalance){
-        // GuestAccount newAccount = new GuestAccount(name, accountIdGenerator, startingBalance);
+    /**
+     * This method adds a new account to the database, and returns the Integer that is the new ID of the newly created
+     * account. It also increments the accountIdGenerator by
+     *
+     * @param name name to be assigned to new account
+     * @param startingBalance starting balance of new account
+     * @return the Integer value that is the new id of the newly created account
+     */
+    Integer addAccount(String name, Double startingBalance){
+        Integer idOfNewlyCreatedAccount = accountIdGenerator;
+
+        GuestAccount newlyCreatedAccount = new GuestAccount(/*name, idOfNewlyCreatedAccount, startingBalance*/);
+        this.guestAccountDatabase.put(idOfNewlyCreatedAccount, newlyCreatedAccount);
         accountIdGenerator++;
+
+        return idOfNewlyCreatedAccount;
     }
 
-    public void removeAnAccount(String name){
-
+    /**
+     * This method removes an existing account from the Database using a given id (the id is the kay for the TreeMap
+     * of GuestAccounts)
+     * @param id the id of the account to remove
+     */
+    void removeAccount(Integer id){
+        this.guestAccountDatabase.remove(id);
     }
 
-    public GuestAccount getAnAccount() {
-        return null;
+    /**
+     * This method takes in an Integer id, finds the associated GuestAccount and returns it.
+     * @param id the id of the account to get
+     * @return the GuestAccount associated with the specified ID
+     */
+    GuestAccount getAnAccount(Integer id) {
+        return this.guestAccountDatabase.get(id);
     }
 
 }
