@@ -11,7 +11,7 @@ public class GuestTest {
 
     @Before
     public void tester() {
-        given = new GuestAccount(null, null, null);
+        given = new GuestAccount(null, null, 100.0);
     }
 
     @Test
@@ -79,20 +79,36 @@ public class GuestTest {
     }
 
     @Test
-    public void updateAccountBalanceTest(){
+    public void addFundsTest(){
         //Given
-//        GuestAccount guestAccount = new GuestAccount();
+//        GuestAccount guestAccount = new GuestAccount(null,null,0.0);
         Guest guest = new Guest("Kevin",given);
         Double given = 100.50;
+        Double expected = 200.5;
 
         //When
-        guest.updateAccountBalance(given);
+        guest.addFunds(given);
         Double actual = guest.getAccountBalance();
 
         //Then
-        Assert.assertEquals(given, actual);
+        Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void removeFundsTest(){
+        //Given
+//        GuestAccount guestAccount = new GuestAccount(null,null,0.0);
+        Guest guest = new Guest("Kevin",given);
+        Double given = 50.00;
+        Double expected = 50.0;
+
+        //When
+        guest.removeFunds(given);
+        Double actual = guest.getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
     @Test
     public void getAccountBalanceTest() {
      // Tested with setMethod -> updateAccountBalanceTest

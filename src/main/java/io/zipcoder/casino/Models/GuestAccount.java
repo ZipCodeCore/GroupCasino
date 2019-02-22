@@ -46,13 +46,13 @@ public class GuestAccount {
     }
 
     public Double addFunds(Double funds){
-
-        return this.accountBalance + funds;
+        this.accountBalance += funds;
+        return this.accountBalance;
     }
 
     public Double removeFunds(Double funds){
-
-        return this.accountBalance - funds;
+        this.accountBalance -= funds;
+        return this.accountBalance;
     }
 }
 
