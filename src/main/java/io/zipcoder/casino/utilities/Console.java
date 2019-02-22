@@ -11,8 +11,9 @@ import java.util.Scanner;
 public final class Console {
     private final Scanner input;
     private final PrintStream output;
+    private static Console instance = null;
 
-    public Console(InputStream in, PrintStream out) {
+    private Console(InputStream in, PrintStream out) {
         this.input = new Scanner(in);
         this.output = out;
     }
@@ -57,5 +58,14 @@ public final class Console {
     public Integer getIntegerInput(String prompt, Object... args) {
         return getLongInput(prompt, args).intValue();
     }
+
+    public static Console getConsole()
+    {
+        if (instance == null)
+            instance = new Console(System.in, System.out);
+        return instance;
+    }
+
+
 }
 
