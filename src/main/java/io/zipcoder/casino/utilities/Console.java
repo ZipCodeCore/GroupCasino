@@ -17,6 +17,10 @@ public final class Console {
         this.output = out;
     }
 
+    public Console() {
+        this(System.in, System.out);
+    }
+
     public void print(String val, Object... args) {
         output.format(val, args);
     }
