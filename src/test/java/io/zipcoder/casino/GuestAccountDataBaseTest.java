@@ -14,11 +14,11 @@ public class GuestAccountDataBaseTest {
     }
 
     @Test
-    public void addAccountUsingNameAndBalanceTest1() {
+    public void addAccountTest1() {
         // Given
         String name = "Miles";
         Double startingBalance = 1000.0;
-        String expected = "[Miles, 1000.0]";
+        String expected = "Name: Miles, ID: 1, Balance: 1000.00\n";
 
         // When
         testDataBase.addAccount(name, startingBalance);
@@ -29,7 +29,7 @@ public class GuestAccountDataBaseTest {
     }
 
     @Test
-    public void addAccountUsingNameAndBalanceTest2() {
+    public void addAccountTest2() {
         // Given
         String name1 = "Miles";
         Double startingBalance1 = 1000.0;
@@ -92,7 +92,7 @@ public class GuestAccountDataBaseTest {
     }
 
     @Test
-    public void getAccountTest() {
+    public void getAccountTest1() {
         // Given
         String name1 = "Miles";
         Double startingBalance1 = 1000.0;
@@ -111,5 +111,50 @@ public class GuestAccountDataBaseTest {
 
         // Then
         Assert.assertEquals(expectedString, actualString);
+    }
+
+    @Test
+    public void getAccountTest2() {
+        // Given
+        String name1 = "Miles";
+        Double startingBalance1 = 1000.0;
+        String name2 = "Sarah";
+        Double startingBalance2 = 2000.0;
+
+        String expectedString = "Miles";
+
+        // When
+        Integer idOfAccountToGet = testDataBase.addAccount(name1, startingBalance1);
+        testDataBase.addAccount(name2, startingBalance2);
+
+        GuestAccount guestAccount = testDataBase.getAnAccount(idOfAccountToGet);
+
+        String actualString = guestAccount.getName();
+
+        // Then
+        Assert.assertEquals(expectedString, actualString);
+    }
+
+    @Test
+    public void getAccountTest3() {
+        // This is the null case
+        // Given
+        String name1 = "Miles";
+        Double startingBalance1 = 1000.0;
+        String name2 = "Sarah";
+        Double startingBalance2 = 2000.0;
+
+        GuestAccount expectedAccount = null;
+
+        Integer idOfAccountToGet = 4;
+
+        // When
+        testDataBase.addAccount(name1, startingBalance1);
+        testDataBase.addAccount(name2, startingBalance2);
+
+        GuestAccount actualAccount = testDataBase.getAnAccount(idOfAccountToGet);
+
+        // Then
+        Assert.assertEquals(expectedAccount, actualAccount);
     }
 }
