@@ -7,4 +7,17 @@ public class Craps extends DiceGame implements GamblingGame {
 
     public void play() {
     }
+
+    public void walkAway() {
+
+    }
+
+    public double payout() {
+        return 0;
+    }
+
+    public void takeBet(double amount) {
+    }
+
+
 }

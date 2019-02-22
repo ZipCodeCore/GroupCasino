@@ -10,4 +10,6 @@ public class Yahtzee extends DiceGame {
 
     public void play() {
     }
+
+    public void walkAway(){}
 }
