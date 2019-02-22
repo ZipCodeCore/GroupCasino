@@ -13,9 +13,18 @@ public final class Console {
     private final PrintStream output;
     private static Console instance = null;
 
-    private Console(InputStream in, PrintStream out) {
+    public Console(InputStream in, PrintStream out) {
         this.input = new Scanner(in);
         this.output = out;
+    }
+
+    public Console(Scanner scanner, PrintStream out) {
+        this.input = scanner;
+        this.output = out;
+    }
+
+    private Console() {
+        this(System.in, System.out);
     }
 
     public void print(String val, Object... args) {
@@ -62,7 +71,7 @@ public final class Console {
     public static Console getConsole()
     {
         if (instance == null)
-            instance = new Console(System.in, System.out);
+            instance = new Console();
         return instance;
     }
 
