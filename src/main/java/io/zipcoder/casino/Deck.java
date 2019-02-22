@@ -1,6 +1,6 @@
 package io.zipcoder.casino;
 
-public class Deck extends CardGame {
+public class Deck {
     private java.util.ArrayList<Card> cards;
     private int size;
 
