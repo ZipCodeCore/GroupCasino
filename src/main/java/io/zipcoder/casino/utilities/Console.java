@@ -11,7 +11,6 @@ import java.util.Scanner;
 public final class Console {
     private final Scanner input;
     private final PrintStream output;
-    private static Console instance = null;
 
     public Console(InputStream in, PrintStream out) {
         this.input = new Scanner(in);
@@ -23,7 +22,7 @@ public final class Console {
         this.output = out;
     }
 
-    private Console() {
+    public Console() {
         this(System.in, System.out);
     }
 
@@ -31,8 +30,8 @@ public final class Console {
         output.format(val, args);
     }
 
-    public void println(String val, Object... vals) {
-        print(val + "\n", vals);
+    public void println(String val, Object... args) {
+        print(val + "\n", args);
     }
 
     public String getStringInput(String prompt, Object... args) {
@@ -66,13 +65,6 @@ public final class Console {
 
     public Integer getIntegerInput(String prompt, Object... args) {
         return getLongInput(prompt, args).intValue();
-    }
-
-    public static Console getConsole()
-    {
-        if (instance == null)
-            instance = new Console();
-        return instance;
     }
 
 

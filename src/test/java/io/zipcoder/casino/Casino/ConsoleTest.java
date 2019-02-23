@@ -11,7 +11,6 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ConsoleTest {
-    private Console console = Console.getConsole();
 
     @Test
     public void testPrint1() {
@@ -205,51 +204,51 @@ public class ConsoleTest {
         console.getLongInput("Don't type in words");
     }
 
-//    @Test
-//    public void testGetLongInput1() {
-//        // Given
-//        byte[] inputBytes = "0".getBytes();
-//        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
-//        Scanner scanner = new Scanner(inputByteArray);
-//        Console console = new Console(scanner, System.out);
-//
-//        // When
-//        Long actual = console.getLongInput("");
-//        Long expected = 0L;
-//
-//        // Then
-//        Assert.assertEquals(expected, actual);
-//    }
-//
-//    @Test
-//    public void testGetLongInput2() {
-//        // Given
-//        byte[] inputBytes = "9000".getBytes();
-//        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
-//        Scanner scanner = new Scanner(inputByteArray);
-//        Console console = new Console(scanner, System.out);
-//
-//        // When
-//        Long actual = console.getLongInput("What are you over?");
-//        Long expected = 9000L;
-//
-//        // Then
-//        Assert.assertEquals(expected, actual);
-//    }
-//
-//
-//    @Test(expected=NoSuchElementException.class)
-//    public void testGetLongInput3()  {
-//        // Given
-//        byte[] inputBytes = "Somethingelse".getBytes();
-//        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
-//        Scanner scanner = new Scanner(inputByteArray);
-//        String expected = String.format("[ %s ] is an invalid user input!", "Somethingelse");
-//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//        Console console = new Console(scanner, new PrintStream(outputStream));
-//
-//        // When
-//        console.getLongInput("Don't type in words");
-//    }
+    @Test
+    public void testGetDoubleInput1() {
+        // Given
+        byte[] inputBytes = "0".getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Scanner scanner = new Scanner(inputByteArray);
+        Console console = new Console(scanner, System.out);
+
+        // When
+        Double actual = console.getDoubleInput("");
+        Double expected = 0.0;
+
+        // Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetDoubleInput2() {
+        // Given
+        byte[] inputBytes = "9000".getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Scanner scanner = new Scanner(inputByteArray);
+        Console console = new Console(scanner, System.out);
+
+        // When
+        Double actual = console.getDoubleInput("What are you over?");
+        Double expected = 9000.0;
+
+        // Then
+        Assert.assertEquals(expected, actual);
+    }
+
+
+    @Test(expected=NoSuchElementException.class)
+    public void testGetDoubleInput3()  {
+        // Given
+        byte[] inputBytes = "Somethingelse".getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Scanner scanner = new Scanner(inputByteArray);
+        String expected = String.format("[ %s ] is an invalid user input!", "Somethingelse");
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(scanner, new PrintStream(outputStream));
+
+        // When
+        console.getDoubleInput("Don't type in words");
+    }
 
 }
