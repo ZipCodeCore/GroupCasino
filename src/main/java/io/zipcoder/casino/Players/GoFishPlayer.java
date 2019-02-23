@@ -31,7 +31,7 @@ public class GoFishPlayer extends Player {
     }
 
     public List<Card> getCards(String getCard) {
-        List<Card> retreivedCards = new ArrayList<>();
+        List<Card> retreivedCards = new ArrayList<Card>();
         for (Card card : hand) {
             if(card.toString().trim().toUpperCase().contains(getCard.trim().toUpperCase())) {
                retreivedCards.add(card);
@@ -57,7 +57,7 @@ public class GoFishPlayer extends Player {
     }
 
     public List<Card> getPairs() {
-        List<Card> cardPairs = new ArrayList<>();
+        List<Card> cardPairs = new ArrayList<Card>();
         for (int i = 0; i < hand.size() - 1; i++) {
             if (hand.get(i).equalRank(hand.get(i + 1))) {
                 cardPairs.add(hand.get(i));
