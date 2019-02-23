@@ -13,7 +13,7 @@ public class GoFish extends Game {
     private GoFishPlayer user = new GoFishPlayer();
     private Deck deck = new Deck();
     private boolean isOver = false;
-    private Console console = new Console();
+    private Console console = Console.getConsole();
 
     public int play() {
         dealStartingHands();
