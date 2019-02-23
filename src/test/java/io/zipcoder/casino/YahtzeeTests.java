@@ -12,6 +12,13 @@ import java.util.TreeMap;
 
 public class YahtzeeTests {
 
+    Dice d1 = new Dice(1, 1);
+    Dice d2 = new Dice(1, 2);
+    Dice d3 = new Dice(1, 3);
+    Dice d4 = new Dice(1, 4);
+    Dice d5 = new Dice(1, 5);
+    Dice d6 = new Dice(1, 6);
+
     @Test
     public void YahtzeeConstructorTest(){
         // Given
@@ -48,12 +55,6 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        Dice d1 = new Dice(1, 3);
-        Dice d2 = new Dice(1, 2);
-        Dice d3 = new Dice(1, 1);
-        Dice d4 = new Dice(1, 4);
-        Dice d5 = new Dice(1, 5);
-
         yahtzee.getRolledDice().add(d1);
         yahtzee.getRolledDice().add(d2);
         yahtzee.getRolledDice().add(d3);
@@ -81,13 +82,6 @@ public class YahtzeeTests {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
-
-        Dice d1 = new Dice(1, 1);
-        Dice d2 = new Dice(1, 2);
-        Dice d3 = new Dice(1, 3);
-        Dice d4 = new Dice(1, 4);
-        Dice d5 = new Dice(1, 5);
-        Dice d6 = new Dice(1, 6);
 
         // Aces
         ArrayList<Dice> acesDice = new ArrayList<Dice>();
@@ -262,13 +256,6 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        Dice d1 = new Dice(1, 1);
-        Dice d2 = new Dice(1, 2);
-        Dice d3 = new Dice(1, 3);
-        Dice d4 = new Dice(1, 4);
-        Dice d5 = new Dice(1, 5);
-        Dice d6 = new Dice(1, 6);
-
         ArrayList<Dice> diceWith2Aces = new ArrayList<Dice>();
         diceWith2Aces.add(d1);
         diceWith2Aces.add(d2);
@@ -301,13 +288,6 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        Dice d1 = new Dice(1, 1);
-        Dice d2 = new Dice(1, 2);
-        Dice d3 = new Dice(1, 3);
-        Dice d4 = new Dice(1, 4);
-        Dice d5 = new Dice(1, 5);
-        Dice d6 = new Dice(1, 6);
-
         ArrayList<Dice> diceWith4Twos = new ArrayList<Dice>();
         diceWith4Twos.add(d2);
         diceWith4Twos.add(d3);
@@ -339,13 +319,6 @@ public class YahtzeeTests {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
-
-        Dice d1 = new Dice(1, 1);
-        Dice d2 = new Dice(1, 2);
-        Dice d3 = new Dice(1, 3);
-        Dice d4 = new Dice(1, 4);
-        Dice d5 = new Dice(1, 5);
-        Dice d6 = new Dice(1, 6);
 
         ArrayList<Dice> diceWith3Threes = new ArrayList<Dice>();
         diceWith3Threes.add(d3);
@@ -488,4 +461,185 @@ public class YahtzeeTests {
         Assert.assertEquals(expectedScore1, actualScore1);
         Assert.assertEquals(expectedScore2, actualScore2);
     }
+
+
+    @Test
+    public void hasThreeOfAKindTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        ArrayList<Dice> diceWithThreeOfAKind = new ArrayList<Dice>();
+        diceWithThreeOfAKind.add(d3);
+        diceWithThreeOfAKind.add(d2);
+        diceWithThreeOfAKind.add(d3);
+        diceWithThreeOfAKind.add(d4);
+        diceWithThreeOfAKind.add(d5);
+
+        ArrayList<Dice> diceWithoutThreeOfAKind = new ArrayList<Dice>();
+        diceWithoutThreeOfAKind.add(d1);
+        diceWithoutThreeOfAKind.add(d2);
+        diceWithoutThreeOfAKind.add(d3);
+        diceWithoutThreeOfAKind.add(d4);
+        diceWithoutThreeOfAKind.add(d3);
+
+        // When
+        boolean actualThreeOfAKind = yahtzee.hasThreeOfAKind(diceWithThreeOfAKind);
+        boolean actualNotThreeOfAKind = yahtzee.hasThreeOfAKind(diceWithoutThreeOfAKind);
+
+        // Then
+        Assert.assertTrue(actualThreeOfAKind);
+        Assert.assertFalse(actualNotThreeOfAKind);
+    }
+
+
+    @Test
+    public void hasFourOfAKindTest() {
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        ArrayList<Dice> diceWithFourOfAKind = new ArrayList<Dice>();
+        diceWithFourOfAKind.add(d2);
+        diceWithFourOfAKind.add(d2);
+        diceWithFourOfAKind.add(d6);
+        diceWithFourOfAKind.add(d2);
+        diceWithFourOfAKind.add(d2);
+
+        ArrayList<Dice> diceWithoutFourOfAKind = new ArrayList<Dice>();
+        diceWithoutFourOfAKind.add(d2);
+        diceWithoutFourOfAKind.add(d3);
+        diceWithoutFourOfAKind.add(d4);
+        diceWithoutFourOfAKind.add(d2);
+        diceWithoutFourOfAKind.add(d2);
+
+        // When
+        boolean actualFourOfAKind = yahtzee.hasFourOfAKind(diceWithFourOfAKind);
+        boolean actualNotFourOfAKind = yahtzee.hasFourOfAKind(diceWithoutFourOfAKind);
+
+        // Then
+        Assert.assertTrue(actualFourOfAKind);
+        Assert.assertFalse(actualNotFourOfAKind);
+    }
+
+
+    @Test
+    public void hasFullHouseTest() {
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        ArrayList<Dice> diceWithFullHouse = new ArrayList<Dice>();
+        diceWithFullHouse.add(d3);
+        diceWithFullHouse.add(d6);
+        diceWithFullHouse.add(d6);
+        diceWithFullHouse.add(d3);
+        diceWithFullHouse.add(d3);
+
+        ArrayList<Dice> diceWithoutFullHouse = new ArrayList<Dice>();
+        diceWithoutFullHouse.add(d3);
+        diceWithoutFullHouse.add(d6);
+        diceWithoutFullHouse.add(d6);
+        diceWithoutFullHouse.add(d3);
+        diceWithoutFullHouse.add(d2);
+
+        // When
+        boolean actualFullHouse = yahtzee.hasFullHouse(diceWithFullHouse);
+        boolean actualNotFullHouse = yahtzee.hasFullHouse(diceWithoutFullHouse);
+
+        // Then
+        Assert.assertTrue(actualFullHouse);
+        Assert.assertFalse(actualNotFullHouse);
+    }
+
+
+    @Test
+    public void hasSmallStraightTest() {
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        ArrayList<Dice> diceWithSmallStraight = new ArrayList<Dice>();
+        diceWithSmallStraight.add(d1);
+        diceWithSmallStraight.add(d4);
+        diceWithSmallStraight.add(d6);
+        diceWithSmallStraight.add(d2);
+        diceWithSmallStraight.add(d3);
+
+        ArrayList<Dice> diceWithoutSmallStraight = new ArrayList<Dice>();
+        diceWithoutSmallStraight.add(d1);
+        diceWithoutSmallStraight.add(d2);
+        diceWithoutSmallStraight.add(d3);
+        diceWithoutSmallStraight.add(d5);
+        diceWithoutSmallStraight.add(d6);
+
+        // When
+        boolean actualSmallStraight = yahtzee.hasSmallStraight(diceWithSmallStraight);
+        boolean actualNotSmallStraight = yahtzee.hasSmallStraight(diceWithoutSmallStraight);
+
+        // Then
+        Assert.assertTrue(actualSmallStraight);
+        Assert.assertFalse(actualNotSmallStraight);
+    }
+
+
+    @Test
+    public void hasLargeStraightTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        ArrayList<Dice> diceWithLargeStraight = new ArrayList<Dice>();
+        diceWithLargeStraight.add(d6);
+        diceWithLargeStraight.add(d2);
+        diceWithLargeStraight.add(d5);
+        diceWithLargeStraight.add(d3);
+        diceWithLargeStraight.add(d4);
+
+        ArrayList<Dice> diceWithoutLargeStraight = new ArrayList<Dice>();
+        diceWithoutLargeStraight.add(d6);
+        diceWithoutLargeStraight.add(d2);
+        diceWithoutLargeStraight.add(d4);
+        diceWithoutLargeStraight.add(d3);
+        diceWithoutLargeStraight.add(d1);
+
+        // When
+        boolean actualLargeStraight = yahtzee.hasLargeStraight(diceWithLargeStraight);
+        boolean actualNotLargeStraight = yahtzee.hasLargeStraight(diceWithoutLargeStraight);
+
+        // Then
+        Assert.assertTrue(actualLargeStraight);
+        Assert.assertFalse(actualNotLargeStraight);
+    }
+
+
+    @Test
+    public void hasYahtzeeTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        ArrayList<Dice> diceWithYahtzee = new ArrayList<Dice>();
+        diceWithYahtzee.add(d2);
+        diceWithYahtzee.add(d2);
+        diceWithYahtzee.add(d2);
+        diceWithYahtzee.add(d2);
+        diceWithYahtzee.add(d2);
+
+        ArrayList<Dice> diceWithoutYahtzee = new ArrayList<Dice>();
+        diceWithoutYahtzee.add(d2);
+        diceWithoutYahtzee.add(d2);
+        diceWithoutYahtzee.add(d2);
+        diceWithoutYahtzee.add(d2);
+        diceWithoutYahtzee.add(d1);
+
+        // When
+        boolean actualYahtzee = yahtzee.hasYahtzee(diceWithYahtzee);
+        boolean actualNotYahtzee = yahtzee.hasYahtzee(diceWithoutYahtzee);
+
+        // Then
+        Assert.assertTrue(actualYahtzee);
+        Assert.assertFalse(actualNotYahtzee);
+    }
+
 }
