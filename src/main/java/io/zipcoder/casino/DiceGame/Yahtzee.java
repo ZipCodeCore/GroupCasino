@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.DiceGame;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
