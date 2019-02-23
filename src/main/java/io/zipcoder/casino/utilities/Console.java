@@ -8,6 +8,7 @@ import java.util.Scanner;
 /**
  * You are advised against modifying this class.
  */
+
 public final class Console {
     private final Scanner input;
     private final PrintStream output;
@@ -33,10 +34,18 @@ public final class Console {
     public void println(String val, Object... args) {
         print(val + "\n", args);
     }
+    
+    public void clear() {}
+        //output.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); }
 
     public String getStringInput(String prompt, Object... args) {
         println(prompt, args);
         return input.nextLine();
+    }
+
+    public String getStandardInput(String prompt, Object... args) {
+        println(prompt, args);
+        return input.nextLine().trim().toUpperCase();
     }
 
     public Double getDoubleInput(String prompt, Object... args) {

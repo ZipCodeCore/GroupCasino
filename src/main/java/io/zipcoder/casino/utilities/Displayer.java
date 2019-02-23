@@ -1,6 +1,7 @@
 package io.zipcoder.casino.utilities;
 
 import io.zipcoder.casino.Cards.Card;
+import io.zipcoder.casino.Players.GoFishPlayer;
 
 import java.util.List;
 
@@ -14,57 +15,32 @@ public class Displayer {
     }
 
 
-    public void displayHand(List<Card> cards) {
-        console.println("Your current hand is: ");
-        displayCards(cards);
-    }
-
-    public void displayCards(List<Card> cards) {
-        console.println("DISPLAYED CARDS: ----------");
-        for (Card card: cards) {
-            console.println(card.toString());
-        }
-        console.println("--------------------");
-    }
 
     public String goFishTurn() {
-        return console.getStringInput("What card would you like to ask for?");
+        return console.getStringInput("What card would you like to ask for?").trim().toUpperCase();
     }
 
     public void announceCardGiven(String answer, int size) {
         console.println(String.format("You got me! Here's %d %ss", size, answer));
     }
 
-    public void announceGoFish(String answer, Card card) {
-        console.println(String.format("Nope! I don't have any %ss. Go Fish!", answer));
-        console.println(String.format("Don't tell that other guy, but you drew a %s", card.toString()));
+    public void announceGoFish(Card card) {
+        console.println(String.format("Nope! Go Fish!"));
+        //console.println(String.format("Don't tell that other guy, but you drew a %s", card.toString()));
     }
 
-    public boolean playPair() {
-        String playPair = console.getStringInput("Would you like to play a pair?");
-        if ("yes".equals(playPair.toLowerCase().trim())) {
-            return true;
-        } else {
-            console.println("Okay, we'll keep going");
-            return false;
-        }
-    }
 
-    public String getPairToPlay() {
+    public String getBookToPlay() {
         return console.getStringInput("Type of card do you want to play? (Ace, two, three, king, etc)").trim().toUpperCase();
     }
 
-    public void notAPair() {
-        console.println("That's not a pair.");
+    public void notABook() {
+        console.println("That's not a book.");
     }
 
     public void congradulate() {
-        console.println("You won! Great game.");
     }
 
-    public void goodGame() {
-        console.println("Looks like I beat you this time. Come back anytime!");
-    }
 
     public boolean askForCard(String askedFor) {
         String hasCard = console.getStringInput(String.format("Do you have any %ss", askedFor));
@@ -85,5 +61,13 @@ public class Displayer {
 
     public void accuse() {
         console.println("I don't think that's right -.-");
+    }
+
+    public void noMoreCards() {
+        console.println("There are no more cards in the deck");
+    }
+
+    public void outOfCards() {
+        console.println("I'm out of cards in my hand! I'll just draw");
     }
 }

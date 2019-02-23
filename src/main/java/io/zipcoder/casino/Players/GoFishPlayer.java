@@ -8,6 +8,7 @@ import java.util.List;
 
 public class GoFishPlayer extends Player {
     private List<Card> hand;
+    private int bookCount = 0;
 
     public List<Card> getHand() {
         return hand;
@@ -20,10 +21,10 @@ public class GoFishPlayer extends Player {
     public void addToHand(List<Card> cards) {this.hand.addAll(cards);  Collections.sort(hand); }
     public void addToHand(Card card) {this.hand.add(card); Collections.sort(hand); }
 
-    public boolean handContains(String checkFor) {
+    public boolean hasCard(String checkCard) {
         boolean hasCard = false;
         for (Card card : hand) {
-            if(card.toString().trim().toUpperCase().contains(checkFor.trim().toUpperCase())) {
+            if(card.toString().contains(checkCard)) {
                 hasCard = true;
             }
         }
@@ -31,14 +32,14 @@ public class GoFishPlayer extends Player {
     }
 
     public List<Card> getCards(String getCard) {
-        List<Card> retreivedCards = new ArrayList<>();
+        List<Card> retrievedCards = new ArrayList<>();
         for (Card card : hand) {
             if(card.toString().trim().toUpperCase().contains(getCard.trim().toUpperCase())) {
-               retreivedCards.add(card);
+                retrievedCards.add(card);
             }
         }
-        hand.removeAll(retreivedCards);
-        return retreivedCards;
+        hand.removeAll(retrievedCards);
+        return retrievedCards;
     }
 
     public Card getRandomCard() {
@@ -46,25 +47,45 @@ public class GoFishPlayer extends Player {
         return hand.get(0);
     }
 
-    public boolean hasPairs() {
-        if(hand.size() == 1) { return false;}
-        for (int i = 0; i < hand.size()-1; i++) {
-            if(hand.get(i).equalRank(hand.get(i+1))) {
+    public boolean hasBooks() {
+        if(hand.size() < 4) { return false;}
+        for (int i = 0; i < hand.size()-3; i++) {
+            List<Card> nextFour = getNextFour(i);
+            if(Card.equalRank(nextFour)) {
                 return true;
             }
         }
         return false;
     }
 
-    public List<Card> getPairs() {
-        List<Card> cardPairs = new ArrayList<>();
-        for (int i = 0; i < hand.size() - 1; i++) {
-            if (hand.get(i).equalRank(hand.get(i + 1))) {
-                cardPairs.add(hand.get(i));
-                cardPairs.add(hand.get(i + 1));
+    public List<Card> getBooks() {
+        List<Card> cardBooks = new ArrayList<>();
+        for (int i = 0; i < hand.size() - 3; i++) {
+            List<Card> nextFour = getNextFour(i);
+                if (Card.equalRank(nextFour)) {
+                    cardBooks.addAll(nextFour);
+                    i+=3;
+                    bookCount++;
+                }
             }
-        }
-        hand.removeAll(cardPairs);
-        return cardPairs;
+        hand.removeAll(cardBooks);
+        return cardBooks;
+    }
+
+    private List<Card> getNextFour(int i) {
+        List<Card> nextFour = new ArrayList<>();
+        nextFour.add(hand.get(i));
+        nextFour.add(hand.get(i+1));
+        nextFour.add(hand.get(i+2));
+        nextFour.add(hand.get(i+3));
+        return nextFour;
+    }
+
+    public int getBookCount() {
+        return bookCount;
+    }
+
+    public void increaseBookCount() {
+        bookCount++;
     }
 }

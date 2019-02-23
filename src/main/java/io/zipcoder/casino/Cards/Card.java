@@ -1,5 +1,7 @@
 package io.zipcoder.casino.Cards;
 
+import java.util.List;
+
 public class Card implements Comparable<Card>{
 
     private Suit suit;
@@ -9,7 +11,7 @@ public class Card implements Comparable<Card>{
         this.rank = rank;
     }
 
-    public Suit getSuit() {
+    private Suit getSuit() {
         return suit;
     }
 
@@ -18,7 +20,7 @@ public class Card implements Comparable<Card>{
     }
 
     public String toString() {
-        return rank + " of " + suit;
+        return "|" + rank + " of " + suit;
     }
 
     public int compareTo(Card otherCard) {
@@ -27,5 +29,14 @@ public class Card implements Comparable<Card>{
 
     public boolean equalRank(Card otherCard) {
         return otherCard.getRank() == rank;
+    }
+
+    public static boolean equalRank(List<Card> otherCards) {
+        for (int i = 0; i < otherCards.size() - 1; i++) {
+            if (!otherCards.get(i).equalRank(otherCards.get(i+1))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

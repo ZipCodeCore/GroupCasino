@@ -111,6 +111,38 @@ public class ConsoleTest {
     }
 
     @Test
+    public void testGetStandardInput() {
+        // Given
+        String input = "test answer";
+        byte[] inputBytes = input.getBytes();
+        String expectedInput = input.toUpperCase().trim();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Console console = new Console(new Scanner(inputByteArray), System.out);
+
+        // When
+        String actualInput = console.getStandardInput(" ");
+
+        // Then
+        Assert.assertEquals(expectedInput, actualInput);
+    }
+
+    @Test
+    public void testGetStandardInput2() {
+        // Given
+        String input = "adfs;jafdsjpafjpi";
+        byte[] inputBytes = input.getBytes();
+        String expectedInput = input.toUpperCase().trim();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Console console = new Console(new Scanner(inputByteArray), System.out);
+
+        // When
+        String actualInput = console.getStandardInput(" ");
+
+        // Then
+        Assert.assertEquals(expectedInput, actualInput);
+    }
+
+    @Test
     public void testGetIntegerInput1() {
         // Given
         byte[] inputBytes = "0".getBytes();
