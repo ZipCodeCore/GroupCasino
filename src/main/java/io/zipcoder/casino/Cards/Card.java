@@ -11,7 +11,7 @@ public class Card implements Comparable<Card>{
         this.rank = rank;
     }
 
-    private Suit getSuit() {
+    public Suit getSuit() {
         return suit;
     }
 
@@ -20,7 +20,7 @@ public class Card implements Comparable<Card>{
     }
 
     public String toString() {
-        return "|" + rank + " of " + suit;
+        return "|" + rank.toString().toLowerCase() + " of " + suit.toString().toLowerCase();
     }
 
     public int compareTo(Card otherCard) {
@@ -33,10 +33,14 @@ public class Card implements Comparable<Card>{
 
     public static boolean equalRank(List<Card> otherCards) {
         for (int i = 0; i < otherCards.size() - 1; i++) {
-            if (!otherCards.get(i).equalRank(otherCards.get(i+1))) {
+            if(!otherCards.get(i).equalRank(otherCards.get(i+1))) {
                 return false;
             }
         }
         return true;
+    }
+
+    public int getRankValue() {
+        return rank.returnPrimaryRankValue();
     }
 }
