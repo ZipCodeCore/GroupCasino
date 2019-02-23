@@ -31,42 +31,133 @@ public class Yahtzee extends DiceGame {
 
     // this method will merge ale rolledDice and savedDice into one ArrayList
     public ArrayList<Dice> getAllDice(ArrayList<Dice> rolledDice, ArrayList<Dice> savedDice){
-        return null;
+        ArrayList<Dice> allDice = rolledDice;
+        for(Dice die : savedDice){
+            allDice.add(die);
+        }
+        return allDice;
     }
 
     // this method will get the score for the entered category based on the dice
     public int getScoreForCategory(String category, ArrayList<Dice> allDice){
-        return 0;
+        int score = 0;
+        String categoryToScore = category.toLowerCase();
+
+        switch (categoryToScore) {
+            case "aces":
+                score = scoreAces(allDice);
+                break;
+
+            case "twos":
+                score = scoreTwos(allDice);
+                break;
+
+            case "threes":
+                score = scoreThrees(allDice);
+                break;
+
+            case "fours":
+                score = scoreFours(allDice);
+                break;
+
+            case "fives":
+                score = scoreFives(allDice);
+                break;
+
+            case "sixes":
+                score = scoreSixes(allDice);
+                break;
+
+            case "three of a kind":
+                score = scoreThreeOfAKind(allDice);
+                break;
+
+            case "four of a kind":
+                score = scoreFourOfAKind(allDice);
+                break;
+
+            case "full house":
+                score = scoreFullHouse(allDice);
+                break;
+
+            case "small straight":
+                score = scoreSmallStraight(allDice);
+                break;
+
+            case "large straight":
+                score = scoreLargeStraight(allDice);
+                break;
+
+            case "yahtzee":
+                score = scoreYahtzee(allDice);
+
+            case "chance":
+                score = scoreChance(allDice);
+
+            default :
+                System.out.println("invalid category");
+        }
+        return score;
     }
 
     public int scoreAces(ArrayList<Dice> allDice){
-        // returns sum of all Aces in Dice
-        return 0;
+        int score = 0;
+        for(Dice die : allDice){
+            if (die.getValue() == 1){
+                score += 1;
+            }
+        }
+        return score;
     }
 
     public int scoreTwos(ArrayList<Dice> allDice){
-        // returns sum of all Twos in Dice
-        return 0;
+        int score = 0;
+        for(Dice die : allDice){
+            if (die.getValue() == 2){
+                score += 2;
+            }
+        }
+        return score;
     }
 
     public int scoreThrees(ArrayList<Dice> allDice){
-        // returns sum of all Threes in dice
-        return 0;
+        int score = 0;
+        for(Dice die : allDice){
+            if (die.getValue() == 3){
+                score += 3;
+            }
+        }
+        return score;
     }
 
     public int scoreFours(ArrayList<Dice> allDice){
-        // returns sum of all Fours in dice
-        return 0;
+        int score = 0;
+        for(Dice die : allDice){
+            if (die.getValue() == 4){
+                score += 4;
+            }
+        }
+        return score;
     }
 
     public int scoreFives(ArrayList<Dice> allDice){
-        // returns sum of all Fives in dice
-        return 0;
+        int score = 0;
+        for(Dice die : allDice){
+            if (die.getValue() == 5){
+                score += 5;
+            }
+        }
+        return score;
     }
 
     public int scoreSixes(ArrayList<Dice> allDice){
-        // returns sum of all Sixes in dice
-        return 0;
+        int score = 0;
+        for(Dice die : allDice){
+            if (die.getValue() == 6){
+                score += 6;
+            }
+        }
+        return score;
     }
 
     public int upperSectionBonus(TreeMap<String, Integer> scoreCard){

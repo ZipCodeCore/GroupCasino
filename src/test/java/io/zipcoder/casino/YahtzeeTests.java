@@ -488,6 +488,4 @@ public class YahtzeeTests {
         Assert.assertEquals(expectedScore1, actualScore1);
         Assert.assertEquals(expectedScore2, actualScore2);
     }
-
-
 }

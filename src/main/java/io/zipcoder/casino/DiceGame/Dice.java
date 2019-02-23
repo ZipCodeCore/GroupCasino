@@ -13,6 +13,22 @@ public class Dice {
         this.value = value;
     }
 
+    public int getNumberOfDice() {
+        return numberOfDice;
+    }
+
+    public void setNumberOfDice(int numberOfDice) {
+        this.numberOfDice = numberOfDice;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     int rollDice(){
         return 0;
     }
