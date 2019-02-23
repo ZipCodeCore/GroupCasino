@@ -39,10 +39,7 @@ public class YahtzeePlayer {
     }
 
 
-
-
-
-
-
-
+    public String getName() {
+        return this.name;
+    }
 }

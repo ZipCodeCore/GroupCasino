@@ -35,7 +35,7 @@ public class Yahtzee extends DiceGame {
     }
 
     // this method will get the score for the entered category based on the dice
-    public int getScoreForCategoty(String category, ArrayList<Dice> allDice){
+    public int getScoreForCategory(String category, ArrayList<Dice> allDice){
         return 0;
     }
 
@@ -164,4 +164,51 @@ public class Yahtzee extends DiceGame {
         return 0;
     }
 
+    public YahtzeePlayer getYahtzeePlayer() {
+        return this.yahtzeePlayer;
+    }
+
+    public TreeMap<String, Integer> getScoreCard() {
+        return this.scoreCard;
+    }
+
+    public ArrayList<Dice> getSavedDice() {
+        return this.savedDice;
+    }
+
+    public void setYahtzeePlayer(YahtzeePlayer yahtzeePlayer) {
+        this.yahtzeePlayer = yahtzeePlayer;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setScoreCard(TreeMap<String, Integer> scoreCard) {
+        this.scoreCard = scoreCard;
+    }
+
+    public int getRollNumber() {
+        return rollNumber;
+    }
+
+    public void setRollNumber(int rollNumber) {
+        this.rollNumber = rollNumber;
+    }
+
+    public void setSavedDice(ArrayList<Dice> savedDice) {
+        this.savedDice = savedDice;
+    }
+
+    public ArrayList<Dice> getRolledDice() {
+        return rolledDice;
+    }
+
+    public void setRolledDice(ArrayList<Dice> rolledDice) {
+        this.rolledDice = rolledDice;
+    }
 }
