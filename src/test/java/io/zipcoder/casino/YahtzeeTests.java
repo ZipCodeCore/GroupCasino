@@ -256,5 +256,238 @@ public class YahtzeeTests {
     }
 
 
+    @Test
+    public void scoreAcesTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        Dice d1 = new Dice(1, 1);
+        Dice d2 = new Dice(1, 2);
+        Dice d3 = new Dice(1, 3);
+        Dice d4 = new Dice(1, 4);
+        Dice d5 = new Dice(1, 5);
+        Dice d6 = new Dice(1, 6);
+
+        ArrayList<Dice> diceWith2Aces = new ArrayList<Dice>();
+        diceWith2Aces.add(d1);
+        diceWith2Aces.add(d2);
+        diceWith2Aces.add(d3);
+        diceWith2Aces.add(d1);
+        diceWith2Aces.add(d5);
+        int expectedScore1 = 2;
+
+        ArrayList<Dice> diceWith0Aces = new ArrayList<Dice>();
+        diceWith0Aces.add(d5);
+        diceWith0Aces.add(d2);
+        diceWith0Aces.add(d3);
+        diceWith0Aces.add(d4);
+        diceWith0Aces.add(d6);
+        int expectedScore2 = 0;
+
+        // When
+        int actualScore1 = yahtzee.scoreAces(diceWith2Aces);
+        int actualScore2 = yahtzee.scoreAces(diceWith0Aces);
+
+        // Then
+        Assert.assertEquals(expectedScore1, actualScore1);
+        Assert.assertEquals(expectedScore2, actualScore2);
+    }
+
+
+    @Test
+    public void scoreTwosTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        Dice d1 = new Dice(1, 1);
+        Dice d2 = new Dice(1, 2);
+        Dice d3 = new Dice(1, 3);
+        Dice d4 = new Dice(1, 4);
+        Dice d5 = new Dice(1, 5);
+        Dice d6 = new Dice(1, 6);
+
+        ArrayList<Dice> diceWith4Twos = new ArrayList<Dice>();
+        diceWith4Twos.add(d2);
+        diceWith4Twos.add(d3);
+        diceWith4Twos.add(d2);
+        diceWith4Twos.add(d2);
+        diceWith4Twos.add(d2);
+        int expectedScore1 = 8;
+
+        ArrayList<Dice> diceWith0Twos = new ArrayList<Dice>();
+        diceWith0Twos.add(d5);
+        diceWith0Twos.add(d6);
+        diceWith0Twos.add(d1);
+        diceWith0Twos.add(d3);
+        diceWith0Twos.add(d4);
+        int expectedScore2 = 0;
+
+        // When
+        int actualScore1 = yahtzee.scoreTwos(diceWith4Twos);
+        int actualScore2 = yahtzee.scoreTwos(diceWith0Twos);
+
+        // Then
+        Assert.assertEquals(expectedScore1, actualScore1);
+        Assert.assertEquals(expectedScore2, actualScore2);
+    }
+
+
+    @Test
+    public void scoreThreesTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        Dice d1 = new Dice(1, 1);
+        Dice d2 = new Dice(1, 2);
+        Dice d3 = new Dice(1, 3);
+        Dice d4 = new Dice(1, 4);
+        Dice d5 = new Dice(1, 5);
+        Dice d6 = new Dice(1, 6);
+
+        ArrayList<Dice> diceWith3Threes = new ArrayList<Dice>();
+        diceWith3Threes.add(d3);
+        diceWith3Threes.add(d2);
+        diceWith3Threes.add(d2);
+        diceWith3Threes.add(d3);
+        diceWith3Threes.add(d3);
+        int expectedScore1 = 9;
+
+        ArrayList<Dice> diceWith0Threes = new ArrayList<Dice>();
+        diceWith0Threes.add(d1);
+        diceWith0Threes.add(d2);
+        diceWith0Threes.add(d4);
+        diceWith0Threes.add(d5);
+        diceWith0Threes.add(d6);
+        int expectedScore2 = 0;
+
+        // When
+        int actualScore1 = yahtzee.scoreThrees(diceWith3Threes);
+        int actualScore2 = yahtzee.scoreThrees(diceWith0Threes);
+
+        // Then
+        Assert.assertEquals(expectedScore1, actualScore1);
+        Assert.assertEquals(expectedScore2, actualScore2);
+    }
+
+
+    @Test
+    public void scoreFoursTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        Dice d1 = new Dice(1, 1);
+        Dice d2 = new Dice(1, 2);
+        Dice d3 = new Dice(1, 3);
+        Dice d4 = new Dice(1, 4);
+        Dice d5 = new Dice(1, 5);
+        Dice d6 = new Dice(1, 6);
+
+        ArrayList<Dice> diceWith4Fours = new ArrayList<Dice>();
+        diceWith4Fours.add(d4);
+        diceWith4Fours.add(d2);
+        diceWith4Fours.add(d4);
+        diceWith4Fours.add(d4);
+        diceWith4Fours.add(d4);
+        int expectedScore1 = 16;
+
+        ArrayList<Dice> diceWith0Fours = new ArrayList<Dice>();
+        diceWith0Fours.add(d1);
+        diceWith0Fours.add(d2);
+        diceWith0Fours.add(d3);
+        diceWith0Fours.add(d5);
+        diceWith0Fours.add(d6);
+        int expectedScore2 = 0;
+
+        // When
+        int actualScore1 = yahtzee.scoreFours(diceWith4Fours);
+        int actualScore2 = yahtzee.scoreFours(diceWith0Fours);
+
+        // Then
+        Assert.assertEquals(expectedScore1, actualScore1);
+        Assert.assertEquals(expectedScore2, actualScore2);
+    }
+
+
+    @Test
+    public void scoreFivesTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        Dice d1 = new Dice(1, 1);
+        Dice d2 = new Dice(1, 2);
+        Dice d3 = new Dice(1, 3);
+        Dice d4 = new Dice(1, 4);
+        Dice d5 = new Dice(1, 5);
+        Dice d6 = new Dice(1, 6);
+
+        ArrayList<Dice> diceWith3Fives = new ArrayList<Dice>();
+        diceWith3Fives.add(d1);
+        diceWith3Fives.add(d2);
+        diceWith3Fives.add(d5);
+        diceWith3Fives.add(d5);
+        diceWith3Fives.add(d5);
+        int expectedScore1 = 15;
+
+        ArrayList<Dice> diceWith0Fives = new ArrayList<Dice>();
+        diceWith0Fives.add(d1);
+        diceWith0Fives.add(d2);
+        diceWith0Fives.add(d3);
+        diceWith0Fives.add(d4);
+        diceWith0Fives.add(d6);
+        int expectedScore2 = 0;
+
+        // When
+        int actualScore1 = yahtzee.scoreFives(diceWith3Fives);
+        int actualScore2 = yahtzee.scoreFives(diceWith0Fives);
+
+        // Then
+        Assert.assertEquals(expectedScore1, actualScore1);
+        Assert.assertEquals(expectedScore2, actualScore2);
+    }
+
+
+    @Test
+    public void scoreSixesTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        Dice d1 = new Dice(1, 1);
+        Dice d2 = new Dice(1, 2);
+        Dice d3 = new Dice(1, 3);
+        Dice d4 = new Dice(1, 4);
+        Dice d5 = new Dice(1, 5);
+        Dice d6 = new Dice(1, 6);
+
+        ArrayList<Dice> diceWith4Sixes = new ArrayList<Dice>();
+        diceWith4Sixes.add(d6);
+        diceWith4Sixes.add(d6);
+        diceWith4Sixes.add(d1);
+        diceWith4Sixes.add(d6);
+        diceWith4Sixes.add(d6);
+        int expectedScore1 = 24;
+
+        ArrayList<Dice> diceWith0Sixes = new ArrayList<Dice>();
+        diceWith0Sixes.add(d1);
+        diceWith0Sixes.add(d2);
+        diceWith0Sixes.add(d3);
+        diceWith0Sixes.add(d4);
+        diceWith0Sixes.add(d5);
+        int expectedScore2 = 0;
+
+        // When
+        int actualScore1 = yahtzee.scoreSixes(diceWith4Sixes);
+        int actualScore2 = yahtzee.scoreSixes(diceWith0Sixes);
+
+        // Then
+        Assert.assertEquals(expectedScore1, actualScore1);
+        Assert.assertEquals(expectedScore2, actualScore2);
+    }
+
 
 }
