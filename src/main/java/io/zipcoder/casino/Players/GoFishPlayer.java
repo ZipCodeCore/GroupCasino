@@ -11,14 +11,13 @@ public class GoFishPlayer extends Player {
     private int bookCount = 0;
 
     public List<Card> getHand() {
-        Collections.sort(hand);
         return hand;
     }
-    public void setHand(List<Card> hand) { if(hand != null) {this.hand = hand;} }
+    public void setHand(List<Card> hand) { if(hand != null) { this.hand = hand;  Collections.sort(hand);} }
     public int getHandSize(){ return hand.size(); }
 
-    public void addToHand(List<Card> cards) {if(hand != null) {this.hand.addAll(cards);} }
-    public void addToHand(Card card) {if(hand != null) {this.hand.add(card);} }
+    public void addToHand(List<Card> cards) {if(hand != null) {this.hand.addAll(cards);  Collections.sort(hand);} }
+    public void addToHand(Card card) {if(hand != null) {this.hand.add(card);  Collections.sort(hand);} }
     public int getBookCount() {
         return bookCount;
     }
@@ -27,18 +26,23 @@ public class GoFishPlayer extends Player {
     }
 
     public boolean hasCard(String checkCard) {
+        String cardRank = parseCardString(checkCard);
+        if (cardRank == null){ return false; }
         for (Card card : hand) {
-            if(card.toString().contains(checkCard)) {
+            if(card.toString().contains(cardRank)) {
                 return true;
             }
         }
         return false;
     }
 
+
     public List<Card> getCards(String getCard) {
+        getCard = parseCardString(getCard);
         List<Card> retrievedCards = new ArrayList<>();
+        if (getCard == null){ return retrievedCards; }
         for (Card card : hand) {
-            if(card.toString().trim().toUpperCase().contains(getCard.trim().toUpperCase())) {
+            if(card.toString().contains(getCard)) {
                 retrievedCards.add(card);
             }
         }
@@ -85,4 +89,67 @@ public class GoFishPlayer extends Player {
         return nextFour;
     }
 
+    private String parseCardString(String checkCard) {
+        switch (checkCard.toLowerCase()) {
+            case "king" :
+            case "kings":
+                return "king";
+            case "queen" :
+            case "queens":
+                return "queen";
+            case "jack" :
+            case "jacks":
+                return "jack";
+            case "ace" :
+            case "aces":
+                return "ace";
+            case "10" :
+            case "10s" :
+            case "ten":
+            case "tens":
+                return "ten";
+            case "9" :
+            case "9s" :
+            case "nine":
+            case "nines":
+                return "nine";
+            case "8" :
+            case "8s" :
+            case "eight":
+            case "eights":
+                return "eight";
+            case "7" :
+            case "7s" :
+            case "seven":
+            case "sevens":
+                return "seven";
+            case "6" :
+            case "6s" :
+            case "six":
+            case "sixs":
+                return "six";
+            case "5" :
+            case "5s" :
+            case "five":
+            case "fives":
+                return "five";
+            case "4" :
+            case "4s" :
+            case "four":
+            case "fours":
+                return "four";
+            case "3" :
+            case "3s" :
+            case "three":
+            case "threes":
+                return "three";
+            case "2" :
+            case "2s" :
+            case "two":
+            case "twos":
+                return "two";
+            default:
+                 return null;
+        }
+    }
 }

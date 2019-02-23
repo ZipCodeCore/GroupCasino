@@ -42,17 +42,13 @@ public class GoFishTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(System.in, new PrintStream(outputStream));
         GoFish goFish = new GoFish(console);
-        String expected = "Your current hand is: \n" +
-                "\n" +
-                "You currently have 0 books and the dealer has 0 books\n" +
-                "I'm out of cards in my hand! I'll just draw\n";
 
         // When
         goFish.dealerTurn();
         String actual = outputStream.toString();
 
         // Then
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual.contains("I'm out of cards in my hand! I'll just draw"));
     }
 
     @Test

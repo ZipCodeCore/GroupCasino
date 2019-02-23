@@ -37,7 +37,7 @@ public class CardTest {
         //When
         Rank actualRank = testCard.getRank();
         Suit actualSuit = testCard.getSuit();
-        String expected = "AND" + rank.toString().toLowerCase() + " of "+suit.toString().toLowerCase();
+        String expected = "|" + rank.toString().toLowerCase() + " of "+suit.toString().toLowerCase();
         //Then
         Assert.assertEquals(expected,testCard.toString());
         Assert.assertEquals(suit,actualSuit);

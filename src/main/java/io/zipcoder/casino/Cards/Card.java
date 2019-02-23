@@ -28,12 +28,14 @@ public class Card implements Comparable<Card>{
     }
 
     public boolean equalRank(Card otherCard) {
-        return otherCard.getRank() == rank;
+        return otherCard.getRank().toString().equals(rank.toString());
     }
 
     public static boolean equalRank(List<Card> otherCards) {
         for (int i = 0; i < otherCards.size() - 1; i++) {
-            if(!otherCards.get(i).equalRank(otherCards.get(i+1))) {
+            String currentRank = otherCards.get(i).getRank().toString();
+            String nextRank = otherCards.get(i+1).getRank().toString();
+            if(!currentRank.equals(nextRank)) {
                 return false;
             }
         }

@@ -6,6 +6,7 @@ import io.zipcoder.casino.Cards.Games.GoFish;
 import io.zipcoder.casino.Players.GoFishPlayer;
 import org.junit.Assert;
 import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -248,10 +249,8 @@ public class GoFishPlayerTest {
         GoFishPlayer testPlayer = new GoFishPlayer();
         Deck testDeck = new Deck();
         testPlayer.addToHand(testDeck.drawMultipleCards(52));
-
+        Collections.sort(testPlayer.getHand());
         // When
-        GoFish goFish = new GoFish();
-        goFish.displayCards(testPlayer.getHand());
         boolean actual = testPlayer.hasBooks();
 
         // Then

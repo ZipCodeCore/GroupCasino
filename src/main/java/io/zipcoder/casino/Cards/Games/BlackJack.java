@@ -26,7 +26,7 @@ public class BlackJack extends Game {
        private boolean isOver = false;
 
 
-        Console blackJackConsole = new Console();
+        Console blackJackConsole = Console.getConsole();
 
     public static void main(String[] args)
     {
