@@ -17,10 +17,12 @@ public final class Console {
         this.output = out;
     }
 
+
     public Console(Scanner scanner, PrintStream out) {
         this.input = scanner;
         this.output = out;
     }
+
 
     public Console() {
         this(System.in, System.out);
