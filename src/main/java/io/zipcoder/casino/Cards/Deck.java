@@ -1,15 +1,20 @@
 package io.zipcoder.casino.Cards;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
+import java.util.*;
+
+
 public class Deck {
     private final static List<Card> COMPLETE_DECK = new ArrayList<Card>();
     private Stack<Card> playDeck;
 
-    static {
+    static  {
+
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
                 COMPLETE_DECK.add(new Card(suit, rank));
@@ -25,9 +30,15 @@ public class Deck {
 
     }
 
+    public List<Card> drawMultipleCards(int numberOfCards) {
+        List<Card> newCards = new ArrayList<Card>();
+        for (int i = 0; i < numberOfCards; i++) {
+            newCards.add(playDeck.pop());
+        }
+        return newCards;
+    }
 
-    public Card getCard() {
-
+    public Card drawCard() {
         return playDeck.pop();
     }
 

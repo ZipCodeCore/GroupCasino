@@ -38,8 +38,8 @@ public class BlackJack {
     }
 
     public void dealsFirstCards(List<Card> hand){
-        hand.add(currentDeck.getCard());
-        hand.add(currentDeck.getCard());
+        hand.add(currentDeck.drawCard());
+        hand.add(currentDeck.drawCard());
 
     }
 
