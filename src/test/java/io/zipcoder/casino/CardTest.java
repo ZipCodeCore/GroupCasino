@@ -50,7 +50,7 @@ public class CardTest {
     public void testBlackJack(){
         BlackJack newBlackJack = new BlackJack();
 
-        newBlackJack.play();
+        int i = newBlackJack.play();
     }
 
 }

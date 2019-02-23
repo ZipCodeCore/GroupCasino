@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Cards;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -20,6 +21,7 @@ public class Deck {
 
         playDeck = new Stack<Card>();
         playDeck.addAll(COMPLETE_DECK);
+        Collections.shuffle(playDeck);
 
     }
 

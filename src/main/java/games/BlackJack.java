@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlackJack {
-    List<Card> userHand;// = new ArrayList<Card>();
-    List<Card> dealerHand;// = new ArrayList<Card>();
+    List<Card> userHand = new ArrayList<Card>();
+    List<Card> dealerHand = new ArrayList<Card>();
 
     CardPlayer dealer = new CardPlayer();
     CardPlayer user = new CardPlayer();
