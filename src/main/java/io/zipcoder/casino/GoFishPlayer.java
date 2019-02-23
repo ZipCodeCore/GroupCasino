@@ -6,17 +6,23 @@ public class GoFishPlayer {
     private Player player;
 
     public GoFishPlayer(Player player) {
+
     }
 
     public void requestCard(String value) {
+
     }
 
     public void draw() {
+
     }
 
     public void giveCard(String value) {
+
     }
 
     public void layDownCards(String value) {
+
+
     }
 }
