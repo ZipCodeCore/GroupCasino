@@ -9,10 +9,10 @@ import java.util.TreeMap;
 public class YahtzeePlayer {
     private String name;
     private Player player;
-    private boolean hasYahtzee = false;
 
     public YahtzeePlayer(Player player) {
         this.name = player.getName();
+        this.player = player;
     }
 
     public ArrayList<Dice> rollDice(int numberOfDice){
@@ -39,10 +39,11 @@ public class YahtzeePlayer {
     }
 
 
+    public String getName() {
+        return this.name;
+    }
 
-
-
-
-
-
+    public Player getPlayer() {
+        return this.player;
+    }
 }
