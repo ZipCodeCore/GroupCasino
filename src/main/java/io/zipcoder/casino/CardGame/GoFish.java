@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.CardGame;
 
 public class GoFish extends CardGame {
     private GoFishPlayer goFishPlayer;

@@ -1,4 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.CardGame;
+
+import io.zipcoder.casino.Player;
 
 public class GoFishPlayer {
     private Hand hand;

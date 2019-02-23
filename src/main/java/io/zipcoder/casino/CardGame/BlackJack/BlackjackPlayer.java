@@ -1,4 +1,8 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.CardGame.BlackJack;
+
+import io.zipcoder.casino.CardGame.Hand;
+import io.zipcoder.casino.GamblingPlayer;
+import io.zipcoder.casino.Player;
 
 public class BlackjackPlayer implements GamblingPlayer {
     private String name;
@@ -31,4 +35,13 @@ public class BlackjackPlayer implements GamblingPlayer {
     public int sumOfHand(Hand hand) {
         return 0;
     }
+
+    public Hand getHand() {
+        return hand;
+    }
+
+    public void setHand(Hand hand) {
+        this.hand = hand;
+    }
+
 }
