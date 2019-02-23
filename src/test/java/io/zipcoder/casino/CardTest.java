@@ -1,5 +1,6 @@
 package io.zipcoder.casino;
 
+import games.BlackJack;
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Rank;
 import io.zipcoder.casino.Cards.Suit;
@@ -43,6 +44,13 @@ public class CardTest {
         Assert.assertEquals(expected,testCard.toString());
         Assert.assertEquals(suit,actualSuit);
 
+    }
+
+    @Test
+    public void testBlackJack(){
+        BlackJack newBlackJack = new BlackJack();
+
+        newBlackJack.play();
     }
 
 }
