@@ -1,7 +1,8 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.CardGame.Cards;
+import java.util.Deque;
 
 public class Deck {
-    private java.util.ArrayList<Card> cards;
+    private Deque<Card> cards;
     private int size;
 
     public void shuffle() {

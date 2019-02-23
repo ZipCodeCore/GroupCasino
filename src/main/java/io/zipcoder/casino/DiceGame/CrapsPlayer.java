@@ -1,4 +1,7 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.DiceGame;
+
+import io.zipcoder.casino.GamblingPlayer;
+import io.zipcoder.casino.Player;
 
 public class CrapsPlayer implements GamblingPlayer {
     private String name;

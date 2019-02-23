@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.DiceGame;
 
 public class Yahtzee extends DiceGame {
     private int rollNumber;

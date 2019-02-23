@@ -1,4 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.DiceGame;
+
+import io.zipcoder.casino.GamblingGame;
 
 public class Craps extends DiceGame implements GamblingGame {
     private double pot;
