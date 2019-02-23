@@ -17,10 +17,10 @@ public class Yahtzee extends DiceGame {
     public Yahtzee(Player player) {
         this.yahtzeePlayer = new YahtzeePlayer(player);
         this.score = 0;
-        this.scoreCard = new TreeMap<String, Integer>();
+        this.scoreCard = new TreeMap<>();
         this.rollNumber = 1;
-        this.savedDice = new ArrayList<Dice>();
-        this.rolledDice = new ArrayList<Dice>();
+        this.savedDice = new ArrayList<>();
+        this.rolledDice = new ArrayList<>();
     }
 
     public void play() {

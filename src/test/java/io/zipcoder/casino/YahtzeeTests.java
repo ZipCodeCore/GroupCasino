@@ -84,7 +84,7 @@ public class YahtzeeTests {
         Yahtzee yahtzee = new Yahtzee(player);
 
         // Aces
-        ArrayList<Dice> acesDice = new ArrayList<Dice>();
+        ArrayList<Dice> acesDice = new ArrayList<>();
         acesDice.add(d1);
         acesDice.add(d2);
         acesDice.add(d3);
@@ -93,7 +93,7 @@ public class YahtzeeTests {
         int expectedAcesScore = 3;
 
         // Twos
-        ArrayList<Dice> twosDice = new ArrayList<Dice>();
+        ArrayList<Dice> twosDice = new ArrayList<>();
         twosDice.add(d2);
         twosDice.add(d6);
         twosDice.add(d5);
@@ -102,7 +102,7 @@ public class YahtzeeTests {
         int expectedTwosScore = 4;
 
         // Threes
-        ArrayList<Dice> threesDice = new ArrayList<Dice>();
+        ArrayList<Dice> threesDice = new ArrayList<>();
         threesDice.add(d3);
         threesDice.add(d3);
         threesDice.add(d4);
@@ -111,7 +111,7 @@ public class YahtzeeTests {
         int expectedThreesScore = 12;
 
         // Fours
-        ArrayList<Dice> foursDice = new ArrayList<Dice>();
+        ArrayList<Dice> foursDice = new ArrayList<>();
         foursDice.add(d4);
         foursDice.add(d1);
         foursDice.add(d4);
@@ -120,7 +120,7 @@ public class YahtzeeTests {
         int expectedFoursScore = 8;
 
         // Fives
-        ArrayList<Dice> fivesDice = new ArrayList<Dice>();
+        ArrayList<Dice> fivesDice = new ArrayList<>();
         fivesDice.add(d5);
         fivesDice.add(d5);
         fivesDice.add(d5);
@@ -129,7 +129,7 @@ public class YahtzeeTests {
         int expectedFivesScore = 25;
 
         // Sixes
-        ArrayList<Dice> sixesDice = new ArrayList<Dice>();
+        ArrayList<Dice> sixesDice = new ArrayList<>();
         sixesDice.add(d1);
         sixesDice.add(d6);
         sixesDice.add(d6);
@@ -138,7 +138,7 @@ public class YahtzeeTests {
         int expectedSixesScore = 18;
 
         // Three of a Kind
-        ArrayList<Dice> threeOfAKindDice = new ArrayList<Dice>();
+        ArrayList<Dice> threeOfAKindDice = new ArrayList<>();
         threeOfAKindDice.add(d5);
         threeOfAKindDice.add(d4);
         threeOfAKindDice.add(d5);
@@ -148,7 +148,7 @@ public class YahtzeeTests {
         int expectedNotThreeOfAKindScore = 0;
 
         // Four of a Kind
-        ArrayList<Dice> fourOfAKindDice = new ArrayList<Dice>();
+        ArrayList<Dice> fourOfAKindDice = new ArrayList<>();
         fourOfAKindDice.add(d1);
         fourOfAKindDice.add(d1);
         fourOfAKindDice.add(d1);
@@ -158,7 +158,7 @@ public class YahtzeeTests {
         int expectedNotFourOfAKindScore = 0;
 
         // Small Straight
-        ArrayList<Dice> smallStraightDice = new ArrayList<Dice>();
+        ArrayList<Dice> smallStraightDice = new ArrayList<>();
         smallStraightDice.add(d3);
         smallStraightDice.add(d2);
         smallStraightDice.add(d1);
@@ -168,7 +168,7 @@ public class YahtzeeTests {
         int expectedNotSmallStraightScore = 0;
 
         // Large Straight
-        ArrayList<Dice> largeStraightDice = new ArrayList<Dice>();
+        ArrayList<Dice> largeStraightDice = new ArrayList<>();
         largeStraightDice.add(d2);
         largeStraightDice.add(d3);
         largeStraightDice.add(d4);
@@ -178,7 +178,7 @@ public class YahtzeeTests {
         int expectedNotLargeStraight = 0;
 
         // Yahtzee
-        ArrayList<Dice> yahtzeeDice = new ArrayList<Dice>();
+        ArrayList<Dice> yahtzeeDice = new ArrayList<>();
         yahtzeeDice.add(d2);
         yahtzeeDice.add(d2);
         yahtzeeDice.add(d2);
@@ -188,7 +188,7 @@ public class YahtzeeTests {
         int expectedNotYahtzeeScore = 0;
 
         // Chance
-        ArrayList<Dice> chanceDice = new ArrayList<Dice>();
+        ArrayList<Dice> chanceDice = new ArrayList<>();
         chanceDice.add(d1);
         chanceDice.add(d2);
         chanceDice.add(d5);
@@ -256,7 +256,7 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        ArrayList<Dice> diceWith2Aces = new ArrayList<Dice>();
+        ArrayList<Dice> diceWith2Aces = new ArrayList<>();
         diceWith2Aces.add(d1);
         diceWith2Aces.add(d2);
         diceWith2Aces.add(d3);
@@ -264,7 +264,7 @@ public class YahtzeeTests {
         diceWith2Aces.add(d5);
         int expectedScore1 = 2;
 
-        ArrayList<Dice> diceWith0Aces = new ArrayList<Dice>();
+        ArrayList<Dice> diceWith0Aces = new ArrayList<>();
         diceWith0Aces.add(d5);
         diceWith0Aces.add(d2);
         diceWith0Aces.add(d3);
@@ -288,7 +288,7 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        ArrayList<Dice> diceWith4Twos = new ArrayList<Dice>();
+        ArrayList<Dice> diceWith4Twos = new ArrayList<>();
         diceWith4Twos.add(d2);
         diceWith4Twos.add(d3);
         diceWith4Twos.add(d2);
@@ -296,7 +296,7 @@ public class YahtzeeTests {
         diceWith4Twos.add(d2);
         int expectedScore1 = 8;
 
-        ArrayList<Dice> diceWith0Twos = new ArrayList<Dice>();
+        ArrayList<Dice> diceWith0Twos = new ArrayList<>();
         diceWith0Twos.add(d5);
         diceWith0Twos.add(d6);
         diceWith0Twos.add(d1);
@@ -320,7 +320,7 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        ArrayList<Dice> diceWith3Threes = new ArrayList<Dice>();
+        ArrayList<Dice> diceWith3Threes = new ArrayList<>();
         diceWith3Threes.add(d3);
         diceWith3Threes.add(d2);
         diceWith3Threes.add(d2);
@@ -328,7 +328,7 @@ public class YahtzeeTests {
         diceWith3Threes.add(d3);
         int expectedScore1 = 9;
 
-        ArrayList<Dice> diceWith0Threes = new ArrayList<Dice>();
+        ArrayList<Dice> diceWith0Threes = new ArrayList<>();
         diceWith0Threes.add(d1);
         diceWith0Threes.add(d2);
         diceWith0Threes.add(d4);
@@ -359,7 +359,7 @@ public class YahtzeeTests {
         Dice d5 = new Dice(1, 5);
         Dice d6 = new Dice(1, 6);
 
-        ArrayList<Dice> diceWith4Fours = new ArrayList<Dice>();
+        ArrayList<Dice> diceWith4Fours = new ArrayList<>();
         diceWith4Fours.add(d4);
         diceWith4Fours.add(d2);
         diceWith4Fours.add(d4);
@@ -398,7 +398,7 @@ public class YahtzeeTests {
         Dice d5 = new Dice(1, 5);
         Dice d6 = new Dice(1, 6);
 
-        ArrayList<Dice> diceWith3Fives = new ArrayList<Dice>();
+        ArrayList<Dice> diceWith3Fives = new ArrayList<>();
         diceWith3Fives.add(d1);
         diceWith3Fives.add(d2);
         diceWith3Fives.add(d5);
@@ -406,7 +406,7 @@ public class YahtzeeTests {
         diceWith3Fives.add(d5);
         int expectedScore1 = 15;
 
-        ArrayList<Dice> diceWith0Fives = new ArrayList<Dice>();
+        ArrayList<Dice> diceWith0Fives = new ArrayList<>();
         diceWith0Fives.add(d1);
         diceWith0Fives.add(d2);
         diceWith0Fives.add(d3);
@@ -437,7 +437,7 @@ public class YahtzeeTests {
         Dice d5 = new Dice(1, 5);
         Dice d6 = new Dice(1, 6);
 
-        ArrayList<Dice> diceWith4Sixes = new ArrayList<Dice>();
+        ArrayList<Dice> diceWith4Sixes = new ArrayList<>();
         diceWith4Sixes.add(d6);
         diceWith4Sixes.add(d6);
         diceWith4Sixes.add(d1);
@@ -445,7 +445,7 @@ public class YahtzeeTests {
         diceWith4Sixes.add(d6);
         int expectedScore1 = 24;
 
-        ArrayList<Dice> diceWith0Sixes = new ArrayList<Dice>();
+        ArrayList<Dice> diceWith0Sixes = new ArrayList<>();
         diceWith0Sixes.add(d1);
         diceWith0Sixes.add(d2);
         diceWith0Sixes.add(d3);
@@ -469,14 +469,14 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        ArrayList<Dice> diceWithThreeOfAKind = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithThreeOfAKind = new ArrayList<>();
         diceWithThreeOfAKind.add(d3);
         diceWithThreeOfAKind.add(d2);
         diceWithThreeOfAKind.add(d3);
         diceWithThreeOfAKind.add(d4);
         diceWithThreeOfAKind.add(d3);
 
-        ArrayList<Dice> diceWithoutThreeOfAKind = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithoutThreeOfAKind = new ArrayList<>();
         diceWithoutThreeOfAKind.add(d1);
         diceWithoutThreeOfAKind.add(d2);
         diceWithoutThreeOfAKind.add(d3);
@@ -499,14 +499,14 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        ArrayList<Dice> diceWithFourOfAKind = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithFourOfAKind = new ArrayList<>();
         diceWithFourOfAKind.add(d2);
         diceWithFourOfAKind.add(d2);
         diceWithFourOfAKind.add(d6);
         diceWithFourOfAKind.add(d2);
         diceWithFourOfAKind.add(d2);
 
-        ArrayList<Dice> diceWithoutFourOfAKind = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithoutFourOfAKind = new ArrayList<>();
         diceWithoutFourOfAKind.add(d2);
         diceWithoutFourOfAKind.add(d3);
         diceWithoutFourOfAKind.add(d4);
@@ -529,14 +529,14 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        ArrayList<Dice> diceWithFullHouse = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithFullHouse = new ArrayList<>();
         diceWithFullHouse.add(d3);
         diceWithFullHouse.add(d6);
         diceWithFullHouse.add(d6);
         diceWithFullHouse.add(d3);
         diceWithFullHouse.add(d3);
 
-        ArrayList<Dice> diceWithoutFullHouse = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithoutFullHouse = new ArrayList<>();
         diceWithoutFullHouse.add(d3);
         diceWithoutFullHouse.add(d6);
         diceWithoutFullHouse.add(d6);
@@ -559,14 +559,14 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        ArrayList<Dice> diceWithSmallStraight = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithSmallStraight = new ArrayList<>();
         diceWithSmallStraight.add(d1);
         diceWithSmallStraight.add(d4);
         diceWithSmallStraight.add(d6);
         diceWithSmallStraight.add(d2);
         diceWithSmallStraight.add(d3);
 
-        ArrayList<Dice> diceWithoutSmallStraight = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithoutSmallStraight = new ArrayList<>();
         diceWithoutSmallStraight.add(d1);
         diceWithoutSmallStraight.add(d2);
         diceWithoutSmallStraight.add(d3);
@@ -589,14 +589,14 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        ArrayList<Dice> diceWithLargeStraight = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithLargeStraight = new ArrayList<>();
         diceWithLargeStraight.add(d6);
         diceWithLargeStraight.add(d2);
         diceWithLargeStraight.add(d5);
         diceWithLargeStraight.add(d3);
         diceWithLargeStraight.add(d4);
 
-        ArrayList<Dice> diceWithoutLargeStraight = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithoutLargeStraight = new ArrayList<>();
         diceWithoutLargeStraight.add(d6);
         diceWithoutLargeStraight.add(d2);
         diceWithoutLargeStraight.add(d4);
@@ -619,14 +619,14 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        ArrayList<Dice> diceWithYahtzee = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithYahtzee = new ArrayList<>();
         diceWithYahtzee.add(d2);
         diceWithYahtzee.add(d2);
         diceWithYahtzee.add(d2);
         diceWithYahtzee.add(d2);
         diceWithYahtzee.add(d2);
 
-        ArrayList<Dice> diceWithoutYahtzee = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithoutYahtzee = new ArrayList<>();
         diceWithoutYahtzee.add(d2);
         diceWithoutYahtzee.add(d2);
         diceWithoutYahtzee.add(d2);
@@ -649,7 +649,7 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        ArrayList<Dice> diceWithThreeOfAKind = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithThreeOfAKind = new ArrayList<>();
         diceWithThreeOfAKind.add(d5);
         diceWithThreeOfAKind.add(d5);
         diceWithThreeOfAKind.add(d3);
@@ -657,7 +657,7 @@ public class YahtzeeTests {
         diceWithThreeOfAKind.add(d5);
         int expectedScore1 = 22;
 
-        ArrayList<Dice> diceWithoutThreeOfAKind = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithoutThreeOfAKind = new ArrayList<>();
         diceWithoutThreeOfAKind.add(d1);
         diceWithoutThreeOfAKind.add(d2);
         diceWithoutThreeOfAKind.add(d3);
@@ -681,7 +681,7 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        ArrayList<Dice> diceWithFourOfAKind = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithFourOfAKind = new ArrayList<>();
         diceWithFourOfAKind.add(d5);
         diceWithFourOfAKind.add(d3);
         diceWithFourOfAKind.add(d5);
@@ -689,7 +689,7 @@ public class YahtzeeTests {
         diceWithFourOfAKind.add(d5);
         int expectedScore1 = 23;
 
-        ArrayList<Dice> diceWithoutFourOfAKind = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithoutFourOfAKind = new ArrayList<>();
         diceWithoutFourOfAKind.add(d5);
         diceWithoutFourOfAKind.add(d3);
         diceWithoutFourOfAKind.add(d3);
@@ -713,7 +713,7 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        ArrayList<Dice> diceWithFullHouse = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithFullHouse = new ArrayList<>();
         diceWithFullHouse.add(d5);
         diceWithFullHouse.add(d2);
         diceWithFullHouse.add(d5);
@@ -721,7 +721,7 @@ public class YahtzeeTests {
         diceWithFullHouse.add(d5);
         int expectedScore1 = 25;
 
-        ArrayList<Dice> diceWithoutFullHouse = new ArrayList<Dice>();
+        ArrayList<Dice> diceWithoutFullHouse = new ArrayList<>();
         diceWithoutFullHouse.add(d5);
         diceWithoutFullHouse.add(d2);
         diceWithoutFullHouse.add(d5);
