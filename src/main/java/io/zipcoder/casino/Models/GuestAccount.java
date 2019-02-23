@@ -38,9 +38,10 @@ public class GuestAccount {
         this.accountBalance = accountBalance;
     }*/
 
-    public String toStringGuestAccount(Integer id) {
 
-        return String.format("%s, %d, $%.2f\n ", name, id, accountBalance);
+    public String toString() {
+
+        return String.format("Name: %s, ID: %d, Balance: $%.2f\n", name, id, accountBalance);
 
     }
 
