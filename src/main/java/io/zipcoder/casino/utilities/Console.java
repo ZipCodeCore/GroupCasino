@@ -17,7 +17,7 @@ public final class Console {
         this.input = new Scanner(in);
         this.output = out;
     }
-
+    
     public Console(Scanner scanner, PrintStream out) {
         this.input = scanner;
         this.output = out;
