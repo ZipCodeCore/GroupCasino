@@ -1,24 +1,55 @@
 package io.zipcoder.casino.Models;
 
 public class Card {
-    enum Suit {HEARTS,SPADES,DIAMONDS,CLUBS};
 
-    private Suit cardSuit;
-    private Long value;
 
-    public Long getValue() {
-        return this.value;
+
+
+    public enum Suit {HEARTS,SPADES,DIAMONDS,CLUBS};
+    public enum Integer {ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN , KING};
+
+    protected Suit cardSuit;
+    protected Integer value;
+
+
+
+
+
+
+    public Card() {
+
     }
 
-    public void setCardSuit(Suit cardSuit) {
+    public Card(Suit cardSuit, Integer value) {
         this.cardSuit = cardSuit;
+        this.value = value;
     }
+
+
+    public Integer getValue() {
+
+        return value;
+    }
+
 
     public Suit getCardSuit() {
+
         return cardSuit;
     }
 
-    public void setValue(Long value) {
-        this.value = value;
+    public Suit setCardSuit(Suit cardSuit) {
+        this.cardSuit = cardSuit;
+        return cardSuit;
     }
+
+
+    public Integer setValue(Integer value) {
+        this.value = value;
+        return value;
+    }
+
+
+
+
+
 }
