@@ -25,8 +25,7 @@ public class BlackJack extends Game {
        private double userBet;
        private boolean isOver = false;
 
-
-        Console blackJackConsole = new Console();
+       Console blackJackConsole = new Console();
 
     public static void main(String[] args)
     {
@@ -39,7 +38,7 @@ public class BlackJack extends Game {
         takeFirstTurn();
 
         while (!isOver) {
-        //evaluate();
+        evaluate(userHand);
 
         }
             return -1;
@@ -60,38 +59,56 @@ public class BlackJack extends Game {
             userTotal = getTotal(userHand);
             dealerTotal = getTotal(dealerHand);
 
-            blackJackConsole.println("Your first card is " + userHand.get(0));
-            blackJackConsole.println("Your second card is " + userHand.get(1));
-            blackJackConsole.println("You've been dealt " + userTotal);
+            blackJackConsole.println("Your first hand has a " + userHand.get(0)+ " & " +userHand.get(1));
+            displayUserTotal(userTotal);
 
             if(userTotal == 21){
                  blackJackConsole.println("You are the Winner");
                  isOver = true;
             } else {
                 blackJackConsole.println("The dealer's hand is showing " + dealerHand.get(0));
-                getUserInput();
+               String doubleDownChoice = blackJackConsole.getStringInput(
+                       "Would you like to Double Down? Please enter Yes or No");
+               if(doubleDownChoice.toLowerCase().equals("yes")){
+                   doubleDown(userHand);
+               }
             }
         }
-/*
+
     private void evaluate(List<Card> hand ){
-        String userChoice =  getUserInput().toLowerCase();
+
+        String userChoice = getUserInput().toLowerCase();
+
         if (userChoice.equals("hit")){
             hit(userHand);
 
-        } else if (userChoice.equals("double down")){
-            doubleDown(userHand);
+        } else if (userChoice.equals("stay")){
+
 
         }
 
 
-    }*/
+    }
 
     private void doubleDown(List<Card> hand) {
+
         userBet = userBet*2;
+        blackJackConsole.println("Bet is now " + Double.toString(userBet));
+
         hand.add(currentDeck.drawCard());
-       blackJackConsole.println(Double.toString(userBet));
-       blackJackConsole.println("Your next card is " + userHand.get(2));
-       blackJackConsole.println("Dealer card is " + dealerHand.get(1) + ". Dealer total is " + dealerTotal);
+        userTotal = getTotal(hand);
+
+        blackJackConsole.print("Your next card is " + userHand.get(2)+ ". ");
+
+        displayUserTotal(userTotal);
+        checkGameOverByBust();
+
+        if(isOver != true){
+            checkIfHandIs21(userHand);
+        } else {
+            takeDealersTurn();
+        }
+
 
     }
 
@@ -103,14 +120,17 @@ public class BlackJack extends Game {
 
     public String getUserInput(){
 
-          String userChoice = blackJackConsole.getStringInput("Would you like to Hit, Stand, or Double Down?");
+          String userChoice = blackJackConsole.getStringInput("Would you like to Hit or Stay?");
           return userChoice;
 
 }
-    public void dealTwoCards(List<Card> hand) {
+        public void dealTwoCards(List<Card> hand) {
             hand.add(currentDeck.drawCard());
             hand.add(currentDeck.drawCard());
 
+        }
+        public void dealOneCard(List<Card> hand){
+            hand.add(currentDeck.drawCard());
         }
 
         public int getTotal(List<Card> hand) {
@@ -125,8 +145,38 @@ public class BlackJack extends Game {
         }
 
 
+    public void displayUserTotal(int userTotal){
+        blackJackConsole.println("Your total is " + userTotal);
+    }
 
+    public void displayDealerTotal(int dealerTotal){
+       blackJackConsole.println( "Dealer total is " + dealerTotal);
 
+    }
+
+    public void checkGameOverByBust() {
+        if (userTotal > 21) {
+            blackJackConsole.println("You Bust. Dealer wins!");
+            isOver = true;
+        }
+    }
+
+     public void checkIfHandIs21(List<Card> hand) {
+            if(userTotal == 21) {
+                blackJackConsole.println("You are the Winner");
+                isOver = true;
+            }
+        }
+
+    public void takeDealersTurn(){
+        blackJackConsole.print("Dealer card is " + dealerHand.get(1)+ ". ");
+        displayDealerTotal(dealerTotal);
+        while(dealerTotal < 17) {
+            dealOneCard(dealerHand);
+            dealerTotal = getTotal(dealerHand);
+        }
+
+        }
     }
 
 
