@@ -12,6 +12,7 @@ public class CardPlayer extends Player {
     }
 
     public void setHand(List<Card> hand) {
+
         this.hand = hand;
     }
 
