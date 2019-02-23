@@ -11,7 +11,7 @@ public class Casino {
 
     public static void main(String[] args)
     {
-        entertainUser();
+        System.out.print("\uD83C\uDCDD");
     }
 
     public static void entertainUser() {

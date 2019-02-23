@@ -7,28 +7,32 @@ import java.util.Collections;
 import java.util.List;
 
 public class GoFishPlayer extends Player {
-    private List<Card> hand;
+    private List<Card> hand = new ArrayList<>();
     private int bookCount = 0;
 
     public List<Card> getHand() {
+        Collections.sort(hand);
         return hand;
     }
-    public void setHand(List<Card> hand) {
-        this.hand = hand;
-    }
-    public int handSize(){ return hand.size(); }
+    public void setHand(List<Card> hand) { if(hand != null) {this.hand = hand;} }
+    public int getHandSize(){ return hand.size(); }
 
-    public void addToHand(List<Card> cards) {this.hand.addAll(cards);  Collections.sort(hand); }
-    public void addToHand(Card card) {this.hand.add(card); Collections.sort(hand); }
+    public void addToHand(List<Card> cards) {if(hand != null) {this.hand.addAll(cards);} }
+    public void addToHand(Card card) {if(hand != null) {this.hand.add(card);} }
+    public int getBookCount() {
+        return bookCount;
+    }
+    public void increaseBookCount() {
+        bookCount++;
+    }
 
     public boolean hasCard(String checkCard) {
-        boolean hasCard = false;
         for (Card card : hand) {
             if(card.toString().contains(checkCard)) {
-                hasCard = true;
+                return true;
             }
         }
-        return hasCard;
+        return false;
     }
 
     public List<Card> getCards(String getCard) {
@@ -81,11 +85,4 @@ public class GoFishPlayer extends Player {
         return nextFour;
     }
 
-    public int getBookCount() {
-        return bookCount;
-    }
-
-    public void increaseBookCount() {
-        bookCount++;
-    }
 }

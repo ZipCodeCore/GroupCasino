@@ -28,7 +28,7 @@ public class GoFish extends Game {
 
     private void dealerTurn() {
         displayStatus();
-        if(dealer.handSize() != 0) {
+        if(dealer.getHandSize() != 0) {
             tryForUserCard();
         } else {
             console.println("I'm out of cards in my hand! I'll just draw");
