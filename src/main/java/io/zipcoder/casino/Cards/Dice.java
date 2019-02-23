@@ -1,8 +1,6 @@
-package io.zipcoder.casino.utilities;
+package io.zipcoder.casino.Cards;
 
 public class Dice {
-
-    private final int SIDES = 6;
 
     public Dice() {
     }
