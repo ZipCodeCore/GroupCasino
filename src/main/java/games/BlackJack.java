@@ -24,20 +24,23 @@ public class BlackJack {
 
     public int play() {
 
-        dealsFirstCards(userHand);
-        dealsFirstCards(dealerHand);
+        dealTwoCards(userHand);
+        dealTwoCards(dealerHand);
+        
         user.setHand(userHand);
         dealer.setHand(dealerHand);
 
         userTotal = getTotal(userHand);
         dealerTotal = getTotal(dealerHand);
 
-        blackJackConsole.print("this is your total hand "+userTotal);
-        blackJackConsole.print("this is the dealers hand "+dealerTotal);
+        blackJackConsole.println("Your first card is " + userHand.get(0));
+        blackJackConsole.println("Your second card is " + userHand.get(1));
+        blackJackConsole.println("You've been dealt " + userTotal);
+        blackJackConsole.println("The dealer's hand is showing " + dealerTotal);
         return -1;
     }
 
-    public void dealsFirstCards(List<Card> hand){
+    public void dealTwoCards(List<Card> hand){
         hand.add(currentDeck.drawCard());
         hand.add(currentDeck.drawCard());
 
