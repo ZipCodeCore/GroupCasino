@@ -1,5 +1,7 @@
 package io.zipcoder.casino.DiceGame;
 
+import io.zipcoder.casino.Player;
+
 import java.util.ArrayList;
 import java.util.TreeMap;
 
