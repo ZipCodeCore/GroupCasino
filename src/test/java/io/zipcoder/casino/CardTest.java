@@ -1,7 +1,7 @@
 package io.zipcoder.casino;
 
-import games.BlackJack;
 import io.zipcoder.casino.Cards.Card;
+import io.zipcoder.casino.Cards.Games.BlackJack;
 import io.zipcoder.casino.Cards.Rank;
 import io.zipcoder.casino.Cards.Suit;
 import org.junit.Assert;
@@ -46,11 +46,5 @@ public class CardTest {
 
     }
 
-    @Test
-    public void testBlackJack(){
-        BlackJack newBlackJack = new BlackJack();
-
-        int i = newBlackJack.play();
-    }
 
 }
