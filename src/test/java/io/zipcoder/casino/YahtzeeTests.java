@@ -474,7 +474,7 @@ public class YahtzeeTests {
         diceWithThreeOfAKind.add(d2);
         diceWithThreeOfAKind.add(d3);
         diceWithThreeOfAKind.add(d4);
-        diceWithThreeOfAKind.add(d5);
+        diceWithThreeOfAKind.add(d3);
 
         ArrayList<Dice> diceWithoutThreeOfAKind = new ArrayList<Dice>();
         diceWithoutThreeOfAKind.add(d1);
@@ -862,5 +862,79 @@ public class YahtzeeTests {
         // Then
         Assert.assertEquals(expectedScore1, actualScore1);
         Assert.assertEquals(expectedScore2, actualScore2);
+    }
+
+
+    @Test
+    public void diceCounterTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        ArrayList<Dice> diceToCount1 = new ArrayList<Dice>();
+        diceToCount1.add(d1);
+        diceToCount1.add(d2);
+        diceToCount1.add(d3);
+        diceToCount1.add(d4);
+        diceToCount1.add(d5);
+        Integer[] expected1 = {1, 1, 1, 1, 1, 0};
+
+        ArrayList<Dice> diceToCount2 = new ArrayList<Dice>();
+        diceToCount2.add(d6);
+        diceToCount2.add(d6);
+        diceToCount2.add(d6);
+        diceToCount2.add(d6);
+        diceToCount2.add(d6);
+        Integer[] expected2 = {0, 0, 0, 0, 0, 5};
+
+        ArrayList<Dice> diceToCount3 = new ArrayList<Dice>();
+        diceToCount3.add(d3);
+        diceToCount3.add(d2);
+        diceToCount3.add(d3);
+        diceToCount3.add(d2);
+        diceToCount3.add(d3);
+        Integer[] expected3 = {0, 2, 3, 0, 0, 0};
+
+        // When
+        Integer[] actual1 = yahtzee.countDice(diceToCount1);
+        Integer[] actual2 = yahtzee.countDice(diceToCount2);
+        Integer[] actual3 = yahtzee.countDice(diceToCount3);
+
+        // Then
+        Assert.assertArrayEquals(expected1, actual1);
+        Assert.assertArrayEquals(expected2, actual2);
+        Assert.assertArrayEquals(expected3, actual3);
+    }
+
+
+    @Test
+    public void getSumOfDiceTest() {
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        ArrayList<Dice> diceToSum1 = new ArrayList<>();
+        diceToSum1.add(d1);
+        diceToSum1.add(d4);
+        diceToSum1.add(d2);
+        diceToSum1.add(d6);
+        diceToSum1.add(d1);
+        int expectedSum1 = 14;
+
+        ArrayList<Dice> diceToSum2 = new ArrayList<>();
+        diceToSum2.add(d6);
+        diceToSum2.add(d3);
+        diceToSum2.add(d6);
+        diceToSum2.add(d4);
+        diceToSum2.add(d6);
+        int expectedSum2 = 25;
+
+        // When
+        int actualSum1 = yahtzee.getSumOfDice(diceToSum1);
+        int actualSum2 = yahtzee.getSumOfDice(diceToSum2);
+
+        // Then
+        Assert.assertEquals(expectedSum1, actualSum1);
+        Assert.assertEquals(expectedSum2, actualSum2);
     }
 }

@@ -14,7 +14,7 @@ public class Yahtzee extends DiceGame {
     private ArrayList<Dice> rolledDice;
 
 
-    public Yahtzee(Player player){
+    public Yahtzee(Player player) {
         this.yahtzeePlayer = new YahtzeePlayer(player);
         this.score = 0;
         this.scoreCard = new TreeMap<String, Integer>();
@@ -26,20 +26,21 @@ public class Yahtzee extends DiceGame {
     public void play() {
     }
 
-    public void walkAway(){}
+    public void walkAway() {
+    }
 
 
     // this method will merge ale rolledDice and savedDice into one ArrayList
-    public ArrayList<Dice> getAllDice(ArrayList<Dice> rolledDice, ArrayList<Dice> savedDice){
+    public ArrayList<Dice> getAllDice(ArrayList<Dice> rolledDice, ArrayList<Dice> savedDice) {
         ArrayList<Dice> allDice = rolledDice;
-        for(Dice die : savedDice){
+        for (Dice die : savedDice) {
             allDice.add(die);
         }
         return allDice;
     }
 
     // this method will get the score for the entered category based on the dice
-    public int getScoreForCategory(String category, ArrayList<Dice> allDice){
+    public int getScoreForCategory(String category, ArrayList<Dice> allDice) {
         int score = 0;
         String categoryToScore = category.toLowerCase();
 
@@ -68,11 +69,11 @@ public class Yahtzee extends DiceGame {
                 score = scoreSixes(allDice);
                 break;
 
-            case "three of a kind":
+            case "3 of a kind":
                 score = scoreThreeOfAKind(allDice);
                 break;
 
-            case "four of a kind":
+            case "4 of a kind":
                 score = scoreFourOfAKind(allDice);
                 break;
 
@@ -90,167 +91,235 @@ public class Yahtzee extends DiceGame {
 
             case "yahtzee":
                 score = scoreYahtzee(allDice);
+                break;
 
             case "chance":
                 score = scoreChance(allDice);
+                break;
 
-            default :
+            default:
                 System.out.println("invalid category");
         }
         return score;
     }
 
-    public int scoreAces(ArrayList<Dice> allDice){
+    public int scoreAces(ArrayList<Dice> allDice) {
         int score = 0;
-        for(Dice die : allDice){
-            if (die.getValue() == 1){
+        for (Dice die : allDice) {
+            if (die.getValue() == 1) {
                 score += 1;
             }
         }
         return score;
     }
 
-    public int scoreTwos(ArrayList<Dice> allDice){
+    public int scoreTwos(ArrayList<Dice> allDice) {
         int score = 0;
-        for(Dice die : allDice){
-            if (die.getValue() == 2){
+        for (Dice die : allDice) {
+            if (die.getValue() == 2) {
                 score += 2;
             }
         }
         return score;
     }
 
-    public int scoreThrees(ArrayList<Dice> allDice){
+    public int scoreThrees(ArrayList<Dice> allDice) {
         int score = 0;
-        for(Dice die : allDice){
-            if (die.getValue() == 3){
+        for (Dice die : allDice) {
+            if (die.getValue() == 3) {
                 score += 3;
             }
         }
         return score;
     }
 
-    public int scoreFours(ArrayList<Dice> allDice){
+    public int scoreFours(ArrayList<Dice> allDice) {
         int score = 0;
-        for(Dice die : allDice){
-            if (die.getValue() == 4){
+        for (Dice die : allDice) {
+            if (die.getValue() == 4) {
                 score += 4;
             }
         }
         return score;
     }
 
-    public int scoreFives(ArrayList<Dice> allDice){
+    public int scoreFives(ArrayList<Dice> allDice) {
         int score = 0;
-        for(Dice die : allDice){
-            if (die.getValue() == 5){
+        for (Dice die : allDice) {
+            if (die.getValue() == 5) {
                 score += 5;
             }
         }
         return score;
     }
 
-    public int scoreSixes(ArrayList<Dice> allDice){
+    public int scoreSixes(ArrayList<Dice> allDice) {
         int score = 0;
-        for(Dice die : allDice){
-            if (die.getValue() == 6){
+        for (Dice die : allDice) {
+            if (die.getValue() == 6) {
                 score += 6;
             }
         }
         return score;
     }
 
-    public int upperSectionBonus(TreeMap<String, Integer> scoreCard){
+    public int upperSectionBonus(TreeMap<String, Integer> scoreCard) {
         // if score for Aces to Sixes is >= 63, return 35.  Else return 0.
         return 0;
     }
 
-    public int getUpperSectionTotal(TreeMap<String, Integer> scoreCard){
+    public int getUpperSectionTotal(TreeMap<String, Integer> scoreCard) {
         return 0;
     }
 
-    public boolean hasThreeOfAKind(ArrayList<Dice> allDice){
-        // returns true if there are at least 3 dice with the same values
+    public boolean hasThreeOfAKind(ArrayList<Dice> allDice) {
+        Integer[] diceCount = countDice(allDice);
+        for (Integer dieCount : diceCount) {
+            if (dieCount >= 3) {
+                return true;
+            }
+        }
         return false;
     }
 
-    public int scoreThreeOfAKind(ArrayList<Dice> allDice){
-        // if hasThreeOfAKind returns true, returns the sum of all Dice
-        // else returns 0
+    public int scoreThreeOfAKind(ArrayList<Dice> allDice) {
+        if (hasThreeOfAKind(allDice)) {
+            return getSumOfDice(allDice);
+        }
         return 0;
     }
 
-    public boolean hasFourOfAKind(ArrayList<Dice> allDice){
-        // return true if there are at least 4 dice with the same values
+
+    public boolean hasFourOfAKind(ArrayList<Dice> allDice) {
+        Integer[] diceCount = countDice(allDice);
+        for (Integer dieCount : diceCount) {
+            if (dieCount >= 4) {
+                return true;
+            }
+        }
         return false;
     }
 
-    public int scoreFourOfAKind(ArrayList<Dice> allDice){
-        // if hasFourOfAKind returns true, returns the sum of all dice
-        // else returns 0
+
+    public int scoreFourOfAKind(ArrayList<Dice> allDice) {
+        if (hasFourOfAKind(allDice)) {
+            return getSumOfDice(allDice);
+        }
         return 0;
     }
 
-    public boolean hasFullHouse(ArrayList<Dice> allDice){
-        // returns true if there are 3 of the same dice and 2 of the same dice
-        // that are not the same value as the 3 dice
+
+    public boolean hasFullHouse(ArrayList<Dice> allDice) {
+        Integer[] diceCount = countDice(allDice);
+        boolean hasTwoCount = false;
+        boolean hasThreeCount = false;
+
+        for (Integer dieCount : diceCount) {
+            if (dieCount == 2) {
+                hasTwoCount = true;
+            }
+            if (dieCount == 3) {
+                hasThreeCount = true;
+            }
+        }
+        if (hasTwoCount && hasThreeCount) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public int scoreFullHouse(ArrayList<Dice> allDice) {
+        if (hasFullHouse(allDice)) {
+            return 25;
+        } else {
+            return 0;
+        }
+    }
+
+
+    public boolean hasSmallStraight(ArrayList<Dice> allDice) {
+        Integer[] diceCount = countDice(allDice);
+
+        if ((diceCount[0] >= 1) && (diceCount[1] >= 1) && (diceCount[2] >= 1) && (diceCount[3] >= 1)) {
+            return true;
+        }
+        if ((diceCount[1] >= 1) && (diceCount[2] >= 1) && (diceCount[3] >= 1) && (diceCount[4] >= 1)) {
+            return true;
+        }
+        if ((diceCount[2] >= 1) && (diceCount[3] >= 1) && (diceCount[4] >= 1) && (diceCount[5] >= 1)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public int scoreSmallStraight(ArrayList<Dice> allDice) {
+        if (hasSmallStraight(allDice)) {
+            return 30;
+        } else {
+            return 0;
+        }
+    }
+
+
+    public boolean hasLargeStraight(ArrayList<Dice> allDice) {
+        Integer[] diceCount = countDice(allDice);
+
+        if ((diceCount[0] == 1) && (diceCount[1] == 1) && (diceCount[2] == 1) && (diceCount[3] == 1) && (diceCount[4] == 1)) {
+            return true;
+        }
+        if ((diceCount[1] == 1) && (diceCount[2] == 1) && (diceCount[3] == 1) && (diceCount[4] == 1) && (diceCount[5] == 1)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public int scoreLargeStraight(ArrayList<Dice> allDice) {
+        if (hasLargeStraight(allDice)) {
+            return 40;
+        } else {
+            return 0;
+        }
+    }
+
+
+    public boolean hasYahtzee(ArrayList<Dice> allDice) {
+        Integer[] diceCount = countDice(allDice);
+
+        for (Integer dieCount : diceCount) {
+            if (dieCount == 5) {
+                return true;
+            }
+        }
         return false;
     }
 
-    public int scoreFullHouse(ArrayList<Dice> allDice){
-        // if hasFullHouse, returns 25
-        // else returns 0
-        return 0;
+
+    public int scoreYahtzee(ArrayList<Dice> allDice) {
+        if(hasYahtzee(allDice)){
+            return 50;
+        }
+        else {
+            return 0;
+        }
     }
 
-    public boolean hasSmallStraight(ArrayList<Dice> allDice){
-        // if allDice has dice with values 1,2,3,4  2,3,4,5  or 3,4,5,6 return true
-        // else return false
-        return false;
+
+    public int scoreChance(ArrayList<Dice> allDice) {
+        return getSumOfDice(allDice);
     }
 
-    public int scoreSmallStraight(ArrayList<Dice> allDice){
-        // if hasSmallStraight return 30
-        // else returns 0
-        return 0;
-    }
-
-    public boolean hasLargeStraight(ArrayList<Dice> allDice){
-        // if allDice has dice with values 1,2,3,4.5 or  2,3,4,5,6 return true
-        // else return false
-        return false;
-    }
-
-    public int scoreLargeStraight(ArrayList<Dice> allDice){
-        // if hasLargeStraight return 40
-        // else returns 0
-        return 0;
-    }
-
-    public boolean hasYahtzee(ArrayList<Dice> allDice){
-        // if allDice has 5 of a kind, return true
-        // else return false
-        return false;
-    }
-
-    public int scoreYahtzee(ArrayList<Dice> allDice){
-        // if yahtzeePlayer.hasYahtzee is true  and hasYahtzee is true, return 100;
-        // else if hasYahtzee, yahtzeePlayer.setHasYahtzee(true) return 50
-        // else return 0
-        return 0;
-    }
-
-    public int scoreChance(ArrayList<Dice> allDice){
-        // returns the sum of all Dice
-        return 0;
-    }
-
-    public int getLowerSectionTotal(TreeMap<String, Integer> scoreCard){
+    public int getLowerSectionTotal(TreeMap<String, Integer> scoreCard) {
         // return sum of all lower section values
         return 0;
     }
 
-    public int getTotalScore(TreeMap<String, Integer> scoreCard){
+    public int getTotalScore(TreeMap<String, Integer> scoreCard) {
         // return the sum of getLowerSectionTotal and getUpperSectionTotal
         return 0;
     }
@@ -302,4 +371,35 @@ public class Yahtzee extends DiceGame {
     public void setRolledDice(ArrayList<Dice> rolledDice) {
         this.rolledDice = rolledDice;
     }
+
+    public Integer[] countDice(ArrayList<Dice> dice) {
+        Integer[] diceCounter = {0, 0, 0, 0, 0, 0};
+        for (Dice die : dice) {
+            if (die.getValue() == 1) {
+                diceCounter[0]++;
+            } else if (die.getValue() == 2) {
+                diceCounter[1]++;
+            } else if (die.getValue() == 3) {
+                diceCounter[2]++;
+            } else if (die.getValue() == 4) {
+                diceCounter[3]++;
+            } else if (die.getValue() == 5) {
+                diceCounter[4]++;
+            } else if (die.getValue() == 6) {
+                diceCounter[5]++;
+            }
+        }
+        return diceCounter;
+    }
+
+
+    public int getSumOfDice(ArrayList<Dice> dice) {
+        int sum = 0;
+
+        for (Dice die : dice) {
+            sum += die.getValue();
+        }
+        return sum;
+    }
+
 }
