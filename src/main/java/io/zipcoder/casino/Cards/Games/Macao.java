@@ -68,20 +68,19 @@ public class Macao extends Game {
     }
 
     public void rollDie(MacaoPlayer player) {
-        player.roll = dice.roll();
-        player.cumulativeRoll += player.roll;
+        player.setRoll(dice.roll());
     }
 
     public void showInitialRolls() {
-        console.println("YOUR ROLL: %s | COMPUTER'S ROLL: %s", macaoGuest.roll, macaoComputer.roll);
+        console.println("YOUR ROLL: %s | COMPUTER'S ROLL: %s", macaoGuest.getRoll(), macaoComputer.getRoll());
     }
 
     public void showGuestRoll() {
-        console.println("YOUR NEW ROLL: %s | YOUR TOTAL: %s", macaoGuest.roll, macaoGuest.cumulativeRoll);
+        console.println("YOUR NEW ROLL: %s | YOUR TOTAL: %s", macaoGuest.getRoll(), macaoGuest.getCumulativeRoll());
     }
 
     public void showComputerRoll() {
-        console.println("\nCOMPUTER'S NEW ROLL: %s | COMPUTER'S TOTAL: %s", macaoComputer.roll, macaoComputer.cumulativeRoll);
+        console.println("\nCOMPUTER'S NEW ROLL: %s | COMPUTER'S TOTAL: %s", macaoComputer.getRoll(), macaoComputer.getCumulativeRoll());
     }
 
     public void initialGameSetup() {
@@ -91,11 +90,11 @@ public class Macao extends Game {
     }
 
     public boolean isGuestStillPlaying() {
-        if (macaoGuest.cumulativeRoll == 9) {
+        if (macaoGuest.getCumulativeRoll() == 9) {
             guestStillPlaying = false;
         }
         for (int i = 0; i < 1; i++) {
-            if (macaoGuest.cumulativeRoll < 9 && guestStillPlaying) {
+            if (macaoGuest.getCumulativeRoll() < 9 && guestStillPlaying) {
                 String yesOrNo = console.getStringInput("\nWould you like to roll again? (Y/N)");
                 yesOrNo = yesOrNo.toLowerCase();
                 if (!yesOrNo.equals("y") && !yesOrNo.equals("n")) {
@@ -115,7 +114,7 @@ public class Macao extends Game {
 
     public boolean didGuestGoOver() {
         boolean guestWentOver = false;
-        if (macaoGuest.cumulativeRoll > 9) {
+        if (macaoGuest.getCumulativeRoll() > 9) {
             guestStillPlaying = false;
             return true;
         }
@@ -124,10 +123,10 @@ public class Macao extends Game {
 
     public boolean isComputerStillPlaying() {
         if (computerStillPlaying) {
-            if (macaoComputer.cumulativeRoll > 6 && macaoComputer.cumulativeRoll > macaoGuest.cumulativeRoll) {
+            if (macaoComputer.getCumulativeRoll() > 6 && macaoComputer.getCumulativeRoll() > macaoGuest.getCumulativeRoll()) {
                 computerStillPlaying = false;
             }
-            if (macaoComputer.cumulativeRoll > 7) {
+            if (macaoComputer.getCumulativeRoll() == 9) {
                 computerStillPlaying = false;
             }
         }
@@ -135,16 +134,16 @@ public class Macao extends Game {
     }
 
     public void evaluate() {
-        if (macaoComputer.cumulativeRoll > 9) {
+        if (macaoComputer.getCumulativeRoll() > 9) {
             console.println("\nThe computer went over. You win!");
             isOver = true;
         } else if (guestStillPlaying == false && computerStillPlaying == false) {
             isOver = true;
-            if (macaoGuest.cumulativeRoll > macaoComputer.cumulativeRoll) {
-                console.println("\nYour total is %s and the computer's total is %s. You win!", macaoGuest.cumulativeRoll, macaoComputer.cumulativeRoll);
-            } else if (macaoComputer.cumulativeRoll > macaoGuest.cumulativeRoll) {
-                console.println("\nYour total is %s and the computer's total is %s. Sorry, you lose!", macaoGuest.cumulativeRoll, macaoComputer.cumulativeRoll);
-            } else if (macaoGuest.cumulativeRoll == macaoComputer.cumulativeRoll) {
+            if (macaoGuest.getCumulativeRoll() > macaoComputer.getCumulativeRoll()) {
+                console.println("\nYour total is %s and the computer's total is %s. You win!", macaoGuest.getCumulativeRoll(), macaoComputer.getCumulativeRoll());
+            } else if (macaoComputer.getCumulativeRoll() > macaoGuest.getCumulativeRoll()) {
+                console.println("\nYour total is %s and the computer's total is %s. Sorry, you lose!", macaoGuest.getCumulativeRoll(), macaoComputer.getCumulativeRoll());
+            } else if (macaoGuest.getCumulativeRoll() == macaoComputer.getCumulativeRoll()) {
                 console.println("\nIt's a tie!");
             }
         }

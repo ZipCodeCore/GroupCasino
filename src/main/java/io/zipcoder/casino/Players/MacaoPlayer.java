@@ -4,8 +4,8 @@ import io.zipcoder.casino.Casino.Casino;
 
 public class MacaoPlayer extends Player {
 
-    public int roll;
-    public int cumulativeRoll;
+    private int roll;
+    private int cumulativeRoll;
 
     public MacaoPlayer() {
         this.roll = 0;
@@ -18,4 +18,18 @@ public class MacaoPlayer extends Player {
         this.cumulativeRoll = 0;
     }
 
+    public int getRoll() {
+        return roll;
+    }
+
+    public int getCumulativeRoll() {
+        return cumulativeRoll;
+    }
+
+    public void setRoll(int roll) {
+        this.roll = roll;
+        this.cumulativeRoll += roll;
+    }
 }
+
+
