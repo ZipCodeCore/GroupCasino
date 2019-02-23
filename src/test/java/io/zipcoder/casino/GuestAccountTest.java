@@ -117,11 +117,11 @@ public void createGuestAccountTest1() {
     }
 
     @Test
-    public void toStringGuestAccountTest(){
+    public void toStringTest(){
 
         //Given
         GuestAccount guestAccount = new GuestAccount("Johnny Blaze", 888, 555.00);
-        String expected = "Johnny Blaze, 888, $555.00\n ";
+        String expected = "Name: Johnny Blaze, ID: 888, Balance: $555.00\n";
 
         //When
         String actual = guestAccount.toString();
