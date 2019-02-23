@@ -17,9 +17,9 @@ public final class Console {
         this.output = out;
     }
 
-    Console console = new Console(System.in, System.out);
+    static Console console = new Console(System.in, System.out);
 
-    public Console getInstance(){
+    public static Console getInstance(){
         return console;
     }
 
