@@ -8,7 +8,7 @@ public class Greeter {
     private Console console;
 
     public Greeter(){
-        this.console = new Console();
+        this.console = Console.getConsole();
     }
 
     public Greeter(Console console) {

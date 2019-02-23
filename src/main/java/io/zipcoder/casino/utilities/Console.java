@@ -12,20 +12,29 @@ import java.util.Scanner;
 public final class Console {
     private final Scanner input;
     private final PrintStream output;
+    private static Console console = null;
 
+    // Console to be a Singleton outside of testing
+    public static Console getConsole()
+    {
+        if (console == null)
+            console = new Console();
+        return console;
+    }
+    private Console() {
+        this(System.in, System.out);
+    }
+
+    // Public Constructors for testing
     public Console(InputStream in, PrintStream out) {
         this.input = new Scanner(in);
         this.output = out;
     }
-    
     public Console(Scanner scanner, PrintStream out) {
         this.input = scanner;
         this.output = out;
     }
 
-    public Console() {
-        this(System.in, System.out);
-    }
 
     public void print(String val, Object... args) {
         output.format(val, args);
