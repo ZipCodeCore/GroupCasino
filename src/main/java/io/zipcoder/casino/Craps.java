@@ -23,14 +23,27 @@ public class Craps {
     Console console = new Console();
     DicePlayer dicePlayer = new DicePlayer();
     private int[] crappedOutRolls = {2, 3, 12};
-    private int initialBalance = User.getBalance();
+    //private int initialBalance = User.getBalance();
     private int adjustedBalance;
     private int nextRoll;
     private int buyIn = 5;
+    Dice die1 = new Dice();
+    Dice die2 = new Dice();4
+    //Casino.getProfile();
 
-    play();
-    playGame();
-    cashIn();
+    //public void play();
+    //public void playGame();
+    //public void cashIn();
+
+    public void main(String[] args) {
+        System.out.println("Welcome to the craps table!");
+        while (!isOver) {
+            promptBet();
+            roll();
+            evaluate();
+            cashOut();
+        }
+    }
 
     public void promptBet() {
         if (isFirstRoll == true) {
@@ -60,14 +73,14 @@ public class Craps {
     }
 
     public void roll() {
-        int initialSum = User.roll(die1) + User.roll(die2);
+        int initialSum = die1.roll() + die2.roll();
         if (isFirstRoll == true) {
             firstRoll = initialSum;
             isFirstRoll = false;
         } else {
             point = initialSum;
         }
-        System.out.println(String.format("You rolled a %d and %d totaling %d", User.roll(die1), User.roll(die2), initialSum));
+        System.out.println(String.format("You rolled a %d and %d totaling %d", die1.roll(), die2.roll(), initialSum));
     }
 
     public void evaluate() {
@@ -126,16 +139,5 @@ public class Craps {
         } else {
             roll();
         }
-    }
-
-    public void main(String[] args) {
-        System.out.println("Welcome to the craps table!");
-        while (!isOver) {
-            promptBet();
-            roll();
-            evaluate();
-            cashOut();
-        }
-        return User.balance;
     }
 }
