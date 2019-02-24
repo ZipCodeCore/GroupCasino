@@ -1,7 +1,9 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.DiceGame.Yahtzee;
+
 public interface Game {
-    void play();
+     public void play();
 
     void walkAway();
 }

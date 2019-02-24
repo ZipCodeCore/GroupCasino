@@ -1,7 +1,6 @@
 package io.zipcoder.casino;
 
 import io.zipcoder.casino.DiceGame.Dice;
-import io.zipcoder.casino.DiceGame.Yahtzee;
 import io.zipcoder.casino.DiceGame.YahtzeePlayer;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class YahtzeePlayerTests {
 
 
     @Test
-    public void rollDiceTest(){
+    public void rollDiceTest() throws YahtzeePlayer.TooManyRollsException {
         // Given
         Player player = new Player("Cara", 1000.00);
         YahtzeePlayer yahtzeePlayer = new YahtzeePlayer(player);
@@ -66,16 +65,21 @@ public class YahtzeePlayerTests {
 
         String diceToSaveInput = "135";
 
-        ArrayList<Dice> expected = new ArrayList<>();
-        expected.add(d3);
-        expected.add(d1);
-        expected.add(d2);
+        ArrayList<Dice> expectedSaved = new ArrayList<>();
+        expectedSaved.add(d3);
+        expectedSaved.add(d1);
+        expectedSaved.add(d2);
+
+        ArrayList<Dice> expectedRolled = new ArrayList<>();
+        expectedRolled.add(d6);
+        expectedRolled.add(d6);
 
         // When
-        ArrayList<Dice> actual = yahtzeePlayer.saveDice(rolledDice, diceToSaveInput);
+        ArrayList<Dice> actualSaved = yahtzeePlayer.saveDice(rolledDice, diceToSaveInput);
 
         // Then
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedSaved, actualSaved);
+        Assert.assertEquals(expectedRolled, rolledDice);
     }
 
 
@@ -94,43 +98,54 @@ public class YahtzeePlayerTests {
 
         String diceToReturnInput = "324";
 
-        ArrayList<Dice> expected = new ArrayList<>();
-        expected.add(d2);
-        expected.add(d3);
-        expected.add(d3);
+        ArrayList<Dice> expectedReturned = new ArrayList<>();
+        expectedReturned.add(d2);
+        expectedReturned.add(d3);
+        expectedReturned.add(d3);
+
+        ArrayList<Dice> expectedSaved = new ArrayList<>();
+        expectedSaved.add(d1);
+        expectedSaved.add(d6);
 
         // When
-        ArrayList<Dice> actual = yahtzeePlayer.returnDice(savedDice, diceToReturnInput);
+        ArrayList<Dice> actualReturned = yahtzeePlayer.returnDice(savedDice, diceToReturnInput);
 
         // Then
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedReturned, actualReturned);
+        Assert.assertEquals(expectedSaved, savedDice);
     }
 
 
     @Test
-    public void moveDiceTest(){
+    public void removeSameDiceTest(){
         Player player = new Player("Cara", 1000.00);
         YahtzeePlayer yahtzeePlayer = new YahtzeePlayer(player);
 
-        ArrayList<Dice> diceToMoveFrom = new ArrayList<>();
-        diceToMoveFrom.add(d1);
-        diceToMoveFrom.add(d2);
-        diceToMoveFrom.add(d3);
-        diceToMoveFrom.add(d4);
-        diceToMoveFrom.add(d5);
+        ArrayList<Dice> diceList = new ArrayList<>();
+        diceList.add(d1);
+        diceList.add(d2);
+        diceList.add(d3);
+        diceList.add(d4);
 
-        String diceToMoveInput = "124";
+        ArrayList<Dice> diceListToRemoveFrom = new ArrayList<>();
+        diceListToRemoveFrom.add(d3);
+        diceListToRemoveFrom.add(d4);
+        diceListToRemoveFrom.add(d5);
+        diceListToRemoveFrom.add(d6);
 
-        ArrayList<Dice> expected = new ArrayList<>();
-        expected.add(d1);
-        expected.add(d2);
-        expected.add(d4);
+        ArrayList<Dice> expectedRemovedFromDiceList = new ArrayList<>();
+        expectedRemovedFromDiceList.add(d5);
+        expectedRemovedFromDiceList.add(d6);
 
         // When
-        ArrayList<Dice> actual = yahtzeePlayer.moveDice(diceToMoveFrom, diceToMoveInput);
+        yahtzeePlayer.removeSameDice(diceListToRemoveFrom, diceList);
 
         // Then
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedRemovedFromDiceList, diceListToRemoveFrom);
+
+
+
+
     }
 
 }

@@ -1,8 +1,10 @@
 package io.zipcoder.casino.DiceGame;
 
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
+import java.util.TooManyListenersException;
 import java.util.TreeMap;
 
 public class Yahtzee extends DiceGame {
@@ -18,12 +20,52 @@ public class Yahtzee extends DiceGame {
         this.yahtzeePlayer = new YahtzeePlayer(player);
         this.score = 0;
         this.scoreCard = new TreeMap<>();
-        this.rollNumber = 1;
         this.savedDice = new ArrayList<>();
         this.rolledDice = new ArrayList<>();
     }
 
-    public void play() {
+    @Override
+    public void play(){
+        boolean playing = false;
+        Console console = Console.getInstance();
+        String input = console.getStringInput("Hello %s!  Welcome to Yahtzee!  Type 'roll' to begin!", yahtzeePlayer.getName());
+        playing = true;
+
+        while(playing) {
+            if (input.toLowerCase().equals("roll")){
+                try {
+                    rolledDice = yahtzeePlayer.rollDice(5 - savedDice.size());
+                } catch(YahtzeePlayer.TooManyRollsException tooManyRollsException) {
+                    console.println("You have already rolled 3 times.  Type 'mark' to mark your scorecard.");
+
+                }
+            }
+            console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
+            console.println(getCurrentDiceString(rolledDice, savedDice));
+            input = console.getStringInput("Type 'save' to save rolled dice.\n" +
+                    "Type 'return' to return saved dice to be rolled again.\n" +
+                    "Type 'roll' to roll again.\n" +
+                    "Type 'scorecard' to see scorecard.\n" +
+                    "Type 'mark' to mark a score on you scorecard.\n");
+
+            if (input.toLowerCase().equals("save")) {
+                input = console.getStringInput("Type the locations of the dice you want to save.\n" +
+                        "(Ex: '123' to save first three dice)");
+                for(Dice die : yahtzeePlayer.saveDice(rolledDice, input)){
+                    savedDice.add(die);
+                }
+                console.println("Dice saved.");
+            }
+
+            if (input.toLowerCase().equals("return")) {
+                input = console.getStringInput("Type the locations of the dice you want to return.\n" +
+                        "(Ex: '345' to return last three dice)");
+                for (Dice die : yahtzeePlayer.returnDice(savedDice, input)){
+                    rolledDice.add(die);
+                }
+                console.println("Dice returned");
+            }
+        }
     }
 
     public void walkAway() {
@@ -38,6 +80,7 @@ public class Yahtzee extends DiceGame {
         }
         return allDice;
     }
+
 
     // this method will get the score for the entered category based on the dice
     public int getScoreForCategory(String category, ArrayList<Dice> allDice) {
@@ -102,6 +145,7 @@ public class Yahtzee extends DiceGame {
         }
         return score;
     }
+
 
     public int scoreAces(ArrayList<Dice> allDice) {
         int score = 0;
@@ -406,5 +450,57 @@ public class Yahtzee extends DiceGame {
         int score = getScoreForCategory(category, dice);
         this.scoreCard.put(category.toLowerCase(), score);
     }
+
+
+    public String listOfDiceToDiceString(ArrayList<Dice> diceList){
+        String diceString = "";
+        for(Dice die : diceList){
+            if (die.getValue() == 1){
+                diceString = diceString + "  ⚀  |";
+            }
+            else if (die.getValue() == 2){
+                diceString = diceString + "  ⚁  |";
+            }
+            else if (die.getValue() == 3){
+                diceString = diceString + "  ⚂  |";
+            }
+            else if (die.getValue() == 4){
+                diceString = diceString + "  ⚃  |";
+            }
+            else if (die.getValue() == 5){
+                diceString = diceString + "  ⚄  |";
+            }
+            else if (die.getValue() == 6){
+                diceString = diceString + "  ⚅  |";
+            }
+        }
+        return diceString;
+
+    }
+
+    public String getCurrentDiceString(ArrayList<Dice> rolledDice, ArrayList<Dice> savedDice){
+        String currentDiceString = "";
+        String spacerString = "\n|------------------------------------------|\n";
+        String numberString = "|            |  1  |  2  |  3  |  4  |  5  |";
+
+
+        String rolledDiceString = "|Rolled Dice |" + listOfDiceToDiceString(rolledDice);
+        for(int i = 0; i < 5 - rolledDice.size(); i++){
+            rolledDiceString = rolledDiceString + "     |";
+        }
+
+        String savedDiceString = "| Saved Dice |";
+
+        for(int i = 0; i < rolledDice.size(); i++){
+            savedDiceString = savedDiceString + "     |";
+        }
+
+        savedDiceString = savedDiceString + listOfDiceToDiceString(savedDice);
+        currentDiceString = spacerString + numberString + spacerString + rolledDiceString + spacerString + savedDiceString + spacerString;
+
+        return currentDiceString;
+    }
+
+
 
 }

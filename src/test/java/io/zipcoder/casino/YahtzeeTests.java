@@ -2,11 +2,8 @@ package io.zipcoder.casino;
 
 import io.zipcoder.casino.DiceGame.Dice;
 import io.zipcoder.casino.DiceGame.Yahtzee;
-import io.zipcoder.casino.DiceGame.YahtzeePlayer;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -27,7 +24,6 @@ public class YahtzeeTests {
         TreeMap<String, Integer> expectedScoreCard = new TreeMap<String, Integer>();
         ArrayList<Dice> expectedSavedDice = new ArrayList<Dice>();
         ArrayList<Dice> expectedRolledDice = new ArrayList<Dice>();
-        int expectedRollNumber = 1;
         int expectedScore = 0;
 
         // When
@@ -36,7 +32,6 @@ public class YahtzeeTests {
         TreeMap<String, Integer> actualScoreCard = yahtzee.getScoreCard();
         ArrayList<Dice> actualSavedDice = yahtzee.getSavedDice();
         ArrayList<Dice> actualRolledDice = yahtzee.getRolledDice();
-        int actualRollNumber = yahtzee.getRollNumber();
         int actualScore = yahtzee.getScore();
 
         // Then
@@ -44,7 +39,6 @@ public class YahtzeeTests {
         Assert.assertEquals(expectedScoreCard, actualScoreCard);
         Assert.assertEquals(expectedSavedDice, actualSavedDice);
         Assert.assertEquals(expectedRolledDice, actualRolledDice);
-        Assert.assertEquals(expectedRollNumber, actualRollNumber);
         Assert.assertEquals(expectedScore, actualScore);
     }
 
@@ -352,13 +346,6 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        Dice d1 = new Dice(1, 1);
-        Dice d2 = new Dice(1, 2);
-        Dice d3 = new Dice(1, 3);
-        Dice d4 = new Dice(1, 4);
-        Dice d5 = new Dice(1, 5);
-        Dice d6 = new Dice(1, 6);
-
         ArrayList<Dice> diceWith4Fours = new ArrayList<>();
         diceWith4Fours.add(d4);
         diceWith4Fours.add(d2);
@@ -391,13 +378,6 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
 
-        Dice d1 = new Dice(1, 1);
-        Dice d2 = new Dice(1, 2);
-        Dice d3 = new Dice(1, 3);
-        Dice d4 = new Dice(1, 4);
-        Dice d5 = new Dice(1, 5);
-        Dice d6 = new Dice(1, 6);
-
         ArrayList<Dice> diceWith3Fives = new ArrayList<>();
         diceWith3Fives.add(d1);
         diceWith3Fives.add(d2);
@@ -429,13 +409,6 @@ public class YahtzeeTests {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
-
-        Dice d1 = new Dice(1, 1);
-        Dice d2 = new Dice(1, 2);
-        Dice d3 = new Dice(1, 3);
-        Dice d4 = new Dice(1, 4);
-        Dice d5 = new Dice(1, 5);
-        Dice d6 = new Dice(1, 6);
 
         ArrayList<Dice> diceWith4Sixes = new ArrayList<>();
         diceWith4Sixes.add(d6);
@@ -1118,6 +1091,70 @@ public class YahtzeeTests {
         Assert.assertEquals(expectedLargeStraight, actualLargeStraight);
         Assert.assertEquals(expectedYahtzee, actualYahtzee);
         Assert.assertEquals(expectedChance, actualChance);
+    }
+
+
+    @Test
+    public void listOfDiceToStringTest() {
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        ArrayList<Dice> diceList1 = new ArrayList<>();
+        diceList1.add(d1);
+        diceList1.add(d2);
+        diceList1.add(d3);
+        diceList1.add(d4);
+        diceList1.add(d5);
+
+        String expected1 = "  ⚀  |  ⚁  |  ⚂  |  ⚃  |  ⚄  |";
+
+        ArrayList<Dice> diceList2 = new ArrayList<>();
+        diceList2.add(d6);
+        diceList2.add(d2);
+
+        String expected2 = "  ⚅  |  ⚁  |";
+
+        // When
+        String actual1 = yahtzee.listOfDiceToDiceString(diceList1);
+        String actual2 = yahtzee.listOfDiceToDiceString(diceList2);
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getCurrentDiceStringTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        ArrayList<Dice> rolledDice = new ArrayList<>();
+        rolledDice.add(d4);
+        rolledDice.add(d6);
+
+        ArrayList<Dice> savedDice = new ArrayList<>();
+        savedDice.add(d2);
+        savedDice.add(d2);
+        savedDice.add(d5);
+
+        String expected ="\n|------------------------------------------|\n" +
+                "|            |  1  |  2  |  3  |  4  |  5  |\n" +
+                "|------------------------------------------|\n" +
+                "|Rolled Dice |  ⚃  |  ⚅  |     |     |     |\n" +
+                "|------------------------------------------|\n" +
+                "| Saved Dice |     |     |  ⚁  |  ⚁  |  ⚄  |\n" +
+                "|------------------------------------------|\n";
+
+
+        // When
+        String actual = yahtzee.getCurrentDiceString(rolledDice, savedDice);
+
+        // Then
+        Assert.assertEquals(expected, actual);
+        System.out.println(actual);
 
     }
 }
