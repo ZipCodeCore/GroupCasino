@@ -16,22 +16,22 @@ public class YahtzeePlayer {
     }
 
     public ArrayList<Dice> rollDice(int numberOfDice){
-        ArrayList<Dice> rolledDice = new ArrayList<Dice>();
+        ArrayList<Dice> rolledDice = new ArrayList<>();
         return rolledDice;
     }
 
     public ArrayList<Dice> saveDice(ArrayList<Dice> dice, String diceToSaveInput) {
-        ArrayList<Dice> diceToSave = new ArrayList<Dice>();
+        ArrayList<Dice> diceToSave = new ArrayList<>();
         return diceToSave;
     }
 
     public ArrayList<Dice> returnDice(ArrayList<Dice> savedDice, String diceToReturnInput){
-        ArrayList<Dice> diceToReturn = new ArrayList<Dice>();
+        ArrayList<Dice> diceToReturn = new ArrayList<>();
         return diceToReturn;
     }
 
     public ArrayList<Dice> moveDice(ArrayList<Dice> dice, String diceToMoveInput){
-        ArrayList<Dice> diceToMove = new ArrayList<Dice>();
+        ArrayList<Dice> diceToMove = new ArrayList<>();
         return diceToMove;
     }
 
