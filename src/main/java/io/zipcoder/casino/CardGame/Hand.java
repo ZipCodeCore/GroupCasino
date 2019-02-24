@@ -6,21 +6,25 @@ import io.zipcoder.casino.CardGame.Cards.Deck;
 import java.util.ArrayList;
 
 public class Hand {
-    private ArrayList<Card> cards;
     private int size;
     private int handValue;
-    private ArrayList<Card> hand;
-    private Deck deck;
+    private ArrayList<Card> cards = new ArrayList<>();
+    private Deck deck = new Deck(1);
 
-    public Hand(Card cards) {
-        deck = new Deck();
-        hand = new ArrayList<Card>();
+
+
+
+    public Hand(ArrayList<Card> cards) {
+
     }
 
     public void drawCard() {
-         hand.add(deck.getCard(0));
+         cards.add(deck.getCard(0));
          deck.removeCardFromDeck(0);
 
     }
 
+
 }
+
+

@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-    public ArrayList<Card> deck;
-    private int size;
+    public ArrayList<Card> deck = new ArrayList<>();
 
-    public Deck() {
-        deck = new ArrayList<Card>();
-        createDeck();
+    public Deck(int numberOfDecks) {
+        for (int i = 0; i < numberOfDecks; i++) {
+            createDeck();
+
+        }
+
 
     }
 

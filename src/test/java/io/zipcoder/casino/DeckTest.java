@@ -5,6 +5,8 @@ import io.zipcoder.casino.CardGame.Cards.Deck;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class DeckTest {
 
 
@@ -14,7 +16,7 @@ public class DeckTest {
     @Test
     public void testShuffle() {
         //GIVEN
-        Deck deck = new Deck();
+        Deck deck = new Deck(1);
         Card expected = deck.getCard(4);
 
         //WHEN
@@ -30,7 +32,7 @@ public class DeckTest {
     @Test
     public void removeCardFromDeck() {
         //GIVEN
-        Deck deck = new Deck();
+        Deck deck = new Deck(1);
         int expected = deck.deckSize();
 
         //WHEN
@@ -44,18 +46,21 @@ public class DeckTest {
     }
 
     @Test
-    public void deal() {
-
+    public void testDeal() {
         //GIVEN
-     Deck deck = new Deck();
-     int expected = deck.deckSize();
+        Deck deck = new Deck(10);
+        ArrayList<Card> cards = new ArrayList<>();
 
 
         //WHEN
-
+        cards = deck.deal(7);
+        int expected = cards.size();
 
         //THEN
-
-
+        Assert.assertTrue(expected == 7);
     }
+
+
+
+
 }
