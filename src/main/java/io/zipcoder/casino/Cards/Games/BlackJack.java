@@ -131,7 +131,8 @@ public class BlackJack extends Game {
     public void hit(List<Card> hand) {
         dealOneCard(hand);
         userTotal = getTotal(userHand);
-        blackJackConsole.println("Your next card is " + userHand.get(user.getHand().size()-1) + ". Your total hand is " + userTotal);
+        blackJackConsole.println("Your next card is " + userHand.get(user.getHand().size()-1) +
+                ". Your total hand is " + userTotal);
 
     }
 
@@ -142,8 +143,8 @@ public class BlackJack extends Game {
     }
 
     public void dealTwoCards(List<Card> hand) {
-        hand.add(currentDeck.drawCard());
-        hand.add(currentDeck.drawCard());
+        dealOneCard(hand);
+        dealOneCard(hand);
     }
 
     public void dealOneCard(List<Card> hand) {
