@@ -11,7 +11,6 @@ public class CardTest {
     @Test
 
     public void testCardConstructor() {
-
         //Given
         Rank rank = Rank.ACE;
         Suit suit = Suit.DIAMONDS;
@@ -29,7 +28,6 @@ public class CardTest {
 
     @Test
     public void testCardSetMethod() {
-
         //Given
         Rank rank = Rank.FIVE;
         Suit suit = Suit.SPADES;
@@ -38,7 +36,7 @@ public class CardTest {
         //When
         Rank actualRank = testCard.getRank();
         Suit actualSuit = testCard.getSuit();
-        String expected = "" + rank + " of "+suit;
+        String expected = "|" + rank.toString().toLowerCase() + " of "+suit.toString().toLowerCase();
         //Then
         Assert.assertEquals(expected,testCard.toString());
         Assert.assertEquals(suit,actualSuit);

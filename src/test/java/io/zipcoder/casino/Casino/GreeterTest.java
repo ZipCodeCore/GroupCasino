@@ -320,7 +320,7 @@ public class GreeterTest {
         Greeter greeter = new Greeter(console);
 
         // When
-        greeter.balanceTooLow();
+        greeter.goodBye();
         String actual = outputStream.toString();
 
         // Then

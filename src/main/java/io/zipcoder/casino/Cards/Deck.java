@@ -42,5 +42,6 @@ public class Deck {
         return playDeck.pop();
     }
 
+    public int cardsLeft() { return playDeck.size(); }
 
 }

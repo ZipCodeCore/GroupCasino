@@ -25,9 +25,10 @@ public class BlackJack extends Game {
     private double userBet;
     private boolean isOver = false;
 
-    Console blackJackConsole = new Console();
+    Console blackJackConsole = Console.getConsole();
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         BlackJack blackJack = new BlackJack();
         blackJack.play();
     }
