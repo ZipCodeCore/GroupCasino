@@ -1,8 +1,29 @@
 package io.zipcoder.casino.CardGame;
 
 import io.zipcoder.casino.CardGame.Cards.Card;
+import io.zipcoder.casino.CardGame.Cards.Deck;
+
+import java.util.ArrayList;
 
 public class Hand {
-    private java.util.ArrayList<Card> cards;
+    private ArrayList<Card> cards;
     private int size;
+    private int handValue;
+    private ArrayList<Card> hand;
+    private Deck deck;
+
+    public Hand(Card cards) {
+        deck = new Deck();
+        hand = new ArrayList<Card>();
+
+
+    }
+
+
+    public void drawCard() {
+         hand.add(deck.getCard(0));
+         deck.removeCardFromDeck(0);
+
+    }
+
 }
