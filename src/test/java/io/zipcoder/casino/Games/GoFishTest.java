@@ -3,6 +3,7 @@ package io.zipcoder.casino.Games;
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Deck;
 import io.zipcoder.casino.Cards.Games.GoFish;
+import io.zipcoder.casino.Cards.Games.Macao;
 import io.zipcoder.casino.Casino.Casino;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Casino.Greeter;

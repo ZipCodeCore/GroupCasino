@@ -1,10 +1,10 @@
 package io.zipcoder.casino.Cards;
 
 public enum Suit {
-    SPADES(	"\u2660" ),
-    HEARTS(	"\u2665" ),
-    DIAMONDS( "\u2666" ),
-    CLUBS( "\u2663" );
+    SPADES(	"\u2664" ),
+    HEARTS(	"\u2661" ),
+    DIAMONDS( "\u2662" ),
+    CLUBS( "\u2667" );
 
     private String stringRepresentation;
 
