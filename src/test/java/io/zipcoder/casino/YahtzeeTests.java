@@ -937,4 +937,187 @@ public class YahtzeeTests {
         Assert.assertEquals(expectedSum1, actualSum1);
         Assert.assertEquals(expectedSum2, actualSum2);
     }
+
+    @Test
+    public void markScoreCardTest(){
+        //Given
+        Player player = new Player("Cara", 1000.00);
+        Yahtzee yahtzee = new Yahtzee(player);
+        TreeMap<String, Integer> scoreCard = yahtzee.getScoreCard();
+
+        // Mark Aces
+        ArrayList<Dice> rollAces = new ArrayList<>();
+        rollAces.add(d1);
+        rollAces.add(d2);
+        rollAces.add(d3);
+        rollAces.add(d1);
+        rollAces.add(d1);
+        int expectedAces = 3;
+
+        // Mark Twos
+        ArrayList<Dice> rollTwos = new ArrayList<>();
+        rollTwos.add(d2);
+        rollTwos.add(d2);
+        rollTwos.add(d3);
+        rollTwos.add(d2);
+        rollTwos.add(d1);
+        int expectedTwos = 6;
+
+        // Mark Threes
+        ArrayList<Dice> rollThrees = new ArrayList<>();
+        rollThrees.add(d3);
+        rollThrees.add(d2);
+        rollThrees.add(d3);
+        rollThrees.add(d3);
+        rollThrees.add(d3);
+        int expectedThrees = 12;
+
+        // Mark Fours
+        ArrayList<Dice> rollFours = new ArrayList<>();
+        rollFours.add(d3);
+        rollFours.add(d4);
+        rollFours.add(d1);
+        rollFours.add(d5);
+        rollFours.add(d4);
+        int expectedFours = 8;
+
+        // Mark Fives
+        ArrayList<Dice> rollFives = new ArrayList<>();
+        rollFives.add(d1);
+        rollFives.add(d5);
+        rollFives.add(d5);
+        rollFives.add(d5);
+        rollFives.add(d5);
+        int expectedFives = 20;
+
+        // Mark Sixes
+        ArrayList<Dice> rollSixes = new ArrayList<>();
+        rollSixes.add(d6);
+        rollSixes.add(d1);
+        rollSixes.add(d4);
+        rollSixes.add(d6);
+        rollSixes.add(d6);
+        int expectedSixes = 18;
+
+        // Mark Three of A Kind
+        ArrayList<Dice> rollThreeOfAKind = new ArrayList<>();
+        rollThreeOfAKind.add(d4);
+        rollThreeOfAKind.add(d4);
+        rollThreeOfAKind.add(d3);
+        rollThreeOfAKind.add(d6);
+        rollThreeOfAKind.add(d4);
+        int expectedThreeOfAKind = 21;
+
+        // Mark Four of A Kind
+        ArrayList<Dice> rollFourOfAKind = new ArrayList<>();
+        rollFourOfAKind.add(d6);
+        rollFourOfAKind.add(d6);
+        rollFourOfAKind.add(d1);
+        rollFourOfAKind.add(d6);
+        rollFourOfAKind.add(d6);
+        int expectedFourOfAKind = 25;
+
+        // Mark Full House
+        ArrayList<Dice> rollFullHouse = new ArrayList<>();
+        rollFullHouse.add(d3);
+        rollFullHouse.add(d3);
+        rollFullHouse.add(d4);
+        rollFullHouse.add(d3);
+        rollFullHouse.add(d4);
+        int expectedFullHouse = 25;
+
+        // Mark Small Straight
+        ArrayList<Dice> rollSmallStraight = new ArrayList<>();
+        rollSmallStraight.add(d2);
+        rollSmallStraight.add(d3);
+        rollSmallStraight.add(d5);
+        rollSmallStraight.add(d3);
+        rollSmallStraight.add(d4);
+        int expectedSmallStraight = 30;
+
+        // Mark Large Straight
+        ArrayList<Dice> rollLargeStraight = new ArrayList<>();
+        rollLargeStraight.add(d6);
+        rollLargeStraight.add(d5);
+        rollLargeStraight.add(d4);
+        rollLargeStraight.add(d2);
+        rollLargeStraight.add(d3);
+        int expectedLargeStraight = 40;
+
+        // Mark Yahtzee
+        ArrayList<Dice> rollYahtzee = new ArrayList<>();
+        rollYahtzee.add(d1);
+        rollYahtzee.add(d1);
+        rollYahtzee.add(d1);
+        rollYahtzee.add(d1);
+        rollYahtzee.add(d1);
+        int expectedYahtzee = 50;
+
+        // Mark Chance
+        ArrayList<Dice> rollChance = new ArrayList<>();
+        rollChance.add(d5);
+        rollChance.add(d6);
+        rollChance.add(d5);
+        rollChance.add(d4);
+        rollChance.add(d4);
+        int expectedChance = 24;
+
+
+        // When
+        yahtzee.markScoreCard("Aces", rollAces);
+        int actualAces = yahtzee.getScoreCard().get("aces");
+
+        yahtzee.markScoreCard("Twos", rollTwos);
+        int actualTwos = yahtzee.getScoreCard().get("twos");
+
+        yahtzee.markScoreCard("Threes", rollThrees);
+        int actualThrees = yahtzee.getScoreCard().get("threes");
+
+        yahtzee.markScoreCard("Fours", rollFours);
+        int actualFours = yahtzee.getScoreCard().get("fours");
+
+        yahtzee.markScoreCard("Fives", rollFives);
+        int actualFives = yahtzee.getScoreCard().get("fives");
+
+        yahtzee.markScoreCard("Sixes", rollSixes);
+        int actualSixes = yahtzee.getScoreCard().get("sixes");
+
+        yahtzee.markScoreCard("3 of a kind", rollThreeOfAKind);
+        int actualThreeOfAKind = yahtzee.getScoreCard().get("3 of a kind");
+
+        yahtzee.markScoreCard("4 of a kind", rollFourOfAKind);
+        int actualFourOfAKind = yahtzee.getScoreCard().get("4 of a kind");
+
+        yahtzee.markScoreCard("Full House", rollFullHouse);
+        int actualFullHouse = yahtzee.getScoreCard().get("full house");
+
+        yahtzee.markScoreCard("Small straight", rollSmallStraight);
+        int actualSmallStraight = yahtzee.getScoreCard().get("small straight");
+
+        yahtzee.markScoreCard("Large straight", rollLargeStraight);
+        int actualLargeStraight = yahtzee.getScoreCard().get("large straight");
+
+        yahtzee.markScoreCard("Yahtzee", rollYahtzee);
+        int actualYahtzee = yahtzee.getScoreCard().get("yahtzee");
+
+        yahtzee.markScoreCard("Chance", rollChance);
+        int actualChance = yahtzee.getScoreCard().get("chance");
+
+
+        // Then
+        Assert.assertEquals(expectedAces, actualAces);
+        Assert.assertEquals(expectedTwos, actualTwos);
+        Assert.assertEquals(expectedThrees, actualThrees);
+        Assert.assertEquals(expectedFours, actualFours);
+        Assert.assertEquals(expectedFives, actualFives);
+        Assert.assertEquals(expectedSixes, actualSixes);
+        Assert.assertEquals(expectedThreeOfAKind, actualThreeOfAKind);
+        Assert.assertEquals(expectedFourOfAKind, actualFourOfAKind);
+        Assert.assertEquals(expectedFullHouse, actualFullHouse);
+        Assert.assertEquals(expectedSmallStraight, actualSmallStraight);
+        Assert.assertEquals(expectedLargeStraight, actualLargeStraight);
+        Assert.assertEquals(expectedYahtzee, actualYahtzee);
+        Assert.assertEquals(expectedChance, actualChance);
+
+    }
 }

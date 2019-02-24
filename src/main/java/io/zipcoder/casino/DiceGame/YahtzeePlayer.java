@@ -17,25 +17,29 @@ public class YahtzeePlayer {
 
     public ArrayList<Dice> rollDice(int numberOfDice){
         ArrayList<Dice> rolledDice = new ArrayList<>();
+        for (int i = 0; i < numberOfDice; i++){
+            Dice die = new Dice(1);
+            int dieValue = die.rollDice();
+            rolledDice.add(new Dice(1, dieValue));
+        }
         return rolledDice;
     }
 
-    public ArrayList<Dice> saveDice(ArrayList<Dice> dice, String diceToSaveInput) {
-        ArrayList<Dice> diceToSave = new ArrayList<>();
-        return diceToSave;
+    public ArrayList<Dice> saveDice(ArrayList<Dice> rolledDice, String diceToSaveInput) {
+        return moveDice(rolledDice, diceToSaveInput);
     }
 
     public ArrayList<Dice> returnDice(ArrayList<Dice> savedDice, String diceToReturnInput){
-        ArrayList<Dice> diceToReturn = new ArrayList<>();
-        return diceToReturn;
+        return moveDice(savedDice, diceToReturnInput);
     }
 
-    public ArrayList<Dice> moveDice(ArrayList<Dice> dice, String diceToMoveInput){
+    public ArrayList<Dice> moveDice(ArrayList<Dice> diceToMoveFrom, String diceToMoveInput){
         ArrayList<Dice> diceToMove = new ArrayList<>();
+        for (int i = 0; i < diceToMoveInput.length(); i++){
+            int indexOfDieToMove = Character.getNumericValue(diceToMoveInput.charAt(i)) - 1;
+            diceToMove.add(diceToMoveFrom.get(indexOfDieToMove));
+        }
         return diceToMove;
-    }
-
-    public void markScoreCard(String category, ArrayList<Dice> allDice, TreeMap<String, Integer> scoreCard){
     }
 
 

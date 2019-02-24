@@ -402,4 +402,9 @@ public class Yahtzee extends DiceGame {
         return sum;
     }
 
+    public void markScoreCard(String category, ArrayList<Dice> dice){
+        int score = getScoreForCategory(category, dice);
+        this.scoreCard.put(category.toLowerCase(), score);
+    }
+
 }
