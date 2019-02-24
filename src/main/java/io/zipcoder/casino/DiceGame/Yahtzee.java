@@ -19,7 +19,7 @@ public class Yahtzee extends DiceGame {
     public Yahtzee(Player player) {
         this.yahtzeePlayer = new YahtzeePlayer(player);
         this.score = 0;
-        this.scoreCard = new TreeMap<>();
+        this.scoreCard = setUpScoreCard();
         this.savedDice = new ArrayList<>();
         this.rolledDice = new ArrayList<>();
     }
@@ -492,8 +492,97 @@ public class Yahtzee extends DiceGame {
         currentDiceString = spacerString + numberString + spacerString + rolledDiceString + spacerString + savedDiceString + spacerString;
 
         return currentDiceString;
-        
     }
 
 
+    public String getScoreCardString(){
+        String scoreCardString = "";
+        String spacerString =  "----------------------------------|\n";
+        String categoryString = "  Category         |  Score        \n";
+        scoreCardString = scoreCardString + spacerString + categoryString + spacerString;
+
+        return scoreCardString;
+    }
+
+
+    public TreeMap<String, Integer> setUpScoreCard() {
+        TreeMap<String, Integer> scoreCard = new TreeMap<>();
+        scoreCard.put("aces", null);
+        scoreCard.put("twos", null);
+        scoreCard.put("threes", null);
+        scoreCard.put("fours", null);
+        scoreCard.put("fives", null);
+        scoreCard.put("sixes", null);
+        scoreCard.put("upper bonus", null);
+        scoreCard.put("3 of a kind", null);
+        scoreCard.put("4 of a kind", null);
+        scoreCard.put("full house", null);
+        scoreCard.put("small straight", null);
+        scoreCard.put("large straight", null);
+        scoreCard.put("yahtzee", null);
+        scoreCard.put("chance", null);
+        scoreCard.put("total score", null);
+
+        return scoreCard;
+    }
+
+    public String getAcesScoreString() {
+        return"";
+    }
+
+    public String getTwosScoreString() {
+        return"";
+    }
+
+    public String getThreesScoreString() {
+        return"";
+    }
+
+    public String getFoursScoreString() {
+        return"";
+    }
+
+    public String getFivesScoreString() {
+        return"";
+    }
+
+    public String getSixesScoreString() {
+        return"";
+    }
+
+    public String getThreeOfAKindScoreString() {
+        return"";
+    }
+
+    public String getFourOfAKindScoreString() {
+        return"";
+    }
+
+    public String getFullHouseScoreString() {
+        return"";
+    }
+
+    public String getSmallStraightScoreString() {
+        return"";
+    }
+
+    public String getLargeStraightScoreString() {
+        return"";
+    }
+
+    public String getYahtzeeScoreString() {
+        return"";
+    }
+
+    public String getChanceScoreString() {
+        return"";
+    }
+
+    public String getUpperBonusScoreString() {
+        return "";
+    }
+
+    public String getTotalScoreString() {
+        return "";
+    }
 }
