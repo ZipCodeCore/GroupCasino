@@ -1,6 +1,6 @@
 package io.zipcoder.casino.CardGame.BlackJack;
 
-import io.zipcoder.casino.CardGame.CardGame;
+import io.zipcoder.casino.CardGame.Cards.CardGame;
 import io.zipcoder.casino.CardGame.Cards.Deck;
 import io.zipcoder.casino.GamblingGame;
 
@@ -14,7 +14,7 @@ public class Blackjack extends CardGame implements GamblingGame {
     }
 
     public void deal() {
-        deck.drawCard();
+
     }
 
     public double payout() {
