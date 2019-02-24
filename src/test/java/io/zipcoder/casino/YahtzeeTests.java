@@ -1688,4 +1688,68 @@ public class YahtzeeTests {
         Assert.assertEquals(expected, actual);
     }
 
+
+    @Test
+    public void upperSectionScoresCompleteTest(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        // When
+        boolean expectedFalse1 = yahtzee.upperSectionScoresComplete();
+
+        yahtzee.getScoreCard().put("aces", 3);
+        yahtzee.getScoreCard().put("twos", 2);
+        yahtzee.getScoreCard().put("threes", 12);
+
+        boolean expectedFalse2 = yahtzee.upperSectionScoresComplete();
+
+        yahtzee.getScoreCard().put("fours", 8);
+        yahtzee.getScoreCard().put("fives", 20);
+        yahtzee.getScoreCard().put("sixes", 18);
+
+        boolean expectedTrue = yahtzee.upperSectionScoresComplete();
+
+        // Then
+        Assert.assertFalse(expectedFalse1);
+        Assert.assertFalse(expectedFalse2);
+        Assert.assertTrue(expectedTrue);
+    }
+
+
+    @Test
+    public void scorecardCompleteTest(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        // When
+        boolean expectedFalse = yahtzee.scorecardComplete();
+
+        yahtzee.getScoreCard().put("aces", 3);
+        yahtzee.getScoreCard().put("twos", 2);
+        yahtzee.getScoreCard().put("threes", 12);
+        yahtzee.getScoreCard().put("fours", 8);
+        yahtzee.getScoreCard().put("fives", 20);
+        yahtzee.getScoreCard().put("sixes", 18);
+
+        boolean expectedFalse2 = yahtzee.scorecardComplete();
+
+        yahtzee.getScoreCard().put("3 of a kind", 20);
+        yahtzee.getScoreCard().put("4 of a kind", 22);
+        yahtzee.getScoreCard().put("full house", 25);
+        yahtzee.getScoreCard().put("small straight", 30);
+        yahtzee.getScoreCard().put("large straight", 40);
+        yahtzee.getScoreCard().put("yahtzee", 50);
+        yahtzee.getScoreCard().put("chance", 23);
+
+        boolean expectedTrue = yahtzee.scorecardComplete();
+
+        // Then
+        Assert.assertFalse(expectedFalse);
+        Assert.assertFalse(expectedFalse2);
+        Assert.assertTrue(expectedTrue);
+
+    }
+
 }
