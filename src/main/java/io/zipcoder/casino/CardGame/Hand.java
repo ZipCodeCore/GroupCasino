@@ -15,10 +15,7 @@ public class Hand {
     public Hand(Card cards) {
         deck = new Deck();
         hand = new ArrayList<Card>();
-
-
     }
-
 
     public void drawCard() {
          hand.add(deck.getCard(0));
