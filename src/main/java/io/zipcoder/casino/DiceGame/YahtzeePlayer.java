@@ -4,6 +4,8 @@ import io.zipcoder.casino.Player;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class YahtzeePlayer {
@@ -36,6 +38,7 @@ public class YahtzeePlayer {
 
     public ArrayList<Dice> saveDice(ArrayList<Dice> rolledDice, String diceToSaveInput) {
         ArrayList<Dice> savedDice = new ArrayList<>();
+        diceToSaveInput = removeDuplicateCharacters(diceToSaveInput);
         for (int i = 0; i < diceToSaveInput.length(); i++) {
             int indexOfDieToSave = Character.getNumericValue(diceToSaveInput.charAt(i)) - 1;
             savedDice.add(rolledDice.get(indexOfDieToSave));
@@ -47,6 +50,7 @@ public class YahtzeePlayer {
 
 
     public ArrayList<Dice> returnDice(ArrayList<Dice> savedDice, String diceToReturnInput) {
+        diceToReturnInput = removeDuplicateCharacters(diceToReturnInput);
         ArrayList<Dice> returnedDice = new ArrayList<>();
         for (int i = 0; i < diceToReturnInput.length(); i++){
             int indexOfDieToReturn = Character.getNumericValue(diceToReturnInput.charAt(i) - (6 - savedDice.size()));
@@ -62,6 +66,24 @@ public class YahtzeePlayer {
                 diceListToRemoveFrom.remove(die);
             }
         }
+    }
+
+
+    public String removeDuplicateCharacters(String input){
+
+        String inputWithoutDuplicates = "";
+
+        char[] charArray = input.toCharArray();
+        Set<Character> charSet = new HashSet<>();
+        for (char c : charArray) {
+            charSet.add(c);
+        }
+
+        for(Character c : charSet){
+            inputWithoutDuplicates = inputWithoutDuplicates + c;
+        }
+
+        return inputWithoutDuplicates;
     }
 
 

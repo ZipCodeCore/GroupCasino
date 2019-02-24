@@ -16,11 +16,7 @@ public class Hand {
 
     public Hand(ArrayList<Card> cards) {
 
-
-
-
     }
-
 
     public void drawCard() {
          cards.add(deck.getCard(0));
