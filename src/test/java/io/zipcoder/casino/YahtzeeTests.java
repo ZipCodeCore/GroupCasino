@@ -21,7 +21,6 @@ public class YahtzeeTests {
         // Given
         String expectedYahtzeePlayerName = "Cara";
         Player player = new Player(expectedYahtzeePlayerName, 1000.00);
-        TreeMap<String, Integer> expectedScoreCard = new TreeMap<String, Integer>();
         ArrayList<Dice> expectedSavedDice = new ArrayList<Dice>();
         ArrayList<Dice> expectedRolledDice = new ArrayList<Dice>();
         int expectedScore = 0;
@@ -29,14 +28,12 @@ public class YahtzeeTests {
         // When
         Yahtzee yahtzee = new Yahtzee(player);
         String actualYahtzeePlayerName = yahtzee.getYahtzeePlayer().getName();
-        TreeMap<String, Integer> actualScoreCard = yahtzee.getScoreCard();
         ArrayList<Dice> actualSavedDice = yahtzee.getSavedDice();
         ArrayList<Dice> actualRolledDice = yahtzee.getRolledDice();
         int actualScore = yahtzee.getScore();
 
         // Then
         Assert.assertEquals(expectedYahtzeePlayerName, actualYahtzeePlayerName);
-        Assert.assertEquals(expectedScoreCard, actualScoreCard);
         Assert.assertEquals(expectedSavedDice, actualSavedDice);
         Assert.assertEquals(expectedRolledDice, actualRolledDice);
         Assert.assertEquals(expectedScore, actualScore);
@@ -1160,11 +1157,58 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreCardStringTest(){
+    public void setUpScoreCardTest(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
 
-        String s = "" +
+        // When
+        TreeMap<String, Integer> actualScoreCard = yahtzee.setUpScoreCard();
+        Integer actualAces = actualScoreCard.get("aces");
+        Integer actualTwos = actualScoreCard.get("twos");
+        Integer actualThrees = actualScoreCard.get("threes");
+        Integer actualFours = actualScoreCard.get("fours");
+        Integer actualFives = actualScoreCard.get("fives");
+        Integer actualSixes = actualScoreCard.get("sixes");
+        Integer actualUpperBonus = actualScoreCard.get("upper bonus");
+        Integer actualThreeOfAKind = actualScoreCard.get("3 of a kind");
+        Integer actualFourOfAKind = actualScoreCard.get("4 of a kind");
+        Integer actualFullHouse = actualScoreCard.get("full house");
+        Integer actualSmallStraight = actualScoreCard.get("small straight");
+        Integer actualLargeStraight = actualScoreCard.get("large straight");
+        Integer actualYahtzee = actualScoreCard.get("yahtzee");
+        Integer actualChance = actualScoreCard.get("chance");
+        Integer actualTotalScore = actualScoreCard.get("total score");
+
+        // Then
+        Assert.assertNull(actualAces);
+        Assert.assertNull(actualTwos);
+        Assert.assertNull(actualThrees);
+        Assert.assertNull(actualFours);
+        Assert.assertNull(actualFives);
+        Assert.assertNull(actualSixes);
+        Assert.assertNull(actualUpperBonus);
+        Assert.assertNull(actualThreeOfAKind);
+        Assert.assertNull(actualFourOfAKind);
+        Assert.assertNull(actualFullHouse);
+        Assert.assertNull(actualSmallStraight);
+        Assert.assertNull(actualLargeStraight);
+        Assert.assertNull(actualYahtzee);
+        Assert.assertNull(actualChance);
+        Assert.assertNull(actualTotalScore);
+
+    }
+
+
+    @Test
+    public void getScoreCardStringTest(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        String expected = "" +
                 "----------------------------------|\n" +
-                "  Category         |  Score         \n" +
+                "  Category         |  Score        \n" +
                 "|---------------------------------|\n" +
                 "   Aces            |\n" +
                 "|---------------------------------|\n" +
@@ -1197,7 +1241,315 @@ public class YahtzeeTests {
                 "   Total Score     |\n" +
                 "|---------------------------------|\n";
 
-        System.out.println(s);
+        System.out.println(expected);
+
+        // When
+        String actual = yahtzee.getScoreCardString();
+
+        // Then
+        Assert.assertEquals(expected, actual);
     }
+
+
+    @Test
+    public void getAcesScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Aces            |\n";
+        String expected2 = "   Aces            |    3\n";
+
+        // When
+        String actual1 = yahtzee.getAcesScoreString();
+
+        yahtzee.getScoreCard().put("aces", 3);
+        String actual2 = yahtzee.getAcesScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getTwosScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Twos            |\n";
+        String expected2 = "   Twos            |    8\n";
+
+        // When
+        String actual1 = yahtzee.getTwosScoreString();
+
+        yahtzee.getScoreCard().put("twos", 8);
+        String actual2 = yahtzee.getTwosScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getThreesScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Threes          |\n";
+        String expected2 = "   Threes          |    12\n";
+
+        // When
+        String actual1 = yahtzee.getThreesScoreString();
+
+        yahtzee.getScoreCard().put("threes", 12);
+        String actual2 = yahtzee.getThreesScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getFoursScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Fours           |\n";
+        String expected2 = "   Fours           |    8\n";
+
+        // When
+        String actual1 = yahtzee.getFoursScoreString();
+
+        yahtzee.getScoreCard().put("fours", 8);
+        String actual2 = yahtzee.getFoursScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getFivesScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Fives           |\n";
+        String expected2 = "   Fives           |    0\n";
+
+        // When
+        String actual1 = yahtzee.getFivesScoreString();
+
+        yahtzee.getScoreCard().put("fives", 0);
+        String actual2 = yahtzee.getFivesScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getSixesScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Sixes           |\n";
+        String expected2 = "   Sixes           |    24\n";
+
+        // When
+        String actual1 = yahtzee.getSixesScoreString();
+
+        yahtzee.getScoreCard().put("sixes", 24);
+        String actual2 = yahtzee.getSixesScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getUpperBonusScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Upper Bonus     |\n";
+        String expected2 = "   Upper Bonus     |    35\n";
+
+        // When
+        String actual1 = yahtzee.getUpperBonusScoreString();
+
+        yahtzee.getScoreCard().put("upper bonus", 35);
+        String actual2 = yahtzee.getUpperBonusScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getThreeOfAKindScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   3 of a Kind     |\n";
+        String expected2 = "   3 of a Kind     |    22\n";
+
+        // When
+        String actual1 = yahtzee.getThreeOfAKindScoreString();
+
+        yahtzee.getScoreCard().put("3 of a kind", 22);
+        String actual2 = yahtzee.getThreeOfAKindScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getFourOfAKindScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   4 of a Kind     |\n";
+        String expected2 = "   4 of a Kind     |    20\n";
+
+        // When
+        String actual1 = yahtzee.getFourOfAKindScoreString();
+
+        yahtzee.getScoreCard().put("4 of a kind", 20);
+        String actual2 = yahtzee.getFourOfAKindScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getFullHouseScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Full House      |\n";
+        String expected2 = "   Full House      |    25\n";
+
+        // When
+        String actual1 = yahtzee.getFullHouseScoreString();
+
+        yahtzee.getScoreCard().put("full house", 25);
+        String actual2 = yahtzee.getFullHouseScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getSmallStraightScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Small Straight  |\n";
+        String expected2 = "   Small Straight  |    30\n";
+
+        // When
+        String actual1 = yahtzee.getSmallStraightScoreString();
+
+        yahtzee.getScoreCard().put("small straight", 30);
+        String actual2 = yahtzee.getSmallStraightScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getLargeStraightScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Large Straight  |\n";
+        String expected2 = "   Large Straight  |    40\n";
+
+        // When
+        String actual1 = yahtzee.getLargeStraightScoreString();
+
+        yahtzee.getScoreCard().put("large straight", 40);
+        String actual2 = yahtzee.getLargeStraightScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getYahtzeeScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Yahtzee         |\n";
+        String expected2 = "   Yahtzee         |    50\n";
+
+        // When
+        String actual1 = yahtzee.getYahtzeeScoreString();
+
+        yahtzee.getScoreCard().put("yahtzee", 50);
+        String actual2 = yahtzee.getYahtzeeScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getChanceScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Chance          |\n";
+        String expected2 = "   Chance          |    23\n";
+
+        // When
+        String actual1 = yahtzee.getChanceScoreString();
+
+        yahtzee.getScoreCard().put("chance", 23);
+        String actual2 = yahtzee.getChanceScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
+    @Test
+    public void getTotalScoreString(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected1 = "   Total Score     |\n";
+        String expected2 = "   Total Score     |\n    200";
+
+        // When
+        String actual1 = yahtzee.getTotalScoreString();
+
+        yahtzee.getScoreCard().put("total score", 200);
+        String actual2 = yahtzee.getTotalScoreString();
+
+        // Then
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+
 
 }

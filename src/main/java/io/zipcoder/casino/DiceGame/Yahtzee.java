@@ -19,7 +19,7 @@ public class Yahtzee extends DiceGame {
     public Yahtzee(Player player) {
         this.yahtzeePlayer = new YahtzeePlayer(player);
         this.score = 0;
-        this.scoreCard = new TreeMap<>();
+        this.scoreCard = setUpScoreCard();
         this.savedDice = new ArrayList<>();
         this.rolledDice = new ArrayList<>();
     }
@@ -492,8 +492,152 @@ public class Yahtzee extends DiceGame {
         currentDiceString = spacerString + numberString + spacerString + rolledDiceString + spacerString + savedDiceString + spacerString;
 
         return currentDiceString;
-        
     }
 
 
+    public String getScoreCardString(){
+        String scoreCardString = "";
+        String spacerString =  "----------------------------------|\n";
+        String categoryString = "  Category         |  Score        \n";
+        scoreCardString = scoreCardString + spacerString + categoryString + spacerString;
+
+        return scoreCardString;
+    }
+
+
+    public TreeMap<String, Integer> setUpScoreCard() {
+        TreeMap<String, Integer> scoreCard = new TreeMap<>();
+        scoreCard.put("aces", null);
+        scoreCard.put("twos", null);
+        scoreCard.put("threes", null);
+        scoreCard.put("fours", null);
+        scoreCard.put("fives", null);
+        scoreCard.put("sixes", null);
+        scoreCard.put("upper bonus", null);
+        scoreCard.put("3 of a kind", null);
+        scoreCard.put("4 of a kind", null);
+        scoreCard.put("full house", null);
+        scoreCard.put("small straight", null);
+        scoreCard.put("large straight", null);
+        scoreCard.put("yahtzee", null);
+        scoreCard.put("chance", null);
+        scoreCard.put("total score", null);
+
+        return scoreCard;
+    }
+
+    public String getAcesScoreString() {
+        if(scoreCard.get("aces") == null){
+            return "   Aces            |\n";
+        }
+        else {
+            return"   Aces            |    " + scoreCard.get("aces") + "\n";
+        }
+    }
+
+    public String getTwosScoreString() {
+        if(scoreCard.get("twos") == null){
+            return "   Twos            |\n";
+        }
+        else {
+            return "   Twos            |    " + scoreCard.get("twos") + "\n";
+        }
+    }
+
+    public String getThreesScoreString() {
+        if(scoreCard.get("threes") == null){
+            return "   Threes          |\n";
+        }
+        else {
+            return "   Threes          |    " + scoreCard.get("threes") + "\n";
+        }
+    }
+
+    public String getFoursScoreString() {
+        if (scoreCard.get("fours") == null){
+            return "   Fours           |\n";
+        }
+        else {
+            return "   Fours           |    " + scoreCard.get("fours") + "\n";
+        }
+    }
+
+    public String getFivesScoreString() {
+        if (scoreCard.get("fives") == null){
+            return "   Fives           |\n";
+        }
+        else {
+            return "   Fives           |    " + scoreCard.get("fives") + "\n";
+        }
+    }
+
+    public String getSixesScoreString() {
+        if (scoreCard.get("sixes") == null){
+            return "   Sixes           |\n";
+        }
+        else {
+            return "   Sixes           |    " + scoreCard.get("sixes") + "\n";
+        }
+    }
+
+    public String getThreeOfAKindScoreString() {
+        if (scoreCard.get("3 of a kind") == null){
+            return "   3 of a Kind     |\n";
+        }
+        else {
+            return "   3 of a Kind     |    " + scoreCard.get("3 of a kind") + "\n";
+        }
+    }
+
+    public String getFourOfAKindScoreString() {
+        if (scoreCard.get("4 of a kind") == null){
+            return "   4 of a Kind     |\n";
+        }
+        else {
+            return "   4 of a Kind     |    " + scoreCard.get("4 of a kind") + "\n";
+        }
+    }
+
+    public String getFullHouseScoreString() {
+        if (scoreCard.get("full house") == null){
+            return "   Full House      |\n";
+        }
+        else {
+            return "   Full House      |    " + scoreCard.get("full house") + "\n";
+        }
+    }
+
+    public String getSmallStraightScoreString() {
+        if (scoreCard.get("small straight") == null){
+            return "   Small Straight  |\n";
+        }
+        else {
+            return "   Small Straight  |    " + scoreCard.get("small straight") + "\n";
+        }
+    }
+
+    public String getLargeStraightScoreString() {
+        if (scoreCard.get("large straight") == null){
+            return "   Large Straight  |\n";
+        }
+        else {
+            return "   Large Straight  |    " + scoreCard.get("large straight") + "\n";
+        }
+    }
+
+    public String getYahtzeeScoreString() {
+        return"";
+    }
+
+    public String getChanceScoreString() {
+        return"";
+    }
+
+    public String getUpperBonusScoreString() {
+        return "";
+    }
+
+    public String getTotalScoreString() {
+        return "";
+    }
 }

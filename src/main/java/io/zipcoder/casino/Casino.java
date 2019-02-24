@@ -20,6 +20,7 @@ public class Casino {
         Casino.game = game;
     }
 
+
     public static void main(String[] args) {
         Console temp = Console.getInstance();
 
