@@ -48,6 +48,7 @@ public class GoFishPlayer {
 
     // The player draws the card from the middle deck.
     // Draw method in the Hand that can be used by Go Fish Player.
+    //Draws only one card from the deck. If the deck is empty then .......we still need to figure out.
 //    public void draw() {
 //
 //
