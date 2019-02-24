@@ -1207,7 +1207,7 @@ public class YahtzeeTests {
         Yahtzee yahtzee = new Yahtzee(player);
 
         String expected = "" +
-                "----------------------------------|\n" +
+                "|---------------------------------|\n" +
                 "  Category         |  Score        \n" +
                 "|---------------------------------|\n" +
                 "   Aces            |\n" +
@@ -1537,7 +1537,7 @@ public class YahtzeeTests {
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
         String expected1 = "   Total Score     |\n";
-        String expected2 = "   Total Score     |\n    200";
+        String expected2 = "   Total Score     |    200\n";
 
         // When
         String actual1 = yahtzee.getTotalScoreString();

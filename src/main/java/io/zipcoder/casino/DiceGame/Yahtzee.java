@@ -32,21 +32,23 @@ public class Yahtzee extends DiceGame {
         playing = true;
 
         while (playing) {
+
+            String allOptions = "Type 'save' to save rolled dice.\n" +
+                    "Type 'return' to return saved dice to be rolled again.\n" +
+                    "Type 'roll' to roll again.\n" +
+                    "Type 'scorecard' to see scorecard.\n" +
+                    "Type 'mark' to mark a score on you scorecard.\n";
+
             if (input.toLowerCase().equals("roll")) {
                 try {
                     rolledDice = yahtzeePlayer.rollDice(5 - savedDice.size());
+                    console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
+                    console.println(getCurrentDiceString(rolledDice, savedDice));
+                    input = console.getStringInput(allOptions);
                 } catch (YahtzeePlayer.TooManyRollsException tooManyRollsException) {
                     console.println("\nYou have already rolled 3 times.  Type 'mark' to mark your scorecard.");
                 }
             }
-            console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
-            console.println(getCurrentDiceString(rolledDice, savedDice));
-            input = console.getStringInput("Type 'save' to save rolled dice.\n" +
-                    "Type 'return' to return saved dice to be rolled again.\n" +
-                    "Type 'roll' to roll again.\n" +
-                    "Type 'scorecard' to see scorecard.\n" +
-                    "Type 'mark' to mark a score on you scorecard.\n");
-
             if (input.toLowerCase().equals("save")) {
                 input = console.getStringInput("Type the locations of the dice you want to save.\n" +
                         "(Ex: '123' to save first three dice)");
@@ -54,6 +56,9 @@ public class Yahtzee extends DiceGame {
                     savedDice.add(die);
                 }
                 console.println("Dice saved.");
+                console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
+                console.println(getCurrentDiceString(rolledDice, savedDice));
+                input = console.getStringInput(allOptions);
             }
 
             if (input.toLowerCase().equals("return")) {
@@ -63,6 +68,49 @@ public class Yahtzee extends DiceGame {
                     rolledDice.add(die);
                 }
                 console.println("Dice returned");
+                console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
+                console.println(getCurrentDiceString(rolledDice, savedDice));
+                input = console.getStringInput(allOptions);
+            }
+
+            if (input.toLowerCase().equals("scorecard")) {
+                console.println(getScoreCardString());
+                input = console.getStringInput("Type 'back' to go back.  Type 'mark' to mark scorecard");
+                if (input.toLowerCase().equals("back")) {
+                    console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
+                    console.println(getCurrentDiceString(rolledDice, savedDice));
+                    input = console.getStringInput(allOptions);
+                }
+            }
+
+            if (input.toLowerCase().equals("mark")) {
+                input = console.getStringInput("Enter the category you want to mark on your scorecard.\n" +
+                        "'aces', 'twos', 'threes', fours', 'fives', 'sixes'\n" +
+                        "'3 of a kind', '4 of a kind', 'full house', 'small straight'\n" +
+                        "'large straight', 'yahtzee', 'chance'\n" +
+                        "Enter 'back' to go back.\n");
+                if (input.toLowerCase().equals("back")) {
+                    console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
+                    console.println(getCurrentDiceString(rolledDice, savedDice));
+                    input = console.getStringInput(allOptions);
+                } else {
+                    if (scoreCard.get(input.toLowerCase()) != null) {
+                        console.println("You already have a score for %s", input);
+                    } else {
+                        markScoreCard(input.toLowerCase(), getAllDice(rolledDice, savedDice));
+                        rolledDice.removeAll(rolledDice);
+                        savedDice.removeAll(savedDice);
+                        console.println(getScoreCardString());
+                        yahtzeePlayer.setRollNumber(0);
+
+                        input = console.getStringInput("Type 'roll' to start your next turn.");
+                    }
+                }
+            }
+            if(!((input.toLowerCase()).equals("roll") || input.toLowerCase().equals("save") || input.toLowerCase().equals("return") ||
+                    input.toLowerCase().equals("scorecard") || input.toLowerCase().equals("mark") || input.toLowerCase().equals("back"))){
+
+                input = console.getStringInput("Invalid input.  " + allOptions);
             }
         }
     }
@@ -82,7 +130,7 @@ public class Yahtzee extends DiceGame {
 
 
     // this method will get the score for the entered category based on the dice
-    public int getScoreForCategory(String category, ArrayList<Dice> allDice) {
+    public Integer getScoreForCategory(String category, ArrayList<Dice> allDice) {
         int score = 0;
         String categoryToScore = category.toLowerCase();
 
@@ -495,11 +543,27 @@ public class Yahtzee extends DiceGame {
     }
 
 
-    public String getScoreCardString(){
+    public String getScoreCardString() {
         String scoreCardString = "";
-        String spacerString =  "----------------------------------|\n";
+        String spacerString = "|---------------------------------|\n";
         String categoryString = "  Category         |  Score        \n";
-        scoreCardString = scoreCardString + spacerString + categoryString + spacerString;
+        scoreCardString = scoreCardString + spacerString +
+                categoryString + spacerString +
+                getAcesScoreString() + spacerString +
+                getTwosScoreString() + spacerString +
+                getThreesScoreString() + spacerString +
+                getFoursScoreString() + spacerString +
+                getFivesScoreString() + spacerString +
+                getSixesScoreString() + spacerString +
+                getUpperBonusScoreString() + spacerString +
+                getThreeOfAKindScoreString() + spacerString +
+                getFourOfAKindScoreString() + spacerString +
+                getFullHouseScoreString() + spacerString +
+                getSmallStraightScoreString() + spacerString +
+                getLargeStraightScoreString() + spacerString +
+                getYahtzeeScoreString() + spacerString +
+                getChanceScoreString() + spacerString +
+                getTotalScoreString() + spacerString;
 
         return scoreCardString;
     }
@@ -527,117 +591,122 @@ public class Yahtzee extends DiceGame {
     }
 
     public String getAcesScoreString() {
-        if(scoreCard.get("aces") == null){
+        if (scoreCard.get("aces") == null) {
             return "   Aces            |\n";
-        }
-        else {
-            return"   Aces            |    " + scoreCard.get("aces") + "\n";
+        } else {
+            return "   Aces            |    " + scoreCard.get("aces") + "\n";
         }
     }
 
     public String getTwosScoreString() {
-        if(scoreCard.get("twos") == null){
+        if (scoreCard.get("twos") == null) {
             return "   Twos            |\n";
-        }
-        else {
+        } else {
             return "   Twos            |    " + scoreCard.get("twos") + "\n";
         }
     }
 
     public String getThreesScoreString() {
-        if(scoreCard.get("threes") == null){
+        if (scoreCard.get("threes") == null) {
             return "   Threes          |\n";
-        }
-        else {
+        } else {
             return "   Threes          |    " + scoreCard.get("threes") + "\n";
         }
     }
 
     public String getFoursScoreString() {
-        if (scoreCard.get("fours") == null){
+        if (scoreCard.get("fours") == null) {
             return "   Fours           |\n";
-        }
-        else {
+        } else {
             return "   Fours           |    " + scoreCard.get("fours") + "\n";
         }
     }
 
     public String getFivesScoreString() {
-        if (scoreCard.get("fives") == null){
+        if (scoreCard.get("fives") == null) {
             return "   Fives           |\n";
-        }
-        else {
+        } else {
             return "   Fives           |    " + scoreCard.get("fives") + "\n";
         }
     }
 
     public String getSixesScoreString() {
-        if (scoreCard.get("sixes") == null){
+        if (scoreCard.get("sixes") == null) {
             return "   Sixes           |\n";
-        }
-        else {
+        } else {
             return "   Sixes           |    " + scoreCard.get("sixes") + "\n";
         }
     }
 
     public String getThreeOfAKindScoreString() {
-        if (scoreCard.get("3 of a kind") == null){
+        if (scoreCard.get("3 of a kind") == null) {
             return "   3 of a Kind     |\n";
-        }
-        else {
+        } else {
             return "   3 of a Kind     |    " + scoreCard.get("3 of a kind") + "\n";
         }
     }
 
     public String getFourOfAKindScoreString() {
-        if (scoreCard.get("4 of a kind") == null){
+        if (scoreCard.get("4 of a kind") == null) {
             return "   4 of a Kind     |\n";
-        }
-        else {
+        } else {
             return "   4 of a Kind     |    " + scoreCard.get("4 of a kind") + "\n";
         }
     }
 
     public String getFullHouseScoreString() {
-        if (scoreCard.get("full house") == null){
+        if (scoreCard.get("full house") == null) {
             return "   Full House      |\n";
-        }
-        else {
+        } else {
             return "   Full House      |    " + scoreCard.get("full house") + "\n";
         }
     }
 
     public String getSmallStraightScoreString() {
-        if (scoreCard.get("small straight") == null){
+        if (scoreCard.get("small straight") == null) {
             return "   Small Straight  |\n";
-        }
-        else {
+        } else {
             return "   Small Straight  |    " + scoreCard.get("small straight") + "\n";
         }
     }
 
     public String getLargeStraightScoreString() {
-        if (scoreCard.get("large straight") == null){
+        if (scoreCard.get("large straight") == null) {
             return "   Large Straight  |\n";
-        }
-        else {
+        } else {
             return "   Large Straight  |    " + scoreCard.get("large straight") + "\n";
         }
     }
 
     public String getYahtzeeScoreString() {
-        return"";
+        if (scoreCard.get("yahtzee") == null) {
+            return "   Yahtzee         |\n";
+        } else {
+            return "   Yahtzee         |    " + scoreCard.get("yahtzee") + "\n";
+        }
     }
 
     public String getChanceScoreString() {
-        return"";
+        if (scoreCard.get("chance") == null) {
+            return "   Chance          |\n";
+        } else {
+            return "   Chance          |    " + scoreCard.get("chance") + "\n";
+        }
     }
 
     public String getUpperBonusScoreString() {
-        return "";
+        if (scoreCard.get("upper bonus") == null) {
+            return "   Upper Bonus     |\n";
+        } else {
+            return "   Upper Bonus     |    " + scoreCard.get("upper bonus") + "\n";
+        }
     }
 
     public String getTotalScoreString() {
-        return "";
+        if (scoreCard.get("total score") == null) {
+            return "   Total Score     |\n";
+        } else {
+            return "   Total Score     |    " + scoreCard.get("total score") + "\n";
+        }
     }
 }
