@@ -527,47 +527,102 @@ public class Yahtzee extends DiceGame {
     }
 
     public String getAcesScoreString() {
-        return"";
+        if(scoreCard.get("aces") == null){
+            return "   Aces            |\n";
+        }
+        else {
+            return"   Aces            |    " + scoreCard.get("aces") + "\n";
+        }
     }
 
     public String getTwosScoreString() {
-        return"";
+        if(scoreCard.get("twos") == null){
+            return "   Twos            |\n";
+        }
+        else {
+            return "   Twos            |    " + scoreCard.get("twos") + "\n";
+        }
     }
 
     public String getThreesScoreString() {
-        return"";
+        if(scoreCard.get("threes") == null){
+            return "   Threes          |\n";
+        }
+        else {
+            return "   Threes          |    " + scoreCard.get("threes") + "\n";
+        }
     }
 
     public String getFoursScoreString() {
-        return"";
+        if (scoreCard.get("fours") == null){
+            return "   Fours           |\n";
+        }
+        else {
+            return "   Fours           |    " + scoreCard.get("fours") + "\n";
+        }
     }
 
     public String getFivesScoreString() {
-        return"";
+        if (scoreCard.get("fives") == null){
+            return "   Fives           |\n";
+        }
+        else {
+            return "   Fives           |    " + scoreCard.get("fives") + "\n";
+        }
     }
 
     public String getSixesScoreString() {
-        return"";
+        if (scoreCard.get("sixes") == null){
+            return "   Sixes           |\n";
+        }
+        else {
+            return "   Sixes           |    " + scoreCard.get("sixes") + "\n";
+        }
     }
 
     public String getThreeOfAKindScoreString() {
-        return"";
+        if (scoreCard.get("3 of a kind") == null){
+            return "   3 of a Kind     |\n";
+        }
+        else {
+            return "   3 of a Kind     |    " + scoreCard.get("3 of a kind") + "\n";
+        }
     }
 
     public String getFourOfAKindScoreString() {
-        return"";
+        if (scoreCard.get("4 of a kind") == null){
+            return "   4 of a Kind     |\n";
+        }
+        else {
+            return "   4 of a Kind     |    " + scoreCard.get("4 of a kind") + "\n";
+        }
     }
 
     public String getFullHouseScoreString() {
-        return"";
+        if (scoreCard.get("full house") == null){
+            return "   Full House      |\n";
+        }
+        else {
+            return "   Full House      |    " + scoreCard.get("full house") + "\n";
+        }
     }
 
     public String getSmallStraightScoreString() {
-        return"";
+        if (scoreCard.get("small straight") == null){
+            return "   Small Straight  |\n";
+        }
+        else {
+            return "   Small Straight  |    " + scoreCard.get("small straight") + "\n";
+        }
     }
 
     public String getLargeStraightScoreString() {
-        return"";
+        if (scoreCard.get("large straight") == null){
+            return "   Large Straight  |\n";
+        }
+        else {
+            return "   Large Straight  |    " + scoreCard.get("large straight") + "\n";
+        }
     }
 
     public String getYahtzeeScoreString() {
