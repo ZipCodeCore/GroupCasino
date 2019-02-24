@@ -255,12 +255,16 @@ public class Yahtzee extends DiceGame {
     }
 
     public int upperSectionBonus(TreeMap<String, Integer> scoreCard) {
-        // if score for Aces to Sixes is >= 63, return 35.  Else return 0.
-        return 0;
+        if (getUpperSectionTotal(scoreCard) >= 63){
+            return 35;
+        }
+        else {
+            return 0;
+        }
     }
 
-    public int getUpperSectionTotal(TreeMap<String, Integer> scoreCard) {
-        return 0;
+    public Integer getUpperSectionTotal(TreeMap<String, Integer> scoreCard) throws NullPointerException{
+        return scoreCard.get("aces") + scoreCard.get("twos") + scoreCard.get("threes") + scoreCard.get("fours") + scoreCard.get("fives") + scoreCard.get("sixes");
     }
 
     public boolean hasThreeOfAKind(ArrayList<Dice> allDice) {
@@ -405,13 +409,12 @@ public class Yahtzee extends DiceGame {
     }
 
     public int getLowerSectionTotal(TreeMap<String, Integer> scoreCard) {
-        // return sum of all lower section values
-        return 0;
+        return scoreCard.get("3 of a kind") + scoreCard.get("4 of a kind") + scoreCard.get("full house") + scoreCard.get("small straight")
+                + scoreCard.get("large straight") + scoreCard.get("yahtzee") + scoreCard.get("chance");
     }
 
     public int getTotalScore(TreeMap<String, Integer> scoreCard) {
-        // return the sum of getLowerSectionTotal and getUpperSectionTotal
-        return 0;
+        return getLowerSectionTotal(scoreCard) + getUpperSectionTotal(scoreCard) + upperSectionBonus(scoreCard);
     }
 
     public YahtzeePlayer getYahtzeePlayer() {
@@ -426,40 +429,12 @@ public class Yahtzee extends DiceGame {
         return this.savedDice;
     }
 
-    public void setYahtzeePlayer(YahtzeePlayer yahtzeePlayer) {
-        this.yahtzeePlayer = yahtzeePlayer;
-    }
-
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public void setScoreCard(TreeMap<String, Integer> scoreCard) {
-        this.scoreCard = scoreCard;
-    }
-
-    public int getRollNumber() {
-        return rollNumber;
-    }
-
-    public void setRollNumber(int rollNumber) {
-        this.rollNumber = rollNumber;
-    }
-
-    public void setSavedDice(ArrayList<Dice> savedDice) {
-        this.savedDice = savedDice;
-    }
-
     public ArrayList<Dice> getRolledDice() {
         return rolledDice;
-    }
-
-    public void setRolledDice(ArrayList<Dice> rolledDice) {
-        this.rolledDice = rolledDice;
     }
 
     public Integer[] countDice(ArrayList<Dice> dice) {
