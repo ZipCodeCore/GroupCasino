@@ -3,6 +3,7 @@ package io.zipcoder.casino.Cards.Games;
 import io.zipcoder.casino.Cards.Dice;
 import io.zipcoder.casino.Casino.Casino;
 import io.zipcoder.casino.Players.MacaoPlayer;
+import io.zipcoder.casino.Players.Player;
 import io.zipcoder.casino.utilities.Console;
 
 public class Macao extends Game {
@@ -26,7 +27,31 @@ public class Macao extends Game {
         this.computerStillPlaying = true;
     }
 
-    public int play() {
+    public boolean getIsOver() {
+        return isOver;
+    }
+
+    public void setIsOver(boolean gameOver) {
+        this.isOver = gameOver;
+    }
+
+    public boolean getGuestStillPlaying() {
+        return guestStillPlaying;
+    }
+
+    public void setGuestStillPlaying(boolean stillPlaying) {
+        this.guestStillPlaying = stillPlaying;
+    }
+
+    public boolean getComputerStillPlaying() {
+        return computerStillPlaying;
+    }
+
+    public void setComputerStillPlaying(boolean stillPlaying) {
+        this.computerStillPlaying = stillPlaying;
+    }
+
+    public int playGame() {
         printGameInstructions();
         if (beginGame()) {
             initialGameSetup();
@@ -151,6 +176,6 @@ public class Macao extends Game {
 
     public static void main(String[] args) {
         Macao macao = new Macao();
-        macao.play();
+        macao.playGame();
     }
 }
