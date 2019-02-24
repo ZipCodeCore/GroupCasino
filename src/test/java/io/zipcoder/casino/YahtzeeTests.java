@@ -1749,6 +1749,25 @@ public class YahtzeeTests {
         Assert.assertFalse(expectedFalse);
         Assert.assertFalse(expectedFalse2);
         Assert.assertTrue(expectedTrue);
+    }
+
+
+    @Test
+    public void isValidCategoryTest(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+
+        String validCategory = "full house";
+        String invalidCategory = "small straihgt";
+
+        // When
+        boolean actualTrue = yahtzee.isValidCategory(validCategory);
+        boolean actualFalse = yahtzee.isValidCategory(invalidCategory);
+
+        // Then
+        Assert.assertTrue(actualTrue);
+        Assert.assertFalse(actualFalse);
 
     }
 

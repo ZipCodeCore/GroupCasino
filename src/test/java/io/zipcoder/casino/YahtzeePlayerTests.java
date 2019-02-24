@@ -99,8 +99,8 @@ public class YahtzeePlayerTests {
         String diceToReturnInput = "324";
 
         ArrayList<Dice> expectedReturned = new ArrayList<>();
-        expectedReturned.add(d2);
         expectedReturned.add(d3);
+        expectedReturned.add(d2);
         expectedReturned.add(d3);
 
         ArrayList<Dice> expectedSaved = new ArrayList<>();
@@ -142,10 +142,23 @@ public class YahtzeePlayerTests {
 
         // Then
         Assert.assertEquals(expectedRemovedFromDiceList, diceListToRemoveFrom);
+    }
 
 
+    @Test
+    public void removeDuplicateCharactersTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        YahtzeePlayer yahtzeePlayer = new YahtzeePlayer(player);
 
+        String input = "1122334454435";
+        String expected = "12345";
 
+        // When
+        String actual = yahtzeePlayer.removeDuplicateCharacters(input);
+
+        // Then
+        Assert.assertEquals(expected, actual);
     }
 
 }
