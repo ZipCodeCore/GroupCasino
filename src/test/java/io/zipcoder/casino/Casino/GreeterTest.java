@@ -2,7 +2,6 @@ package io.zipcoder.casino.Casino;
 
 import io.zipcoder.casino.Cards.Games.*;
 import io.zipcoder.casino.utilities.Console;
-import io.zipcoder.casino.utilities.Greeter;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -324,6 +323,6 @@ public class GreeterTest {
         String actual = outputStream.toString();
 
         // Then
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual.contains(expected));
     }
 }

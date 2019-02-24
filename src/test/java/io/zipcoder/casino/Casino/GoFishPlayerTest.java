@@ -307,8 +307,6 @@ public class GoFishPlayerTest {
         Collections.sort(expected);
 
         // When
-        GoFish goFish = new GoFish();
-        goFish.displayCards(testPlayer.getHand());
         List<Card> actual = testPlayer.getBooks();
 
         // Then
@@ -349,5 +347,4 @@ public class GoFishPlayerTest {
         int expected = 0;
         Assert.assertEquals(expected, actual);
     }
-
 }

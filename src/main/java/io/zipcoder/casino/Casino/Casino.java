@@ -2,7 +2,6 @@ package io.zipcoder.casino.Casino;
 
 import io.zipcoder.casino.Cards.Games.Game;
 import io.zipcoder.casino.Players.Profile;
-import io.zipcoder.casino.utilities.Greeter;
 
 public class Casino {
     private static Profile profile;

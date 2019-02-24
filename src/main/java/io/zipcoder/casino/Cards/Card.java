@@ -20,17 +20,48 @@ public class Card implements Comparable<Card>{
     }
 
     public String toString() {
-        return "|" + rank.toString().toLowerCase() + " of " + suit.toString().toLowerCase();
+        return rank.toString().toLowerCase() + " of " + suit.toString().toLowerCase();
     }
 
+    public String printCard() {
+        String top = rank.getStringRepresentation();
+        String bottom = rank.getStringRepresentation();
+        //Add on lines to non-10 ranks to make all the cards evenly sized.
+        if (!rank.equals(Rank.TEN)) {
+            top += "\u2501";
+            bottom = "\u2501" + bottom;
+        }
+        String fullCard = String.format("%s\u2513\n\u2503%s\u2503\n\u2517%s", top, suit.getStringRepresentation(), bottom);
+        return fullCard;
+    }
+
+    public static String printAllCards(List<Card> cards) {
+        StringBuilder allCardsPrinted = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            for (Card card : cards) {
+                allCardsPrinted.append(card.splitCard()[i]);
+            }
+            allCardsPrinted.append("\n");
+        }
+        return allCardsPrinted.toString();
+    }
+    private String[] splitCard() {
+        return printCard().split("\n");
+    }
+
+
     public int compareTo(Card otherCard) {
-        return otherCard.getRank().compareTo(rank);
+        int rankCompare = otherCard.getRank().compareTo(rank) * 2;
+        int suiteCompare = 0;
+        if (rankCompare == 0) {
+            suiteCompare = otherCard.getSuit().compareTo(suit);
+        }
+        return rankCompare + suiteCompare;
     }
 
     public boolean equalRank(Card otherCard) {
         return otherCard.getRank().toString().equals(rank.toString());
     }
-
     public static boolean equalRank(List<Card> otherCards) {
         for (int i = 0; i < otherCards.size() - 1; i++) {
             String currentRank = otherCards.get(i).getRank().toString();
@@ -42,7 +73,4 @@ public class Card implements Comparable<Card>{
         return true;
     }
 
-    public int getRankValue() {
-        return rank.returnPrimaryRankValue();
-    }
 }

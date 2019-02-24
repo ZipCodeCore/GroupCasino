@@ -43,9 +43,6 @@ public final class Console {
     public void println(String val, Object... args) {
         print(val + "\n", args);
     }
-    
-    public void clear() {}
-        //output.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); }
 
     public String getStringInput(String prompt, Object... args) {
         println(prompt, args);
@@ -53,6 +50,11 @@ public final class Console {
     }
 
     public String getStandardInput(String prompt, Object... args) {
+        println(prompt, args);
+        return input.nextLine().trim().toLowerCase();
+    }
+
+    public String getStandardInputCaps(String prompt, Object... args) {
         println(prompt, args);
         return input.nextLine().trim().toUpperCase();
     }
