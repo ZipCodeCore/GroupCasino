@@ -81,6 +81,8 @@ public class BlackJack extends Game {
 
         if (userChoice.equals("hit")){
             hit(userHand);
+            checkGameOverByBust();
+            checkIfHandIs21(userHand);
 
         } else if (userChoice.equals("stay")){
 
@@ -116,6 +118,7 @@ public class BlackJack extends Game {
         hand.add(currentDeck.drawCard());
         userTotal = getTotal(userHand);
         blackJackConsole.println("Your next card is " + userHand.get(2) + ". Your total hand is " + userTotal);
+
     }
 
     public String getUserInput(){
