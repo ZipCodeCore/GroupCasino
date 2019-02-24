@@ -32,7 +32,7 @@ public class BlackJack extends Game {
         blackJack.play();
     }
 
-    public int play() {
+    public int play() { 
         getUserBet();
         takeFirstTurn();
 
@@ -183,7 +183,6 @@ public class BlackJack extends Game {
             dealerTotal = getTotal(dealerHand);
             displayDealerTotal(dealerTotal);
         }
-
         checkWinner();
     }
 
