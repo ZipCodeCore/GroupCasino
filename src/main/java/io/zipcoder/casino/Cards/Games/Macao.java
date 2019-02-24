@@ -27,6 +27,18 @@ public class Macao extends Game {
         this.computerStillPlaying = true;
     }
 
+    public MacaoPlayer getMacaoGuest() {
+        return macaoGuest;
+    }
+
+    public MacaoPlayer getMacaoComputer() {
+        return macaoComputer;
+    }
+
+    public void setConsole(Console console) {
+        this.console = console;
+    }
+
     public boolean getIsOver() {
         return isOver;
     }
@@ -169,7 +181,7 @@ public class Macao extends Game {
             } else if (macaoComputer.getCumulativeRoll() > macaoGuest.getCumulativeRoll()) {
                 console.println("\nYour total is %s and the computer's total is %s. Sorry, you lose!", macaoGuest.getCumulativeRoll(), macaoComputer.getCumulativeRoll());
             } else if (macaoGuest.getCumulativeRoll() == macaoComputer.getCumulativeRoll()) {
-                console.println("\nIt's a tie!");
+                console.println("\nYou both rolled %s. It's a tie!", macaoGuest.getCumulativeRoll());
             }
         }
     }

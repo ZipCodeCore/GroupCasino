@@ -30,6 +30,10 @@ public class MacaoPlayer extends Player {
         this.roll = roll;
         this.cumulativeRoll += roll;
     }
+
+    public void setCumulativeRoll(int roll) {
+        this.cumulativeRoll = roll;
+    }
 }
 
 
