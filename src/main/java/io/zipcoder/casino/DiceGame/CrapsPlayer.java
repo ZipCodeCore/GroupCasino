@@ -8,11 +8,13 @@ public class CrapsPlayer implements GamblingPlayer {
     private double wallet;
     private Player player;
 
+
     public CrapsPlayer(Player player) {
+        this.wallet = player.getWallet();
     }
 
-    public double bet(double amount) {
-        return 0.0;
+    public void bet(double amount) {
+        this.wallet = wallet - amount;
     }
 
     public void collect(double amount) {
