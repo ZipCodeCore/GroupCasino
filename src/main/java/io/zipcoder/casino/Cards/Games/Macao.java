@@ -3,36 +3,45 @@ package io.zipcoder.casino.Cards.Games;
 import io.zipcoder.casino.Cards.Dice;
 import io.zipcoder.casino.Casino.Casino;
 import io.zipcoder.casino.Players.MacaoPlayer;
-import io.zipcoder.casino.Players.Player;
 import io.zipcoder.casino.utilities.Console;
 
 public class Macao extends Game {
 
     private MacaoPlayer macaoGuest;
-    private MacaoPlayer macaoComputer;
+    private MacaoPlayer macaoDealer;
     private boolean isOver;
     private Dice dice;
     private Console console;
     private boolean guestStillPlaying;
-    private boolean computerStillPlaying;
+    private boolean dealerStillPlaying;
 
 
     public Macao() {
         this.macaoGuest = new MacaoPlayer(Casino.getProfile());
-        this.macaoComputer = new MacaoPlayer();
+        this.macaoDealer = new MacaoPlayer();
         this.isOver = false;
         this.dice = new Dice();
         this.console = Console.getConsole();
         this.guestStillPlaying = true;
-        this.computerStillPlaying = true;
+        this.dealerStillPlaying = true;
+    }
+
+    public Macao(Console console) {
+        this.macaoGuest = new MacaoPlayer(Casino.getProfile());
+        this.macaoDealer = new MacaoPlayer();
+        this.isOver = false;
+        this.dice = new Dice();
+        this.console = console;
+        this.guestStillPlaying = true;
+        this.dealerStillPlaying = true;
     }
 
     public MacaoPlayer getMacaoGuest() {
         return macaoGuest;
     }
 
-    public MacaoPlayer getMacaoComputer() {
-        return macaoComputer;
+    public MacaoPlayer getMacaoDealer() {
+        return macaoDealer;
     }
 
     public void setConsole(Console console) {
@@ -55,12 +64,12 @@ public class Macao extends Game {
         this.guestStillPlaying = stillPlaying;
     }
 
-    public boolean getComputerStillPlaying() {
-        return computerStillPlaying;
+    public boolean getDealerStillPlaying() {
+        return dealerStillPlaying;
     }
 
-    public void setComputerStillPlaying(boolean stillPlaying) {
-        this.computerStillPlaying = stillPlaying;
+    public void setDealerStillPlaying(boolean stillPlaying) {
+        this.dealerStillPlaying = stillPlaying;
     }
 
     public int playGame() {
@@ -77,9 +86,9 @@ public class Macao extends Game {
                 youWentOver();
                 break;
             }
-            if (isComputerStillPlaying()) {
-                rollDie(macaoComputer);
-                showComputerRoll();
+            if (isDealerStillPlaying()) {
+                rollDie(macaoDealer);
+                showDealerRoll();
             }
             evaluate();
         }
@@ -87,17 +96,17 @@ public class Macao extends Game {
     }
 
     public void printGameInstructions() {
-        console.println("GAME: MACAO\nThe object of this game is to roll the die enough times to reach a total of 9 without going over.\nGood luck!\n");
+        console.println("Rules:\nThe object of this game is to roll the die enough times to reach a total of 9 without going over.\nGood luck!\n");
     }
 
     public boolean beginGame() {
         boolean beginGame = false;
         for (int i = 0; i < 1; i++) {
-            String begin = console.getStringInput("Enter 'Y' to begin:");
-            if (begin.toLowerCase().equals("y")) {
+            String begin = console.getStandardInput("Are you ready to begin?");
+            if (begin.equals("y") || begin.equals("yes")) {
                 beginGame = true;
             } else {
-                console.print("Try Again. ");
+                console.println("Try Again.");
                 i--;
             }
         }
@@ -109,20 +118,20 @@ public class Macao extends Game {
     }
 
     public void showInitialRolls() {
-        console.println("YOUR ROLL: %s | COMPUTER'S ROLL: %s", macaoGuest.getRoll(), macaoComputer.getRoll());
+        console.println("YOUR ROLL: %s | DEALER'S ROLL: %s", macaoGuest.getRoll(), macaoDealer.getRoll());
     }
 
     public void showGuestRoll() {
         console.println("YOUR NEW ROLL: %s | YOUR TOTAL: %s", macaoGuest.getRoll(), macaoGuest.getCumulativeRoll());
     }
 
-    public void showComputerRoll() {
-        console.println("\nCOMPUTER'S NEW ROLL: %s | COMPUTER'S TOTAL: %s", macaoComputer.getRoll(), macaoComputer.getCumulativeRoll());
+    public void showDealerRoll() {
+        console.println("\nDEALERS'S NEW ROLL: %s | DEALERS'S TOTAL: %s", macaoDealer.getRoll(), macaoDealer.getCumulativeRoll());
     }
 
     public void initialGameSetup() {
         rollDie(macaoGuest);
-        rollDie(macaoComputer);
+        rollDie(macaoDealer);
         showInitialRolls();
     }
 
@@ -132,13 +141,15 @@ public class Macao extends Game {
         }
         for (int i = 0; i < 1; i++) {
             if (macaoGuest.getCumulativeRoll() < 9 && guestStillPlaying) {
-                String yesOrNo = console.getStringInput("\nWould you like to roll again? (Y/N)");
-                yesOrNo = yesOrNo.toLowerCase();
-                if (!yesOrNo.equals("y") && !yesOrNo.equals("n")) {
-                    console.print("Invalid response. ");
-                    i--;
-                } else if (yesOrNo.equals("n")) {
+                String yesOrNo = console.getStandardInput("\nWould you like to roll again?");
+                if (yesOrNo.equals("yes") || yesOrNo.equals("y")) {
+                    console.println("Great, here's your die.");
+                } else if(yesOrNo.equals("no") || yesOrNo.equals("n")) {
+                    console.println("Bold tactic.");
                     guestStillPlaying = false;
+                } else {
+                    console.println("I didn't catch that.");
+                    i--;
                 }
             }
         }
@@ -158,29 +169,29 @@ public class Macao extends Game {
         return guestWentOver;
     }
 
-    public boolean isComputerStillPlaying() {
-        if (computerStillPlaying) {
-            if (macaoComputer.getCumulativeRoll() > 6 && macaoComputer.getCumulativeRoll() > macaoGuest.getCumulativeRoll()) {
-                computerStillPlaying = false;
+    public boolean isDealerStillPlaying() {
+        if (dealerStillPlaying) {
+            if (macaoDealer.getCumulativeRoll() > 6 && macaoDealer.getCumulativeRoll() > macaoGuest.getCumulativeRoll()) {
+                dealerStillPlaying = false;
             }
-            if (macaoComputer.getCumulativeRoll() == 9) {
-                computerStillPlaying = false;
+            if (macaoDealer.getCumulativeRoll() > 7) {
+                dealerStillPlaying = false;
             }
         }
-        return computerStillPlaying;
+        return dealerStillPlaying;
     }
 
     public void evaluate() {
-        if (macaoComputer.getCumulativeRoll() > 9) {
-            console.println("\nThe computer went over. You win!");
+        if (macaoDealer.getCumulativeRoll() > 9) {
+            console.println("\nThe dealer went over. You win!");
             isOver = true;
-        } else if (guestStillPlaying == false && computerStillPlaying == false) {
+        } else if (guestStillPlaying == false && dealerStillPlaying == false) {
             isOver = true;
-            if (macaoGuest.getCumulativeRoll() > macaoComputer.getCumulativeRoll()) {
-                console.println("\nYour total is %s and the computer's total is %s. You win!", macaoGuest.getCumulativeRoll(), macaoComputer.getCumulativeRoll());
-            } else if (macaoComputer.getCumulativeRoll() > macaoGuest.getCumulativeRoll()) {
-                console.println("\nYour total is %s and the computer's total is %s. Sorry, you lose!", macaoGuest.getCumulativeRoll(), macaoComputer.getCumulativeRoll());
-            } else if (macaoGuest.getCumulativeRoll() == macaoComputer.getCumulativeRoll()) {
+            if (macaoGuest.getCumulativeRoll() > macaoDealer.getCumulativeRoll()) {
+                console.println("\nYour total is %s and the dealer's total is %s. You win!", macaoGuest.getCumulativeRoll(), macaoDealer.getCumulativeRoll());
+            } else if (macaoDealer.getCumulativeRoll() > macaoGuest.getCumulativeRoll()) {
+                console.println("\nYour total is %s and the dealer's total is %s. Sorry, you lose!", macaoGuest.getCumulativeRoll(), macaoDealer.getCumulativeRoll());
+            } else if (macaoGuest.getCumulativeRoll() == macaoDealer.getCumulativeRoll()) {
                 console.println("\nYou both rolled %s. It's a tie!", macaoGuest.getCumulativeRoll());
             }
         }

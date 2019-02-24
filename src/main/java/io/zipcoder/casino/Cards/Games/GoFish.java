@@ -15,6 +15,8 @@ public class GoFish extends Game {
     private boolean isOver = false;
     private Console console;
 
+    public void setIsOver(boolean isOver) { this.isOver = isOver; }
+
     public GoFishPlayer getDealer() {
         return dealer;
     }
@@ -30,10 +32,10 @@ public class GoFish extends Game {
     }
 
     public int play() {
+        console.println("Rules:\nThe object of this game is to get the most books (4 of a kind) down.\nHere's your staring hand!\n");
         dealStartingHands();
         while (!isOver) {
             displayStatus();
-            displayCards(dealer.getHand());
             dealerTurn();
             evaluate();
             displayStatus();
@@ -57,7 +59,7 @@ public class GoFish extends Game {
         if (dealer.hasBooks()) {
             List<Card> books = dealer.getBooks();
             console.println("Alright, I'm going to play these:");
-            displayCards(books);
+            console.println(Card.printAllCards(books));
         }
     }
 
@@ -76,14 +78,14 @@ public class GoFish extends Game {
     }
 
     public boolean askForCard(String askedFor) {
-        String hasCard = console.getStandardInput(String.format("Do you have any %ss", askedFor));
-        return hasCard.equals("YES");
+        String hasCard = console.getStandardInput(String.format("Do you have any %ss?", askedFor));
+        return hasCard.equals("yes");
     }
 
     public void takeCards(String askedFor) {
         List<Card> takenCards = user.getCards(askedFor);
         console.println("I'll take these:");
-        displayCards(takenCards);
+        console.println(Card.printAllCards(takenCards));
         dealer.addToHand(takenCards);
     }
 
@@ -93,11 +95,16 @@ public class GoFish extends Game {
     }
 
     public void userTurn() {
-        String answer = console.getStandardInput("What card would you like to ask for?");
-        boolean hasCard = dealer.hasCard(answer);
-        dealerResponse(hasCard, answer);
-        if(user.hasBooks()) {
-            bookTurn();
+        String answer = console.getStandardInputCaps("What card would you like to ask for?");
+        if(!user.hasCard(answer)) {
+            console.println("You can only ask for cards you have");
+            userTurn();
+        } else {
+            boolean hasCard = dealer.hasCard(answer);
+            dealerResponse(hasCard, answer);
+            if (user.hasBooks()) {
+                bookTurn();
+            }
         }
     }
 
@@ -127,9 +134,8 @@ public class GoFish extends Game {
     }
 
     public List<Card> getPotentialBook() {
-        displayCards(user.getHand());
         user.increaseBookCount();
-        String playBooks = console.getStandardInput("Type of card do you want to play? (Ace, two, three, king, etc)");
+        String playBooks = console.getStandardInputCaps("What type of card do you want to play? (Ace, two, three, king, etc)");
         return user.getCards(playBooks);
     }
 
@@ -138,7 +144,7 @@ public class GoFish extends Game {
             Card card = deck.drawCard();
             player.addToHand(card);
             if(user) {
-                console.println(String.format("Nope! Go Fish!"));
+                console.println(String.format("Nope! Go Fish!\nYOU DREW:\n%s", card.printCard()));
             }
         } else {
             console.println("There are no more cards in the deck");
@@ -158,26 +164,15 @@ public class GoFish extends Game {
 
 
     public void displayStatus() {
-        console.clear();
-        console.println("Your current hand is: ");
-        displayCards(user.getHand());
-        console.println(String.format("You currently have %d books and the dealer has %d books",
+        console.print(Card.printAllCards(user.getHand()));
+        console.println(String.format("YOU: %d DEALER: %d",
                 user.getBookCount(), dealer.getBookCount()));
     }
 
-    public void displayCards(List<Card> cards) {
-        for (int i = 0; i < cards.size(); i++) {
-            console.print(cards.get(i).toString());
-            if((i + 1) % 8 == 0) {
-                console.print("\n");
-            }
-        }
-        console.print("\n");
-    }
 
     public boolean playBook() {
         String playbook = console.getStandardInput("Would you like to play a book?");
-        if ("YES".equals(playbook)) {
+        if ("yes".equals(playbook)) {
             return true;
         } else {
             console.println("Okay, we'll keep going");
