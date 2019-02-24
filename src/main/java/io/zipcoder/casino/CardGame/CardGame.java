@@ -1,5 +1,6 @@
-package io.zipcoder.casino.CardGame.Cards;
+package io.zipcoder.casino.CardGame;
 
+import io.zipcoder.casino.CardGame.Cards.Deck;
 import io.zipcoder.casino.Game;
 import io.zipcoder.casino.Player;
 
