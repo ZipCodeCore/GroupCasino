@@ -8,7 +8,7 @@ public class Greeter {
     private Console console;
 
     public Greeter(){
-        this.console = new Console();
+        this.console = Console.getConsole();
     }
 
     public Greeter(Console console) {
@@ -65,18 +65,23 @@ public class Greeter {
     private Game parseGame(String game, Boolean gambling) {
         if (game.equals("blackjack") && gambling) {
             console.println("Sounds good, let me go get the BlackJack dealer");
+            console.clear();
             return new BlackJack();
         } else if (game.equals("craps") && gambling) {
             console.println("The Craps table is right over here");
+            console.clear();
             return new Craps();
         } else if (game.equals("macao")) {
             console.println("Great, I hope you remember how to play");
+            console.clear();
             return new Macao();
         } else if (game.equals("gofish")) {
             console.println("Great game, GoFish! Just a moment.");
+            console.clear();
             return new GoFish();
         } else {
             console.println("How about we play my favorite game, GoFish?");
+            console.clear();
             return new GoFish();
         }
     }

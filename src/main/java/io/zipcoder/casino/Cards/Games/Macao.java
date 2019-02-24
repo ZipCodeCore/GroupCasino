@@ -22,7 +22,7 @@ public class Macao extends Game {
         this.macaoComputer = new MacaoPlayer();
         this.isOver = false;
         this.dice = new Dice();
-        this.console = new Console();
+        this.console = Console.getConsole();
         this.guestStillPlaying = true;
         this.computerStillPlaying = true;
     }

@@ -41,7 +41,7 @@ public class Casino {
     }
 
     public static void playGameWithUser(Game nextGame) {
-        int winningsOrLosings = nextGame.playGame();
+        int winningsOrLosings = nextGame.play();
         profile.setBalance(profile.getBalance() + winningsOrLosings);
     }
 
@@ -62,8 +62,15 @@ public class Casino {
     public static Profile getProfile() {
         return profile;
     }
+    public static void setProfile() {
+         profile = new Profile();
+    }
 
     public static void setGreeter(Greeter newGreeter) {
         greeter = newGreeter;
+    }
+
+    public static boolean isUserIsLeaving() {
+        return userIsLeaving;
     }
 }
