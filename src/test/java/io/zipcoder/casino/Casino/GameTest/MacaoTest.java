@@ -6,6 +6,7 @@ import org.junit.Test;
 import io.zipcoder.casino.utilities.Console;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class MacaoTest {
 
@@ -141,6 +142,43 @@ public class MacaoTest {
         actual = actual.trim();
 
         // Then we expect the given data to match the retrieved data
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void beginGameTest1() {
+        // Given user input = 'y' and the console is set to our console
+        String userInput = "y";
+        byte[] inputBytes = userInput.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Console ioconsole = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        macao.setConsole(ioconsole);
+
+        // When begin game is called
+        boolean retrieved = macao.beginGame();
+
+        // Then the retrieved boolean should be true (i.e. the game should begin)
+        Assert.assertTrue(retrieved);
+    }
+
+    @Test
+    public void beginGameTest2() {
+        // Given user input = 'x' and the console is set to our console
+        String userInput = "x\nx";
+        byte[] inputBytes = userInput.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Console ioconsole = new Console(new Scanner(inputByteArray), System.out);
+        macao.setConsole(ioconsole);
+
+        // Given the expected string output
+        String expected = "Try again.";
+
+        // When begin game is called & the output stored in a variable
+        boolean retrieved = macao.beginGame();
+        String actual = outputStream.toString();
+
+        // Then the retrieved boolean should be false (i.e. the game should not start) & the given string should match the actual string
+        Assert.assertFalse(retrieved);
         Assert.assertEquals(expected, actual);
     }
 

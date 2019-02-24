@@ -1,7 +1,5 @@
 package io.zipcoder.casino.Players;
 
-import io.zipcoder.casino.Casino.Casino;
-
 public class MacaoPlayer extends Player {
 
     private int roll;
@@ -16,6 +14,10 @@ public class MacaoPlayer extends Player {
         super(profile);
         this.roll = 0;
         this.cumulativeRoll = 0;
+    }
+
+    public Profile getProfile() {
+        return super.getProfile();
     }
 
     public int getRoll() {
