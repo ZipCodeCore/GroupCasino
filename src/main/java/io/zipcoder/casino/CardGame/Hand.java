@@ -24,18 +24,14 @@ public class Hand {
         return cards;
     }
 
-    public void addCardsToHand(ArrayList<Card> cards){
-
-        for (Card c : cards){
-            this.cards.add(c);
-
-        }
+    public void addCardsToHand(ArrayList<Card> cards) {
+        cards.addAll(cards);
     }
 
     public void removeCardsFromHand(ArrayList<Card> cards) {
-        for (Card c : cards) {
-            this.cards.remove(c);
-        }
+       cards.removeAll(cards);
+
+
     }
 
 
