@@ -13,6 +13,7 @@ public class Yahtzee extends DiceGame {
     private TreeMap<String, Integer> scoreCard;
     private ArrayList<Dice> savedDice;
     private ArrayList<Dice> rolledDice;
+    private boolean playing = false;
 
 
     public Yahtzee(Player player) {
@@ -25,7 +26,6 @@ public class Yahtzee extends DiceGame {
 
     @Override
     public void play() {
-        boolean playing = false;
         Console console = Console.getInstance();
         console.println("      ___       __   __         ___    ___  __                   ___ __  ___  ___   /");
         console.println("|  | |__  |    /  ` /  \\  |\\/| |__      |  /  \\    \\ /  /\\  |__|  |   / |__  |__   / ");
@@ -39,7 +39,8 @@ public class Yahtzee extends DiceGame {
                     "Type 'return' to return saved dice to be rolled again.\n" +
                     "Type 'roll' to roll again.\n" +
                     "Type 'scorecard' to see scorecard.\n" +
-                    "Type 'mark' to mark a score on you scorecard.\n";
+                    "Type 'mark' to mark a score on you scorecard.\n" +
+                    "Type 'exit' to walk away.";
 
             // if user enters "roll"
             if (input.toLowerCase().equals("roll")) {
@@ -123,8 +124,9 @@ public class Yahtzee extends DiceGame {
                             yahtzeePlayer.setRollNumber(0);
 
                             if (scorecardComplete()) {
-                                console.println("Thank you for playing Yahtzee!  Your final score is %d", getTotalScore(scoreCard));
+                                console.println("Thank you for playing Yahtzee!  Your final score is %d.", getTotalScore(scoreCard));
                                 playing = false;
+                                input = "back";
                             } else {
                                 input = console.getStringInput("Type 'roll' to start your next turn.");
                             }
@@ -135,10 +137,13 @@ public class Yahtzee extends DiceGame {
                 }
 
             }
+            if (input.toLowerCase().equals("exit")){
+                walkAway();
+            }
 
             // if user does not enter a valid input
-            if (!((input.toLowerCase()).equals("roll") || input.toLowerCase().equals("save") || input.toLowerCase().equals("return") ||
-                    input.toLowerCase().equals("scorecard") || input.toLowerCase().equals("mark") || input.toLowerCase().equals("back"))) {
+            if (!(input.toLowerCase().equals("roll") || input.toLowerCase().equals("save") || input.toLowerCase().equals("return") ||
+                    input.toLowerCase().equals("scorecard") || input.toLowerCase().equals("mark") || input.toLowerCase().equals("back") || input.toLowerCase().equals("exit"))){
 
                 input = console.getStringInput("Invalid input.  " + allOptions);
             }
@@ -146,6 +151,8 @@ public class Yahtzee extends DiceGame {
     }
 
     public void walkAway() {
+        playing = false;
+        System.out.println("Thank you for playing Yahtzee!");
     }
 
 
