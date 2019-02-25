@@ -2,6 +2,7 @@ package io.zipcoder.casino.CardGame;
 
 import io.zipcoder.casino.CardGame.Cards.Card;
 import io.zipcoder.casino.CardGame.Cards.Deck;
+import io.zipcoder.casino.CardGame.Cards.Suit;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -36,6 +37,20 @@ public class Hand {
         for (Card c : cards) {
             this.cards.remove(c);
         }
+    }
+
+    public String toString(){
+        String cardsInHand = "";
+
+        for (Card c: cards) {
+
+            cardsInHand += "| " + c.getCardFaceValue() + c.getCardSuitValue() + " |\t";
+
+        }
+
+        cardsInHand += "\n";
+
+        return cardsInHand;
     }
 
 }
