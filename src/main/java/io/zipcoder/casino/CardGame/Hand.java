@@ -41,7 +41,7 @@ public class Hand {
 
         for (Card c: cards) {
 
-            cardsInHand += "| " + c.getCardFaceValue() + " " + c.getCardSuitValue() + " |\t";
+            cardsInHand += "| " + c.getCardFaceValue() + " " + c.getCardSuitValue() + " |  ";
 
         }
 
