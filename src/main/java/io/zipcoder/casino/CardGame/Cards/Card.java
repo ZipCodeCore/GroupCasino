@@ -22,5 +22,11 @@ public class Card {
         return suit;
     }
 
+    public String getCardFaceValue(){
+        return face.getFaceValue();
+    }
 
+    public char getCardSuitValue(){
+        return suit.getSuitIcon();
+    }
 }
