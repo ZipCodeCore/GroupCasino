@@ -56,6 +56,10 @@ public class Macao extends Game {
         this.isOver = gameOver;
     }
 
+    public void setDice(Dice dice) {
+        this.dice = dice;
+    }
+
     public boolean getGuestStillPlaying() {
         return guestStillPlaying;
     }
@@ -106,7 +110,7 @@ public class Macao extends Game {
             if (begin.equals("y") || begin.equals("yes")) {
                 beginGame = true;
             } else {
-                console.println("Try Again.");
+                console.println("Try again.");
                 i--;
             }
         }
@@ -197,8 +201,4 @@ public class Macao extends Game {
         }
     }
 
-    public static void main(String[] args) {
-        Macao macao = new Macao();
-        macao.playGame();
-    }
 }
