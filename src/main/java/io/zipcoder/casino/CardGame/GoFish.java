@@ -156,7 +156,7 @@ public class GoFish extends CardGame {
                     if (getLastCard(goFishPlayer).getFace().equals(face1)) {
 
                         console.println("The Card you drew is the face you requested so go again");
-                        //console.getStringInput("Please enter the face of the card you want to request", faceRequested);
+
 
 
                     } else {
@@ -187,7 +187,7 @@ public class GoFish extends CardGame {
 
                 console.println("The dealer requested the face " + face2.getFaceValue());
 
-                boolean bool2 = dealer.isCardsToReturn(face2);
+                boolean bool2 = goFishPlayer.isCardsToReturn(face2);
 
                 if (bool2) {
 
