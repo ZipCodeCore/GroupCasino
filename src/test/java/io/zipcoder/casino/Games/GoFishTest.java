@@ -16,6 +16,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class GoFishTest {
@@ -33,6 +34,31 @@ public class GoFishTest {
 
         // Then
         Assert.assertTrue(actual.contains("I'm out of cards in my hand! I'll just draw"));
+    }
+
+    @Test
+    public void dealerTurnTest2() {
+        // Given
+        String input = "no";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish goFish = new GoFish(console);
+        Deck deck = new Deck();
+        Card testCard = deck.drawCard();
+        goFish.getDealer().addToHand(testCard);
+        goFish.getUser().addToHand(testCard);
+        goFish.getUser().addToHand(testCard);
+
+        // When
+        goFish.dealerTurn();
+        String actual = outputStream.toString();
+
+        // Then
+        int expectedNumberOfDealerCards = 3;
+        Assert.assertTrue(actual.contains("J'accuse!"));
+        Assert.assertEquals(expectedNumberOfDealerCards, goFish.getDealer().getHandSize());
     }
 
     @Test
@@ -216,6 +242,7 @@ public class GoFishTest {
         int expected = -5;
         String expectedString = "The object of this game is to get the most books (4 of a kind) down";
         Assert.assertFalse(actualString.contains("Alright, I'm going to play these:"));
+        Assert.assertTrue(actualString.contains(expectedString));
         Assert.assertEquals(expected, actual);
     }
 
@@ -282,7 +309,31 @@ public class GoFishTest {
     }
 
     @Test
-    public void testUserTurn4() {
+    public void testUserTurnWithBook() {
+        // Given
+        String input = "ace\nyes\nace";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+        testGoFish.getDealer().addToHand(new Card(Suit.HEARTS, Rank.KING));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+
+        // When
+        testGoFish.userTurn();
+
+        // Then
+        int expectedCards = 1;
+        int actualCards = testGoFish.getUser().getHandSize();
+        Assert.assertEquals(expectedCards, actualCards);
+    }
+
+    @Test
+    public void testBookTurn0() {
         // Given
         String input = "ace\nyes\nking";
         byte[] inputBytes = input.getBytes();
@@ -413,11 +464,28 @@ public class GoFishTest {
         testGoFish.getDeck().drawMultipleCards(52);
 
         // When
-        testGoFish.goFish(testGoFish.getUser(), true);
+        testGoFish.goFish(testGoFish.getUser(), null);
 
         // Then
         String actual = outputStream.toString();
         Assert.assertTrue(actual.contains("There are no more cards in the deck"));
+    }
+
+    @Test
+    public void testGoFish2() {
+        // Given
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(System.in, new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+        Collections.sort(testGoFish.getDeck().getPlayDeck());
+
+        // When
+        testGoFish.goFish(testGoFish.getUser(), "ace");
+
+        // Then
+        String actual = outputStream.toString();
+        System.out.print(outputStream.toString());
+        Assert.assertTrue(actual.contains("Fish, Fish, you got your wish!"));
     }
 
     @Test
@@ -517,35 +585,9 @@ public class GoFishTest {
 
         //Then
         String actual = outputStream.toString();
-        String expected = "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "Would you like to play a book?\n" +
-                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
-                "You won! Great game.\n";
+        String expected = "You won! Great game.\n";
         Assert.assertTrue(testGoFish.isOver());
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual.contains(expected));
 
     }
 }

@@ -2,11 +2,14 @@ package io.zipcoder.casino.Cards.Games;
 
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Deck;
+import io.zipcoder.casino.Cards.Rank;
 import io.zipcoder.casino.Players.GoFishPlayer;
 import io.zipcoder.casino.utilities.Console;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class GoFish extends Game {
     private GoFishPlayer dealer = new GoFishPlayer();
@@ -37,7 +40,7 @@ public class GoFish extends Game {
     }
 
     public int play() {
-        console.println("Rules:\nThe object of this game is to get the most books (4 of a kind) down.\nHere's your staring hand!\n");
+        console.println("Rules: The object of this game is to get the most books (4 of a kind) down.\nHere's your staring hand:\n");
         dealStartingHands();
         while (!isOver) {
             displayStatus();
@@ -55,7 +58,7 @@ public class GoFish extends Game {
             tryForUserCard();
         } else {
             console.println("I'm out of cards in my hand! I'll just draw");
-            goFish(dealer, false);
+            goFish(dealer);
         }
         playBooks();
     }
@@ -76,9 +79,9 @@ public class GoFish extends Game {
             takeCards(askedFor);
         } else if (saysHasCard) {
             console.println("Huh, it doesn't actually look like you do.");
-            goFish(dealer, false);
+            goFish(dealer);
         } else {
-            goFish(dealer, false);
+            goFish(dealer);
         }
     }
 
@@ -90,7 +93,7 @@ public class GoFish extends Game {
     public void takeCards(String askedFor) {
         List<Card> takenCards = user.getCards(askedFor);
         console.println("I'll take these:");
-        console.println(Card.printAllCards(takenCards));
+        console.print(Card.printAllCards(takenCards));
         dealer.addToHand(takenCards);
     }
 
@@ -100,33 +103,34 @@ public class GoFish extends Game {
     }
 
     public void userTurn() {
-        String answer = console.getStandardInputCaps("What card would you like to ask for?");
-        if(!user.hasCard(answer)) {
+        String askedForCard = console.getStandardInputCaps("What card would you like to ask for?");
+        if(!user.hasCard(askedForCard)) {
             console.println("You can only ask for cards you have");
             userTurn();
         } else {
-            boolean hasCard = dealer.hasCard(answer);
-            dealerResponse(hasCard, answer);
+            boolean hasCard = dealer.hasCard(askedForCard);
+            dealerResponse(hasCard, askedForCard);
             if (user.hasBooks()) {
                 bookTurn();
             }
         }
     }
 
-    public void dealerResponse(boolean hasCard, String answer) {
+    public void dealerResponse(boolean hasCard, String askedForCard) {
         if (hasCard) {
-            List<Card> givenCards = dealer.getCards(answer);
+            List<Card> givenCards = dealer.getCards(askedForCard);
             user.addToHand(givenCards);
-            console.println(String.format("You got me! Here's %d %ss", givenCards.size(), answer));
+            console.println(String.format("You got me! Here's %d %ss", givenCards.size(), askedForCard));
             userTurn();
         } else {
-            goFish(user, true);
+            goFish(user, askedForCard);
         }
     }
 
     public void bookTurn() {
         boolean playingBook = playBook();
         if(playingBook) {
+            displayStatus();
             List<Card> playedBooks = getPotentialBook();
             if(playedBooks.size() != 4) {
                 console.println("That's not a book.");
@@ -140,17 +144,48 @@ public class GoFish extends Game {
 
     public List<Card> getPotentialBook() {
         user.increaseBookCount();
-        String playBooks = console.getStandardInputCaps("What type of card do you want to play? (Ace, two, three, king, etc)");
+        String playBooks = console.getStandardInputCaps(String.format("What type of card do you want to play? (%s)", getAllBooks()));
         return user.getCards(playBooks);
     }
 
-    public void goFish(GoFishPlayer player, boolean user) {
+    private String getAllBooks() {
+        HashMap<Rank, Integer> rankCount = new HashMap<>();
+        for (Card card : user.getHand()) {
+            Rank rank = card.getRank();
+            if(rankCount.get(rank) == null) {
+                rankCount.put(rank, 0);
+            } else {
+                rankCount.put(rank, rankCount.get(rank) + 1);
+            }
+        }
+        StringBuilder allBooks = new StringBuilder();
+        Set<Rank> allRanks = rankCount.keySet();
+        for (Rank rank : allRanks) {
+            if(rankCount.get(rank) > 2) {
+                allBooks.append(rank + " ");
+            }
+        }
+        return allBooks.toString();
+    }
+
+    public void goFish(GoFishPlayer player) {
         if(deck.cardsLeft() != 0) {
             Card card = deck.drawCard();
             player.addToHand(card);
-            if(user) {
-                console.println(String.format("Nope! Go Fish!\nYOU DREW:\n%s", card.printCard()));
+        } else {
+            console.println("There are no more cards in the deck");
+        }
+    }
+
+    public void goFish(GoFishPlayer player, String askedFor) {
+        if(deck.cardsLeft() != 0) {
+            console.println("Nope! Go Fish!");
+            Card card = deck.drawCard();
+            player.addToHand(card);
+            if(card.toString().toLowerCase().contains(player.parseCardString(askedFor))) {
+                console.println("Fish, Fish, you got your wish!");
             }
+            console.println(String.format("YOU DREW:\n%s", card.printCard()));
         } else {
             console.println("There are no more cards in the deck");
         }

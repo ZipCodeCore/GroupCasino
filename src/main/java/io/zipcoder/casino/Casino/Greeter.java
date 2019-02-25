@@ -124,7 +124,6 @@ public class Greeter {
             return new Macao();
         } else if (game.equals("gofish")) {
             console.println(goFishName);
-            console.println("Great game, GoFish! Here's your starting hand.");
             return new GoFish();
         } else if (game.equals("testingcheatsenabledtrue")) {
             String input = "yes\nno";
