@@ -2,6 +2,8 @@ package io.zipcoder.casino.Casino;
 
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Games.BlackJack;
+import io.zipcoder.casino.Cards.Rank;
+import io.zipcoder.casino.Cards.Suit;
 import io.zipcoder.casino.Players.CardPlayer;
 import io.zipcoder.casino.Players.Player;
 import io.zipcoder.casino.Players.Profile;
@@ -127,7 +129,7 @@ public class BlackJackTest {
     @Test
     public void testTellUserDeyPoor(){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Console console = getConsoleWithBufferedInputAndOutput("",baos);
+        Console console = getConsoleWithBufferedInputAndOutput(null ,baos);
         BlackJack newBlkJ = new BlackJack(console);
 
         //When
@@ -135,14 +137,75 @@ public class BlackJackTest {
 
         //Then
         Assert.assertTrue(baos.toString().contains("Your broke ass has insufficient funds.."));
+    }
+    @Test
+    public void testDealFirstHand(){
+
+        BlackJack newBlkJ = new BlackJack();
+        List<Card> userHand = new ArrayList<Card>();
+        List<Card> dealerHand = new ArrayList<Card>();
+        int expected = 2;
+
+        //When
+        newBlkJ.dealFirstHand(userHand,dealerHand);
+
+        //Then
+        Assert.assertEquals(expected, userHand.size());
+        Assert.assertEquals(expected, dealerHand.size());
+    }
+    @Test
+    public void testGetTotal(){
+        //Given
+        BlackJack newBlkJ = new BlackJack();
+        List<Card> testHand = new ArrayList<Card>();
+        Card c1 = new Card(Suit.DIAMONDS,Rank.NINE);
+        Card c2 = new Card(Suit.SPADES, Rank.QUEEN);
+        Card c3 = new Card(Suit.HEARTS, Rank.SIX);
+
+        testHand.add(c1);
+        testHand.add(c2);
+        testHand.add(c3);
+
+        //When
+        int actual = newBlkJ.getTotal(testHand);
+        int expected = 25;
+
+        //Then
+        Assert.assertEquals(expected, actual);
+
+    }
+    @Test
+    public void testGetTotalAcesOver21(){
+        //Given
+        BlackJack newBlkJ = new BlackJack();
+        List<Card> testHand = new ArrayList<Card>();
+        Card c1 = new Card(Suit.DIAMONDS,Rank.NINE);
+        Card c2 = new Card(Suit.SPADES, Rank.QUEEN);
+        Card c3 = new Card(Suit.HEARTS, Rank.ACE);
+        Card c4 = new Card(Suit.CLUBS, Rank.ACE);
+        
+        testHand.add(c1);
+        testHand.add(c2);
+        testHand.add(c3);
+        testHand.add(c4);
+
+        //When
+        int actual = newBlkJ.getTotal(testHand);
+        int expected = 21;
+
+        //Then
+        Assert.assertEquals(expected, actual);
 
     }
 
-    @Test
-
     public Console getConsoleWithBufferedInputAndOutput(String input, ByteArrayOutputStream baos){
-        ByteArrayInputStream bais = new ByteArrayInputStream(input.getBytes());
-        Console testConsole = new Console(bais, new PrintStream(baos));
+        Console testConsole;
+        if (input == null) {
+             testConsole = new Console(System.in, new PrintStream(baos));
+        } else {
+            ByteArrayInputStream bais = new ByteArrayInputStream(input.getBytes());
+             testConsole = new Console(bais, new PrintStream(baos));
+        }
 
        return testConsole;
     }
