@@ -45,8 +45,7 @@ public class GoFishTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
         GoFish goFish = new GoFish(console);
-        Deck deck = new Deck();
-        Card testCard = deck.drawCard();
+        Card testCard = new Card(Suit.HEARTS, Rank.THREE);
         goFish.getDealer().addToHand(testCard);
         goFish.getUser().addToHand(testCard);
         goFish.getUser().addToHand(testCard);
@@ -70,8 +69,7 @@ public class GoFishTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
         GoFish goFish = new GoFish(console);
-        Deck deck = new Deck();
-        Card testCard = deck.drawCard();
+        Card testCard = new Card(Suit.HEARTS, Rank.THREE);
         goFish.getDealer().addToHand(testCard);
         goFish.getUser().addToHand(testCard);
         goFish.getUser().addToHand(testCard);
@@ -95,8 +93,7 @@ public class GoFishTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
         GoFish goFish = new GoFish(console);
-        Deck deck = new Deck();
-        Card testCard = deck.drawCard();
+        Card testCard = new Card(Suit.HEARTS, Rank.THREE);
         goFish.getDealer().addToHand(testCard);
         goFish.getUser().addToHand(testCard);
         goFish.getUser().addToHand(testCard);
@@ -120,8 +117,7 @@ public class GoFishTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
         GoFish goFish = new GoFish(console);
-        Deck deck = new Deck();
-        Card testCard = deck.drawCard();
+        Card testCard = new Card(Suit.HEARTS, Rank.THREE);
         goFish.getDealer().addToHand(testCard);
 
         // When
@@ -143,8 +139,7 @@ public class GoFishTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
         GoFish goFish = new GoFish(console);
-        Deck deck = new Deck();
-        Card testCard = deck.drawCard();
+        Card testCard = new Card(Suit.HEARTS, Rank.THREE);
         goFish.getDealer().addToHand(testCard);
 
         // When
@@ -161,8 +156,7 @@ public class GoFishTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(System.in, new PrintStream(outputStream));
         GoFish goFish = new GoFish(console);
-        Deck deck = new Deck();
-        Card testCard = deck.drawCard();
+        Card testCard = new Card(Suit.HEARTS, Rank.THREE);
         goFish.getDealer().addToHand(testCard);
         goFish.getDealer().addToHand(testCard);
         goFish.getDealer().addToHand(testCard);
@@ -184,9 +178,8 @@ public class GoFishTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(System.in, new PrintStream(outputStream));
         GoFish goFish = new GoFish(console);
-        Deck deck = new Deck();
-        Card testCard = deck.drawCard();
-        Card otherCard = deck.drawCard();
+        Card testCard = new Card(Suit.HEARTS, Rank.THREE);
+        Card otherCard = new Card(Suit.HEARTS, Rank.ACE);
         goFish.getDealer().addToHand(testCard);
         goFish.getDealer().addToHand(testCard);
         goFish.getDealer().addToHand(testCard);
@@ -209,9 +202,8 @@ public class GoFishTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(System.in, new PrintStream(outputStream));
         GoFish goFish = new GoFish(console);
-        Deck deck = new Deck();
-        Card testCard = deck.drawCard();
-        Card otherCard = deck.drawCard();
+        Card testCard = new Card(Suit.HEARTS, Rank.THREE);
+        Card otherCard = new Card(Suit.HEARTS, Rank.ACE);
         goFish.getDealer().addToHand(testCard);
         goFish.getDealer().addToHand(testCard);
         goFish.getDealer().addToHand(otherCard);

@@ -3,6 +3,7 @@ package io.zipcoder.casino.Cards.Games;
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Deck;
 import io.zipcoder.casino.Cards.Rank;
+import io.zipcoder.casino.Casino.Greeter;
 import io.zipcoder.casino.Players.GoFishPlayer;
 import io.zipcoder.casino.utilities.Console;
 
@@ -40,6 +41,7 @@ public class GoFish extends Game {
     }
 
     public int play() {
+        console.println(Greeter.getGoFishName());
         console.println("Rules: The object of this game is to get the most books (4 of a kind) down.\nHere's your staring hand:\n");
         dealStartingHands();
         while (!isOver) {

@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.util.EnumMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 public class Greeter {
     private Console console;
@@ -55,7 +56,21 @@ public class Greeter {
                     "██║ ╚═╝ ██║██║  ██║╚██████╗██║  ██║╚██████╔╝\n" +
                     "╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ ";
 
+//    public static String getBlackJackName() {
+//        return blackJackName;
+//    }
 
+    public static String getGoFishName() {
+        return goFishName;
+    }
+
+//    public static String getCrapsName() {
+//        return crapsName;
+//    }
+
+    public static String getMacaoName() {
+        return macaoName;
+    }
 
     public Greeter(){
         this.console = Console.getConsole();
@@ -102,48 +117,61 @@ public class Greeter {
     }
 
     public Game getNextGame() {
-        String game = console.getStringInput(
+        String requestedGame = console.getStandardInputCaps(
                 "Would you like to play BlackJack, GoFish, Craps or Macao?");
-        game = game.toLowerCase().trim();
-        return parseGame(game, true);
+        return parseGame(requestedGame);
     }
 
     public Game getNextCleanGame() {
-        String game = console.getStandardInput("Would you like to play GoFish or Macao?");
-        return parseGame(game, false);
+        String requestedGame = console.getStandardInputCaps("Would you like to play GoFish or Macao?");
+        if (requestedGame.equals("BLACKJACK") || requestedGame.equals("CRAPS")) {requestedGame = "GOFISH";}
+        return parseGame(requestedGame);
     }
 
-    private Game parseGame(String game, Boolean gambling) {
-        if (game.equals("blackjack") && gambling) {
-            console.println(blackJackName);
-            return new BlackJack();
-        } else if (game.equals("craps") && gambling) {
-            console.println(crapsName);
-            return new Craps();
-        } else if (game.equals("macao")) {
-            console.println(macaoName);
-            return new Macao();
-        } else if (game.equals("gofish")) {
-            console.println(goFishName);
-            return new GoFish();
-            // For testing, makes a macao game that takes in an input stream that runs through it
-        } else if (game.equals("testingcheatsenabledtrue")) {
-            String input = "yes\nno";
-            byte[] inputBytes = input.getBytes();
-            ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
-            Console console = new Console(new Scanner(inputByteArray), System.out);
-            return new Macao(console);
-        } else {
-            console.println(goFishName);
-            console.println("How about we play my favorite game, GoFish?");
-            return new GoFish();
+    public Game parseGame(String requestedGame) {
+        if (requestedGame.equals("TESTINGCHEATSENABLEDTRUE")) {return getCheatingTest();}
+        GameEnum enumeration = GameEnum.getValueOf(requestedGame);
+        return enumeration.create();
+    }
+
+
+
+    public enum GameEnum {
+        BLACKJACK(BlackJack::new),
+        CRAPS(Craps::new),
+        GOFISH(GoFish::new),
+        MACAO(Macao::new);
+
+        private final Supplier<Game> supplier;
+
+        GameEnum(Supplier<Game> supplier) {
+            this.supplier = supplier;
+        }
+
+        public Game create() {
+            return this.supplier.get();
+        }
+
+        public static io.zipcoder.casino.Casino.Greeter.GameEnum getValueOf(String userInput) {
+            try {
+                return valueOf(userInput);
+            } catch (IllegalArgumentException var2) {
+                return valueOf("GOFISH");
+            }
         }
     }
 
+    private Game getCheatingTest() {
+        String input = "yes\nno";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Console console = new Console(new Scanner(inputByteArray), System.out);
+        return new Macao(console);
+    }
 
     public boolean getIfLeaving() {
-        String isLeaving = console.getStringInput("That was great! Would you like to play another game?");
-        if (isLeaving.toLowerCase().trim().equals("no")) {
+        String isLeaving = console.getStringInput("Would you like to play another game?");
+        if (isLeaving.equals("no") || isLeaving.equals("n")) {
             return true;
         } else if (isLeaving.toLowerCase().trim().equals("yes")) {
             console.println("We're happy you're staying!");

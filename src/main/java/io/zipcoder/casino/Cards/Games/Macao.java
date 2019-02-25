@@ -2,6 +2,7 @@ package io.zipcoder.casino.Cards.Games;
 
 import io.zipcoder.casino.Cards.Dice;
 import io.zipcoder.casino.Casino.Casino;
+import io.zipcoder.casino.Casino.Greeter;
 import io.zipcoder.casino.Players.MacaoPlayer;
 import io.zipcoder.casino.utilities.Console;
 
@@ -76,7 +77,8 @@ public class Macao extends Game {
         this.dealerStillPlaying = stillPlaying;
     }
 
-    public int playGame() {
+    public int play() {
+        console.println(Greeter.getMacaoName());
         printGameInstructions();
         if (beginGame()) {
             initialGameSetup();

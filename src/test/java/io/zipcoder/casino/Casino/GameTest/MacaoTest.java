@@ -174,11 +174,11 @@ public class MacaoTest {
                 "Oh no! Looks like you went over! You lose.";
 
         // When we call the play game method and store the output in a variable
-        macao.playGame();
+        macao.play();
         String actual = outputStream.toString().trim();
 
         // Then we expect the given and retrieved strings to match
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual.contains(expected));
     }
 
     @Test
@@ -224,11 +224,11 @@ public class MacaoTest {
                 "Lucky you! The dealer went over. YOU WIN!";
 
         // When we call the play game method and store the output in a variable
-        macao.playGame();
+        macao.play();
         String actual = outputStream.toString().trim();
 
         // Then we expect the given and retrieved strings to match
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual.contains(expected));
     }
 
     @Test
