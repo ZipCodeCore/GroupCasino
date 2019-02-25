@@ -5,6 +5,7 @@ import io.zipcoder.casino.Cards.Deck;
 import io.zipcoder.casino.Cards.Rank;
 import io.zipcoder.casino.Casino.Casino;
 import io.zipcoder.casino.Players.CardPlayer;
+import io.zipcoder.casino.Players.Player;
 import io.zipcoder.casino.Players.Profile;
 import io.zipcoder.casino.utilities.Console;
 
@@ -39,13 +40,19 @@ public class BlackJack extends Game {
         blackJackConsole = testConsole;
     }
 
+    public CardPlayer getUser(){
+        return this.user;
+    }
+    public CardPlayer getDealer(){
+        return this.dealer;
+    }
+
     public Integer getUserBetAsInteger(){
         return userBet;
     }
 
     public static void main(String[] args)
-    {
-        BlackJack blackJack = new BlackJack();
+    {   BlackJack blackJack = new BlackJack();
         blackJack.play();
     }
 
@@ -73,7 +80,6 @@ public class BlackJack extends Game {
     public void tellUserDeyPoor(){
         blackJackConsole.println("Your broke ass has insufficient funds..");
     }
-
 
     public void playFirstTurn() {
 
@@ -159,7 +165,6 @@ public class BlackJack extends Game {
         userTotal = getTotal(userHand);
         blackJackConsole.println("Your next card is " + userHand.get(user.getHand().size()-1) +
                 ". Your total hand is " + userTotal);
-
     }
 
     public String getUserInput() {
@@ -186,8 +191,9 @@ public class BlackJack extends Game {
                 acesCounter++;
             }
             sum += card.getRank().returnPrimaryRankValue();
-            if(sum > 21 && acesCounter>0){
+            while(sum > 21 && acesCounter>0){
                 sum -= 10;
+                acesCounter--;
             }
         }
         return sum;
