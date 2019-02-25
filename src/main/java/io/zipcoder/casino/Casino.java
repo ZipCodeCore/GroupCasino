@@ -73,7 +73,7 @@ public class Casino {
                     break;
 
                 case "go fish":
-                    Casino.setGame(new GoFish());
+                    Casino.setGame(new GoFish(player));
                     Casino.game.play();
                     break;
 

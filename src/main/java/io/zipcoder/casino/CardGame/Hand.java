@@ -5,7 +5,7 @@ import io.zipcoder.casino.CardGame.Cards.Deck;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-gi
+
 public class Hand {
     private int size;
     private int handValue;

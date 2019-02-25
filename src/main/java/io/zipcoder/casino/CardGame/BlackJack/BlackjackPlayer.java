@@ -13,8 +13,8 @@ public class BlackjackPlayer implements GamblingPlayer {
     public BlackjackPlayer(Player player) {
     }
 
-    public double bet(double amount) {
-        return 0;
+    public void bet(double amount) {
+
     }
 
     public void collect(double amount) {
