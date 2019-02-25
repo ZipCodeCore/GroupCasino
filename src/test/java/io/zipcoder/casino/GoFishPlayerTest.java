@@ -115,13 +115,59 @@ public class GoFishPlayerTest {
 
 
     @Test
-    public void checkForFourOfAKindTest(){
+    public void getCardCountInHandTest(){
         // Given
         Player player = new Player("Cara", 1000);
         GoFishPlayer goFishPlayer = new GoFishPlayer(player);
 
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(dA);
+        cards.add(hA);
+        cards.add(s3);
+        cards.add(s4);
+        cards.add(d4);
+        cards.add(c4);
+        cards.add(h4);
+        cards.add(s6);
+        cards.add(h8);
+        cards.add(c8);
+        cards.add(sQ);
+        cards.add(hQ);
 
+        goFishPlayer.addCardsToHands(cards);
 
+        Integer[] expected = {2, 0, 1, 4, 0, 1, 0, 2, 0, 0, 0, 2, 0};
+
+        // When
+        Integer[] actual = goFishPlayer.getCardCountInHand();
+
+        // Then
+        Assert.assertArrayEquals(expected, actual);
     }
 
+
+/*
+    @Test
+    public void layDown4OfAKindTest(){
+        // Given
+        Player player = new Player("Cara", 1000);
+        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
+
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(dA);
+        cards.add(hA);
+        cards.add(s3);
+        cards.add(s4);
+        cards.add(d4);
+        cards.add(c4);
+        cards.add(h4);
+        cards.add(s6);
+        cards.add(h8);
+        cards.add(c8);
+        cards.add(sQ);
+        cards.add(hQ);
+
+        goFishPlayer.addCardsToHands(cards);
+
+    }*/
 }
