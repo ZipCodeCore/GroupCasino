@@ -1769,6 +1769,25 @@ public class YahtzeeTests {
         // Then
         Assert.assertTrue(actualTrue);
         Assert.assertFalse(actualFalse);
+    }
+
+
+    @Test
+    public void welcomeToYahtzeeStringTest(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected = "\n⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅\n" +
+                "      ___       __   __         ___    ___  __                   ___ __  ___  ___   /\n" +
+                "|  | |__  |    /  ` /  \\  |\\/| |__      |  /  \\    \\ /  /\\  |__|  |   / |__  |__   / \n" +
+                "|/\\| |___ |___ \\__, \\__/  |  | |___     |  \\__/     |  /~~\\ |  |  |  /_ |___ |___ .  \n\n" +
+                "⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅\n";
+
+        // When
+        String actual = yahtzee.welcomeToYahtzeeString();
+
+        // Then
+        Assert.assertEquals(expected, actual);
 
     }
 
