@@ -23,19 +23,6 @@ public class Card implements Comparable<Card>{
         return rank.toString().toLowerCase() + " of " + suit.toString().toLowerCase();
     }
 
-//    public String printCard() {
-//        String top = rank.getStringRepresentation();
-//        String bottom = rank.getStringRepresentation();
-//        //Add on lines to non-10 ranks to make all the cards evenly sized.
-//        if (!rank.equals(Rank.TEN)) {
-//            top += "\u2501";
-//            bottom = "\u2501" + bottom;
-//        }
-//        String fullCard = String.format("%s\u2501\u2501\u2513\n\u2503   \u2503\n\u2503 %s \u2503\n\u2503   \u2503\n\u2517\u2501\u2501%s",
-//                top, suit.getStringRepresentation(), bottom);
-//        return fullCard;
-//    }
-
     public String printCard() {
         String top = rank.getStringRepresentation();
         String bottom = rank.getStringRepresentation();
@@ -44,10 +31,11 @@ public class Card implements Comparable<Card>{
             top += "\u2501";
             bottom = "\u2501" + bottom;
         }
-        String fullCard = String.format("\u250F\u2501\u2501\u2513\n\u2503   \u2503\n\u2503 %s \u2503\n\u2503   \u2503\n\u2517\u2501\u2501%s",
+        String fullCard = String.format("%s\u2501\u2501\u2513\n\u2503   \u2503\n\u2503 %s \u2503\n\u2503   \u2503\n\u2517\u2501\u2501%s",
                 top, suit.getStringRepresentation(), bottom);
         return fullCard;
     }
+
 
     public static String printAllCards(List<Card> cards) {
         StringBuilder allCardsPrinted = new StringBuilder();

@@ -4,7 +4,10 @@ import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Deck;
 import io.zipcoder.casino.Cards.Games.GoFish;
 import io.zipcoder.casino.Cards.Games.Macao;
+import io.zipcoder.casino.Cards.Rank;
+import io.zipcoder.casino.Cards.Suit;
 import io.zipcoder.casino.Casino.Casino;
+import io.zipcoder.casino.Players.GoFishPlayer;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Casino.Greeter;
 import org.junit.Assert;
@@ -93,9 +96,7 @@ public class GoFishTest {
         GoFish goFish = new GoFish(console);
         Deck deck = new Deck();
         Card testCard = deck.drawCard();
-        Card otherCard = deck.drawCard();
         goFish.getDealer().addToHand(testCard);
-        goFish.getUser().addToHand(otherCard);
 
         // When
         goFish.tryForUserCard();
@@ -104,6 +105,27 @@ public class GoFishTest {
         // Then
         int expectedNumberOfDealerCards = 2;
         Assert.assertTrue(actual.contains("Huh, it doesn't actually look like you do."));
+        Assert.assertEquals(expectedNumberOfDealerCards, goFish.getDealer().getHandSize());
+    }
+
+    @Test
+    public void tryForUserCardTest4() {
+        // Given
+        String input = "no";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish goFish = new GoFish(console);
+        Deck deck = new Deck();
+        Card testCard = deck.drawCard();
+        goFish.getDealer().addToHand(testCard);
+
+        // When
+        goFish.tryForUserCard();
+
+        // Then
+        int expectedNumberOfDealerCards = 2;
         Assert.assertEquals(expectedNumberOfDealerCards, goFish.getDealer().getHandSize());
     }
 
@@ -197,6 +219,204 @@ public class GoFishTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testUserTurn() {
+        // Given
+        String input = "king\nace";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+
+        // When
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.userTurn();
+
+        // Then
+        String actual = outputStream.toString();
+        Assert.assertTrue(actual.contains("You can only ask for cards you have"));
+    }
+
+    @Test
+    public void testUserTurn2() {
+        // Given
+        String input = "ace";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+
+        // When
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.userTurn();
+
+        // Then
+        String actual = outputStream.toString();
+        Assert.assertTrue(actual.contains("Go Fish!"));
+    }
+
+    @Test
+    public void testUserTurn3() {
+        // Given
+        String input = "ace\nking";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.KING));
+        testGoFish.getDealer().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+
+        // When
+        testGoFish.userTurn();
+
+        // Then
+        int expectedCards = 0;
+        int actualCards = testGoFish.getDealer().getHandSize();
+        String actual = outputStream.toString();
+        Assert.assertTrue(actual.contains("You got me"));
+        Assert.assertEquals(expectedCards, actualCards);
+    }
+
+    @Test
+    public void testUserTurn4() {
+        // Given
+        String input = "ace\nyes\nking";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+        testGoFish.getDealer().addToHand(new Card(Suit.HEARTS, Rank.KING));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+
+        // When
+        testGoFish.bookTurn();
+
+        // Then
+        int expectedCards = 4;
+        int actualCards = testGoFish.getUser().getHandSize();
+        Assert.assertEquals(expectedCards, actualCards);
+    }
+
+    @Test
+    public void testBookTurn() {
+        // Given
+        String input = "no";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+
+        // When
+        testGoFish.bookTurn();
+
+        // Then
+        int expectedCards = 4;
+        int actualCards = testGoFish.getUser().getHandSize();
+        Assert.assertEquals(expectedCards, actualCards);
+    }
+
+    @Test
+    public void testBookTurn2() {
+        // Given
+        String input = "yes\nace";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+
+        // When
+        testGoFish.bookTurn();
+
+        // Then
+        int expectedCards = 0;
+        int actualCards = testGoFish.getUser().getHandSize();
+        Assert.assertEquals(expectedCards, actualCards);
+    }
+
+    @Test
+    public void testBookTurn3() {
+        // Given
+        String input = "yes\nking\nace";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+
+        // When
+        testGoFish.bookTurn();
+
+        // Then
+        int expectedCards = 4;
+        int actualCards = testGoFish.getUser().getHandSize();
+        String actual = outputStream.toString();
+        Assert.assertEquals(expectedCards, actualCards);
+        Assert.assertTrue(actual.contains("That's not a book."));
+    }
+
+    @Test
+    public void testBookTurn4() {
+        // Given
+        String input = "yes\nace\nyes\nthree";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.THREE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.THREE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.THREE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.THREE));
 
 
+        // When
+        testGoFish.bookTurn();
+
+        // Then
+        int expectedCards = 0;
+        int actualCards = testGoFish.getUser().getHandSize();
+        Assert.assertEquals(expectedCards, actualCards);
+    }
+
+    @Test
+    public void testGoFish() {
+        // Given
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(System.in, new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+        testGoFish.getDeck().drawMultipleCards(52);
+
+        // When
+        testGoFish.goFish(testGoFish.getUser(), true);
+
+        // Then
+        String actual = outputStream.toString();
+        Assert.assertTrue(actual.contains("There are no more cards in the deck"));
+    }
 }
