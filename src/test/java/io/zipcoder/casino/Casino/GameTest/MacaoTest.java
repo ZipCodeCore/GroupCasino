@@ -148,13 +148,30 @@ public class MacaoTest {
                 "Good luck!\n" +
                 "\n" +
                 "Are you ready to begin?\n" +
-                "YOUR ROLL: 6 | DEALER'S ROLL: 6\n" +
+                "YOUR ROLL     DEALER'S ROLL\n" +
+                "┏━━━━━━━━┓     ┏━━━━━━━━┓     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┗━━━━━━━━┛     ┗━━━━━━━━┛     \n" +
                 "\n" +
                 "Would you like to roll again?\n" +
                 "Great, here's your die.\n" +
-                "YOUR NEW ROLL: 6 | YOUR TOTAL: 12\n" +
+                "YOUR NEW ROLL\n" +
+                "┏━━━━━━━━┓     \n" +
+                "┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     \n" +
+                "┗━━━━━━━━┛     \n" +
+                "YOUR TOTAL IS NOW... 12\n" +
+                "HERE'S WHAT YOU ROLLED SO FAR\n" +
+                "┏━━━━━━━━┓┏━━━━━━━━┓\n" +
+                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┗━━━━━━━━┛┗━━━━━━━━┛\n" +
                 "\n" +
-                "Sorry, you went over. You lose!";
+                "Oh no! Looks like you went over! You lose.";
 
         // When we call the play game method and store the output in a variable
         macao.playGame();
@@ -181,14 +198,30 @@ public class MacaoTest {
                 "Good luck!\n" +
                 "\n" +
                 "Are you ready to begin?\n" +
-                "YOUR ROLL: 6 | DEALER'S ROLL: 6\n" +
+                "YOUR ROLL     DEALER'S ROLL\n" +
+                "┏━━━━━━━━┓     ┏━━━━━━━━┓     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┗━━━━━━━━┛     ┗━━━━━━━━┛     \n" +
                 "\n" +
                 "Would you like to roll again?\n" +
                 "Bold tactic.\n" +
+                "DEALERS'S NEW ROLL\n" +
+                "┏━━━━━━━━┓\n" +
+                "┃ ⬤  ⬤ ┃\n" +
+                "┃ ⬤  ⬤ ┃\n" +
+                "┃ ⬤  ⬤ ┃\n" +
+                "┗━━━━━━━━┛\n" +
+                "THE DEALERS'S TOTAL IS NOW... 12\n" +
+                "HERE'S WHAT THE DEALER ROLLED SO FAR\n" +
+                "┏━━━━━━━━┓┏━━━━━━━━┓\n" +
+                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┗━━━━━━━━┛┗━━━━━━━━┛\n" +
                 "\n" +
-                "DEALERS'S NEW ROLL: 6 | DEALERS'S TOTAL: 12\n" +
-                "\n" +
-                "The dealer went over. You win!";
+                "Lucky you! The dealer went over. YOU WIN!";
 
         // When we call the play game method and store the output in a variable
         macao.playGame();
@@ -237,7 +270,8 @@ public class MacaoTest {
         macao.setConsole(ioconsole);
 
         // Given the expected string output
-        String expected = "Are you ready to begin?\nTry again.\nAre you ready to begin?";
+        String expected = "Are you ready to begin?\n" +
+                "Hm, I expected something different. Are you ready to begin?";
 
         // When begin game is called & the output stored in a variable
         boolean retrieved = macao.beginGame();
@@ -275,7 +309,12 @@ public class MacaoTest {
         macao.getMacaoDealer().setRoll(4);
 
         // Given the expected string
-        String expected = "YOUR ROLL: 3 | DEALER'S ROLL: 4";
+        String expected = "YOUR ROLL     DEALER'S ROLL\n" +
+                "┏━━━━━━━━┓     ┏━━━━━━━━┓     \n" +
+                "┃     ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃   ⬤   ┃     ┃        ┃     \n" +
+                "┃ ⬤     ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┗━━━━━━━━┛     ┗━━━━━━━━┛";
 
         // When we set the console to the test console
         macao.setConsole(console);
@@ -296,7 +335,19 @@ public class MacaoTest {
         macao.getMacaoGuest().setCumulativeRoll(10);
 
         // Given the expected string
-        String expected = "YOUR NEW ROLL: 4 | YOUR TOTAL: 10";
+        String expected = "YOUR NEW ROLL\n" +
+                "┏━━━━━━━━┓     \n" +
+                "┃ ⬤  ⬤ ┃     \n" +
+                "┃        ┃     \n" +
+                "┃ ⬤  ⬤ ┃     \n" +
+                "┗━━━━━━━━┛     \n" +
+                "YOUR TOTAL IS NOW... 10\n" +
+                "HERE'S WHAT YOU ROLLED SO FAR\n" +
+                "┏━━━━━━━━┓\n" +
+                "┃ ⬤  ⬤ ┃\n" +
+                "┃        ┃\n" +
+                "┃ ⬤  ⬤ ┃\n" +
+                "┗━━━━━━━━┛";
 
         // When we set the console to the test console
         macao.setConsole(console);
@@ -317,7 +368,19 @@ public class MacaoTest {
         macao.getMacaoDealer().setCumulativeRoll(8);
 
         // Given the expected string
-        String expected = "DEALERS'S NEW ROLL: 3 | DEALERS'S TOTAL: 8";
+        String expected = "DEALERS'S NEW ROLL\n" +
+                "┏━━━━━━━━┓\n" +
+                "┃     ⬤ ┃\n" +
+                "┃   ⬤   ┃\n" +
+                "┃ ⬤     ┃\n" +
+                "┗━━━━━━━━┛\n" +
+                "THE DEALERS'S TOTAL IS NOW... 8\n" +
+                "HERE'S WHAT THE DEALER ROLLED SO FAR\n" +
+                "┏━━━━━━━━┓\n" +
+                "┃     ⬤ ┃\n" +
+                "┃   ⬤   ┃\n" +
+                "┃ ⬤     ┃\n" +
+                "┗━━━━━━━━┛";
 
         // When we set the console to the test console
         macao.setConsole(console);
@@ -339,7 +402,12 @@ public class MacaoTest {
 
         // Given the console is set to our test console & we expect the initial rolls to print
         macao.setConsole(console);
-        String expected = "YOUR ROLL: 6 | DEALER'S ROLL: 6";
+        String expected = "YOUR ROLL     DEALER'S ROLL\n" +
+                "┏━━━━━━━━┓     ┏━━━━━━━━┓     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┗━━━━━━━━┛     ┗━━━━━━━━┛";
 
         // When the initial game setup method is called & we store the string output in a variable
         macao.initialGameSetup();
@@ -405,7 +473,10 @@ public class MacaoTest {
         macao.setConsole(ioconsole);
 
         // Given the expected string (what we expect for "huh" followed by what we expect for "yes"
-        String expected = "Would you like to roll again?\nI didn't catch that.\n\nWould you like to roll again?\nGreat, here's your die.";
+        String expected = "Would you like to roll again?\n" +
+                "I didn't catch that.\n" +
+                "Would you like to roll again?\n" +
+                "Great, here's your die.";
 
         // When we call the is guest still playing method
         macao.isGuestStillPlaying();
@@ -418,7 +489,7 @@ public class MacaoTest {
     @Test
     public void youWentOverTest() {
         // Given the expected string
-        String expected = "Sorry, you went over. You lose!";
+        String expected = "Oh no! Looks like you went over! You lose.";
 
         // When we set the console to the test console
         macao.setConsole(console);
@@ -501,7 +572,7 @@ public class MacaoTest {
         // Given the dealers cumulative roll is 10, the console is our test console, and we expect 'the dealer went over' to print
         macao.getMacaoDealer().setCumulativeRoll(10);
         macao.setConsole(console);
-        String expected = "The dealer went over. You win!";
+        String expected = "Lucky you! The dealer went over. YOU WIN!";
 
         // When we call the evaluate function & we store the output in a string variable
         macao.evaluate();
@@ -529,7 +600,7 @@ public class MacaoTest {
         macao.setConsole(console);
 
         // Given the expected string output
-        String expected = "Your total is 8 and the dealer's total is 7. You win!";
+        String expected = "Your total is 8 and the dealer's total is 7. You're our winner!";
 
         // When we call the evaluate method
         macao.evaluate();
@@ -559,7 +630,7 @@ public class MacaoTest {
         macao.setConsole(console);
 
         // Given the expected string output
-        String expected = "Your total is 8 and the dealer's total is 9. Sorry, you lose!";
+        String expected = "Your total is 8 and the dealer's total is 9. Better luck next time.";
 
         // When we call the evaluate method
         macao.evaluate();

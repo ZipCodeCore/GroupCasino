@@ -31,13 +31,15 @@ public class Card implements Comparable<Card>{
             top += "\u2501";
             bottom = "\u2501" + bottom;
         }
-        String fullCard = String.format("%s\u2513\n\u2503%s\u2503\n\u2517%s", top, suit.getStringRepresentation(), bottom);
+        String fullCard = String.format("%s\u2501\u2501\u2513\n\u2503   \u2503\n\u2503 %s \u2503\n\u2503   \u2503\n\u2517\u2501\u2501%s",
+                top, suit.getStringRepresentation(), bottom);
         return fullCard;
     }
 
+
     public static String printAllCards(List<Card> cards) {
         StringBuilder allCardsPrinted = new StringBuilder();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             for (Card card : cards) {
                 allCardsPrinted.append(card.splitCard()[i]);
             }

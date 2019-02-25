@@ -15,7 +15,12 @@ public class GoFish extends Game {
     private boolean isOver = false;
     private Console console;
 
+    public boolean isOver() {
+        return isOver;
+    }
+
     public void setIsOver(boolean isOver) { this.isOver = isOver; }
+    public Deck getDeck() { return deck; }
 
     public GoFishPlayer getDealer() {
         return dealer;
@@ -151,18 +156,6 @@ public class GoFish extends Game {
         }
     }
 
-    public void evaluate() {
-        if(dealer.getBookCount() + user.getBookCount() == 13) {
-            isOver = true;
-            if (user.getBookCount() > dealer.getBookCount()) {
-                console.println("You won! Great game.");
-            } else if (user.getBookCount() < dealer.getBookCount()) {
-                console.println("Looks like I beat you this time. Come back anytime!");
-            }
-        }
-    }
-
-
     public void displayStatus() {
         console.print(Card.printAllCards(user.getHand()));
         console.println(String.format("YOU: %d DEALER: %d",
@@ -172,11 +165,22 @@ public class GoFish extends Game {
 
     public boolean playBook() {
         String playbook = console.getStandardInput("Would you like to play a book?");
-        if ("yes".equals(playbook)) {
+        if ("yes".equals(playbook) || "y".equals(playbook)) {
             return true;
         } else {
             console.println("Okay, we'll keep going");
             return false;
+        }
+    }
+
+    public void evaluate() {
+        if(dealer.getBookCount() + user.getBookCount() == 13) {
+            isOver = true;
+            if (user.getBookCount() > dealer.getBookCount()) {
+                console.println("You won! Great game.");
+            } else if (user.getBookCount() < dealer.getBookCount()) {
+                console.println("Looks like I beat you this time. Come back anytime!");
+            }
         }
     }
 
