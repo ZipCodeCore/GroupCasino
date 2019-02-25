@@ -41,12 +41,17 @@ public class MacaoPlayer extends Player {
         diceRolls.add(roll);
     }
 
-    public int[] getDiceArray() {
-        int[] diceArray = new int[diceRolls.size()];
-        for (int i = 0; i < diceArray.length; i++) {
-            diceArray[i] = diceRolls.get(i);
-            }
-        return diceArray;
+//    public int[] getDiceArray() {
+//        int[] diceArray = new int[diceRolls.size()];
+//        for (int i = 0; i < diceArray.length; i++) {
+//            diceArray[i] = diceRolls.get(i);
+//            }
+//        return diceArray;
+//    }
+
+
+    public ArrayList<Integer> getDiceRolls() {
+        return diceRolls;
     }
 
     public void setCumulativeRoll(int roll) {

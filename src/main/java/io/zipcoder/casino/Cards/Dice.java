@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Cards;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,7 +44,13 @@ public class Dice {
 //        return dieRepresentation.toString();
 //    }
 
+
     public static String getDiceString(Integer... diceNumbers) {
+        List<Integer> diceList = new ArrayList<>(Arrays.asList(diceNumbers));
+        return getDiceString(diceList);
+    }
+
+    public static String getDiceString(List<Integer> diceNumbers) {
         StringBuilder allDicePrinted = new StringBuilder();
         for (int i = 0; i < 5; i++) {
             for (int number : diceNumbers) {
@@ -54,7 +61,7 @@ public class Dice {
         return allDicePrinted.toString();
     }
 
-    public static String getDiceStringWithSpace(int... diceNumbers) {
+    public static String getDiceStringWithSpace(Integer... diceNumbers) {
         StringBuilder allDicePrinted = new StringBuilder();
         for (int i = 0; i < 5; i++) {
             for (int number : diceNumbers) {

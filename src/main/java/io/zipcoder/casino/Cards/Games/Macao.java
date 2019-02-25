@@ -126,11 +126,11 @@ public class Macao extends Game {
     }
 
     public void showGuestRoll() {
-        console.println("YOUR NEW ROLL\n%sYOUR TOTAL IS NOW... %s\nHERE'S WHAT YOU ROLLED SO FAR\n%s", Dice.getDiceStringWithSpace(macaoGuest.getRoll()), macaoGuest.getCumulativeRoll(), Dice.getDiceString(macaoGuest.getDiceArray()));
+        console.println("YOUR NEW ROLL\n%sYOUR TOTAL IS NOW... %s\nHERE'S WHAT YOU ROLLED SO FAR\n%s", Dice.getDiceStringWithSpace(macaoGuest.getRoll()), macaoGuest.getCumulativeRoll(), Dice.getDiceString(macaoGuest.getDiceRolls()));
     }
 
     public void showDealerRoll() {
-        console.println("DEALERS'S NEW ROLL\n%sTHE DEALERS'S TOTAL IS NOW... %s\nHERE'S WHAT THE DEALER ROLLED SO FAR\n%s", Dice.getDiceString(macaoDealer.getRoll()), macaoDealer.getCumulativeRoll(), Dice.getDiceString(macaoDealer.getDiceArray()));
+        console.println("DEALERS'S NEW ROLL\n%sTHE DEALERS'S TOTAL IS NOW... %s\nHERE'S WHAT THE DEALER ROLLED SO FAR\n%s", Dice.getDiceString(macaoDealer.getRoll()), macaoDealer.getCumulativeRoll(), Dice.getDiceString(macaoDealer.getDiceRolls()));
     }
 
     public void initialGameSetup() {
@@ -201,9 +201,5 @@ public class Macao extends Game {
         }
     }
 
-    public static void main(String[] args) {
-        Macao macao = new Macao();
-        macao.playGame();
-    }
 
 }
