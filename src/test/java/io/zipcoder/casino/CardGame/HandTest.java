@@ -70,6 +70,6 @@ public class HandTest {
         //THEN
         Assert.assertNotEquals(expected, actual);
     }
-    
+
 
 }

@@ -7,19 +7,18 @@ import io.zipcoder.casino.GamblingGame;
 public class Blackjack extends CardGame implements GamblingGame {
     private double pot;
     private BlackjackPlayer blackjackPlayer;
-    private Deck deck = new Deck(1);
-    private int winner;
+    private Deck deck = new Deck(10);
     private int bet;
-    private int wallet;
     private int playerTotal;
+
+    public Blackjack() {
+
+    }
 
     public void takeBet(double amount) {
         pot += amount;
     }
 
-    public void deal() {
-
-    }
 
     public double payout() {
 
