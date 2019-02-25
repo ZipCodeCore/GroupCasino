@@ -28,8 +28,19 @@ public class BlackJack extends Game {
     private Integer userBet;
     private boolean isOver = false;
 
-    Console blackJackConsole = Console.getConsole();
+    Console blackJackConsole;
 
+    public BlackJack(){
+        this(Console.getConsole());
+    }
+
+    public BlackJack(Console testConsole) {
+        blackJackConsole = testConsole;
+    }
+
+    public Integer getUserBetAsInteger(){
+        return userBet;
+    }
 
     public static void main(String[] args)
     {
@@ -47,7 +58,7 @@ public class BlackJack extends Game {
         return -1;
     }
 
-    private void getUserBet() {
+    public void getUserBet() {
         blackJackConsole.println("Your current balance is " + user.getBalance());
         userBet = blackJackConsole.getIntegerInput("Place a bet if you DARE");
 
