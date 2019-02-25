@@ -32,7 +32,7 @@ public enum Rank {
     private int secondValue;
     private String stringRepresentation;
 
-    private Rank(int value, int secondValue, String stringRepresentation) {
+    Rank(int value, int secondValue, String stringRepresentation) {
         this.value = value;
         this.secondValue = secondValue;
         this.stringRepresentation = stringRepresentation;

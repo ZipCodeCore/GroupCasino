@@ -6,6 +6,7 @@ import io.zipcoder.casino.utilities.Console;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.EnumMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -125,6 +126,7 @@ public class Greeter {
         } else if (game.equals("gofish")) {
             console.println(goFishName);
             return new GoFish();
+            // For testing, makes a macao game that takes in an input stream that runs through it
         } else if (game.equals("testingcheatsenabledtrue")) {
             String input = "yes\nno";
             byte[] inputBytes = input.getBytes();
