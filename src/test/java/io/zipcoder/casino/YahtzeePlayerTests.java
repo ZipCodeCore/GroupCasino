@@ -162,4 +162,14 @@ public class YahtzeePlayerTests {
     }
 
 
+    @Test(expected = YahtzeePlayer.TooManyRollsException.class)
+    public void tooManyRollsExceptionTest() throws YahtzeePlayer.TooManyRollsException{
+        Player player = new Player("Cara", 1000);
+        YahtzeePlayer yahtzeePlayer = new YahtzeePlayer(player);
+        yahtzeePlayer.setRollNumber(3);
+        yahtzeePlayer.rollDice(5);
+    }
+
+
+
 }

@@ -242,6 +242,89 @@ public class GoFishPlayerTest {
 
     @Test
     public void requestCardTest(){
-        
+        // Given
+        Player player = new Player("Cara", 1000);
+        Player otherPlayer = new Player("Neela", 1000);
+        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
+        GoFishPlayer otherGoFishPlayer = new GoFishPlayer(otherPlayer);
+
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(d4);
+        cards.add(hQ);
+        cards.add(s2);
+        cards.add(sJ);
+        cards.add(d10);
+        cards.add(c3);
+        cards.add(h5);
+        cards.add(s7);
+        cards.add(h9);
+
+        goFishPlayer.getHand().addCardsToHand(cards);
+
+        ArrayList<Card> expectedCards = new ArrayList<>();
+        expectedCards.addAll(cards);
+        expectedCards.add(s5);
+        expectedCards.add(c5);
+        expectedCards.add(d5);
+
+        ArrayList<Card> otherPlayersCards = new ArrayList<>();
+        otherPlayersCards.add(s5);
+        otherPlayersCards.add(c5);
+        otherPlayersCards.add(c7);
+        otherPlayersCards.add(d7);
+        otherPlayersCards.add(s8);
+        otherPlayersCards.add(d6);
+        otherPlayersCards.add(c6);
+        otherPlayersCards.add(d5);
+
+        otherGoFishPlayer.getHand().addCardsToHand(otherPlayersCards);
+
+        ArrayList<Card> expectedOtherPlayersCards = new ArrayList<>();
+        expectedOtherPlayersCards.add(c7);
+        expectedOtherPlayersCards.add(d7);
+        expectedOtherPlayersCards.add(s8);
+        expectedOtherPlayersCards.add(d6);
+        expectedOtherPlayersCards.add(c6);
+
+        // When
+        goFishPlayer.requestCard(otherGoFishPlayer, Face.FIVE);
+        ArrayList<Card> actualCards = goFishPlayer.getHand().showMyCards();
+        ArrayList<Card> actualOtherPlayersCards = otherGoFishPlayer.getHand().showMyCards();
+
+        // Then
+        Assert.assertEquals(expectedCards, actualCards);
+        Assert.assertEquals(expectedOtherPlayersCards, actualOtherPlayersCards);
+
+    }
+
+
+    @Test
+    public void isCardsToReturnTest(){
+        // Given
+        Player player = new Player("Cara", 1000);
+        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
+
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(cJ);
+        cards.add(dJ);
+        cards.add(sA);
+        cards.add(c2);
+        cards.add(s10);
+        cards.add(c10);
+        cards.add(d8);
+        cards.add(dQ);
+        cards.add(h6);
+
+        goFishPlayer.getHand().addCardsToHand(cards);
+
+        // When
+        boolean expectedTrue = goFishPlayer.isCardsToReturn(Face.TEN);
+        boolean expectedTrue2 = goFishPlayer.isCardsToReturn(Face.SIX);
+        boolean expectedFalse = goFishPlayer.isCardsToReturn(Face.THREE);
+
+        // Then
+        Assert.assertTrue(expectedTrue);
+        Assert.assertTrue(expectedTrue2);
+        Assert.assertFalse(expectedFalse);
     }
 }
