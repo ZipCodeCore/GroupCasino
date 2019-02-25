@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class Hand {
     private int size;
-    private int handValue;
     private ArrayList<Card> cards = new ArrayList<>();
 
     public Hand(ArrayList<Card> cards) {
@@ -39,6 +38,8 @@ public class Hand {
         }
     }
 
+
+
     public String toString(){
         String cardsInHand = "";
 
@@ -53,6 +54,9 @@ public class Hand {
         return cardsInHand;
     }
 
+    public int getSize() {
+        return cards.size();
+    }
 }
 
 

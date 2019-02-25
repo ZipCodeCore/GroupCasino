@@ -55,6 +55,10 @@ public class Deck {
             }
         }
     }
+
+    public String toString() {
+        return deck.toString();
+    }
 }
 
 
