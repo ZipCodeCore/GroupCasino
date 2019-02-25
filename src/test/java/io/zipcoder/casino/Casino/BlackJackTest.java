@@ -2,6 +2,8 @@ package io.zipcoder.casino.Casino;
 
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Games.BlackJack;
+import io.zipcoder.casino.Players.CardPlayer;
+import io.zipcoder.casino.Players.Profile;
 import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,6 +22,9 @@ public class BlackJackTest {
 
 
     private Console console;
+    private int userTotal;
+    private int dealerTotal;
+    private int userBet;
 
     @Test
     public void dealTwoCardsFirstCardTest() {
@@ -67,6 +72,19 @@ public class BlackJackTest {
         //Then
         Assert.assertTrue(userhand.get(0) !=null);
     }
+
+    @Test
+    public void testTakeUserBet(){
+        //Given
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Console console = getConsoleWithBufferedInputAndOutput("600\n200",baos);
+        BlackJack newBlkJ = new BlackJack(console);
+        //When
+        newBlkJ.getUserBet();
+        //Then
+        Assert.assertTrue(baos.toString().contains("Your broke ass has insufficient funds.."));
+
+    }
     @Test
 
     public void testTakingUserBet() {
@@ -99,6 +117,8 @@ public class BlackJackTest {
 
        return testConsole;
     }
+
+
 
 
 }
