@@ -17,14 +17,13 @@ public class GoFishPlayer {
     private Player player;
 
     // Four of a kind counter
-    private int counter4 =0;
+    private int counter4 = 0;
 
 
     private Deck deck;
 
 
-
-    private ArrayList<Card> cardsToReturn;
+    //private ArrayList<Card> cardsToReturn;
 
     // Constructor
 
@@ -53,37 +52,47 @@ public class GoFishPlayer {
         return name;
     }
 
+    // method return boolean to check whether the opponent has the requested face
+    public boolean isCardsToReturn(Face faceRequested) {
 
-    //A player is requesting  a particular Face of Card from the opponent.
-    //Once the particular face enum is requested, check opponents hand for that face if true return all the cards in opponents hands having the same face to the requesting player's hand.
-    public ArrayList <Card>  requestCard (GoFishPlayer otherPlayer, Face face) {
+        boolean bool = false;
 
-        ArrayList <Card> cardsInHand = otherPlayer.hand.showMyCards();
+        for (Card card : hand.showMyCards()) {
 
-        ArrayList <Card> cardsToRemove = new ArrayList<Card>();
+            if (card.getFace().equals(faceRequested)) {
 
-        //Integer len = cardsInHand.size();
 
-        if (isCardsToReturn(face)){
-
-            for (Card card : cardsInHand){
-
-                if (card.getFace().equals(face)) {
-
-                    cardsToRemove.add(card);
-                }
-
+                bool = true;
             }
         }
 
-
-        return cardsToReturn ;
-
-
+        return bool;
 
     }
 
 
+    //A player is requesting  a particular Face of Card from the opponent.
+    //Once the particular face enum is requested, check opponents hand for that face if true return all the cards in opponents hands having the same face to the requesting player's hand.
+    public void requestCard(GoFishPlayer otherPlayer, Face face) {
+
+        ArrayList<Card> cardsInHand = otherPlayer.hand.showMyCards();
+
+        ArrayList<Card> cardsToRemove = new ArrayList<Card>();
+
+
+        for (Card card : cardsInHand) {
+
+            if (card.getFace().equals(face)) {
+
+                cardsToRemove.add(card);
+            }
+
+        }
+
+        otherPlayer.getHand().removeCardsFromHand(cardsToRemove);
+        hand.addCardsToHand(cardsToRemove);
+
+    }
 
 
     // Provided that a player has a particular face 4 times the player can lay stack of 4 of a kind.
@@ -103,27 +112,8 @@ public class GoFishPlayer {
     }
 
 
-
-    // method return boolean to check whether the opponent has the requested face
-    public boolean isCardsToReturn(Face faceRequested) {
-
-        boolean bool = false;
-
-        //hand.showMyCards();
-
-        for (Card card : hand.showMyCards()){
-
-            card.getFace().equals(faceRequested);
-
-            bool = true;
-        }
-
-        return bool;
-
-    }
-
     public Integer[] getCardCountInHand() {
-        Integer[] counter = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+        Integer[] counter = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 
         for (Card card : hand.showMyCards()) {
@@ -189,7 +179,7 @@ public class GoFishPlayer {
         return counter;
     }
 
-    public void fourOfAKindFinder(){
+    public void fourOfAKindFinder() {
 
         Integer[] cardCounter = getCardCountInHand();
 
@@ -237,8 +227,6 @@ public class GoFishPlayer {
             }
         }
     }
-
-
 
 
     // The show method shows the hand of a particular player/dealer
