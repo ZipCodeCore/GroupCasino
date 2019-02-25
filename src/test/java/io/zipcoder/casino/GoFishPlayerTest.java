@@ -107,7 +107,8 @@ public class GoFishPlayerTest {
         expected.add(dK);
 
         // When
-        ArrayList<Card> actual = goFishPlayer.addCardsToHands(cardsToAdd);
+        goFishPlayer.getHand().addCardsToHand(cardsToAdd);
+        ArrayList<Card> actual = goFishPlayer.getHand().showMyCards();
 
         // Then
         Assert.assertEquals(expected, actual);
@@ -134,7 +135,7 @@ public class GoFishPlayerTest {
         cards.add(sQ);
         cards.add(hQ);
 
-        goFishPlayer.addCardsToHands(cards);
+        goFishPlayer.getHand().addCardsToHand(cards);
 
         Integer[] expected = {2, 0, 1, 4, 0, 1, 0, 2, 0, 0, 0, 2, 0};
 
