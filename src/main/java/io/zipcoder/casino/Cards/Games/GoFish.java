@@ -184,7 +184,7 @@ public class GoFish extends Game {
             console.println("Nope! Go Fish!");
             Card card = deck.drawCard();
             player.addToHand(card);
-            if(card.toString().toLowerCase().contains(player.parseCardString(askedFor))) {
+            if(card.getRank().equals(GoFishPlayer.parseCardString(askedFor))) {
                 console.println("Fish, Fish, you got your wish!");
             }
             console.println(String.format("YOU DREW:\n%s", card.printCard()));

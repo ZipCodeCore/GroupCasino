@@ -104,6 +104,7 @@ public class GoFishTest {
 
         // Then
         int expectedNumberOfDealerCards = 3;
+        System.out.print(outputStream.toString());
         Assert.assertTrue(actual.contains("I'll take these:"));
         Assert.assertEquals(expectedNumberOfDealerCards, goFish.getDealer().getHandSize());
     }
@@ -380,6 +381,7 @@ public class GoFishTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
         GoFish testGoFish = new GoFish(console);
+        System.out.print(outputStream.toString());
         testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
         testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
         testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
