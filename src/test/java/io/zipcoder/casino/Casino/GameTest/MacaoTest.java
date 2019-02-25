@@ -1,5 +1,7 @@
 package io.zipcoder.casino.Casino.GameTest;
 
+import io.zipcoder.casino.Cards.Dice;
+import io.zipcoder.casino.Cards.Games.LoadedDice;
 import io.zipcoder.casino.Cards.Games.Macao;
 import org.junit.Assert;
 import org.junit.Test;
@@ -130,6 +132,106 @@ public class MacaoTest {
     }
 
     @Test
+    public void playGameTest1() {
+        // Given the macao dice are set to our loaded dice
+        Dice dice = new LoadedDice();
+        macao.setDice(dice);
+
+        // Given the user says "yes" they'd like to play and "yes" they'd like to roll again
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("yes\nyes".getBytes());
+        Console ioconsole = new Console(new Scanner(inputStream), new PrintStream(outputStream));
+        macao.setConsole(ioconsole);
+
+        // Given the expected string
+        String expected = "Rules:\n" +
+                "The object of this game is to roll the die enough times to reach a total of 9 without going over.\n" +
+                "Good luck!\n" +
+                "\n" +
+                "Are you ready to begin?\n" +
+                "YOUR ROLL     DEALER'S ROLL\n" +
+                "┏━━━━━━━━┓     ┏━━━━━━━━┓     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┗━━━━━━━━┛     ┗━━━━━━━━┛     \n" +
+                "\n" +
+                "Would you like to roll again?\n" +
+                "Great, here's your die.\n" +
+                "YOUR NEW ROLL\n" +
+                "┏━━━━━━━━┓     \n" +
+                "┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     \n" +
+                "┗━━━━━━━━┛     \n" +
+                "YOUR TOTAL IS NOW... 12\n" +
+                "HERE'S WHAT YOU ROLLED SO FAR\n" +
+                "┏━━━━━━━━┓┏━━━━━━━━┓\n" +
+                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┗━━━━━━━━┛┗━━━━━━━━┛\n" +
+                "\n" +
+                "Oh no! Looks like you went over! You lose.";
+
+        // When we call the play game method and store the output in a variable
+        macao.playGame();
+        String actual = outputStream.toString().trim();
+
+        // Then we expect the given and retrieved strings to match
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void playGameTest2() {
+        // Given the macao dice are set to our loaded dice
+        Dice dice = new LoadedDice();
+        macao.setDice(dice);
+
+        // Given the user says "yes" they'd like to play and "no" they wouldn't like to roll again
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("yes\nno".getBytes());
+        Console ioconsole = new Console(new Scanner(inputStream), new PrintStream(outputStream));
+        macao.setConsole(ioconsole);
+
+        // Given the expected string
+        String expected = "Rules:\n" +
+                "The object of this game is to roll the die enough times to reach a total of 9 without going over.\n" +
+                "Good luck!\n" +
+                "\n" +
+                "Are you ready to begin?\n" +
+                "YOUR ROLL     DEALER'S ROLL\n" +
+                "┏━━━━━━━━┓     ┏━━━━━━━━┓     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┗━━━━━━━━┛     ┗━━━━━━━━┛     \n" +
+                "\n" +
+                "Would you like to roll again?\n" +
+                "Bold tactic.\n" +
+                "DEALERS'S NEW ROLL\n" +
+                "┏━━━━━━━━┓\n" +
+                "┃ ⬤  ⬤ ┃\n" +
+                "┃ ⬤  ⬤ ┃\n" +
+                "┃ ⬤  ⬤ ┃\n" +
+                "┗━━━━━━━━┛\n" +
+                "THE DEALERS'S TOTAL IS NOW... 12\n" +
+                "HERE'S WHAT THE DEALER ROLLED SO FAR\n" +
+                "┏━━━━━━━━┓┏━━━━━━━━┓\n" +
+                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┗━━━━━━━━┛┗━━━━━━━━┛\n" +
+                "\n" +
+                "Lucky you! The dealer went over. YOU WIN!";
+
+        // When we call the play game method and store the output in a variable
+        macao.playGame();
+        String actual = outputStream.toString().trim();
+
+        // Then we expect the given and retrieved strings to match
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void printGameInstructionsTest() {
         // Given the expected string
         String expected = "Rules:\nThe object of this game is to roll the die enough times to reach a total of 9 without going over.\nGood luck!";
@@ -149,9 +251,7 @@ public class MacaoTest {
     @Test
     public void beginGameTest1() {
         // Given user input = 'y' and the console is set to our console
-        String userInput = "y";
-        byte[] inputBytes = userInput.getBytes();
-        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream("y".getBytes());
         Console ioconsole = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
         macao.setConsole(ioconsole);
 
@@ -162,26 +262,45 @@ public class MacaoTest {
         Assert.assertTrue(retrieved);
     }
 
-//    @Test
-//    public void beginGameTest2() {
-//        // Given user input = 'x' and the console is set to our console
-//        String userInput = "x";
-//        byte[] inputBytes = userInput.getBytes();
-//        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
-//        Console ioconsole = new Console(new Scanner(inputByteArray), System.out);
-//        macao.setConsole(ioconsole);
-//
-//        // Given the expected string output
-//        String expected = "Try again.";
-//
-//        // When begin game is called & the output stored in a variable
-//        boolean retrieved = macao.beginGame();
-//        String actual = outputStream.toString();
-//
-//        // Then the retrieved boolean should be false (i.e. the game should not start) & the given string should match the actual string
-//        Assert.assertFalse(retrieved);
-//        Assert.assertEquals(expected, actual);
-//    }
+    @Test
+    public void beginGameTest2() {
+        // Given user input = 'x' and the console is set to our console
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream("x\nyes".getBytes());
+        Console ioconsole = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        macao.setConsole(ioconsole);
+
+        // Given the expected string output
+        String expected = "Are you ready to begin?\n" +
+                "Hm, I expected something different. Are you ready to begin?";
+
+        // When begin game is called & the output stored in a variable
+        boolean retrieved = macao.beginGame();
+        String actual = outputStream.toString().trim();
+
+        // Then the retrieved boolean should be true (since the second input is 'yes') & the given string should match the actual string
+        Assert.assertTrue(retrieved);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void rollDieTest() {
+        // Given players initial dice roll
+        macao.getMacaoGuest().setRoll(4);
+
+        // Given we set the macao dice to our loaded dice; given an expected roll of 6
+        Dice dice = new LoadedDice();
+        macao.setDice(dice);
+        int expected = 6;
+
+        // When the roll die method is called
+        macao.rollDie(macao.getMacaoGuest());
+
+        // When we retrieve the current roll from the player
+        int actual = macao.getMacaoGuest().getRoll();
+
+        // Then we expect the new roll to equal the expected
+        Assert.assertEquals(expected, actual);
+    }
 
     @Test
     public void showInitialRollsTest() {
@@ -190,7 +309,12 @@ public class MacaoTest {
         macao.getMacaoDealer().setRoll(4);
 
         // Given the expected string
-        String expected = "YOUR ROLL: 3 | DEALER'S ROLL: 4";
+        String expected = "YOUR ROLL     DEALER'S ROLL\n" +
+                "┏━━━━━━━━┓     ┏━━━━━━━━┓     \n" +
+                "┃     ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃   ⬤   ┃     ┃        ┃     \n" +
+                "┃ ⬤     ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┗━━━━━━━━┛     ┗━━━━━━━━┛";
 
         // When we set the console to the test console
         macao.setConsole(console);
@@ -205,9 +329,167 @@ public class MacaoTest {
     }
 
     @Test
+    public void showGuestRollTest() {
+        // Given we set the guest's current roll to 4 and cumulative roll to 5
+        macao.getMacaoGuest().setRoll(4);
+        macao.getMacaoGuest().setCumulativeRoll(10);
+
+        // Given the expected string
+        String expected = "YOUR NEW ROLL\n" +
+                "┏━━━━━━━━┓     \n" +
+                "┃ ⬤  ⬤ ┃     \n" +
+                "┃        ┃     \n" +
+                "┃ ⬤  ⬤ ┃     \n" +
+                "┗━━━━━━━━┛     \n" +
+                "YOUR TOTAL IS NOW... 10\n" +
+                "HERE'S WHAT YOU ROLLED SO FAR\n" +
+                "┏━━━━━━━━┓\n" +
+                "┃ ⬤  ⬤ ┃\n" +
+                "┃        ┃\n" +
+                "┃ ⬤  ⬤ ┃\n" +
+                "┗━━━━━━━━┛";
+
+        // When we set the console to the test console
+        macao.setConsole(console);
+
+        // When we print out the initial rolls and store the string output in a variable
+        macao.showGuestRoll();
+        String actual = outputStream.toString();
+        actual = actual.trim();
+
+        // Then we expect the given and the retrieved data to match
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void showDealerRollTest() {
+        // Given we set the dealer's current roll to 3 and cumulative roll to 8
+        macao.getMacaoDealer().setRoll(3);
+        macao.getMacaoDealer().setCumulativeRoll(8);
+
+        // Given the expected string
+        String expected = "DEALERS'S NEW ROLL\n" +
+                "┏━━━━━━━━┓\n" +
+                "┃     ⬤ ┃\n" +
+                "┃   ⬤   ┃\n" +
+                "┃ ⬤     ┃\n" +
+                "┗━━━━━━━━┛\n" +
+                "THE DEALERS'S TOTAL IS NOW... 8\n" +
+                "HERE'S WHAT THE DEALER ROLLED SO FAR\n" +
+                "┏━━━━━━━━┓\n" +
+                "┃     ⬤ ┃\n" +
+                "┃   ⬤   ┃\n" +
+                "┃ ⬤     ┃\n" +
+                "┗━━━━━━━━┛";
+
+        // When we set the console to the test console
+        macao.setConsole(console);
+
+        // When we print out the initial rolls and store the string output in a variable
+        macao.showDealerRoll();
+        String actual = outputStream.toString();
+        actual = actual.trim();
+
+        // Then we expect the given and the retrieved data to match
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void initialGameSetupTest() {
+        // Given a set of loaded die are set to our macao die
+        Dice dice = new LoadedDice();
+        macao.setDice(dice);
+
+        // Given the console is set to our test console & we expect the initial rolls to print
+        macao.setConsole(console);
+        String expected = "YOUR ROLL     DEALER'S ROLL\n" +
+                "┏━━━━━━━━┓     ┏━━━━━━━━┓     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┗━━━━━━━━┛     ┗━━━━━━━━┛";
+
+        // When the initial game setup method is called & we store the string output in a variable
+        macao.initialGameSetup();
+        String actual = outputStream.toString().trim();
+
+        // Then we expect the given and retrieved strings to match
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void isGuestStillPlayingTest1() {
+        // Given the guests cumulative roll is set to 9
+        macao.getMacaoGuest().setCumulativeRoll(9);
+
+        // When the is guest still playing method is called and the outcome stored in a variable
+        boolean retrieved = macao.isGuestStillPlaying();
+
+        // Then we expect it to return false because the guest would no longer be playing with a total of 9
+        Assert.assertFalse(retrieved);
+    }
+
+    @Test
+    public void isGuestStillPlayingTest2() {
+        // Given the guest says they do want to roll again & the console is set to our test console
+        ByteArrayInputStream inputBytes = new ByteArrayInputStream("yes".getBytes());
+        Console ioconsole = new Console(new Scanner(inputBytes), new PrintStream(outputStream));
+        macao.setConsole(ioconsole);
+
+        // Given the expected string
+        String expected = "Would you like to roll again?\nGreat, here's your die.";
+
+        // When we call the is guest still playing method
+        macao.isGuestStillPlaying();
+        String actual = outputStream.toString().trim();
+
+        // Then we expect the strings to match
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void isGuestStillPlayingTest3() {
+        // Given the guest says they don't want to roll again & the console is set to our test console
+        ByteArrayInputStream inputBytes = new ByteArrayInputStream("no".getBytes());
+        Console ioconsole = new Console(new Scanner(inputBytes), new PrintStream(outputStream));
+        macao.setConsole(ioconsole);
+
+        // Given the expected string
+        String expected = "Would you like to roll again?\nBold tactic.";
+
+        // When we call the is guest still playing method
+        macao.isGuestStillPlaying();
+        String actual = outputStream.toString().trim();
+
+        // Then we expect the strings to match
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void isGuestStillPlayingTest4() {
+        // Given the guest enters something other than yes or no & the console is set to our test console
+        ByteArrayInputStream inputBytes = new ByteArrayInputStream("huh\nyes".getBytes());
+        Console ioconsole = new Console(new Scanner(inputBytes), new PrintStream(outputStream));
+        macao.setConsole(ioconsole);
+
+        // Given the expected string (what we expect for "huh" followed by what we expect for "yes"
+        String expected = "Would you like to roll again?\n" +
+                "I didn't catch that.\n" +
+                "Would you like to roll again?\n" +
+                "Great, here's your die.";
+
+        // When we call the is guest still playing method
+        macao.isGuestStillPlaying();
+        String actual = outputStream.toString().trim();
+
+        // Then we expect the strings to match
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void youWentOverTest() {
         // Given the expected string
-        String expected = "Sorry, you went over. You lose!";
+        String expected = "Oh no! Looks like you went over! You lose.";
 
         // When we set the console to the test console
         macao.setConsole(console);
@@ -290,7 +572,7 @@ public class MacaoTest {
         // Given the dealers cumulative roll is 10, the console is our test console, and we expect 'the dealer went over' to print
         macao.getMacaoDealer().setCumulativeRoll(10);
         macao.setConsole(console);
-        String expected = "The dealer went over. You win!";
+        String expected = "Lucky you! The dealer went over. YOU WIN!";
 
         // When we call the evaluate function & we store the output in a string variable
         macao.evaluate();
@@ -318,7 +600,7 @@ public class MacaoTest {
         macao.setConsole(console);
 
         // Given the expected string output
-        String expected = "Your total is 8 and the dealer's total is 7. You win!";
+        String expected = "Your total is 8 and the dealer's total is 7. You're our winner!";
 
         // When we call the evaluate method
         macao.evaluate();
@@ -348,7 +630,7 @@ public class MacaoTest {
         macao.setConsole(console);
 
         // Given the expected string output
-        String expected = "Your total is 8 and the dealer's total is 9. Sorry, you lose!";
+        String expected = "Your total is 8 and the dealer's total is 9. Better luck next time.";
 
         // When we call the evaluate method
         macao.evaluate();
