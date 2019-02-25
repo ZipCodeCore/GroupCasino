@@ -132,7 +132,7 @@ public class GoFish extends CardGame {
 
                 console.println(goFishPlayer.getHand().toString());
                 // console.println("Please enter the face of the card you want to request");
-                console.getStringInput("Please enter the face of the card you want to request", faceRequested);
+                faceRequested = console.getStringInput("Please enter the face of the card you want to request");
                 face1 = Face.valueOf(faceRequested);
 
                 boolean bool1 = dealer.isCardsToReturn(face1);
