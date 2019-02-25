@@ -419,4 +419,133 @@ public class GoFishTest {
         String actual = outputStream.toString();
         Assert.assertTrue(actual.contains("There are no more cards in the deck"));
     }
+
+    @Test
+    public void testDisplayStatus() {
+        // Given
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(System.in, new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.ACE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.THREE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.THREE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.THREE));
+        testGoFish.getUser().addToHand(new Card(Suit.HEARTS, Rank.THREE));
+
+        // When
+        testGoFish.displayStatus();
+
+        //Then
+        String expected = "3━━━┓3━━━┓3━━━┓3━━━┓A━━━┓A━━━┓A━━━┓A━━━┓\n" +
+                "┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃\n" +
+                "┃ ♡ ┃┃ ♡ ┃┃ ♡ ┃┃ ♡ ┃┃ ♡ ┃┃ ♡ ┃┃ ♡ ┃┃ ♡ ┃\n" +
+                "┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃\n" +
+                "┗━━━3┗━━━3┗━━━3┗━━━3┗━━━A┗━━━A┗━━━A┗━━━A\n" +
+                "YOU: 0 DEALER: 0\n";
+        String actual = outputStream.toString();
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testEvaluate() {
+        // Given
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(System.in, new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+
+
+        // When
+        testGoFish.evaluate();
+
+        //Then
+
+        Assert.assertFalse(testGoFish.isOver());
+
+    }
+
+    @Test
+    public void testEvaluate2() {
+        // Given
+        String input = "no";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+        testGoFish.getDealer().addToHand(testGoFish.getDeck().drawMultipleCards(52));
+        testGoFish.playBooks();
+
+
+        // When
+        testGoFish.evaluate();
+
+        //Then
+        String actual = outputStream.toString();
+        String expected = "Alright, I'm going to play these:\n" +
+                "K━━━┓K━━━┓K━━━┓K━━━┓Q━━━┓Q━━━┓Q━━━┓Q━━━┓J━━━┓J━━━┓J━━━┓J━━━┓10━━┓10━━┓10━━┓10━━┓9━━━┓9━━━┓9━━━┓9━━━┓8━━━┓8━━━┓8━━━┓8━━━┓7━━━┓7━━━┓7━━━┓7━━━┓6━━━┓6━━━┓6━━━┓6━━━┓5━━━┓5━━━┓5━━━┓5━━━┓4━━━┓4━━━┓4━━━┓4━━━┓3━━━┓3━━━┓3━━━┓3━━━┓2━━━┓2━━━┓2━━━┓2━━━┓A━━━┓A━━━┓A━━━┓A━━━┓\n" +
+                "┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃\n" +
+                "┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃┃ ♧ ┃┃ ♢ ┃┃ ♡ ┃┃ ♤ ┃\n" +
+                "┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃┃   ┃\n" +
+                "┗━━━K┗━━━K┗━━━K┗━━━K┗━━━Q┗━━━Q┗━━━Q┗━━━Q┗━━━J┗━━━J┗━━━J┗━━━J┗━━10┗━━10┗━━10┗━━10┗━━━9┗━━━9┗━━━9┗━━━9┗━━━8┗━━━8┗━━━8┗━━━8┗━━━7┗━━━7┗━━━7┗━━━7┗━━━6┗━━━6┗━━━6┗━━━6┗━━━5┗━━━5┗━━━5┗━━━5┗━━━4┗━━━4┗━━━4┗━━━4┗━━━3┗━━━3┗━━━3┗━━━3┗━━━2┗━━━2┗━━━2┗━━━2┗━━━A┗━━━A┗━━━A┗━━━A\n" +
+                "\n" +
+                "Looks like I beat you this time. Come back anytime!\n";
+        Assert.assertTrue(testGoFish.isOver());
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testEvaluate3() {
+        // Given
+        String input = "yes\nace\nyes\ntwo\nyes\nthree\nyes\nfour\nyes\nfive\nyes\nsix\nyes\nseven\nyes\neight\nyes\nnine\nyes\n10\nyes\njs\nyes\nqueen\nyes\nkings";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        GoFish testGoFish = new GoFish(console);
+        testGoFish.getUser().addToHand(testGoFish.getDeck().drawMultipleCards(52));
+        testGoFish.bookTurn();
+        System.out.print(Card.printAllCards(testGoFish.getUser().getHand()));
+        System.out.print(outputStream.toString());
+
+        // When
+        testGoFish.evaluate();
+
+        //Then
+        String actual = outputStream.toString();
+        String expected = "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "Would you like to play a book?\n" +
+                "What type of card do you want to play? (Ace, two, three, king, etc)\n" +
+                "You won! Great game.\n";
+        Assert.assertTrue(testGoFish.isOver());
+        Assert.assertEquals(expected, actual);
+
+    }
 }

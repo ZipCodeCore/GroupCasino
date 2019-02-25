@@ -162,26 +162,26 @@ public class MacaoTest {
         Assert.assertTrue(retrieved);
     }
 
-    @Test
-    public void beginGameTest2() {
-        // Given user input = 'x' and the console is set to our console
-        String userInput = "x";
-        byte[] inputBytes = userInput.getBytes();
-        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
-        Console ioconsole = new Console(new Scanner(inputByteArray), System.out);
-        macao.setConsole(ioconsole);
-
-        // Given the expected string output
-        String expected = "Try again.";
-
-        // When begin game is called & the output stored in a variable
-        boolean retrieved = macao.beginGame();
-        String actual = outputStream.toString();
-
-        // Then the retrieved boolean should be false (i.e. the game should not start) & the given string should match the actual string
-        Assert.assertFalse(retrieved);
-        Assert.assertEquals(expected, actual);
-    }
+//    @Test
+//    public void beginGameTest2() {
+//        // Given user input = 'x' and the console is set to our console
+//        String userInput = "x";
+//        byte[] inputBytes = userInput.getBytes();
+//        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+//        Console ioconsole = new Console(new Scanner(inputByteArray), System.out);
+//        macao.setConsole(ioconsole);
+//
+//        // Given the expected string output
+//        String expected = "Try again.";
+//
+//        // When begin game is called & the output stored in a variable
+//        boolean retrieved = macao.beginGame();
+//        String actual = outputStream.toString();
+//
+//        // Then the retrieved boolean should be false (i.e. the game should not start) & the given string should match the actual string
+//        Assert.assertFalse(retrieved);
+//        Assert.assertEquals(expected, actual);
+//    }
 
     @Test
     public void showInitialRollsTest() {

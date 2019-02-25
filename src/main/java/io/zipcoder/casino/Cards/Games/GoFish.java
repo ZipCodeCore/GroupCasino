@@ -15,6 +15,10 @@ public class GoFish extends Game {
     private boolean isOver = false;
     private Console console;
 
+    public boolean isOver() {
+        return isOver;
+    }
+
     public void setIsOver(boolean isOver) { this.isOver = isOver; }
     public Deck getDeck() { return deck; }
 
@@ -161,7 +165,7 @@ public class GoFish extends Game {
 
     public boolean playBook() {
         String playbook = console.getStandardInput("Would you like to play a book?");
-        if ("yes".equals(playbook)) {
+        if ("yes".equals(playbook) || "y".equals(playbook)) {
             return true;
         } else {
             console.println("Okay, we'll keep going");
