@@ -25,11 +25,11 @@ public class Hand {
     }
 
     public void addCardsToHand(ArrayList<Card> cards) {
-        cards.addAll(cards);
+        this.cards.addAll(cards);
     }
 
     public void removeCardsFromHand(ArrayList<Card> cards) {
-       cards.removeAll(cards);
+       this.cards.removeAll(cards);
 
 
     }
@@ -41,7 +41,7 @@ public class Hand {
 
         for (Card c: cards) {
 
-            cardsInHand += "| " + c.getCardFaceValue() + c.getCardSuitValue() + " |\t";
+            cardsInHand += "| " + c.getCardFaceValue() + " " + c.getCardSuitValue() + " |\t";
 
         }
 
