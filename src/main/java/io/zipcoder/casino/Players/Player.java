@@ -10,4 +10,8 @@ public abstract class Player {
     public Player() {
         profile = new Profile();
     }
+
+    public Profile getProfile() {
+        return this.profile;
+    }
 }
