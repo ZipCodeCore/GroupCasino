@@ -1,26 +1,40 @@
 package io.zipcoder.casino.CardGame.BlackJack;
 
+import io.zipcoder.casino.CardGame.Cards.Card;
+import io.zipcoder.casino.CardGame.Cards.Deck;
 import io.zipcoder.casino.CardGame.Hand;
 import io.zipcoder.casino.GamblingPlayer;
 import io.zipcoder.casino.Player;
 
+import java.util.ArrayList;
+
 public class BlackjackPlayer implements GamblingPlayer {
-    private String name;
-    private double wallet;
     private Hand hand;
     private Player player;
+    private double wallet;
 
     public BlackjackPlayer(Player player) {
+        this.player = player;
+        this.wallet = player.getWallet();
+
+    }
+
+    public double getBlackjackPlayerWallet() {
+        return this.wallet;
+
     }
 
     public void bet(double amount) {
+        this.wallet -= amount;
 
     }
 
     public void collect(double amount) {
+        this.wallet += amount;
     }
 
-    public void hit() {
+    public void hit(Deck deck) {
+        this.hand.drawCard(deck);
     }
 
     public void stand() {
@@ -37,11 +51,14 @@ public class BlackjackPlayer implements GamblingPlayer {
     }
 
     public Hand getHand() {
-        return hand;
+        return this.hand;
     }
 
-    public void setHand(Hand hand) {
-        this.hand = hand;
+    public void setHand(ArrayList<Card> cards) {
+        this.hand = new Hand(cards);
     }
 
+    public int numberOfCardsInHand() {
+        return this.hand.getSize();
+    }
 }
