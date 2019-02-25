@@ -4,6 +4,7 @@ import io.zipcoder.casino.CardGame.Cards.Card;
 import io.zipcoder.casino.CardGame.Cards.Deck;
 import io.zipcoder.casino.CardGame.Cards.Face;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.utilities.Console;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class GoFishPlayer {
     private Player player;
 
     // Four of a kind counter
-    private int counter4;
+    private int counter4 =0;
 
 
     private Deck deck;
@@ -34,6 +35,10 @@ public class GoFishPlayer {
         this.hand = new Hand(new ArrayList<Card>());
 
 
+    }
+
+    public int getCounter4() {
+        return counter4;
     }
 
     public Hand getHand() {
@@ -244,15 +249,19 @@ public class GoFishPlayer {
 
     // Kyle is working on re-writing the ToString method to print
 
-    public void showHand() {
-
-        hand.showMyCards(); //showMyCards method needs to be defined in the Hand Class.
-
-
-
-
-
-    }
+//    public void showHand() {
+//
+//        hand.showMyCards(); //showMyCards method needs to be defined in the Hand Class.
+//
+//        Console console = Console.getInstance();
+//
+//       console.print(hand.toString());
+//
+//
+//
+//
+//
+//    }
 
 
 }

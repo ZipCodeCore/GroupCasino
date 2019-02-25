@@ -1,5 +1,6 @@
 package io.zipcoder.casino.CardGame;
 
+import io.zipcoder.casino.CardGame.Cards.Deck;
 import io.zipcoder.casino.Player;
 
 public class GoFish extends CardGame {
@@ -7,6 +8,8 @@ public class GoFish extends CardGame {
     private GoFishPlayer dealer;
     private int playersFourOfAKind;
     private int dealersFourOfAKind;
+
+    private Deck deck;
 
 //    // Player's hand
 //    public Hand playersHand;
@@ -20,6 +23,8 @@ public class GoFish extends CardGame {
         this.goFishPlayer = new GoFishPlayer(player);
 
         this.dealer = new GoFishPlayer( new Player("dealer", 0.0));
+
+        this.deck = new Deck(1);
 
 
     }
@@ -91,8 +96,22 @@ public class GoFish extends CardGame {
 
     public void play () {
 
-        GoFishPlayer goFishPlayer;
-        GoFishPlayer dealer;
+       // GoFishPlayer goFishPlayer;
+        //GoFishPlayer dealer;
+
+        while (!((goFishPlayer.hand.getSize() ==0 || dealer.hand.getSize()==0) && deck.deckSize() ==0)) { // the getter size method is included in the Hand class
+
+            deck.deal(7);
+
+
+
+
+        }
+
+
+
+
+
 
 
     }
