@@ -28,7 +28,7 @@ public class Deck {
 
     public Deck() {
 
-        playDeck = new Stack<Card>();
+        playDeck = new Stack<>();
         playDeck.addAll(COMPLETE_DECK);
         Collections.shuffle(playDeck);
 
@@ -45,7 +45,9 @@ public class Deck {
     public Card drawCard() {
         return playDeck.pop();
     }
-
     public int cardsLeft() { return playDeck.size(); }
 
+    public Stack<Card> getPlayDeck() {
+        return playDeck;
+    }
 }

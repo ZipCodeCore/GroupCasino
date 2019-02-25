@@ -89,7 +89,7 @@ public class GoFishPlayer extends Player {
         return nextFour;
     }
 
-    private String parseCardString(String checkCard) {
+    public String parseCardString(String checkCard) {
         switch (checkCard.toLowerCase()) {
             case "king" :
             case "kings":
