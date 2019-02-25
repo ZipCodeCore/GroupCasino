@@ -1,5 +1,7 @@
 package io.zipcoder.casino.Cards;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Card implements Comparable<Card>{
@@ -36,12 +38,20 @@ public class Card implements Comparable<Card>{
         return fullCard;
     }
 
+    public static String printAllCards(Card... cards) {
+        return printAllCards(new ArrayList<>(Arrays.asList(cards)));
+    }
+
 
     public static String printAllCards(List<Card> cards) {
         StringBuilder allCardsPrinted = new StringBuilder();
         for (int i = 0; i < 5; i++) {
             for (Card card : cards) {
-                allCardsPrinted.append(card.splitCard()[i]);
+                if(card.getSuit() != null) {
+                    allCardsPrinted.append(card.splitCard()[i]);
+                } else {
+                    allCardsPrinted.append(printCardBack()[i]);
+                }
             }
             allCardsPrinted.append("\n");
         }
@@ -49,6 +59,11 @@ public class Card implements Comparable<Card>{
     }
     private String[] splitCard() {
         return printCard().split("\n");
+    }
+
+    private static String[] printCardBack() {
+        return new String[]{"\u250F\u2501\u2501\u2501\u2513", "\u2503 \u0220 \u2503", "\u2503 \u0244 \u2503",
+        "\u2503 \u0297 \u2503", "\u2517\u2501\u2501\u2501\u251B"};
     }
 
 

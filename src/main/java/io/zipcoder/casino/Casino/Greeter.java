@@ -12,17 +12,16 @@ import java.util.Scanner;
 public class Greeter {
     private Console console;
     private static final String casinoName =
-                    "   __  __            __           ______                       __                     \n" +
-                    "  /  |/  |         _/  |         /      \\                     /  |                    \n" +
-                    " _$$ |$$ |_       / $$ |        /$$$$$$  |  ______    _______ $$/  _______    ______  \n" +
-                    "/ $$  $$   |      $$$$ |        $$ |  $$/  /      \\  /       |/  |/       \\  /      \\ \n" +
-                    "$$$$$$$$$$/         $$ |        $$ |       $$$$$$  |/$$$$$$$/ $$ |$$$$$$$  |/$$$$$$  |\n" +
-                    "/ $$  $$   |        $$ |        $$ |   __  /    $$ |$$      \\ $$ |$$ |  $$ |$$ |  $$ |\n" +
-                    "$$$$$$$$$$/        _$$ |_       $$ \\__/  |/$$$$$$$ | $$$$$$  |$$ |$$ |  $$ |$$ \\__$$ |\n" +
-                    "  $$ |$$ |        / $$   |      $$    $$/ $$    $$ |/     $$/ $$ |$$ |  $$ |$$    $$/ \n" +
-                    "  $$/ $$/         $$$$$$/        $$$$$$/   $$$$$$$/ $$$$$$$/  $$/ $$/   $$/  $$$$$$/  \n" +
-                    "                                                                                      \n" +
-                    "                                                                                      ";
+            " __    __                                                         __    __                           ______                    __                   \n" +
+            "/  \\  /  |                                                       /  |  /  |                         /      \\                  /  |                  \n" +
+            "$$  \\ $$ |__    __ _____  ____   ______   ______   ______        $$ |  $$ |_______   ______        /$$$$$$  | ______   _______$$/ _______   ______  \n" +
+            "$$$  \\$$ /  |  /  /     \\/    \\ /      \\ /      \\ /      \\       $$ |  $$ /       \\ /      \\       $$ |  $$/ /      \\ /       /  /       \\ /      \\ \n" +
+            "$$$$  $$ $$ |  $$ $$$$$$ $$$$  /$$$$$$  /$$$$$$  /$$$$$$  |      $$ |  $$ $$$$$$$  /$$$$$$  |      $$ |      $$$$$$  /$$$$$$$/$$ $$$$$$$  /$$$$$$  |\n" +
+            "$$ $$ $$ $$ |  $$ $$ | $$ | $$ $$    $$ $$ |  $$/$$ |  $$ |      $$ |  $$ $$ |  $$ $$ |  $$ |      $$ |   __ /    $$ $$      \\$$ $$ |  $$ $$ |  $$ |\n" +
+            "$$ |$$$$ $$ \\__$$ $$ | $$ | $$ $$$$$$$$/$$ |     $$ \\__$$ |      $$ \\__$$ $$ |  $$ $$ \\__$$ |      $$ \\__/  /$$$$$$$ |$$$$$$  $$ $$ |  $$ $$ \\__$$ |\n" +
+            "$$ | $$$ $$    $$/$$ | $$ | $$ $$       $$ |     $$    $$/       $$    $$/$$ |  $$ $$    $$/       $$    $$/$$    $$ /     $$/$$ $$ |  $$ $$    $$/ \n" +
+            "$$/   $$/ $$$$$$/ $$/  $$/  $$/ $$$$$$$/$$/       $$$$$$/         $$$$$$/ $$/   $$/ $$$$$$/         $$$$$$/  $$$$$$$/$$$$$$$/ $$/$$/   $$/ $$$$$$/  \n" +
+            "                                                                                                                                                    ";
     private static final String blackJackName =
                     "██████╗ ██╗      █████╗  ██████╗██╗  ██╗     ██╗ █████╗  ██████╗██╗  ██╗\n" +
                     "██╔══██╗██║     ██╔══██╗██╔════╝██║ ██╔╝     ██║██╔══██╗██╔════╝██║ ██╔╝\n" +
@@ -82,7 +81,7 @@ public class Greeter {
             return parseIsGambling(isGambling);
         } else {
             console.print("No problem, we're happy to offer GoFish and Macao for our nongamblers. They do still" +
-                    " cost money, though. Your starting balance is 500 zips.\n");
+                    " cost money, though. Your starting balance is \u20A6500 NUC Bucks.\n");
             return false;
         }
     }
@@ -90,10 +89,10 @@ public class Greeter {
     private Boolean parseIsGambling(String isGambling) {
         isGambling = isGambling.toLowerCase().trim();
         if ("yes".equals(isGambling)) {
-            console.println("Your starting balance with us is 500 zips. Best of luck!");
+            console.println("Your starting balance with us is \u20A6500 NUC Bucks. Best of luck!");
             return true;
         } else  if ("no".equals(isGambling)) {
-            console.println("Okay, but our non-gambling games do still cost money to play. You have 500 zips to start.");
+            console.println("Okay, but our non-gambling games do still cost money to play. You have \u20A6500 NUC Bucks to start.");
             return false;
         } else {
             console.println("That sounds like a yes!");

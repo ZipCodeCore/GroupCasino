@@ -1,8 +1,6 @@
 package io.zipcoder.casino.Casino;
 
-import io.zipcoder.casino.Cards.Card;
-import io.zipcoder.casino.Cards.Deck;
-import io.zipcoder.casino.Cards.Dice;
+import io.zipcoder.casino.Cards.*;
 import io.zipcoder.casino.Cards.Games.Game;
 import io.zipcoder.casino.Players.Profile;
 
@@ -13,8 +11,9 @@ public class Casino {
 
     public static void main(String[] args)
     {
-        //System.out.print(Card.printAllCards(new Deck().drawMultipleCards(52)));
-        //System.out.print(Dice.getDiceString(1, 2, 3, 4, 5, 6));
+ //       System.out.print(Card.printAllCards(new Deck().drawMultipleCards(52)));
+//        System.out.print(Card.printAllCards(Deck.getCardBack(), new Card(Suit.HEARTS, Rank.THREE)));
+//        System.out.print(Dice.getDiceString(5, 5));
         entertainUser();
     }
 
