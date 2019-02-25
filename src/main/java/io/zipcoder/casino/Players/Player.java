@@ -2,7 +2,6 @@ package io.zipcoder.casino.Players;
 
 
 public abstract class Player {
-
     private Profile profile;
     public Player(Profile profile) {
 
@@ -12,7 +11,7 @@ public abstract class Player {
         profile = new Profile();
     }
 
-    public Profile getProfile(){
+    public Profile getProfile() {
         return this.profile;
     }
 }

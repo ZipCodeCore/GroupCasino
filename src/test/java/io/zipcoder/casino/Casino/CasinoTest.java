@@ -6,7 +6,6 @@ import io.zipcoder.casino.Cards.Games.Game;
 import io.zipcoder.casino.Cards.Games.GoFish;
 import io.zipcoder.casino.Cards.Games.Macao;
 import io.zipcoder.casino.utilities.Console;
-import io.zipcoder.casino.utilities.Greeter;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -166,7 +165,7 @@ public class CasinoTest {
     }
 
     @Test
-    public void offerUserLeave() {
+    public void offerUserLeaveTest() {
         // Given
         String input = "no";
         byte[] inputBytes = input.getBytes();
@@ -185,7 +184,7 @@ public class CasinoTest {
     }
 
     @Test
-    public void offerUserLeave2() {
+    public void offerUserLeaveTest2() {
         // Given
         String input = "yes";
         byte[] inputBytes = input.getBytes();
@@ -204,7 +203,7 @@ public class CasinoTest {
     }
 
     @Test
-    public void offerUserLeave3() {
+    public void offerUserLeaveTest3() {
         // Given
         String input = "asdfasdf";
         byte[] inputBytes = input.getBytes();
@@ -223,7 +222,7 @@ public class CasinoTest {
     }
 
     @Test
-    public void offerUserLeave4() {
+    public void offerUserLeaveTest4() {
         // Given
         String input = "yes";
         byte[] inputBytes = input.getBytes();
@@ -243,7 +242,7 @@ public class CasinoTest {
     }
 
     @Test
-    public void seeUserOut() {
+    public void seeUserOutTest() {
         // Given
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(System.in, new PrintStream(outputStream));
@@ -256,6 +255,51 @@ public class CasinoTest {
 
         // Then
         String actual = outputStream.toString();
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual.contains(expected));
+    }
+
+    @Test
+    public void entertainUserTest() {
+        // Given
+        String input = "testname\n1\ntestingcheatsenabledtrue\nno";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        Greeter greeter = new Greeter(console);
+
+        Casino.setGreeter(greeter);
+
+        // When
+        Casino.setProfile();
+        Casino.entertainUser();
+        String actual = outputStream.toString();
+
+        // Then
+        Assert.assertTrue(Casino.isUserIsLeaving());
+        Assert.assertTrue(actual.contains("Thank you so much for coming! Please come again!") &&
+                actual.contains("Welcome to our Casino! What's your name?"));
+    }
+
+    @Test
+    public void mainTest() {
+        // Given
+        String input = "testname\n1\ntestingcheatsenabledtrue\nno";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Console console = new Console(new Scanner(inputByteArray), new PrintStream(outputStream));
+        Greeter greeter = new Greeter(console);
+        Casino.setGreeter(greeter);
+        Casino.setProfile();
+
+        // When
+        Casino.main(new String[0]);
+        String actual = outputStream.toString();
+
+        // Then
+        Assert.assertTrue(Casino.isUserIsLeaving());
+        Assert.assertTrue(actual.contains("Thank you so much for coming! Please come again!") &&
+                actual.contains("Welcome to our Casino! What's your name?"));
     }
 }

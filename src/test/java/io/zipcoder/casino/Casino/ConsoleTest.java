@@ -115,7 +115,7 @@ public class ConsoleTest {
         // Given
         String input = "test answer";
         byte[] inputBytes = input.getBytes();
-        String expectedInput = input.toUpperCase().trim();
+        String expectedInput = input.toLowerCase().trim();
         ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
         Console console = new Console(new Scanner(inputByteArray), System.out);
 
@@ -131,12 +131,44 @@ public class ConsoleTest {
         // Given
         String input = "adfs;jafdsjpafjpi";
         byte[] inputBytes = input.getBytes();
-        String expectedInput = input.toUpperCase().trim();
+        String expectedInput = input.toLowerCase().trim();
         ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
         Console console = new Console(new Scanner(inputByteArray), System.out);
 
         // When
         String actualInput = console.getStandardInput(" ");
+
+        // Then
+        Assert.assertEquals(expectedInput, actualInput);
+    }
+
+    @Test
+    public void testGetStandardInputCaps() {
+        // Given
+        String input = "test answer";
+        byte[] inputBytes = input.getBytes();
+        String expectedInput = input.toUpperCase().trim();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Console console = new Console(new Scanner(inputByteArray), System.out);
+
+        // When
+        String actualInput = console.getStandardInputCaps(" ");
+
+        // Then
+        Assert.assertEquals(expectedInput, actualInput);
+    }
+
+    @Test
+    public void testGetStandardInputCaps2() {
+        // Given
+        String input = "adfs;jafdsjpafjpi";
+        byte[] inputBytes = input.getBytes();
+        String expectedInput = input.toUpperCase().trim();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Console console = new Console(new Scanner(inputByteArray), System.out);
+
+        // When
+        String actualInput = console.getStandardInputCaps(" ");
 
         // Then
         Assert.assertEquals(expectedInput, actualInput);

@@ -1,4 +1,4 @@
-package io.zipcoder.casino.Casino;
+package io.zipcoder.casino.Casino.GameTest;
 
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Games.BlackJack;
@@ -25,35 +25,6 @@ public class BlackJackTest {
     private int dealerTotal;
     private int userBet;
 
-//    @Test
-//    public void dealTwoCardsFirstCardTest() {
-//
-//        //Given
-//        BlackJack blackJack = new BlackJack();
-//        List<Card> userHand = new ArrayList<Card>();
-//
-//       //When
-//        blackJack.dealTwoCards(userHand);
-//
-//        //Then
-//        Assert.assertTrue(userHand.get(0)!=null);
-//        Assert.assertTrue(userHand.get(1)!=null);
-//
-//    }
-
-//    @Test
-//    public void dealTwoCardsSecondCardTest(){
-//        //Given
-//        BlackJack blackJack = new BlackJack();
-//        List<Card> userHand = new ArrayList<Card>();
-//        int expected = 2;
-//        //When
-//        blackJack.dealTwoCards(userHand);
-//
-//        //Then
-//        Assert.assertEquals(expected, userHand.size());
-//
-//    }
     @Test
     public void testTakingUserBet() {
         String input = "10\n";
@@ -70,20 +41,6 @@ public class BlackJackTest {
         //Then
         Assert.assertEquals((int)blackJack.getUserBetAsInteger(), 10);
     }
-
-//    @Test
-//    public void dealOneCardTest() {
-//        //Given
-//        BlackJack blackJack = new BlackJack();
-//        List<Card> userhand = new ArrayList<Card>();
-//        int expected = 1;
-//        //When
-//        blackJack.dealOneCard(userhand);
-//
-//        //Then
-//        Assert.assertTrue(userhand.get(0) != null);
-//        Assert.assertEquals(expected,userhand.size());
-//    }
 
     @Test
     public void testTakeUserBetWithInsult(){

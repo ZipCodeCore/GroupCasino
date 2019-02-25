@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Casino.GameTest;
 
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Rank;
@@ -36,7 +36,7 @@ public class CardTest {
         //When
         Rank actualRank = testCard.getRank();
         Suit actualSuit = testCard.getSuit();
-        String expected = "|" + rank.toString().toLowerCase() + " of "+suit.toString().toLowerCase();
+        String expected = rank.toString().toLowerCase() + " of "+suit.toString().toLowerCase();
         //Then
         Assert.assertEquals(expected,testCard.toString());
         Assert.assertEquals(suit,actualSuit);

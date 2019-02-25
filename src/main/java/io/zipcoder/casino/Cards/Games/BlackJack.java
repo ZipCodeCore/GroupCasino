@@ -16,9 +16,6 @@ import java.util.List;
 
 
 public class BlackJack extends Game {
-//
-//    private List<Card> user.getHand() = new ArrayList<Card>();
-//    private List<Card> dealer.getHand( = new ArrayList<Card>();
 
     private CardPlayer dealer = new CardPlayer(new Profile());
     //private CardPlayer user = new CardPlayer(Casino.getProfile()); //this will need to be uncommented for live version and line below will need to be removed
@@ -88,14 +85,18 @@ public class BlackJack extends Game {
         userTotal = getTotal(user.getHand());
         dealerTotal = getTotal(dealer.getHand());
 
-        blackJackConsole.println("Your first hand has a " + user.getHand().get(0) + " & " + user.getHand().get(1));
+        //blackJackConsole.println("Your first hand has a " + user.getHand().get(0) + " & " + user.getHand().get(1));
+        blackJackConsole.print(Card.printAllCards(user.getHand()));
         displayUserTotal(userTotal);
 
         if(checkIfHandIs21()){
         celebrateUser();
 
         } else {
-            blackJackConsole.println("The dealer's hand is showing " + dealer.getHand().get(0));
+            List<Card> printingCards = new ArrayList<>();
+            printingCards.add(dealer.getHand().get(0));
+            printingCards.add(Deck.getCardBack());
+            blackJackConsole.println(Card.printAllCards(printingCards));
             String doubleDownChoice = blackJackConsole.getStringInput(
                     "Would you like to Double Down? Please enter Yes or No");
             while(!doubleDownChoice.toLowerCase().equals("yes") && !doubleDownChoice.toLowerCase().equals("no") ){
@@ -143,7 +144,7 @@ public class BlackJack extends Game {
         user.getHand().add(currentDeck.drawCard());
         userTotal = getTotal(user.getHand());
 
-        blackJackConsole.print("Your next card is " + user.getHand().get(2) + ". ");
+        blackJackConsole.print("Your next card is \n" + Card.printAllCards(user.getHand().get(2)));
 
         displayUserTotal(userTotal);
         checkGameOverByBust();
@@ -158,8 +159,8 @@ public class BlackJack extends Game {
     public void hit() {
         user.getHand().add(currentDeck.drawCard());
         userTotal = getTotal(user.getHand());
-        blackJackConsole.println("Your next card is " + user.getHand().get(user.getHand().size()-1) +
-                ". Your total hand is " + userTotal);
+        blackJackConsole.println("Your next card is \n" + Card.printAllCards(user.getHand().get(user.getHand().size()-1)) +
+                "Your total hand is " + userTotal);
     }
 
     public String getUserInput() {
@@ -167,15 +168,6 @@ public class BlackJack extends Game {
         String userChoice = blackJackConsole.getStringInput("Would you like to Hit or Stay?");
         return userChoice;
     }
-//
-//    public void dealTwoCards(List<Card> hand) {
-//        dealOneCard(hand);
-//        dealOneCard(hand);
-//    }
-//
-//    public void dealOneCard(List<Card> hand) {
-//        hand.add(currentDeck.drawCard());
-//    }
 
     public int getTotal(List<Card> hand) {
         int sum = 0;
@@ -208,8 +200,8 @@ public class BlackJack extends Game {
     }
 
     public void displayDealerHand() {
-        blackJackConsole.println("Dealer's hand is now: \n" + dealer.getHand().toString());
-    }
+        blackJackConsole.println("Dealer's hand is now: \n" + Card.printAllCards(dealer.getHand()));
+    }//Card.printAllCards(dealer.getHand().toString()));
 
     public void checkGameOverByBust() {
         if (userTotal > 21) {
@@ -235,13 +227,13 @@ public class BlackJack extends Game {
     }
 
     public void takeDealersTurn() {
-        blackJackConsole.println("Dealer card is " + dealer.getHand().get(1) + ". ");
-        //blackJackConsole.println("Dealer's hand is now ");
+        blackJackConsole.println("Dealer card is \n" + Card.printAllCards(dealer.getHand().get(1)));
+
         displayDealerHand();
         displayDealerTotal(dealerTotal);
         while (dealerTotal < 17) {
             dealer.getHand().add(currentDeck.drawCard());
-            blackJackConsole.println("The dealer drew " + dealer.getHand().get(dealer.getHand().size() - 1));
+            blackJackConsole.println("The dealer drew \n" + Card.printAllCards(dealer.getHand().get(dealer.getHand().size() - 1)));
             dealerTotal = getTotal(dealer.getHand());
             displayDealerHand();
             displayDealerTotal(dealerTotal);
