@@ -54,6 +54,17 @@ public class Dice {
         return allDicePrinted.toString();
     }
 
+    public static String getDiceStringWithSpace(int... diceNumbers) {
+        StringBuilder allDicePrinted = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            for (int number : diceNumbers) {
+                allDicePrinted.append(stringRepresentations.get(number)[i] + "     ");
+            }
+            allDicePrinted.append("\n");
+        }
+        return allDicePrinted.toString();
+    }
+
 
 }
 
