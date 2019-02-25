@@ -11,6 +11,7 @@ import java.util.*;
 
 public class Deck {
     private final static List<Card> COMPLETE_DECK = new ArrayList<Card>();
+    private final static Card cardBack = new Card(null, null);
     private Stack<Card> playDeck;
 
     static  {
@@ -20,6 +21,9 @@ public class Deck {
                 COMPLETE_DECK.add(new Card(suit, rank));
             }
         }
+    }
+    public static Card getCardBack() {
+        return cardBack;
     }
 
     public Deck() {
