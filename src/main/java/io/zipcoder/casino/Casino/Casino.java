@@ -13,9 +13,9 @@ public class Casino {
 
     public static void main(String[] args)
     {
-        System.out.print(Card.printAllCards(new Deck().drawMultipleCards(52)));
-        System.out.print(Dice.getDiceString(1, 2, 3, 4, 5, 6));
-        //entertainUser();
+//        System.out.print(Card.printAllCards(new Deck().drawMultipleCards(52)));
+//        System.out.print(Dice.getDiceString(1, 2, 3, 4, 5, 6));
+        entertainUser();
     }
 
     public static void entertainUser() {
