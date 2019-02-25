@@ -29,52 +29,63 @@ public class Casino {
     }
 
 
+    public static void run() {
+        Console console = Console.getInstance();
+        boolean running = true;
 
+        console.println("                                                           \n" +
+                "⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁\n" +
+                "⚅ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ⚂\n" +
+                "⚄ ♦                                                                     ♠ ⚃\n" +
+                "⚃ ♥  ♠---.             .--♥        ♦        .--♠                        ♣ ⚄\n" +
+                "⚂ ♣     /   ♣         :            |       :               ♣            ♥ ⚅\n" +
+                "⚁ ♠    /    .  ♦,-.   |    .-.  .-.| .-.   |    .-.♦ .--♥  .  .--. .-.  ♦ ⚀\n" +
+                "⚀ ♦   /     |  |   )  :   (   )(   |(.-'   :   (   ) `--.  |  |  |(   ) ♠ ⚁\n" +
+                "⚅ ♥  '---♥-' `-|`-'    `--♥`-'  `-'`♠`--♦   `--♣`-'`-♣--'-' `-♠  `♥`-'  ♣ ⚂\n" +
+                "⚄ ♣            |                                                        ♥ ⚃\n" +
+                "⚃ ♠            ♥                                                        ♦ ⚄\n" +
+                "⚂ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♠ ⚅\n" +
+                "⚁ ⚀ ⚅ ⚄ ⚃ ⚂ ⚁ ⚀ ⚅ ⚄ ⚃ ⚂ ⚁ ⚀ ⚅ ⚄ ⚃ ⚂ ⚁ ⚀ ⚅ ⚄ ⚃ ⚂ ⚁ ⚀ ⚅ ⚄ ⚃ ⚂ ⚁ ⚀ ⚅ ⚄ ⚃ ⚂ ⚁ ⚀\n");
 
-    public static void run(){
-            Console console = Console.getInstance();
-            boolean running = true;
+        String name = console.getStringInput("Welcome to the Zip Code Casino!  What is your name?");
+        Double wallet = console.getDoubleInput("\nThanks for playing, %s!  How much money will you be gambling?", name);
+        Casino.setPlayer(new Player(name, wallet));
 
-            console.println("                                                           \n" +
-                    "⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁\n" +
-                    "⚅ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ⚂\n" +
-                    "⚄ ♦                                                                     ♠ ⚃\n" +
-                    "⚃ ♥  ♠---.             .--♥        ♦        .--♠                        ♣ ⚄\n" +
-                    "⚂ ♣     /   ♣         :            |       :               ♣            ♥ ⚅\n" +
-                    "⚁ ♠    /    .  ♦,-.   |    .-.  .-.| .-.   |    .-.♦ .--♥  .  .--. .-.  ♦ ⚀\n" +
-                    "⚀ ♦   /     |  |   )  :   (   )(   |(.-'   :   (   ) `--.  |  |  |(   ) ♠ ⚁\n" +
-                    "⚅ ♥  '---♥-' `-|`-'    `--♥`-'  `-'`♠`--♦   `--♣`-'`-♣--'-' `-♠  `♥`-'  ♣ ⚂\n" +
-                    "⚄ ♣            |                                                        ♥ ⚃\n" +
-                    "⚃ ♠            ♥                                                        ♦ ⚄\n" +
-                    "⚂ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♥ ♦ ♠ ♣ ♠ ⚅\n" +
-                    "⚁ ⚀ ⚅ ⚄ ⚃ ⚂ ⚁ ⚀ ⚅ ⚄ ⚃ ⚂ ⚁ ⚀ ⚅ ⚄ ⚃ ⚂ ⚁ ⚀ ⚅ ⚄ ⚃ ⚂ ⚁ ⚀ ⚅ ⚄ ⚃ ⚂ ⚁ ⚀ ⚅ ⚄ ⚃ ⚂ ⚁ ⚀\n");
+        while (running) {
+            console.println("\nWhat game would you like to play, %s?", name);
+            String gameToPlay = console.getStringInput("We have Blackjack, Craps, Yahtzee, and Go Fish!");
 
-            String name = console.getStringInput("Welcome to the Zip Code Casino!  What is your name?");
-            Double wallet = console.getDoubleInput("\nThanks for playing, %s!  How much money will you be gambling?", name);
-            Casino.setPlayer(new Player(name, wallet));
+            switch (gameToPlay.toLowerCase()) {
 
-            while (running) {
-                console.println("\nWhat game would you like to play, %s?", name);
-                String gameToPlay = console.getStringInput("We have Blackjack, Craps, Yahtzee, and Go Fish!");
-
-                if (gameToPlay.toLowerCase().equals("yahtzee")) {
+                case "yahtzee":
                     Casino.setGame(new Yahtzee(player));
                     Casino.game.play();
-                } else if (gameToPlay.toLowerCase().equals("craps")) {
-                    Casino.setGame(new Craps());
-                    Casino.game.play();
-                } else if (gameToPlay.toLowerCase().equals("blackjack")) {
+                    break;
+
+                case "blackjack":
                     Casino.setGame(new Blackjack());
                     Casino.game.play();
-                } else if (gameToPlay.toLowerCase().equals("go fish")) {
+                    break;
+
+                case "craps":
+                    Casino.setGame(new Craps());
+                    Casino.game.play();
+                    break;
+
+                case "go fish":
                     Casino.setGame(new GoFish());
                     Casino.game.play();
-                } else {
+                    break;
+
+                case "exit":
+                    running = false;
+                    console.println("Bye %s!  Thank you for playing at the Zip Code Casino!", name);
+                    break;
+
+                default:
                     console.println("Invalid Game!  Try again!");
-                }
+
             }
-
-
+        }
     }
-
 }
