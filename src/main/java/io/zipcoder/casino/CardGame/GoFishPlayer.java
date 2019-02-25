@@ -95,9 +95,11 @@ public class GoFishPlayer {
     }
 
     // Method adds the Array list of cards in the parameters to the hand and returns all the cards in that hand
-    public ArrayList<Card> addCardsToHand(ArrayList<Card> cardsToAdd, Hand playersHand) {
+    public ArrayList<Card> addCardsToHands(ArrayList<Card> cardsToAdd){ //Hand playersHand) {
 
-        return newHand;
+        hand.addCardsToHand(cardsToAdd);
+
+         return hand.showMyCards();
 
 
     }
@@ -111,7 +113,7 @@ public class GoFishPlayer {
 
         int fourOfaKindCounter =0;
 
-        ArrayList <Card>  cardsInHand = player.hand.getHand();
+        ArrayList <Card>  cardsInHand = player.hand.showMyCards();
 
         int aceCounter =0, jackCounter=0, kingCounter=0,queenCounter=0, twoCounter=0, threeCounter=0, fourCounter=0, fiveCounter=0, sixCounter=0, sevenCounter=0,eightCounter=0, nineCounter=0, tenCounter = 0;
 
@@ -272,7 +274,7 @@ public class GoFishPlayer {
 
     public void showHand() {
 
-        player.hand.getHand(); //getHand method needs to be defined
+        hand.showMyCards(); //getHand method needs to be defined
 
 
 
