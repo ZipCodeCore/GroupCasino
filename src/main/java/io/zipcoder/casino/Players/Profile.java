@@ -14,7 +14,7 @@ public class Profile {
     public Profile() {
         this.name = "Dealer";
         this.gambler = true;
-        this.balance = Integer.MAX_VALUE;
+        this.balance = 1000;
     }
 
     public String getName() {

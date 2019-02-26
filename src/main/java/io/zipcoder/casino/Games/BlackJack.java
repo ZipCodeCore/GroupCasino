@@ -3,6 +3,7 @@ package io.zipcoder.casino.Games;
 import io.zipcoder.casino.CardsAndDice.Card;
 import io.zipcoder.casino.CardsAndDice.Deck;
 import io.zipcoder.casino.CardsAndDice.Rank;
+import io.zipcoder.casino.Casino.Casino;
 import io.zipcoder.casino.Casino.Greeter;
 import io.zipcoder.casino.Players.BlackJackPlayer;
 import io.zipcoder.casino.Players.Profile;
@@ -16,8 +17,8 @@ import java.util.List;
 public class BlackJack implements Game {
 
     private BlackJackPlayer dealer = new BlackJackPlayer(new Profile());
-    //private BlackJackPlayer user = new BlackJackPlayer(Casino.getProfile()); //this will need to be uncommented for live version and line below will need to be removed
-    private BlackJackPlayer user = new BlackJackPlayer(new Profile("testName",true));
+    private BlackJackPlayer user = new BlackJackPlayer(Casino.getProfile()); //this will need to be uncommented for live version and line below will need to be removed
+    //private BlackJackPlayer user = new BlackJackPlayer(new Profile("testName",true));
     private Deck currentDeck = new Deck();
 
     private int userTotal;

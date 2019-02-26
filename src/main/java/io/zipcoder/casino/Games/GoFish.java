@@ -42,6 +42,7 @@ public class GoFish implements Game {
 
     public void play() {
         console.println(Greeter.getGoFishName());
+        user.getProfile().setBalance(user.getProfile().getBalance() - 5);
         console.println("Rules: The object of this game is to get the most books (4 of a kind) down.\nHere's your staring hand:\n");
         dealStartingHands();
         while (!isOver) {
@@ -52,7 +53,6 @@ public class GoFish implements Game {
             userTurn();
             evaluate();
         }
-        user.getProfile().setBalance(user.getProfile().getBalance() - 5);
     }
 
     public void dealerTurn() {
