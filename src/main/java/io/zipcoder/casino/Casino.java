@@ -11,7 +11,7 @@ public class Casino {
     private static Player player;
     private static Game game;
 
-    public Player getPlayer() {
+    public static Player getPlayer() {
         return player;
     }
 
@@ -23,6 +23,9 @@ public class Casino {
         Casino.game = game;
     }
 
+    public static Game getGame(){
+        return game;
+    }
 
     public static void main(String[] args) {
         Casino.run();
@@ -84,7 +87,6 @@ public class Casino {
 
                 default:
                     console.println("Invalid Game!  Try again!");
-
             }
         }
     }
