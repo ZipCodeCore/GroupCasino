@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 public class Craps implements Game {
     private CrapsPlayer user = new CrapsPlayer(Casino.getProfile());
-    //private int initialBalance = user.getBalance();
+    private int initialBalance = user.getProfile().getBalance();
     Console console = Console.getConsole();
     private int point = 0;
     private boolean toWinPassBet = false;
@@ -35,7 +35,6 @@ public class Craps implements Game {
     private boolean isHornBet;
     private boolean isPlaceBet;
     private boolean isLayBet;
-    private int initialBalance = 500;
     private int firstRollSum;
     Dice die1 = new Dice();
     Dice die2 = new Dice();
@@ -49,6 +48,7 @@ public class Craps implements Game {
     private boolean isEleven = false;
     private boolean isPoint = false;
     private boolean isPlaying = true;
+    private boolean isQuitting = false;
 
     private enum GameStatus {UNRESOLVED, WON, LOST}
 
@@ -84,12 +84,12 @@ public class Craps implements Game {
     }
 
     private enum BetExplanations {
-        PLACE("The Place bet wins if the chosen number is rolled before a 7. "),
+        PLACE("The Place bet wins if the chosen number is rolled before a 7"),
         LAY("The Lay bet wins if a 7 is rolled before the point"),
         ANYCRAPS("Any Craps pays off on 2, 3 or 12 before rolling a 7"),
         FIELD("The Field wins if 4, 5, 6, 8, 9 or 10 hits before 7"),
         HORN("The Horn wins on 2, 3, 11 or 12 before rolling a 7"),
-        HARDWAYS("Hardways involves two dice of the same face value, which must be hit before 7 or the corresponding sum thrown 'easy'");
+        HARDWAYS("Hardways involves two dice of the same face value, which must be hit before 7 or the corresponding sum thrown 'easy'\n");
         private String betRules;
 
         BetExplanations(String betRules) {
@@ -121,44 +121,43 @@ public class Craps implements Game {
                 firstRoll();
             }
             while (isPlaying && gameState == GameStatus.UNRESOLVED) {
+                roll();
+                evaluate();
                 promptBet();
-                while (isPlaying) {
-                    roll();
-                    evaluate();
-                }
+
             }
         }
     }
 
-    public int firstRoll() {
+    public void firstRoll() {
         roll();
         if (Arrays.stream(anyCraps).anyMatch(i -> i == rollSum) && toWinPassBet) {
-            System.out.println("Whomp, whomp, you crapped out.");
+            System.out.println("Whomp, whomp, you crapped out\n");
             adjustBalance(-betAmount);
             resetPointAndRoll();
         } else if (rollSum == 7 && toWinPassBet || rollSum == 11 && toWinPassBet) {
-            System.out.println("You won the Pass bet, keep it up!");
+            System.out.println("You won the Pass bet, keep it up!\n");
             gameState = GameStatus.WON;
             adjustBalance(betAmount);
             resetPointAndRoll();
         } else if (rollSum == 7 && !toWinPassBet || rollSum == 11 && !toWinPassBet) {
-            System.out.println("You lost the Pass bet!");
+            System.out.println("You lost the Pass bet!\n");
             gameState = GameStatus.UNRESOLVED;
             adjustBalance(-betAmount);
             resetPointAndRoll();
         } else if (Arrays.stream(anyCraps).anyMatch(i -> i == rollSum) && !toWinPassBet) {
-            System.out.println("You won the Don't Pass bet, keep it up!");
+            System.out.println("You won the Don't Pass bet, keep it up!\n");
             gameState = GameStatus.UNRESOLVED;
             adjustBalance(betAmount);
             resetPointAndRoll();
         } else {
             point = rollSum;
-            System.out.println("The point is now " + point + ".\nKeep on rollin', shooter!");
+            System.out.println("The point is now " + point + ".\nKeep on rollin', shooter!\n");
             gameState = GameStatus.UNRESOLVED;
             isFirstRoll = false;
         }
         rollSum = point;
-        return point;
+        promptBet();
     }
 
     public void resetPointAndRoll() {
@@ -169,11 +168,11 @@ public class Craps implements Game {
     public void promptBet() {
         if (isFirstRoll) {
             int betAmount = console.getIntegerInput("How much would you like to bet?");
-            String passChoice = console.getStringInput("Please choose 'Pass' or 'Don't Pass'");
-            if (passChoice.equals("Pass")) {
+            String passChoice = console.getStandardInput("Please choose 'Pass' or 'Don't Pass'");
+            if (passChoice.equals("pass")) {
                 toWinPassBet = true;
                 betMap.put("Pass Bet", true);
-            } else if (passChoice.equals("Don't Pass")) {
+            } else if (passChoice.equals("don't pass")) {
                 toWinPassBet = false;
                 betMap.put("Pass Bet", false);
             }
@@ -184,7 +183,7 @@ public class Craps implements Game {
                     betRulesListed();
                     promptBet();
                 case 2:
-                    System.out.println("You have the current bets: " + currentBetList(true));
+                    System.out.println("You have the current bets: " + currentBetList(true) + "\n");
                     promptBet();
                 case 3:
                     listBets();
@@ -193,6 +192,7 @@ public class Craps implements Game {
                     makeBet();
                     break;
                 case 5:
+                    isQuitting = true;
                     break;
                 case 6:
                     cashOut();
@@ -201,36 +201,36 @@ public class Craps implements Game {
     }
 
     public void makeBet() {
-        String betName = console.getStringInput("What bet would you like to place?");
+        String betName = console.getStandardInput("What bet would you like to place?\n");
         switch (betName) {
-            case "Place":
+            case "place":
                 isPlaceBet = true;
-                placeBetChoice = console.getIntegerInput("What number do you want to make a Place Bet for?");
+                placeBetChoice = console.getIntegerInput("What number do you want to make a Place Bet for?\n");
                 if (Arrays.stream(placeNumberRolls).anyMatch(i -> i == placeBetChoice)) {
-                    System.out.println("Excellent choice!");
+                    System.out.println("Excellent choice!\n");
                 } else {
-                    placeBetChoice = console.getIntegerInput("Stick to the Place numbers, buddy! Pick from 4, 5, 6, 8, 9 or 10.");
+                    placeBetChoice = console.getIntegerInput("Stick to the Place numbers, buddy! Pick from 4, 5, 6, 8, 9 or 10\n");
                 }
                 break;
-            case "Lay":
+            case "lay":
                 isLayBet = true;
                 break;
-            case "AnyCraps":
+            case "anycraps":
                 isAnyCrapsBet = true;
                 break;
-            case "Field":
+            case "field":
                 isFieldBet = true;
                 break;
-            case "Horn":
+            case "horn":
                 isHornBet = true;
                 break;
-            case "Hardways":
+            case "hardways":
                 isHardwaysBet = true;
-                hardwaysRoll = console.getIntegerInput("What number do you want to place a Hardways Bet on?");
+                hardwaysRoll = console.getIntegerInput("What number do you want to place a Hardways Bet on?\n");
                 if (Arrays.stream(hardwaysRolls).anyMatch(i -> i == hardwaysRoll)) {
-                    System.out.println("Excellent choice!");
+                    System.out.println("Excellent choice!\n");
                 } else {
-                    hardwaysRoll = console.getIntegerInput("Stick to the Place numbers, buddy! Pick from 4, 6, 8, or 10.");
+                    hardwaysRoll = console.getIntegerInput("Stick to the Place numbers, buddy! Pick from 4, 6, 8, or 10\n");
                 }
 
             default:
@@ -304,15 +304,15 @@ public class Craps implements Game {
         if (isNatural) {
             if (toWinLayBet) {
                 gameState = GameStatus.WON;
-                System.out.println("Your Lay bet paid off!");
+                System.out.println("Your Lay bet paid off!\n");
                 adjustBalance(betAmount);
             }
             if (!toWinPassBet) {
                 gameState = GameStatus.WON;
-                System.out.println("Your Don't Pass bet paid off!");
+                System.out.println("Your Don't Pass bet paid off!\n");
                 adjustBalance(betAmount);
             } else if (!isOver) {
-                System.out.println("Sorry shooter, it looks like your hot streak has come to an end!");
+                System.out.println("Sorry shooter, it looks like your hot streak has come to an end!\n");
                 gameState = GameStatus.LOST;
                 adjustBalance(-betAmount);
                 resetPointAndRoll();
@@ -322,81 +322,81 @@ public class Craps implements Game {
         if (isCrappedRolls && !isFirstRoll) {
             if (isAnyCrapsBet && Arrays.stream(anyCraps).anyMatch(i -> i == rollSum)) {
                 gameState = GameStatus.WON;
-                System.out.println("Your Any Craps bet paid off!");
+                System.out.println("Your Any Craps bet paid off!\n");
                 adjustBalance(betAmount);
             }
             if (isAnyCrapsBet && Arrays.stream(anyCraps).noneMatch(i -> i == rollSum)) {
                 gameState = GameStatus.LOST;
-                System.out.println("You lost your Any Craps bet!");
+                System.out.println("You lost your Any Craps bet!\n");
                 adjustBalance(-betAmount);
             }
         }
         if (isPoint) {
             /*if (point == rollSum){
                 gameState = GameStatus.WON;
-                System.out.println("You hit the point!");
+                System.out.println("You hit the point!\n");
                 adjustBalance(betAmount);
             }*/
             if (isFieldBet && Arrays.stream(fieldNumberRolls).anyMatch(i -> i == rollSum)) {
                 gameState = GameStatus.WON;
-                System.out.println("You won your Field bet!");
+                System.out.println("You won your Field bet!\n");
                 adjustBalance(betAmount);
             }
             if (isHornBet && Arrays.stream(hornBetRolls).anyMatch(i -> i == rollSum)) {
                 gameState = GameStatus.WON;
-                System.out.println("You won your Horn bet!");
+                System.out.println("You won your Horn bet!\n");
                 adjustBalance(betAmount);
             }
             if (isHardwaysBet && (die1 == die2) && hardwaysBet == rollSum) {
                 gameState = GameStatus.WON;
-                System.out.println("You won your Hardways bet!");
+                System.out.println("You won your Hardways bet!\n");
                 adjustBalance(betAmount);
             }
             if (isLayBet && rollSum == 7) {
                 gameState = GameStatus.WON;
-                System.out.println("You won your Lay Bet!");
+                System.out.println("You won your Lay Bet!\n");
                 adjustBalance(betAmount);
             }
             if (rollSum == point && toWinPassBet) {
-                System.out.println("Lucky number " + point + "! You hit the point!");
+                System.out.println("Lucky number " + point + "! You hit the point!\n");
                 adjustBalance(betAmount);
             } else {
                 gameState = GameStatus.UNRESOLVED;
             }
         }
         if (rollSum == placeBetChoice) {
-            System.out.println("Your Place bet paid off!");
+            System.out.println("Your Place bet paid off!\n");
             adjustBalance(betAmount);
         }
     }
 
     private int adjustBalance(int profitOrLoss) {
         if (profitOrLoss > 0) {
-            System.out.println(String.format("You're on a roll and %d NUCs richer!", profitOrLoss));
+            System.out.println(String.format("You're on a roll and %d NUCs richer!\n", profitOrLoss));
         } else if (profitOrLoss < 0) {
-            System.out.println(String.format("You only lost %d NUCs. Play again to win that back and more!", profitOrLoss));
+            System.out.println(String.format("You only lost %d NUCs. Play again to win that back and more!\n", profitOrLoss));
         }
-        return adjustedBalance + profitOrLoss;
+        return (adjustedBalance + profitOrLoss);
     }
 
     public void compareBalance() {
         if (adjustedBalance > initialBalance) {
-            System.out.println(String.format("You won %d NUCs!", (adjustedBalance - initialBalance)));
+            System.out.println(String.format("You won %d NUCs!\n", (adjustedBalance - initialBalance)));
         } else if (adjustedBalance < initialBalance) {
-            System.out.println(String.format("You lost %d NUCs!", (initialBalance - adjustedBalance)));
+            System.out.println(String.format("You lost %d NUCs!\n", (initialBalance - adjustedBalance)));
         } else if (adjustedBalance == initialBalance) {
-            System.out.println("You broke even!");
+            System.out.println("You broke even!\n");
         }
     }
 
     public void cashOut() {
-        String continuePlaying = console.getStringInput("Would you like to continue playing?");
-        if (continuePlaying.equals("No")) {
+        String continuePlaying = console.getStandardInput("Would you like to continue playing?\n");
+        if (continuePlaying.equals("no")) {
             compareBalance();
-            //profile.setBalance(adjustedBalance);
+            user.getProfile().setBalance(adjustedBalance);
             isPlaying = false;
             isOver = true;
-        } else if (continuePlaying.equals("Yes")) {
+        } else if (continuePlaying.equals("yes")) {
             roll();
         }
     }
