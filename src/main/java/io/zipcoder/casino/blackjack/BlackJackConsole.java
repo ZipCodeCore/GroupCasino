@@ -3,12 +3,11 @@ package io.zipcoder.casino.blackjack;
 public class BlackJackConsole {
     //define a field of type Console named console
 
-    //create a static method that takes in
+    //create a method that takes in
     // a List<Card>
     // the method will display the suite
     // and face value of card
 
-    //create a method that will
 
     //create a method called printResult which
     //takes in String param and a double amount

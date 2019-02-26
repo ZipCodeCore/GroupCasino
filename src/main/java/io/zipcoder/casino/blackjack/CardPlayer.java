@@ -1,5 +1,7 @@
 package io.zipcoder.casino.blackjack;
 
+import io.zipcoder.casino.Player;
+
 //extends from the player
 public class CardPlayer {
     //create a field of type List<Card> named hand
