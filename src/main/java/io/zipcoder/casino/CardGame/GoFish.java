@@ -7,6 +7,7 @@ import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class GoFish extends CardGame {
@@ -27,6 +28,9 @@ public class GoFish extends CardGame {
     boolean givingDealerCard = false;
     boolean dealerDrawing = false;
     Face requestedCard = null;
+
+    boolean deckNotEmpty;
+
 
 
     public GoFish(Player player) {
@@ -124,7 +128,7 @@ public class GoFish extends CardGame {
 
 
     public String getCardOptions() {
-        return "\n'Ace' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine ' Ten' 'Jack' 'Queen' 'King'\n";
+        return "\n" + Arrays.toString(Face.values()) + "\n" ;
     }
 
     public void updatePlayerScore() {
@@ -151,6 +155,10 @@ public class GoFish extends CardGame {
     public int getDealersScoreCounter() {
         return dealersScoreCounter;
     }
+
+
+    // Starting the game asking for the initial deal of 7 cards for each of the players.
+    // cHeck if the initial dealt cards already contains any 4 of a kind  if yes updates the player's scores.
 
     public void startGame() {
 
@@ -309,7 +317,140 @@ public class GoFish extends CardGame {
     }
 
 
+    public boolean isDeckNotEmpty (Deck deck){
+
+        if(deck.deckSize() > 0){
+
+            deckNotEmpty = true;
+        }
+
+        else {
+
+            deckNotEmpty = false;
+        }
 
 
+        return deckNotEmpty;
+    }
 
+
+    public void setGoFishPlayer(GoFishPlayer goFishPlayer) {
+        this.goFishPlayer = goFishPlayer;
+    }
+
+    public void setDealer(GoFishPlayer dealer) {
+        this.dealer = dealer;
+    }
+
+    public void setPlayersScoreCounter(int playersScoreCounter) {
+        this.playersScoreCounter = playersScoreCounter;
+    }
+
+    public void setDealersScoreCounter(int dealersScoreCounter) {
+        this.dealersScoreCounter = dealersScoreCounter;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
+    public Console getConsole() {
+        return console;
+    }
+
+    public void setConsole(Console console) {
+        this.console = console;
+    }
+
+    public boolean isPlaying() {
+        return playing;
+    }
+
+    public void setPlaying(boolean playing) {
+        this.playing = playing;
+    }
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+    public boolean isPlayerAskingForCard() {
+        return playerAskingForCard;
+    }
+
+    public void setPlayerAskingForCard(boolean playerAskingForCard) {
+        this.playerAskingForCard = playerAskingForCard;
+    }
+
+    public boolean isPlayerDrawing() {
+        return playerDrawing;
+    }
+
+    public void setPlayerDrawing(boolean playerDrawing) {
+        this.playerDrawing = playerDrawing;
+    }
+
+    public boolean isPlayersTurn() {
+        return playersTurn;
+    }
+
+    public void setPlayersTurn(boolean playersTurn) {
+        this.playersTurn = playersTurn;
+    }
+
+    public boolean isNewTurn() {
+        return newTurn;
+    }
+
+    public void setNewTurn(boolean newTurn) {
+        this.newTurn = newTurn;
+    }
+
+    public boolean isDealersTurn() {
+        return dealersTurn;
+    }
+
+    public void setDealersTurn(boolean dealersTurn) {
+        this.dealersTurn = dealersTurn;
+    }
+
+    public boolean isDealerAskingForCard() {
+        return dealerAskingForCard;
+    }
+
+    public void setDealerAskingForCard(boolean dealerAskingForCard) {
+        this.dealerAskingForCard = dealerAskingForCard;
+    }
+
+    public boolean isGivingDealerCard() {
+        return givingDealerCard;
+    }
+
+    public void setGivingDealerCard(boolean givingDealerCard) {
+        this.givingDealerCard = givingDealerCard;
+    }
+
+    public boolean isDealerDrawing() {
+        return dealerDrawing;
+    }
+
+    public void setDealerDrawing(boolean dealerDrawing) {
+        this.dealerDrawing = dealerDrawing;
+    }
+
+    public Face getRequestedCard() {
+        return requestedCard;
+    }
+
+    public void setRequestedCard(Face requestedCard) {
+        this.requestedCard = requestedCard;
+    }
 }
