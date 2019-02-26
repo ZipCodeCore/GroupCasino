@@ -40,8 +40,7 @@ public class Casino {
     }
 
     public static void playGameWithUser(Game nextGame) {
-        int winningsOrLosings = nextGame.play();
-        profile.setBalance(profile.getBalance() + winningsOrLosings);
+        nextGame.play();
     }
 
 
