@@ -12,9 +12,7 @@ public class Casino {
     public static void main(String[] args)
     {
         Craps craps = new Craps();
-        craps.setRollSum(2);
-        craps.setToWinPassSet(true);
-        craps.evaluateFirstRoll();
+        craps.makeBet();
         //entertainUser();
     }
 
