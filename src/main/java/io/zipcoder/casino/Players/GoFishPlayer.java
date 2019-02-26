@@ -1,10 +1,11 @@
 package io.zipcoder.casino.Players;
 
 import io.zipcoder.casino.Cards.Card;
+import io.zipcoder.casino.Cards.Games.*;
+import io.zipcoder.casino.Cards.Rank;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.function.Supplier;
 
 public class GoFishPlayer extends Player {
     private List<Card> hand = new ArrayList<>();
@@ -26,10 +27,10 @@ public class GoFishPlayer extends Player {
     }
 
     public boolean hasCard(String checkCard) {
-        String cardRank = parseCardString(checkCard);
+        Rank cardRank = parseCardString(checkCard);
         if (cardRank == null){ return false; }
         for (Card card : hand) {
-            if(card.toString().contains(cardRank)) {
+            if(card.getRank().equals(cardRank)) {
                 return true;
             }
         }
@@ -38,11 +39,11 @@ public class GoFishPlayer extends Player {
 
 
     public List<Card> getCards(String getCard) {
-        getCard = parseCardString(getCard);
+        Rank cardRank = parseCardString(getCard);
         List<Card> retrievedCards = new ArrayList<>();
         if (getCard == null){ return retrievedCards; }
         for (Card card : hand) {
-            if(card.toString().contains(getCard)) {
+            if(card.getRank().equals(cardRank)) {
                 retrievedCards.add(card);
             }
         }
@@ -89,75 +90,38 @@ public class GoFishPlayer extends Player {
         return nextFour;
     }
 
-    private String parseCardString(String checkCard) {
-        switch (checkCard.toLowerCase()) {
-            case "king" :
-            case "kings":
-            case "k":
-            case "ks":
-                return "king";
-            case "queen" :
-            case "queens":
-            case "q" :
-            case "qs" :
-                return "queen";
-            case "jack" :
-            case "jacks":
-            case "j" :
-            case "js" :
-                return "jack";
-            case "ace" :
-            case "aces":
-            case "a" :
-            case "as" :
-                return "ace";
-            case "10" :
-            case "10s" :
-            case "ten":
-            case "tens":
-                return "ten";
-            case "9" :
-            case "9s" :
-            case "nine":
-            case "nines":
-                return "nine";
-            case "8" :
-            case "8s" :
-            case "eight":
-            case "eights":
-                return "eight";
-            case "7" :
-            case "7s" :
-            case "seven":
-            case "sevens":
-                return "seven";
-            case "6" :
-            case "6s" :
-            case "six":
-            case "sixs":
-                return "six";
-            case "5" :
-            case "5s" :
-            case "five":
-            case "fives":
-                return "five";
-            case "4" :
-            case "4s" :
-            case "four":
-            case "fours":
-                return "four";
-            case "3" :
-            case "3s" :
-            case "three":
-            case "threes":
-                return "three";
-            case "2" :
-            case "2s" :
-            case "two":
-            case "twos":
-                return "two";
-            default:
-                 return null;
-        }
+    public static Rank parseCardString(String checkCard) {
+        return possibleUserInputs.get(checkCard.toLowerCase());
     }
+
+    private static final HashMap<String, Rank> possibleUserInputs = new HashMap<>();
+    static {
+        possibleUserInputs.put("king", Rank.KING); possibleUserInputs.put("kings", Rank.KING);
+        possibleUserInputs.put("k", Rank.KING); possibleUserInputs.put("ks", Rank.KING);
+        possibleUserInputs.put("queen", Rank.QUEEN); possibleUserInputs.put("queens", Rank.QUEEN);
+        possibleUserInputs.put("q", Rank.QUEEN); possibleUserInputs.put("qs", Rank.QUEEN);
+        possibleUserInputs.put("jack", Rank.QUEEN); possibleUserInputs.put("jacks", Rank.JACK);
+        possibleUserInputs.put("j", Rank.JACK); possibleUserInputs.put("js", Rank.JACK);
+        possibleUserInputs.put("ace", Rank.ACE); possibleUserInputs.put("aces", Rank.ACE);
+        possibleUserInputs.put("a", Rank.ACE); possibleUserInputs.put("as", Rank.ACE);
+        possibleUserInputs.put("ten", Rank.TEN); possibleUserInputs.put("tens", Rank.TEN);
+        possibleUserInputs.put("10", Rank.TEN); possibleUserInputs.put("10s", Rank.TEN);
+        possibleUserInputs.put("nine", Rank.NINE); possibleUserInputs.put("nines", Rank.NINE);
+        possibleUserInputs.put("9", Rank.NINE); possibleUserInputs.put("9s", Rank.NINE);
+        possibleUserInputs.put("eight", Rank.EIGHT); possibleUserInputs.put("eights", Rank.EIGHT);
+        possibleUserInputs.put("8", Rank.EIGHT); possibleUserInputs.put("8s", Rank.EIGHT);
+        possibleUserInputs.put("seven", Rank.SEVEN); possibleUserInputs.put("sevens", Rank.SEVEN);
+        possibleUserInputs.put("7", Rank.SEVEN); possibleUserInputs.put("7s", Rank.SEVEN);
+        possibleUserInputs.put("six", Rank.SIX); possibleUserInputs.put("sixes", Rank.SIX);
+        possibleUserInputs.put("6", Rank.SIX); possibleUserInputs.put("6s", Rank.SIX);
+        possibleUserInputs.put("five", Rank.FIVE); possibleUserInputs.put("fives", Rank.FIVE);
+        possibleUserInputs.put("5", Rank.FIVE); possibleUserInputs.put("5s", Rank.FIVE);
+        possibleUserInputs.put("four", Rank.FOUR); possibleUserInputs.put("fours", Rank.FOUR);
+        possibleUserInputs.put("4", Rank.FOUR); possibleUserInputs.put("4s", Rank.FOUR);
+        possibleUserInputs.put("three", Rank.THREE); possibleUserInputs.put("threes", Rank.THREE);
+        possibleUserInputs.put("3", Rank.THREE); possibleUserInputs.put("3s", Rank.THREE);
+        possibleUserInputs.put("two", Rank.TWO); possibleUserInputs.put("twos", Rank.TWO);
+        possibleUserInputs.put("2", Rank.TWO); possibleUserInputs.put("2s", Rank.TWO);
+    }
+
 }

@@ -178,7 +178,7 @@ public class MacaoTest {
         String actual = outputStream.toString().trim();
 
         // Then we expect the given and retrieved strings to match
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual.contains(expected));
     }
 
     @Test
@@ -228,7 +228,7 @@ public class MacaoTest {
         String actual = outputStream.toString().trim();
 
         // Then we expect the given and retrieved strings to match
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual.contains(expected));
     }
 
     @Test

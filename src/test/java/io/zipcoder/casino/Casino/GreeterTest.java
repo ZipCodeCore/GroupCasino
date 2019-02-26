@@ -58,15 +58,6 @@ public class GreeterTest {
         // Then
         Assert.assertEquals(expectedInput, actualInput);
     }
-    @Test
-    public void testDefaultConstructor() {
-        // Given
-        // When
-        Greeter greeter = new Greeter();
-
-        // Then
-        Assert.assertTrue(greeter instanceof Greeter);
-    }
 
 
     @Test
@@ -136,7 +127,7 @@ public class GreeterTest {
     @Test
     public void testGetNextClean() {
         // Given
-        String input = "blackjack";
+        String input = "gofish";
         byte[] inputBytes = input.getBytes();
         ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
         Console console = new Console(new Scanner(inputByteArray), System.out);
@@ -163,6 +154,22 @@ public class GreeterTest {
 
         // Then
         Assert.assertTrue(game instanceof Macao);
+    }
+
+    @Test
+    public void testGetNextClean3() {
+        // Given
+        String input = "blackjack";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Console console = new Console(new Scanner(inputByteArray), System.out);
+        Greeter greeter = new Greeter(console);
+
+        // When
+        Game game = greeter.getNextCleanGame();
+
+        // Then
+        Assert.assertTrue(game instanceof GoFish);
     }
 
     @Test

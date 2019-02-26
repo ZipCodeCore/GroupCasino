@@ -62,8 +62,8 @@ public class Card implements Comparable<Card>{
     }
 
     private static String[] printCardBack() {
-        return new String[]{"\u250F\u2501\u2501\u2501\u2513", "\u2503 \u0220 \u2503", "\u2503 \u0244 \u2503",
-        "\u2503 \u0297 \u2503", "\u2517\u2501\u2501\u2501\u251B"};
+        return new String[]{"\u250F\u2501\u2501\u2501\u2513", "\u2503\u0220  \u2503", "\u2503 \u0244 \u2503",
+        "\u2503  \u0297\u2503", "\u2517\u2501\u2501\u2501\u251B"};
     }
 
 

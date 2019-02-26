@@ -2,6 +2,7 @@ package io.zipcoder.casino.Cards.Games;
 
 import io.zipcoder.casino.Cards.Dice;
 import io.zipcoder.casino.Casino.Casino;
+import io.zipcoder.casino.Casino.Greeter;
 import io.zipcoder.casino.Players.MacaoPlayer;
 import io.zipcoder.casino.utilities.Console;
 
@@ -77,6 +78,7 @@ public class Macao extends Game {
     }
 
     public int play() {
+        console.println(Greeter.getMacaoName());
         printGameInstructions();
         if (beginGame()) {
             initialGameSetup();
@@ -126,11 +128,11 @@ public class Macao extends Game {
     }
 
     public void showGuestRoll() {
-        console.println("YOUR NEW ROLL\n%sYOUR TOTAL IS NOW... %s\nHERE'S WHAT YOU ROLLED SO FAR\n%s", Dice.getDiceStringWithSpace(macaoGuest.getRoll()), macaoGuest.getCumulativeRoll(), Dice.getDiceString(macaoGuest.getDiceArray()));
+        console.println("YOUR NEW ROLL\n%sYOUR TOTAL IS NOW... %s\nHERE'S WHAT YOU ROLLED SO FAR\n%s", Dice.getDiceStringWithSpace(macaoGuest.getRoll()), macaoGuest.getCumulativeRoll(), Dice.getDiceString(macaoGuest.getDiceRolls()));
     }
 
     public void showDealerRoll() {
-        console.println("DEALERS'S NEW ROLL\n%sTHE DEALERS'S TOTAL IS NOW... %s\nHERE'S WHAT THE DEALER ROLLED SO FAR\n%s", Dice.getDiceString(macaoDealer.getRoll()), macaoDealer.getCumulativeRoll(), Dice.getDiceString(macaoDealer.getDiceArray()));
+        console.println("DEALERS'S NEW ROLL\n%sTHE DEALERS'S TOTAL IS NOW... %s\nHERE'S WHAT THE DEALER ROLLED SO FAR\n%s", Dice.getDiceString(macaoDealer.getRoll()), macaoDealer.getCumulativeRoll(), Dice.getDiceString(macaoDealer.getDiceRolls()));
     }
 
     public void initialGameSetup() {
@@ -201,9 +203,5 @@ public class Macao extends Game {
         }
     }
 
-//    public static void main(String[] args) {
-//        Macao macao = new Macao();
-//        macao.play();
-//    }
 
 }
