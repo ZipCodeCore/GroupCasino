@@ -1,8 +1,11 @@
-package io.zipcoder.casino;
-import io.zipcoder.casino.CardGame.BlackJack.Blackjack;
+package io.zipcoder.casino.CardGame.BlackJack;
+
+import io.zipcoder.casino.Player;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class BlackjackTest {
 
@@ -16,21 +19,16 @@ public class BlackjackTest {
     public void constructorTest(){
         //Given
         Blackjack blackjack = new Blackjack(player);
+        double expected = 0;
 
         //When
+        double actual = blackjack.getPot();
 
         //Then
+        Assert.assertEquals(expected, actual, 0);
     }
 
     @Test
-    public void payout() {
-    }
-
-    @Test
-    public void play() {
-    }
-
-    @Test
-    public void walkAway() {
+    public void push() {
     }
 }

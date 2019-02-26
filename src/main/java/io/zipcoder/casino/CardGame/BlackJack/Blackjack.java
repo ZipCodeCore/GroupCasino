@@ -27,7 +27,13 @@ public class Blackjack extends CardGame implements GamblingGame {
 
     public double payout() {
 
+
     return 0;
+    }
+
+
+    public double push(){
+        return 0;
     }
 
     public void play() {
