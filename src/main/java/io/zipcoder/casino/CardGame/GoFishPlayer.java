@@ -20,18 +20,13 @@ public class GoFishPlayer {
     private int counter4 = 0;
 
 
-    private Deck deck;
-
-
-    //private ArrayList<Card> cardsToReturn;
-
     // Constructor
 
     public GoFishPlayer(Player player) {
 
         this.name = player.getName();
         this.player = player;
-        this.hand = new Hand(new ArrayList<Card>());
+        this.hand = new Hand(new ArrayList<>());
 
 
     }
@@ -53,21 +48,15 @@ public class GoFishPlayer {
     }
 
     // method return boolean to check whether the opponent has the requested face
-    public boolean isCardsToReturn(Face faceRequested) {
-
-        boolean bool = false;
+    public boolean hasRequestedCard(Face cardRequested) {
 
         for (Card card : hand.showMyCards()) {
 
-            if (card.getFace().equals(faceRequested)) {
-
-
-                bool = true;
+            if (card.getFace().equals(cardRequested)) {
+                return true;
             }
         }
-
-        return bool;
-
+        return false;
     }
 
 
@@ -77,7 +66,7 @@ public class GoFishPlayer {
 
         ArrayList<Card> cardsInHand = otherPlayer.hand.showMyCards();
 
-        ArrayList<Card> cardsToRemove = new ArrayList<Card>();
+        ArrayList<Card> cardsToRemove = new ArrayList<>();
 
 
         for (Card card : cardsInHand) {
@@ -179,77 +168,85 @@ public class GoFishPlayer {
         return counter;
     }
 
-    public void fourOfAKindFinder() {
+    public boolean fourOfAKindFinder() {
 
         Integer[] cardCounter = getCardCountInHand();
+        Boolean hasFourOfAKind = false;
 
         for (int i = 0; i < 13; i++) {
             if (cardCounter[i] == 4) {
                 if (i == 0) {
                     layDown4OfAKind(Face.ACE);
+                    hasFourOfAKind = true;
                 }
                 if (i == 1) {
                     layDown4OfAKind(Face.TWO);
+                    hasFourOfAKind = true;
                 }
                 if (i == 2) {
                     layDown4OfAKind(Face.THREE);
+                    hasFourOfAKind = true;
                 }
                 if (i == 3) {
                     layDown4OfAKind(Face.FOUR);
+                    hasFourOfAKind = true;
                 }
                 if (i == 4) {
                     layDown4OfAKind(Face.FIVE);
+                    hasFourOfAKind = true;
                 }
                 if (i == 5) {
                     layDown4OfAKind(Face.SIX);
+                    hasFourOfAKind = true;
                 }
                 if (i == 6) {
                     layDown4OfAKind(Face.SEVEN);
+                    hasFourOfAKind = true;
                 }
                 if (i == 7) {
                     layDown4OfAKind(Face.EIGHT);
+                    hasFourOfAKind = true;
                 }
                 if (i == 8) {
                     layDown4OfAKind(Face.NINE);
+                    hasFourOfAKind = true;
                 }
                 if (i == 9) {
                     layDown4OfAKind(Face.TEN);
+                    hasFourOfAKind = true;
                 }
                 if (i == 10) {
                     layDown4OfAKind(Face.JACK);
+                    hasFourOfAKind = true;
                 }
                 if (i == 11) {
                     layDown4OfAKind(Face.QUEEN);
+                    hasFourOfAKind = true;
                 }
                 if (i == 12) {
                     layDown4OfAKind(Face.KING);
+                    hasFourOfAKind = true;
                 }
             }
         }
+        return hasFourOfAKind;
     }
 
+    public void setHand(Hand hand) {
+        this.hand = hand;
+    }
 
-    // The show method shows the hand of a particular player/dealer
-//    System.out.println('\u2665');// hearts
-//    System.out.println('\u2666');//Diamond
-//    System.out.println('\u2660'); //Spade
-//    System.out.println('\u2663'); // club
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    // Kyle is working on re-writing the ToString method to print
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
-//    public void showHand() {
-//
-//        hand.showMyCards(); //showMyCards method needs to be defined in the Hand Class.
-//
-//        Console console = Console.getInstance();
-//
-//       console.print(hand.toString());
-//
-//
-//
-//
-//
-//    }
+    public void setCounter4(int counter4) {
+        this.counter4 = counter4;
+    }
 
 
 }

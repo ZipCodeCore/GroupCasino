@@ -66,7 +66,7 @@ public class GoFishPlayerTest {
     Card dK = new Card(Face.KING, Suit.DIAMONDS);
 
     @Test
-    public void goFishPlayerConstructorTest(){
+    public void goFishPlayerConstructorTest() {
 
         // Given
         String expectedName = "Cara";
@@ -84,7 +84,7 @@ public class GoFishPlayerTest {
 
 
     @Test
-    public void addCardsToHandsTest(){
+    public void addCardsToHandsTest() {
         // Given
         Player player = new Player("Cara", 1000);
         GoFishPlayer goFishPlayer = new GoFishPlayer(player);
@@ -116,7 +116,7 @@ public class GoFishPlayerTest {
 
 
     @Test
-    public void getCardCountInHandTest(){
+    public void getCardCountInHandTest() {
         // Given
         Player player = new Player("Cara", 1000);
         GoFishPlayer goFishPlayer = new GoFishPlayer(player);
@@ -147,9 +147,8 @@ public class GoFishPlayerTest {
     }
 
 
-
     @Test
-    public void layDown4OfAKindTest(){
+    public void layDown4OfAKindTest() {
         // Given
         Player player = new Player("Cara", 1000);
         GoFishPlayer goFishPlayer = new GoFishPlayer(player);
@@ -193,7 +192,7 @@ public class GoFishPlayerTest {
 
 
     @Test
-    public void fourOfAKindFinderTest(){
+    public void fourOfAKindFinderTest() {
         // Given
         Player player = new Player("Cara", 1000);
         GoFishPlayer goFishPlayer = new GoFishPlayer(player);
@@ -230,18 +229,19 @@ public class GoFishPlayerTest {
         expectedCards.add(hQ);
 
         // When
-        goFishPlayer.fourOfAKindFinder();
+        boolean actual = goFishPlayer.fourOfAKindFinder();
         int actualCounter4 = goFishPlayer.getCounter4();
         ArrayList<Card> actualCards = goFishPlayer.getHand().showMyCards();
 
         // Then
         Assert.assertEquals(expectedCounter4, actualCounter4);
         Assert.assertEquals(expectedCards, actualCards);
+        Assert.assertTrue(actual);
     }
 
 
     @Test
-    public void requestCardTest(){
+    public void requestCardTest() {
         // Given
         Player player = new Player("Cara", 1000);
         Player otherPlayer = new Player("Neela", 1000);
@@ -299,7 +299,7 @@ public class GoFishPlayerTest {
 
 
     @Test
-    public void isCardsToReturnTest(){
+    public void hasRequestedCardTest() {
         // Given
         Player player = new Player("Cara", 1000);
         GoFishPlayer goFishPlayer = new GoFishPlayer(player);
@@ -318,9 +318,9 @@ public class GoFishPlayerTest {
         goFishPlayer.getHand().addCardsToHand(cards);
 
         // When
-        boolean expectedTrue = goFishPlayer.isCardsToReturn(Face.TEN);
-        boolean expectedTrue2 = goFishPlayer.isCardsToReturn(Face.SIX);
-        boolean expectedFalse = goFishPlayer.isCardsToReturn(Face.THREE);
+        boolean expectedTrue = goFishPlayer.hasRequestedCard(Face.TEN);
+        boolean expectedTrue2 = goFishPlayer.hasRequestedCard(Face.SIX);
+        boolean expectedFalse = goFishPlayer.hasRequestedCard(Face.THREE);
 
         // Then
         Assert.assertTrue(expectedTrue);
