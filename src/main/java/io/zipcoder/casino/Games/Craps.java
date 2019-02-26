@@ -107,6 +107,11 @@ public class Craps implements Game {
     public Craps() {
     }
 
+    // Purely for testing
+    public Craps(Console console) {
+        this.console = console;
+    }
+
     public static void main(String[] args) {
         Craps craps = new Craps();
         craps.play();
