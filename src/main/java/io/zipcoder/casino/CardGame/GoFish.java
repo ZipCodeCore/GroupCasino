@@ -5,6 +5,7 @@ import io.zipcoder.casino.CardGame.Cards.Deck;
 import io.zipcoder.casino.CardGame.Cards.Face;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,200 +15,84 @@ public class GoFish extends CardGame {
     private int playersScoreCounter;
     private int dealersScoreCounter;
     private Deck deck;
+    Console console = Console.getInstance();
+    private boolean playing = false;
+    private String input;
+    private boolean playerAskingForCard = false;
+    boolean playerDrawing = false;
+    boolean playersTurn = true;
+    boolean newTurn = true;
+    boolean dealersTurn = false;
+    boolean dealerAskingForCard = false;
+    boolean givingDealerCard = false;
+    boolean dealerDrawing = false;
+    Face requestedCard = null;
 
 
     public GoFish(Player player) {
 
         this.goFishPlayer = new GoFishPlayer(player);
-
         this.dealer = new GoFishPlayer(new Player("dealer", 0.0));
-
         this.deck = new Deck(1);
-
         this.deck.shuffle();
     }
 
 
     public void play() {
 
-        boolean playing = false;
-        Console console = Console.getInstance();
-        String input = console.getStringInput("Welcome to Go Fish!  Type 'deal' to play!");
-
-
-        if (input.equals("deal")) {
-            goFishPlayer.getHand().addCardsToHand(deck.deal(7));
-            dealer.getHand().addCardsToHand(deck.deal(7));
-            playing = true;
-
-            console.println(goFishPlayer.getHand().toString());
-
-            if (goFishPlayer.fourOfAKindFinder()) {
-                updatePlayerScore();
-                console.println("Wow! You were dealt four of a kind!  Your new score is %d.", playersScoreCounter);
-            }
-
-            if (dealer.fourOfAKindFinder()) {
-                updateDealerScore();
-                console.println("The dealer was dealt four of a kind!  The dealers score is %d.", dealersScoreCounter);
-            }
-        }
-
-
-        boolean playersTurn = true;
-        boolean newTurn = true;
-        boolean playerAskingForCard = false;
-        boolean playerDrawing = false;
-        boolean dealersTurn = false;
-        boolean dealerAskingForCard = false;
-        boolean givingDealerCard = false;
-        boolean dealerDrawing = false;
-        Face requestedCard = null;
+        startGame();
 
         while (playing) {
 
+            // players turn
             while (playersTurn) {
-                if (newTurn) {
-                    input = console.getStringInput("\nType 'ASK' to ask for a card.");
-                }
-
-
-                if (input.toLowerCase().equals("ask")) {
-                    playerAskingForCard = true;
-                }
+                checkAskInput();
 
                 // player asking dealer for card
                 while (playerAskingForCard) {
-                    console.println("\n" + goFishPlayer.getHand().toString());
-                    String cardInput = console.getStringInput("Enter the card you want to ask the dealer for!\n" + getCardOptions());
-                    try {
-                        requestedCard = Face.valueOf(cardInput.toUpperCase());
-                        playerAskingForCard = false;
-                    } catch (IllegalArgumentException iae) {
-                        console.println("Invalid card requested.\n");
-                    }
+                    askDealerForCard();
                 }
 
-                // if dealer has requested card
+                // if dealer has card requested by player
                 if ((requestedCard != null) && input.toLowerCase().equals("ask")) {
-                    if (dealer.hasRequestedCard(requestedCard)) {
-                        goFishPlayer.requestCard(dealer, requestedCard);
-                        console.println("\n" + goFishPlayer.getHand().toString());
-                        console.println("The dealer gave you all their " + requestedCard.name() + " cards!  Go again!\n");
+                    dealerResponse();
 
-                        if (goFishPlayer.fourOfAKindFinder()) {
-                            updatePlayerScore();
-                            console.println("\nYou got four of a kind!  Your new score is %d.", playersScoreCounter);
-                            playerAskingForCard = true;
-                        }
-                    } else {
-                        input = console.getStringInput("\nThe dealer does not have any " + requestedCard.name() + " cards.  Enter 'DRAW' to Go Fish!");
-                    }
-
-
-                    if (input.toLowerCase().equals("draw")) {
-                        playerDrawing = true;
-                        newTurn = true;
-                    }
-                    else if (input.toLowerCase().equals("ask")){
-                        newTurn = true;
-                        continue;
-                    }
-                    else {
-                        console.println("Invalid input.");
-                        newTurn = false;
-                    }
-
+                    // if player has to draw
+                    checkDrawInput();
                     while (playerDrawing) {
-                        goFishPlayer.getHand().drawCard(deck);
-                        if (getLastCard(goFishPlayer).getFace().equals(requestedCard)) {
-
-                            console.println("You drew a %s!  Go again!", requestedCard.name());
-                            playerDrawing = false;
-                            playerAskingForCard = true;
-                        } else {
-                            console.println("\n" + goFishPlayer.getHand().toString());
-                            console.println("You drew a %s.  It's the dealer's turn.", getLastCard(goFishPlayer).getFace().name());
-                            playerDrawing = false;
-                            playersTurn = false;
-                            dealersTurn = true;
-                            dealerAskingForCard = true;
-                        }
-                        if (goFishPlayer.fourOfAKindFinder()) {
-                            updatePlayerScore();
-                            console.println("You got 4 of a kind!  Your new score is %d!\n", playersScoreCounter);
-                        }
+                        playerDraw();
                     }
                 }
             }
 
+            // dealers turn
             while (dealersTurn) {
 
-                int sizeOfDealersHand = dealer.getHand().getSize();
-                Random random = new Random();
-                Integer indexOfCard = random.nextInt(sizeOfDealersHand - 1);
-                Face dealersRequestedCard = dealer.getHand().showMyCards().get(indexOfCard).getFace();
+                // card dealer is asking player for
+                Face dealersRequestedCard = getDealersRequestedCard();
 
+                // dealer requests card
                 while (dealerAskingForCard) {
                     console.println("\nThe dealer requested the card " + dealersRequestedCard + ".\n\n" + goFishPlayer.getHand().toString());
-                    if (goFishPlayer.hasRequestedCard(dealersRequestedCard)) {
-                        input = console.getStringInput("You have the card the dealer requested. Type 'GIVE' to it to the dealer.");
-                        if (!input.toLowerCase().equals("give")) {
-                            console.println("Invalid input.");
-                        } else {
-                            dealerAskingForCard = false;
-                            givingDealerCard = true;
-                        }
-                    }
-                    else {
-                        input = console.getStringInput("You don't have the requested card!  Tell the dealer to 'GO FISH'.");
-                        if(input.toLowerCase().equals("go fish")) {
-                            dealerAskingForCard = false;
-                            dealerDrawing = true;
-                        }
-                        else {
-                            console.println("Invalid input.");
-                        }
-                    }
-
+                    respondToDealer(dealersRequestedCard);
                 }
 
-                if(givingDealerCard) {
-                    dealer.requestCard(goFishPlayer, dealersRequestedCard);
-                    if (dealer.fourOfAKindFinder()) {
-                        updateDealerScore();
-                        console.println("The dealer got 4 of a kind.  Their score is %d", dealersScoreCounter);
-                    }
-                    givingDealerCard = false;
-                    dealerAskingForCard = true;
+                // player has card to give to dealer
+                if (givingDealerCard) {
+                    giveDealerCard(dealersRequestedCard);
                 }
 
+                // dealer drawing
                 if (dealerDrawing) {
+                    dealerDraw(dealersRequestedCard);
 
-                    dealer.getHand().drawCard(deck);
-
-                    if (getLastCard(dealer).getFace().equals(dealersRequestedCard)) {
-                        console.println("The dealer drew the card they requested.  It's their turn again!");
-                        dealerDrawing = false;
-                        dealerAskingForCard = true;
-                    }
-                    if (dealer.fourOfAKindFinder()) {
-                        updateDealerScore();
-                        console.println("The dealer got 4 of a kind.  Their score is %d", dealersScoreCounter);
-                    }
-
+                    // dealer did not draw the requested card -- switch to players turn
                     if (dealerDrawing) {
-
                         dealersTurn = false;
                         dealerDrawing = false;
                         playersTurn = true;
-
                     }
-
                 }
-
-
-
             }
 /*
             if (dealersScoreCounter > playersScoreCounter) {
@@ -221,7 +106,6 @@ public class GoFish extends CardGame {
 */
         }
     }
-
 
 
     public Card getLastCard(GoFishPlayer player) {
@@ -267,4 +151,165 @@ public class GoFish extends CardGame {
     public int getDealersScoreCounter() {
         return dealersScoreCounter;
     }
+
+    public void startGame() {
+
+        input = console.getStringInput("Welcome to Go Fish!  Type 'deal' to play!");
+
+        if (input.equals("deal")) {
+            goFishPlayer.getHand().addCardsToHand(deck.deal(7));
+            dealer.getHand().addCardsToHand(deck.deal(7));
+            playing = true;
+
+            console.println(goFishPlayer.getHand().toString());
+
+            if (goFishPlayer.fourOfAKindFinder()) {
+                updatePlayerScore();
+                console.println("Wow! You were dealt four of a kind!  Your new score is %d.", playersScoreCounter);
+            }
+
+            if (dealer.fourOfAKindFinder()) {
+                updateDealerScore();
+                console.println("The dealer was dealt four of a kind!  The dealers score is %d.", dealersScoreCounter);
+            }
+        }
+    }
+
+
+    public void checkAskInput() {
+        if (newTurn) {
+            input = console.getStringInput("\nType 'ASK' to ask for a card.");
+        }
+        if (input.toLowerCase().equals("ask")) {
+            playerAskingForCard = true;
+        }
+    }
+
+
+    public void askDealerForCard() {
+        console.println("\n" + goFishPlayer.getHand().toString());
+        String cardInput = console.getStringInput("Enter the card you want to ask the dealer for!\n" + getCardOptions());
+        try {
+            requestedCard = Face.valueOf(cardInput.toUpperCase());
+            playerAskingForCard = false;
+        } catch (IllegalArgumentException iae) {
+            console.println("Invalid card requested.\n");
+        }
+    }
+
+
+    public void dealerResponse() {
+        if (dealer.hasRequestedCard(requestedCard)) {
+            goFishPlayer.requestCard(dealer, requestedCard);
+            console.println("\n" + goFishPlayer.getHand().toString());
+            console.println("The dealer gave you all their " + requestedCard.name() + " cards!  Go again!\n");
+
+            if (goFishPlayer.fourOfAKindFinder()) {
+                updatePlayerScore();
+                console.println("\nYou got four of a kind!  Your new score is %d.", playersScoreCounter);
+                playerAskingForCard = true;
+            }
+        } else {
+            input = console.getStringInput("\nThe dealer does not have any " + requestedCard.name() + " cards.  Enter 'DRAW' to Go Fish!");
+        }
+    }
+
+    public void checkDrawInput() {
+        if (input.toLowerCase().equals("draw")) {
+            playerDrawing = true;
+            newTurn = true;
+        } else if (input.toLowerCase().equals("ask")) {
+            newTurn = true;
+        } else {
+            console.println("Invalid input.");
+            newTurn = false;
+        }
+    }
+
+    public void playerDraw() {
+        goFishPlayer.getHand().drawCard(deck);
+        printPlayersDraw();
+        if (goFishPlayer.fourOfAKindFinder()) {
+            updatePlayerScore();
+            console.println("You got 4 of a kind!  Your new score is %d!\n", playersScoreCounter);
+        }
+    }
+
+    public void printPlayersDraw() {
+        if (getLastCard(goFishPlayer).getFace().equals(requestedCard)) {
+
+            console.println("You drew a %s!  Go again!", requestedCard.name());
+            playerDrawing = false;
+            playerAskingForCard = true;
+        } else {
+            console.println("\n" + goFishPlayer.getHand().toString());
+            console.println("You drew a %s.  It's the dealer's turn.", getLastCard(goFishPlayer).getFace().name());
+            playerDrawing = false;
+            playersTurn = false;
+            dealersTurn = true;
+            dealerAskingForCard = true;
+        }
+    }
+
+    public Face getDealersRequestedCard() {
+        int sizeOfDealersHand = dealer.getHand().getSize();
+        Random random = new Random();
+        Integer indexOfCard = random.nextInt(sizeOfDealersHand - 1);
+        Face dealersRequestedCard = dealer.getHand().showMyCards().get(indexOfCard).getFace();
+
+        return dealersRequestedCard;
+    }
+
+
+    public void respondToDealer(Face dealersRequestedCard) {
+        if (goFishPlayer.hasRequestedCard(dealersRequestedCard)) {
+            input = console.getStringInput("You have the card the dealer requested. Type 'GIVE' to it to the dealer.");
+            if (!input.toLowerCase().equals("give")) {
+                console.println("Invalid input.");
+            } else {
+                dealerAskingForCard = false;
+                givingDealerCard = true;
+            }
+        } else {
+            input = console.getStringInput("You don't have the requested card!  Tell the dealer to 'GO FISH'.");
+            if (input.toLowerCase().equals("go fish")) {
+                dealerAskingForCard = false;
+                dealerDrawing = true;
+            } else {
+                console.println("Invalid input.");
+            }
+        }
+    }
+
+
+    public void dealerDraw(Face dealersRequestedCard) {
+        dealer.getHand().drawCard(deck);
+
+        if (getLastCard(dealer).getFace().equals(dealersRequestedCard)) {
+            console.println("The dealer drew the card they requested.  It's their turn again!");
+            dealerDrawing = false;
+            dealerAskingForCard = true;
+        }
+        if (dealer.fourOfAKindFinder()) {
+            updateDealerScore();
+            console.println("The dealer got 4 of a kind.  Their score is %d", dealersScoreCounter);
+        }
+    }
+
+
+    public void giveDealerCard(Face dealersRequestedCard) {
+        dealer.requestCard(goFishPlayer, dealersRequestedCard);
+
+        if (dealer.fourOfAKindFinder()) {
+            updateDealerScore();
+            console.println("The dealer got 4 of a kind.  Their score is %d", dealersScoreCounter);
+        }
+        givingDealerCard = false;
+        dealerAskingForCard = true;
+    }
+
+
+
+
+
 }
