@@ -253,20 +253,18 @@ public class GoFishPlayer {
         this.counter4 = counter4;
     }
 
-    public boolean isPlayersHandNotEmpty (GoFishPlayer player){
+    public boolean isPlayersHandNotEmpty (){
 
-        if(player.getHand().getSize() > 0){
+        if(getHand().getSize() > 0){
 
-            playersHandNotEmpty = true;
+            return true;
         }
 
         else {
 
-            playersHandNotEmpty = false;
+            return false;
         }
 
-
-        return playersHandNotEmpty;
     }
 
 
