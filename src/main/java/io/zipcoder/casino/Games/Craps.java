@@ -50,6 +50,14 @@ public class Craps implements Game {
     private boolean isPlaying = true;
     private boolean isQuitting = false;
 
+    public boolean getToWinPassBet() {
+        return toWinPassBet;
+    }
+
+    public Map<String, Boolean> getBetMap() {
+        return betMap;
+    }
+
     private enum GameStatus {UNRESOLVED, WON, LOST}
 
     private enum BetList {
