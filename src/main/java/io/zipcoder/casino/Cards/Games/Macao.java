@@ -76,7 +76,7 @@ public class Macao extends Game {
         this.dealerStillPlaying = stillPlaying;
     }
 
-    public int playGame() {
+    public int play() {
         printGameInstructions();
         if (beginGame()) {
             initialGameSetup();
@@ -201,9 +201,9 @@ public class Macao extends Game {
         }
     }
 
-    public static void main(String[] args) {
-        Macao macao = new Macao();
-        macao.playGame();
-    }
+//    public static void main(String[] args) {
+//        Macao macao = new Macao();
+//        macao.play();
+//    }
 
 }
