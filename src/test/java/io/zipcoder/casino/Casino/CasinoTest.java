@@ -1,10 +1,10 @@
 package io.zipcoder.casino.Casino;
 
 
-import io.zipcoder.casino.Cards.Games.BlackJack;
-import io.zipcoder.casino.Cards.Games.Game;
-import io.zipcoder.casino.Cards.Games.GoFish;
-import io.zipcoder.casino.Cards.Games.Macao;
+import io.zipcoder.casino.Games.BlackJack;
+import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.Games.GoFish;
+import io.zipcoder.casino.Games.Macao;
 import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Test;

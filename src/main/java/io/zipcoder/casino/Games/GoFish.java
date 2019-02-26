@@ -1,4 +1,4 @@
-package io.zipcoder.casino.Cards.Games;
+package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Deck;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class GoFish extends Game {
+public class GoFish implements Game {
     private GoFishPlayer dealer = new GoFishPlayer();
     private GoFishPlayer user = new GoFishPlayer();
     private Deck deck = new Deck();
@@ -40,7 +40,7 @@ public class GoFish extends Game {
         console = Console.getConsole();
     }
 
-    public int play() {
+    public void play() {
         console.println(Greeter.getGoFishName());
         console.println("Rules: The object of this game is to get the most books (4 of a kind) down.\nHere's your staring hand:\n");
         dealStartingHands();
@@ -52,7 +52,7 @@ public class GoFish extends Game {
             userTurn();
             evaluate();
         }
-        return -5;
+        user.getProfile().setBalance(user.getProfile().getBalance() - 5);
     }
 
     public void dealerTurn() {

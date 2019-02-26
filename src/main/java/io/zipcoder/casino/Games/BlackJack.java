@@ -1,25 +1,22 @@
-package io.zipcoder.casino.Cards.Games;
+package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Deck;
 import io.zipcoder.casino.Cards.Rank;
-import io.zipcoder.casino.Casino.Casino;
-import io.zipcoder.casino.Players.CardPlayer;
-import io.zipcoder.casino.Players.Player;
+import io.zipcoder.casino.Players.BlackJackPlayer;
 import io.zipcoder.casino.Players.Profile;
 import io.zipcoder.casino.utilities.Console;
 
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class BlackJack extends Game {
+public class BlackJack implements Game {
 
-    private CardPlayer dealer = new CardPlayer(new Profile());
-    //private CardPlayer user = new CardPlayer(Casino.getProfile()); //this will need to be uncommented for live version and line below will need to be removed
-    private CardPlayer user = new CardPlayer(new Profile("testName",true));
+    private BlackJackPlayer dealer = new BlackJackPlayer(new Profile());
+    //private BlackJackPlayer user = new BlackJackPlayer(Casino.getProfile()); //this will need to be uncommented for live version and line below will need to be removed
+    private BlackJackPlayer user = new BlackJackPlayer(new Profile("testName",true));
     private Deck currentDeck = new Deck();
 
     private int userTotal;
@@ -27,7 +24,7 @@ public class BlackJack extends Game {
     private Integer userBet;
     private boolean isOver = false;
 
-    Console blackJackConsole;
+    private Console blackJackConsole;
 
     public BlackJack(){
         this(Console.getConsole());
@@ -37,10 +34,10 @@ public class BlackJack extends Game {
         blackJackConsole = testConsole;
     }
 
-    public CardPlayer getUser(){
+    public BlackJackPlayer getUser(){
         return this.user;
     }
-    public CardPlayer getDealer(){
+    public BlackJackPlayer getDealer(){
         return this.dealer;
     }
 
@@ -53,14 +50,13 @@ public class BlackJack extends Game {
         blackJack.play();
     }
 
-    public int play() {
+    public void play() {
         getUserBet();
         playFirstTurn();
 
-        while (isOver != true) {
+        while (!isOver) {
             evaluate();
         }
-        return -1;
     }
 
     public void getUserBet() {

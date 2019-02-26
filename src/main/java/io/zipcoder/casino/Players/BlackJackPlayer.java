@@ -5,9 +5,9 @@ import io.zipcoder.casino.Cards.Card;
 import java.util.Collections;
 import java.util.List;
 
-public class CardPlayer extends Player {
+public class BlackJackPlayer extends Player {
 
-    public CardPlayer(Profile profile){
+    public BlackJackPlayer(Profile profile){
         super(profile);
     }
 

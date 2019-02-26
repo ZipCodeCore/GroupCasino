@@ -1,7 +1,6 @@
 package io.zipcoder.casino.Casino;
 
-import io.zipcoder.casino.Cards.*;
-import io.zipcoder.casino.Cards.Games.Game;
+import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.Players.Profile;
 
 public class Casino {
