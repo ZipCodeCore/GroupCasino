@@ -550,11 +550,34 @@ public class GoFishTests {
 
 
         // When
+        goFish.drawNewCardsIfHandIsEmpty(goFish.getGoFishPlayer());
 
-        goFish.checkIfDeckIsEmpty();
+        //goFish.checkIfDeckIsEmpty();
 
         // Then
-        Assert.assertFalse(goFish.isDealerDrawing());
+        Assert.assertTrue(goFish.deckIsEmpty(goFish.getDeck()));
+
+
+    }
+
+    @Test
+    public void endOfGameMessageTest(){
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+        goFish.getDeck().deck.removeAll(goFish.getDeck().deck);
+
+
+        // When
+        goFish.drawNewCardsIfHandIsEmpty(goFish.getGoFishPlayer());
+
+        //goFish.checkIfDeckIsEmpty();
+
+        // Then
+        Assert.assertTrue(goFish.deckIsEmpty(goFish.getDeck()));
+
 
 
     }
