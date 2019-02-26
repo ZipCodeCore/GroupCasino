@@ -23,6 +23,7 @@ public class CrapsPlayer implements GamblingPlayer {
     public ArrayList<Dice> rollDice(int numberOfDice) {
 
         ArrayList<Dice> rolledDice = new ArrayList<>();
+
         for (int i = 0; i < numberOfDice; i++) {
             Dice die = new Dice(1);
             int dieValue = die.rollDice();
