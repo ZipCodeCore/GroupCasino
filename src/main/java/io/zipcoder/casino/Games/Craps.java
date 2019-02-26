@@ -27,7 +27,7 @@ public class Craps implements Game {
     private final int[] hardwaysRolls = {4, 6, 8, 10};
     private final int[] placeNumberRolls = {4, 5, 6, 8, 9, 10};
     private final int[] fieldNumberRolls = {2, 3, 4, 9, 10, 11, 12};
-    private int adjustedBalance;
+    private int adjustedBalance = 0;
     private int rollSum;
     private int hardwaysRoll;
     private boolean isAnyCrapsBet;
@@ -54,8 +54,40 @@ public class Craps implements Game {
         return toWinPassBet;
     }
 
+    public void setIsFirstRoll(boolean isFirstRoll) {
+        this.isFirstRoll = isFirstRoll;
+    }
+
+    public void setRollSum(int rollSum) {
+        this.rollSum = rollSum;
+    }
+
     public Map<String, Boolean> getBetMap() {
         return betMap;
+    }
+
+    public void setToWinPassSet(boolean toWinPassBet) {
+        this.toWinPassBet = toWinPassBet;
+    }
+
+    public void setBetAmount(int betAmount) {
+        this.betAmount = betAmount;
+    }
+
+    public int getAdjustedBalance() {
+        return adjustedBalance;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public boolean getIsFirstRoll() {
+        return isFirstRoll;
     }
 
     private enum GameStatus {UNRESOLVED, WON, LOST}
@@ -131,7 +163,8 @@ public class Craps implements Game {
         while (!isOver) {
             while (isFirstRoll) {
                 promptBet();
-                firstRoll();
+                roll();
+                evaluateFirstRoll();
             }
             while (isPlaying && gameState == GameStatus.UNRESOLVED) {
                 roll();
@@ -142,8 +175,7 @@ public class Craps implements Game {
         }
     }
 
-    public void firstRoll() {
-        roll();
+    public void evaluateFirstRoll() {
         if (Arrays.stream(anyCraps).anyMatch(i -> i == rollSum) && toWinPassBet) {
             console.println("Whomp, whomp, you crapped out\n");
             adjustBalance(-betAmount);
@@ -170,7 +202,6 @@ public class Craps implements Game {
             isFirstRoll = false;
         }
         rollSum = point;
-        promptBet();
     }
 
     public void resetPointAndRoll() {
@@ -182,10 +213,10 @@ public class Craps implements Game {
         if (isFirstRoll) {
             int betAmount = console.getIntegerInput("How much would you like to bet?");
             String passChoice = console.getStandardInput("Please choose 'Pass' or 'Don't Pass'");
-            if (passChoice.equals("pass")) {
+            if (passChoice.toLowerCase().equals("pass")) {
                 toWinPassBet = true;
                 betMap.put("Pass Bet", true);
-            } else if (passChoice.equals("don't pass")) {
+            } else if (passChoice.toLowerCase().equals("don't pass")) {
                 toWinPassBet = false;
                 betMap.put("Pass Bet", false);
             }
@@ -404,13 +435,13 @@ public class Craps implements Game {
 
     public void cashOut() {
         String continuePlaying = console.getStandardInput("Would you like to continue playing?\n");
+        isPlaying = false;
         if (continuePlaying.equals("no")) {
             compareBalance();
             user.getProfile().setBalance(adjustedBalance);
-            isPlaying = false;
             isOver = true;
         } else if (continuePlaying.equals("yes")) {
-            roll();
+            isPlaying = true;
         }
     }
 }
