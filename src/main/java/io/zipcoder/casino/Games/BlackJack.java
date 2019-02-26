@@ -1,8 +1,8 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.Cards.Card;
-import io.zipcoder.casino.Cards.Deck;
-import io.zipcoder.casino.Cards.Rank;
+import io.zipcoder.casino.CardsAndDice.Card;
+import io.zipcoder.casino.CardsAndDice.Deck;
+import io.zipcoder.casino.CardsAndDice.Rank;
 import io.zipcoder.casino.Players.BlackJackPlayer;
 import io.zipcoder.casino.Players.Profile;
 import io.zipcoder.casino.utilities.Console;

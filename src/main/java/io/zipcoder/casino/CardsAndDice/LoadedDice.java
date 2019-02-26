@@ -1,6 +1,4 @@
-package io.zipcoder.casino.Cards;
-
-import io.zipcoder.casino.Cards.Dice;
+package io.zipcoder.casino.CardsAndDice;
 
 public class LoadedDice extends Dice {
 

@@ -1,8 +1,9 @@
 package io.zipcoder.casino.Casino.GameTest;
 
-import io.zipcoder.casino.Cards.Card;
-import io.zipcoder.casino.Cards.Rank;
-import io.zipcoder.casino.Cards.Suit;
+import io.zipcoder.casino.CardsAndDice.Card;
+import io.zipcoder.casino.CardsAndDice.Deck;
+import io.zipcoder.casino.CardsAndDice.Rank;
+import io.zipcoder.casino.CardsAndDice.Suit;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,6 +41,23 @@ public class CardTest {
         //Then
         Assert.assertEquals(expected,testCard.toString());
         Assert.assertEquals(suit,actualSuit);
+
+    }
+    @Test
+    public void testGetCardBack() {
+        //Given
+        Card testCard = Deck.getCardBack();
+
+        //When
+        String actualBack = Card.printAllCards(testCard);
+        String expected =
+                        "┏━━━┓\n" +
+                        "┃Ƞ  ┃\n" +
+                        "┃ Ʉ ┃\n" +
+                        "┃  ʗ┃\n" +
+                        "┗━━━┛\n";
+        //Then
+        Assert.assertEquals(expected, actualBack);
 
     }
 

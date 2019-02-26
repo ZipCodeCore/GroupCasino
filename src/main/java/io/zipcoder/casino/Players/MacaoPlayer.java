@@ -1,7 +1,5 @@
 package io.zipcoder.casino.Players;
 
-import io.zipcoder.casino.Cards.Dice;
-
 import java.util.ArrayList;
 
 public class MacaoPlayer extends Player {

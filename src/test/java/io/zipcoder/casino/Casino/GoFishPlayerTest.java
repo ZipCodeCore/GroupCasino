@@ -1,9 +1,9 @@
 package io.zipcoder.casino.Casino;
 
-import io.zipcoder.casino.Cards.Card;
-import io.zipcoder.casino.Cards.Deck;
-import io.zipcoder.casino.Cards.Rank;
-import io.zipcoder.casino.Cards.Suit;
+import io.zipcoder.casino.CardsAndDice.Card;
+import io.zipcoder.casino.CardsAndDice.Deck;
+import io.zipcoder.casino.CardsAndDice.Rank;
+import io.zipcoder.casino.CardsAndDice.Suit;
 import io.zipcoder.casino.Players.GoFishPlayer;
 import org.junit.Assert;
 import org.junit.Test;
@@ -112,12 +112,11 @@ public class GoFishPlayerTest {
     public void testHasCardTrue() {
         // Given
         GoFishPlayer testPlayer = new GoFishPlayer();
-        Deck testDeck = new Deck();
-        Card expected = testDeck.drawCard();
+        Card expected = new Card(Suit.HEARTS, Rank.THREE);
 
         // When
         testPlayer.addToHand(expected);
-        boolean actual = testPlayer.hasCard(expected.getRank().toString().toLowerCase());
+        boolean actual = testPlayer.hasCard(expected.getRank().toString().toUpperCase());
 
         // Then
         Assert.assertTrue(actual);
@@ -127,7 +126,6 @@ public class GoFishPlayerTest {
     public void testHasCardFalse() {
         // Given
         GoFishPlayer testPlayer = new GoFishPlayer();
-        Deck testDeck = new Deck();
         Card cardInHand = new Card(Suit.HEARTS, Rank.ACE);
         Card cardNotInHand = new Card(Suit.DIAMONDS, Rank.THREE);
 
@@ -143,8 +141,7 @@ public class GoFishPlayerTest {
     public void testGetCards() {
         // Given
         GoFishPlayer testPlayer = new GoFishPlayer();
-        Deck testDeck = new Deck();
-        Card cardInHand = testDeck.drawCard();
+        Card cardInHand = new Card(Suit.HEARTS, Rank.ACE);
         List<Card> expected = new ArrayList<>();
         expected.add(cardInHand);
         expected.add(cardInHand);
@@ -240,8 +237,7 @@ public class GoFishPlayerTest {
     public void testHasBooks2() {
         // Given
         GoFishPlayer testPlayer = new GoFishPlayer();
-        Deck testDeck = new Deck();
-        testPlayer.addToHand(testDeck.drawMultipleCards(1));
+        testPlayer.addToHand(new Card(Suit.HEARTS, Rank.ACE));
 
         // When
         boolean actual = testPlayer.hasBooks();
@@ -268,7 +264,6 @@ public class GoFishPlayerTest {
     public void testHasBooks4() {
         // Given
         GoFishPlayer testPlayer = new GoFishPlayer();
-        Deck testDeck = new Deck();
         Card cardInHand =  new Card(Suit.HEARTS, Rank.ACE);
         Card otherCard =  new Card(Suit.DIAMONDS, Rank.ACE);
         Card thirdCard =  new Card(Suit.SPADES, Rank.ACE);
@@ -289,8 +284,7 @@ public class GoFishPlayerTest {
     public void testGetBooks() {
         // Given
         GoFishPlayer testPlayer = new GoFishPlayer();
-        Deck testDeck = new Deck();
-        Card testCard = testDeck.drawCard();
+        Card testCard = new Card(Suit.CLUBS, Rank.QUEEN);
         List<Card> expected = new ArrayList<>();
         expected.add(testCard);
         expected.add(testCard);
@@ -327,8 +321,7 @@ public class GoFishPlayerTest {
     public void testGetHandSize() {
         // Given
         GoFishPlayer testPlayer = new GoFishPlayer();
-        Deck testDeck = new Deck();
-        Card testCard = testDeck.drawCard();
+        Card testCard = new Card(Suit.DIAMONDS, Rank.FIVE);
         List<Card> testCards = new ArrayList<>();
         testCards.add(testCard);
         testCards.add(testCard);

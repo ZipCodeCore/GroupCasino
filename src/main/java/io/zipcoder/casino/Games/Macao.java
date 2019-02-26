@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.Cards.Dice;
+import io.zipcoder.casino.CardsAndDice.Dice;
 import io.zipcoder.casino.Casino.Casino;
 import io.zipcoder.casino.Casino.Greeter;
 import io.zipcoder.casino.Players.MacaoPlayer;
