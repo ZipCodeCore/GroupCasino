@@ -160,6 +160,10 @@ public class GoFish implements Game {
                 rankCount.put(rank, rankCount.get(rank) + 1);
             }
         }
+        return allBooksString(rankCount);
+    }
+
+    private String allBooksString(HashMap<Rank, Integer> rankCount) {
         StringBuilder allBooks = new StringBuilder();
         Set<Rank> allRanks = rankCount.keySet();
         for (Rank rank : allRanks) {
