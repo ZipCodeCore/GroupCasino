@@ -1,9 +1,11 @@
 package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.Cards.Dice;
+import io.zipcoder.casino.Casino.Casino;
 import io.zipcoder.casino.Games.Game;
 //import io.zipcoder.casino.Players.CrapsPlayer;
 //import io.zipcoder.casino.Players.Profile;
+import io.zipcoder.casino.Players.CrapsPlayer;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.*;
@@ -11,8 +13,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Craps implements Game {
-    //private CrapsPlayer user = new CrapsPlayer(Casino.getProfile());
-    //private int initialBalance = profile.getBalance();
+    private CrapsPlayer user = new CrapsPlayer(Casino.getProfile());
+    //private int initialBalance = user.getBalance();
     //Profile profile = new Profile();
     Console console = Console.getConsole();
     private int point = 0;
