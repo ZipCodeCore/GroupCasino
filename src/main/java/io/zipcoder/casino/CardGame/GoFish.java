@@ -134,11 +134,6 @@ public class GoFish extends CardGame {
     }
 
 
-    public void walkAway() {
-        setAllBooleansFalse();
-        console.println("Thanks for playing Go Fish!");
-        console.println("Your score is %d.  The dealer's score is %d.", playersScoreCounter, dealersScoreCounter);
-    }
 
 
     public String getCardOptions() {
@@ -421,6 +416,13 @@ public class GoFish extends CardGame {
             walkAway();
         }
     }
+
+    public void walkAway() {
+        setAllBooleansFalse();
+        console.println("Thanks for playing Go Fish!");
+        console.println("Your score is %d.  The dealer's score is %d.", playersScoreCounter, dealersScoreCounter);
+    }
+
 
 
     public void setGoFishPlayer(GoFishPlayer goFishPlayer) {
