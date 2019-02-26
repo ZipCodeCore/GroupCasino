@@ -1,12 +1,10 @@
 package io.zipcoder.casino.Casino.GameTest;
 
 import io.zipcoder.casino.Cards.Card;
-import io.zipcoder.casino.Cards.Games.BlackJack;
+import io.zipcoder.casino.Games.BlackJack;
 import io.zipcoder.casino.Cards.Rank;
 import io.zipcoder.casino.Cards.Suit;
-import io.zipcoder.casino.Players.CardPlayer;
-import io.zipcoder.casino.Players.Player;
-import io.zipcoder.casino.Players.Profile;
+import io.zipcoder.casino.Players.BlackJackPlayer;
 import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,9 +13,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-@SuppressWarnings("all")
+
 public class BlackJackTest {
 
     private Console console;
@@ -72,7 +69,7 @@ public class BlackJackTest {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Console console = getConsoleWithBufferedInputAndOutput("600\n200",baos);
         BlackJack newBlkJ = new BlackJack(console);
-        CardPlayer testPlayer =  newBlkJ.getUser();
+        BlackJackPlayer testPlayer =  newBlkJ.getUser();
         int expected = 300;
 
         //When
@@ -167,12 +164,10 @@ public class BlackJackTest {
         int expected = 12;
         int actual = blackJack.getTotal(testH);
 
-
         //Then
        Assert.assertEquals(expected,actual);
 
     }
-
 
     @Test
     public void testCheckHandTwentyOneFirst() {
@@ -214,7 +209,122 @@ public class BlackJackTest {
         //Then
         Assert.assertEquals(expected,actual);
     }
+    @Test
 
+    public void testCheckHandTwentyOneThird () {
+        //Given
+        BlackJack blackJack = new BlackJack();
+        List<Card> testHand = new ArrayList<Card>();
+
+        Card card1 = new Card(Suit.DIAMONDS, Rank.QUEEN);
+        Card card2 = new Card(Suit.SPADES, Rank.TWO);
+        Card card3 = new Card(Suit.HEARTS, Rank.EIGHT);
+        Card card4 = new Card(Suit.CLUBS, Rank.ACE);
+        //When
+        testHand.add(card1);
+        testHand.add(card2);
+        testHand.add(card3);
+        testHand.add(card4);
+
+        int total = blackJack.getTotal(testHand);
+        blackJack.setUserTotal(total);
+
+       Assert.assertTrue(blackJack.checkIfHandIs21());
+    }
+    @Test
+    public void testCheckHandTwentyOneFourth () {
+        //Given
+        BlackJack blackJack = new BlackJack();
+        List<Card> testHand = new ArrayList<Card>();
+
+        Card card1 = new Card(Suit.DIAMONDS, Rank.QUEEN);
+        Card card2 = new Card(Suit.SPADES, Rank.TWO);
+        Card card3 = new Card(Suit.HEARTS, Rank.EIGHT);
+
+        //When
+        testHand.add(card1);
+        testHand.add(card2);
+        testHand.add(card3);
+
+        int total = blackJack.getTotal(testHand);
+        blackJack.setUserTotal(total);
+
+        Assert.assertFalse(blackJack.checkIfHandIs21());
+    }
+
+    @Test
+    public void testCheckIfUserBustTrue() {
+        //Given
+        BlackJack blackJack = new BlackJack();
+        List<Card> testHand = new ArrayList<Card>();
+
+        Card card1 = new Card(Suit.DIAMONDS, Rank.QUEEN);
+        Card card2 = new Card(Suit.SPADES, Rank.TWO);
+        Card card3 = new Card(Suit.HEARTS, Rank.EIGHT);
+        Card card4 = new Card(Suit.DIAMONDS, Rank.QUEEN);
+
+        //When
+        testHand.add(card1);
+        testHand.add(card2);
+        testHand.add(card3);
+        testHand.add(card4);
+
+        int total = blackJack.getTotal(testHand);
+        blackJack.setUserTotal(total);
+
+        Assert.assertTrue(blackJack.checkGameOverByBust());
+    }
+
+
+    @Test
+    public void testCheckIfUserBustFalse() {
+        //Given
+        BlackJack blackJack = new BlackJack();
+        List<Card> testHand = new ArrayList<Card>();
+
+        Card card1 = new Card(Suit.DIAMONDS, Rank.QUEEN);
+        Card card2 = new Card(Suit.SPADES, Rank.TWO);
+        Card card3 = new Card(Suit.HEARTS, Rank.EIGHT);
+        Card card4 = new Card(Suit.DIAMONDS, Rank.ACE);
+
+        //When
+        testHand.add(card1);
+        testHand.add(card2);
+        testHand.add(card3);
+        testHand.add(card4);
+
+        int total = blackJack.getTotal(testHand);
+        blackJack.setUserTotal(total);
+
+        Assert.assertFalse(blackJack.checkGameOverByBust());
+    }
+
+    @Test
+    public void displayDealerHandTest() {
+        //Given
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Console console = getConsoleWithBufferedInputAndOutput(null, baos);
+        BlackJack blackJack = new BlackJack(console);
+        List<Card> hand = new ArrayList<>();
+        Card card1 = new Card(Suit.DIAMONDS, Rank.TEN);
+        Card card2 = new Card(Suit.HEARTS, Rank.SEVEN);
+
+        //When
+        hand.add(card1);
+        hand.add(card2);
+        blackJack.getDealer().setHand(hand);
+        blackJack.displayDealerHand();
+        String expected = "Dealer's hand is now: \n" +
+                "10━━┓7━━━┓\n" +
+                "┃   ┃┃   ┃\n" +
+                "┃ ♢ ┃┃ ♡ ┃\n" +
+                "┃   ┃┃   ┃\n" +
+                "┗━━10┗━━━7\n" +
+                "\n";
+
+        //Then
+        Assert.assertEquals(expected, baos.toString());
+    }
 
     @Test
 
@@ -253,7 +363,7 @@ public class BlackJackTest {
     }
 
     @Test
-    public void checkHitTest(){
+    public void checkHitTest1(){
 
         //Given
         BlackJack blackJack = new BlackJack();
@@ -270,6 +380,74 @@ public class BlackJackTest {
         Assert.assertTrue(hand.size() == 3);
     }
 
+    @Test
+    public void displayUserTotalTest(){
+        //Given
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Console console = getConsoleWithBufferedInputAndOutput(null, baos);
+        BlackJack blackJack = new BlackJack(console);
+
+        //When
+        userTotal  = 19;
+        blackJack.displayUserTotal(userTotal);
+        String expected = "Your total is 19\n";
+
+        //Then
+        Assert.assertEquals(expected,baos.toString());
+    }
+
+    @Test
+
+    public void displayDealerTotalTest() {
+        //Given
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Console console = getConsoleWithBufferedInputAndOutput(null, baos);
+        BlackJack blackJack = new BlackJack(console);
+
+        //When
+        dealerTotal  = 21;
+        blackJack.displayDealerTotal(dealerTotal);
+        String expected = "Dealer total is 21\n";
+
+        //Then
+        Assert.assertEquals(expected,baos.toString());
+    }
+    @Test
+
+    public void displayUserBalanceTest(){
+        //Given
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Console console = getConsoleWithBufferedInputAndOutput(null, baos);
+        BlackJack blackJack = new BlackJack(console);
+
+        //When
+        blackJack.getUser().setBalance(21);
+        blackJack.displayUserBalance();
+        String expected = "Your balance is: $21\n";
+
+        //Then
+        Assert.assertEquals(expected,baos.toString());
+    }
+
+    @Test
+    public void testCelebrateUser(){
+        //Given
+        String input = "10\n";
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Console console = getConsoleWithBufferedInputAndOutput(input, baos);
+        BlackJack blackJack = new BlackJack(console);
+
+
+        //When
+        blackJack.getUser().setBalance(100);
+        blackJack.getUserBet();
+
+        blackJack.celebrateUser();
+
+        //Then
+        Assert.assertTrue(baos.toString().contains("You are the Winner!!!!"));
+    }
+
     public Console getConsoleWithBufferedInputAndOutput(String input, ByteArrayOutputStream baos){
         Console testConsole;
         if (input == null) {
@@ -281,6 +459,7 @@ public class BlackJackTest {
 
         return testConsole;
     }
+
 
 
 }

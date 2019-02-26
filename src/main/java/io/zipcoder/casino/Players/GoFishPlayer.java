@@ -1,11 +1,9 @@
 package io.zipcoder.casino.Players;
 
 import io.zipcoder.casino.Cards.Card;
-import io.zipcoder.casino.Cards.Games.*;
 import io.zipcoder.casino.Cards.Rank;
 
 import java.util.*;
-import java.util.function.Supplier;
 
 public class GoFishPlayer extends Player {
     private List<Card> hand = new ArrayList<>();

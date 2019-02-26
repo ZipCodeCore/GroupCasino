@@ -1,15 +1,10 @@
 package io.zipcoder.casino.Casino.GameTest;
 
 import io.zipcoder.casino.Cards.Card;
-import io.zipcoder.casino.Cards.Deck;
-import io.zipcoder.casino.Cards.Games.GoFish;
-import io.zipcoder.casino.Cards.Games.Macao;
+import io.zipcoder.casino.Games.GoFish;
 import io.zipcoder.casino.Cards.Rank;
 import io.zipcoder.casino.Cards.Suit;
-import io.zipcoder.casino.Casino.Casino;
-import io.zipcoder.casino.Players.GoFishPlayer;
 import io.zipcoder.casino.utilities.Console;
-import io.zipcoder.casino.Casino.Greeter;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -228,15 +223,13 @@ public class GoFishTest {
 
         // When
         testGoFish.setIsOver(true);
-        int actual = testGoFish.play();
+        testGoFish.play();
         String actualString = outputStream.toString();
 
         // Then
-        int expected = -5;
         String expectedString = "The object of this game is to get the most books (4 of a kind) down";
         Assert.assertFalse(actualString.contains("Alright, I'm going to play these:"));
         Assert.assertTrue(actualString.contains(expectedString));
-        Assert.assertEquals(expected, actual);
     }
 
     @Test

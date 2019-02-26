@@ -2,7 +2,6 @@ package io.zipcoder.casino.Casino;
 
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Deck;
-import io.zipcoder.casino.Cards.Games.GoFish;
 import io.zipcoder.casino.Cards.Rank;
 import io.zipcoder.casino.Cards.Suit;
 import io.zipcoder.casino.Players.GoFishPlayer;
@@ -153,11 +152,11 @@ public class GoFishPlayerTest {
         // When
         testPlayer.addToHand(cardInHand);
         testPlayer.addToHand(cardInHand);
-        List<Card> actual = testPlayer.getCards(cardInHand.getRank().toString().toLowerCase());
+        List<Card> actual = testPlayer.getCards(cardInHand.getRank().toString().toUpperCase());
 
         // Then
         Assert.assertEquals(expected, actual);
-        Assert.assertFalse(testPlayer.hasCard(cardInHand.getRank().toString().toLowerCase()));
+        Assert.assertFalse(testPlayer.hasCard(cardInHand.getRank().toString().toUpperCase()));
     }
 
     @Test

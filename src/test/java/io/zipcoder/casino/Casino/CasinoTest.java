@@ -1,10 +1,10 @@
 package io.zipcoder.casino.Casino;
 
 
-import io.zipcoder.casino.Cards.Games.BlackJack;
-import io.zipcoder.casino.Cards.Games.Game;
-import io.zipcoder.casino.Cards.Games.GoFish;
-import io.zipcoder.casino.Cards.Games.Macao;
+import io.zipcoder.casino.Games.BlackJack;
+import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.Games.GoFish;
+import io.zipcoder.casino.Games.Macao;
 import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Test;
@@ -151,18 +151,6 @@ public class CasinoTest {
         Assert.assertTrue(game instanceof BlackJack);
     }
 
-    @Test
-    public void playGameWithUserTest() {
-        // Given
-        Game game = new Game();
-        Casino.setProfile();
-        int expectedBalance = Casino.getProfile().getBalance() - 13;
-        // When
-        Casino.playGameWithUser(game);
-        int actualBalance = Casino.getProfile().getBalance();
-                // Then
-        Assert.assertEquals(expectedBalance, actualBalance);
-    }
 
     @Test
     public void offerUserLeaveTest() {
