@@ -8,7 +8,11 @@ public class BlackjackTest {
 
     @Test
     public void takeBetTest() {
-     
+        //Given
+
+        //When
+
+        //Then
     }
 
     @Test
