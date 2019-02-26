@@ -1,27 +1,41 @@
 package io.zipcoder.casino.Cards;
 
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Stack;
+
 import java.util.*;
 
-public class Deck
-{
+
+public class Deck {
     private final static List<Card> COMPLETE_DECK = new ArrayList<Card>();
+    private final static Card cardBack = new Card(null, null);
+    private Stack<Card> playDeck;
+
     static  {
+
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
                 COMPLETE_DECK.add(new Card(suit, rank));
             }
         }
     }
+    public static Card getCardBack() {
+        return cardBack;
+    }
 
-    private Stack<Card> playDeck;
-    public Deck () {
-        playDeck = new Stack<Card>();
+    public Deck() {
+
+        playDeck = new Stack<>();
         playDeck.addAll(COMPLETE_DECK);
         Collections.shuffle(playDeck);
+
     }
 
     public List<Card> drawMultipleCards(int numberOfCards) {
-        List<Card> newCards = new ArrayList<>();
+        List<Card> newCards = new ArrayList<Card>();
         for (int i = 0; i < numberOfCards; i++) {
             newCards.add(playDeck.pop());
         }
@@ -31,7 +45,9 @@ public class Deck
     public Card drawCard() {
         return playDeck.pop();
     }
-
     public int cardsLeft() { return playDeck.size(); }
 
+    public Stack<Card> getPlayDeck() {
+        return playDeck;
+    }
 }
