@@ -19,7 +19,7 @@ public class YahtzeePlayer {
         this.player = player;
     }
 
-    public ArrayList<Dice> rollDice(int numberOfDice) throws TooManyRollsException{
+    public ArrayList<Dice> playerRollDice(int numberOfDice) throws TooManyRollsException{
         if (rollNumber >= 3){
             throw new TooManyRollsException();
         }

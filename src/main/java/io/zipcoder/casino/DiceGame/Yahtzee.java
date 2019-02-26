@@ -827,7 +827,7 @@ public class Yahtzee extends DiceGame {
 
     public void roll() {
         try {
-            rolledDice = yahtzeePlayer.rollDice(5 - savedDice.size());
+            rolledDice = yahtzeePlayer.playerRollDice(5 - savedDice.size());
             console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
             console.println(getCurrentDiceString(rolledDice, savedDice));
             input = console.getStringInput(allOptions());
