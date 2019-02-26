@@ -1,4 +1,4 @@
-package io.zipcoder.casino.Cards.Games;
+package io.zipcoder.casino.Cards;
 
 import io.zipcoder.casino.Cards.Dice;
 

@@ -1,8 +1,8 @@
 package io.zipcoder.casino.Casino.GameTest;
 
 import io.zipcoder.casino.Cards.Dice;
-import io.zipcoder.casino.Cards.Games.LoadedDice;
-import io.zipcoder.casino.Cards.Games.Macao;
+import io.zipcoder.casino.Cards.LoadedDice;
+import io.zipcoder.casino.Games.Macao;
 import org.junit.Assert;
 import org.junit.Test;
 import io.zipcoder.casino.utilities.Console;
@@ -285,7 +285,7 @@ public class MacaoTest {
     @Test
     public void rollDieTest() {
         // Given players initial dice roll
-        macao.getMacaoGuest().setRoll(4);
+        macao.getUser().setRoll(4);
 
         // Given we set the macao dice to our loaded dice; given an expected roll of 6
         Dice dice = new LoadedDice();
@@ -293,10 +293,10 @@ public class MacaoTest {
         int expected = 6;
 
         // When the roll die method is called
-        macao.rollDie(macao.getMacaoGuest());
+        macao.rollDie(macao.getUser());
 
         // When we retrieve the current roll from the player
-        int actual = macao.getMacaoGuest().getRoll();
+        int actual = macao.getUser().getRoll();
 
         // Then we expect the new roll to equal the expected
         Assert.assertEquals(expected, actual);
@@ -305,8 +305,8 @@ public class MacaoTest {
     @Test
     public void showInitialRollsTest() {
         // Given we set the guest's roll to 3 and the dealer's roll to 4
-        macao.getMacaoGuest().setRoll(3);
-        macao.getMacaoDealer().setRoll(4);
+        macao.getUser().setRoll(3);
+        macao.getDealer().setRoll(4);
 
         // Given the expected string
         String expected = "YOUR ROLL     DEALER'S ROLL\n" +
@@ -331,8 +331,8 @@ public class MacaoTest {
     @Test
     public void showGuestRollTest() {
         // Given we set the guest's current roll to 4 and cumulative roll to 5
-        macao.getMacaoGuest().setRoll(4);
-        macao.getMacaoGuest().setCumulativeRoll(10);
+        macao.getUser().setRoll(4);
+        macao.getUser().setCumulativeRoll(10);
 
         // Given the expected string
         String expected = "YOUR NEW ROLL\n" +
@@ -364,8 +364,8 @@ public class MacaoTest {
     @Test
     public void showDealerRollTest() {
         // Given we set the dealer's current roll to 3 and cumulative roll to 8
-        macao.getMacaoDealer().setRoll(3);
-        macao.getMacaoDealer().setCumulativeRoll(8);
+        macao.getDealer().setRoll(3);
+        macao.getDealer().setCumulativeRoll(8);
 
         // Given the expected string
         String expected = "DEALERS'S NEW ROLL\n" +
@@ -420,7 +420,7 @@ public class MacaoTest {
     @Test
     public void isGuestStillPlayingTest1() {
         // Given the guests cumulative roll is set to 9
-        macao.getMacaoGuest().setCumulativeRoll(9);
+        macao.getUser().setCumulativeRoll(9);
 
         // When the is guest still playing method is called and the outcome stored in a variable
         boolean retrieved = macao.isGuestStillPlaying();
@@ -506,7 +506,7 @@ public class MacaoTest {
     public void didGuestGoOverTest1() {
         // Given the guest has a cumulative roll of 10
         int cumuRoll = 10;
-        macao.getMacaoGuest().setCumulativeRoll(cumuRoll);
+        macao.getUser().setCumulativeRoll(cumuRoll);
 
         // When we call the 'did guest go over method'
         Boolean guestWentOver = macao.didGuestGoOver();
@@ -519,7 +519,7 @@ public class MacaoTest {
     public void didGuestGoOverTest2() {
         // Given the guest has a cumulative roll of 7
         int cumuRoll = 7;
-        macao.getMacaoGuest().setCumulativeRoll(cumuRoll);
+        macao.getUser().setCumulativeRoll(cumuRoll);
 
         // When we call the 'did guest go over method'
         Boolean guestWentOver = macao.didGuestGoOver();
@@ -531,8 +531,8 @@ public class MacaoTest {
     @Test
     public void dealerStillPlayingTest1() {
         // Given the dealers cumulative roll is 7 and the guest's cumulative roll is 6
-        macao.getMacaoDealer().setCumulativeRoll(7);
-        macao.getMacaoGuest().setCumulativeRoll(6);
+        macao.getDealer().setCumulativeRoll(7);
+        macao.getUser().setCumulativeRoll(6);
 
         // When we call the 'dealer still playing function'
         Boolean dealerStillPlaying = macao.isDealerStillPlaying();
@@ -544,8 +544,8 @@ public class MacaoTest {
     @Test
     public void dealerStillPlayingTest2() {
         // Given the dealer's cumulative roll is 4 and the guest's cumulative roll is 8
-        macao.getMacaoDealer().setCumulativeRoll(4);
-        macao.getMacaoGuest().setCumulativeRoll(8);
+        macao.getDealer().setCumulativeRoll(4);
+        macao.getUser().setCumulativeRoll(8);
 
         // When we call the 'dealer still playing function'
         Boolean dealerStillPlaying = macao.isDealerStillPlaying();
@@ -557,8 +557,8 @@ public class MacaoTest {
     @Test
     public void dealerStillPlayingTest3() {
         // Given the dealer's cumulative roll is 4 and the guest's cumulative roll is 8
-        macao.getMacaoDealer().setCumulativeRoll(9);
-        macao.getMacaoGuest().setCumulativeRoll(8);
+        macao.getDealer().setCumulativeRoll(9);
+        macao.getUser().setCumulativeRoll(8);
 
         // When we call the 'dealer still playing function'
         Boolean dealerStillPlaying = macao.isDealerStillPlaying();
@@ -570,7 +570,7 @@ public class MacaoTest {
     @Test
     public void evaluateTest1() {
         // Given the dealers cumulative roll is 10, the console is our test console, and we expect 'the dealer went over' to print
-        macao.getMacaoDealer().setCumulativeRoll(10);
+        macao.getDealer().setCumulativeRoll(10);
         macao.setConsole(console);
         String expected = "Lucky you! The dealer went over. YOU WIN!";
 
@@ -593,8 +593,8 @@ public class MacaoTest {
         macao.setDealerStillPlaying(false);
 
         // Given the dealers cumulative roll is 7 and the guests cumulative roll is 8
-        macao.getMacaoDealer().setCumulativeRoll(7);
-        macao.getMacaoGuest().setCumulativeRoll(8);
+        macao.getDealer().setCumulativeRoll(7);
+        macao.getUser().setCumulativeRoll(8);
 
         // Given the game console is set to our test console
         macao.setConsole(console);
@@ -623,8 +623,8 @@ public class MacaoTest {
         macao.setDealerStillPlaying(false);
 
         // Given the dealers cumulative roll is 9 and the guests cumulative roll is 8
-        macao.getMacaoDealer().setCumulativeRoll(9);
-        macao.getMacaoGuest().setCumulativeRoll(8);
+        macao.getDealer().setCumulativeRoll(9);
+        macao.getUser().setCumulativeRoll(8);
 
         // Given the game console is set to our test console
         macao.setConsole(console);
@@ -653,8 +653,8 @@ public class MacaoTest {
         macao.setDealerStillPlaying(false);
 
         // Given the dealers cumulative roll is 9 and the guests cumulative roll is 9
-        macao.getMacaoDealer().setCumulativeRoll(9);
-        macao.getMacaoGuest().setCumulativeRoll(9);
+        macao.getDealer().setCumulativeRoll(9);
+        macao.getUser().setCumulativeRoll(9);
 
         // Given the game console is set to our test console
         macao.setConsole(console);

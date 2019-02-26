@@ -1,12 +1,10 @@
 package io.zipcoder.casino.Casino.GameTest;
 
 import io.zipcoder.casino.Cards.Card;
-import io.zipcoder.casino.Cards.Games.BlackJack;
+import io.zipcoder.casino.Games.BlackJack;
 import io.zipcoder.casino.Cards.Rank;
 import io.zipcoder.casino.Cards.Suit;
-import io.zipcoder.casino.Players.CardPlayer;
-import io.zipcoder.casino.Players.Player;
-import io.zipcoder.casino.Players.Profile;
+import io.zipcoder.casino.Players.BlackJackPlayer;
 import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,7 +13,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 public class BlackJackTest {
@@ -72,7 +69,7 @@ public class BlackJackTest {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Console console = getConsoleWithBufferedInputAndOutput("600\n200",baos);
         BlackJack newBlkJ = new BlackJack(console);
-        CardPlayer testPlayer =  newBlkJ.getUser();
+        BlackJackPlayer testPlayer =  newBlkJ.getUser();
         int expected = 300;
 
         //When
