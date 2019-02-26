@@ -240,6 +240,7 @@ public class GoFishTests {
         Assert.assertTrue(actualTrue);
         Assert.assertFalse(actualFalse);
     }
+}
 
 /*
     @Test
@@ -250,5 +251,5 @@ public class GoFishTests {
         GoFishPlayer dealer = goFish.getDealer();
         Face requestedCard = KING;
     }
-/*
-}
+*/
+
