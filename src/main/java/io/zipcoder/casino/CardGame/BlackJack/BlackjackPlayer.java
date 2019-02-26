@@ -46,8 +46,14 @@ public class BlackjackPlayer implements GamblingPlayer {
     public void split() {
     }
 
-    public int sumOfHand(Hand hand) {
-        return 0;
+    public Integer sumOfHand() {
+        int sum = 0;
+        ArrayList<Card> cardsInHand = hand.showMyCards();
+        for (Card c : cardsInHand) {
+            sum += c.getFace().getValue();
+        }
+
+        return sum;
     }
 
     public Hand getHand() {
