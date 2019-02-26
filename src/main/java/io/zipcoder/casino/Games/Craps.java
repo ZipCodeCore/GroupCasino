@@ -130,7 +130,8 @@ public class Craps implements Game {
         while (!isOver) {
             while (isFirstRoll) {
                 promptBet();
-                firstRoll();
+                roll();
+                evaluateFirstRoll();
             }
             while (isPlaying && gameState == GameStatus.UNRESOLVED) {
                 promptBet();
@@ -141,8 +142,7 @@ public class Craps implements Game {
         }
     }
 
-    public void firstRoll() {
-        roll();
+    public void evaluateFirstRoll() {
         if (Arrays.stream(anyCraps).anyMatch(i -> i == rollSum) && toWinPassBet) {
             console.println("Whomp, whomp, you crapped out\n");
             adjustBalance(-betAmount);
@@ -167,7 +167,6 @@ public class Craps implements Game {
             console.println("The point is now " + point + ".\nKeep on rollin', shooter!\n");
             gameState = GameStatus.UNRESOLVED;
             isFirstRoll = false;
-            //promptBet();
         }
         rollSum = point;
     }
@@ -384,7 +383,7 @@ public class Craps implements Game {
         if (quitPrompt.equals("yes")) {
             cashOut();
         } else if (quitPrompt.equals("no")) {
-            console.println("Okay, you're a responsible adult, and you know your limits.");
+            console.println("Okay, you're a responsible adult, and you know your limits");
         }
     }
 
@@ -409,13 +408,13 @@ public class Craps implements Game {
 
     public void cashOut() {
         String continuePlaying = console.getStandardInput("Wouldn't you rather continue playing?\n");
+        isPlaying = false;
         if (continuePlaying.equals("no")) {
             compareBalance();
             user.getProfile().setBalance(adjustedBalance);
-            isPlaying = false;
             isOver = true;
         } else if (continuePlaying.equals("yes")) {
-            roll();
+            isPlaying = true;
         }
     }
 }
