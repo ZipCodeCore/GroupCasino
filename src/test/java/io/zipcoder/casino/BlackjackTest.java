@@ -4,16 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class BlackjackTest {
-
-
-    @Test
-    public void takeBetTest() {
-        //Given
-
-        //When
-
-        //Then
-    }
+   
 
     @Test
     public void payout() {
