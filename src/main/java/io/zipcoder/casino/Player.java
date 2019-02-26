@@ -22,4 +22,49 @@ public class Player {
     //takes a double named amount
     //the method will substract the amount from
     //the money
+
+    private String name;
+    private double money;
+
+    public Player (String name) {
+
+        this.name = name;
+    }
+
+    public Player (String name, double money) {
+
+        this.name = name;
+        this.money = money;
+
+    }
+
+        public void setName(String playerone) {
+
+            this.name = playerone;
+
+        }
+
+        public String getName(){
+
+            return name;
+        }
+
+    public double getMoney() {
+        return money;
+    }
+    //add a getter for money
+
+    public double addMoney(double amount1){
+        money = money + amount1;
+        return money;
+    }
+
+    public double pay(double amount2){
+        money = money - amount2;
+        return money;
+
+    }
+
+
 }
+
