@@ -167,7 +167,7 @@ public class Greeter {
     }
 
     public boolean getIfLeaving() {
-        String isLeaving = console.getStringInput("Good Game. Would you like to stay in our casino?");
+        String isLeaving = console.getStringInput("\n\n\nGood Game. Would you like to stay in our casino?");
         if (isLeaving.equals("no") || isLeaving.equals("n")) {
             return true;
         } else if (isLeaving.toLowerCase().trim().equals("yes")) {
