@@ -47,6 +47,9 @@ public class BlackJack extends Game {
     public Integer getUserBetAsInteger(){
         return userBet;
     }
+    public void setUserTotal(int total){
+        this.userTotal = total;
+    }
 
     public static void main(String[] args)
     {   BlackJack blackJack = new BlackJack();
@@ -58,7 +61,7 @@ public class BlackJack extends Game {
         playFirstTurn();
 
         while (isOver != true) {
-            evaluate();
+            evaluateUserHitOrStay();
         }
         return -1;
     }
@@ -78,49 +81,52 @@ public class BlackJack extends Game {
         blackJackConsole.println("Your broke ass has insufficient funds..");
     }
 
+
     public void playFirstTurn() {
-
         dealFirstHand();
-
-        userTotal = getTotal(user.getHand());
-        dealerTotal = getTotal(dealer.getHand());
-
-        //blackJackConsole.println("Your first hand has a " + user.getHand().get(0) + " & " + user.getHand().get(1));
         blackJackConsole.print(Card.printAllCards(user.getHand()));
         displayUserTotal(userTotal);
-
         if(checkIfHandIs21()){
         celebrateUser();
-
         } else {
-            List<Card> printingCards = new ArrayList<>();
-            printingCards.add(dealer.getHand().get(0));
-            printingCards.add(Deck.getCardBack());
-            blackJackConsole.println(Card.printAllCards(printingCards));
-            String doubleDownChoice = blackJackConsole.getStringInput(
-                    "Would you like to Double Down? Please enter Yes or No");
-            while(!doubleDownChoice.toLowerCase().equals("yes") && !doubleDownChoice.toLowerCase().equals("no") ){
-                blackJackConsole.println("Please enter a valid option of Yes or No");
-                 doubleDownChoice = blackJackConsole.getStringInput(
-                        "Would you like to Double Down? Please enter Yes or No");
-                 }
-            if (doubleDownChoice.toLowerCase().equals("yes") && userBet <= user.getBalance()) {
-                doubleDown();
-            } else if (doubleDownChoice.toLowerCase().equals("yes") && userBet > user.getBalance()){
-                tellUserDeyPoor();
-            }
+            displayDealersFirstHand();
+            checkIfUserWantsToDoubleDown();
         }
     }
 
     public void dealFirstHand(){
         user.setHand(currentDeck.drawMultipleCards(2));
         dealer.setHand(currentDeck.drawMultipleCards(2));
+        userTotal = getTotal(user.getHand());
+        dealerTotal = getTotal(dealer.getHand());
     }
 
-    private void evaluate() {
+    public void displayDealersFirstHand(){
+        List<Card> printingCards = new ArrayList<>();
+        blackJackConsole.println("Dealer's hand is showing: ");
+        printingCards.add(dealer.getHand().get(0));
+        printingCards.add(Deck.getCardBack());
+        blackJackConsole.println(Card.printAllCards(printingCards));
+    }
+
+    public void checkIfUserWantsToDoubleDown(){
+        String doubleDownChoice = blackJackConsole.getStringInput(
+                "Would you like to Double Down? Please enter Yes or No");
+        while(!doubleDownChoice.toLowerCase().equals("yes") && !doubleDownChoice.toLowerCase().equals("no") ){
+            blackJackConsole.println("Please enter a valid option of Yes or No");
+            doubleDownChoice = blackJackConsole.getStringInput(
+                    "Would you like to Double Down? Please enter Yes or No");
+            }
+        if (doubleDownChoice.toLowerCase().equals("yes") && userBet <= user.getBalance()) {
+            doubleDown();
+        } else if (doubleDownChoice.toLowerCase().equals("yes") && userBet > user.getBalance()){
+            tellUserDeyPoor();
+        }
+    }
+
+    private void evaluateUserHitOrStay() {
 
         String userChoice = getUserInput().toLowerCase();
-
         if(!userChoice.equals("hit") && !userChoice.equals("stay") ){
             blackJackConsole.println("Please enter a valid option of Hit or Stay");
         }
@@ -128,11 +134,9 @@ public class BlackJack extends Game {
             hit();
             checkGameOverByBust();
             checkIfHandIs21();
-
         } else if (userChoice.equals("stay")) {
             takeDealersTurn();
         }
-
     }
 
     private void doubleDown() {
@@ -153,7 +157,6 @@ public class BlackJack extends Game {
             checkIfHandIs21();
             takeDealersTurn();
             }
-
     }
 
     public void hit() {
@@ -201,15 +204,15 @@ public class BlackJack extends Game {
 
     public void displayDealerHand() {
         blackJackConsole.println("Dealer's hand is now: \n" + Card.printAllCards(dealer.getHand()));
-    }//Card.printAllCards(dealer.getHand().toString()));
+    }
 
-    public void checkGameOverByBust() {
+    public boolean checkGameOverByBust() {
         if (userTotal > 21) {
             blackJackConsole.println("You Bust. Dealer wins!");
             displayUserBalance();
             isOver = true;
-
         }
+        return isOver;
     }
 
     public boolean checkIfHandIs21() {
@@ -219,6 +222,7 @@ public class BlackJack extends Game {
         }
         else return isOver;
     }
+
     public void celebrateUser(){
         blackJackConsole.println("You are the Winner!!!!");
         addWinningsBalance();
@@ -237,7 +241,6 @@ public class BlackJack extends Game {
             dealerTotal = getTotal(dealer.getHand());
             displayDealerHand();
             displayDealerTotal(dealerTotal);
-
         }
         checkWinner();
     }
@@ -268,7 +271,6 @@ public class BlackJack extends Game {
         }
 
     public void addWinningsBalance() {
-
          user.setBalance(user.getBalance() + (userBet * 2));
 
     }
