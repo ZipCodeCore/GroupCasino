@@ -20,6 +20,10 @@ public class GoFishPlayer {
     private int counter4 = 0;
 
 
+
+    boolean playersHandNotEmpty;
+
+
     // Constructor
 
     public GoFishPlayer(Player player) {
@@ -62,6 +66,7 @@ public class GoFishPlayer {
 
     //A player is requesting  a particular Face of Card from the opponent.
     //Once the particular face enum is requested, check opponents hand for that face if true return all the cards in opponents hands having the same face to the requesting player's hand.
+    // Adds the cards to the player's deck and removes the cards from the other player.
     public void requestCard(GoFishPlayer otherPlayer, Face face) {
 
         ArrayList<Card> cardsInHand = otherPlayer.hand.showMyCards();
@@ -246,6 +251,22 @@ public class GoFishPlayer {
 
     public void setCounter4(int counter4) {
         this.counter4 = counter4;
+    }
+
+    public boolean isPlayersHandNotEmpty (GoFishPlayer player){
+
+        if(player.getHand().getSize() > 0){
+
+            playersHandNotEmpty = true;
+        }
+
+        else {
+
+            playersHandNotEmpty = false;
+        }
+
+
+        return playersHandNotEmpty;
     }
 
 
