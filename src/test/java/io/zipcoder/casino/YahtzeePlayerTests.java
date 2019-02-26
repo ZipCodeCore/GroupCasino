@@ -35,14 +35,14 @@ public class YahtzeePlayerTests {
 
 
     @Test
-    public void rollDiceTest() throws YahtzeePlayer.TooManyRollsException {
+    public void playerRollDiceTest() throws YahtzeePlayer.TooManyRollsException {
         // Given
         Player player = new Player("Cara", 1000.00);
         YahtzeePlayer yahtzeePlayer = new YahtzeePlayer(player);
         int expected = 5;
 
         // When
-        ArrayList<Dice> rolledDice = yahtzeePlayer.rollDice(5);
+        ArrayList<Dice> rolledDice = yahtzeePlayer.playerRollDice(5);
         int actual = rolledDice.size();
 
         // Then
@@ -167,7 +167,7 @@ public class YahtzeePlayerTests {
         Player player = new Player("Cara", 1000);
         YahtzeePlayer yahtzeePlayer = new YahtzeePlayer(player);
         yahtzeePlayer.setRollNumber(3);
-        yahtzeePlayer.rollDice(5);
+        yahtzeePlayer.playerRollDice(5);
     }
 
     @Test
