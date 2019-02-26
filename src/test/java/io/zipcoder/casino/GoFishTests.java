@@ -5,6 +5,7 @@ import io.zipcoder.casino.CardGame.Cards.Face;
 import io.zipcoder.casino.CardGame.Cards.Suit;
 import io.zipcoder.casino.CardGame.GoFish;
 import io.zipcoder.casino.CardGame.GoFishPlayer;
+import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -240,7 +241,7 @@ public class GoFishTests {
         Assert.assertTrue(actualTrue);
         Assert.assertFalse(actualFalse);
     }
-}
+
 
 /*
     @Test
@@ -253,3 +254,310 @@ public class GoFishTests {
     }
 */
 
+
+    @Test
+    public void setAllBooleansFalseTest() {
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+
+        // When
+
+        goFish.setAllBooleansFalse();
+
+        // Then
+
+        Assert.assertFalse(goFish.isPlaying());
+        Assert.assertFalse(goFish.isPlayerAskingForCard());
+        Assert.assertFalse(goFish.isPlayerDrawing());
+        Assert.assertFalse(goFish.isPlayersTurn());
+        Assert.assertFalse(goFish.isNewTurn());
+        Assert.assertFalse(goFish.isDealersTurn());
+        Assert.assertFalse(goFish.isDealerAskingForCard());
+        Assert.assertFalse(goFish.isGivingDealerCard());
+        Assert.assertNull(goFish.getRequestedCard());
+
+
+    }
+
+    @Test
+    public void checkExitTest() {
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+        String input1 = "exit";
+        goFish.setInput(input1);
+
+
+        // When
+        goFish.checkExit();
+
+        // Then
+        Assert.assertFalse(goFish.isPlaying());
+        Assert.assertFalse(goFish.isPlayerAskingForCard());
+        Assert.assertFalse(goFish.isPlayerDrawing());
+        Assert.assertFalse(goFish.isPlayersTurn());
+        Assert.assertFalse(goFish.isNewTurn());
+        Assert.assertFalse(goFish.isDealersTurn());
+        Assert.assertFalse(goFish.isDealerAskingForCard());
+        Assert.assertFalse(goFish.isGivingDealerCard());
+        Assert.assertNull(goFish.getRequestedCard());
+
+
+    }
+
+
+    @Test
+    public void walkAwayTest() {
+
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+
+        // When
+        goFish.walkAway();
+
+        // Then
+        Assert.assertFalse(goFish.isPlaying());
+
+
+    }
+
+    @Test
+    public void walkAwayTest2() {
+
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+
+        // When
+        goFish.walkAway();
+
+        // Then
+
+        Assert.assertFalse(goFish.isPlayerAskingForCard());
+
+
+    }
+
+    @Test
+    public void walkAwayTest3() {
+
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+
+        // When
+        goFish.walkAway();
+
+        // Then
+
+        Assert.assertFalse(goFish.isPlayerDrawing());
+
+    }
+
+    @Test
+    public void walkAwayTest4() {
+
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+
+        // When
+        goFish.walkAway();
+
+        // Then
+
+
+        Assert.assertFalse(goFish.isPlayersTurn());
+
+
+    }
+
+    @Test
+    public void walkAwayTest5() {
+
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+
+        // When
+        goFish.walkAway();
+
+        // Then
+
+        Assert.assertFalse(goFish.isNewTurn());
+
+    }
+
+    @Test
+    public void walkAwayTest6() {
+
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+
+        // When
+        goFish.walkAway();
+
+        // Then
+
+        Assert.assertFalse(goFish.isDealersTurn());
+
+
+    }
+
+    @Test
+    public void walkAwayTest7() {
+
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+
+        // When
+        goFish.walkAway();
+
+        // Then
+
+        Assert.assertFalse(goFish.isDealerAskingForCard());
+
+    }
+
+    @Test
+    public void walkAwayTest8() {
+
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+
+        // When
+        goFish.walkAway();
+
+        // Then
+
+        Assert.assertFalse(goFish.isGivingDealerCard());
+
+
+    }
+
+    @Test
+    public void walkAwayTest9() {
+
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+
+        // When
+        goFish.walkAway();
+
+        // Then
+
+        Assert.assertNull(goFish.getRequestedCard());
+
+
+    }
+
+    @Test
+    public void deckIsEmptyTest() {
+
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+        goFish.getDeck().deck.removeAll(goFish.getDeck().deck);
+
+
+        // When
+        boolean actual = goFish.deckIsEmpty(goFish.getDeck());
+
+
+        // Then
+        Assert.assertTrue(actual);
+
+    }
+
+    @Test
+
+    public void checkIfDeckIsEmptyTest() {
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+        goFish.getDeck().deck.removeAll(goFish.getDeck().deck);
+
+
+        // When
+
+        goFish.checkIfDeckIsEmpty();
+
+        // Then
+        Assert.assertFalse(goFish.isPlayerDrawing());
+
+
+    }
+
+    @Test
+
+    public void checkIfDeckIsEmptyTest2() {
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+        goFish.getDeck().deck.removeAll(goFish.getDeck().deck);
+
+
+        // When
+
+        goFish.checkIfDeckIsEmpty();
+
+        // Then
+        Assert.assertFalse(goFish.isDealerDrawing());
+
+
+    }
+
+    @Test
+
+    public void drawNewCardsIfHandIsEmptyTest(){
+
+        // Given
+        Player player = new Player("Nhu", 1000);
+        GoFish goFish = new GoFish(player);
+
+        goFish.getDeck().deck.removeAll(goFish.getDeck().deck);
+
+
+        // When
+
+        goFish.checkIfDeckIsEmpty();
+
+        // Then
+        Assert.assertFalse(goFish.isDealerDrawing());
+
+
+    }
+
+
+}
