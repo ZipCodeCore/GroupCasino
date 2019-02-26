@@ -375,7 +375,7 @@ public class Craps implements Game {
         } else if (profitOrLoss < 0) {
             System.out.println(String.format("You only lost %d NUCs. Play again to win that back and more!", profitOrLoss));
         }
-        return adjustedBalance + profitOrLoss;
+        return (adjustedBalance + profitOrLoss);
     }
 
     public void compareBalance() {
@@ -392,7 +392,7 @@ public class Craps implements Game {
         String continuePlaying = console.getStringInput("Would you like to continue playing?");
         if (continuePlaying.equals("No")) {
             compareBalance();
-            //profile.setBalance(adjustedBalance);
+            user.getProfile().setBalance(adjustedBalance);
             isPlaying = false;
             isOver = true;
         } else if (continuePlaying.equals("Yes")) {
