@@ -10,13 +10,16 @@ import java.util.Collections;
 
 public class Craps extends DiceGame implements GamblingGame {
 
-    private int pointNumber;
-    private int comePointNumber;
+    Console crapsConsole = Console.getInstance();
+
     private CrapsPlayer crapsPlayer;
-    Console crapsConsole;
     private ArrayList<Dice> rolledDice;
     private Integer summedRoll;
     private Boolean pointOn;
+
+    private int pointNumber;
+    private int comePointNumber;
+    private int hardwayNumber;
 
     private double passLinePot;
     private double passLineOddsPot;
@@ -38,6 +41,7 @@ public class Craps extends DiceGame implements GamblingGame {
         this.summedRoll = 0;
         this.passLinePot = 0.0;
         this.fieledPot = 0.0;
+        this.hardWaysPot = 0.0;
 
         Collections.addAll(fieldNumbers, 2, 3, 4, 9, 10, 11, 12);
         Collections.addAll(pointNumbers, 4, 5, 6, 8, 9, 10);
@@ -53,19 +57,19 @@ public class Craps extends DiceGame implements GamblingGame {
         boolean comeLine = false;
         boolean startPromt = false;
         boolean roll = false;
-        crapsConsole = Console.getInstance();
+
+
         String input = "";
 
         String phase1Options = "Type 'pass line' to place a pass line bet.\n" +
                 "Type 'field' to place field bet.\n" +
-                "Type roll to roll the dice";
+                "Type 'hardway' to place a hardway bet\n" +
+                "Type roll to roll the dice \n";
 
-        String phase2Options = "Type 'pass line odds' to place pass line odds bet.\n" +
-                "Type 'come line' to place a come line bet. \n" +
-                "Type 'field' to place a field bet.\n" +
-                "Type 'hardway' to plce a hardway bet. \n" +
-                "Type 'place' to choose a place bet\n" +
-                "Type roll to roll the dice";
+        String phase2Options = "Type 'field' to place a field bet.\n" +
+                "Type pass line odds to place odds on the pass line. \n" +
+                "Type 'hardway' to place a hardway bet. \n" +
+                "Type roll to roll the dice. \n";
 
         while (!startPromt) {
             input = crapsConsole.getStringInput("\nHello %s!  Welcome to Craps!  Type 'Start' to begin!", crapsPlayer.getName());
@@ -84,24 +88,34 @@ public class Craps extends DiceGame implements GamblingGame {
                 while (!roll) {
                     roll = askForRoll(roll, phase1Options);
                 }
-                summedRoll = rollDice();
+                rolledDice = rollDice();
+                summedRoll = rollDiceSum(rolledDice);
 
                 checkFieldBetWinner(summedRoll, fieledPot);
                 checkPassLineBetWinner(summedRoll, passLinePot);
+                checkHardwayWinner(summedRoll,hardWaysPot,rolledDice);
+
                 roll = false;
                 summedRoll = 0;
+                printWallet();
 
             }
 
             if (pointOn && !comeLine) {
-                while (!roll) {
-                    roll = askForRoll(roll, phase2Options);
+                while (pointOn) {
+                    askForRoll(roll, phase2Options);
 
+                    rolledDice = rollDice();
+                    summedRoll = rollDiceSum(rolledDice);
 
-                    summedRoll = rollDice();
                     checkPassLineBetPhase2(summedRoll, passLinePot);
                     checkFieldBetWinner(summedRoll, fieledPot);
+                    checkPassLineOddsWinner(summedRoll,passLineOddsPot);
+                    checkHardwayWinner(summedRoll,hardWaysPot,rolledDice);
+
                     summedRoll = 0;
+                    printWallet();
+                    roll = false;
                 }
             }
         }
@@ -134,10 +148,10 @@ public class Craps extends DiceGame implements GamblingGame {
         passLinePot += amount;
     }
 
-//    public void passLineOddsBet(Double amount) {
-//        crapsPlayer.bet(amount);
-//        passLineOddsPot += amount;
-//    }
+    public void passLineOddsBet(Double amount) {
+        crapsPlayer.bet(amount);
+        passLineOddsPot += amount;
+    }
 //
 //    public void comeLineBet(Double amount) {
 //        crapsPlayer.bet(amount);
@@ -149,11 +163,12 @@ public class Craps extends DiceGame implements GamblingGame {
 //        comeLineOddsPot += amount;
 //    }
 //
-//    public void hardWayBet(Double amount) {
-//        crapsPlayer.bet(amount);
-//        hardWaysPot += amount;
-//    }
-//
+    public void hardWayBet(Double amount) {
+        crapsPlayer.bet(amount);
+        hardWaysPot += amount;
+        hardwayNumber = crapsConsole.getIntegerInput("Please enter the number of the Hardway roll you would like to bet on");
+    }
+
     public void fieldBet(Double amount) {
         crapsPlayer.bet(amount);
         fieledPot += amount;
@@ -177,8 +192,8 @@ public class Craps extends DiceGame implements GamblingGame {
         this.fieledPot = 0;
     }
 
-    public void clearComeLinePot() {
-        this.comeLinePot = 0;
+    public void clearHardwayPot() {
+        this.hardWaysPot = 0;
     }
 
     private void clearPassLineOddsPot() {
@@ -187,15 +202,7 @@ public class Craps extends DiceGame implements GamblingGame {
 
 
     public void printWallet() {
-        System.out.println(crapsPlayer.getWallet());
-    }
-
-    public Double getPassLinePot(){
-        return passLinePot;
-    }
-
-    public Double getFieldBet(){
-        return fieledPot;
+        System.out.println("Your current wallet is " + crapsPlayer.getWallet() + "\n");
     }
 
     public void checkFieldBetWinner(int sumofRoll, Double betAmount) {
@@ -215,33 +222,63 @@ public class Craps extends DiceGame implements GamblingGame {
             clearPassLinePot();
         } else if (pointNumbers.contains(sumofRoll)) {
             System.out.println("The point is now set at " + sumofRoll);
-            pointOn = true;
-            pointNumber = sumofRoll;
+            setPointOn();
+            setPointNumber(sumofRoll);
         } else {
             System.out.println("You lost " + passLinePot + " on you Pass Line bet");
+            clearPassLinePot();
         }
-        clearPassLinePot();
     }
 
     public void checkPassLineBetPhase2(int sumofRoll, Double betAmount) {
-        if (sumofRoll == pointNumber) {
+        if (sumofRoll == pointNumber && betAmount > 0) {
             System.out.println("You won " + passLinePot + " on your Pass Line bet");
             crapsPlayer.collectCraps(passLinePot, 2.0);
             clearPassLinePot();
-            pointOn = false;
+            setPointOff();
         } else if (sumofRoll == 7) {
             System.out.println("You lost " + passLinePot + " on your Pass Line bet");
             clearPassLinePot();
-            pointOn = false;
+            setPointOff();
         }
     }
 
-    public Integer rollDice() {
+    public void checkPassLineOddsWinner(int sumofRoll, Double betAmount) {
+        if (sumofRoll == pointNumber && betAmount > 0) {
+            System.out.println("You won " + passLineOddsPot + " on your Pass Line Odds");
+            crapsPlayer.collectCraps(passLineOddsPot, 2.0);
+            clearPassLineOddsPot();
+            setPointOff();
+        } else if (sumofRoll == 7) {
+            System.out.println("You lost " + passLineOddsPot + " on your Pass Line Odds");
+            clearPassLineOddsPot();
+            setPointOff();
+        }
+    }
+
+    public void checkHardwayWinner(int sumofRoll, Double betAmount, ArrayList<Dice> rolledDice) {
+        if(sumofRoll == hardwayNumber && betAmount > 0) {
+            if(areDiceTheSame(rolledDice)) {
+                System.out.println("You won " + hardWaysPot + " on your hardway bet");
+                clearHardwayPot();
+            } else {
+                System.out.println("You lost " + hardWaysPot + " on your hardway bet");
+                clearHardwayPot();
+            }
+        }
+    }
+
+    public ArrayList<Dice> rollDice() {
         rolledDice = (crapsPlayer.rollDice(2));
-        summedRoll += crapsPlayer.sumOfRoll(rolledDice);
+        return rolledDice;
+    }
+
+    public Integer rollDiceSum(ArrayList<Dice> lastRoll) {
+        summedRoll += crapsPlayer.sumOfRoll(lastRoll);
         System.out.println("You rolled " + summedRoll);
         return summedRoll;
     }
+
 
     public CrapsPlayer getCrapsPlayer() {
         return this.crapsPlayer;
@@ -259,12 +296,36 @@ public class Craps extends DiceGame implements GamblingGame {
         return pointOn;
     }
 
+    public Double getPassLinePot(){
+        return passLinePot;
+    }
+
+    public Double getFieldBet(){
+        return fieledPot;
+    }
+
+    public Double getHardwayBet(){
+        return hardWaysPot;
+    }
+
     public void setPointOn() {
         this.pointOn = true;
     }
 
     public void setPointOff() {
         this.pointOn = false;
+    }
+
+    public void setHardWayPot(Double amount) {
+        this.hardWaysPot = amount;
+    }
+
+    public boolean areDiceTheSame(ArrayList<Dice> diceRolled) {
+        if (diceRolled.get(0).getValue() == diceRolled.get(1).getValue()){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
