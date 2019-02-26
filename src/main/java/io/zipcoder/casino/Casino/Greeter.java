@@ -53,9 +53,9 @@ public class Greeter {
                     "██║ ╚═╝ ██║██║  ██║╚██████╗██║  ██║╚██████╔╝\n" +
                     "╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ ";
 
-//    public static String getBlackJackName() {
-//        return blackJackName;
-//    }
+    public static String getBlackJackName() {
+        return blackJackName;
+    }
 
     public static String getGoFishName() {
         return goFishName;

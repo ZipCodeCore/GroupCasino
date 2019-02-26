@@ -3,6 +3,7 @@ package io.zipcoder.casino.Games;
 import io.zipcoder.casino.CardsAndDice.Card;
 import io.zipcoder.casino.CardsAndDice.Deck;
 import io.zipcoder.casino.CardsAndDice.Rank;
+import io.zipcoder.casino.Casino.Greeter;
 import io.zipcoder.casino.Players.BlackJackPlayer;
 import io.zipcoder.casino.Players.Profile;
 import io.zipcoder.casino.utilities.Console;
@@ -24,14 +25,13 @@ public class BlackJack implements Game {
     private Integer userBet;
     private boolean isOver = false;
 
-    private Console blackJackConsole;
+    private Console console;
 
     public BlackJack(){
         this(Console.getConsole());
     }
 
-    public BlackJack(Console testConsole) {
-        blackJackConsole = testConsole;
+    public BlackJack(Console testConsole) { console = testConsole;
     }
 
     public BlackJackPlayer getUser(){
@@ -54,6 +54,7 @@ public class BlackJack implements Game {
     }
 
     public void play() {
+        console.println(Greeter.getBlackJackName());
         getUserBet();
         playFirstTurn();
 
@@ -64,24 +65,24 @@ public class BlackJack implements Game {
     }
 
     public void getUserBet() {
-        blackJackConsole.println("Your current balance is $" + user.getBalance());
-        userBet = blackJackConsole.getIntegerInput("Place a bet if you DARE");
+        console.println("Your current balance is $" + user.getBalance());
+        userBet = console.getIntegerInput("Place a bet if you DARE");
 
         while(userBet > user.getBalance()){
             tellUserDeyPoor();
-            userBet = blackJackConsole.getIntegerInput("Place a bet if you DARE");
+            userBet = console.getIntegerInput("Place a bet if you DARE");
             }
         decreaseBalance();
     }
 
     public void tellUserDeyPoor(){
-        blackJackConsole.println("Your broke ass has insufficient funds..");
+        console.println("Your broke ass has insufficient funds..");
     }
 
 
     public void playFirstTurn() {
         dealFirstHand();
-        blackJackConsole.print(Card.printAllCards(user.getHand()));
+        console.print(Card.printAllCards(user.getHand()));
         displayUserTotal(userTotal);
         if(checkIfHandIs21()){
         celebrateUser();
@@ -100,18 +101,18 @@ public class BlackJack implements Game {
 
     public void displayDealersFirstHand(){
         List<Card> printingCards = new ArrayList<>();
-        blackJackConsole.println("Dealer's hand is showing: ");
+        console.println("Dealer's hand is showing: ");
         printingCards.add(dealer.getHand().get(0));
         printingCards.add(Deck.getCardBack());
-        blackJackConsole.println(Card.printAllCards(printingCards));
+        console.println(Card.printAllCards(printingCards));
     }
 
     public void checkIfUserWantsToDoubleDown(){
-        String doubleDownChoice = blackJackConsole.getStringInput(
+        String doubleDownChoice = console.getStringInput(
                 "Would you like to Double Down? Please enter Yes or No");
         while(!doubleDownChoice.toLowerCase().equals("yes") && !doubleDownChoice.toLowerCase().equals("no") ){
-            blackJackConsole.println("Please enter a valid option of Yes or No");
-            doubleDownChoice = blackJackConsole.getStringInput(
+            console.println("Please enter a valid option of Yes or No");
+            doubleDownChoice = console.getStringInput(
                     "Would you like to Double Down? Please enter Yes or No");
             }
         if (doubleDownChoice.toLowerCase().equals("yes") && userBet <= user.getBalance()) {
@@ -125,7 +126,7 @@ public class BlackJack implements Game {
 
         String userChoice = getUserInput().toLowerCase();
         if(!userChoice.equals("hit") && !userChoice.equals("stay") ){
-            blackJackConsole.println("Please enter a valid option of Hit or Stay");
+            console.println("Please enter a valid option of Hit or Stay");
         }
         else if (userChoice.equals("hit")) {
             hit();
@@ -140,12 +141,12 @@ public class BlackJack implements Game {
         decreaseBalance();
         userBet = userBet * 2;
 
-        blackJackConsole.println("Bet is now $" + userBet);
+        console.println("Bet is now $" + userBet);
 
         user.getHand().add(currentDeck.drawCard());
         userTotal = getTotal(user.getHand());
 
-        blackJackConsole.print("Your next card is \n" + Card.printAllCards(user.getHand().get(2)));
+        console.print("Your next card is \n" + Card.printAllCards(user.getHand().get(2)));
 
         displayUserTotal(userTotal);
         checkGameOverByBust();
@@ -159,13 +160,13 @@ public class BlackJack implements Game {
     public void hit() {
         user.getHand().add(currentDeck.drawCard());
         userTotal = getTotal(user.getHand());
-        blackJackConsole.println("Your next card is \n" + Card.printAllCards(user.getHand().get(user.getHand().size()-1)) +
+        console.println("Your next card is \n" + Card.printAllCards(user.getHand().get(user.getHand().size()-1)) +
                 "Your total hand is " + userTotal);
     }
 
     public String getUserInput() {
 
-        String userChoice = blackJackConsole.getStringInput("Would you like to Hit or Stay?");
+        String userChoice = console.getStringInput("Would you like to Hit or Stay?");
         return userChoice;
     }
 
@@ -188,24 +189,24 @@ public class BlackJack implements Game {
 
 
     public void displayUserTotal(int userTotal) {
-        blackJackConsole.println("Your total is " + userTotal);
+        console.println("Your total is " + userTotal);
     }
 
     public void displayDealerTotal(int dealerTotal) {
-        blackJackConsole.println("Dealer total is " + dealerTotal);
+        console.println("Dealer total is " + dealerTotal);
     }
 
     public void displayUserBalance(){
-        blackJackConsole.println("Your balance is: $" + user.getBalance());
+        console.println("Your balance is: $" + user.getBalance());
     }
 
     public void displayDealerHand() {
-        blackJackConsole.println("Dealer's hand is now: \n" + Card.printAllCards(dealer.getHand()));
+        console.println("Dealer's hand is now: \n" + Card.printAllCards(dealer.getHand()));
     }
 
     public boolean checkGameOverByBust() {
         if (userTotal > 21) {
-            blackJackConsole.println("You Bust. Dealer wins!");
+            console.println("You Bust. Dealer wins!");
             displayUserBalance();
             isOver = true;
         }
@@ -221,20 +222,20 @@ public class BlackJack implements Game {
     }
 
     public void celebrateUser(){
-        blackJackConsole.println("You are the Winner!!!!");
+        console.println("You are the Winner!!!!");
         addWinningsBalance();
         displayUserBalance();
 
     }
 
     public void takeDealersTurn() {
-        blackJackConsole.println("Dealer card is \n" + Card.printAllCards(dealer.getHand().get(1)));
+        console.println("Dealer card is \n" + Card.printAllCards(dealer.getHand().get(1)));
 
         displayDealerHand();
         displayDealerTotal(dealerTotal);
         while (dealerTotal < 17) {
             dealer.getHand().add(currentDeck.drawCard());
-            blackJackConsole.println("The dealer drew \n" + Card.printAllCards(dealer.getHand().get(dealer.getHand().size() - 1)));
+            console.println("The dealer drew \n" + Card.printAllCards(dealer.getHand().get(dealer.getHand().size() - 1)));
             dealerTotal = getTotal(dealer.getHand());
             displayDealerHand();
             displayDealerTotal(dealerTotal);
@@ -245,12 +246,12 @@ public class BlackJack implements Game {
     public void checkWinner() {
 
         if (dealerTotal > 21) {
-            blackJackConsole.print("Dealer Busts.");
+            console.print("Dealer Busts.");
             celebrateUser();
             isOver = true;
 
         }else if (dealerTotal == userTotal) {
-            blackJackConsole.println("It's a Push. Ehh");
+            console.println("It's a Push. Ehh");
             user.setBalance(user.getBalance() + userBet);
             displayUserBalance();
             isOver = true;
@@ -260,7 +261,7 @@ public class BlackJack implements Game {
             if (result.equals("You are the winner")){
                 addWinningsBalance();
             }
-            blackJackConsole.println(result);
+            console.println(result);
             displayUserBalance();
             isOver = true;
             }

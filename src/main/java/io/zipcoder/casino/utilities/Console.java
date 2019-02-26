@@ -50,13 +50,11 @@ public final class Console {
     }
 
     public String getStandardInput(String prompt, Object... args) {
-        println(prompt, args);
-        return input.nextLine().trim().toLowerCase();
+        return getStringInput(prompt, args).trim().toLowerCase();
     }
 
     public String getStandardInputCaps(String prompt, Object... args) {
-        println(prompt, args);
-        return input.nextLine().trim().toUpperCase();
+        return getStringInput(prompt, args).trim().toUpperCase();
     }
 
     public Double getDoubleInput(String prompt, Object... args) {

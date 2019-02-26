@@ -79,7 +79,7 @@ public class CasinoTest {
     }
 
     @Test
-    public void testGetNextClean2() {
+    public void testGetNextClean() {
         // Given
         String input = "macao";
         byte[] inputBytes = input.getBytes();
@@ -92,6 +92,38 @@ public class CasinoTest {
 
         // Then
         Assert.assertTrue(game instanceof Macao);
+    }
+
+    @Test
+    public void testGetNextClean2() {
+        // Given
+        String input = "gofish";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Console console = new Console(new Scanner(inputByteArray), System.out);
+        Greeter greeter = new Greeter(console);
+
+        // When
+        Game game = greeter.getNextCleanGame();
+
+        // Then
+        Assert.assertTrue(game instanceof GoFish);
+    }
+
+    @Test
+    public void testGetNextClean3() {
+        // Given
+        String input = "blackjack";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Console console = new Console(new Scanner(inputByteArray), System.out);
+        Greeter greeter = new Greeter(console);
+
+        // When
+        Game game = greeter.getNextCleanGame();
+
+        // Then
+        Assert.assertTrue(game instanceof GoFish);
     }
 
     @Test
