@@ -37,9 +37,18 @@ public class CrapsPlayer implements GamblingPlayer {
 
 
     public void collect(double amount) {
+        this.wallet += amount;
     }
 
     public String getName(){
         return name;
+    }
+
+    public void collectCraps(double amount, double winningsMultiplier){
+        this.wallet += (amount*winningsMultiplier);
+    }
+
+    public double getWallet(){
+        return this.wallet;
     }
 }
