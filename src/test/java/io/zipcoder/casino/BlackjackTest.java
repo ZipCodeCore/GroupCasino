@@ -4,19 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class BlackjackTest {
-    private Blackjack test = new Blackjack();
-
-
+    
     @Test
     public void takeBetTest() {
-        //GIVEN
-        double stash = test.getPot();
-
-        //WHEN
-        test.takeBet(10);
-
-        //THEN
-        Assert.assertEquals(test.getPot(),stash + 10,0);
 
     }
 
