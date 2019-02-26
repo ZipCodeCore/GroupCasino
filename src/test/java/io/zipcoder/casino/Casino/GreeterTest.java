@@ -1,8 +1,7 @@
 package io.zipcoder.casino.Casino;
 
-import io.zipcoder.casino.Cards.Games.*;
+import io.zipcoder.casino.Games.*;
 import io.zipcoder.casino.utilities.Console;
-import io.zipcoder.casino.utilities.Greeter;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -58,15 +57,6 @@ public class GreeterTest {
 
         // Then
         Assert.assertEquals(expectedInput, actualInput);
-    }
-    @Test
-    public void testDefaultConstructor() {
-        // Given
-        // When
-        Greeter greeter = new Greeter();
-
-        // Then
-        Assert.assertTrue(greeter instanceof Greeter);
     }
 
 
@@ -137,7 +127,7 @@ public class GreeterTest {
     @Test
     public void testGetNextClean() {
         // Given
-        String input = "blackjack";
+        String input = "gofish";
         byte[] inputBytes = input.getBytes();
         ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
         Console console = new Console(new Scanner(inputByteArray), System.out);
@@ -164,6 +154,22 @@ public class GreeterTest {
 
         // Then
         Assert.assertTrue(game instanceof Macao);
+    }
+
+    @Test
+    public void testGetNextClean3() {
+        // Given
+        String input = "blackjack";
+        byte[] inputBytes = input.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Console console = new Console(new Scanner(inputByteArray), System.out);
+        Greeter greeter = new Greeter(console);
+
+        // When
+        Game game = greeter.getNextCleanGame();
+
+        // Then
+        Assert.assertTrue(game instanceof GoFish);
     }
 
     @Test
@@ -324,6 +330,6 @@ public class GreeterTest {
         String actual = outputStream.toString();
 
         // Then
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual.contains(expected));
     }
 }
