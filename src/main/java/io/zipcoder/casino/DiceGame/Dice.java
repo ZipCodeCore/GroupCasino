@@ -1,5 +1,6 @@
 package io.zipcoder.casino.DiceGame;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Dice {
@@ -36,7 +37,4 @@ public class Dice {
         return random.nextInt(6) + 1;
     }
 
-    int tossAndSum(){
-        return 0;
-    }
 }

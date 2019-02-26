@@ -2,10 +2,20 @@ package io.zipcoder.casino.CardGame.Cards;
 
 public enum Suit {
 
-        CLUBS,
-        SPADES,
-        HEARTS,
-        DIAMONDS;
+        CLUBS('\u2663'),
+        SPADES('\u2660'),
+        HEARTS('\u2665'),
+        DIAMONDS('\u2666');
+
+        private char suitIcon;
+
+        private Suit(char s){
+                this.suitIcon = s;
+        }
+
+        public char getSuitIcon(){
+                return suitIcon;
+        }
 }
 
 

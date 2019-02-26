@@ -13,7 +13,6 @@ public class Deck {
     public Deck(int numberOfDecks) {
         for (int i = 0; i < numberOfDecks; i++) {
             createDeck();
-
         }
 
 
@@ -40,6 +39,7 @@ public class Deck {
         ArrayList<Card> requestedCards = new ArrayList<Card>();
         for (int i = 0; i < numberOfCards; i++ ) {
             requestedCards.add(deck.get(i));
+            deck.remove(i);
         }
 
         return requestedCards;
@@ -54,6 +54,10 @@ public class Deck {
 
             }
         }
+    }
+
+    public String toString() {
+        return deck.toString();
     }
 }
 

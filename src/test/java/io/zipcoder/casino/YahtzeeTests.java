@@ -4,6 +4,7 @@ import io.zipcoder.casino.DiceGame.Dice;
 import io.zipcoder.casino.DiceGame.Yahtzee;
 import org.junit.Assert;
 import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -17,12 +18,12 @@ public class YahtzeeTests {
     Dice d6 = new Dice(1, 6);
 
     @Test
-    public void YahtzeeConstructorTest(){
+    public void YahtzeeConstructorTest() {
         // Given
         String expectedYahtzeePlayerName = "Cara";
         Player player = new Player(expectedYahtzeePlayerName, 1000.00);
-        ArrayList<Dice> expectedSavedDice = new ArrayList<Dice>();
-        ArrayList<Dice> expectedRolledDice = new ArrayList<Dice>();
+        ArrayList<Dice> expectedSavedDice = new ArrayList<>();
+        ArrayList<Dice> expectedRolledDice = new ArrayList<>();
         int expectedScore = 0;
 
         // When
@@ -41,7 +42,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getAllDiceTest(){
+    public void getAllDiceTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -69,7 +70,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getScoreForCategoryTest(){
+    public void getScoreForCategoryTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -223,7 +224,7 @@ public class YahtzeeTests {
         Assert.assertEquals(expectedSixesScore, actualSixesScore);
 
         Assert.assertEquals(expectedThreeOfAKindScore, actualThreeOfAKindScore);
-        Assert.assertEquals(expectedNotThreeOfAKindScore,actualNotThreeOfAKindScore);
+        Assert.assertEquals(expectedNotThreeOfAKindScore, actualNotThreeOfAKindScore);
 
         Assert.assertEquals(expectedFourOfAKindScore, actualFourOfAKindScore);
         Assert.assertEquals(expectedNotFourOfAKindScore, actualNotFourOfAKindScore);
@@ -242,7 +243,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreAcesTest(){
+    public void scoreAcesTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -274,7 +275,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreTwosTest(){
+    public void scoreTwosTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -306,7 +307,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreThreesTest(){
+    public void scoreThreesTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -338,7 +339,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreFoursTest(){
+    public void scoreFoursTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -370,7 +371,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreFivesTest(){
+    public void scoreFivesTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -402,7 +403,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreSixesTest(){
+    public void scoreSixesTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -434,7 +435,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void hasThreeOfAKindTest(){
+    public void hasThreeOfAKindTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -554,7 +555,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void hasLargeStraightTest(){
+    public void hasLargeStraightTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -584,7 +585,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void hasYahtzeeTest(){
+    public void hasYahtzeeTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -614,7 +615,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreThreeOfAKindTest(){
+    public void scoreThreeOfAKindTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -635,7 +636,7 @@ public class YahtzeeTests {
         diceWithoutThreeOfAKind.add(d3);
         int expectedScore2 = 0;
 
-         // When
+        // When
         int actualScore1 = yahtzee.scoreThreeOfAKind(diceWithThreeOfAKind);
         int actualScore2 = yahtzee.scoreThreeOfAKind(diceWithoutThreeOfAKind);
 
@@ -646,7 +647,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreFourOfAKindTest(){
+    public void scoreFourOfAKindTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -678,7 +679,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreFullHouseTest(){
+    public void scoreFullHouseTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -710,7 +711,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreSmallStraightTest(){
+    public void scoreSmallStraightTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -762,7 +763,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreLargeStraightTest(){
+    public void scoreLargeStraightTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -804,7 +805,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scoreYahtzeeTest(){
+    public void scoreYahtzeeTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -836,7 +837,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void diceCounterTest(){
+    public void diceCounterTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -909,7 +910,7 @@ public class YahtzeeTests {
     }
 
     @Test
-    public void markScoreCardTest(){
+    public void markScoreCardTest() {
         //Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1123,7 +1124,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getCurrentDiceStringTest(){
+    public void getCurrentDiceStringTest() {
         // Given
         Player player = new Player("Cara", 1000.00);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1137,7 +1138,7 @@ public class YahtzeeTests {
         savedDice.add(d2);
         savedDice.add(d5);
 
-        String expected ="\n|------------------------------------------|\n" +
+        String expected = "\n|------------------------------------------|\n" +
                 "|            |  1  |  2  |  3  |  4  |  5  |\n" +
                 "|------------------------------------------|\n" +
                 "|Rolled Dice |  ⚃  |  ⚅  |     |     |     |\n" +
@@ -1157,7 +1158,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void setUpScoreCardTest(){
+    public void setUpScoreCardTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1201,7 +1202,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getScoreCardStringTest(){
+    public void getScoreCardStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1252,7 +1253,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getAcesScoreString(){
+    public void getAcesScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1272,7 +1273,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getTwosScoreString(){
+    public void getTwosScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1292,7 +1293,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getThreesScoreString(){
+    public void getThreesScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1312,7 +1313,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getFoursScoreString(){
+    public void getFoursScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1332,7 +1333,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getFivesScoreString(){
+    public void getFivesScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1352,7 +1353,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getSixesScoreString(){
+    public void getSixesScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1372,7 +1373,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getUpperBonusScoreString(){
+    public void getUpperBonusScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1392,7 +1393,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getThreeOfAKindScoreString(){
+    public void getThreeOfAKindScoreString() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1412,7 +1413,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getFourOfAKindScoreString(){
+    public void getFourOfAKindScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1432,7 +1433,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getFullHouseScoreString(){
+    public void getFullHouseScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1452,7 +1453,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getSmallStraightScoreString(){
+    public void getSmallStraightScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1472,7 +1473,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getLargeStraightScoreString(){
+    public void getLargeStraightScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1492,7 +1493,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getYahtzeeScoreString(){
+    public void getYahtzeeScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1512,7 +1513,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getChanceScoreString(){
+    public void getChanceScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1532,7 +1533,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getTotalScoreString(){
+    public void getTotalScoreStringTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1552,7 +1553,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void getUpperSectionTotal(){
+    public void getUpperSectionTotalTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee1 = new Yahtzee(player);
@@ -1595,7 +1596,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void upperSectionBonusTest(){
+    public void upperSectionBonusTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee1 = new Yahtzee(player);
@@ -1659,7 +1660,7 @@ public class YahtzeeTests {
     }
 
     @Test
-    public void getTotalScoreTest(){
+    public void getTotalScoreTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1690,7 +1691,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void upperSectionScoresCompleteTest(){
+    public void upperSectionScoresCompleteTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1718,7 +1719,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void scorecardCompleteTest(){
+    public void scorecardCompleteTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1753,7 +1754,7 @@ public class YahtzeeTests {
 
 
     @Test
-    public void isValidCategoryTest(){
+    public void isValidCategoryTest() {
         // Given
         Player player = new Player("Cara", 1000.0);
         Yahtzee yahtzee = new Yahtzee(player);
@@ -1768,6 +1769,25 @@ public class YahtzeeTests {
         // Then
         Assert.assertTrue(actualTrue);
         Assert.assertFalse(actualFalse);
+    }
+
+
+    @Test
+    public void welcomeToYahtzeeStringTest(){
+        // Given
+        Player player = new Player("Cara", 1000.0);
+        Yahtzee yahtzee = new Yahtzee(player);
+        String expected = "\n⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅\n" +
+                "      ___       __   __         ___    ___  __                   ___ __  ___  ___   /\n" +
+                "|  | |__  |    /  ` /  \\  |\\/| |__      |  /  \\    \\ /  /\\  |__|  |   / |__  |__   / \n" +
+                "|/\\| |___ |___ \\__, \\__/  |  | |___     |  \\__/     |  /~~\\ |  |  |  /_ |___ |___ .  \n\n" +
+                "⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅\n";
+
+        // When
+        String actual = yahtzee.welcomeToYahtzeeString();
+
+        // Then
+        Assert.assertEquals(expected, actual);
 
     }
 

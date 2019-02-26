@@ -4,6 +4,7 @@ import io.zipcoder.casino.CardGame.Cards.Card;
 import io.zipcoder.casino.CardGame.Cards.Deck;
 import io.zipcoder.casino.CardGame.Cards.Face;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.utilities.Console;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -16,107 +17,95 @@ public class GoFishPlayer {
     private Player player;
 
     // Four of a kind counter
-    private int counter4;
+    private int counter4 = 0;
 
-    //Array list to store player's 4 of a kind stacks
-    private ArrayList<Card> player4OfAKind;
-
-
-    //Array to store the faces of the 4 of a kind stacks
-    private ArrayList<Card> dealer4OfAKind;
-
-    private Deck deck;
-
-    private ArrayList<Card> firstHand; // Player's/Dealer's Initial Hand
-    private ArrayList<Card> remainingDeck;
-
-    private ArrayList<Card> cardsToReturn;
-    private  ArrayList<Card> newHand;
 
     // Constructor
 
     public GoFishPlayer(Player player) {
 
         this.name = player.getName();
+        this.player = player;
+        this.hand = new Hand(new ArrayList<>());
 
 
+    }
+
+    public int getCounter4() {
+        return counter4;
+    }
+
+    public Hand getHand() {
+        return hand;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    // method return boolean to check whether the opponent has the requested face
+    public boolean hasRequestedCard(Face cardRequested) {
+
+        for (Card card : hand.showMyCards()) {
+
+            if (card.getFace().equals(cardRequested)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
     //A player is requesting  a particular Face of Card from the opponent.
     //Once the particular face enum is requested, check opponents hand for that face if true return all the cards in opponents hands having the same face to the requesting player's hand.
-    public void requestCard(Enum requestFace) {
+    public void requestCard(GoFishPlayer otherPlayer, Face face) {
 
+        ArrayList<Card> cardsInHand = otherPlayer.hand.showMyCards();
+
+        ArrayList<Card> cardsToRemove = new ArrayList<>();
+
+
+        for (Card card : cardsInHand) {
+
+            if (card.getFace().equals(face)) {
+
+                cardsToRemove.add(card);
+            }
+
+        }
+
+        otherPlayer.getHand().removeCardsFromHand(cardsToRemove);
+        hand.addCardsToHand(cardsToRemove);
 
     }
 
-    // The player draws the card from the middle deck.
-    // Draw method in the Hand that can be used by Go Fish Player.
-    //Draws only one card from the deck. If the deck is empty then .......we still need to figure out.
-//    public void draw() {
-//
-//
-//    }
-
-    // Provided that the player has the face requested the player gives all the cards to the opponent.
-    public void removeCardFromHand(ArrayList<Card> cards) {
-
-
-    }
 
     // Provided that a player has a particular face 4 times the player can lay stack of 4 of a kind.
-    public void layFourOfAKindCards(Enum face4, Hand playersHand) {
+    public void layDown4OfAKind(Face face4) {
+
+        ArrayList<Card> fourOfAKind = new ArrayList<>();
+        for (Card c : hand.showMyCards()) {
+            if (c.getFace().equals(face4)) {
+                fourOfAKind.add(c);
+            }
+        }
+
+        hand.removeCardsFromHand(fourOfAKind);
+        counter4++;
 
 
     }
 
-    // The method to allocate the first hand to each of the players and setting aside the the remaining to the middle deck. 7 cards for each of the two players.
-    // The deal method will be created in the Deck class and the go fish player/dealer will call the deal method passing 7 as a parameter.
-    // And get back the array list of the 7 cards that will be set to the players/dealers hand.
-//    public ArrayList allocateFirstHand(Deck deck) {
-//
-//        return firstHand;
-//    }
 
-    // The method returns the remaining middle deck. full deck -
-    // (player's hand + dealer's hand + all four of a kind stacks)
-    // Might not need it. It can be taken care by the Deck class.
-//    public ArrayList getRemainingDeck() {
-//
-//
-//        return remainingDeck;
-//    }
-
-    // Checks the players hand for the face passed through the parameters  and return the array list of cards with the same face and return null if the face do not exist in the player's Hand
-    public ArrayList<Card> cardsToReturn(Hand playersHand, Enum faceInHand) {
-
-        return cardsToReturn;
-
-    }
-
-    // Method adds the Array list of cards in the parameters to the hand and returns all the cards in that hand
-    public ArrayList<Card> addCardsToHand(ArrayList<Card> cardsToAdd, Hand playersHand) {
-
-        return newHand;
+    public Integer[] getCardCountInHand() {
+        Integer[] counter = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 
-    }
-
-    // Checks the player/dealers' hand for 4 of a kind cards and returns a boolean
-    public int checkForFourOKind (GoFishPlayer player , Hand hand){
-
-        //int len = hand.getSize; // the getSize might be defined in the Hand Class.
-
-        boolean bool = false;
-
-        int fourOfaKindCounter =0;
-
-        ArrayList <Card>  cardsInHand = player.hand.getHand();
-
-        int aceCounter =0, jackCounter=0, kingCounter=0,queenCounter=0, twoCounter=0, threeCounter=0, fourCounter=0, fiveCounter=0, sixCounter=0, sevenCounter=0,eightCounter=0, nineCounter=0, tenCounter = 0;
-
-
-        for (Card card: cardsInHand) {
+        for (Card card : hand.showMyCards()) {
 
             Face face = card.getFace();
 
@@ -124,158 +113,139 @@ public class GoFishPlayer {
 
                 case ACE:
 
-                    aceCounter++;
-                    break;
-
-                case JACK:
-                    jackCounter++;
-                    break;
-
-                case KING:
-                    kingCounter++;
-                    break;
-
-                case QUEEN:
-                    queenCounter++;
+                    counter[0]++;
                     break;
 
                 case TWO:
-                    twoCounter++;
+                    counter[1]++;
                     break;
 
                 case THREE:
-                    threeCounter++;
+                    counter[2]++;
                     break;
 
                 case FOUR:
-                    fourCounter++;
+                    counter[3]++;
                     break;
 
                 case FIVE:
-                    fiveCounter++;
+                    counter[4]++;
                     break;
 
                 case SIX:
-                    sixCounter++;
+                    counter[5]++;
                     break;
 
                 case SEVEN:
-                    sevenCounter++;
+                    counter[6]++;
                     break;
 
                 case EIGHT:
-                    eightCounter++;
+                    counter[7]++;
                     break;
 
                 case NINE:
-                    nineCounter++;
+                    counter[8]++;
                     break;
 
                 case TEN:
-                    tenCounter++;
+                    counter[9]++;
                     break;
 
+                case JACK:
+                    counter[10]++;
+                    break;
+
+                case QUEEN:
+                    counter[11]++;
+                    break;
+
+                case KING:
+                    counter[12]++;
+                    break;
             }
-
-            if (aceCounter==4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-
-            else if (kingCounter == 4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-            else if (queenCounter==4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-
-            else if (jackCounter==4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-
-            else if (twoCounter==4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-
-            else if (threeCounter==4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-
-            else if (fourCounter==4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-
-            else if (fiveCounter==4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-
-            else if (sixCounter==4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-
-            else if (sevenCounter==4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-
-            else if (eightCounter==4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-
-            else if (nineCounter==4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-
-
-            else if (tenCounter==4) {
-
-                bool = true;
-                fourOfaKindCounter++;
-            }
-
         }
-
-        return fourOfaKindCounter;
-
-
-
+        return counter;
     }
 
+    public boolean fourOfAKindFinder() {
 
-    // The show method shows the hand of a particular player/dealer
-//    System.out.println('\u2665');// hearts
-//    System.out.println('\u2666');//Diamond
-//    System.out.println('\u2660'); //Spade
-//    System.out.println('\u2663'); // club
+        Integer[] cardCounter = getCardCountInHand();
+        Boolean hasFourOfAKind = false;
 
-    public void showHand() {
+        for (int i = 0; i < 13; i++) {
+            if (cardCounter[i] == 4) {
+                if (i == 0) {
+                    layDown4OfAKind(Face.ACE);
+                    hasFourOfAKind = true;
+                }
+                if (i == 1) {
+                    layDown4OfAKind(Face.TWO);
+                    hasFourOfAKind = true;
+                }
+                if (i == 2) {
+                    layDown4OfAKind(Face.THREE);
+                    hasFourOfAKind = true;
+                }
+                if (i == 3) {
+                    layDown4OfAKind(Face.FOUR);
+                    hasFourOfAKind = true;
+                }
+                if (i == 4) {
+                    layDown4OfAKind(Face.FIVE);
+                    hasFourOfAKind = true;
+                }
+                if (i == 5) {
+                    layDown4OfAKind(Face.SIX);
+                    hasFourOfAKind = true;
+                }
+                if (i == 6) {
+                    layDown4OfAKind(Face.SEVEN);
+                    hasFourOfAKind = true;
+                }
+                if (i == 7) {
+                    layDown4OfAKind(Face.EIGHT);
+                    hasFourOfAKind = true;
+                }
+                if (i == 8) {
+                    layDown4OfAKind(Face.NINE);
+                    hasFourOfAKind = true;
+                }
+                if (i == 9) {
+                    layDown4OfAKind(Face.TEN);
+                    hasFourOfAKind = true;
+                }
+                if (i == 10) {
+                    layDown4OfAKind(Face.JACK);
+                    hasFourOfAKind = true;
+                }
+                if (i == 11) {
+                    layDown4OfAKind(Face.QUEEN);
+                    hasFourOfAKind = true;
+                }
+                if (i == 12) {
+                    layDown4OfAKind(Face.KING);
+                    hasFourOfAKind = true;
+                }
+            }
+        }
+        return hasFourOfAKind;
+    }
 
-        player.hand.getHand(); //getHand method needs to be defined
+    public void setHand(Hand hand) {
+        this.hand = hand;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
+    public void setCounter4(int counter4) {
+        this.counter4 = counter4;
     }
 
 

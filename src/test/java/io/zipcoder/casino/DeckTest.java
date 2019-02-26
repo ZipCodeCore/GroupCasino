@@ -17,11 +17,11 @@ public class DeckTest {
     public void testShuffle() {
         //GIVEN
         Deck deck = new Deck(1);
-        Card expected = deck.getCard(4);
+        String expected = deck.toString();
 
         //WHEN
         deck.shuffle();
-        Card actual = deck.getCard(4);
+        String actual = deck.toString();
 
 
         //THEN
@@ -58,6 +58,23 @@ public class DeckTest {
 
         //THEN
         Assert.assertTrue(expected == 7);
+    }
+
+    @Test
+    public void testCardRemovedAfterDeal(){
+        //GIVEN
+        Deck deck = new Deck(1);
+        ArrayList<Card> cards = new ArrayList<>();
+        int expected = 42;
+
+        //WHEN
+        cards = deck.deal(10);
+        int actual = deck.deckSize();
+
+        //THEN
+        Assert.assertEquals(expected, actual);
+
+
     }
 
 
