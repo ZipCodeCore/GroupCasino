@@ -14,6 +14,8 @@ public class Yahtzee extends DiceGame {
     private ArrayList<Dice> savedDice;
     private ArrayList<Dice> rolledDice;
     private boolean playing = false;
+    Console console = Console.getInstance();
+    String input = "";
 
 
     public Yahtzee(Player player) {
@@ -27,130 +29,41 @@ public class Yahtzee extends DiceGame {
     @Override
     public void play() {
 
-        Console console = Console.getInstance();
         console.println(welcomeToYahtzeeString());
-
-        String input = console.getStringInput("\nHello %s!  Welcome to Yahtzee!  Type 'roll' to begin!", yahtzeePlayer.getName());
+        input = console.getStringInput("\nHello %s!  Welcome to Yahtzee!  Type 'roll' to begin!", yahtzeePlayer.getName());
         playing = true;
 
         while (playing) {
 
-            String allOptions = "Type 'save' to save rolled dice.\n" +
-                    "Type 'return' to return saved dice to be rolled again.\n" +
-                    "Type 'roll' to roll again.\n" +
-                    "Type 'scorecard' to see scorecard.\n" +
-                    "Type 'mark' to mark a score on you scorecard.\n" +
-                    "Type 'exit' to walk away.";
-
-            // if user enters "roll"
             if (input.toLowerCase().equals("roll")) {
-
-                try {
-                    rolledDice = yahtzeePlayer.rollDice(5 - savedDice.size());
-                    console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
-                    console.println(getCurrentDiceString(rolledDice, savedDice));
-                    input = console.getStringInput(allOptions);
-
-                } catch (YahtzeePlayer.TooManyRollsException tooManyRollsException) {
-                    input = console.getStringInput("\nYou have already rolled 3 times.  Type 'mark' to mark your scorecard.");
-                }
+                roll();
             }
 
-            // if user enters "save"
             if (input.toLowerCase().equals("save")) {
-                input = console.getStringInput("Type the locations of the dice you want to save.\n" +
-                        "(Ex: '123' to save first three dice)");
-                try {
-                    for (Dice die : yahtzeePlayer.saveDice(rolledDice, input)) {
-                        savedDice.add(die);
-                    }
-                    console.println("Dice saved.");
-                    console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
-                    console.println(getCurrentDiceString(rolledDice, savedDice));
-                    input = console.getStringInput(allOptions);
-
-                } catch (IndexOutOfBoundsException i) {
-                    input = console.getStringInput("Invalid input.  " + allOptions);
-                }
+                saveDice();
             }
 
-            // if user enters "return"
             if (input.toLowerCase().equals("return")) {
-                input = console.getStringInput("Type the locations of the dice you want to return.\n" +
-                        "(Ex: '345' to return last three dice)");
-                try {
-                    for (Dice die : yahtzeePlayer.returnDice(savedDice, input)) {
-                        rolledDice.add(die);
-                    }
-                    console.println("Dice returned");
-                    console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
-                    console.println(getCurrentDiceString(rolledDice, savedDice));
-                    input = console.getStringInput(allOptions);
-
-                } catch (ArrayIndexOutOfBoundsException aioobEx) {
-                    input = console.getStringInput("Invalid input.  " + allOptions);
-                }
+                returnDice();
             }
 
-            // if user enters "scorecard"
             if (input.toLowerCase().equals("scorecard")) {
-                console.println(getScoreCardString());
-                input = console.getStringInput("Type 'back' to go back.  Type 'mark' to mark scorecard");
-                if (input.toLowerCase().equals("back")) {
-                    console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
-                    console.println(getCurrentDiceString(rolledDice, savedDice));
-                    input = console.getStringInput(allOptions);
-                }
+                showScorecard();
             }
 
-            // if user enters "mark"
             if (input.toLowerCase().equals("mark")) {
-                input = console.getStringInput("Enter the category you want to mark on your scorecard.\n" +
-                        " 'aces', 'twos', 'threes', fours', 'fives', 'sixes'\n" +
-                        "     '3 of a kind', '4 of a kind', 'full house',\n" +
-                        "'small straight', large straight', 'yahtzee', 'chance'\n" +
-                        "           Enter 'back' to go back.\n");
+                input = console.getStringInput(categoryString());
+
                 if (input.toLowerCase().equals("back")) {
-                    console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
-                    console.println(getCurrentDiceString(rolledDice, savedDice));
-                    input = console.getStringInput(allOptions);
+                    back();
                 } else {
-                    if (isValidCategory(input)) {
-                        if (scoreCard.get(input.toLowerCase()) != null) {
-                            console.println("You already have a score for %s", input);
-                        } else {
-                            markScoreCard(input.toLowerCase(), getAllDice(rolledDice, savedDice));
-                            scoreCard.put("total score", getTotalScore(scoreCard));
-                            rolledDice.removeAll(rolledDice);
-                            savedDice.removeAll(savedDice);
-                            console.println(getScoreCardString());
-                            yahtzeePlayer.setRollNumber(0);
-
-                            if (scorecardComplete()) {
-                                console.println("Thank you for playing Yahtzee!  Your final score is %d.", getTotalScore(scoreCard));
-                                playing = false;
-                                input = "back";
-                            } else {
-                                input = console.getStringInput("Type 'roll' to start your next turn.");
-                            }
-                        }
-                    } else {
-                        input = console.getStringInput("Invalid category. Enter 'mark' to try again.");
-                    }
+                    markScore();
                 }
-
             }
             if (input.toLowerCase().equals("exit")) {
                 walkAway();
             }
-
-            // if user does not enter a valid input
-            if (!(input.toLowerCase().equals("roll") || input.toLowerCase().equals("save") || input.toLowerCase().equals("return") ||
-                    input.toLowerCase().equals("scorecard") || input.toLowerCase().equals("mark") || input.toLowerCase().equals("back")
-                    || input.toLowerCase().equals("exit"))) {
-
-                input = console.getStringInput("Invalid input.  " + allOptions);
-            }
+            invalidInputCheck();
         }
     }
 
@@ -901,4 +814,128 @@ public class Yahtzee extends DiceGame {
                 "⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅\n";
     }
 
+
+    public String allOptions() {
+        return "Type 'save' to save rolled dice.\n" +
+                "Type 'return' to return saved dice to be rolled again.\n" +
+                "Type 'roll' to roll again.\n" +
+                "Type 'scorecard' to see scorecard.\n" +
+                "Type 'mark' to mark a score on you scorecard.\n" +
+                "Type 'exit' to walk away.";
+    }
+
+
+    public void roll() {
+        try {
+            rolledDice = yahtzeePlayer.rollDice(5 - savedDice.size());
+            console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
+            console.println(getCurrentDiceString(rolledDice, savedDice));
+            input = console.getStringInput(allOptions());
+
+        } catch (YahtzeePlayer.TooManyRollsException tooManyRollsException) {
+            input = console.getStringInput("\nYou have already rolled 3 times.  Type 'mark' to mark your scorecard.");
+        }
+    }
+
+    public void saveDice() {
+        input = console.getStringInput("Type the locations of the dice you want to save.\n" +
+                "(Ex: '123' to save first three dice)");
+        try {
+            for (Dice die : yahtzeePlayer.saveDice(rolledDice, input)) {
+                savedDice.add(die);
+            }
+            console.println("Dice saved.");
+            console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
+            console.println(getCurrentDiceString(rolledDice, savedDice));
+            input = console.getStringInput(allOptions());
+
+        } catch (IndexOutOfBoundsException i) {
+            input = console.getStringInput("Invalid input.  " + allOptions());
+        }
+    }
+
+
+    public void returnDice() {
+        input = console.getStringInput("Type the locations of the dice you want to return.\n" +
+                "(Ex: '345' to return last three dice)");
+        try {
+            for (Dice die : yahtzeePlayer.returnDice(savedDice, input)) {
+                rolledDice.add(die);
+            }
+            console.println("Dice returned");
+            console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
+            console.println(getCurrentDiceString(rolledDice, savedDice));
+            input = console.getStringInput(allOptions());
+
+        } catch (ArrayIndexOutOfBoundsException aioobEx) {
+            input = console.getStringInput("Invalid input.  " + allOptions());
+        }
+    }
+
+    public void showScorecard() {
+        console.println(getScoreCardString());
+        input = console.getStringInput("Type 'back' to go back.  Type 'mark' to mark scorecard");
+        if (input.toLowerCase().equals("back")) {
+            console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
+            console.println(getCurrentDiceString(rolledDice, savedDice));
+            input = console.getStringInput(allOptions());
+        }
+    }
+
+
+    public String categoryString() {
+        return "Enter the category you want to mark on your scorecard.\n" +
+                " 'aces', 'twos', 'threes', fours', 'fives', 'sixes'\n" +
+                "     '3 of a kind', '4 of a kind', 'full house',\n" +
+                "'small straight', large straight', 'yahtzee', 'chance'\n" +
+                "           Enter 'back' to go back.\n";
+    }
+
+    public void back() {
+        console.println("\nRoll #%d", yahtzeePlayer.getRollNumber());
+        console.println(getCurrentDiceString(rolledDice, savedDice));
+        input = console.getStringInput(allOptions());
+    }
+
+
+    public void markScore() {
+        if (isValidCategory(input)) {
+            if (scoreCard.get(input.toLowerCase()) != null) {
+                console.println("You already have a score for %s", input);
+            } else {
+                markScoreCard(input.toLowerCase(), getAllDice(rolledDice, savedDice));
+                scoreCard.put("total score", getTotalScore(scoreCard));
+                rolledDice.removeAll(rolledDice);
+                savedDice.removeAll(savedDice);
+                console.println(getScoreCardString());
+                yahtzeePlayer.setRollNumber(0);
+
+                checkScorecardComplete();
+            }
+        } else {
+            input = console.getStringInput("Invalid category. Enter 'mark' to try again.");
+        }
+    }
+
+
+    public void checkScorecardComplete() {
+        if (scorecardComplete()) {
+            console.println("Thank you for playing Yahtzee!  Your final score is %d.", getTotalScore(scoreCard));
+            playing = false;
+            input = "back";
+        } else {
+            input = console.getStringInput("Type 'roll' to start your next turn.");
+        }
+    }
+
+
+    public void invalidInputCheck(){
+        if (!(input.toLowerCase().equals("roll") || input.toLowerCase().equals("save") || input.toLowerCase().equals("return") ||
+                input.toLowerCase().equals("scorecard") || input.toLowerCase().equals("mark") || input.toLowerCase().equals("back")
+                || input.toLowerCase().equals("exit"))) {
+
+            input = console.getStringInput("Invalid input.  " + allOptions());
+        }
+    }
 }
+

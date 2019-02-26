@@ -2,6 +2,7 @@ package io.zipcoder.casino;
 
 import io.zipcoder.casino.DiceGame.Dice;
 import io.zipcoder.casino.DiceGame.Yahtzee;
+import io.zipcoder.casino.DiceGame.YahtzeePlayer;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -1788,7 +1789,7 @@ public class YahtzeeTests {
 
         // Then
         Assert.assertEquals(expected, actual);
-
     }
+
 
 }
