@@ -433,6 +433,33 @@ public class BlackJackTest {
         //Then
         Assert.assertTrue(baos.toString().contains("Dealer card is: \n"));
     }
+    @Test
+    public void testEvaluateUserHitOrStay_Hit(){
+        //Given
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Console console = getConsoleWithBufferedInputAndOutput("100\nhit", baos);
+        BlackJack blackJack = new BlackJack(console);
+        List<Card> hand = new ArrayList<>();
+        Card card1 = new Card(Suit.DIAMONDS, Rank.EIGHT);
+        Card card2 = new Card(Suit.HEARTS, Rank.SEVEN);
+
+        blackJack.getUser().setBalance(1000);
+        blackJack.setUserTotal(100);
+
+        //When
+        hand.add(card1);
+        hand.add(card2);
+
+        blackJack.getUser().setHand(hand);
+        blackJack.getDealer().setHand(hand);
+        blackJack.getUserBet();
+
+        //When
+        blackJack.evaluateUserHitOrStay();
+
+        //Then
+        Assert.assertTrue(baos.toString().contains("Your next card is \n"));
+    }
 
     @Test
     public void checkHitTest1(){
