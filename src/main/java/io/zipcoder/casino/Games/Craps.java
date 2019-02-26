@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 public class Craps implements Game {
     private CrapsPlayer user = new CrapsPlayer(Casino.getProfile());
     //private int initialBalance = user.getBalance();
-    //Profile profile = new Profile();
     Console console = Console.getConsole();
     private int point = 0;
     private boolean toWinPassBet = false;
@@ -38,7 +37,6 @@ public class Craps implements Game {
     private boolean isLayBet;
     private int initialBalance = 500;
     private int firstRollSum;
-    private int buyIn = 5;
     Dice die1 = new Dice();
     Dice die2 = new Dice();
     private int betAmount = 0;
