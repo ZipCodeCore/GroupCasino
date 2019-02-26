@@ -151,18 +151,6 @@ public class CasinoTest {
         Assert.assertTrue(game instanceof BlackJack);
     }
 
-    @Test
-    public void playGameWithUserTest() {
-        // Given
-        Game game = new Game();
-        Casino.setProfile();
-        int expectedBalance = Casino.getProfile().getBalance() - 13;
-        // When
-        Casino.playGameWithUser(game);
-        int actualBalance = Casino.getProfile().getBalance();
-                // Then
-        Assert.assertEquals(expectedBalance, actualBalance);
-    }
 
     @Test
     public void offerUserLeaveTest() {

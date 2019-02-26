@@ -223,15 +223,13 @@ public class GoFishTest {
 
         // When
         testGoFish.setIsOver(true);
-        int actual = testGoFish.play();
+        testGoFish.play();
         String actualString = outputStream.toString();
 
         // Then
-        int expected = -5;
         String expectedString = "The object of this game is to get the most books (4 of a kind) down";
         Assert.assertFalse(actualString.contains("Alright, I'm going to play these:"));
         Assert.assertTrue(actualString.contains(expectedString));
-        Assert.assertEquals(expected, actual);
     }
 
     @Test

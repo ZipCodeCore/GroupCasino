@@ -152,11 +152,11 @@ public class GoFishPlayerTest {
         // When
         testPlayer.addToHand(cardInHand);
         testPlayer.addToHand(cardInHand);
-        List<Card> actual = testPlayer.getCards(cardInHand.getRank().toString().toLowerCase());
+        List<Card> actual = testPlayer.getCards(cardInHand.getRank().toString().toUpperCase());
 
         // Then
         Assert.assertEquals(expected, actual);
-        Assert.assertFalse(testPlayer.hasCard(cardInHand.getRank().toString().toLowerCase()));
+        Assert.assertFalse(testPlayer.hasCard(cardInHand.getRank().toString().toUpperCase()));
     }
 
     @Test
