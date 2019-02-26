@@ -48,6 +48,10 @@ public class BlackJack implements Game {
     public void setUserTotal(int total){
         this.userTotal = total;
     }
+    public void setDealerTotal(int total) {this.dealerTotal = total;}
+    public void setUserBet(Integer userBet) {
+        this.userBet = userBet;
+    }
 
     public static void main(String[] args)
     {   BlackJack blackJack = new BlackJack();
