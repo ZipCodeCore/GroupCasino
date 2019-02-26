@@ -7,6 +7,7 @@ import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class GoFish extends CardGame {
@@ -28,6 +29,8 @@ public class GoFish extends CardGame {
     boolean dealerDrawing = false;
     Face requestedCard = null;
 
+    boolean deckIsEmpty = false;
+
 
     public GoFish(Player player) {
 
@@ -41,26 +44,37 @@ public class GoFish extends CardGame {
     public void play() {
 
         startGame();
+        checkExit();
 
         while (playing) {
 
             // players turn
             while (playersTurn) {
+                checkIfOutOfCards();
                 checkAskInput();
+                checkExit();
 
                 // player asking dealer for card
                 while (playerAskingForCard) {
+                    checkIfOutOfCards();
                     askDealerForCard();
+                    checkExit();
                 }
 
                 // if dealer has card requested by player
-                if ((requestedCard != null) && input.toLowerCase().equals("ask")) {
+                if ((requestedCard != null) && (input.toLowerCase().equals("ask") || input.toLowerCase().equals("type draw"))) {
+                    checkIfOutOfCards();
                     dealerResponse();
+                    checkExit();
 
                     // if player has to draw
                     checkDrawInput();
+                    checkIfDeckIsEmpty();
+                    checkIfOutOfCards();
+                    checkExit();
                     while (playerDrawing) {
                         playerDraw();
+                        checkExit();
                     }
                 }
             }
@@ -68,42 +82,44 @@ public class GoFish extends CardGame {
             // dealers turn
             while (dealersTurn) {
 
+                checkIfOutOfCards();
+                checkExit();
                 // card dealer is asking player for
                 Face dealersRequestedCard = getDealersRequestedCard();
 
                 // dealer requests card
                 while (dealerAskingForCard) {
+                    checkIfOutOfCards();
+                    checkExit();
                     console.println("\nThe dealer requested the card " + dealersRequestedCard + ".\n\n" + goFishPlayer.getHand().toString());
                     respondToDealer(dealersRequestedCard);
                 }
 
                 // player has card to give to dealer
                 if (givingDealerCard) {
+                    checkIfOutOfCards();
+                    checkExit();
                     giveDealerCard(dealersRequestedCard);
                 }
 
                 // dealer drawing
+                checkIfDeckIsEmpty();
+                checkExit();
                 if (dealerDrawing) {
+                    checkIfOutOfCards();
+                    checkExit();
                     dealerDraw(dealersRequestedCard);
 
                     // dealer did not draw the requested card -- switch to players turn
                     if (dealerDrawing) {
+                        checkExit();
+                        checkIfOutOfCards();
                         dealersTurn = false;
                         dealerDrawing = false;
                         playersTurn = true;
                     }
                 }
             }
-/*
-            if (dealersScoreCounter > playersScoreCounter) {
-
-                console.println("You Lose, Better Luck Next Time");
-            } else {
-
-                console.println("Congratulations! You Win");
-            }
-
-*/
         }
     }
 
@@ -119,12 +135,14 @@ public class GoFish extends CardGame {
 
 
     public void walkAway() {
-
+        setAllBooleansFalse();
+        console.println("Thanks for playing Go Fish!");
+        console.println("Your score is %d.  The dealer's score is %d.", playersScoreCounter, dealersScoreCounter);
     }
 
 
     public String getCardOptions() {
-        return "\n'Ace' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine ' Ten' 'Jack' 'Queen' 'King'\n";
+        return "\n" + Arrays.toString(Face.values()) + "\n";
     }
 
     public void updatePlayerScore() {
@@ -151,6 +169,10 @@ public class GoFish extends CardGame {
     public int getDealersScoreCounter() {
         return dealersScoreCounter;
     }
+
+
+    // Starting the game asking for the initial deal of 7 cards for each of the players.
+    // cHeck if the initial dealt cards already contains any 4 of a kind  if yes updates the player's scores.
 
     public void startGame() {
 
@@ -194,6 +216,7 @@ public class GoFish extends CardGame {
             playerAskingForCard = false;
         } catch (IllegalArgumentException iae) {
             console.println("Invalid card requested.\n");
+
         }
     }
 
@@ -223,6 +246,7 @@ public class GoFish extends CardGame {
         } else {
             console.println("Invalid input.");
             newTurn = false;
+            input = "type draw";
         }
     }
 
@@ -241,6 +265,7 @@ public class GoFish extends CardGame {
             console.println("You drew a %s!  Go again!", requestedCard.name());
             playerDrawing = false;
             playerAskingForCard = true;
+            checkIfDeckIsEmpty();
         } else {
             console.println("\n" + goFishPlayer.getHand().toString());
             console.println("You drew a %s.  It's the dealer's turn.", getLastCard(goFishPlayer).getFace().name());
@@ -253,9 +278,15 @@ public class GoFish extends CardGame {
 
     public Face getDealersRequestedCard() {
         int sizeOfDealersHand = dealer.getHand().getSize();
+        Face dealersRequestedCard;
         Random random = new Random();
-        Integer indexOfCard = random.nextInt(sizeOfDealersHand - 1);
-        Face dealersRequestedCard = dealer.getHand().showMyCards().get(indexOfCard).getFace();
+        if(sizeOfDealersHand >0) {
+            Integer indexOfCard = random.nextInt(sizeOfDealersHand);
+            dealersRequestedCard = dealer.getHand().showMyCards().get(indexOfCard).getFace();
+        }
+        else{
+            dealersRequestedCard = Face.ACE;
+        }
 
         return dealersRequestedCard;
     }
@@ -309,7 +340,206 @@ public class GoFish extends CardGame {
     }
 
 
+    public boolean deckIsEmpty(Deck deck) {
+
+        if (deck.deckSize() <= 1) {
+            this.deckIsEmpty = true;
+            return true;
+        }
+
+        return false;
+    }
 
 
+    public boolean handHasCards(GoFishPlayer goFishPlayer) {
+        return goFishPlayer.isPlayersHandNotEmpty();
+    }
 
+
+    public void drawNewCardsIfHandIsEmpty(GoFishPlayer goFishPlayer) {
+        if (!handHasCards(goFishPlayer)) {
+            if (deck.deckSize() > 7) {
+                deck.deal(7);
+                console.println("Hand is empty.  Dealing 7 more cards.");
+            } else if (!deckIsEmpty) {
+                deck.deal(deck.deckSize() - 1);
+                deckIsEmpty = true;
+                console.println("Hand is empty.  Dealing the rest of the cards in the deck.");
+            } else {
+                playing = false;
+                endOfGameMessage(goFishPlayer);
+            }
+        }
+    }
+
+    public void checkIfOutOfCards(){
+        drawNewCardsIfHandIsEmpty(goFishPlayer);
+        drawNewCardsIfHandIsEmpty(dealer);
+    }
+
+    public void checkIfDeckIsEmpty(){
+        if (deckIsEmpty(deck)){
+            playerDrawing = false;
+            dealerDrawing = false;
+            console.println("The deck is empty so there are no cards to draw.");
+        }
+    }
+
+
+    public void endOfGameMessage(GoFishPlayer goFishPlayer){
+        setAllBooleansFalse();
+        if (goFishPlayer.equals(dealer)) {
+            console.println("The deck is empty and the dealer is out of cards!");
+        }
+        if (goFishPlayer.equals(this.goFishPlayer)){
+            console.println("The deck is empty and you are out of cards!");
+        }
+        console.println("Your score is %d.  The dealer's score is %d.", playersScoreCounter, dealersScoreCounter);
+        if(playersScoreCounter > dealersScoreCounter){
+            console.println("You win!!!!! You are a Go Fish wizard!");
+        }
+        else{
+            console.println("You lose!  Better luck next time!");
+        }
+    }
+
+    public void setAllBooleansFalse(){
+        playing = false;
+        playerAskingForCard = false;
+        playerDrawing = false;
+        playersTurn = false;
+        newTurn = false;
+        dealersTurn = false;
+        dealerAskingForCard = false;
+        givingDealerCard = false;
+        dealerDrawing = false;
+        requestedCard = null;
+    }
+
+    public void checkExit(){
+        if("exit".equals(input)){
+            walkAway();
+        }
+    }
+
+
+    public void setGoFishPlayer(GoFishPlayer goFishPlayer) {
+        this.goFishPlayer = goFishPlayer;
+    }
+
+    public void setDealer(GoFishPlayer dealer) {
+        this.dealer = dealer;
+    }
+
+    public void setPlayersScoreCounter(int playersScoreCounter) {
+        this.playersScoreCounter = playersScoreCounter;
+    }
+
+    public void setDealersScoreCounter(int dealersScoreCounter) {
+        this.dealersScoreCounter = dealersScoreCounter;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
+    public Console getConsole() {
+        return console;
+    }
+
+    public void setConsole(Console console) {
+        this.console = console;
+    }
+
+    public boolean isPlaying() {
+        return playing;
+    }
+
+    public void setPlaying(boolean playing) {
+        this.playing = playing;
+    }
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+    public boolean isPlayerAskingForCard() {
+        return playerAskingForCard;
+    }
+
+    public void setPlayerAskingForCard(boolean playerAskingForCard) {
+        this.playerAskingForCard = playerAskingForCard;
+    }
+
+    public boolean isPlayerDrawing() {
+        return playerDrawing;
+    }
+
+    public void setPlayerDrawing(boolean playerDrawing) {
+        this.playerDrawing = playerDrawing;
+    }
+
+    public boolean isPlayersTurn() {
+        return playersTurn;
+    }
+
+    public void setPlayersTurn(boolean playersTurn) {
+        this.playersTurn = playersTurn;
+    }
+
+    public boolean isNewTurn() {
+        return newTurn;
+    }
+
+    public void setNewTurn(boolean newTurn) {
+        this.newTurn = newTurn;
+    }
+
+    public boolean isDealersTurn() {
+        return dealersTurn;
+    }
+
+    public void setDealersTurn(boolean dealersTurn) {
+        this.dealersTurn = dealersTurn;
+    }
+
+    public boolean isDealerAskingForCard() {
+        return dealerAskingForCard;
+    }
+
+    public void setDealerAskingForCard(boolean dealerAskingForCard) {
+        this.dealerAskingForCard = dealerAskingForCard;
+    }
+
+    public boolean isGivingDealerCard() {
+        return givingDealerCard;
+    }
+
+    public void setGivingDealerCard(boolean givingDealerCard) {
+        this.givingDealerCard = givingDealerCard;
+    }
+
+    public boolean isDealerDrawing() {
+        return dealerDrawing;
+    }
+
+    public void setDealerDrawing(boolean dealerDrawing) {
+        this.dealerDrawing = dealerDrawing;
+    }
+
+    public Face getRequestedCard() {
+        return requestedCard;
+    }
+
+    public void setRequestedCard(Face requestedCard) {
+        this.requestedCard = requestedCard;
+    }
 }

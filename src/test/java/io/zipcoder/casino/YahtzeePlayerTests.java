@@ -170,6 +170,24 @@ public class YahtzeePlayerTests {
         yahtzeePlayer.rollDice(5);
     }
 
+    @Test
+    public void getRollNumberTest(){
+        // Given
+        Player player = new Player("Cara", 1000.00);
+        YahtzeePlayer yahtzeePlayer = new YahtzeePlayer(player);
+
+        int expected = 2;
+        yahtzeePlayer.setRollNumber(expected);
+
+        // When
+        int actual = yahtzeePlayer.getRollNumber();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+
+
+
+    }
 
 
 }

@@ -25,7 +25,6 @@ public class Blackjack extends CardGame implements GamblingGame {
         this.dealer = new BlackjackPlayer(this.player);
         this.deck = new Deck(10);
         this.deck.shuffle();
-
     }
 
     public void takeBet(double amount) {
