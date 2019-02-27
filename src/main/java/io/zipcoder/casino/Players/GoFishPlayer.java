@@ -2,10 +2,15 @@ package io.zipcoder.casino.Players;
 
 import io.zipcoder.casino.CardsAndDice.Card;
 import io.zipcoder.casino.CardsAndDice.Rank;
-
 import java.util.*;
 
 public class GoFishPlayer extends Player {
+    public GoFishPlayer() {
+        super();
+    }
+    public GoFishPlayer(Profile profile) {
+        super(profile);
+    }
     private List<Card> hand = new ArrayList<>();
     private int bookCount = 0;
 
@@ -39,7 +44,6 @@ public class GoFishPlayer extends Player {
     public List<Card> getCards(String getCard) {
         Rank cardRank = parseCardString(getCard);
         List<Card> retrievedCards = new ArrayList<>();
-        if (getCard == null){ return retrievedCards; }
         for (Card card : hand) {
             if(card.getRank().equals(cardRank)) {
                 retrievedCards.add(card);
@@ -98,7 +102,7 @@ public class GoFishPlayer extends Player {
         possibleUserInputs.put("k", Rank.KING); possibleUserInputs.put("ks", Rank.KING);
         possibleUserInputs.put("queen", Rank.QUEEN); possibleUserInputs.put("queens", Rank.QUEEN);
         possibleUserInputs.put("q", Rank.QUEEN); possibleUserInputs.put("qs", Rank.QUEEN);
-        possibleUserInputs.put("jack", Rank.QUEEN); possibleUserInputs.put("jacks", Rank.JACK);
+        possibleUserInputs.put("jack", Rank.JACK); possibleUserInputs.put("jacks", Rank.JACK);
         possibleUserInputs.put("j", Rank.JACK); possibleUserInputs.put("js", Rank.JACK);
         possibleUserInputs.put("ace", Rank.ACE); possibleUserInputs.put("aces", Rank.ACE);
         possibleUserInputs.put("a", Rank.ACE); possibleUserInputs.put("as", Rank.ACE);

@@ -5,6 +5,7 @@ import io.zipcoder.casino.CardsAndDice.Card;
 import io.zipcoder.casino.CardsAndDice.Deck;
 import io.zipcoder.casino.CardsAndDice.Rank;
 import io.zipcoder.casino.Casino.Casino;
+import io.zipcoder.casino.Casino.Greeter;
 import io.zipcoder.casino.Players.BlackJackPlayer;
 import io.zipcoder.casino.Players.Profile;
 import io.zipcoder.casino.utilities.Console;
@@ -17,8 +18,7 @@ import java.util.List;
 public class BlackJack implements Game {
 
     private BlackJackPlayer dealer = new BlackJackPlayer(new Profile());
-    private BlackJackPlayer user = new BlackJackPlayer(Casino.getProfile()); //this will need to be uncommented for live version and line below will need to be removed
-   // private BlackJackPlayer user = new BlackJackPlayer(new Profile("testName",true));
+    private BlackJackPlayer user = new BlackJackPlayer(Casino.getProfile());
     private Deck currentDeck = new Deck();
 
     private int userTotal;
@@ -54,12 +54,9 @@ public class BlackJack implements Game {
         this.userBet = userBet;
     }
 
-    public static void main(String[] args)
-    {   BlackJack blackJack = new BlackJack();
-        blackJack.play();
-    }
 
     public void play() {
+        blackJackConsole.println(Greeter.getBlackJackName());
         getUserBet();
         playFirstTurn();
 
@@ -84,7 +81,7 @@ public class BlackJack implements Game {
     }
 
 
-    public void playFirstTurn() {
+    private void playFirstTurn() {
         dealFirstHand();
         blackJackConsole.print(Card.printAllCards(user.getHand()));
         displayUserTotal(userTotal);
@@ -142,7 +139,7 @@ public class BlackJack implements Game {
         }
     }
 
-    public void doubleDown() {
+    private void doubleDown() {
         decreaseBalance();
         userBet = userBet * 2;
 
@@ -226,7 +223,7 @@ public class BlackJack implements Game {
 
     }
 
-    public void takeDealersTurn() {
+    private void takeDealersTurn() {
         blackJackConsole.println("Dealer card is: \n" + Card.printAllCards(dealer.getHand().get(1)));
 
         displayDealerHand();
@@ -266,11 +263,11 @@ public class BlackJack implements Game {
 
         }
 
-    public void addWinningsBalance() {
+    private void addWinningsBalance() {
          user.setBalance(user.getBalance() + (userBet * 2));
     }
 
-    public void decreaseBalance() {
+    private void decreaseBalance() {
         user.setBalance(user.getBalance() - userBet);
        displayUserBalance();
     }

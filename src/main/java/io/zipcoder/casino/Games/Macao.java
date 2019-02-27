@@ -191,7 +191,7 @@ public class Macao implements Game {
         if (dealer.getCumulativeRoll() > 9) {
             console.println("Lucky you! The dealer went over. YOU WIN!");
             isOver = true;
-        } else if (guestStillPlaying == false && dealerStillPlaying == false) {
+        } else if (!guestStillPlaying && !dealerStillPlaying) {
             isOver = true;
             if (user.getCumulativeRoll() > dealer.getCumulativeRoll()) {
                 console.println("Your total is %s and the dealer's total is %s. You're our winner!", user.getCumulativeRoll(), dealer.getCumulativeRoll());

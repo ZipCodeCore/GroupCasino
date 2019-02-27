@@ -2,6 +2,7 @@ package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.CardsAndDice.Dice;
 import io.zipcoder.casino.Casino.Casino;
+import io.zipcoder.casino.Casino.Greeter;
 import io.zipcoder.casino.Players.CrapsPlayer;
 import io.zipcoder.casino.utilities.Console;
 
@@ -286,12 +287,8 @@ public class Craps implements Game {
         this.console = console;
     }
 
-    public static void main(String[] args) {
-        Craps craps = new Craps();
-        craps.play();
-    }
-
     public void play() {
+        console.println(Greeter.getCrapsName());
         console.println("Welcome to the craps table!");
         while (!isOver) {
             while (isFirstRoll) {
@@ -353,7 +350,7 @@ public class Craps implements Game {
                 toWinPassBet = false;
                 betMap.put("Pass Bet", false);
             }
-        } else if (!isFirstRoll) {
+        } else {
             int betChoice = console.getIntegerInput("You have five choices:\n1) Explain Possible Bets\n2) List Current Bets\n3) List Available Bets\n4) Make a Bet\n5) Continue Rolling");
             switch (betChoice) {
                 case 1:
@@ -458,7 +455,7 @@ public class Craps implements Game {
         rollSum = roll1 + roll2;
         if (roll1 == roll2) {
             rollSumHardways = true;
-        } else if (roll1 != roll2) {
+        } else  {
             rollSumHardways = false;
         }
         switch (rollSum) {
@@ -568,14 +565,13 @@ public class Craps implements Game {
         }
     }
 
-    public int adjustBalance(int profitOrLoss) {
+    public void adjustBalance(int profitOrLoss) {
         if (profitOrLoss > 0) {
             console.println(String.format("You're on a roll and %d NUCs richer!\n", profitOrLoss));
         } else if (profitOrLoss < 0) {
             console.println(String.format("%d NUCs gone already? Play again to win that back and more!\n", profitOrLoss));
         }
         adjustedBalance += profitOrLoss;
-        return adjustedBalance;
     }
 
     public void compareBalance() {
@@ -583,7 +579,7 @@ public class Craps implements Game {
             console.println(String.format("You won %d NUCs!\n", (adjustedBalance - initialBalance)));
         } else if (adjustedBalance < initialBalance) {
             console.println(String.format("You're %d NUCs poorer!\n", (initialBalance - adjustedBalance)));
-        } else if (adjustedBalance == initialBalance) {
+        } else {
             console.println("You broke even!\n");
         }
     }

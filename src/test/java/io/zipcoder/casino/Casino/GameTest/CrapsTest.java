@@ -464,351 +464,365 @@ public class CrapsTest {
         Assert.assertEquals(expectedReturn, actualReturn);
     }
 
-//    @Test
-//    public void rollTest2() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        Dice diceRoll5 = new LoadedDice();
-//        Dice diceRoll2 = new LoadedDice2();
-//        craps.setDie1(diceRoll5);
-//        craps.setDie2(diceRoll2);
-//        craps.setRollSum(0);
-//        craps.setRollSumHardways(true);
-//        craps.setIsNatural(false);
-//        craps.setIsPlaying(false);
-//        int expectedRollSum = 7;
-//        String expectedOutput = "You rolled a 5 and 2 totaling 7";
-//        int expectedReturn = expectedRollSum;
-//
-//        // When
-//        int actualReturn = craps.roll();
-//        int actualRollSum = craps.getRollSum();
-//        String actualOutput = outputStream.toString().trim();
-//
-//        // Then
-//        Assert.assertEquals(expectedRollSum, actualRollSum);
-//        Assert.assertFalse(craps.getRollSumHardways());
-//        Assert.assertTrue(craps.getIsNatural());
-//        Assert.assertTrue(craps.getIsPlaying());
-//        Assert.assertEquals(expectedOutput, actualOutput);
-//        Assert.assertEquals(expectedReturn, actualReturn);
-//    }
+    @Test
+    public void rollTest2() {
+        // Given
+        Craps craps = helperFunctionNoInput();
+        Dice diceRoll5 = new LoadedDice();
+        Dice diceRoll2 = new LoadedDice2();
+        craps.setDie1(diceRoll5);
+        craps.setDie2(diceRoll2);
+        craps.setRollSum(0);
+        craps.setRollSumHardways(true);
+        craps.setIsNatural(false);
+        craps.setIsPlaying(false);
+        int expectedRollSum = 7;
+        String expectedOutput = "HERE ARE YOUR DIE:";
+        int expectedReturn = expectedRollSum;
 
-//    @Test
-//    public void evaluateTest1() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        craps.setIsNatural(true);
-//        craps.setToWinLayBet(true);
-//        craps.setBetAmount(100);
-//        int expectedTotalBalance = craps.getAdjustedBalance() + craps.getBetAmount();
-//        String expectedOutput = "Your Lay bet paid off!\n" +
-//                "\n" +
-//                "You're on a roll and 100 NUCs richer!";
-//
-//        // When
-//        craps.evaluate();
-//        int actualTotalBalance = craps.getAdjustedBalance();
-//        String actualOutput = outputStream.toString().trim();
-//
-//        // Then
-//
-//        Assert.assertEquals(expectedOutput, actualOutput);
-//        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
-//    }
-//
-//    @Test
-//    public void evaluateTest2() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        craps.setIsNatural(true);
-//        craps.setToWinLayBet(false);
-//        craps.setToWinPassBet(false);
-//        craps.setBetAmount(100);
-//        int expectedTotalBalance = craps.getAdjustedBalance() + craps.getBetAmount();
-//        String expectedOutput = "Your Don't Pass bet paid off!\n" +
-//                "\n" +
-//                "You're on a roll and 100 NUCs richer!";
-//
-//        // When
-//        craps.evaluate();
-//        int actualTotalBalance = craps.getAdjustedBalance();
-//        String actualOutput = outputStream.toString().trim();
-//
-//        // Then
-//
-//        Assert.assertEquals(expectedOutput, actualOutput);
-//        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
-//    }
-//
-//    @Test
-//    public void evaluateTest3() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        craps.setIsNatural(true);
-//        craps.setToWinLayBet(false);
-//        craps.setToWinPassBet(true);
-//        craps.setIsOver(false);
-//        craps.setBetAmount(100);
-//        int expectedTotalBalance = craps.getAdjustedBalance() - craps.getBetAmount();
-//        String expectedOutput = "Sorry shooter, it looks like your hot streak has come to an end!\n" +
-//                "\n" +
-//                "-100 NUCs gone already? Play again to win that back and more!";
-//
-//        // When
-//        craps.evaluate();
-//        int actualTotalBalance = craps.getAdjustedBalance();
-//        String actualOutput = outputStream.toString().trim();
-//
-//        // Then
-//
-//        Assert.assertEquals(expectedOutput, actualOutput);
-//        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
-//    }
-//
-//    @Test
-//    public void evaluateTest4() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        craps.setIsNatural(false);
-//        craps.setIsCrappedRolls(true);
-//        craps.setIsFirstRoll(false);
-//        craps.setIsAnyCrapsBet(true);
-//        craps.setRollSum(2);
-//        craps.setBetAmount(50);
-//        int expectedTotalBalance = craps.getAdjustedBalance() + craps.getBetAmount();
-//        String expectedOutput = "Your Any Craps bet paid off!\n" +
-//                "\n" +
-//                "You're on a roll and 50 NUCs richer!";
-//
-//        // When
-//        craps.evaluate();
-//        int actualTotalBalance = craps.getAdjustedBalance();
-//        String actualOutput = outputStream.toString().trim();
-//
-//        // Then
-//        Assert.assertEquals(expectedOutput, actualOutput);
-//        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
-//    }
-//
-//    @Test
-//    public void evaluateTest5() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        craps.setIsNatural(false);
-//        craps.setIsCrappedRolls(true);
-//        craps.setIsFirstRoll(false);
-//        craps.setIsAnyCrapsBet(true);
-//        craps.setRollSum(5);
-//        craps.setBetAmount(50);
-//        int expectedTotalBalance = craps.getAdjustedBalance() - craps.getBetAmount();
-//        String expectedOutput = "You lost your Any Craps bet!\n" +
-//                "\n" +
-//                "-50 NUCs gone already? Play again to win that back and more!";
-//
-//        // When
-//        craps.evaluate();
-//        int actualTotalBalance = craps.getAdjustedBalance();
-//        String actualOutput = outputStream.toString().trim();
-//
-//        // Then
-//        Assert.assertEquals(expectedOutput, actualOutput);
-//        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
-//    }
-//
-//    @Test
-//    public void evaluateTest6() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        craps.setIsNatural(false);
-//        craps.setIsCrappedRolls(false);
-//        craps.setIsPoint(true);
-//        craps.setIsFieldBet(true);
-//        craps.setRollSum(3);
-//        craps.setBetAmount(80);
-//        int expectedTotalBalance = craps.getAdjustedBalance() + 80;
-//        String expectedOutput = "You won your Field bet!\n" +
-//                "\n" +
-//                "You're on a roll and 80 NUCs richer!";
-//
-//        // When
-//        craps.evaluate();
-//        int actualTotalBalance = craps.getAdjustedBalance();
-//        String actualOutput = outputStream.toString().trim();
-//
-//        // Then
-//        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
-//        Assert.assertEquals(expectedOutput, actualOutput);
-//    }
-//
-//    @Test
-//    public void evaluateTest7() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        craps.setIsNatural(false);
-//        craps.setIsCrappedRolls(false);
-//        craps.setIsPoint(true);
-//        craps.setIsFieldBet(false);
-//        craps.setIsHornBet(true);
-//        craps.setRollSum(2);
-//        craps.setBetAmount(80);
-//        int expectedTotalBalance = craps.getAdjustedBalance() + 80;
-//        String expectedOutput = "You won your Horn bet!\n" +
-//                "\n" +
-//                "You're on a roll and 80 NUCs richer!";
-//
-//        // When
-//        craps.evaluate();
-//        int actualTotalBalance = craps.getAdjustedBalance();
-//        String actualOutput = outputStream.toString().trim();
-//
-//        // Then
-//        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
-//        Assert.assertEquals(expectedOutput, actualOutput);
-//    }
-//
-//    @Test
-//    public void evaluateTest8() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        craps.setIsNatural(false);
-//        craps.setIsCrappedRolls(false);
-//        craps.setIsPoint(true);
-//        craps.setIsFieldBet(false);
-//        craps.setIsHornBet(false);
-//        craps.setIsHardwaysBet(true);
-//        craps.setHardwaysRoll(4);
-//        craps.setRollSum(4);
-//        craps.setBetAmount(80);
-//        craps.setAdjustedBalance(100);
-//        int expectedTotalBalance = craps.getAdjustedBalance() + 80;
-//        String expectedOutput = "You won your Hardways bet!\n" +
-//                "\n" +
-//                "You're on a roll and 80 NUCs richer!";
-//
-//        // When
-//        craps.evaluate();
-//        int actualTotalBalance = craps.getAdjustedBalance();
-//        String actualOutput = outputStream.toString().trim();
-//
-//        // Then
-//        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
-//        Assert.assertEquals(expectedOutput, actualOutput);
-//    }
-//
-//    @Test
-//    public void evaluateTest9() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        craps.setIsNatural(false);
-//        craps.setIsCrappedRolls(false);
-//        craps.setIsPoint(true);
-//        craps.setIsFieldBet(false);
-//        craps.setIsHornBet(false);
-//        craps.setIsHardwaysBet(false);
-//        craps.setIsLayBet(true);
-//        craps.setRollSum(7);
-//        craps.setBetAmount(80);
-//        craps.setAdjustedBalance(100);
-//        int expectedTotalBalance = craps.getAdjustedBalance() + 80;
-//        String expectedOutput = "You won your Lay Bet!\n" +
-//                "\n" +
-//                "You're on a roll and 80 NUCs richer!";
-//
-//        // When
-//        craps.evaluate();
-//        int actualTotalBalance = craps.getAdjustedBalance();
-//        String actualOutput = outputStream.toString().trim();
-//
-//        // Then
-//        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
-//        Assert.assertEquals(expectedOutput, actualOutput);
-//    }
-//
-//    @Test
-//    public void evaluateTest10() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        craps.setIsNatural(false);
-//        craps.setIsCrappedRolls(false);
-//        craps.setIsPoint(true);
-//        craps.setIsFieldBet(false);
-//        craps.setIsHornBet(false);
-//        craps.setIsHardwaysBet(false);
-//        craps.setIsLayBet(false);
-//        craps.setPoint(4);
-//        craps.setRollSum(4);
-//        craps.setToWinPassBet(true);
-//        craps.setBetAmount(80);
-//        craps.setAdjustedBalance(100);
-//        int expectedTotalBalance = craps.getAdjustedBalance() + 80;
-//        String expectedOutput = "Lucky number 4! You hit the point!\n" +
-//                "\n" +
-//                "You're on a roll and 80 NUCs richer!";
-//
-//        // When
-//        craps.evaluate();
-//        int actualTotalBalance = craps.getAdjustedBalance();
-//        String actualOutput = outputStream.toString().trim();
-//
-//        // Then
-//        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
-//        Assert.assertEquals(expectedOutput, actualOutput);
-//    }
-//
-//    @Test
-//    public void evaluateTest11() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        craps.setIsNatural(false);
-//        craps.setIsCrappedRolls(false);
-//        craps.setIsPoint(true);
-//        craps.setIsFieldBet(false);
-//        craps.setIsHornBet(false);
-//        craps.setIsHardwaysBet(false);
-//        craps.setIsLayBet(false);
-//        craps.setPoint(4);
-//        craps.setRollSum(5);
-//        craps.setIsPlaying(false);
-//
-//        // When
-//        craps.evaluate();
-//
-//        // Then
-//        Assert.assertTrue(craps.getIsPlaying());
-//    }
-//
-//    @Test
-//    public void evaluateTest12() {
-//        // Given
-//        Craps craps = helperFunctionNoInput();
-//        craps.setIsNatural(false);
-//        craps.setIsCrappedRolls(false);
-//        craps.setIsPoint(true);
-//        craps.setIsFieldBet(false);
-//        craps.setIsHornBet(false);
-//        craps.setIsHardwaysBet(false);
-//        craps.setIsLayBet(false);
-//        craps.setPlaceBetChoice(5);
-//        craps.setRollSum(5);
-//        craps.setIsPlaying(true);
-//        craps.setBetAmount(80);
-//        craps.setAdjustedBalance(100);
-//        int expectedTotalBalance = craps.getAdjustedBalance() + 80;
-//        String expectedOutput = "Your Place bet paid off!\n" +
-//                "\n" +
-//                "You're on a roll and 80 NUCs richer!";
-//
-//        // When
-//        craps.evaluate();
-//        int actualTotalBalance = craps.getAdjustedBalance();
-//        String actualOutput = outputStream.toString().trim();
-//
-//        // Then
-//        Assert.assertFalse(craps.getIsPlaying());
-//        Assert.assertEquals(expectedOutput, actualOutput);
-//        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
-//    }
+        // When
+        int actualReturn = craps.roll();
+        int actualRollSum = craps.getRollSum();
+        String actualOutput = outputStream.toString().trim();
+
+        // Then
+        Assert.assertEquals(expectedRollSum, actualRollSum);
+        Assert.assertFalse(craps.getRollSumHardways());
+        Assert.assertTrue(craps.getIsPlaying());
+        Assert.assertTrue(actualOutput.contains(expectedOutput));
+        Assert.assertEquals(expectedReturn, actualReturn);
+    }
+
+    public static void main(String[] args)
+    {
+        Craps craps = new Craps();
+        craps.setIsNatural(true);
+        craps.setToWinLayBet(true);
+        craps.setBetAmount(100);
+        int expectedTotalBalance = craps.getAdjustedBalance() + craps.getBetAmount();
+        String expectedOutput = "Your Lay bet paid off!\n" +
+                "\n" +
+                "You're on a roll and 100 NUCs richer!";
+
+        // When
+        craps.evaluate();
+    }
+
+    @Test
+    public void evaluateTest1() {
+        // Given
+        Craps craps = helperFunction("yes\nno");
+        craps.setIsNatural(true);
+        craps.setToWinLayBet(true);
+        craps.setBetAmount(100);
+        int expectedTotalBalance = craps.getAdjustedBalance() + craps.getBetAmount();
+        String expectedOutput = "Your Lay bet paid off!\n" +
+                "\n" +
+                "You're on a roll and 100 NUCs richer!";
+
+        // When
+        craps.evaluate();
+        int actualTotalBalance = craps.getAdjustedBalance();
+        String actualOutput = outputStream.toString().trim();
+
+        // Then
+
+        Assert.assertTrue(actualOutput.contains(expectedOutput));
+        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
+    }
+
+    @Test
+    public void evaluateTest2() {
+        // Given
+        Craps craps = helperFunction("yes\nno");
+        craps.setIsNatural(true);
+        craps.setToWinLayBet(false);
+        craps.setToWinPassBet(false);
+        craps.setBetAmount(100);
+        int expectedTotalBalance = craps.getAdjustedBalance() + craps.getBetAmount();
+        String expectedOutput = "Your Don't Pass bet paid off!\n" +
+                "\n" +
+                "You're on a roll and 100 NUCs richer!";
+
+        // When
+        craps.evaluate();
+        int actualTotalBalance = craps.getAdjustedBalance();
+        String actualOutput = outputStream.toString().trim();
+
+        // Then
+
+        Assert.assertTrue( actualOutput.contains(expectedOutput));
+        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
+    }
+
+    @Test
+    public void evaluateTest3() {
+        // Given
+        Craps craps = helperFunction("yes\nno");
+        craps.setIsNatural(true);
+        craps.setToWinLayBet(false);
+        craps.setToWinPassBet(true);
+        craps.setIsOver(false);
+        craps.setBetAmount(100);
+        int expectedTotalBalance = craps.getAdjustedBalance() - craps.getBetAmount();
+        String expectedOutput = "Sorry shooter, it looks like your hot streak has come to an end!\n" +
+                "\n" +
+                "-100 NUCs gone already? Play again to win that back and more!";
+
+        // When
+        craps.evaluate();
+        int actualTotalBalance = craps.getAdjustedBalance();
+        String actualOutput = outputStream.toString().trim();
+
+        // Then
+
+        Assert.assertTrue(actualOutput.contains(expectedOutput));
+        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
+    }
+
+    @Test
+    public void evaluateTest4() {
+        // Given
+        Craps craps = helperFunction("yes\nno");
+        craps.setIsNatural(false);
+        craps.setIsCrappedRolls(true);
+        craps.setIsFirstRoll(false);
+        craps.setIsAnyCrapsBet(true);
+        craps.setRollSum(2);
+        craps.setBetAmount(50);
+        int expectedTotalBalance = craps.getAdjustedBalance() + craps.getBetAmount();
+        String expectedOutput = "Your Any Craps bet paid off!\n" +
+                "\n" +
+                "You're on a roll and 50 NUCs richer!";
+
+        // When
+        craps.evaluate();
+        int actualTotalBalance = craps.getAdjustedBalance();
+        String actualOutput = outputStream.toString().trim();
+
+        // Then
+        Assert.assertTrue(actualOutput.contains(expectedOutput));
+        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
+    }
+
+    @Test
+    public void evaluateTest5() {
+        // Given
+        Craps craps = helperFunction("yes\nno");
+        craps.setIsNatural(false);
+        craps.setIsCrappedRolls(true);
+        craps.setIsFirstRoll(false);
+        craps.setIsAnyCrapsBet(true);
+        craps.setRollSum(5);
+        craps.setBetAmount(50);
+        int expectedTotalBalance = craps.getAdjustedBalance() - craps.getBetAmount();
+        String expectedOutput = "You lost your Any Craps bet!\n" +
+                "\n" +
+                "-50 NUCs gone already? Play again to win that back and more!";
+
+        // When
+        craps.evaluate();
+        int actualTotalBalance = craps.getAdjustedBalance();
+        String actualOutput = outputStream.toString().trim();
+
+        // Then
+        Assert.assertTrue(actualOutput.contains(expectedOutput));
+        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
+    }
+
+    @Test
+    public void evaluateTest6() {
+        // Given
+        Craps craps = helperFunction("yes\nno");
+        craps.setIsNatural(false);
+        craps.setIsCrappedRolls(false);
+        craps.setIsPoint(true);
+        craps.setIsFieldBet(true);
+        craps.setRollSum(3);
+        craps.setBetAmount(80);
+        int expectedTotalBalance = craps.getAdjustedBalance() + 80;
+        String expectedOutput = "You won your Field bet!\n" +
+                "\n" +
+                "You're on a roll and 80 NUCs richer!";
+
+        // When
+        craps.evaluate();
+        int actualTotalBalance = craps.getAdjustedBalance();
+        String actualOutput = outputStream.toString().trim();
+
+        // Then
+        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
+        Assert.assertTrue(actualOutput.contains(expectedOutput));
+    }
+
+    @Test
+    public void evaluateTest7() {
+        // Given
+        Craps craps = helperFunction("yes\nno");
+        craps.setIsNatural(false);
+        craps.setIsCrappedRolls(false);
+        craps.setIsPoint(true);
+        craps.setIsFieldBet(false);
+        craps.setIsHornBet(true);
+        craps.setRollSum(2);
+        craps.setBetAmount(80);
+        int expectedTotalBalance = craps.getAdjustedBalance() + 80;
+        String expectedOutput = "You won your Horn bet!\n" +
+                "\n" +
+                "You're on a roll and 80 NUCs richer!";
+
+        // When
+        craps.evaluate();
+        int actualTotalBalance = craps.getAdjustedBalance();
+        String actualOutput = outputStream.toString().trim();
+
+        // Then
+        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
+        Assert.assertTrue(actualOutput.contains(expectedOutput));
+    }
+
+    @Test
+    public void evaluateTest8() {
+        // Given
+        Craps craps = helperFunction("yes\nno");
+        craps.setIsNatural(false);
+        craps.setIsCrappedRolls(false);
+        craps.setIsPoint(true);
+        craps.setIsFieldBet(false);
+        craps.setIsHornBet(false);
+        craps.setIsHardwaysBet(true);
+        craps.setHardwaysRoll(4);
+        craps.setRollSum(4);
+        craps.setBetAmount(80);
+        craps.setAdjustedBalance(100);
+        int expectedTotalBalance = craps.getAdjustedBalance() + 80;
+        String expectedOutput = "You won your Hardways bet!\n" +
+                "\n" +
+                "You're on a roll and 80 NUCs richer!";
+
+        // When
+        craps.evaluate();
+        int actualTotalBalance = craps.getAdjustedBalance();
+        String actualOutput = outputStream.toString().trim();
+
+        // Then
+        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
+        Assert.assertTrue(actualOutput.contains(expectedOutput));
+    }
+
+    @Test
+    public void evaluateTest9() {
+        // Given
+        Craps craps = helperFunction("yes\nno");
+        craps.setIsNatural(false);
+        craps.setIsCrappedRolls(false);
+        craps.setIsPoint(true);
+        craps.setIsFieldBet(false);
+        craps.setIsHornBet(false);
+        craps.setIsHardwaysBet(false);
+        craps.setIsLayBet(true);
+        craps.setRollSum(7);
+        craps.setBetAmount(80);
+        craps.setAdjustedBalance(100);
+        int expectedTotalBalance = craps.getAdjustedBalance() + 80;
+        String expectedOutput = "You won your Lay Bet!\n" +
+                "\n" +
+                "You're on a roll and 80 NUCs richer!";
+
+        // When
+        craps.evaluate();
+        int actualTotalBalance = craps.getAdjustedBalance();
+        String actualOutput = outputStream.toString().trim();
+
+        // Then
+        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
+        Assert.assertTrue(actualOutput.contains(expectedOutput));
+    }
+
+    @Test
+    public void evaluateTest10() {
+        // Given
+        Craps craps = helperFunction("yes\nno");
+        craps.setIsNatural(false);
+        craps.setIsCrappedRolls(false);
+        craps.setIsPoint(true);
+        craps.setIsFieldBet(false);
+        craps.setIsHornBet(false);
+        craps.setIsHardwaysBet(false);
+        craps.setIsLayBet(false);
+        craps.setPoint(4);
+        craps.setRollSum(4);
+        craps.setToWinPassBet(true);
+        craps.setBetAmount(80);
+        craps.setAdjustedBalance(100);
+        int expectedTotalBalance = craps.getAdjustedBalance() + 80;
+        String expectedOutput = "Lucky number 4! You hit the point!\n" +
+                "\n" +
+                "You're on a roll and 80 NUCs richer!";
+
+        // When
+        craps.evaluate();
+        int actualTotalBalance = craps.getAdjustedBalance();
+        String actualOutput = outputStream.toString().trim();
+
+        // Then
+        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
+        Assert.assertTrue(actualOutput.contains(expectedOutput));
+    }
+
+    @Test
+    public void evaluateTest11() {
+        // Given
+        Craps craps = helperFunction("yes\nno");
+        craps.setIsNatural(false);
+        craps.setIsCrappedRolls(false);
+        craps.setIsPoint(true);
+        craps.setIsFieldBet(false);
+        craps.setIsHornBet(false);
+        craps.setIsHardwaysBet(false);
+        craps.setIsLayBet(false);
+        craps.setPoint(4);
+        craps.setRollSum(5);
+        craps.setIsPlaying(false);
+
+        // When
+        craps.evaluate();
+
+        // Then
+        Assert.assertTrue(craps.getIsPlaying());
+    }
+
+    @Test
+    public void evaluateTest12() {
+        // Given
+        Craps craps = helperFunction("yes\nno");
+        craps.setIsNatural(false);
+        craps.setIsCrappedRolls(false);
+        craps.setIsPoint(true);
+        craps.setIsFieldBet(false);
+        craps.setIsHornBet(false);
+        craps.setIsHardwaysBet(false);
+        craps.setIsLayBet(false);
+        craps.setPlaceBetChoice(5);
+        craps.setRollSum(5);
+        craps.setIsPlaying(true);
+        craps.setBetAmount(80);
+        craps.setAdjustedBalance(100);
+        int expectedTotalBalance = craps.getAdjustedBalance() + 80;
+        String expectedOutput = "Your Place bet paid off!\n" +
+                "\n" +
+                "You're on a roll and 80 NUCs richer!";
+
+        // When
+        craps.evaluate();
+        int actualTotalBalance = craps.getAdjustedBalance();
+        String actualOutput = outputStream.toString().trim();
+
+        // Then
+        Assert.assertFalse(craps.getIsPlaying());
+        Assert.assertTrue(actualOutput.contains(expectedOutput));
+        Assert.assertEquals(expectedTotalBalance, actualTotalBalance);
+    }
 
     @Test
     public void adjustBalanceTest() {

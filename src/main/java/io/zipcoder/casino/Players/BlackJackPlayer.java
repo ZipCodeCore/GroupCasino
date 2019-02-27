@@ -31,8 +31,4 @@ public class BlackJackPlayer extends Player {
     public void setBalance(int newBalance){
         getProfile().setBalance(newBalance);
     }
-
-//    public void addToHand(List<Card> cards) {if(hand != null) {this.hand.addAll(cards);  Collections.sort(hand);} }
-//    public void addToHand(Card card) {if(hand != null) {this.hand.add(card);  Collections.sort(hand);} }
-
 }
