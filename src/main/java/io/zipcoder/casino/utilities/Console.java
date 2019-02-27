@@ -1,6 +1,8 @@
 package io.zipcoder.casino.utilities;
 
 
+import io.zipcoder.casino.Games.Craps;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -42,6 +44,10 @@ public final class Console {
 
     public void println(String val, Object... args) {
         print(val + "\n", args);
+    }
+
+    public void println(Craps.BetList betList) {
+        print(betList.toString() + "\n");
     }
 
     public String getStringInput(String prompt, Object... args) {
