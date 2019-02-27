@@ -2,9 +2,6 @@ package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.Cards.Dice;
 import io.zipcoder.casino.Casino.Casino;
-import io.zipcoder.casino.Games.Game;
-//import io.zipcoder.casino.Players.CrapsPlayer;
-//import io.zipcoder.casino.Players.Profile;
 import io.zipcoder.casino.Players.CrapsPlayer;
 import io.zipcoder.casino.utilities.Console;
 
@@ -518,11 +515,6 @@ public class Craps implements Game {
             }
         }
         if (isPoint && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
-            /*if (point == rollSum){
-                gameState = GameStatus.WON;
-                console.println("You hit the point!\n");
-                adjustBalance(betAmount);
-            }*/
             if (isFieldBet && Arrays.stream(fieldNumberRolls).anyMatch(i -> i == rollSum) && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
                 gameState = GameStatus.WON;
                 console.println("You won your Field bet!\n");
