@@ -143,7 +143,14 @@ public class MacaoTest {
         macao.setConsole(ioconsole);
 
         // Given the expected string
-        String expected = "Rules:\n" +
+        String expected =
+                "███╗   ███╗ █████╗  ██████╗ █████╗  ██████╗ \n" +
+                "████╗ ████║██╔══██╗██╔════╝██╔══██╗██╔═══██╗\n" +
+                "██╔████╔██║███████║██║     ███████║██║   ██║\n" +
+                "██║╚██╔╝██║██╔══██║██║     ██╔══██║██║   ██║\n" +
+                "██║ ╚═╝ ██║██║  ██║╚██████╗██║  ██║╚██████╔╝\n" +
+                "╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ \n" +
+                "Rules:\n" +
                 "The object of this game is to roll the die enough times to reach a total of 9 without going over.\n" +
                 "Good luck!\n" +
                 "\n" +
@@ -151,7 +158,7 @@ public class MacaoTest {
                 "YOUR ROLL     DEALER'S ROLL\n" +
                 "┏━━━━━━━━┓     ┏━━━━━━━━┓     \n" +
                 "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
-                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃   ⬤   ┃     ┃   ⬤   ┃     \n" +
                 "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
                 "┗━━━━━━━━┛     ┗━━━━━━━━┛     \n" +
                 "\n" +
@@ -160,14 +167,14 @@ public class MacaoTest {
                 "YOUR NEW ROLL\n" +
                 "┏━━━━━━━━┓     \n" +
                 "┃ ⬤  ⬤ ┃     \n" +
-                "┃ ⬤  ⬤ ┃     \n" +
+                "┃   ⬤   ┃     \n" +
                 "┃ ⬤  ⬤ ┃     \n" +
                 "┗━━━━━━━━┛     \n" +
-                "YOUR TOTAL IS NOW... 12\n" +
+                "YOUR TOTAL IS NOW... 10\n" +
                 "HERE'S WHAT YOU ROLLED SO FAR\n" +
                 "┏━━━━━━━━┓┏━━━━━━━━┓\n" +
                 "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
-                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┃   ⬤   ┃┃   ⬤   ┃\n" +
                 "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
                 "┗━━━━━━━━┛┗━━━━━━━━┛\n" +
                 "\n" +
@@ -178,7 +185,7 @@ public class MacaoTest {
         String actual = outputStream.toString().trim();
 
         // Then we expect the given and retrieved strings to match
-        Assert.assertTrue(actual.contains(expected));
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -193,7 +200,14 @@ public class MacaoTest {
         macao.setConsole(ioconsole);
 
         // Given the expected string
-        String expected = "Rules:\n" +
+        String expected =
+                "███╗   ███╗ █████╗  ██████╗ █████╗  ██████╗ \n" +
+                "████╗ ████║██╔══██╗██╔════╝██╔══██╗██╔═══██╗\n" +
+                "██╔████╔██║███████║██║     ███████║██║   ██║\n" +
+                "██║╚██╔╝██║██╔══██║██║     ██╔══██║██║   ██║\n" +
+                "██║ ╚═╝ ██║██║  ██║╚██████╗██║  ██║╚██████╔╝\n" +
+                "╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ \n" +
+                "Rules:\n" +
                 "The object of this game is to roll the die enough times to reach a total of 9 without going over.\n" +
                 "Good luck!\n" +
                 "\n" +
@@ -201,7 +215,7 @@ public class MacaoTest {
                 "YOUR ROLL     DEALER'S ROLL\n" +
                 "┏━━━━━━━━┓     ┏━━━━━━━━┓     \n" +
                 "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
-                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃   ⬤   ┃     ┃   ⬤   ┃     \n" +
                 "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
                 "┗━━━━━━━━┛     ┗━━━━━━━━┛     \n" +
                 "\n" +
@@ -210,14 +224,14 @@ public class MacaoTest {
                 "DEALERS'S NEW ROLL\n" +
                 "┏━━━━━━━━┓\n" +
                 "┃ ⬤  ⬤ ┃\n" +
-                "┃ ⬤  ⬤ ┃\n" +
+                "┃   ⬤   ┃\n" +
                 "┃ ⬤  ⬤ ┃\n" +
                 "┗━━━━━━━━┛\n" +
-                "THE DEALERS'S TOTAL IS NOW... 12\n" +
+                "THE DEALERS'S TOTAL IS NOW... 10\n" +
                 "HERE'S WHAT THE DEALER ROLLED SO FAR\n" +
                 "┏━━━━━━━━┓┏━━━━━━━━┓\n" +
                 "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
-                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
+                "┃   ⬤   ┃┃   ⬤   ┃\n" +
                 "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
                 "┗━━━━━━━━┛┗━━━━━━━━┛\n" +
                 "\n" +
@@ -228,7 +242,7 @@ public class MacaoTest {
         String actual = outputStream.toString().trim();
 
         // Then we expect the given and retrieved strings to match
-        Assert.assertTrue(actual.contains(expected));
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -287,10 +301,10 @@ public class MacaoTest {
         // Given players initial dice roll
         macao.getUser().setRoll(4);
 
-        // Given we set the macao dice to our loaded dice; given an expected roll of 6
+        // Given we set the macao dice to our loaded dice; given an expected roll of 5
         Dice dice = new LoadedDice();
         macao.setDice(dice);
-        int expected = 6;
+        int expected = 5;
 
         // When the roll die method is called
         macao.rollDie(macao.getUser());
@@ -405,7 +419,7 @@ public class MacaoTest {
         String expected = "YOUR ROLL     DEALER'S ROLL\n" +
                 "┏━━━━━━━━┓     ┏━━━━━━━━┓     \n" +
                 "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
-                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
+                "┃   ⬤   ┃     ┃   ⬤   ┃     \n" +
                 "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
                 "┗━━━━━━━━┛     ┗━━━━━━━━┛";
 

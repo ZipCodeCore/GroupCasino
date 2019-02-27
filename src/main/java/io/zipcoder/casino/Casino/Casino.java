@@ -1,14 +1,7 @@
 package io.zipcoder.casino.Casino;
 
-import io.zipcoder.casino.Cards.Card;
-import io.zipcoder.casino.Cards.Rank;
-import io.zipcoder.casino.Cards.Suit;
-import io.zipcoder.casino.Games.BlackJack;
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.Players.Profile;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Casino {
     private static Profile profile = new Profile();
@@ -17,7 +10,7 @@ public class Casino {
 
     public static void main(String[] args)
     {
-//        entertainUser();
+        entertainUser();
     }
 
     public static void entertainUser() {
@@ -67,6 +60,7 @@ public class Casino {
     public static Profile getProfile() {
         return profile;
     }
+
     public static void setProfile() {
          profile = new Profile();
     }
