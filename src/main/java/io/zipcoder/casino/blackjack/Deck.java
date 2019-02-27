@@ -43,6 +43,8 @@ public class Deck {
         // at index 0
         public Card draw() {
             deckOfCards.remove(0);
+            deckOfCards.size();
+
             return draw();
         }
         //create a method called shuffle
