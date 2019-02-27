@@ -11,10 +11,10 @@ public class Casino {
     public static void main(String[] args)
     {
         //System.out.print("\033[31mERROR  \033[0m");
-        System.out.println(Greeter.getCrapsName());
-        System.out.println(Greeter.getMacaoName());
-        System.out.println(Greeter.getGoFishName());
-        System.out.println(Greeter.getBlackJackName());
+//        System.out.println(Greeter.getCrapsName());
+//        System.out.println(Greeter.getMacaoName());
+//        System.out.println(Greeter.getGoFishName());
+//        System.out.println(Greeter.getBlackJackName());
         entertainUser();
     }
 
