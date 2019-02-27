@@ -1,7 +1,10 @@
 package io.zipcoder.casino.Casino;
 
+import io.zipcoder.casino.Cards.Dice;
+import io.zipcoder.casino.Cards.LoadedDice;
 import io.zipcoder.casino.Games.Craps;
 import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.Games.Macao;
 import io.zipcoder.casino.Players.Profile;
 
 public class Casino {
@@ -11,9 +14,7 @@ public class Casino {
 
     public static void main(String[] args)
     {
-        Craps craps = new Craps();
-        craps.makeBet();
-        //entertainUser();
+        entertainUser();
     }
 
     public static void entertainUser() {
@@ -63,6 +64,7 @@ public class Casino {
     public static Profile getProfile() {
         return profile;
     }
+
     public static void setProfile() {
          profile = new Profile();
     }
