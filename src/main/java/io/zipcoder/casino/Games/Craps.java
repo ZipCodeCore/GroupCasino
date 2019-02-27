@@ -38,7 +38,7 @@ public class Craps implements Game {
     private int firstRollSum;
     Dice die1 = new Dice();
     Dice die2 = new Dice();
-    private int betAmount = 5;
+    private int betAmount = 0;
     private int hardwaysBet = 0;
     private boolean rollSumHardways = false;
     private GameStatus gameState;
@@ -53,13 +53,81 @@ public class Craps implements Game {
         return toWinPassBet;
     }
 
+    public void setIsFirstRoll(boolean isFirstRoll) {
+        this.isFirstRoll = isFirstRoll;
+    }
+
+    public void setRollSum(int rollSum) {
+        this.rollSum = rollSum;
+    }
+
     public Map<String, Boolean> getBetMap() {
         return betMap;
     }
 
+    public void setToWinPassSet(boolean toWinPassBet) {
+        this.toWinPassBet = toWinPassBet;
+    }
+
+    public void setBetAmount(int betAmount) {
+        this.betAmount = betAmount;
+    }
+
+    public int getAdjustedBalance() {
+        return adjustedBalance;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public boolean getIsFirstRoll() {
+        return isFirstRoll;
+    }
+
+    public void setBetToTrueOnBetMap(String hardways) {
+        betMap.put(hardways, true);
+    }
+
+    public void setIsPlaceBet(boolean isPlaceBet) {
+        this.isPlaceBet = isPlaceBet;
+    }
+
+    public boolean getIsPlaceBet() {
+        return isPlaceBet;
+    }
+
+    public void setIsLayBet(boolean isLayBet) {
+        this.isLayBet = isLayBet;
+    }
+
+    public boolean getIsLayBet() {
+        return isLayBet;
+    }
+
+    public void setIsAnyCrapsBet(boolean isAnyCrapsBet) {
+        this.isAnyCrapsBet = isAnyCrapsBet;
+    }
+
+    public boolean getIsAnyCrapsBet() {
+        return isAnyCrapsBet;
+    }
+
+    public boolean getIsHardwaysBet() {
+        return isHardwaysBet;
+    }
+
+    public void setIsHardwaysBet(boolean isHardwaysBet) {
+        this.isHardwaysBet = isHardwaysBet;
+    }
+
     private enum GameStatus {UNRESOLVED, WON, LOST}
 
-    private enum BetList {
+    public enum BetList {
         PLACE("always"),
         LAY("always"),
         ANYCRAPS("oneOff"),
@@ -143,7 +211,6 @@ public class Craps implements Game {
     }
 
     public void evaluateFirstRoll() {
-        isPlaying = false;
         if (Arrays.stream(anyCraps).anyMatch(i -> i == rollSum) && toWinPassBet) {
             console.println("Whomp, whomp, you crapped out\n");
             adjustBalance(-betAmount);
@@ -169,8 +236,6 @@ public class Craps implements Game {
             gameState = GameStatus.UNRESOLVED;
             isFirstRoll = false;
         }
-        isPlaying = true;
-        rollSum = point;
     }
 
     public void resetPointAndRoll() {
@@ -197,12 +262,15 @@ public class Craps implements Game {
                 case 1:
                     betRulesListed();
                     promptBet();
+                    break;
                 case 2:
                     console.println("You have the current bets: " + currentBetList(true) + "\n");
                     promptBet();
+                    break;
                 case 3:
                     listBets();
                     promptBet();
+                    break;
                 case 4:
                     makeBet();
                     break;
@@ -213,15 +281,15 @@ public class Craps implements Game {
     }
 
     public void makeBet() {
-        String betName = console.getStandardInput("What bet would you like to place?\n");
+        String betName = console.getStandardInput("What bet would you like to place?");
         switch (betName) {
             case "place":
                 isPlaceBet = true;
-                placeBetChoice = console.getIntegerInput("What number do you want to make a Place Bet for?\n");
+                placeBetChoice = console.getIntegerInput("What number do you want to make a Place Bet for?");
                 if (Arrays.stream(placeNumberRolls).anyMatch(i -> i == placeBetChoice)) {
                     console.println("Excellent choice!\n");
                 } else {
-                    placeBetChoice = console.getIntegerInput("Stick to the Place numbers, buddy! Pick from 4, 5, 6, 8, 9 or 10\n");
+                    placeBetChoice = console.getIntegerInput("Stick to the Place numbers, buddy! Pick from 4, 5, 6, 8, 9 or 10");
                 }
                 break;
             case "lay":
@@ -238,15 +306,16 @@ public class Craps implements Game {
                 break;
             case "hardways":
                 isHardwaysBet = true;
-                hardwaysRoll = console.getIntegerInput("What number do you want to place a Hardways Bet on?\n");
+                hardwaysRoll = console.getIntegerInput("What number do you want to place a Hardways Bet on?");
                 if (Arrays.stream(hardwaysRolls).anyMatch(i -> i == hardwaysRoll)) {
                     console.println("Excellent choice!\n");
                 } else {
-                    hardwaysRoll = console.getIntegerInput("Stick to the Place numbers, buddy! Pick from 4, 6, 8, or 10\n");
+                    hardwaysRoll = console.getIntegerInput("Stick to the Place numbers, buddy! Pick from 4, 6, 8, or 10");
                 }
-
+                break;
             default:
                 console.println("Please enter an actual bet, pal");
+                makeBet();
         }
     }
 
@@ -259,10 +328,10 @@ public class Craps implements Game {
     public void filteredBetList(String betOptions) {
         BetList.stream()
                 .filter(e -> e.typeOfBet.equals(betOptions))
-                .forEach(System.out::println);
+                .forEach(console::println);
     }
 
-    private List<String> currentBetList(boolean value) {
+    public List<String> currentBetList(boolean value) {
         return betMap
                 .entrySet()
                 .stream()
@@ -313,7 +382,6 @@ public class Craps implements Game {
     }
 
     public void evaluate() {
-        isPlaying = false;
         if (isNatural) {
             if (toWinLayBet) {
                 gameState = GameStatus.WON;
