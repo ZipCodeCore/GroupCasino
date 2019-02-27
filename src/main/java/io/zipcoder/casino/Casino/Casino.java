@@ -1,11 +1,13 @@
 package io.zipcoder.casino.Casino;
 
+
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.Players.Profile;
 
 
+
 public class Casino {
-    private static Profile profile;
+    private static Profile profile = new Profile();
     private static Greeter greeter = new Greeter();
     private static boolean userIsLeaving = false;
 

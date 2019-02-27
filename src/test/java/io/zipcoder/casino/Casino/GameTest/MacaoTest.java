@@ -130,86 +130,53 @@ public class MacaoTest {
         Assert.assertTrue(initial);
         Assert.assertFalse(changed);
     }
-//
-//    @Test
-//    public void playGameTest1() {
-//        // Given the macao dice are set to our loaded dice
-//        Dice dice = new LoadedDice();
-//        macao.setDice(dice);
-//
-//        // Given the user says "yes" they'd like to play and "yes" they'd like to roll again
-//        ByteArrayInputStream inputStream = new ByteArrayInputStream("yes\nyes".getBytes());
-//        Console ioconsole = new Console(new Scanner(inputStream), new PrintStream(outputStream));
-//        macao.setConsole(ioconsole);
-//
-//        // Given the expected string
-//        String expected =
-//                "Oh no! Looks like you went over! You lose.";
-//
-//        // When we call the play game method and store the output in a variable
-//        macao.play();
-//        String actual = outputStream.toString().trim();
-//
-//        // Then we expect the given and retrieved strings to match
-//        Assert.assertTrue(actual.contains(expected));
-//    }
-//
-//    @Test
-//    public void playGameTest2() {
-//        // Given the macao dice are set to our loaded dice
-//        Dice dice = new LoadedDice();
-//        macao.setDice(dice);
-//
-//        // Given the user says "yes" they'd like to play and "no" they wouldn't like to roll again
-//        ByteArrayInputStream inputStream = new ByteArrayInputStream("yes\nno".getBytes());
-//        Console ioconsole = new Console(new Scanner(inputStream), new PrintStream(outputStream));
-//        macao.setConsole(ioconsole);
-//
-//        // Given the expected string
-//        String expected =
-//                "███╗   ███╗ █████╗  ██████╗ █████╗  ██████╗ \n" +
-//                "████╗ ████║██╔══██╗██╔════╝██╔══██╗██╔═══██╗\n" +
-//                "██╔████╔██║███████║██║     ███████║██║   ██║\n" +
-//                "██║╚██╔╝██║██╔══██║██║     ██╔══██║██║   ██║\n" +
-//                "██║ ╚═╝ ██║██║  ██║╚██████╗██║  ██║╚██████╔╝\n" +
-//                "╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ \n" +
-//                "Rules:\n" +
-//                "The object of this game is to roll the die enough times to reach a total of 9 without going over.\n" +
-//                "Good luck!\n" +
-//                "\n" +
-//                "Are you ready to begin?\n" +
-//                "YOUR ROLL     DEALER'S ROLL\n" +
-//                "┏━━━━━━━━┓     ┏━━━━━━━━┓     \n" +
-//                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
-//                "┃   ⬤   ┃     ┃   ⬤   ┃     \n" +
-//                "┃ ⬤  ⬤ ┃     ┃ ⬤  ⬤ ┃     \n" +
-//                "┗━━━━━━━━┛     ┗━━━━━━━━┛     \n" +
-//                "\n" +
-//                "Would you like to roll again?\n" +
-//                "Bold tactic.\n" +
-//                "DEALERS'S NEW ROLL\n" +
-//                "┏━━━━━━━━┓\n" +
-//                "┃ ⬤  ⬤ ┃\n" +
-//                "┃   ⬤   ┃\n" +
-//                "┃ ⬤  ⬤ ┃\n" +
-//                "┗━━━━━━━━┛\n" +
-//                "THE DEALERS'S TOTAL IS NOW... 10\n" +
-//                "HERE'S WHAT THE DEALER ROLLED SO FAR\n" +
-//                "┏━━━━━━━━┓┏━━━━━━━━┓\n" +
-//                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
-//                "┃   ⬤   ┃┃   ⬤   ┃\n" +
-//                "┃ ⬤  ⬤ ┃┃ ⬤  ⬤ ┃\n" +
-//                "┗━━━━━━━━┛┗━━━━━━━━┛\n" +
-//                "\n" +
-//                "Lucky you! The dealer went over. YOU WIN!";
-//
-//        // When we call the play game method and store the output in a variable
-//        macao.play();
-//        String actual = outputStream.toString().trim();
-//
-//        // Then we expect the given and retrieved strings to match
-//        Assert.assertTrue(actual.contains(expected));
-//    }
+
+    @Test
+    public void playGameTest1() {
+        // Given the macao dice are set to our loaded dice
+        Dice dice = new LoadedDice();
+        macao.setDice(dice);
+
+        // Given the user says "yes" they'd like to play and "yes" they'd like to roll again
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("yes\nyes".getBytes());
+        Console ioconsole = new Console(new Scanner(inputStream), new PrintStream(outputStream));
+        macao.setConsole(ioconsole);
+
+        // Given the expected string
+        String expected =
+                "Oh no! Looks like you went over! You lose.";
+
+        // When we call the play game method and store the output in a variable
+        macao.play();
+        String actual = outputStream.toString().trim();
+
+        // Then we expect the given and retrieved strings to match
+        Assert.assertTrue(actual.contains(expected));
+    }
+
+    @Test
+    public void playGameTest2() {
+        // Given the macao dice are set to our loaded dice
+        Dice dice = new LoadedDice();
+        macao.setDice(dice);
+
+        // Given the user says "yes" they'd like to play and "no" they wouldn't like to roll again
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("yes\nno".getBytes());
+        Console ioconsole = new Console(new Scanner(inputStream), new PrintStream(outputStream));
+        macao.setConsole(ioconsole);
+
+        // Given the expected string
+        String expected =
+                "Lucky you! The dealer went over. YOU WIN!";
+
+        // When we call the play game method and store the output in a variable
+        macao.play();
+        System.out.println(outputStream.toString());
+        String actual = outputStream.toString().trim();
+
+        // Then we expect the given and retrieved strings to match
+        Assert.assertTrue(actual.contains(expected));
+    }
 
     @Test
     public void printGameInstructionsTest() {

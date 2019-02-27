@@ -98,7 +98,7 @@ public class GoFishPlayer extends Player {
         possibleUserInputs.put("k", Rank.KING); possibleUserInputs.put("ks", Rank.KING);
         possibleUserInputs.put("queen", Rank.QUEEN); possibleUserInputs.put("queens", Rank.QUEEN);
         possibleUserInputs.put("q", Rank.QUEEN); possibleUserInputs.put("qs", Rank.QUEEN);
-        possibleUserInputs.put("jack", Rank.QUEEN); possibleUserInputs.put("jacks", Rank.JACK);
+        possibleUserInputs.put("jack", Rank.JACK); possibleUserInputs.put("jacks", Rank.JACK);
         possibleUserInputs.put("j", Rank.JACK); possibleUserInputs.put("js", Rank.JACK);
         possibleUserInputs.put("ace", Rank.ACE); possibleUserInputs.put("aces", Rank.ACE);
         possibleUserInputs.put("a", Rank.ACE); possibleUserInputs.put("as", Rank.ACE);

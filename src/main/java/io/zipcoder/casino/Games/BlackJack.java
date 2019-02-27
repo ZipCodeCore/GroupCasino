@@ -5,6 +5,7 @@ import io.zipcoder.casino.CardsAndDice.Card;
 import io.zipcoder.casino.CardsAndDice.Deck;
 import io.zipcoder.casino.CardsAndDice.Rank;
 import io.zipcoder.casino.Casino.Casino;
+import io.zipcoder.casino.Casino.Greeter;
 import io.zipcoder.casino.Players.BlackJackPlayer;
 import io.zipcoder.casino.Players.Profile;
 import io.zipcoder.casino.utilities.Console;
@@ -54,12 +55,9 @@ public class BlackJack implements Game {
         this.userBet = userBet;
     }
 
-    public static void main(String[] args)
-    {   BlackJack blackJack = new BlackJack();
-        blackJack.play();
-    }
 
     public void play() {
+        blackJackConsole.println(Greeter.getBlackJackName());
         getUserBet();
         playFirstTurn();
 

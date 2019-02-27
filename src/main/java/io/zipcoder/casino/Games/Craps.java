@@ -2,6 +2,7 @@ package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.CardsAndDice.Dice;
 import io.zipcoder.casino.Casino.Casino;
+import io.zipcoder.casino.Casino.Greeter;
 import io.zipcoder.casino.Players.CrapsPlayer;
 import io.zipcoder.casino.utilities.Console;
 
@@ -286,12 +287,8 @@ public class Craps implements Game {
         this.console = console;
     }
 
-    public static void main(String[] args) {
-        Craps craps = new Craps();
-        craps.play();
-    }
-
     public void play() {
+        console.println(Greeter.getCrapsName());
         console.println("Welcome to the craps table!");
         while (!isOver) {
             while (isFirstRoll) {
