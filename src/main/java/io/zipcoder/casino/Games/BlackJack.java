@@ -3,6 +3,7 @@ package io.zipcoder.casino.Games;
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Deck;
 import io.zipcoder.casino.Cards.Rank;
+import io.zipcoder.casino.Casino.Casino;
 import io.zipcoder.casino.Players.BlackJackPlayer;
 import io.zipcoder.casino.Players.Profile;
 import io.zipcoder.casino.utilities.Console;
@@ -15,8 +16,8 @@ import java.util.List;
 public class BlackJack implements Game {
 
     private BlackJackPlayer dealer = new BlackJackPlayer(new Profile());
-    //private BlackJackPlayer user = new BlackJackPlayer(Casino.getProfile()); //this will need to be uncommented for live version and line below will need to be removed
-    private BlackJackPlayer user = new BlackJackPlayer(new Profile("testName",true));
+    private BlackJackPlayer user = new BlackJackPlayer(Casino.getProfile()); //this will need to be uncommented for live version and line below will need to be removed
+   // private BlackJackPlayer user = new BlackJackPlayer(new Profile("testName",true));
     private Deck currentDeck = new Deck();
 
     private int userTotal;
@@ -47,6 +48,10 @@ public class BlackJack implements Game {
     public void setUserTotal(int total){
         this.userTotal = total;
     }
+    public void setDealerTotal(int total) {this.dealerTotal = total;}
+    public void setUserBet(Integer userBet) {
+        this.userBet = userBet;
+    }
 
     public static void main(String[] args)
     {   BlackJack blackJack = new BlackJack();
@@ -57,9 +62,8 @@ public class BlackJack implements Game {
         getUserBet();
         playFirstTurn();
 
-        while (isOver != true) {
+        while (!isOver) {
             evaluateUserHitOrStay();
-            
         }
     }
 
@@ -83,7 +87,8 @@ public class BlackJack implements Game {
         dealFirstHand();
         blackJackConsole.print(Card.printAllCards(user.getHand()));
         displayUserTotal(userTotal);
-        if(checkIfHandIs21()){
+        isOver = (userTotal == 21);
+        if(isOver){
         celebrateUser();
         } else {
             displayDealersFirstHand();
@@ -121,7 +126,7 @@ public class BlackJack implements Game {
         }
     }
 
-    private void evaluateUserHitOrStay() {
+    public void evaluateUserHitOrStay() {
 
         String userChoice = getUserInput().toLowerCase();
         if(!userChoice.equals("hit") && !userChoice.equals("stay") ){
@@ -130,13 +135,13 @@ public class BlackJack implements Game {
         else if (userChoice.equals("hit")) {
             hit();
             checkGameOverByBust();
-            checkIfHandIs21();
-        } else if (userChoice.equals("stay")) {
+            isOver = (userTotal == 21);
+        } else  {
             takeDealersTurn();
         }
     }
 
-    private void doubleDown() {
+    public void doubleDown() {
         decreaseBalance();
         userBet = userBet * 2;
 
@@ -150,8 +155,8 @@ public class BlackJack implements Game {
         displayUserTotal(userTotal);
         checkGameOverByBust();
 
-        if (isOver == false) {
-            checkIfHandIs21();
+        if (!isOver) {
+            isOver = (userTotal == 21);
             takeDealersTurn();
             }
     }
@@ -212,13 +217,6 @@ public class BlackJack implements Game {
         return isOver;
     }
 
-    public boolean checkIfHandIs21() {
-        if (userTotal == 21) {
-            isOver = true;
-            return isOver;
-        }
-        else return isOver;
-    }
 
     public void celebrateUser(){
         blackJackConsole.println("You are the Winner!!!!");
@@ -228,7 +226,7 @@ public class BlackJack implements Game {
     }
 
     public void takeDealersTurn() {
-        blackJackConsole.println("Dealer card is \n" + Card.printAllCards(dealer.getHand().get(1)));
+        blackJackConsole.println("Dealer card is: \n" + Card.printAllCards(dealer.getHand().get(1)));
 
         displayDealerHand();
         displayDealerTotal(dealerTotal);
@@ -269,7 +267,6 @@ public class BlackJack implements Game {
 
     public void addWinningsBalance() {
          user.setBalance(user.getBalance() + (userBet * 2));
-
     }
 
     public void decreaseBalance() {
