@@ -1,14 +1,14 @@
 package io.zipcoder.casino.Cards;
 
-public class LoadedDice extends Dice {
+public class LoadedDice2 extends Dice {
 
-    public LoadedDice() {
+    public LoadedDice2() {
 
     }
 
     @Override
     public int roll() {
-        return 5;
+        return 2;
     }
 
 }
