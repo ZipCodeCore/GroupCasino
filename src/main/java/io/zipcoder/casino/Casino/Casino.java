@@ -1,5 +1,6 @@
 package io.zipcoder.casino.Casino;
 
+import io.zipcoder.casino.Games.Craps;
 import io.zipcoder.casino.Cards.Card;
 import io.zipcoder.casino.Cards.Rank;
 import io.zipcoder.casino.Cards.Suit;
@@ -17,7 +18,9 @@ public class Casino {
 
     public static void main(String[] args)
     {
-//        entertainUser();
+        Craps craps = new Craps();
+        craps.makeBet();
+        //entertainUser();
     }
 
     public static void entertainUser() {
