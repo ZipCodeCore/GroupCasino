@@ -13,7 +13,6 @@ public class Deck {
     private Stack<Card> playDeck;
 
     static  {
-
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
                 COMPLETE_DECK.add(new Card(suit, rank));
@@ -25,7 +24,6 @@ public class Deck {
     }
 
     public Deck() {
-
         playDeck = new Stack<>();
         playDeck.addAll(COMPLETE_DECK);
         Collections.shuffle(playDeck);

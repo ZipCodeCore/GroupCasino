@@ -9,6 +9,7 @@ public class MacaoPlayer extends Player {
     private ArrayList<Integer> diceRolls;
 
     public MacaoPlayer() {
+        super();
         this.roll = 0;
         this.cumulativeRoll = 0;
         this.diceRolls = new ArrayList<>();

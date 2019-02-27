@@ -3,6 +3,7 @@ package io.zipcoder.casino.Games;
 import io.zipcoder.casino.CardsAndDice.Card;
 import io.zipcoder.casino.CardsAndDice.Deck;
 import io.zipcoder.casino.CardsAndDice.Rank;
+import io.zipcoder.casino.Casino.Casino;
 import io.zipcoder.casino.Casino.Greeter;
 import io.zipcoder.casino.Players.GoFishPlayer;
 import io.zipcoder.casino.utilities.Console;
@@ -14,7 +15,7 @@ import java.util.Set;
 
 public class GoFish implements Game {
     private GoFishPlayer dealer = new GoFishPlayer();
-    private GoFishPlayer user = new GoFishPlayer();
+    private GoFishPlayer user = new GoFishPlayer(Casino.getProfile());
     private Deck deck = new Deck();
     private boolean isOver = false;
     private Console console;

@@ -2,10 +2,15 @@ package io.zipcoder.casino.Players;
 
 import io.zipcoder.casino.CardsAndDice.Card;
 import io.zipcoder.casino.CardsAndDice.Rank;
-
 import java.util.*;
 
 public class GoFishPlayer extends Player {
+    public GoFishPlayer() {
+        super();
+    }
+    public GoFishPlayer(Profile profile) {
+        super(profile);
+    }
     private List<Card> hand = new ArrayList<>();
     private int bookCount = 0;
 
