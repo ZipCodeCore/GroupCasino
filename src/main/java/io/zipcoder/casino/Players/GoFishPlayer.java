@@ -39,7 +39,6 @@ public class GoFishPlayer extends Player {
     public List<Card> getCards(String getCard) {
         Rank cardRank = parseCardString(getCard);
         List<Card> retrievedCards = new ArrayList<>();
-        if (getCard == null){ return retrievedCards; }
         for (Card card : hand) {
             if(card.getRank().equals(cardRank)) {
                 retrievedCards.add(card);

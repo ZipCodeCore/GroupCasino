@@ -11,14 +11,14 @@ public class MacaoPlayer extends Player {
     public MacaoPlayer() {
         this.roll = 0;
         this.cumulativeRoll = 0;
-        this.diceRolls = new ArrayList<Integer>();
+        this.diceRolls = new ArrayList<>();
     }
 
     public MacaoPlayer(Profile profile) {
         super(profile);
         this.roll = 0;
         this.cumulativeRoll = 0;
-        this.diceRolls = new ArrayList<Integer>();
+        this.diceRolls = new ArrayList<>();
     }
 
     public Profile getProfile() {
@@ -39,13 +39,6 @@ public class MacaoPlayer extends Player {
         diceRolls.add(roll);
     }
 
-//    public int[] getDiceArray() {
-//        int[] diceArray = new int[diceRolls.size()];
-//        for (int i = 0; i < diceArray.length; i++) {
-//            diceArray[i] = diceRolls.get(i);
-//            }
-//        return diceArray;
-//    }
 
 
     public ArrayList<Integer> getDiceRolls() {

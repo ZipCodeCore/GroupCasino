@@ -87,19 +87,19 @@ public class GoFish implements Game {
         }
     }
 
-    public boolean askForCard(String askedFor) {
+    private boolean askForCard(String askedFor) {
         String hasCard = console.getStandardInput(String.format("Do you have any %ss?", askedFor));
         return hasCard.equals("yes");
     }
 
-    public void takeCards(String askedFor) {
+    private void takeCards(String askedFor) {
         List<Card> takenCards = user.getCards(askedFor);
         console.println("I'll take these:");
         console.print(Card.printAllCards(takenCards));
         dealer.addToHand(takenCards);
     }
 
-    public void dealStartingHands() {
+    private void dealStartingHands() {
         dealer.setHand(deck.drawMultipleCards(5));
         user.setHand(deck.drawMultipleCards(5));
     }
@@ -118,7 +118,7 @@ public class GoFish implements Game {
         }
     }
 
-    public void dealerResponse(boolean hasCard, String askedForCard) {
+    private void dealerResponse(boolean hasCard, String askedForCard) {
         if (hasCard) {
             List<Card> givenCards = dealer.getCards(askedForCard);
             user.addToHand(givenCards);
@@ -144,7 +144,7 @@ public class GoFish implements Game {
         }
     }
 
-    public List<Card> getPotentialBook() {
+    private List<Card> getPotentialBook() {
         user.increaseBookCount();
         String playBooks = console.getStandardInputCaps(String.format("What type of card do you want to play? (%s)", getAllBooks()));
         return user.getCards(playBooks);
@@ -174,7 +174,7 @@ public class GoFish implements Game {
         return allBooks.toString();
     }
 
-    public void goFish(GoFishPlayer player) {
+    private void goFish(GoFishPlayer player) {
         if(deck.cardsLeft() != 0) {
             Card card = deck.drawCard();
             player.addToHand(card);
@@ -204,7 +204,7 @@ public class GoFish implements Game {
     }
 
 
-    public boolean playBook() {
+    private boolean playBook() {
         String playbook = console.getStandardInput("Would you like to play a book?");
         if ("yes".equals(playbook) || "y".equals(playbook)) {
             return true;

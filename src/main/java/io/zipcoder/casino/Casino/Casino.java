@@ -16,7 +16,7 @@ public class Casino {
         entertainUser();
     }
 
-    public static void entertainUser() {
+    static void entertainUser() {
         greetUser();
         while (!userIsLeaving) {
             Game nextGame = offerUserGames();
@@ -26,13 +26,13 @@ public class Casino {
         seeUserOut();
     }
 
-    public static void greetUser() {
+    static void greetUser() {
         String name = greeter.getUserName();
         Boolean gambing = greeter.getIfGambling(name);
         profile = new Profile(name, gambing);
     }
 
-    public static Game offerUserGames() {
+    static Game offerUserGames() {
         Game nextGame;
         if(profile.isGambler()) {
             nextGame = greeter.getNextGame();
@@ -42,12 +42,12 @@ public class Casino {
         return nextGame;
     }
 
-    public static void playGameWithUser(Game nextGame) {
+    private static void playGameWithUser(Game nextGame) {
         nextGame.play();
     }
 
 
-    public static void offerUserLeave() {
+    static void offerUserLeave() {
         if(profile.getBalance() > 0) {
             userIsLeaving = greeter.getIfLeaving();
         } else {
@@ -56,22 +56,22 @@ public class Casino {
         }
     }
 
-    public static void seeUserOut() {
+    static void seeUserOut() {
         greeter.goodBye();
     }
 
     public static Profile getProfile() {
         return profile;
     }
-    public static void setProfile() {
+    static void setProfile() {
          profile = new Profile();
     }
 
-    public static void setGreeter(Greeter newGreeter) {
+    static void setGreeter(Greeter newGreeter) {
         greeter = newGreeter;
     }
 
-    public static boolean isUserIsLeaving() {
+     static boolean isUserIsLeaving() {
         return userIsLeaving;
     }
 }

@@ -69,25 +69,24 @@ public class Greeter {
         return macaoName;
     }
 
-    public Greeter(){
+    Greeter(){
         this.console = Console.getConsole();
     }
 
-    public Greeter(Console console) {
+    Greeter(Console console) {
         this.console = console;
     }
 
-    public String getUserName() {
+    String getUserName() {
         try {
             console.println(casinoName);
-            String name = console.getStringInput("Welcome to our Casino! What's your name?");
-            return name;
+            return console.getStringInput("Welcome to our Casino! What's your name?");
         } catch (NoSuchElementException exception) {
             return "Jane Doe";
         }
     }
 
-    public Boolean getIfGambling(String name) {
+    Boolean getIfGambling(String name) {
         Integer age = console.getIntegerInput(String.format("It's great to meet you, %s. How old are you?", name));
         if (age >= 18) {
             String isGambling = console.getStringInput("And will you be gambling here today?");
@@ -113,19 +112,19 @@ public class Greeter {
         }
     }
 
-    public Game getNextGame() {
+    Game getNextGame() {
         String requestedGame = console.getStandardInputCaps(
                 "Would you like to play BlackJack, GoFish, Craps or Macao?");
         return parseGame(requestedGame);
     }
 
-    public Game getNextCleanGame() {
+    Game getNextCleanGame() {
         String requestedGame = console.getStandardInputCaps("Would you like to play GoFish or Macao?");
         if (requestedGame.equals("BLACKJACK") || requestedGame.equals("CRAPS")) {requestedGame = "GOFISH";}
         return parseGame(requestedGame);
     }
 
-    public Game parseGame(String requestedGame) {
+    private Game parseGame(String requestedGame) {
         if (requestedGame.equals("TESTINGCHEATSENABLEDTRUE")) {return getCheatingTest();}
         GameEnum enumeration = GameEnum.getValueOf(requestedGame);
         return enumeration.create();
@@ -166,7 +165,7 @@ public class Greeter {
         return new Macao(console);
     }
 
-    public boolean getIfLeaving() {
+    boolean getIfLeaving() {
         String isLeaving = console.getStringInput("\n\n\nGood Game. Would you like to stay in our casino?");
         if (isLeaving.equals("no") || isLeaving.equals("n")) {
             return true;
@@ -179,11 +178,11 @@ public class Greeter {
         }
     }
 
-    public void balanceTooLow() {
+    void balanceTooLow() {
         console.println("Sorry, your balance is too low to keep playing.");
     }
 
-    public void goodBye() {
+    void goodBye() {
         console.println(casinoName);
         console.println("Thank you so much for coming! Please come again!");
     }
