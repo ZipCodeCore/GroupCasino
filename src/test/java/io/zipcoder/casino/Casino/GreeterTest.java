@@ -332,4 +332,44 @@ public class GreeterTest {
         // Then
         Assert.assertTrue(actual.contains(expected));
     }
+
+    @Test
+    public void getBlackJackNameTest() {
+        // Given
+        String expected =
+                    "██████╗ ██╗      █████╗  ██████╗██╗  ██╗     ██╗ █████╗  ██████╗██╗  ██╗\n" +
+                    "██╔══██╗██║     ██╔══██╗██╔════╝██║ ██╔╝     ██║██╔══██╗██╔════╝██║ ██╔╝\n" +
+                    "██████╔╝██║     ███████║██║     █████╔╝      ██║███████║██║     █████╔╝ \n" +
+                    "██╔══██╗██║     ██╔══██║██║     ██╔═██╗ ██   ██║██╔══██║██║     ██╔═██╗ \n" +
+                    "██████╔╝███████╗██║  ██║╚██████╗██║  ██╗╚█████╔╝██║  ██║╚██████╗██║  ██╗\n" +
+                    "╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝\n" +
+                    "                                                                        ";
+        Greeter greeter = new Greeter();
+
+        // When
+        String actual = greeter.getBlackJackName();
+
+        // Then
+        Assert.assertTrue(actual.contains(expected));
+    }
+
+    @Test
+    public void getCrapsNameTest() {
+        // Given
+        String expected =
+                        " ██████╗██████╗  █████╗ ██████╗ ███████╗\n" +
+                        "██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔════╝\n" +
+                        "██║     ██████╔╝███████║██████╔╝███████╗\n" +
+                        "██║     ██╔══██╗██╔══██║██╔═══╝ ╚════██║\n" +
+                        "╚██████╗██║  ██║██║  ██║██║     ███████║\n" +
+                        " ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚══════╝\n" +
+                        "                                        ";
+        Greeter greeter = new Greeter();
+
+        // When
+        String actual = greeter.getCrapsName();
+
+        // Then
+        Assert.assertTrue(actual.contains(expected));
+    }
 }

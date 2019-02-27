@@ -1,7 +1,7 @@
 package io.zipcoder.casino.Players;
 
-import io.zipcoder.casino.Cards.Card;
-import io.zipcoder.casino.Cards.Rank;
+import io.zipcoder.casino.CardsAndDice.Card;
+import io.zipcoder.casino.CardsAndDice.Rank;
 
 import java.util.*;
 

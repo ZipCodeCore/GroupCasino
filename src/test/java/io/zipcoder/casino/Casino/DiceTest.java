@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Casino;
 
-import io.zipcoder.casino.Cards.Dice;
+import io.zipcoder.casino.CardsAndDice.Dice;
 import org.junit.Assert;
 import org.junit.Test;
 

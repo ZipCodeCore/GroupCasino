@@ -1,6 +1,6 @@
-package io.zipcoder.casino.Cards;
+package io.zipcoder.casino.CardsAndDice;
 
-import io.zipcoder.casino.Cards.Dice;
+import io.zipcoder.casino.CardsAndDice.Dice;
 
 public class LoadedDice extends Dice {
 
@@ -10,6 +10,7 @@ public class LoadedDice extends Dice {
 
     @Override
     public int roll() {
-        return 6;
+        return 5;
     }
+
 }

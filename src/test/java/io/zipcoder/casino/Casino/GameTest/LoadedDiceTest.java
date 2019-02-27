@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Casino.GameTest;
 
-import io.zipcoder.casino.Cards.LoadedDice;
+import io.zipcoder.casino.CardsAndDice.LoadedDice;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ public class LoadedDiceTest {
     public void rollTest() {
         // Given a set of loaded dice exist and we expect a roll of 6
         LoadedDice dice = new LoadedDice();
-        int expected = 6;
+        int expected = 5;
 
         // When we roll the loaded die
         int actual = dice.roll();

@@ -1,4 +1,4 @@
-package io.zipcoder.casino.Cards;
+package io.zipcoder.casino.CardsAndDice;
 
 import java.util.ArrayList;
 import java.util.Arrays;

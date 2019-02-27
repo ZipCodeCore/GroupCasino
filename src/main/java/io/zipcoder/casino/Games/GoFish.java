@@ -1,8 +1,8 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.Cards.Card;
-import io.zipcoder.casino.Cards.Deck;
-import io.zipcoder.casino.Cards.Rank;
+import io.zipcoder.casino.CardsAndDice.Card;
+import io.zipcoder.casino.CardsAndDice.Deck;
+import io.zipcoder.casino.CardsAndDice.Rank;
 import io.zipcoder.casino.Casino.Greeter;
 import io.zipcoder.casino.Players.GoFishPlayer;
 import io.zipcoder.casino.utilities.Console;
@@ -42,6 +42,7 @@ public class GoFish implements Game {
 
     public void play() {
         console.println(Greeter.getGoFishName());
+        user.getProfile().setBalance(user.getProfile().getBalance() - 5);
         console.println("Rules: The object of this game is to get the most books (4 of a kind) down.\nHere's your staring hand:\n");
         dealStartingHands();
         while (!isOver) {
@@ -52,7 +53,6 @@ public class GoFish implements Game {
             userTurn();
             evaluate();
         }
-        user.getProfile().setBalance(user.getProfile().getBalance() - 5);
     }
 
     public void dealerTurn() {
@@ -160,6 +160,10 @@ public class GoFish implements Game {
                 rankCount.put(rank, rankCount.get(rank) + 1);
             }
         }
+        return allBooksString(rankCount);
+    }
+
+    private String allBooksString(HashMap<Rank, Integer> rankCount) {
         StringBuilder allBooks = new StringBuilder();
         Set<Rank> allRanks = rankCount.keySet();
         for (Rank rank : allRanks) {

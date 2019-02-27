@@ -1,12 +1,10 @@
-package io.zipcoder.casino.Cards;
+package io.zipcoder.casino.CardsAndDice;
 
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
-
-import java.util.*;
 
 
 public class Deck {
