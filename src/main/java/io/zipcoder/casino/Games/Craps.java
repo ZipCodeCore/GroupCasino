@@ -35,17 +35,17 @@ public class Craps implements Game {
     private boolean isHornBet;
     private boolean isPlaceBet;
     private boolean isLayBet;
-    private int firstRollSum;
+    //    private int firstRollSum;
     Dice die1 = new Dice();
     Dice die2 = new Dice();
     private int betAmount = 0;
-    private int hardwaysBet = 0;
+    //    private int hardwaysBet = 0;
     private boolean rollSumHardways = false;
     private GameStatus gameState;
     private boolean isHardwaysBet = false;
     private boolean isCrappedRolls = false;
     private boolean isNatural = false;
-    private boolean isEleven = false;
+    //   private boolean isEleven = false;
     private boolean isPoint = false;
     private boolean isPlaying = true;
 
@@ -290,45 +290,48 @@ public class Craps implements Game {
     public void play() {
         console.println(Greeter.getCrapsName());
         console.println("Welcome to the craps table!");
-        while (!isOver) {
-            while (isFirstRoll) {
-                promptBet();
-                roll();
-                evaluateFirstRoll();
-            }
-            while (isPlaying && gameState == GameStatus.UNRESOLVED) {
-                promptBet();
-                roll();
-                evaluate();
-            }
+        while (isFirstRoll) {
+            promptFirstBet();
+            roll();
+            evaluateFirstRoll();
+            evaluateGameState(gameState);
+        }
+        while (gameState == GameStatus.UNRESOLVED) {
+            promptBet();
+            roll();
+            evaluate();
+            evaluateGameState(gameState);
         }
     }
 
     public void evaluateFirstRoll() {
         if (Arrays.stream(anyCraps).anyMatch(i -> i == rollSum) && toWinPassBet) {
-            console.println("Whomp, whomp, you crapped out\n");
-            adjustBalance(-betAmount);
-            resetPointAndRoll();
+            gameState = GameStatus.LOST;
         } else if (rollSum == 7 && toWinPassBet || rollSum == 11 && toWinPassBet) {
-            console.println("You won the Pass bet, keep it up!\n");
             gameState = GameStatus.WON;
+        } else if (rollSum == 7 && !toWinPassBet || rollSum == 11 && !toWinPassBet) {
+            gameState = GameStatus.LOST;
+        } else if (Arrays.stream(anyCraps).anyMatch(i -> i == rollSum) && !toWinPassBet) {
+            gameState = GameStatus.UNRESOLVED;
+        } else {
+            gameState = GameStatus.UNRESOLVED;
+            point = rollSum;
+            isFirstRoll = false;
+            console.println("The point is now " + point + ".\n");
+        }
+    }
+
+    public void evaluateGameState(GameStatus gameState) {
+        if (gameState == GameStatus.WON) {
+            console.println("Your bet paid off!");
             adjustBalance(betAmount);
             resetPointAndRoll();
-        } else if (rollSum == 7 && !toWinPassBet || rollSum == 11 && !toWinPassBet) {
-            console.println("You lost the Pass bet!\n");
-            gameState = GameStatus.UNRESOLVED;
+            promptQuit();
+        } else if (gameState == GameStatus.LOST) {
+            console.println("You lost your bet!");
             adjustBalance(-betAmount);
             resetPointAndRoll();
-        } else if (Arrays.stream(anyCraps).anyMatch(i -> i == rollSum) && !toWinPassBet) {
-            console.println("You won the Don't Pass bet, keep it up!\n");
-            gameState = GameStatus.UNRESOLVED;
-            adjustBalance(betAmount);
-            resetPointAndRoll();
-        } else {
-            point = rollSum;
-            console.println("The point is now " + point + ".\nKeep on rollin', shooter!\n");
-            gameState = GameStatus.UNRESOLVED;
-            isFirstRoll = false;
+            promptQuit();
         }
     }
 
@@ -338,39 +341,47 @@ public class Craps implements Game {
         isPlaying = false;
     }
 
-    public void promptBet() {
-        if (isFirstRoll) {
-            int betReturn = console.getIntegerInput("How much would you like to bet?");
-            betAmount = betReturn;
-            String passChoice = console.getStandardInput("Please choose 'Pass' or 'Don't Pass'");
-            if (passChoice.equals("pass")) {
-                toWinPassBet = true;
-                betMap.put("Pass Bet", true);
-            } else if (passChoice.equals("don't pass")) {
-                toWinPassBet = false;
-                betMap.put("Pass Bet", false);
-            }
+    public void promptFirstBet() {
+        int betReturn = console.getIntegerInput("How much would you like to bet?");
+        if (betReturn > adjustedBalance) {
+            console.println("You don't have that much, pal");
+            promptFirstBet();
         } else {
-            int betChoice = console.getIntegerInput("You have five choices:\n1) Explain Possible Bets\n2) List Current Bets\n3) List Available Bets\n4) Make a Bet\n5) Continue Rolling");
-            switch (betChoice) {
-                case 1:
-                    betRulesListed();
-                    promptBet();
-                    break;
-                case 2:
-                    console.println("You have the current bets: " + currentBetList(true) + "\n");
-                    promptBet();
-                    break;
-                case 3:
-                    listBets();
-                    promptBet();
-                    break;
-                case 4:
-                    makeBet();
-                    break;
-                case 5:
-                    break;
-            }
+            betAmount = betReturn;
+        }
+        String passChoice = console.getStandardInput("Please choose 'Pass' or 'Don't Pass'");
+        if (passChoice.equals("pass")) {
+            toWinPassBet = true;
+            betMap.put("Pass Bet", true);
+        } else if (passChoice.equals("don't pass")) {
+            toWinPassBet = false;
+            betMap.put("Pass Bet", false);
+        } else {
+            console.println("I don't know that one, ace. Try again.");
+            promptFirstBet();
+        }
+    }
+
+    public void promptBet() {
+        int betChoice = console.getIntegerInput("You have five choices:\n1) Explain Possible Bets\n2) List Current Bets\n3) List Available Bets\n4) Make a Bet\n5) Continue Rolling");
+        switch (betChoice) {
+            case 1:
+                betRulesListed();
+                promptBet();
+                break;
+            case 2:
+                console.println("You have the current bets: " + currentBetList(true) + "\n");
+                promptBet();
+                break;
+            case 3:
+                listBets();
+                promptBet();
+                break;
+            case 4:
+                makeBet();
+                break;
+            case 5:
+                break;
         }
     }
 
@@ -455,7 +466,7 @@ public class Craps implements Game {
         rollSum = roll1 + roll2;
         if (roll1 == roll2) {
             rollSumHardways = true;
-        } else  {
+        } else {
             rollSumHardways = false;
         }
         switch (rollSum) {
@@ -465,8 +476,10 @@ public class Craps implements Game {
                 isCrappedRolls = true;
             case 7:
                 isNatural = true;
+/*
             case 11:
                 isEleven = true;
+*/
             default:
                 isNatural = false;
                 isPoint = true;
@@ -477,78 +490,58 @@ public class Craps implements Game {
     }
 
     public void evaluate() {
-        if (isNatural) {
-            if (toWinLayBet)  {
-                gameState = GameStatus.WON;
-                console.println("Your Lay bet paid off!\n");
-                adjustBalance(betAmount);
-                promptQuit();
-            }
-            if (!toWinPassBet && gameState != GameStatus.WON) {
-                gameState = GameStatus.WON;
-                console.println("Your Don't Pass bet paid off!\n");
-                adjustBalance(betAmount);
-                promptQuit();
-            } else if (!isOver && gameState != GameStatus.WON) {
-                console.println("Sorry shooter, it looks like your hot streak has come to an end!\n");
-                gameState = GameStatus.LOST;
-                adjustBalance(-betAmount);
-                resetPointAndRoll();
-                promptQuit();
-            }
+        if (rollSum == 7) {
+            evaluate7s();
+        } else if (Arrays.stream(anyCraps).anyMatch(i -> i == rollSum)) {
+            evaluateCrappedRolls();
+        } else evaluatePointRolls();
+    }
+
+    public void evaluate7s() {
+        if (toWinLayBet) {
+            gameState = GameStatus.WON;
+        } else if (!toWinPassBet) {
+            gameState = GameStatus.WON;
+        } else {
+            gameState = GameStatus.LOST;
         }
-        if (isCrappedRolls && !isFirstRoll && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
+    }
+
+    public void evaluateCrappedRolls() {
+        if (isCrappedRolls && !isFirstRoll && gameState == GameStatus.UNRESOLVED) {
             if (isAnyCrapsBet && Arrays.stream(anyCraps).anyMatch(i -> i == rollSum)) {
                 gameState = GameStatus.WON;
-                console.println("Your Any Craps bet paid off!\n");
-                adjustBalance(betAmount);
-                promptQuit();
             }
-            if (isAnyCrapsBet && Arrays.stream(anyCraps).noneMatch(i -> i == rollSum) && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
+            if (isAnyCrapsBet && Arrays.stream(anyCraps).noneMatch(i -> i == rollSum)) {
                 gameState = GameStatus.LOST;
-                console.println("You lost your Any Craps bet!\n");
-                adjustBalance(-betAmount);
-                promptQuit();
             }
         }
-        if (isPoint && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
-            if (isFieldBet && Arrays.stream(fieldNumberRolls).anyMatch(i -> i == rollSum) && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
+    }
+
+    public void evaluatePointRolls() {
+        if (isPoint && gameState == GameStatus.UNRESOLVED) {
+            if (isFieldBet && Arrays.stream(fieldNumberRolls).anyMatch(i -> i == rollSum)) {
                 gameState = GameStatus.WON;
-                console.println("You won your Field bet!\n");
-                adjustBalance(betAmount);
-                promptQuit();
             }
-            if (isHornBet && Arrays.stream(hornBetRolls).anyMatch(i -> i == rollSum) && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
+            if (isHornBet && Arrays.stream(hornBetRolls).anyMatch(i -> i == rollSum)) {
                 gameState = GameStatus.WON;
-                console.println("You won your Horn bet!\n");
-                adjustBalance(betAmount);
-                promptQuit();
             }
-            if (isHardwaysBet && (roll1 == roll2) && hardwaysRoll == rollSum && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
+            if (isHardwaysBet && (roll1 == roll2) && hardwaysRoll == rollSum) {
                 gameState = GameStatus.WON;
-                console.println("You won your Hardways bet!\n");
-                adjustBalance(betAmount);
-                promptQuit();
             }
-            if (isLayBet && rollSum == 7 && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
+            if (isLayBet && rollSum == 7) {
                 gameState = GameStatus.WON;
-                console.println("You won your Lay Bet!\n");
-                adjustBalance(betAmount);
-                promptQuit();
             }
-            if (rollSum == point && toWinPassBet && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
+            if (rollSum == point && toWinPassBet) {
                 console.println("Lucky number " + point + "! You hit the point!\n");
-                adjustBalance(betAmount);
-                promptQuit();
+                gameState = GameStatus.WON;
             } else {
-                gameState = GameStatus.UNRESOLVED;
                 isPlaying = true;
                 console.println("Nothing won yet...\n");
             }
         }
-        if (rollSum == placeBetChoice && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
-            console.println("Your Place bet paid off!\n");
-            adjustBalance(betAmount);
+        if (rollSum == placeBetChoice) {
+            gameState = GameStatus.WON;
             isPlaying = false;
             promptQuit();
         }
@@ -560,7 +553,7 @@ public class Craps implements Game {
             cashOut();
         } else if (quitPrompt.equals("no")) {
             console.println("Okay, you're a responsible adult, and you know your limits\n");
-            isPlaying = true;
+            gameState = GameStatus.UNRESOLVED;
             resetPointAndRoll();
         }
     }
