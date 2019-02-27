@@ -3,18 +3,14 @@ package io.zipcoder.casino.Casino;
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.Players.Profile;
 
+
 public class Casino {
-    private static Profile profile = new Profile();
+    private static Profile profile;
     private static Greeter greeter = new Greeter();
     private static boolean userIsLeaving = false;
 
     public static void main(String[] args)
     {
-        //System.out.print("\033[31mERROR  \033[0m");
-//        System.out.println(Greeter.getCrapsName());
-//        System.out.println(Greeter.getMacaoName());
-//        System.out.println(Greeter.getGoFishName());
-//        System.out.println(Greeter.getBlackJackName());
         entertainUser();
     }
 
