@@ -307,7 +307,6 @@ public class Craps implements Game {
                 roll();
                 evaluate();
             }
-            promptQuit();
         }
     }
 
@@ -489,16 +488,19 @@ public class Craps implements Game {
                 gameState = GameStatus.WON;
                 console.println("Your Lay bet paid off!\n");
                 adjustBalance(betAmount);
+                promptQuit();
             }
             if (!toWinPassBet && gameState != GameStatus.WON) {
                 gameState = GameStatus.WON;
                 console.println("Your Don't Pass bet paid off!\n");
                 adjustBalance(betAmount);
+                promptQuit();
             } else if (!isOver && gameState != GameStatus.WON) {
                 console.println("Sorry shooter, it looks like your hot streak has come to an end!\n");
                 gameState = GameStatus.LOST;
                 adjustBalance(-betAmount);
                 resetPointAndRoll();
+                promptQuit();
             }
         }
         if (isCrappedRolls && !isFirstRoll && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
@@ -506,11 +508,13 @@ public class Craps implements Game {
                 gameState = GameStatus.WON;
                 console.println("Your Any Craps bet paid off!\n");
                 adjustBalance(betAmount);
+                promptQuit();
             }
             if (isAnyCrapsBet && Arrays.stream(anyCraps).noneMatch(i -> i == rollSum) && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
                 gameState = GameStatus.LOST;
                 console.println("You lost your Any Craps bet!\n");
                 adjustBalance(-betAmount);
+                promptQuit();
             }
         }
         if (isPoint && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
@@ -523,25 +527,30 @@ public class Craps implements Game {
                 gameState = GameStatus.WON;
                 console.println("You won your Field bet!\n");
                 adjustBalance(betAmount);
+                promptQuit();
             }
             if (isHornBet && Arrays.stream(hornBetRolls).anyMatch(i -> i == rollSum) && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
                 gameState = GameStatus.WON;
                 console.println("You won your Horn bet!\n");
                 adjustBalance(betAmount);
+                promptQuit();
             }
             if (isHardwaysBet && (roll1 == roll2) && hardwaysRoll == rollSum && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
                 gameState = GameStatus.WON;
                 console.println("You won your Hardways bet!\n");
                 adjustBalance(betAmount);
+                promptQuit();
             }
             if (isLayBet && rollSum == 7 && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
                 gameState = GameStatus.WON;
                 console.println("You won your Lay Bet!\n");
                 adjustBalance(betAmount);
+                promptQuit();
             }
             if (rollSum == point && toWinPassBet && gameState != GameStatus.WON && gameState != GameStatus.LOST) {
                 console.println("Lucky number " + point + "! You hit the point!\n");
                 adjustBalance(betAmount);
+                promptQuit();
             } else {
                 gameState = GameStatus.UNRESOLVED;
                 isPlaying = true;
@@ -552,6 +561,7 @@ public class Craps implements Game {
             console.println("Your Place bet paid off!\n");
             adjustBalance(betAmount);
             isPlaying = false;
+            promptQuit();
         }
     }
 
@@ -560,7 +570,9 @@ public class Craps implements Game {
         if (quitPrompt.equals("yes")) {
             cashOut();
         } else if (quitPrompt.equals("no")) {
-            console.println("Okay, you're a responsible adult, and you know your limits");
+            console.println("Okay, you're a responsible adult, and you know your limits\n");
+            isPlaying = true;
+            resetPointAndRoll();
         }
     }
 
