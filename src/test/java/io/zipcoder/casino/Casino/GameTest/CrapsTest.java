@@ -2,7 +2,6 @@ package io.zipcoder.casino.Casino.GameTest;
 
 import io.zipcoder.casino.CardsAndDice.Dice;
 import io.zipcoder.casino.CardsAndDice.LoadedDice;
-import io.zipcoder.casino.CardsAndDice.LoadedDice2;
 import io.zipcoder.casino.Games.Craps;
 import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
@@ -435,7 +434,7 @@ public class CrapsTest {
     public void rollTest1() {
         // Given
         Craps craps = helperFunctionNoInput();
-        Dice diceRoll2 = new LoadedDice2();
+        Dice diceRoll2 = new LoadedDice(2);
         craps.setDie1(diceRoll2);
         craps.setDie2(diceRoll2);
         craps.setRollSum(0);
@@ -468,8 +467,8 @@ public class CrapsTest {
     public void rollTest2() {
         // Given
         Craps craps = helperFunctionNoInput();
-        Dice diceRoll5 = new LoadedDice();
-        Dice diceRoll2 = new LoadedDice2();
+        Dice diceRoll5 = new LoadedDice(5);
+        Dice diceRoll2 = new LoadedDice(2);
         craps.setDie1(diceRoll5);
         craps.setDie2(diceRoll2);
         craps.setRollSum(0);

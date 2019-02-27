@@ -8,8 +8,8 @@ public class LoadedDiceTest {
 
     @Test
     public void rollTest() {
-        // Given a set of loaded dice exist and we expect a roll of 6
-        LoadedDice dice = new LoadedDice();
+        // Given a set of loaded dice exist and we expect a roll of 5
+        LoadedDice dice = new LoadedDice(5);
         int expected = 5;
 
         // When we roll the loaded die

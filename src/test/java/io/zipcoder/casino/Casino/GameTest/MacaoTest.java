@@ -134,7 +134,7 @@ public class MacaoTest {
     @Test
     public void playGameTest1() {
         // Given the macao dice are set to our loaded dice
-        Dice dice = new LoadedDice();
+        Dice dice = new LoadedDice(5);
         macao.setDice(dice);
 
         // Given the user says "yes" they'd like to play and "yes" they'd like to roll again
@@ -157,7 +157,7 @@ public class MacaoTest {
     @Test
     public void playGameTest2() {
         // Given the macao dice are set to our loaded dice
-        Dice dice = new LoadedDice();
+        Dice dice = new LoadedDice(5);
         macao.setDice(dice);
 
         // Given the user says "yes" they'd like to play and "no" they wouldn't like to roll again
@@ -235,7 +235,7 @@ public class MacaoTest {
         macao.getUser().setRoll(4);
 
         // Given we set the macao dice to our loaded dice; given an expected roll of 5
-        Dice dice = new LoadedDice();
+        Dice dice = new LoadedDice(5);
         macao.setDice(dice);
         int expected = 5;
 
@@ -344,7 +344,7 @@ public class MacaoTest {
     @Test
     public void initialGameSetupTest() {
         // Given a set of loaded die are set to our macao die
-        Dice dice = new LoadedDice();
+        Dice dice = new LoadedDice(5);
         macao.setDice(dice);
 
         // Given the console is set to our test console & we expect the initial rolls to print

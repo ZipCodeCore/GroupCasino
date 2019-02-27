@@ -19,6 +19,7 @@ public class Deck {
             }
         }
     }
+
     public static Card getCardBack() {
         return cardBack;
     }

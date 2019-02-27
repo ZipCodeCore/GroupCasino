@@ -20,12 +20,10 @@ public class BlackJack implements Game {
     private BlackJackPlayer dealer = new BlackJackPlayer(new Profile());
     private BlackJackPlayer user = new BlackJackPlayer(Casino.getProfile());
     private Deck currentDeck = new Deck();
-
     private int userTotal;
     private int dealerTotal;
     private Integer userBet;
     private boolean isOver = false;
-
     private Console blackJackConsole;
 
     public BlackJack(){
@@ -225,7 +223,6 @@ public class BlackJack implements Game {
 
     private void takeDealersTurn() {
         blackJackConsole.println("Dealer card is: \n" + Card.printAllCards(dealer.getHand().get(1)));
-
         displayDealerHand();
         displayDealerTotal(dealerTotal);
         while (dealerTotal < 17) {
@@ -239,19 +236,17 @@ public class BlackJack implements Game {
     }
 
     public void checkWinner() {
-
         if (dealerTotal > 21) {
             blackJackConsole.print("Dealer Busts.");
             celebrateUser();
             isOver = true;
 
-        }else if (dealerTotal == userTotal) {
+        } else if (dealerTotal == userTotal) {
             blackJackConsole.println("It's a Push. Ehh");
             user.setBalance(user.getBalance() + userBet);
             displayUserBalance();
             isOver = true;
-        }
-        else {
+        } else {
             String result = (dealerTotal > userTotal) ? "Dealer is the winner!" : "You are the winner" ;
             if (result.equals("You are the winner")){
                 addWinningsBalance();
@@ -260,7 +255,6 @@ public class BlackJack implements Game {
             displayUserBalance();
             isOver = true;
             }
-
         }
 
     private void addWinningsBalance() {
@@ -271,8 +265,7 @@ public class BlackJack implements Game {
         user.setBalance(user.getBalance() - userBet);
        displayUserBalance();
     }
-
-    }
+ }
 
 
 

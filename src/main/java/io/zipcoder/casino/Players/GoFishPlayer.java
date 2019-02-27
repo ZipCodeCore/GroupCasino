@@ -17,7 +17,7 @@ public class GoFishPlayer extends Player {
     public List<Card> getHand() {
         return hand;
     }
-    public void setHand(List<Card> hand) { if(hand != null) { this.hand = hand;  Collections.sort(hand);} }
+    public void setHand(List<Card> hand) { if(hand != null) { this.hand = hand;  Collections.sort(this.hand);} }
     public int getHandSize(){ return hand.size(); }
 
     public void addToHand(List<Card> cards) {if(hand != null) {this.hand.addAll(cards);  Collections.sort(hand);} }
