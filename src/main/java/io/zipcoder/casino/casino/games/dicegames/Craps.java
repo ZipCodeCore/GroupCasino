@@ -14,7 +14,7 @@ public class Craps implements Game {
     Console console = Console.getConsole();
     private CrapsPlayer user = new CrapsPlayer(Casino.getProfile());
     private int initialBalance = getUser().getProfile().getBalance();
-    private int adjustedBalance = initialBalance;
+    private int adjustedBalance = 0;
     private int betAmount = 0;
     private final int[] anyCraps = {2, 3, 12};
     private final int[] hornBetRolls = {2, 3, 11, 12};
@@ -127,6 +127,8 @@ public class Craps implements Game {
         this.initialBalance = initialBalance;
     }
 
+    public int getInitialBalance(){return initialBalance;}
+
     public CrapsPlayer getUser() {
         return user;
     }
@@ -196,6 +198,7 @@ public class Craps implements Game {
     public void play() {
         console.println(Greeter.getCrapsName());
         console.println("Welcome to the craps table!");
+        setAdjustedBalance(getInitialBalance());
         while (getIsFirstRoll()) {
             promptFirstBet();
             roll();
@@ -430,7 +433,7 @@ public class Craps implements Game {
             if (getBetInBetMap("The Horn") && Arrays.stream(hornBetRolls).anyMatch(i -> i == getRollSum())) {
                 gameState = GameStatus.WON;
             }
-            if (getBetInBetMap("Hardways") && (roll1 == roll2) && hardwaysRoll == getRollSum()) {
+            if (getBetInBetMap("Hardways") && (roll1 == roll2) && getHardwaysRoll() == getRollSum()) {
                 gameState = GameStatus.WON;
             }
             if (getBetInBetMap("Lay Bet") && getRollSum() == 7) {
