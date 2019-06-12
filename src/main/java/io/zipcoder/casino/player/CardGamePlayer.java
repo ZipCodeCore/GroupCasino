@@ -2,6 +2,7 @@ package io.zipcoder.casino.player;
 
 import javax.smartcardio.Card;
 import java.util.ArrayList;
+///
 
 public class CardGamePlayer extends Player {
     public ArrayList<Card> hand;
