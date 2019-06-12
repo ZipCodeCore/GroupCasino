@@ -5,7 +5,19 @@ import io.zipcoder.casino.player.RoulettePlayer;
 public class Roulette extends Games implements GamblerGameInterface {
     String betType; //   red/back - odd / even / number
     RoulettePlayer roulettePlayer = new RoulettePlayer();
+    private Double currentBet;
 
+
+
+    @Override
+    void nextTurn() {
+
+    }
+
+    @Override
+    void endGame() {
+
+    }
 
     @Override
     boolean getResults() {
@@ -23,5 +35,13 @@ public class Roulette extends Games implements GamblerGameInterface {
 
     public void updateAccount(Integer num) {
 
+    }
+
+    public Double getCurrentBet() {
+        return currentBet;
+    }
+
+    public void setCurrentBet(Double currentBet) {
+        this.currentBet = currentBet;
     }
 }

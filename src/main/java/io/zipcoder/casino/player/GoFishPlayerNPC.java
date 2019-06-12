@@ -4,9 +4,7 @@ import io.zipcoder.casino.Card;
 
 import java.util.ArrayList;
 
-public class GoFishPlayerNPC extends Player implements NPCInterface {
-    ArrayList<Card> hand;
-
+public class GoFishPlayerNPC extends CardGamePlayer implements NPCInterface {
 
 
     String betType; //   red/back - odd / even / number

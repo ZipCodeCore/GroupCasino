@@ -4,8 +4,7 @@ import io.zipcoder.casino.Card;
 
 import java.util.ArrayList;
 
-public class BlackJackPlayerNPC extends Player implements NPCInterface {
-    ArrayList<Card> hand;
+public class BlackJackPlayerNPC extends CardGamePlayer implements NPCInterface {
 
     public void bet(Integer bet) {
 

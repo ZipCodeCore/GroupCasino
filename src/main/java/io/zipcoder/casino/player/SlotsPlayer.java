@@ -13,4 +13,18 @@ public class SlotsPlayer extends Player implements GamblerInterface {
     public void cashout() {
 
     }
+
+    @Override
+    public Double getAccount() {
+        return super.getAccount();
+    }
+
+    @Override
+    public void setAccount(Double account) {
+        super.setAccount(account);
+    }
+
+    public void displayAccoutBal() {
+
+    }
 }

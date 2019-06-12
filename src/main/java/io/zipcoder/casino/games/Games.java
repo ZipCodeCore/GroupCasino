@@ -6,6 +6,11 @@ import java.security.PublicKey;
 abstract class Games {
     Integer odds;
 
+
+    abstract void nextTurn();
+
+    abstract void endGame();
+
     abstract boolean getResults();
 
     public void display(String output) {

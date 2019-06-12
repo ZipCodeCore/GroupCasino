@@ -5,8 +5,20 @@ import io.zipcoder.casino.player.SlotsPlayer;
 public class Slots extends Games implements GamblerGameInterface {
     Integer numOfLines;
     SlotsPlayer slotsPlayer = new SlotsPlayer();
+    private Double currentBet;
+
 
     public Slots(){}
+
+    @Override
+    void nextTurn() {
+
+    }
+
+    @Override
+    void endGame() {
+
+    }
 
     @Override
     boolean getResults() {
@@ -24,5 +36,13 @@ public class Slots extends Games implements GamblerGameInterface {
 
     public void updateAccount(Integer num) {
 
+    }
+
+    public Double getCurrentBet() {
+        return currentBet;
+    }
+
+    public void setCurrentBet(Double currentBet) {
+        this.currentBet = currentBet;
     }
 }
