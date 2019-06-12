@@ -12,6 +12,12 @@ public class GoFish extends Games {
     private Integer player1Score;
     private Integer player2Score;
 
+    public GoFish() {
+        super();
+        this.player1Score = 0;
+        this.player2Score = 0;
+    }
+
 
     @Override
     boolean getResults() {
