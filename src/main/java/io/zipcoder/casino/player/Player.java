@@ -2,7 +2,7 @@ package io.zipcoder.casino.player;
 
 public class Player {
 private String name;
-Double account;
+private Double account;
 
     public Player(){};
 

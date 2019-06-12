@@ -6,9 +6,9 @@ public class Craps extends Games implements GamblerGameInterface {
     private CrapsPlayer crapsPlayer = new CrapsPlayer();
     private Boolean isOn = false;
     private Integer onNumber;
-    private Integer firstLineBet;
-    private Integer secondLineBet;
-    private Integer otherBet;
+    private Double firstLineBet;
+    private Double secondLineBet;
+    private Double otherBet;
 
     public Integer calcPayment(Integer bet, Integer odds) {
         return null;
@@ -54,31 +54,36 @@ public class Craps extends Games implements GamblerGameInterface {
         this.onNumber = onNumber;
     }
 
-    public Integer getFirstLineBet() {
+    public Double getFirstLineBet() {
         return firstLineBet;
     }
 
-    public void setFirstLineBet(Integer firstLineBet) {
+    public void setFirstLineBet(Double firstLineBet) {
         this.firstLineBet = firstLineBet;
     }
 
-    public Integer getSecondLineBet() {
+    public Double getSecondLineBet() {
         return secondLineBet;
     }
 
-    public void setSecondLineBet(Integer secondLineBet) {
+    public void setSecondLineBet(Double secondLineBet) {
         this.secondLineBet = secondLineBet;
     }
 
-    public Integer getOtherBet() {
+    public Double getOtherBet() {
         return otherBet;
     }
 
-    public void setOtherBet(Integer otherBet) {
+    public void setOtherBet(Double otherBet) {
         this.otherBet = otherBet;
     }
 
 
+    public Double calcPayment(Double bet, Double odds) {
+        return null;
+    }
 
+    public void updateAccount(Double num) {
 
+    }
 }
