@@ -7,7 +7,7 @@ public interface GamblerInterface {
 
     void cashout();
 
-
+    void displayAccoutBal();
 
 
 }

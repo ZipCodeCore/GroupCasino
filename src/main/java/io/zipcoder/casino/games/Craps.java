@@ -19,6 +19,16 @@ public class Craps extends Games implements GamblerGameInterface {
     }
 
     @Override
+    void nextTurn() {
+
+    }
+
+    @Override
+    void endGame() {
+
+    }
+
+    @Override
     boolean getResults() {
         return false;
     }
