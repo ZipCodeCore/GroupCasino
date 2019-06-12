@@ -1,5 +1,6 @@
 package io.zipcoder.casino.games;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,8 +12,13 @@ public class CrapsTest {
     public void calcPayment() {
         Craps craps = new Craps();
 
-        craps.odds = 2;
-        craps.
+        craps.setOdds(2.0);
+        craps.setFirstLineBet(10.0);
+
+        Double expected = 20.0;
+        Double actual = craps.calcPayment(craps.odds, craps.getFirstLineBet());
+
+        Assert.assertEquals(expected, actual);
     }
 
     @Test

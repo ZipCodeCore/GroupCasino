@@ -45,4 +45,12 @@ public class Slots extends Games implements GamblerGameInterface {
     public void setCurrentBet(Double currentBet) {
         this.currentBet = currentBet;
     }
+
+    public Double calcPayment(Double bet, Double odds) {
+        return null;
+    }
+
+    public void updateAccount(Double num) {
+
+    }
 }

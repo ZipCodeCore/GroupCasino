@@ -2,8 +2,8 @@ package io.zipcoder.casino.games;
 
 interface GamblerGameInterface {
 
-     Integer calcPayment(Integer bet, Integer odds);
+     Double calcPayment(Double bet, Double odds);
 
 
-     void updateAccount(Integer num);
+     void updateAccount(Double num);
 }
