@@ -1,5 +1,6 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.player.CardGamePlayer;
 import io.zipcoder.casino.player.Player;
 
 import java.util.ArrayList;
@@ -13,7 +14,14 @@ public class Deck {
         Collections.shuffle(card);
     };
 
-    public ArrayList<Card> deal (Integer numOfCards, Player player) {
+    public ArrayList<Card> deal (Integer numOfCards, CardGamePlayer player) {
         return null;
     }
+
+    public Card dealSingleCard(CardGamePlayer player) {
+
+        return null;
+    }
+
+
 }

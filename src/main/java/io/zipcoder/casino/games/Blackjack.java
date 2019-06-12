@@ -14,11 +14,17 @@ public class Blackjack extends CardGames implements GamblerGameInterface {
     private Integer player1Score;
     private Integer player2Score;
 
+
+
+    private Double currentBet;
+
     public Blackjack() {
         super();
         this.odds = 2;
         this.player1Score = 0;
         this.player2Score = 0;
+
+
     }
 
 
@@ -57,5 +63,22 @@ public class Blackjack extends CardGames implements GamblerGameInterface {
         this.player2Score = player2Score;
     }
 
+    public Double getCurrentBet() {
+        return currentBet;
+    }
 
+    public void setCurrentBet(Double currentBet) {
+        this.currentBet = currentBet;
+    }
+
+
+    @Override
+    void nextTurn() {
+
+    }
+
+    @Override
+    void endGame() {
+
+    }
 }
