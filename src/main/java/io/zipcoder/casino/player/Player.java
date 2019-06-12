@@ -2,8 +2,14 @@ package io.zipcoder.casino.player;
 
 public class Player {
 private String name;
-Integer account;
+Double account;
 
+    public Player(){};
+
+    public Player(String name, Double account) {
+        this.account = account;
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -13,11 +19,11 @@ Integer account;
         this.name = name;
     }
 
-    public Integer getAccount() {
+    public Double getAccount() {
         return account;
     }
 
-    public void setAccount(Integer account) {
+    public void setAccount(Double account) {
         this.account = account;
     }
 }

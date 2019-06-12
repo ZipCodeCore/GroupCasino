@@ -14,4 +14,8 @@ public class RoulettePlayer extends Player implements GamblerInterface {
     public void cashout() {
 
     }
+
+    public void displayAccoutBal() {
+
+    }
 }
