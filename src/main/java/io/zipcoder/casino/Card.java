@@ -4,6 +4,7 @@ public class Card {
     Integer cardVal;
 
     public enum cardValue {
+
     }
 
     public enum cardSuit {

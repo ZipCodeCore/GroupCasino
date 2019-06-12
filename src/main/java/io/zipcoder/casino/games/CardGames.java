@@ -3,15 +3,24 @@ package io.zipcoder.casino.games;
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.Deck;
 
-public class CardGames {
+abstract class CardGames extends Games {
     Deck deck;
 
     public CardGames() {
-        deck = new Deck();
+        this.deck = new Deck();
     }
 
     public Card dealCard () {
         return null;
     }
 
+    @Override
+    boolean getResults() {
+        return false;
+    }
+
+    @Override
+    public void display(String output) {
+        super.display(output);
+    }
 }

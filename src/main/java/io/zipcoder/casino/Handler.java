@@ -1,5 +1,4 @@
 package io.zipcoder.casino;
-
 import io.zipcoder.casino.games.*;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
@@ -23,7 +22,7 @@ void run() {
             Roulette roulette = new Roulette();
             break;
         case 3:
-            Craps craps = new Craps(false);
+            Craps craps = new Craps();
             break;
         case 4:
             Slots slots = new Slots();

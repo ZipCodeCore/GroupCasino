@@ -1,16 +1,14 @@
 package io.zipcoder.casino.games;
 
+import io.zipcoder.casino.player.CrapsPlayer;
+
 public class Craps extends Games implements GamblerGameInterface {
-    private Boolean isOn;
+    private CrapsPlayer crapsPlayer = new CrapsPlayer();
+    private Boolean isOn = false;
     private Integer onNumber;
     private Integer firstLineBet;
     private Integer secondLineBet;
     private Integer otherBet;
-
-    public Craps(Boolean isOn) {
-        this.isOn = isOn;
-    }
-
 
     public Integer calcPayment(Integer bet, Integer odds) {
         return null;
