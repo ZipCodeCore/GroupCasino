@@ -1,6 +1,12 @@
 package io.zipcoder.casino.player;
 
-public class GoFishPlayerNPC implements NPCInterface {
+import io.zipcoder.casino.Card;
+
+import java.util.ArrayList;
+
+public class GoFishPlayerNPC extends Player implements NPCInterface {
+    ArrayList<Card> hand;
+
 
 
     String betType; //   red/back - odd / even / number
@@ -16,4 +22,7 @@ public class GoFishPlayerNPC implements NPCInterface {
     public void logicNPC() {
 
     }
+
+    public void endturn() {};
+
 }

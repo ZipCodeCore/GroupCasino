@@ -1,6 +1,12 @@
 package io.zipcoder.casino.player;
 
-public class BlackJackPlayerNPC implements NPCInterface {
+import io.zipcoder.casino.Card;
+
+import java.util.ArrayList;
+
+public class BlackJackPlayerNPC extends Player implements NPCInterface {
+    ArrayList<Card> hand;
+
     public void bet(Integer bet) {
 
     }
@@ -12,4 +18,7 @@ public class BlackJackPlayerNPC implements NPCInterface {
     public void logicNPC() {
 
     }
+
+    public void endturn() {};
+
 }

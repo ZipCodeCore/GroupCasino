@@ -22,4 +22,6 @@ public class BlackJackPlayer extends Player implements GamblerInterface {
 
     public void cashout() {
     }
+
+    public void endturn() {};
 }

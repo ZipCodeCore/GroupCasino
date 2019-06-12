@@ -11,4 +11,7 @@ public class GoFishPlayer extends Player {
         hand = new ArrayList<Card>();
 
     }
+
+    public void endturn() {};
+
 }
