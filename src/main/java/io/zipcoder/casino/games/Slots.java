@@ -5,7 +5,6 @@ public class Slots extends Games {
 
     public Slots(){}
 
-
     @Override
     boolean getResults() {
         return false;
