@@ -42,6 +42,8 @@ public final class Console {
         }
     }
 
+
+
     public Long getLongInput(String prompt, Object... args) {
         String stringInput = getStringInput(prompt, args);
         try {
