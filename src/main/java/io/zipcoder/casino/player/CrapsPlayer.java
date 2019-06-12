@@ -21,4 +21,8 @@ public class CrapsPlayer extends Player implements GamblerInterface {
     public void cashout() {
 
     }
+
+    public void displayAccoutBal() {
+
+    }
 }
