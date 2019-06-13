@@ -12,6 +12,7 @@ public class DeckTest {
     @Test
     public void shuffle() {
         Deck testDeck = new Deck();
+
         Card beforeShuffle = testDeck.cardStack.peek();
         testDeck.shuffle();
         Card afterShuffle = testDeck.cardStack.peek();
@@ -21,7 +22,6 @@ public class DeckTest {
     public void shuffleNotWorking() {
         Deck testDeck = new Deck();
         Card beforeShuffle = testDeck.cardStack.peek();
-        testDeck.shuffle();
         Card afterShuffle = testDeck.cardStack.peek();
         Assert.assertFalse(!beforeShuffle.equals(afterShuffle));
     }
