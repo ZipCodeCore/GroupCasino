@@ -4,7 +4,13 @@ import javax.smartcardio.Card;
 import java.util.ArrayList;
 
 public class GoFishPlayer extends CardGamePlayer {
+    Player player;
 
+    public GoFishPlayer() {}
+
+    public GoFishPlayer(Player player) {
+        this.player = player;
+    }
 
     public void endturn() {};
 

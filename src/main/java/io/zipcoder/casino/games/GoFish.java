@@ -1,24 +1,22 @@
 package io.zipcoder.casino.games;
 
-import io.zipcoder.casino.Card;
-import io.zipcoder.casino.Deck;
+import io.zipcoder.casino.gameTools.Card;
+import io.zipcoder.casino.gameTools.Deck;
+import io.zipcoder.casino.player.CardGamePlayer;
 import io.zipcoder.casino.player.GoFishPlayer;
-import io.zipcoder.casino.player.GoFishPlayerNPC;
+import io.zipcoder.casino.player.Player;
 
-import java.security.PrivateKey;
+import java.util.ArrayList;
 
 public class GoFish extends Games {
-    GoFishPlayer player1 = new GoFishPlayer();
-    GoFishPlayerNPC player2 = new GoFishPlayerNPC();
-    Deck deck = new Deck();
-    private Integer player1Score;
-    private Integer player2Score;
-    private Double currentBet;
 
-    public GoFish() {
+    private CardGamePlayer goFishPlayer;
+    Deck deck = new Deck();
+
+    public GoFish() {}
+    public GoFish(GoFishPlayer player) {
         super();
-        this.player1Score = 0;
-        this.player2Score = 0;
+        this.goFishPlayer = player;
     }
 
 
@@ -50,12 +48,17 @@ public class GoFish extends Games {
         return null;
     };
 
-    public Double getCurrentBet() {
-        return currentBet;
+
+    //====================alex
+    public Integer inputNumPlayers() {
+        String info = "Please Enter Number of players";
+        return null;
+    }
+    public ArrayList<Player> createOtherPlayers (Integer numPlayers) {
+        //foreach of inputnUmplayers - create player
+        return null;
     }
 
-    public void setCurrentBet(Double currentBet) {
-        this.currentBet = currentBet;
-    }
+
 
 }
