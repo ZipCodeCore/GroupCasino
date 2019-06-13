@@ -2,7 +2,9 @@ package io.zipcoder.casino.player;
 
 public class SlotsPlayer extends Player implements GamblerInterface {
 
-    public void bet(Integer bet) {
+
+
+    public void bet(Double bet) {
 
     }
 
@@ -19,10 +21,6 @@ public class SlotsPlayer extends Player implements GamblerInterface {
         return super.getAccount();
     }
 
-    @Override
-    public void setAccount(Double account) {
-        super.setAccount(account);
-    }
 
     public void displayAccoutBal() {
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class BlackJackPlayerNPC extends CardGamePlayer implements NPCInterface {
 
-    public void bet(Integer bet) {
+    public void bet(Double bet) {
 
     }
 

@@ -1,7 +1,7 @@
 package io.zipcoder.casino.player;
 
 public interface GamblerInterface {
-    void bet(Integer bet);
+    void bet(Double bet);
 
     void betType (String betType);
 
