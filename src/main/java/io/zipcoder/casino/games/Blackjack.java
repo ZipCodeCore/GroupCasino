@@ -73,7 +73,12 @@ public class Blackjack extends CardGames implements GamblerGameInterface {
         return null;
     }
 
-    public void updateAccount(Double num) {
+    public void withdraw(Double num) {
 
     }
+
+    public void deposit(Double num) {
+
+    }
+
 }

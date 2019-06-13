@@ -1,5 +1,7 @@
 package io.zipcoder.casino.player;
 
+import io.zipcoder.casino.games.GoFish;
+
 import javax.smartcardio.Card;
 import java.util.ArrayList;
 
