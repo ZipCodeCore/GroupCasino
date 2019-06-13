@@ -1,15 +1,13 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.gameTools;
 
+import io.zipcoder.casino.gameTools.Card;
+import io.zipcoder.casino.gameTools.Deck;
 import io.zipcoder.casino.player.CardGamePlayer;
 import io.zipcoder.casino.player.GoFishPlayer;
-import io.zipcoder.casino.player.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Stack;
-
-import static org.junit.Assert.*;
 
 public class DeckTest {
 

@@ -1,13 +1,11 @@
 package io.zipcoder.casino.games;
 
-import io.zipcoder.casino.Card;
-import io.zipcoder.casino.Deck;
+import io.zipcoder.casino.gameTools.Card;
+import io.zipcoder.casino.gameTools.Deck;
 import io.zipcoder.casino.player.CardGamePlayer;
 import io.zipcoder.casino.player.GoFishPlayer;
-import io.zipcoder.casino.player.GoFishPlayerNPC;
 import io.zipcoder.casino.player.Player;
 
-import java.security.PrivateKey;
 import java.util.ArrayList;
 
 public class GoFish extends Games {

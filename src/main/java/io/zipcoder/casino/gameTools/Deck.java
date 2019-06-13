@@ -1,5 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.gameTools;
 
+import io.zipcoder.casino.gameTools.Card;
 import io.zipcoder.casino.player.CardGamePlayer;
 
 import java.util.ArrayList;
@@ -10,6 +11,20 @@ public class Deck {
     public Stack<Card> getDeck() {
         return deck;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     Stack<Card> deck = new Stack<Card>();
 
