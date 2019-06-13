@@ -9,7 +9,7 @@ public class GoFishPlayerNPC extends CardGamePlayer implements NPCInterface {
 
     String betType; //   red/back - odd / even / number
 
-    public void bet(Integer bet) {
+    public void bet(Double bet) {
 
     }
 

@@ -2,7 +2,17 @@ package io.zipcoder.casino.player;
 
 public class Player {
 private String name;
-Double account;
+private Double account;
+private Boolean isPlaying = false;
+
+    public Boolean getPlaying() {
+        return isPlaying;
+    }
+
+    public void setPlaying(Boolean playing) {
+        isPlaying = playing;
+    }
+
 
     public Player(){};
 
@@ -23,7 +33,7 @@ Double account;
         return account;
     }
 
-    public void setAccount(Double account) {
-        this.account = account;
+    public void setAccount(Double sum) {
+        this.account = sum;
     }
 }

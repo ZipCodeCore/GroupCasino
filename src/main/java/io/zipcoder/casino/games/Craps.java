@@ -1,31 +1,43 @@
 package io.zipcoder.casino.games;
 
+import io.zipcoder.casino.Casino;
+import io.zipcoder.casino.Handler;
 import io.zipcoder.casino.player.CrapsPlayer;
+import io.zipcoder.casino.player.Player;
 
 public class Craps extends Games implements GamblerGameInterface {
+
+
     private CrapsPlayer crapsPlayer = new CrapsPlayer();
+    private Player player;
     private Boolean isOn = false;
     private Integer onNumber;
-    private Integer firstLineBet;
-    private Integer secondLineBet;
-    private Integer otherBet;
+    private Double firstLineBet;
+    private Double secondLineBet;
+    private Double otherBet;
+
+    public Craps() {
+    };
+
+    public Craps(Player player) {
+        this.player = player;
+    }
+
+
+
+
 
     public Integer calcPayment(Integer bet, Integer odds) {
         return null;
     }
 
-    public void updateAccount(Integer num) {
-
+    public void updateAccount(Double num) {
+        this.crapsPlayer.setAccount(num);
     }
 
-    @Override
-    void nextTurn() {
-
-    }
 
     @Override
     void endGame() {
-
     }
 
     @Override
@@ -54,30 +66,41 @@ public class Craps extends Games implements GamblerGameInterface {
         this.onNumber = onNumber;
     }
 
-    public Integer getFirstLineBet() {
+    public Double getFirstLineBet() {
         return firstLineBet;
     }
 
-    public void setFirstLineBet(Integer firstLineBet) {
+    public void setFirstLineBet(Double firstLineBet) {
         this.firstLineBet = firstLineBet;
     }
 
-    public Integer getSecondLineBet() {
+    public Double getSecondLineBet() {
         return secondLineBet;
     }
 
-    public void setSecondLineBet(Integer secondLineBet) {
+    public void setSecondLineBet(Double secondLineBet) {
         this.secondLineBet = secondLineBet;
     }
 
-    public Integer getOtherBet() {
+    public Double getOtherBet() {
         return otherBet;
     }
 
-    public void setOtherBet(Integer otherBet) {
+    public void setOtherBet(Double otherBet) {
         this.otherBet = otherBet;
     }
 
+    public CrapsPlayer getCrapsPlayer() {
+        return crapsPlayer;
+    }
+
+    public Double calcPayment(Double bet, Double odds) {
+        return null;
+    }
+
+    @Override
+    void nextTurn() {
+    }
 
 
 
