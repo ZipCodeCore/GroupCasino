@@ -5,14 +5,19 @@ import static org.junit.Assert.*;
 public class PileOfCardsTest {
 
     @Test
-    public void clear() {
+    public void clearTest() {
+
     }
 
     @Test
-    public void addAll() {
+    public void addAllTest() {
     }
 
     @Test
-    public void remove() {
+    public void addTest() {
+    }
+
+    @Test
+    public void removeTest() {
     }
 }
