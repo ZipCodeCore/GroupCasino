@@ -1,7 +1,7 @@
 package io.zipcoder.casino.games;
 
-import io.zipcoder.casino.Card;
-import io.zipcoder.casino.Deck;
+import io.zipcoder.casino.gameTools.Card;
+import io.zipcoder.casino.gameTools.Deck;
 
 abstract class CardGames extends Games {
     Deck deck;

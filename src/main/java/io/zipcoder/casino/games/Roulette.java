@@ -16,28 +16,32 @@ public class Roulette extends Games implements GamblerGameInterface {
 
     @Override
     void endGame() {
-
+        // end game and go back to main menu
     }
 
     @Override
     boolean getResults() {
+        // determine win or loose
         return false;
     }
 
     @Override
     public void display(String output) {
+
         super.display(output);
     }
 
     public Integer calcPayment(Integer bet, Integer odds) {
+        //calculate payment amount to be payed based on the position
         return null;
     }
 
     public void updateAccount(Integer num) {
-
+        //add or remove money from the balance
     }
 
     public Double getCurrentBet() {
+
         return currentBet;
     }
 
@@ -46,10 +50,16 @@ public class Roulette extends Games implements GamblerGameInterface {
     }
 
     public Double calcPayment(Double bet, Double odds) {
+
         return null;
     }
 
-    public void updateAccount(Double num) {
+    public void withdraw(Double num) {
 
     }
+
+    public void deposit(Double num) {
+
+    }
+
 }

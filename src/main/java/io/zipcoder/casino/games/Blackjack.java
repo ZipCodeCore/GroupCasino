@@ -1,10 +1,8 @@
 package io.zipcoder.casino.games;
 
-import io.zipcoder.casino.Card;
-import io.zipcoder.casino.Deck;
+import io.zipcoder.casino.gameTools.Card;
 import io.zipcoder.casino.player.BlackJackPlayer;
 import io.zipcoder.casino.player.BlackJackPlayerNPC;
-import io.zipcoder.casino.utilities.Console;
 
 public class Blackjack extends CardGames implements GamblerGameInterface {
 
@@ -75,7 +73,12 @@ public class Blackjack extends CardGames implements GamblerGameInterface {
         return null;
     }
 
-    public void updateAccount(Double num) {
+    public void withdraw(Double num) {
 
     }
+
+    public void deposit(Double num) {
+
+    }
+
 }

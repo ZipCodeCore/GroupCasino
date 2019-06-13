@@ -1,32 +1,28 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.gameTools;
 
 import io.zipcoder.casino.player.CardGamePlayer;
 import io.zipcoder.casino.player.GoFishPlayer;
-import io.zipcoder.casino.player.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Stack;
-
-import static org.junit.Assert.*;
 
 public class DeckTest {
 
     @Test
     public void shuffle() {
         Deck testDeck = new Deck();
-        Card beforeShuffle = testDeck.deck.peek();
+        Card beforeShuffle = testDeck.cardStack.peek();
         testDeck.shuffle();
-        Card afterShuffle = testDeck.deck.peek();
+        Card afterShuffle = testDeck.cardStack.peek();
         Assert.assertFalse(beforeShuffle.equals(afterShuffle));
     }
     @Test
     public void shuffleNotWorking() {
         Deck testDeck = new Deck();
-        Card beforeShuffle = testDeck.deck.peek();
+        Card beforeShuffle = testDeck.cardStack.peek();
         testDeck.shuffle();
-        Card afterShuffle = testDeck.deck.peek();
+        Card afterShuffle = testDeck.cardStack.peek();
         Assert.assertFalse(!beforeShuffle.equals(afterShuffle));
     }
 
@@ -58,9 +54,7 @@ public class DeckTest {
         Integer numCards = -2;
         Deck deck = new Deck();
         ArrayList<Card> testStartingHand = deck.deal(numCards,testPlayer);
-        Integer expected = 2;
-        Integer actual = testStartingHand.size();
-        Assert.assertEquals(expected,actual);
+        Assert.assertNull(testStartingHand);
     }
 
     @Test

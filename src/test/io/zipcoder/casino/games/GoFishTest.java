@@ -1,13 +1,14 @@
 package io.zipcoder.casino.games;
 
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class GoFishTest {
 
     @Test
     public void nextTurn() {
+
+
     }
 
     @Test
@@ -36,5 +37,20 @@ public class GoFishTest {
 
     @Test
     public void setCurrentBet() {
+    }
+
+    @Test
+    public void inputNumPlayers() {
+
+    }
+
+    @Test
+    public void createOtherPlayersTest() {
+        GoFish goFish = new GoFish();
+        Integer expected = 2;
+        Integer actual = goFish.createOtherPlayers(expected).size();
+        Assert.assertEquals(expected,actual);
+
+
     }
 }

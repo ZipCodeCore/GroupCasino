@@ -9,7 +9,7 @@ public class RoulettePlayer extends Player implements GamblerInterface {
 
     public void betType (String betType) {
 
-    };
+    }
 
     public void cashout() {
 

@@ -10,4 +10,6 @@ public interface GamblerInterface {
     void displayAccoutBal();
 
 
+
+
 }
