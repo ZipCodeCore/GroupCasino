@@ -35,85 +35,7 @@ public class CrapsTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void updateAccountNeg() {
-        Handler handler = new Handler();
-        handler.createPlayer("bob" , 100.0);
-        Craps craps = new Craps();
 
-        craps.getCrapsPlayer().setAccount(-10.0);
-        Double expected = 90.0;
-        Double actual = craps.getCrapsPlayer().getAccount();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-
-    @Test
-    public void endGame() {
-        Handler handler = new Handler();
-        Player player = handler.createPlayer("bob" , 100.0);
-        Craps craps = new Craps();
-        craps.setOn(true);
-        craps.setOnNumber(8);
-
-        craps.getCrapsPlayer().roll().equals(7);
-
-
-        Boolean expected = false;
-        Boolean actual = player.getPlaying();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-
-    @Test
-    public void getResults() {
-        Handler handler = new Handler();
-        handler.createPlayer("bob" , 100.0);
-        Craps craps = new Craps();
-
-        craps.setOn(true);
-        craps.setOnNumber(8);
-
-
-        craps.getCrapsPlayer().roll().equals(7.0);
-
-
-        Double expected = 7.0;
-        Boolean actual = craps.getResults();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-
-    @Test
-    public void getOn() {
-        Handler handler = new Handler();
-        handler.createPlayer("bob" , 100.0);
-        Craps craps = new Craps();
-
-        craps.setOn(true);
-
-        Boolean expected = true;
-        Boolean actual = craps.getOn();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setOn() {
-        Handler handler = new Handler();
-        handler.createPlayer("bob" , 100.0);
-        Craps craps = new Craps();
-
-        craps.setOn(false);
-
-        Boolean expected = false;
-        Boolean actual = craps.getOn();
-
-        Assert.assertEquals(expected, actual);
-    }
 
     @Test
     public void getOnNumber() {
@@ -135,10 +57,10 @@ public class CrapsTest {
         handler.createPlayer("bob" , 100.0);
         Craps craps = new Craps();
 
-        craps.setOn(true);
+        craps.setOnNumber(8);
 
-        Boolean expected = true;
-        Boolean actual = craps.getOn();
+        Integer expected = 8;
+        Integer actual = craps.getOnNumber();
 
         Assert.assertEquals(expected, actual);
     }
@@ -225,5 +147,33 @@ public class CrapsTest {
         Double actual = craps.getOtherBet();
 
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void stage0Play() {
+    }
+
+    @Test
+    public void stage1PlayLost() {
+        Craps craps = new Craps();
+        Integer roll = 2;
+
+
+    }
+
+    @Test
+    public void stage2Play() {
+    }
+
+    @Test
+    public void stage3Play() {
+    }
+
+    @Test
+    public void withdraw() {
+    }
+
+    @Test
+    public void deposit() {
     }
 }

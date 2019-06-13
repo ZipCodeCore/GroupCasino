@@ -4,6 +4,8 @@ interface GamblerGameInterface {
 
      Double calcPayment(Double bet, Double odds);
 
+     void withdraw(Double num);
 
-     void updateAccount(Double num);
+     void deposit(Double num);
+
 }

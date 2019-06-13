@@ -50,6 +50,14 @@ public class Slots extends Games implements GamblerGameInterface {
         return null;
     }
 
+    public void withdraw(Double num) {
+
+    }
+
+    public void deposit(Double num) {
+
+    }
+
     public void updateAccount(Double num) {
 
     }
