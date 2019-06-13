@@ -3,9 +3,11 @@ import java.util.ArrayList;
 public class PokerPlayer extends Player implements Gambling {
     private Hand hand = new PokerHand();
     private Boolean folded = false;
+    private Chips chips;
 
     public PokerPlayer(Person p) {
         super(p);
+        chips = new Chips(1000.0);
     }
 
 
@@ -21,5 +23,5 @@ public class PokerPlayer extends Player implements Gambling {
     public Integer bet() {
         return null;
     }
-    public Integer getChip() {return 0;};
+    public Chips getChip() {return chips;};
 }

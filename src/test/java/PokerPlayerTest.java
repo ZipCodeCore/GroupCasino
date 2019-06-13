@@ -30,6 +30,7 @@ public class PokerPlayerTest {
     @Test
     public void callChipTest() {
         Assert.assertEquals(10, (int) player.call(10));
+//        Assert.assertEquals(,player.getChip());
     }
 
     @Test
