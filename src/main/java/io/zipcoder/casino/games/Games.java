@@ -7,7 +7,6 @@ abstract class Games {
 
     Double odds;
 
-
     abstract void nextTurn();
 
     abstract void endGame();
