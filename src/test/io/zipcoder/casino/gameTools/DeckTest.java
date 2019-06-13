@@ -1,7 +1,5 @@
 package io.zipcoder.casino.gameTools;
 
-import io.zipcoder.casino.gameTools.Card;
-import io.zipcoder.casino.gameTools.Deck;
 import io.zipcoder.casino.player.CardGamePlayer;
 import io.zipcoder.casino.player.GoFishPlayer;
 import org.junit.Assert;
@@ -14,17 +12,17 @@ public class DeckTest {
     @Test
     public void shuffle() {
         Deck testDeck = new Deck();
-        Card beforeShuffle = testDeck.deck.peek();
+        Card beforeShuffle = testDeck.cardStack.peek();
         testDeck.shuffle();
-        Card afterShuffle = testDeck.deck.peek();
+        Card afterShuffle = testDeck.cardStack.peek();
         Assert.assertFalse(beforeShuffle.equals(afterShuffle));
     }
     @Test
     public void shuffleNotWorking() {
         Deck testDeck = new Deck();
-        Card beforeShuffle = testDeck.deck.peek();
+        Card beforeShuffle = testDeck.cardStack.peek();
         testDeck.shuffle();
-        Card afterShuffle = testDeck.deck.peek();
+        Card afterShuffle = testDeck.cardStack.peek();
         Assert.assertFalse(!beforeShuffle.equals(afterShuffle));
     }
 

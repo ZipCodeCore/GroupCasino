@@ -8,7 +8,7 @@ public class Card {
         this.cardValue = cv;
         this.suit = s;
     }
-    
+
     public CardValue getCardValue() {
         return cardValue;
     }
