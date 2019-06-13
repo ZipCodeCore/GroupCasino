@@ -8,4 +8,7 @@ public class Person {
         this.name = name;
         this.age = age;
     }
+    public Integer getWallet() {
+        return wallet;
+    }
 }

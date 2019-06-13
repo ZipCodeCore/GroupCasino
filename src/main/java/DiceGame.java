@@ -10,7 +10,20 @@ public abstract class DiceGame extends Game {
 
     }
 
- //   public ArrayList<Dice> makeDice(Integer numberOfDice) {return new ArrayList<Dice>();}
+    public Dice getDice() {
+        return dice;
+    }
+
+    public void setDice(Dice dice) {
+        this.dice = dice;
+    }
+
+    public DiceGame(Integer numberOfDice){
+        dice=new Dice(numberOfDice);
+
+   }
+
+    //   public ArrayList<Dice> makeDice(Integer numberOfDice) {return new ArrayList<Dice>();}
 
 
 }
