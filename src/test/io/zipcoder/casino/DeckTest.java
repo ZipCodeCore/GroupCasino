@@ -58,9 +58,7 @@ public class DeckTest {
         Integer numCards = -2;
         Deck deck = new Deck();
         ArrayList<Card> testStartingHand = deck.deal(numCards,testPlayer);
-        Integer expected = 2;
-        Integer actual = testStartingHand.size();
-        Assert.assertEquals(expected,actual);
+        Assert.assertNull(testStartingHand);
     }
 
     @Test

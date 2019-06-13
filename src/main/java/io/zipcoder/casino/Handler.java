@@ -1,5 +1,6 @@
 package io.zipcoder.casino;
 import io.zipcoder.casino.games.*;
+import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
@@ -25,7 +26,8 @@ void run() {
             Blackjack blackjack = new Blackjack();
             break;
         case 1 :
-            GoFish goFish = new GoFish();
+            GoFishPlayer goFishPlayer = new GoFishPlayer(player);
+            GoFish goFish = new GoFish(goFishPlayer);
             break;
         case 2:
             Roulette roulette = new Roulette();
