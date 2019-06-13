@@ -1,27 +1,27 @@
 package io.zipcoder.casino;
 
 import io.zipcoder.casino.player.CardGamePlayer;
-import io.zipcoder.casino.player.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 
 public class Deck {
-    Stack<Card> card = new Stack<Card>();
+    public Stack<Card> getDeck() {
+        return deck;
+    }
+
+    Stack<Card> deck = new Stack<Card>();
 
     public void shuffle () {
-        Collections.shuffle(card);
+        Collections.shuffle(deck);
     };
 
     public ArrayList<Card> deal (Integer numOfCards, CardGamePlayer player) {
         return null;
     }
 
-    public Card dealSingleCard(CardGamePlayer player) {
-
-        return null;
-    }
+    public void dealSingleCard(CardGamePlayer player) { }
 
 
 }
