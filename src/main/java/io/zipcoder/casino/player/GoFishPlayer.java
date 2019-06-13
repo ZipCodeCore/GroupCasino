@@ -23,9 +23,4 @@ public class GoFishPlayer extends CardGamePlayer {
         return super.getAccount();
     }
 
-    @Override
-    public void setAccount(Double account) {
-        super.setAccount(account);
-    }
-
 }

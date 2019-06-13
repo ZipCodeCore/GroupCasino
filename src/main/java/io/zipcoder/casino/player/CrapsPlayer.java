@@ -5,13 +5,15 @@ import io.zipcoder.casino.Dice;
 
 public class CrapsPlayer extends Player implements GamblerInterface {
 
+
+
     public Integer roll() {
         Dice dice = new Dice();
 
         return dice.rollDice();
     }
 
-    public void bet(Integer bet) {
+    public void bet(Double bet) {
     }
 
     public void betType(String betType) {

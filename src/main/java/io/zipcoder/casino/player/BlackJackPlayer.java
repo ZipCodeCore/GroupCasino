@@ -13,7 +13,7 @@ public class BlackJackPlayer extends CardGamePlayer implements GamblerInterface 
         super();
 
     }
-    public void bet(Integer bet) {
+    public void bet(Double bet) {
     }
 
     public void betType (String betType) {

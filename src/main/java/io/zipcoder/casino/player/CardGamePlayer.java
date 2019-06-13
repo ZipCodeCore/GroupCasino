@@ -4,7 +4,7 @@ import javax.smartcardio.Card;
 import java.util.ArrayList;
 
 public class CardGamePlayer extends Player {
-    private ArrayList<Card> hand;
+    public ArrayList<Card> hand;
 
     public ArrayList<Card> getHand() {
         return hand;
@@ -38,10 +38,6 @@ public class CardGamePlayer extends Player {
         return super.getAccount();
     }
 
-    @Override
-    public void setAccount(Double account) {
-        super.setAccount(account);
-    }
 
 
 }

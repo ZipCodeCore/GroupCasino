@@ -7,14 +7,13 @@ abstract class Games {
 
     Double odds;
 
-
     abstract void nextTurn();
 
     abstract void endGame();
 
     abstract boolean getResults();
 
-    public void display(String output) {
+    void display(String output) {
         System.out.println(output);
     }
 

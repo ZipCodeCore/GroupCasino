@@ -3,7 +3,7 @@ package io.zipcoder.casino.player;
 public class RoulettePlayer extends Player implements GamblerInterface {
 
 
-    public void bet(Integer bet) {
+    public void bet(Double bet) {
 
     }
 
