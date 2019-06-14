@@ -1,5 +1,6 @@
-package io.zipcoder.casino.games;
+package java.io.zipcoder.casino.games;
 
+import io.zipcoder.casino.games.Roulette;
 import io.zipcoder.casino.player.Player;
 import org.junit.Assert;
 import org.junit.Before;
@@ -42,8 +43,6 @@ public class RouletteTest {
         Double actual = this.roulette.roulettePlayer.getAccount();
         Assert.assertEquals(10,actual.doubleValue(),0.0);
 
-
-
     }
 
 
@@ -54,13 +53,7 @@ public class RouletteTest {
 
     }
 
-    @Test
-    public void updateAccountDoubleTest(){
-        this.roulette.updateAccount(1.5);
-        Double actual = this.roulette.roulettePlayer.getAccount();
-        Assert.assertEquals(1.5, actual.doubleValue(),0.0);
 
-    }
 
 
 

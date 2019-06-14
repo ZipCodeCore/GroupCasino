@@ -10,6 +10,7 @@ import java.util.TreeMap;
 
 public class Craps extends Games implements GamblerGameInterface {
     private CrapsPlayer crapsPlayer;
+    private Console console;
     private Integer onNumber;
     private Double firstLineBet;
     private Double secondLineBet;
@@ -26,13 +27,21 @@ public class Craps extends Games implements GamblerGameInterface {
 
 
     private Integer stage;
-    Console console = new Console(System.in, System.out);
 
-    public Craps() {
-    };
+
+    public Craps() {}
 
     public Craps(CrapsPlayer player) {
         this.crapsPlayer = player;
+        crapsPlayer.player.setPlaying(true);
+        this.stage = 0;
+
+    }
+
+
+    public Craps(CrapsPlayer player, Console console) {
+        this.crapsPlayer = player;
+        this.console = console;
         crapsPlayer.player.setPlaying(true);
         this.stage = 0;
 

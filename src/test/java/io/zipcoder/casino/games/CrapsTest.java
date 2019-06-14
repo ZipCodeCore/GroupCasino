@@ -1,6 +1,7 @@
-package io.zipcoder.casino.games;
+package java.io.zipcoder.casino.games;
 
 import io.zipcoder.casino.Handler;
+import io.zipcoder.casino.games.Craps;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
 import org.junit.Assert;
@@ -17,7 +18,7 @@ public class CrapsTest {
         craps.setFirstLineBet(10.0);
 
         Double expected = 20.0;
-        Double actual = craps.calcPayment(craps.odds, craps.getFirstLineBet());
+        Double actual = craps.calcPayment(craps.getOdds(), craps.getFirstLineBet());
 
         Assert.assertEquals(expected, actual);
     }
@@ -152,7 +153,7 @@ public class CrapsTest {
         Handler handler = new Handler();
         Player player = handler.createPlayer("", 1000.0);
         CrapsPlayer crapsPlayer = new CrapsPlayer(player);
-        Craps craps = new Craps(crapsPlayer);
+        Craps craps = new Craps(crapsPlayer );
 
         craps.withdraw(100.0);
         Double expected = 900.0;

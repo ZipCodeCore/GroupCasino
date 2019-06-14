@@ -36,7 +36,7 @@ public void run() {
             break;
         case 3:
             CrapsPlayer crapsPlayer = new CrapsPlayer(player);
-            Craps craps = new Craps(crapsPlayer);
+            Craps craps = new Craps(crapsPlayer, console);
             craps.runGame();
             break;
         case 4:
