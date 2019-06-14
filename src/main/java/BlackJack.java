@@ -18,9 +18,9 @@ Integer sumHand = 0;
             return true;
         }
         return false;}
-     public Boolean checkWin(){
+     /*public Boolean checkWin(){
         if ()
-     }
+     }*/
      public Integer HandSum(Hand hand){
          for (int i = 0; i < 5; i++) {
              if(playerHand.get(i).getValue() != null){

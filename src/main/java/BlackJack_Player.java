@@ -26,7 +26,7 @@ public class BlackJack_Player extends Player implements Gambling, Dealer {
     public void doubleDown() {}
 
     @Override
-    public Integer bet() {
+    public Integer bet(Integer numOfChipsToBet) {
         return null;
     }
 }
