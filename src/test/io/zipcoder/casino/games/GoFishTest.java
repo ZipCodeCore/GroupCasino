@@ -1,25 +1,14 @@
 package io.zipcoder.casino.games;
 
-import io.zipcoder.casino.gameTools.Card;
-import io.zipcoder.casino.gameTools.Deck;
-import io.zipcoder.casino.games.GoFish;
-import io.zipcoder.casino.player.GoFishPlayer;
-import io.zipcoder.casino.player.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Stack;
-
 public class GoFishTest {
-    GoFish goFish = new GoFish();
-    GoFishPlayer mainplayer = new GoFishPlayer();
-    GoFishPlayer otherPlayer = new GoFishPlayer();
-
+    //GoFish goFish = new GoFish();
 
     @Test
     public void nextTurn() {
+
 
     }
 
@@ -36,8 +25,7 @@ public class GoFishTest {
     }
 
     @Test
-    public void checkCondition() {
-
+    public void check() {
     }
 
     @Test
@@ -58,40 +46,15 @@ public class GoFishTest {
     }
 
     @Test
-    public void createPlayersTestMain() {
-        Deck deck = new Deck();
-        deck.deal(5,mainplayer);
-        Integer expected = 5;
-        Integer actual = mainplayer.getHand().size();
+    public void createOtherPlayersTest() {
+        GoFish goFish = new GoFish();
+        Integer expected = 2;
+        Integer actual = goFish.createOtherPlayers(expected).size();
         Assert.assertEquals(expected,actual);
     }
 
     @Test
-    public void createPlayersTestOther() {
-        Deck deck = new Deck();
-        otherPlayer.setHand(new ArrayList<Card>(1));
-        deck.deal(10,otherPlayer);
-        Integer expected = 10;
-        Integer actual = otherPlayer.getHand().size();
-        Assert.assertEquals(expected,actual);
-    }
-
-    @Test
-    public void readyToPlayFalse() {
-        Assert.assertFalse(goFish.readyToPlay("no"));
-    }
-    @Test
-    public void readyToPlayTrue() {
-        Assert.assertTrue(goFish.readyToPlay("yes"));
-    }
-
-    @Test
-    public void seeHandTest() {
-        Deck deck = new Deck();
-        Stack stack = new Stack();
-        stack = deck.getDeck();
-        Card card = new Card();
-
+    public void runGoFishGameStart() {
 
     }
 }

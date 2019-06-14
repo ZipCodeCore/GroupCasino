@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Roulette extends Games implements GamblerGameInterface {
     String betType; //   red/back - odd / even / number
-    RoulettePlayer roulettePlayer = new RoulettePlayer();
+    public RoulettePlayer roulettePlayer = new RoulettePlayer();
     private Double currentBet;
 
 
