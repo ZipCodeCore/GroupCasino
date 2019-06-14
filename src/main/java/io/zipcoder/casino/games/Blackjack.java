@@ -3,6 +3,7 @@ package io.zipcoder.casino.games;
 import io.zipcoder.casino.gameTools.Card;
 import io.zipcoder.casino.player.BlackJackPlayer;
 import io.zipcoder.casino.player.BlackJackPlayerNPC;
+import io.zipcoder.casino.player.Player;
 
 public class Blackjack extends CardGames implements GamblerGameInterface {
 
@@ -23,7 +24,20 @@ public class Blackjack extends CardGames implements GamblerGameInterface {
 
     }
 
+    public void runGame(){
+        display("Hello "); //+ BlackJackPlayer.getName() + "!");
+    }
 
+   /** public void getWinner(){
+        if(player1.currentHand() > 21){
+            playerLose();
+        } else if (player1.currentHand() < player2.currentHand() && player2 <=21){
+            playerLose();
+        } else if (player1.currentHand() == 21 && player2.currentHand() == 21){
+            push();
+        } else if {
+
+    } */
 
     public Integer calcPayment(Integer bet, Integer odds) {
         return null;
@@ -31,7 +45,11 @@ public class Blackjack extends CardGames implements GamblerGameInterface {
 
     public void updateAccount(Integer num) {}
 
+    public void currentHand(){
 
+    };
+
+    //enums for the below
 
     public void stay() {};
 
@@ -67,6 +85,13 @@ public class Blackjack extends CardGames implements GamblerGameInterface {
     public double getCurrentBet(){
         return currentBet;
     }
+
+   /** public BlackJackPlayer getBlackJackPLayer() {
+
+       return blackJackPlayer;
+    } */
+
+
 
 
     @Override
