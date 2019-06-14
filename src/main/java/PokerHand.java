@@ -1,7 +1,5 @@
 public class PokerHand extends Hand {
 
 
-    public PokerHand(){
-
-    }
+    public PokerHand(){ }
 }
