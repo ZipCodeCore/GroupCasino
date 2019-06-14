@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 
-import static io.zipcoder.casino.gameTools.Suit.Clubs;
+import static io.zipcoder.casino.gameTools.Suit.CLUBS;
 
 public class DeckTest {
 

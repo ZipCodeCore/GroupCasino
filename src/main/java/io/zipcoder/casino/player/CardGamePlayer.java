@@ -37,7 +37,9 @@ public class CardGamePlayer {
         player.setName(name);
     }
 
-
+    public void setAccount(Double balance) {
+        player.setAccount(balance);
+    }
 
     public Double getAccount() {
         return player.getAccount();

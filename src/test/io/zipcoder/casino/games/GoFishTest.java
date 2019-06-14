@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Stack;
 
 public class GoFishTest {
     GoFish goFish = new GoFish();
@@ -75,4 +76,22 @@ public class GoFishTest {
         Assert.assertEquals(expected,actual);
     }
 
+    @Test
+    public void readyToPlayFalse() {
+        Assert.assertFalse(goFish.readyToPlay("no"));
+    }
+    @Test
+    public void readyToPlayTrue() {
+        Assert.assertTrue(goFish.readyToPlay("yes"));
+    }
+
+    @Test
+    public void seeHandTest() {
+        Deck deck = new Deck();
+        Stack stack = new Stack();
+        stack = deck.getDeck();
+        Card card = new Card();
+
+
+    }
 }
