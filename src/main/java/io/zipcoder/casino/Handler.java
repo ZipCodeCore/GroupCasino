@@ -29,6 +29,7 @@ void run() {
         case 1 :
             GoFishPlayer goFishPlayer = new GoFishPlayer(player);
             GoFish goFish = new GoFish(goFishPlayer);
+            goFish.startTheGame();
             break;
         case 2:
             Roulette roulette = new Roulette();

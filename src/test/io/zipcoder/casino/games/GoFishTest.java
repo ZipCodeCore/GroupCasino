@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class GoFishTest {
+    //GoFish goFish = new GoFish();
 
     @Test
     public void nextTurn() {
@@ -50,7 +51,10 @@ public class GoFishTest {
         Integer expected = 2;
         Integer actual = goFish.createOtherPlayers(expected).size();
         Assert.assertEquals(expected,actual);
+    }
 
+    @Test
+    public void runGoFishGameStart() {
 
     }
 }

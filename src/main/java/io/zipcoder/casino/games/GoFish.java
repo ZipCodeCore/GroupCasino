@@ -5,19 +5,34 @@ import io.zipcoder.casino.gameTools.Deck;
 import io.zipcoder.casino.player.CardGamePlayer;
 import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.Player;
+import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GoFish extends Games {
 
-    private CardGamePlayer goFishPlayer;
-    Deck deck = new Deck();
+    private CardGamePlayer mainPlayer;
+    private Deck deck = new Deck();
+    private Scanner scanner = new Scanner(System.in);
+    private ArrayList<GoFishPlayer> otherPlayers;
 
     public GoFish() {}
+
     public GoFish(GoFishPlayer player) {
         super();
-        this.goFishPlayer = player;
+        this.mainPlayer = player;
     }
+
+    public void startTheGame () {
+        otherPlayers = createOtherPlayers(2);
+        deck.deal(5,mainPlayer);
+        for (GoFishPlayer other: otherPlayers
+             ) {
+            deck.deal(5, other);
+        }
+    }
+
 
 
     @Override
@@ -44,19 +59,31 @@ public class GoFish extends Games {
         return null;
     };
 
-    public Card goFish () {
+    public Card goFishAction () {
         return null;
     };
 
 
     //====================alex
     public Integer inputNumPlayers() {
+
         String info = "Please Enter Number of players";
-        return null;
+        Integer result = scanner.nextInt();
+        return result;
     }
-    public ArrayList<Player> createOtherPlayers (Integer numPlayers) {
+    public ArrayList<GoFishPlayer> createOtherPlayers (Integer numPlayers) {
+        ArrayList<GoFishPlayer> players = new ArrayList<GoFishPlayer>();
         //foreach of inputnUmplayers - create player
-        return null;
+        for (int i = 1; i <= numPlayers; i++) {
+            GoFishPlayer goFishPlayer = new GoFishPlayer();
+            goFishPlayer.setName("Player" + i);
+            players.add(goFishPlayer);
+        }
+        return players;
+    }
+    public void runAction (String userAction) {
+        //based on the action user Start the game/See Rules/ Exit the game
+
     }
 
 

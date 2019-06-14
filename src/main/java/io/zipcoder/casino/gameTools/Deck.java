@@ -8,7 +8,9 @@ import java.util.Iterator;
 import java.util.Stack;
 
 public class Deck {
-    Stack<Card> cardStack;
+
+
+    private Stack<Card> cardStack;
     public Deck() {
         this.cardStack = new Stack<Card>();
         for (CardValue c : CardValue.values()
@@ -20,26 +22,36 @@ public class Deck {
             }
         }
         Collections.shuffle(cardStack);
-
-        System.out.println("FML");
-
     }
 
-
-
-    public Stack<Card> getCardStack() {
-        return cardStack;
-    }
 
     public void shuffle () {
         Collections.shuffle(cardStack);
     };
 
     public ArrayList<Card> deal (Integer numOfCards, CardGamePlayer player) {
-        return null;
+        ArrayList<Card> result = new ArrayList<Card>();
+        for (int i = 0; i < numOfCards ; i++) {
+            result.add(cardStack.pop());
+        }
+        return result;
     }
 
-    public void dealSingleCard(CardGamePlayer player) { }
+    public void dealSingleCard(CardGamePlayer player) {
+        Card card = cardStack.pop();
+        ArrayList<Card> hand;
+        hand = player.getHand();
+        hand.add(card);
+        player.setHand(hand);
+
+    }
+
+    public void setDeck(Stack<Card> cardStack) {
+        this.cardStack = cardStack;
+    }
+    public Stack<Card> getDeck() {
+        return cardStack;
+    }
 
 
 }
