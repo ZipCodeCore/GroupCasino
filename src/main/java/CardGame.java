@@ -10,6 +10,6 @@ abstract class CardGame extends Game{
 
     }
 
-    private String getValue() {return "";}
+
 
 }
