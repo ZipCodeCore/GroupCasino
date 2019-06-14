@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.player;
 
 import io.zipcoder.casino.player.RoulettePlayer;
 import org.junit.Assert;
