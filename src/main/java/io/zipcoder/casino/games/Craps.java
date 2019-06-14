@@ -1,5 +1,6 @@
 package io.zipcoder.casino.games;
 
+import io.zipcoder.casino.Handler;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
@@ -89,32 +90,24 @@ public class Craps extends Games implements GamblerGameInterface {
         } else if (currentRoll.equals(7) || currentRoll.equals(11)) {
             display(" you rolled a " + currentRoll +  "\n" + "you won!" +  calcPayment(firstLineOdds, firstLineBet));
             deposit(calcPayment(firstLineBet, firstLineOdds) + firstLineBet);
-        } else{
+        } else if(currentRoll.equals(2) && currentRoll.equals(3) && !currentRoll.equals(12) && !currentRoll.equals(7) && !currentRoll.equals(11)){
             display(" you rolled a " + currentRoll +  ".\n" + currentRoll + " is now the on number!");
             setOnNumber(currentRoll);
             this.stage = 2;
-        }
+        } else {
+        display("Excuse me I didnt understand");
+    }
 
     }
 
     public void stage2Play(Double secondLineBet, Double fieldBet, Integer bet ){
-//
 
-
-//        if(currentRoll.equals(7)) {
-//            display(" you rolled a " + currentRoll +  "\n" + "Sorry you crapped out!");
-//            this.stage = 0;
-//        } else if (currentRoll.equals(onNumber)) {
-//            display(" you rolled a " + currentRoll +  "\n" + "you won!" +  (calcPayment(firstLineOdds, firstLineBet) + (calcPayment(secondLineBet,secondLineOdds))));
-//            deposit(calcPayment(firstLineBet, firstLineOdds));
-//            deposit(calcPayment(otherBet, otherBetodds ));
-////        }   else if () {  if other bet
-////            display("");
-//        }
     }
 
     @Override
     void endGame() {
+        Handler handler = new Handler();
+        handler.run();
     }
 
     @Override

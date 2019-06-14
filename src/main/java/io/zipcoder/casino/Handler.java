@@ -13,7 +13,7 @@ public class Handler {
     private Double account = 0.0;
 
 
-void run() {
+public void run() {
     getNameInput();
     getAccountBalanceInput();
     createPlayer(name, account);
