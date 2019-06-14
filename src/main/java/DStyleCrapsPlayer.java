@@ -1,29 +1,27 @@
 public class DStyleCrapsPlayer extends Player{
     Person person;
+    Chips chip;
+    Integer chips;
     public DStyleCrapsPlayer(Person player) {
         this.person=player;
+        chip = new Chips(person.getWallet().doubleValue());
+         chips=chip.getChips();
     }
-    Player[] player1;
-    Integer chips=0;
+
     public Integer roll(Dice dice){
        Integer total= dice.tossAndSum();
         return total;
     }
-    public Integer numOfChips(){
+    public Chips numOfChips(){
         if (person.getWallet()==0)
-            return 0;
+            return null;
         else
-            chips=person.getWallet()/5;
-        return chips;
+        return chip;
         
     }
-    DolioStyleCraps dcraps=new DolioStyleCraps(2);
     public Integer bet(Integer betChips){
-     chips=chips-betChips;
-      if(dcraps.didWin(player1[0]))
-      return chips+betChips*2;
-      else
-          return chips;
+        chips=chips-betChips;
+        return betChips;
     }
 
 }

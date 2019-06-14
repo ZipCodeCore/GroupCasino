@@ -3,18 +3,29 @@ public class Dice {
     public Dice(Integer numberOfDice) {
         this.dice = new Integer[numberOfDice];
     }
-    Integer roll;
-    Integer toss=0;
     public Integer toss() {
-    roll=((int)(Math.random()*6) + 1);
-    return roll;
+    return ((int)(Math.random()*6) + 1);
+
     }
     public Integer tossAndSum() {
-        for(int i=1;i<dice.length;i++) {
-            toss = toss + ((int) (Math.random() * 6) + 1);
+        Integer sum=0;
+        int j=0;
+        for(int i=0;i<dice.length;i++) {
+            dice[i]=toss();
+            sum = sum + dice[i];
         }
-            return toss;
+            return sum;
     }
 
+    public Integer[] getDice() {
+        return dice;
+    }
 
+    public Integer sum() {
+        Integer sum=0;
+        for(int i=0;i<dice.length;i++) {
+            sum = sum + dice[i];
+        }
+        return sum;
+    }
 }

@@ -8,51 +8,53 @@ public class DolioStyleCrapsTest {
     @Test
     public void didWin() {
         Dice dice=new Dice(2);
-        Player[] player= {new DStyleCrapsPlayer(new Person(500,"Jon",25))};
-        DolioStyleCraps dCraps=new DolioStyleCraps(player,2);
-
+        DStyleCrapsPlayer[] player={new DStyleCrapsPlayer(new Person(500,"Jon",25))};
+        DolioStyleCraps dCraps=new DolioStyleCraps(player);
         Boolean b=false;
-        int j=dice.tossAndSum();
-
+        int j=dCraps.getDice().tossAndSum();
         if(j==7){
-            b=true;
+          b= dCraps.didWin(player[0]);
         }
-            Assert.assertEquals(true, dCraps.didWin(player[0]));
+            Assert.assertEquals(true, b);
     }
     @Test
     public void didWin1() {
-        Dice dice = new Dice(2);
-        DolioStyleCraps dCraps = new DolioStyleCraps(2);
-        Player[] player= {new DStyleCrapsPlayer(new Person(500,"Jon",25))};
-        Boolean b = false;
-        int j = dice.tossAndSum();
+        DStyleCrapsPlayer[] player= {new DStyleCrapsPlayer(new Person(500,"Jon",25))};
+        DolioStyleCraps dCraps = new DolioStyleCraps(player);
+        Boolean b =false;
+        dCraps.playGame();
+        System.out.println(dCraps.getDice().sum());
+        System.out.println(dCraps.didWin(player[0]));
+        if(dCraps.getDice().sum() == 11) {
+          b=dCraps.didWin(player[0]);
 
-        if (j == 11) {
-            dCraps.didWin(player[0]);
         }
-          Assert.assertEquals(true, dCraps.didWin(player[0]));
+          Assert.assertTrue(b );
+    }
+        @Test
+    public void playGame() {
+
     }
 
     @Test
     public void endOfGame() {
 
-        Dice dice=new Dice(2);
-        DolioStyleCraps dCraps=new DolioStyleCraps(2);
-        Player[] player= {new DStyleCrapsPlayer(new Person(500,"Jon",25))};
+        DStyleCrapsPlayer[] player= {new DStyleCrapsPlayer(new Person(500,"Jon",25))};
+        DolioStyleCraps dCraps=new DolioStyleCraps(player);
         Boolean b = false;
-        int j = dice.tossAndSum();
-
+        dCraps.playGame();
+        int j = dCraps.getDice().sum();
         if (j == 2) {
             b =  dCraps.didWin(player[0]);
         }
         Assert.assertEquals(false, dCraps.didWin(player[0]));
     }
-    @Test
-    public void endOfGame1() {
-
-        Dice dice=new Dice(2);
-        DolioStyleCraps dCraps=new DolioStyleCraps(2);
-        int j=dice.tossAndSum();
-        j=7;
-    }
+  //  @Test
+//    public void endOfGame1() {
+//
+//        Dice dice=new Dice(2);
+//        DolioStyleCraps dCraps=new DolioStyleCraps(2);
+//        int j=dice.tossAndSum();
+//        j=7;
+//    }
 }

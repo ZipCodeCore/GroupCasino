@@ -24,7 +24,7 @@ public class DiceTest {
         int j = dice.tossAndSum();
         if (j < 2 && j > 12)
             b = false;
-        Assert.assertNotEquals(false, b);
+        Assert.assertNotEquals(true, b);
     }
 
     @Test
