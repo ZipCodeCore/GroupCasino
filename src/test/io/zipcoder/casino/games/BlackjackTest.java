@@ -10,49 +10,49 @@ import io.zipcoder.casino.player.Player;
 public class BlackjackTest {
 
     @Test
-    public void stayTest(){
+    public void stayTest() {
 
     }
 
     @Test
-    public void splitTest(){
+    public void splitTest() {
 
     }
 
     @Test
-    public void doubleDownTest(){
+    public void doubleDownTest() {
 
     }
 
     @Test
-    public void getPlayer1ScoreTest(){
+    public void getPlayer1ScoreTest() {
 
     }
 
     @Test
-    public void setPlayer1ScoreTest(){
+    public void setPlayer1ScoreTest() {
 
     }
 
     @Test
-    public void getPlayer2ScoreTest(){
+    public void getPlayer2ScoreTest() {
 
     }
 
     @Test
-    public void setPlayer2ScoreTest(){
+    public void setPlayer2ScoreTest() {
 
     }
 
     @Test
-    public void nextTurnTest(){
+    public void nextTurnTest() {
 
     }
 
     @Test
-    public void endGameTest(){
+    public void endGameTest() {
         Handler handler = new Handler();
-        Player player = handler.createPlayer("Sally" , 200.0);
+        Player player = handler.createPlayer("Sally", 200.0);
         Blackjack blackjack = new Blackjack();
 
 
@@ -64,7 +64,7 @@ public class BlackjackTest {
     }
 
     @Test
-    public void calcBJPaymentTest(){
+    public void calcBJPaymentTest() {
         Blackjack blackjack = new Blackjack();
 
         blackjack.setOdds(3.0);
@@ -75,8 +75,9 @@ public class BlackjackTest {
 
         Assert.assertEquals(expected, actual);
     }
+}
 
-    @Test
+    /**@Test
     public void updateAccount(){
         Blackjack blackjack = new Blackjack();
 
@@ -86,4 +87,4 @@ public class BlackjackTest {
 
         Assert.assertEquals(expected, actual);
     }
-}
+} */
