@@ -12,8 +12,9 @@ public class DecksTest {
         Assert.assertEquals(deck.getCards().size(), 3*52);
     }
 
-    @Test
-    public void buildSuitTest() {
-
-    }
+//    @Test
+//    public void buildSuitTest() {
+//        Decks deck = new Decks(1);
+//        deck.buil
+//    }
 }

@@ -9,18 +9,17 @@ public class CardTest {
 
     @Test
     public void flipTest1() {
-        Boolean faceDown = false;
+        Integer faceDown = -1;
         Card card = new Card(faceDown, Rank.ACE, Suit.DIAMOND);
         card.flip();
         Integer expected = 14;
-        PrasanthiCard prasanthiCard = new PrasanthiCard();
         Integer actual = card.getValue();
         Assert.assertEquals(expected, actual);
 
     }
     @Test
     public void flipTest2() {
-        Boolean faceDown = true;
+        Integer faceDown = 1;
         Card card = new Card(faceDown, Rank.ACE, Suit.DIAMOND);
         card.flip();
         Integer expected = 14;
@@ -30,7 +29,7 @@ public class CardTest {
 
     @Test
     public void getValueTest1() {
-        Boolean faceDown = false;
+        Integer faceDown = 1;
         Card card = new Card(faceDown, Rank.SIX, Suit.HEART);
 
         Integer expected = 14;
@@ -40,7 +39,7 @@ public class CardTest {
 
     @Test
     public void getValueTest2() {
-        Boolean faceDown = false;
+        Integer faceDown = -1;
         Card card = new Card(faceDown, Rank.JACK, Suit.SPADE);
 
         Integer expected = 14;
@@ -49,7 +48,7 @@ public class CardTest {
     }
     @Test
     public void getValueTest3() {
-        Boolean faceDown = false;
+        Integer faceDown = 1;
         Card card = new Card(faceDown, Rank.KING, Suit.CLUB);
 
         Integer expected = 14;

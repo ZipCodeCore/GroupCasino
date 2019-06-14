@@ -1,25 +1,32 @@
 public class Card {
 
-    private Boolean faceDown;
+    private Integer faceUp;
     private Rank rank;
     private Suit suit;
 
-    public Card(Boolean faceDown, Rank rank, Suit suit) {
-        this.faceDown = faceDown;
+    public Card(Integer faceDown, Rank rank, Suit suit) {
+        this.faceUp = faceDown;
         this.rank = rank;
         this.suit = suit;
     }
 
-    public void setFaceDown() {
-        this.faceDown = true;
+    public void setFaceDownToEveryone() {
+        this.faceUp = -1;
     }
-
-    public void setFaceUP() {
-        this.faceDown = false;
+    public void setFaceUpToMe() {
+        this.faceUp = 0;
     }
-
-    public Boolean getFaceDown() {
-        return faceDown;
+    public void setFaceUpToEveryone() {
+        this.faceUp = 1;
+    }
+    public Boolean isFaceDownToEveryone() {
+        return (faceUp == -1);
+    }
+    public Boolean isFaceUpToMe() {
+        return (faceUp == 0);
+    }
+    public Boolean isFaceUpToEveryone() {
+        return (faceUp == 1);
     }
 
     public Integer getRank() {

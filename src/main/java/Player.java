@@ -4,4 +4,8 @@ public abstract class Player {
     public Player(Person p) {
         person = p;
     }
+
+    public Player() {
+
+    }
 }

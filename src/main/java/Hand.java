@@ -18,4 +18,8 @@ public abstract class Hand {
         for (int i : index) cardsToPlay[count] = cards.remove(i);
         return cardsToPlay;
     }
+
+    public Integer numberOfCardsInHand() {
+        return cards.size();
+    }
 }
