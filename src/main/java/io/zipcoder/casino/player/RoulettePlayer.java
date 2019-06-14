@@ -1,6 +1,9 @@
 package io.zipcoder.casino.player;
 
+import java.util.Random;
+
 public class RoulettePlayer extends Player implements GamblerInterface {
+
 
 
     public void bet(Double bet) {
@@ -12,6 +15,7 @@ public class RoulettePlayer extends Player implements GamblerInterface {
     }
 
     public void cashout() {
+
 
     }
 
