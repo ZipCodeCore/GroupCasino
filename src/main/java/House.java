@@ -1,7 +1,19 @@
 public class House implements Dealer {
 
-    public void payout() {}
-    public void takeBets() {}
-    public Chips moneyToChips(Double moneyAmount, Player player) { return new Chips(100.0); }
+    private Integer moneyBet;
+
+    public Integer payout(Integer payoutRatio, Integer originalBetAmount) {
+        Integer payout = payoutRatio*originalBetAmount;
+        moneyBet -= payout;
+        return payout;
+    }
+
+    public void takeBets(Integer ...chips) {
+        for (Integer chip : chips) moneyBet += chip;
+    }
+
+    public Integer moneyToChips(Double moneyAmount) {
+        return (int)Math.floor(moneyAmount/5.0);
+    }
 
 }
