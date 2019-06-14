@@ -4,17 +4,21 @@ import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
+import java.util.HashMap;
+import java.util.TreeMap;
+
 public class Craps extends Games implements GamblerGameInterface {
     private CrapsPlayer crapsPlayer;
     private Integer onNumber;
     private Double firstLineBet;
     private Double secondLineBet;
-    private Double otherBet;
-    private String otherBetType;
+    private Double fieldBet;
+    private Integer fieldBetType;
     private Double firstLineOdds = 2.0;
     private Double secondLineOdds = 2.0;
-    private Double otherBetodds = 5.0;
+    private Double fieldBetodds = 12.0;
     private Integer currentRoll;
+    //private HashMap<Integer , Integer> fieldOdds = new HashMap();
 
 
 
@@ -30,7 +34,7 @@ public class Craps extends Games implements GamblerGameInterface {
         this.crapsPlayer = player;
         crapsPlayer.player.setPlaying(true);
         this.stage = 0;
-        runGame();
+
     }
 
 
@@ -47,16 +51,16 @@ public class Craps extends Games implements GamblerGameInterface {
                     stage0Play(input);
                     break;
                 case 1:
-                    firstLineBet = console.getDoubleInput("Let's get started! \n Place Your bet!");
+                    firstLineBet = (console.getDoubleInput("Let's get started! \n Place Your bet!"));
                     currentRoll = crapsPlayer.roll();
                     stage1Play(firstLineBet);
                     break;
                 case 2:
                     secondLineBet = console.getDoubleInput("Bet your push number bets! \n Place Your bet!");
-                    otherBetType = console.getStringInput("What else do you want to bet?");
-                    otherBet = console.getDoubleInput("how much do you want to bet on this?");
+                    fieldBetType = console.getIntegerInput("What else do you want to bet?");
+                    fieldBet = console.getDoubleInput("how much do you want to bet on this?");
                     currentRoll =crapsPlayer.roll();
-                    stage2Play(secondLineBet, otherBet, otherBetType);
+                    stage2Play(secondLineBet, fieldBet, fieldBetType);
                     break;
             }
         }
@@ -77,14 +81,14 @@ public class Craps extends Games implements GamblerGameInterface {
     }
 
     public void stage1Play(Double firstLineBet){
-        withdraw(firstLineBet); //need to handle seeting account
-        if(currentRoll.equals(2) || currentRoll.equals(3) || currentRoll.equals(12)) {
+        withdraw(firstLineBet);
 
+        if(currentRoll.equals(2) || currentRoll.equals(3) || currentRoll.equals(12)) {
             display(" you rolled a " + currentRoll +  "\n" + "Sorry you crapped out!");
             this.stage = 0;
         } else if (currentRoll.equals(7) || currentRoll.equals(11)) {
             display(" you rolled a " + currentRoll +  "\n" + "you won!" +  calcPayment(firstLineOdds, firstLineBet));
-            deposit(calcPayment(firstLineBet, firstLineOdds));
+            deposit(calcPayment(firstLineBet, firstLineOdds) + firstLineBet);
         } else{
             display(" you rolled a " + currentRoll +  ".\n" + currentRoll + " is now the on number!");
             setOnNumber(currentRoll);
@@ -93,18 +97,20 @@ public class Craps extends Games implements GamblerGameInterface {
 
     }
 
-    public void stage2Play(Double secondLineBet, Double otherBet, String bet ){
+    public void stage2Play(Double secondLineBet, Double fieldBet, Integer bet ){
+//
 
-        if(currentRoll.equals(7)) {
-            display(" you rolled a " + currentRoll +  "\n" + "Sorry you crapped out!");
-            this.stage = 0;
-        } else if (currentRoll.equals(onNumber)) {
-            display(" you rolled a " + currentRoll +  "\n" + "you won!" +  (calcPayment(firstLineOdds, firstLineBet) + (calcPayment(secondLineBet,secondLineOdds))));
-            deposit(calcPayment(firstLineBet, firstLineOdds));
-            deposit(calcPayment(otherBet, otherBetodds ));
-//        }   else if () {  if other bet
-//            display("");
-        }
+
+//        if(currentRoll.equals(7)) {
+//            display(" you rolled a " + currentRoll +  "\n" + "Sorry you crapped out!");
+//            this.stage = 0;
+//        } else if (currentRoll.equals(onNumber)) {
+//            display(" you rolled a " + currentRoll +  "\n" + "you won!" +  (calcPayment(firstLineOdds, firstLineBet) + (calcPayment(secondLineBet,secondLineOdds))));
+//            deposit(calcPayment(firstLineBet, firstLineOdds));
+//            deposit(calcPayment(otherBet, otherBetodds ));
+////        }   else if () {  if other bet
+////            display("");
+//        }
     }
 
     @Override
@@ -169,12 +175,12 @@ public class Craps extends Games implements GamblerGameInterface {
         this.secondLineBet = secondLineBet;
     }
 
-    public Double getOtherBet() {
-        return otherBet;
+    public Double getFieldBet() {
+        return fieldBet;
     }
 
-    public void setOtherBet(Double otherBet) {
-        this.otherBet = otherBet;
+    public void setFieldBet(Double fieldBet) {
+        this.fieldBet = fieldBet;
     }
 
 //    public CrapsPlayer getCrapsPlayer() {
