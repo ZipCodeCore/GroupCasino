@@ -144,9 +144,25 @@ public class CrapsTest {
     public void stage2PlayWinOnNumber() {
         craps.data.setOnNumber(8);
         craps.data.setCurrentRoll(8);
+        craps.data.setFirstLineBet(10.0);
         craps.stage2Play(10.0, 10.0, 5);
 
+
         Double actual = 250.0;
+        Double expected = player.getAccount();
+
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void stage2PlayWinField() {
+        craps.data.setOnNumber(8);
+        craps.data.setCurrentRoll(9);
+        craps.stage2Play(10.0, 10.0, 9);
+
+
+        Double actual = 1050.0;
         Double expected = player.getAccount();
 
         Assert.assertEquals(expected, actual);
@@ -163,7 +179,7 @@ public class CrapsTest {
         Integer expected = craps.getStage();
 
         Assert.assertEquals(expected, actual);
-        
+
 
     }
 }

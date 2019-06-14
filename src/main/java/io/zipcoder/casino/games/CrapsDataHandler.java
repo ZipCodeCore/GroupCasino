@@ -1,11 +1,11 @@
 package io.zipcoder.casino.games;
 
+import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.HashMap;
 
 public class CrapsDataHandler {
-
     private Console console;
     private Integer onNumber;
     private Double firstLineBet;
@@ -14,23 +14,26 @@ public class CrapsDataHandler {
     private Integer fieldBetType;
     private Double firstLineOdds = 2.0;
     private Double secondLineOdds = 2.0;
-    private Double fieldBetodds = 12.0;
     private Integer currentRoll;
-    private HashMap<Integer , Integer> fieldOdds = new HashMap();
+    private HashMap<Integer , Double> fieldOdds = new HashMap();
 
+
+    public Double getfieldOdds(Integer key) {
+        return  fieldOdds.get(key);
+    }
 
     public CrapsDataHandler(){
-        fieldOdds.put(2,10);
-        fieldOdds.put(3,9);
-        fieldOdds.put(4,8);
-        fieldOdds.put(5,7);
-        fieldOdds.put(6,6);
-        fieldOdds.put(7,5);
-        fieldOdds.put(8,6);
-        fieldOdds.put(9,7);
-        fieldOdds.put(10,8);
-        fieldOdds.put(11,9);
-        fieldOdds.put(12,10);
+        fieldOdds.put(2,10.0);
+        fieldOdds.put(3,9.0);
+        fieldOdds.put(4,8.0);
+        fieldOdds.put(5,7.0);
+        fieldOdds.put(6,6.0);
+        fieldOdds.put(7,5.0);
+        fieldOdds.put(8,6.0);
+        fieldOdds.put(9,7.0);
+        fieldOdds.put(10,8.0);
+        fieldOdds.put(11,9.0);
+        fieldOdds.put(12,10.0);
     }
 
 
@@ -99,14 +102,6 @@ public class CrapsDataHandler {
 
     public void setSecondLineOdds(Double secondLineOdds) {
         this.secondLineOdds = secondLineOdds;
-    }
-
-    public Double getFieldBetodds() {
-        return fieldBetodds;
-    }
-
-    public void setFieldBetodds(Double fieldBetodds) {
-        this.fieldBetodds = fieldBetodds;
     }
 
     public Integer getCurrentRoll() {

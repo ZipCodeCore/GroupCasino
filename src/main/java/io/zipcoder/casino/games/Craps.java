@@ -12,6 +12,9 @@ public class Craps extends Games implements GamblerGameInterface {
     private CrapsPlayer crapsPlayer;
     public CrapsDataHandler data = new CrapsDataHandler();
     private Integer stage;
+    private Boolean comeFirstRound = true;
+    private Boolean passFirstRound = true;
+
 
 
     public Craps() {}
@@ -37,20 +40,24 @@ public class Craps extends Games implements GamblerGameInterface {
 
             switch (stage) {
                 case 0:
-                    String input = data.getConsole().getStringInput("A game has just ended would you like to play or exit? ");
+                    String input = data.getConsole().getStringInput("A game has just ended would you like to join the table? (play or exit?) ");
                     stage0Play(input);
                     break;
                 case 1:
-                    data.setFirstLineBet (data.getConsole().getDoubleInput("Let's get started! \n Place Your bet!"));
+                    if (comeFirstRound) {
+                        data.setFirstLineBet(data.getConsole().getDoubleInput("Let's get started! \n" + ""+"Place Your Come bets!"));
+                    }
                     if(hasMoenytoBet(data.getFirstLineBet(), crapsPlayer.player)){
                         data.setCurrentRoll(crapsPlayer.roll());
                         stage1Play(data.getFirstLineBet());
                     }
                     break;
                 case 2:
-                    data.setSecondLineBet(data.getConsole().getDoubleInput("Bet your push number bets! \n Place Your bets!"));
-                    data.setFieldBetType(data.getConsole().getIntegerInput("What else do you want to bet?"));
-                    data.setFieldBet(data.getConsole().getDoubleInput("how much do you want to bet on this?"));
+                    if(passFirstRound) {
+                        data.setSecondLineBet(data.getConsole().getDoubleInput(" Make your passline bets!"));
+                        data.setFieldBetType(data.getConsole().getIntegerInput("What prop number bet do you want to make?"));
+                        data.setFieldBet(data.getConsole().getDoubleInput("how much do you want to bet on this?"));
+                    }
                     if(hasMoenytoBet(data.getSecondLineBet() + data.getFieldBet(), crapsPlayer.player)){
                         data.setCurrentRoll(crapsPlayer.roll());
                         stage2Play(data.getSecondLineBet(), data.getFieldBet(), data.getFieldBetType());
@@ -61,6 +68,7 @@ public class Craps extends Games implements GamblerGameInterface {
         endGame();
     }
 
+/*----------------STAGE 0---------------*/
 
     public void stage0Play(String input){
 
@@ -69,30 +77,61 @@ public class Craps extends Games implements GamblerGameInterface {
         } else if (input.toLowerCase().equals("exit")){
             crapsPlayer.player.setPlaying(false);
         } else {
-            display("Excuse me I didnt understand");
+            display("Excuse me, I didnt understand");
         }
     }
 
+/*----------------STAGE 1---------------*/
+
+
     public void stage1Play(Double firstLineBet){
+        if (comeFirstRound)
         withdraw(firstLineBet);
+        comeFirstRound= false;
 
         if(data.getCurrentRoll().equals(2) || data.getCurrentRoll().equals(3) || data.getCurrentRoll().equals(12)) {
             display(" you rolled a " + data.getCurrentRoll() +  "\n" + "Sorry you crapped out!  \n you now have " + crapsPlayer.player.getAccount());
             stage = 0;
+            comeFirstRound = true;
+            passFirstRound = true;
         } else if (data.getCurrentRoll().equals(7) || data.getCurrentRoll().equals(11)) {
-            System.out.println(calcPayment(firstLineBet, data.getFirstLineOdds()));
             deposit(calcPayment(firstLineBet, data.getFirstLineOdds()));
-            display(" you rolled a " + data.getCurrentRoll() +  "\n" + "you won! " +  calcPayment(data.getFirstLineOdds(), firstLineBet) + " you now have " + crapsPlayer.player.getAccount());
+            display(" you rolled a " + data.getCurrentRoll() +  "\n" + "you won " +  calcPayment(data.getFirstLineOdds(), firstLineBet) + "! you now have " + crapsPlayer.player.getAccount());
         } else if(!data.getCurrentRoll().equals(2) && !data.getCurrentRoll().equals(3) && !data.getCurrentRoll().equals(12) && !data.getCurrentRoll().equals(7) && !data.getCurrentRoll().equals(11)){
             display(" you rolled a " + data.getCurrentRoll() +  ".\n" + data.getCurrentRoll() + " is now the on number!");
             data.setOnNumber(data.getCurrentRoll());
             stage = 2;
         } else {
-        display("Excuse me I didnt understand");
+        display("Excuse me, I didnt understand");
         }
     }
 
-    public void stage2Play(Double secondLineBet, Double fieldBet, Integer bet ){
+
+/*-----------------STAGE 2----------------*/
+
+
+    public void stage2Play(Double secondLineBet, Double fieldBet, Integer fieldBetNumber ){
+        if(passFirstRound) {
+            withdraw(secondLineBet);
+            withdraw(fieldBet);
+        }
+        passFirstRound = false;
+        if(data.getCurrentRoll().equals(7)) {
+            display(" you rolled a " + data.getCurrentRoll() +  "\n" + "Sorry you crapped out!  \n you now have " + crapsPlayer.player.getAccount());
+            stage = 0;
+            comeFirstRound = true;
+            passFirstRound = true;
+        } else if (data.getCurrentRoll().equals(fieldBetNumber)) {
+            Double wins = calcPayment(fieldBet, data.getfieldOdds(fieldBetNumber));
+            deposit(wins);
+            display(" you rolled a " + data.getCurrentRoll() + "\n" + "you won " + wins + "! you now have " + crapsPlayer.player.getAccount());
+        }else if (data.getCurrentRoll().equals(data.getOnNumber())) {
+            Double wins =  calcPayment(data.getfieldOdds(data.getOnNumber()), secondLineBet) + calcPayment(data.getfieldOdds(data.getOnNumber()), data.getFirstLineBet());
+            deposit(wins);
+            display(" you rolled a " + data.getCurrentRoll() + "\n" + "you won " + wins + "! you now have " + crapsPlayer.player.getAccount());
+        } else {
+            display("Excuse me, I didn't understand");
+        }
 
     }
 
