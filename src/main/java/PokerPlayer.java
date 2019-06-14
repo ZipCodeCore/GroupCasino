@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import exceptions.NegativeBetException;
+import exceptions.NotEnoughChipException;
 
 public class PokerPlayer extends Player implements Gambling {
     private Hand hand = new PokerHand();
@@ -50,8 +51,12 @@ public class PokerPlayer extends Player implements Gambling {
         this.chips = chips;
     }
 
-    @Override
-    public Integer bet(Integer numOfChipsToBet) {
+
+    public Integer bet(Integer numOfChipsToBet) throws NegativeBetException, NotEnoughChipException {
+        if (numOfChipsToBet < 0)
+            throw new NegativeBetException("Invalid number of Chips");
+        if(numOfChipsToBet > chips)
+            throw new NotEnoughChipException("Not enough Chips");
         chips -= numOfChipsToBet;
         return numOfChipsToBet;
     }

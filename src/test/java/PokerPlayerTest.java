@@ -1,3 +1,5 @@
+import exceptions.NegativeBetException;
+import exceptions.NotEnoughChipException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -118,11 +120,14 @@ public class PokerPlayerTest {
         Assert.assertEquals(expected,player.getChip());
     }
 
-    @Test
-    public void betTestOverNegative() {
-        Integer bet = 50;
-        Integer expected = originalChips-bet;
-        player.bet(bet);
-        Assert.assertEquals(expected,player.getChip());
+    @Test (expected = NegativeBetException.class)
+    public void betTestNegative() {
+        player.bet(-10);
+    }
+
+    @Test (expected = NotEnoughChipException.class)
+    public void betTestNotEnoughChip() {
+        player.bet(110);
+
     }
 }
