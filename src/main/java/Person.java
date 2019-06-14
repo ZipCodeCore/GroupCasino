@@ -8,7 +8,7 @@ public class Person {
         this.name = name;
         this.age = age;
     }
-<<<<<<< HEAD
+
 
     public Double getWallet() {
         return wallet;
@@ -34,9 +34,5 @@ public class Person {
         this.age = age;
     }
 
-=======
-    public Double getWallet() {
-        return wallet;
-    }
->>>>>>> 2f08e58f3d0c1a158f01e853a8293a5edb154dc6
+
 }
