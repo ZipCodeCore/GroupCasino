@@ -326,20 +326,4 @@ public class CrapsTest {
         Assert.assertEquals(expected, actual);
 
     }
-
-    @Test
-    public void stage2PlayBadSecondLineInput() {
-        Handler handler = new Handler();
-        Player player = handler.createPlayer("bob", 10.0);
-        CrapsPlayer crapsPlayer = new CrapsPlayer(player);
-        Craps craps = new Craps(crapsPlayer);
-
-        craps.stage2Play(1.0, 10.0, 5);
-
-        Double actual = 30.0;
-        Double expected = player.getAccount();
-
-        Assert.assertEquals(expected, actual);
-
-    }
 }
