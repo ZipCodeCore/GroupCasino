@@ -1,11 +1,11 @@
 
 
 public interface Dealer {
-    public static Hand dealPokerHand() { return new PokerHand();}
-    public static Hand dealPalaceHand() { return new PalaceHand();}
-    public static Hand dealBlackJackHand() {return new BlackJackHand();}
-    public static Card dealCard(Integer numberOfCards) { return new Card(false, Rank.ACE, Suit.HEART);}
-    public static void shuffle() {}
+    public  Hand dealRound(Integer numberOfCards, Boolean faceDown);
+    public  Hand dealHand(Integer numberOfC );
+    public  Hand dealBlackJackHand(BlackJack_Player player);
+    public  Card dealCard(Integer numberOfCards);
+    public  void shuffle();
 
 
 }

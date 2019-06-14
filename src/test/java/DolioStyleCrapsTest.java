@@ -8,7 +8,7 @@ public class DolioStyleCrapsTest {
     @Test
     public void didWin() {
         Dice dice=new Dice(2);
-        DStyleCrapsPlayer[] player={new DStyleCrapsPlayer(new Person(500,"Jon",25))};
+        DStyleCrapsPlayer[] player={new DStyleCrapsPlayer(new Person(500.00,"Jon",25))};
         DolioStyleCraps dCraps=new DolioStyleCraps(player);
         Boolean b=false;
         int j=dCraps.getDice().tossAndSum();
@@ -20,7 +20,7 @@ public class DolioStyleCrapsTest {
 
     @Test
        public void didWin1() {
-        DStyleCrapsPlayer[] player= {new DStyleCrapsPlayer(new Person(500,"Jon",25))};
+        DStyleCrapsPlayer[] player= {new DStyleCrapsPlayer(new Person(500.00,"Jon",25))};
         DolioStyleCraps dCraps = new DolioStyleCraps(player);
         Boolean b =false;
         dCraps.playGame();
@@ -40,7 +40,7 @@ public class DolioStyleCrapsTest {
     @Test
     public void endOfGame() {
 
-        DStyleCrapsPlayer[] player= {new DStyleCrapsPlayer(new Person(500,"Jon",25))};
+        DStyleCrapsPlayer[] player= {new DStyleCrapsPlayer(new Person(500.00,"Jon",25))};
         DolioStyleCraps dCraps=new DolioStyleCraps(player);
         Boolean b = false;
         dCraps.playGame();

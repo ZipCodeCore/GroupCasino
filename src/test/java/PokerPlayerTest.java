@@ -10,7 +10,7 @@ public class PokerPlayerTest {
 
     @Before
     public void setUp() throws Exception {
-        PokerPlayer player = new PokerPlayer(new Person(100,"John", 21));
+        PokerPlayer player = new PokerPlayer(new Person(100.00,"John", 21));
 
     }
 

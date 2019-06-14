@@ -22,8 +22,8 @@ public class Card {
         return faceDown;
     }
 
-    public Rank getRank() {
-        return rank;
+    public Integer getRank() {
+        return rank.getRankNumber();
     }
 
     public Suit getSuit() {
