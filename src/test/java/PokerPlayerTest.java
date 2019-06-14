@@ -11,7 +11,8 @@ public class PokerPlayerTest {
 
     @Before
     public void setUp() throws Exception {
-        player = new PokerPlayer(new Person(100,"John", 21));
+        player = new PokerPlayer(new Person(100.0,"John", 21));
+        player.setChips(100);
         originalChips = player.getChip();
     }
 
@@ -100,7 +101,7 @@ public class PokerPlayerTest {
     @Test
     public void bigBlindChip() {
         Integer expected = originalChips-2;
-        player.smallBlind();
+        player.bigBlind();
         Assert.assertEquals(expected, player.getChip());
     }
 }

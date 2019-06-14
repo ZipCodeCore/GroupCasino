@@ -1,3 +1,3 @@
 public interface Gambling {
-    public Integer bet() ;
+    public Integer bet(Integer numOfChipsToBet) ;
 }
