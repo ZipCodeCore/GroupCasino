@@ -6,6 +6,7 @@ public class Dice {
     public Integer toss() {
     return ((int)(Math.random()*6) + 1);
 
+
     }
     public Integer tossAndSum() {
         Integer sum=0;
