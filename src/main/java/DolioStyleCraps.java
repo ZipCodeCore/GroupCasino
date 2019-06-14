@@ -19,7 +19,7 @@ public class DolioStyleCraps extends DiceGame {
            playGame();
         return false;
        }
-       
+
     public void endOfGame() {
         if(didWin((DStyleCrapsPlayer)players[0])==true)
             System.out.println("Player "+players[0]+" won the game");
