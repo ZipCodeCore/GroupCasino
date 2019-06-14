@@ -77,7 +77,9 @@ public class BlackjackTest {
     }
 }
 
-    /**@Test
+
+   /* @Test
+>>>>>>> modified:src/test/java/io/zipcoder/casino/games/BlackjackTest.java
     public void updateAccount(){
         Blackjack blackjack = new Blackjack();
 
@@ -86,5 +88,6 @@ public class BlackjackTest {
         Double actual = blackjack.getBlackJackPlayer().getAccount();
 
         Assert.assertEquals(expected, actual);
+<<<<<<< HEAD:src/test/io/zipcoder/casino/games/BlackjackTest.java
     }
 } */
