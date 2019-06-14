@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 public class Craps extends Games implements GamblerGameInterface {
     private CrapsPlayer crapsPlayer;
-    private CrapsDataHandler data = new CrapsDataHandler();
+    public CrapsDataHandler data = new CrapsDataHandler();
     private Integer stage;
 
 
@@ -78,14 +78,15 @@ public class Craps extends Games implements GamblerGameInterface {
 
         if(data.getCurrentRoll().equals(2) || data.getCurrentRoll().equals(3) || data.getCurrentRoll().equals(12)) {
             display(" you rolled a " + data.getCurrentRoll() +  "\n" + "Sorry you crapped out!  \n you now have " + crapsPlayer.player.getAccount());
-            this.stage = 0;
+            stage = 0;
         } else if (data.getCurrentRoll().equals(7) || data.getCurrentRoll().equals(11)) {
-            display(" you rolled a " + data.getCurrentRoll() +  "\n" + "you won!" +  calcPayment(data.getFirstLineOdds(), firstLineBet) + "you now have " + crapsPlayer.player.getAccount());
+            System.out.println(calcPayment(firstLineBet, data.getFirstLineOdds()));
             deposit(calcPayment(firstLineBet, data.getFirstLineOdds()));
+            display(" you rolled a " + data.getCurrentRoll() +  "\n" + "you won! " +  calcPayment(data.getFirstLineOdds(), firstLineBet) + " you now have " + crapsPlayer.player.getAccount());
         } else if(!data.getCurrentRoll().equals(2) && !data.getCurrentRoll().equals(3) && !data.getCurrentRoll().equals(12) && !data.getCurrentRoll().equals(7) && !data.getCurrentRoll().equals(11)){
             display(" you rolled a " + data.getCurrentRoll() +  ".\n" + data.getCurrentRoll() + " is now the on number!");
             data.setOnNumber(data.getCurrentRoll());
-            this.stage = 2;
+            stage = 2;
         } else {
         display("Excuse me I didnt understand");
         }
@@ -122,7 +123,7 @@ public class Craps extends Games implements GamblerGameInterface {
     }
 
     public Double calcPayment(Double bet, Double odds) {
-        return bet *odds;
+        return bet * odds;
     }
 
 

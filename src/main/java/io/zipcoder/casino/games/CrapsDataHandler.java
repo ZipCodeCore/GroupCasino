@@ -1,12 +1,11 @@
 package io.zipcoder.casino.games;
 
-import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.HashMap;
 
 public class CrapsDataHandler {
-    private CrapsPlayer crapsPlayer;
+
     private Console console;
     private Integer onNumber;
     private Double firstLineBet;
@@ -32,16 +31,11 @@ public class CrapsDataHandler {
         fieldOdds.put(10,8);
         fieldOdds.put(11,9);
         fieldOdds.put(12,10);
-
-
-    }
-    public CrapsPlayer getCrapsPlayer() {
-        return crapsPlayer;
     }
 
-    public void setCrapsPlayer(CrapsPlayer crapsPlayer) {
-        this.crapsPlayer = crapsPlayer;
-    }
+
+
+
 
     public Console getConsole() {
         return console;
