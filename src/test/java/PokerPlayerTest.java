@@ -7,11 +7,15 @@ import static org.junit.Assert.*;
 
 public class PokerPlayerTest {
     PokerPlayer player;
+    Integer originalChips;
 
     @Before
     public void setUp() throws Exception {
+<<<<<<< HEAD
         PokerPlayer player = new PokerPlayer(new Person(100.0,"John", 21));
 
+=======
+>>>>>>> 8e61c5f62b0f715ab55530f1341a4d94f375bb19
     }
 
     @After
@@ -29,12 +33,19 @@ public class PokerPlayerTest {
 
     @Test
     public void callChipTest() {
-        Assert.assertEquals(10, (int) player.call(10));
-//        Assert.assertEquals(,player.getChip());
+        Integer lastPlayerBet = 10;
+        Integer expected = originalChips-lastPlayerBet;
+        player.call(lastPlayerBet);
+        Assert.assertEquals(expected,player.getChip());
     }
 
     @Test
-    public void check() {
+    public void checkTestChip() {
+        Assert.assertEquals(originalChips,player.getChip());
+    }
+
+    @Test
+    public void checkTest() {
         Assert.assertEquals(0, (int) player.check());
     }
 
@@ -65,6 +76,13 @@ public class PokerPlayerTest {
     }
 
     @Test
+    public void raiseChip() {
+        Integer expected = originalChips-50;
+        player.raise(30,20);
+        Assert.assertEquals(50, (int) player.getChip());
+    }
+
+    @Test
     public void smallBlind() {
         Assert.assertEquals(1, (int) player.smallBlind());
     }
@@ -72,5 +90,41 @@ public class PokerPlayerTest {
     @Test
     public void bigBlind() {
         Assert.assertEquals(2, (int) player.bigBlind());
+    }
+
+
+    @Test
+    public void smallBlindChip() {
+        Integer expected = originalChips-1;
+         player.smallBlind();
+         Assert.assertEquals(expected, player.getChip());
+    }
+
+    @Test
+    public void bigBlindChip() {
+        Integer expected = originalChips-2;
+        player.bigBlind();
+        Assert.assertEquals(expected, player.getChip());
+    }
+
+    @Test
+    public void betTest() {
+        Assert.assertEquals(30, (int) player.bet(30));
+    }
+
+    @Test
+    public void betTestChip() {
+        Integer bet = 50;
+        Integer expected = originalChips-bet;
+        player.bet(bet);
+        Assert.assertEquals(expected,player.getChip());
+    }
+
+    @Test
+    public void betTestOverNegative() {
+        Integer bet = 50;
+        Integer expected = originalChips-bet;
+        player.bet(bet);
+        Assert.assertEquals(expected,player.getChip());
     }
 }

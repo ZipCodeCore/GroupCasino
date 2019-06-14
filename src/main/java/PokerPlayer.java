@@ -3,23 +3,63 @@ import java.util.ArrayList;
 public class PokerPlayer extends Player implements Gambling {
     private Hand hand = new PokerHand();
     private Boolean folded = false;
+<<<<<<< HEAD
+=======
+
+
+
+    private Integer chips;
+>>>>>>> 8e61c5f62b0f715ab55530f1341a4d94f375bb19
 
     public PokerPlayer(Person p) {
         super(p);
     }
 
 
+
     public void leaveGame(){}
-    public Integer call(Integer lastPlayerBet) {return 0;}
-    public Integer check() {return 0;}
-    public void fold() {}
-    public Integer raise(Integer lastPlayerBetInteger, Integer amountToRaise) {return 0;}
-    public Integer smallBlind() {return 1;}
-    public Integer bigBlind() {return 2;}
-    public Boolean isFolded() {return folded;}
-    @Override
-    public Integer bet() {
-        return null;
+
+    public Integer call(Integer lastPlayerBet) {
+        return bet(lastPlayerBet);
     }
 
+    public Integer check() {return call(0);}
+
+    public void fold() {
+        folded = true;
+    }
+
+    public Integer raise(Integer lastPlayerBet, Integer amountToRaise) {
+        return bet(lastPlayerBet + amountToRaise);
+    }
+
+    public Integer smallBlind() {
+        return bet(1);
+    }
+
+    public Integer bigBlind() {
+        return bet(2);
+    }
+
+    public Boolean isFolded() {
+        return folded;
+    }
+
+    public Integer getChip() {
+        return chips;
+    }
+
+    public void setChips(Integer chips) {
+        this.chips = chips;
+    }
+
+    @Override
+    public Integer bet(Integer numOfChipsToBet) {
+        chips -= numOfChipsToBet;
+        return numOfChipsToBet;
+    }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8e61c5f62b0f715ab55530f1341a4d94f375bb19
 }
