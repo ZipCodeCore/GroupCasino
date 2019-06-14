@@ -1,9 +1,13 @@
 package io.zipcoder.casino;
 import io.zipcoder.casino.games.*;
+import io.zipcoder.casino.player.CardGamePlayer;
 import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
+
+import javax.smartcardio.Card;
+
 //
 public class Handler {
     private Console console = new Console(System.in, System.out);
@@ -28,8 +32,8 @@ public void run() {
             break;
         case 1 :
             GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-            GoFish goFish = new GoFish(goFishPlayer);
-            goFish.startTheGame();
+            GoFish goFish = new GoFish(goFishPlayer, console);
+            goFish.runGame();
             break;
         case 2:
             Roulette roulette = new Roulette();

@@ -56,7 +56,7 @@ public class RouletteTest {
 
     @Test
     public void updateAccountDoubleTest(){
-        this.roulette.updateAccount(1.5);
+        //this.roulette.updateAccount(1.5);
         Double actual = this.roulette.roulettePlayer.getAccount();
         Assert.assertEquals(1.5, actual.doubleValue(),0.0);
 

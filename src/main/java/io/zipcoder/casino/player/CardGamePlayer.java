@@ -4,10 +4,17 @@ package io.zipcoder.casino.player;
 import io.zipcoder.casino.gameTools.Card;
 
 import java.util.ArrayList;
-///
 
-public class CardGamePlayer extends Player {
-    public ArrayList<Card> hand;
+
+public class CardGamePlayer {
+    private Player player;
+    private ArrayList<Card> hand;
+
+    public CardGamePlayer (Player player) {
+        this.player = player;
+
+    }
+
 
     public ArrayList<Card> getHand() {
         return hand;
@@ -21,24 +28,19 @@ public class CardGamePlayer extends Player {
 
     public CardGamePlayer(){};
 
-    public CardGamePlayer(String name, Double account) {
-        super(name, account);
-    }
-
-    @Override
     public String getName() {
-        return super.getName();
+        return player.getName();
     }
 
-    @Override
+
     public void setName(String name) {
-        super.setName(name);
+        player.setName(name);
     }
 
 
-    @Override
+
     public Double getAccount() {
-        return super.getAccount();
+        return player.getAccount();
     }
 
 

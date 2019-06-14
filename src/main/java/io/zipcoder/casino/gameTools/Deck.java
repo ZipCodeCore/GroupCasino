@@ -29,12 +29,12 @@ public class Deck {
         Collections.shuffle(cardStack);
     };
 
-    public ArrayList<Card> deal (Integer numOfCards, CardGamePlayer player) {
+    public void deal (Integer numOfCards, CardGamePlayer player) {
         ArrayList<Card> result = new ArrayList<Card>();
         for (int i = 0; i < numOfCards ; i++) {
             result.add(cardStack.pop());
+            player.setHand(result);
         }
-        return result;
     }
 
     public void dealSingleCard(CardGamePlayer player) {

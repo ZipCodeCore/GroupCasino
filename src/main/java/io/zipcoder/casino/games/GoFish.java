@@ -8,42 +8,44 @@ import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class GoFish extends Games {
-
-    private CardGamePlayer mainPlayer;
+    Console console;
+    private GoFishPlayer mainPlayer;
+    private CardGamePlayer otherPlayer = new GoFishPlayer();
     private Deck deck = new Deck();
-    private Scanner scanner = new Scanner(System.in);
-    private ArrayList<GoFishPlayer> otherPlayers;
+
 
     public GoFish() {}
 
-    public GoFish(GoFishPlayer player) {
+    public GoFish(GoFishPlayer player, Console console) {
         super();
         this.mainPlayer = player;
+        this.console = console;
+//        otherPlayer.setName("other player");
+    }
+    public void runGame () {
+
+        console.println("Hey " + mainPlayer.getName() + "! \nWelcome to GOFISH GAME");
+
+
     }
 
-    public void startTheGame () {
-        otherPlayers = createOtherPlayers(2);
-        deck.deal(5,mainPlayer);
-        for (GoFishPlayer other: otherPlayers
-             ) {
-            deck.deal(5, other);
-        }
+    public void createPlayers () {
+//        deck.deal(5, mainPlayer);
+//        deck.deal(5, otherPlayer);
+//        ArrayList<Card> hand = mainPlayer.getHand();
+//        ArrayList<Card> dealerHand = otherPlayer.getHand();
     }
-
 
 
     @Override
-    void nextTurn() {
-
-    }
+    void nextTurn() { }
 
     @Override
-    void endGame() {
-
-    }
+    void endGame() { }
 
     @Override
     boolean getResults() {
@@ -64,13 +66,6 @@ public class GoFish extends Games {
     };
 
 
-    //====================alex
-    public Integer inputNumPlayers() {
-
-        String info = "Please Enter Number of players";
-        Integer result = scanner.nextInt();
-        return result;
-    }
     public ArrayList<GoFishPlayer> createOtherPlayers (Integer numPlayers) {
         ArrayList<GoFishPlayer> players = new ArrayList<GoFishPlayer>();
         //foreach of inputnUmplayers - create player
@@ -81,11 +76,6 @@ public class GoFish extends Games {
         }
         return players;
     }
-    public void runAction (String userAction) {
-        //based on the action user Start the game/See Rules/ Exit the game
-
-    }
-
 
 
 }
