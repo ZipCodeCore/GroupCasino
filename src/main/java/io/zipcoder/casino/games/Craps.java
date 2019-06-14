@@ -29,7 +29,7 @@ public class Craps extends Games implements GamblerGameInterface {
     Console console = new Console(System.in, System.out);
 
     public Craps() {
-    };
+    }
 
     public Craps(CrapsPlayer player) {
         this.crapsPlayer = player;

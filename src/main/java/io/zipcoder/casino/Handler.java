@@ -3,6 +3,7 @@ import io.zipcoder.casino.games.*;
 import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
+import io.zipcoder.casino.player.SlotsPlayer;
 import io.zipcoder.casino.utilities.Console;
 //
 public class Handler {
@@ -40,7 +41,9 @@ public void run() {
             craps.runGame();
             break;
         case 4:
-            Slots slots = new Slots();
+            SlotsPlayer slotsPlayer = new SlotsPlayer(player);
+            Slots slots = new Slots(slotsPlayer, console);
+//            slots.runGame();
             break;
         default:
             System.out.println("you blew it");
