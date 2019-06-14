@@ -10,6 +10,4 @@ abstract class CardGame extends Game{
 
     }
 
-
-
 }
