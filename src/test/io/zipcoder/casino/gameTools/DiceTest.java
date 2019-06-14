@@ -13,4 +13,6 @@ public class DiceTest {
 
         Assert.assertTrue(result <= 12 && result >=2);
     }
+
+
 }

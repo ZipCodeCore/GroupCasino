@@ -91,4 +91,5 @@ public class Blackjack extends CardGames implements GamblerGameInterface {
 
     }
 
+    public void getBlackJackPlayer(){};
 }

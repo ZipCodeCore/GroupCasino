@@ -1,12 +1,8 @@
 package io.zipcoder.casino.games;
 
-import io.zipcoder.casino.Casino;
-import io.zipcoder.casino.Handler;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
-
-import java.security.PrivateKey;
 
 public class Craps extends Games implements GamblerGameInterface {
     private CrapsPlayer crapsPlayer;
@@ -14,8 +10,16 @@ public class Craps extends Games implements GamblerGameInterface {
     private Double firstLineBet;
     private Double secondLineBet;
     private Double otherBet;
+    private String otherBetType;
     private Double firstLineOdds = 2.0;
     private Double secondLineOdds = 2.0;
+    private Double otherBetodds = 5.0;
+    private Integer currentRoll;
+
+
+
+
+
     private Integer stage;
     Console console = new Console(System.in, System.out);
 
@@ -24,8 +28,13 @@ public class Craps extends Games implements GamblerGameInterface {
 
     public Craps(CrapsPlayer player) {
         this.crapsPlayer = player;
+        crapsPlayer.player.setPlaying(true);
         this.stage = 0;
+        runGame();
     }
+
+
+
 
 
     public void runGame() {
@@ -34,24 +43,29 @@ public class Craps extends Games implements GamblerGameInterface {
 
             switch (stage) {
                 case 0:
-                    stage0Play();
+                    String input = console.getStringInput("A game has just ended would you like to play or exit? ");
+                    stage0Play(input);
                     break;
                 case 1:
-                    stage1Play();
+                    firstLineBet = console.getDoubleInput("Let's get started! \n Place Your bet!");
+                    currentRoll = crapsPlayer.roll();
+                    stage1Play(firstLineBet);
                     break;
                 case 2:
-                    stage2Play();
-                    break;
-                case 3:
-                    stage3Play();
+                    secondLineBet = console.getDoubleInput("Bet your push number bets! \n Place Your bet!");
+                    otherBetType = console.getStringInput("What else do you want to bet?");
+                    otherBet = console.getDoubleInput("how much do you want to bet on this?");
+                    currentRoll =crapsPlayer.roll();
+                    stage2Play(secondLineBet, otherBet, otherBetType);
                     break;
             }
         }
 
+        endGame();
     }
 
-    public void stage0Play(){
-        String input = console.getStringInput("A game has just ended would you like to play or exit? ");
+
+    public void stage0Play(String input){
 
         if(input.toLowerCase().equals("play")) {
             this.stage = 1;
@@ -62,36 +76,36 @@ public class Craps extends Games implements GamblerGameInterface {
         }
     }
 
-    public void stage1Play(){
-        firstLineBet = console.getDoubleInput("Let's get started! \n Place Your bet!");
+    public void stage1Play(Double firstLineBet){
         withdraw(firstLineBet); //need to handle seeting account
-        Integer roll = crapsPlayer.roll();
+        if(currentRoll.equals(2) || currentRoll.equals(3) || currentRoll.equals(12)) {
 
-        if(roll.equals(2) || roll.equals(3) || roll.equals(12)) {
-            display(" you rolled a " + roll +  "\n" + "Sorry you crapped out!");
+            display(" you rolled a " + currentRoll +  "\n" + "Sorry you crapped out!");
             this.stage = 0;
-        } else if (roll.equals(7) || roll.equals(11)) {
-            display(" you rolled a " + roll +  "\n" + "you won!" +  calcPayment(firstLineOdds, firstLineBet));
-            deposit(firstLineBet);
+        } else if (currentRoll.equals(7) || currentRoll.equals(11)) {
+            display(" you rolled a " + currentRoll +  "\n" + "you won!" +  calcPayment(firstLineOdds, firstLineBet));
+            deposit(calcPayment(firstLineBet, firstLineOdds));
         } else{
-            display(" you rolled a " + roll +  ".\n" + roll + " is now the on number!");
-            setOnNumber(roll);
+            display(" you rolled a " + currentRoll +  ".\n" + currentRoll + " is now the on number!");
+            setOnNumber(currentRoll);
             this.stage = 2;
         }
 
     }
 
-    public void stage2Play(){
+    public void stage2Play(Double secondLineBet, Double otherBet, String bet ){
 
+        if(currentRoll.equals(7)) {
+            display(" you rolled a " + currentRoll +  "\n" + "Sorry you crapped out!");
+            this.stage = 0;
+        } else if (currentRoll.equals(onNumber)) {
+            display(" you rolled a " + currentRoll +  "\n" + "you won!" +  (calcPayment(firstLineOdds, firstLineBet) + (calcPayment(secondLineBet,secondLineOdds))));
+            deposit(calcPayment(firstLineBet, firstLineOdds));
+            deposit(calcPayment(otherBet, otherBetodds ));
+//        }   else if () {  if other bet
+//            display("");
+        }
     }
-    public void stage3Play(){
-
-    }
-
-    public Integer calcPayment(Integer bet, Integer odds) {
-        return null;
-    }
-
 
     @Override
     void endGame() {
@@ -117,6 +131,19 @@ public class Craps extends Games implements GamblerGameInterface {
         crapsPlayer.player.setAccount(temp + num);
     }
 
+    public Double calcPayment(Double bet, Double odds) {
+        return bet *odds;
+    }
+
+
+    public Boolean hasMoenytoBet(Double bet, Player player) {
+        if (bet > player.getAccount()){
+            return false;
+        } else return  true;
+    }
+
+
+    /*----Getters/Setters------*/
 
     public Integer getOnNumber() {
         return onNumber;
@@ -150,18 +177,24 @@ public class Craps extends Games implements GamblerGameInterface {
         this.otherBet = otherBet;
     }
 
-    public CrapsPlayer getCrapsPlayer() {
-        return crapsPlayer;
+//    public CrapsPlayer getCrapsPlayer() {
+//        return crapsPlayer;
+//    }
+
+    public Integer getStage() {
+        return stage;
     }
 
-    public Double calcPayment(Double bet, Double odds) {
-        return bet *odds;
+    public Integer getCurrentRoll() {
+        return currentRoll;
+    }
+
+    public void setCurrentRoll(Integer num) {
+        this.currentRoll = num;
     }
 
     @Override
     void nextTurn() {
     }
-
-
 
 }
