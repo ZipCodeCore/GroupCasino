@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class BlackJack_Player extends Player implements Gambling, Dealer {
+public class BlackJack_Player extends Player implements Gambling {
 
     private Person player;
     Integer bet;
-    Hand playerHand = dealHand(1);
+    
 
 
 
@@ -15,12 +15,12 @@ public class BlackJack_Player extends Player implements Gambling, Dealer {
     public Boolean didWin(){ return false;}
     public void makeMove(){}
     public void leaveGame(){}
-    public Boolean canSplit(){
-        ArrayList<Card> playerHand =  new ArrayList<>(5);
+  /*  public Boolean canSplit(){
+
         if(playerHand.get(0) == playerHand.get(1)){
             return true;
         }
-        return false;}
+        return false;}*/
     public void split() {}
     public void hitOrStay() {}
     public void doubleDown() {}
