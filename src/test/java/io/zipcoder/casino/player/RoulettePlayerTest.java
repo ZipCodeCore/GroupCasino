@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.player;
 
 import io.zipcoder.casino.player.RoulettePlayer;
 import org.junit.Assert;
@@ -14,7 +14,11 @@ public class RoulettePlayerTest {
 
     @Test
     public void cashoutTest() {
-
-
+    this.roulettePlayer.cashout();
+    Double actual = this.roulettePlayer.getAccount();
+    Assert.assertEquals(2.0,actual.doubleValue(),0.0);
     }
+
+
+
 }

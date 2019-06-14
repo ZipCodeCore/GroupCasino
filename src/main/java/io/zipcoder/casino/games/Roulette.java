@@ -2,6 +2,8 @@ package io.zipcoder.casino.games;
 
 import io.zipcoder.casino.player.RoulettePlayer;
 
+import java.util.Random;
+
 public class Roulette extends Games implements GamblerGameInterface {
     String betType; //   red/back - odd / even / number
     RoulettePlayer roulettePlayer = new RoulettePlayer();
@@ -17,6 +19,7 @@ public class Roulette extends Games implements GamblerGameInterface {
     @Override
     void endGame() {
         // end game and go back to main menu
+
     }
 
     @Override
