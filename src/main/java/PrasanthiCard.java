@@ -1,6 +1,6 @@
 public class PrasanthiCard {
     public PrasanthiCard() {
-
+        System.out.println(drawCard(Rank.ACE.getRankString(), Suit.SPADE.getSuitImage()));
     }
 
     private String drawBack() {

@@ -6,5 +6,6 @@ public class Dice {
 
     public Integer tossAndSum() {return 2; }
     public void toss() {}
+    public Integer[] getDice() { return dice; }
 
 }
