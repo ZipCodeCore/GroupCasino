@@ -4,6 +4,7 @@ public class Card {
     private CardValue cardValue;
     private Suit suit;
 
+    public Card (){}
     public Card (CardValue cv, Suit s) {
         this.cardValue = cv;
         this.suit = s;
