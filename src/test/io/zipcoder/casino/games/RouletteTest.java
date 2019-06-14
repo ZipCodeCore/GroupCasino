@@ -1,4 +1,4 @@
-package java.io.zipcoder.casino.games;
+package io.zipcoder.casino.games;
 
 import io.zipcoder.casino.games.Roulette;
 import io.zipcoder.casino.player.Player;

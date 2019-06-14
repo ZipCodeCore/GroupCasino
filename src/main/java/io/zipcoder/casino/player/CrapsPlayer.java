@@ -6,10 +6,7 @@ import io.zipcoder.casino.gameTools.Card;
 
 
 public class CrapsPlayer extends Player implements GamblerInterface {
-
     public Player player;
-
-
 
     public CrapsPlayer(){};
 
@@ -24,6 +21,7 @@ public class CrapsPlayer extends Player implements GamblerInterface {
     }
 
     public void bet(Double bet) {
+
     }
 
     public void betType(String betType) {
@@ -35,6 +33,6 @@ public class CrapsPlayer extends Player implements GamblerInterface {
     }
 
     public void displayAccoutBal() {
-
+        System.out.println(player.getAccount());
     }
 }

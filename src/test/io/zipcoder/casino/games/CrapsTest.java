@@ -1,24 +1,25 @@
-package java.io.zipcoder.casino.games;
+package io.zipcoder.casino.games;
 
 import io.zipcoder.casino.Handler;
 import io.zipcoder.casino.games.Craps;
+import io.zipcoder.casino.games.CrapsDataHandler;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class CrapsTest {
-
+CrapsDataHandler data = new CrapsDataHandler();
 
     @Test
     public void calcPayment() {
         Craps craps = new Craps();
 
         craps.setOdds(2.0);
-        craps.setFirstLineBet(10.0);
+        data.setFirstLineBet(10.0);
 
         Double expected = 20.0;
-        Double actual = craps.calcPayment(craps.getOdds(), craps.getFirstLineBet());
+        Double actual = craps.calcPayment(craps.getOdds(), data.getFirstLineBet());
 
         Assert.assertEquals(expected, actual);
     }
@@ -33,120 +34,6 @@ public class CrapsTest {
 
         Assert.assertEquals(expected, actual);
     }
-
-
-    @Test
-    public void getOnNumber() {
-        Handler handler = new Handler();
-        handler.createPlayer("", 100.0);
-        Craps craps = new Craps();
-
-        craps.setOnNumber(10);
-
-        Integer expected = 10;
-        Integer actual = craps.getOnNumber();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setOnNumber() {
-        Handler handler = new Handler();
-        handler.createPlayer("", 100.0);
-        Craps craps = new Craps();
-
-        craps.setOnNumber(8);
-
-        Integer expected = 8;
-        Integer actual = craps.getOnNumber();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getFirstLineBet() {
-        Handler handler = new Handler();
-        handler.createPlayer("", 100.0);
-        Craps craps = new Craps();
-
-        craps.setFirstLineBet(10.0);
-
-        Double expected = 10.0;
-        Double actual = craps.getFirstLineBet();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setFirstLineBet() {
-        Handler handler = new Handler();
-        handler.createPlayer("", 100.0);
-        Craps craps = new Craps();
-
-        craps.setFirstLineBet(10.0);
-
-        Double expected = 10.0;
-        Double actual = craps.getFirstLineBet();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getSecondLineBet() {
-        Handler handler = new Handler();
-        handler.createPlayer("", 100.0);
-        Craps craps = new Craps();
-
-        craps.setSecondLineBet(10.0);
-
-        Double expected = 10.0;
-        Double actual = craps.getSecondLineBet();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setSecondLineBet() {
-        Handler handler = new Handler();
-        handler.createPlayer("", 100.0);
-        Craps craps = new Craps();
-
-        craps.setSecondLineBet(10.0);
-
-        Double expected = 10.0;
-        Double actual = craps.getSecondLineBet();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getOtherBet() {
-        Handler handler = new Handler();
-        handler.createPlayer("", 100.0);
-        Craps craps = new Craps();
-
-        craps.setFieldBet(10.0);
-
-        Double expected = 10.0;
-        Double actual = craps.getFieldBet();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setOtherBet() {
-        Handler handler = new Handler();
-        handler.createPlayer("", 100.0);
-        Craps craps = new Craps();
-
-        craps.setFieldBet(10.0);
-
-        Double expected = 10.0;
-        Double actual = craps.getFieldBet();
-
-        Assert.assertEquals(expected, actual);
-    }
-
 
     @Test
     public void withdraw() {
@@ -197,8 +84,11 @@ public class CrapsTest {
 
     @Test
     public void stage0PlayPlay() {
-        Craps craps = new Craps();
-        craps.stage0Play("");
+        Handler handler = new Handler();
+        Player player = handler.createPlayer("", 1000.0);
+        CrapsPlayer crapsPlayer = new CrapsPlayer(player);
+        Craps craps = new Craps(crapsPlayer);
+        craps.stage0Play("play");
 
         Integer actual = 1;
         Integer expected = craps.getStage();
@@ -244,12 +134,11 @@ public class CrapsTest {
         CrapsPlayer crapsPlayer = new CrapsPlayer(player);
         Craps craps = new Craps(crapsPlayer);
 
-        craps.setCurrentRoll(10);
-        craps.stage1Play(10.0);
-        Integer currentRoll = craps.getCurrentRoll();
+        data.setCurrentRoll(10);
+        craps.stage1Play(100.0);
 
-        Integer actual = 10;
-        Integer expected = craps.getOnNumber();
+        Integer actual = 2;
+        Integer expected = craps.getStage();
 
         Assert.assertEquals(expected, actual);
 
@@ -262,7 +151,7 @@ public class CrapsTest {
         CrapsPlayer crapsPlayer = new CrapsPlayer(player);
         Craps craps = new Craps(crapsPlayer);
 
-        craps.setCurrentRoll(2);
+        data.setCurrentRoll(7);
         craps.stage1Play(10.0);
 
 
@@ -280,7 +169,7 @@ public class CrapsTest {
         CrapsPlayer crapsPlayer = new CrapsPlayer(player);
         Craps craps = new Craps(crapsPlayer);
 
-        craps.setCurrentRoll(7);
+        data.setCurrentRoll(7);
         craps.stage1Play(10.0);
 
 
@@ -298,8 +187,8 @@ public class CrapsTest {
         CrapsPlayer crapsPlayer = new CrapsPlayer(player);
         Craps craps = new Craps(crapsPlayer);
 
-        craps.setOnNumber(8);
-        craps.setCurrentRoll(8);
+        data.setOnNumber(8);
+        data.setCurrentRoll(8);
         craps.stage2Play(10.0, 10.0, 5);
 
 
@@ -318,7 +207,7 @@ public class CrapsTest {
         CrapsPlayer crapsPlayer = new CrapsPlayer(player);
         Craps craps = new Craps(crapsPlayer);
 
-        craps.setCurrentRoll(7);
+        data.setCurrentRoll(7);
         craps.stage2Play(10.0, 10.0, 5);
 
         Integer actual = 0;
