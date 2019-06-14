@@ -1,6 +1,8 @@
 package io.zipcoder.casino.player;
 
-import javax.smartcardio.Card;
+
+import io.zipcoder.casino.gameTools.Card;
+
 import java.util.ArrayList;
 ///
 

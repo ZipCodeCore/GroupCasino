@@ -1,6 +1,8 @@
 package io.zipcoder.casino.player;
 
 import io.zipcoder.casino.gameTools.Dice;
+import io.zipcoder.casino.gameTools.Card;
+
 
 
 public class CrapsPlayer extends Player implements GamblerInterface {
