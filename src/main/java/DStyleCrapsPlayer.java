@@ -1,22 +1,22 @@
 public class DStyleCrapsPlayer extends Player{
     Person person;
-    Chips chip;
     Integer chips;
     public DStyleCrapsPlayer(Person player) {
         this.person=player;
-        chip = new Chips(person.getWallet().doubleValue());
-         chips=chip.getChips();
+        House house=new House(2);
+        chips=house.moneyToChips(20.0);
+
     }
 
     public Integer roll(Dice dice){
        Integer total= dice.tossAndSum();
         return total;
     }
-    public Chips numOfChips(){
+    public Integer numOfChips(){
         if (person.getWallet()==0)
             return null;
         else
-        return chip;
+        return chips;
         
     }
     public Integer bet(Integer betChips){

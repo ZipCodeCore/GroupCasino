@@ -42,6 +42,6 @@ public class DStyleCrapsPlayerTest {
         Integer totalChips=0;
        //if( dc.didWin(player1)==true)
         totalChips=player[0].bet(4);
-       Assert.assertEquals(96, totalChips,0.0001);
+       Assert.assertEquals(4, totalChips,0.0001);
     }
 }
