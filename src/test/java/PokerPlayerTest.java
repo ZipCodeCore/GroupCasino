@@ -11,11 +11,9 @@ public class PokerPlayerTest {
 
     @Before
     public void setUp() throws Exception {
-<<<<<<< HEAD
+
         PokerPlayer player = new PokerPlayer(new Person(100.0,"John", 21));
 
-=======
->>>>>>> 8e61c5f62b0f715ab55530f1341a4d94f375bb19
     }
 
     @After
