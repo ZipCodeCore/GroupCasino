@@ -6,16 +6,18 @@ import io.zipcoder.casino.utilities.Console;
 import java.util.HashMap;
 
 public class CrapsDataHandler {
+    private String quit;
     private Console console;
     private Integer onNumber;
     private Double firstLineBet;
     private Double secondLineBet;
-    private Double fieldBet;
-    private Integer fieldBetType;
+    private Double fieldBet = 0.0;
+    private Integer fieldBetType =0;
     private Double firstLineOdds = 2.0;
     private Double secondLineOdds = 2.0;
     private Integer currentRoll;
     private String makePropBet;
+    private Integer stage;
     private HashMap<Integer , Double> fieldOdds = new HashMap();
     public Double getfieldOdds(Integer key) {
         return  fieldOdds.get(key);
@@ -119,7 +121,20 @@ public class CrapsDataHandler {
         this.makePropBet = makePropBet;
     }
 
+    public String getQuit() {
+        return quit;
+    }
 
+    public void setQuit(String quit) {
+        this.quit = quit;
+    }
 
+    public Integer getStage() {
+        return stage;
+    }
+
+    public void setStage(Integer stage) {
+        this.stage = stage;
+    }
 
 }

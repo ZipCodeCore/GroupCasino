@@ -1,37 +1,36 @@
 package io.zipcoder.casino;
 import io.zipcoder.casino.games.*;
-import io.zipcoder.casino.player.CardGamePlayer;
 import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.player.RoulettePlayer;
 import io.zipcoder.casino.utilities.Console;
 
-import javax.smartcardio.Card;
-
 //
 public class Handler {
     private Console console = new Console(System.in, System.out);
     public Player player;
-    private Integer intergerInput;
+    private Integer integerInput;
     private String name = "";
     private Double account = 0.0;
+    private Boolean hasStarted = false;
 
 
 public void run() {
-    if (player ==null) {
-    getNameInput();
-    getAccountBalanceInput();
-    createPlayer(name, account);}
+    if (!hasStarted) {
+        getNameInput();
+        getAccountBalanceInput();
+        createPlayer(name, account);
+    }
 
-
+    hasStarted = true;
 
     System.out.println("0 blackjack -- 1 go fish -- 2 roulette -- 3 craps -- 4 slots ");
     getGameInput();
 
 
 
-    switch (intergerInput) {
+    switch (integerInput) {
         case 0 :
             Blackjack blackjack = new Blackjack();
             break;
@@ -68,10 +67,10 @@ public void run() {
     }
 
     public void getAccountBalanceInput() {
-       this.account = console.getDoubleInput("How much do you want to depoist in your account?");
+       this.account = console.getDoubleInput("How much do you want to deposit in your account?");
     }
 
     public void getGameInput() {
-        this.intergerInput = console.getIntegerInput("What game would you like to play?");
+        this.integerInput = console.getIntegerInput("What game would you like to play?");
     }
 }

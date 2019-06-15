@@ -75,7 +75,7 @@ public class CrapsTest {
         craps.stage0Play("play");
 
         Integer actual = 1;
-        Integer expected = craps.getStage();
+        Integer expected = craps.data.getStage();
 
         Assert.assertEquals(expected, actual);
     }
@@ -95,7 +95,7 @@ public class CrapsTest {
         craps.stage0Play("234234");
 
         Integer actual = 0;
-        Integer expected = craps.getStage();
+        Integer expected = craps.data.getStage();
 
         Assert.assertEquals(expected, actual);
     }
@@ -109,7 +109,7 @@ public class CrapsTest {
         craps.stage1Play(10.0);
 
         Integer actual = 2;
-        Integer expected = craps.getStage();
+        Integer expected = craps.data.getStage();
 
         Assert.assertEquals(expected, actual);
 
@@ -121,7 +121,7 @@ public class CrapsTest {
         craps.stage1Play(10.0);
 
         Integer actual = 0;
-        Integer expected = craps.getStage();
+        Integer expected = craps.data.getStage();
 
         Assert.assertEquals(expected, actual);
 
@@ -148,7 +148,7 @@ public class CrapsTest {
         craps.stage2Play(10.0, 10.0, 5);
 
 
-        Double actual = 250.0;
+        Double actual = 1100.0;
         Double expected = player.getAccount();
 
         Assert.assertEquals(expected, actual);
@@ -176,7 +176,7 @@ public class CrapsTest {
         craps.stage2Play(10.0, 10.0, 5);
 
         Integer actual = 1;
-        Integer expected = craps.getStage();
+        Integer expected = craps.data.getStage();
 
         Assert.assertEquals(expected, actual);
 

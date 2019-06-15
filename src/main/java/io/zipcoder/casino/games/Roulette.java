@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Roulette extends Games implements GamblerGameInterface {
     String betType; //   red/back - odd / even / number
-    private RoulettePlayer roulettePlayer;
+    protected RoulettePlayer roulettePlayer;
     private Double currentBet;
 
     String[] redArray = {"2","4","6","8","10","12","14","16","18","20","22","24","26","28","30","32","34","36"};
