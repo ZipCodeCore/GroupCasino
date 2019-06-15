@@ -60,6 +60,12 @@ public class RouletteTest {
         //this.roulette.updateAccount(1.5);
         Double actual = this.roulette.roulettePlayer.getAccount();
         Assert.assertEquals(1.5, actual.doubleValue(), 0.0);
+<<<<<<< Updated upstream
+=======
+
+
+    }
+>>>>>>> Stashed changes
 
 
     }
