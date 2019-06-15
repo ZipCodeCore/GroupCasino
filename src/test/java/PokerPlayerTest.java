@@ -79,8 +79,14 @@ public class PokerPlayerTest {
     public void raiseChip() {
         Integer expected = originalChips-50;
         player.raise(30,20);
-        Assert.assertEquals(50, (int) player.getChip());
+        Assert.assertEquals(expected, player.getChip());
     }
+
+    @Test (expected = NegativeBetException.class)
+    public void raiseNegative() {
+        player.raise(30,-20);
+    }
+
 
     @Test
     public void smallBlind() {

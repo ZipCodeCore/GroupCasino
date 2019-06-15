@@ -24,7 +24,9 @@ public class PokerPlayer extends Player implements Gambling {
         folded = true;
     }
 
-    public Integer raise(Integer lastPlayerBet, Integer amountToRaise) {
+    public Integer raise(Integer lastPlayerBet, Integer amountToRaise) throws NegativeBetException {
+        if (amountToRaise < 0)
+            throw new NegativeBetException();
         return bet(lastPlayerBet + amountToRaise);
     }
 
@@ -51,7 +53,7 @@ public class PokerPlayer extends Player implements Gambling {
 
     public Integer bet(Integer numOfChipsToBet) throws NegativeBetException, NotEnoughChipException {
         if (numOfChipsToBet < 0)
-            throw new NegativeBetException("Invalid number of Chips");
+            throw new NegativeBetException();
         if(numOfChipsToBet > chips)
             throw new NotEnoughChipException("Not enough Chips");
         chips -= numOfChipsToBet;
