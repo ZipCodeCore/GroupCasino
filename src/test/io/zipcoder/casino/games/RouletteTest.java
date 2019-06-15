@@ -2,6 +2,7 @@ package io.zipcoder.casino.games;
 
 import io.zipcoder.casino.games.Roulette;
 import io.zipcoder.casino.player.Player;
+import io.zipcoder.casino.player.RoulettePlayer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +13,8 @@ public class RouletteTest {
 
     @Before //it will get invoked before each test method
     public void setup() {
-        this.roulette = new Roulette();
+        RoulettePlayer roulettePlayer = new RoulettePlayer("Player", 20d);
+        this.roulette = new Roulette(roulettePlayer);
     }
 
 

@@ -4,6 +4,7 @@ import io.zipcoder.casino.player.CardGamePlayer;
 import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
+import io.zipcoder.casino.player.RoulettePlayer;
 import io.zipcoder.casino.utilities.Console;
 
 import javax.smartcardio.Card;
@@ -40,7 +41,9 @@ public void run() {
             goFish.runGame();
             break;
         case 2:
-            Roulette roulette = new Roulette();
+            RoulettePlayer roulettePlayer = new RoulettePlayer(name, account);
+            Roulette roulette = new Roulette(roulettePlayer);
+            roulette.play();
             break;
         case 3:
             CrapsPlayer crapsPlayer = new CrapsPlayer(player);
@@ -57,6 +60,7 @@ public void run() {
 
     public Player createPlayer (String name, Double account) {
         return player = new Player(name, account);
+
     }
 
     public void getNameInput() {
