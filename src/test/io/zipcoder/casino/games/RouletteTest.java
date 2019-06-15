@@ -62,6 +62,5 @@ public class RouletteTest {
         Assert.assertEquals(1.5, actual.doubleValue(), 0.0);
 
 
-
     }
 }

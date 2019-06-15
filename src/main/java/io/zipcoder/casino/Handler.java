@@ -51,7 +51,7 @@ public void run(Handler handler) {
         case 4:
             SlotsPlayer slotsPlayer = new SlotsPlayer(player);
             Slots slots = new Slots(slotsPlayer, console);
-//            slots.runGame();
+            slots.runGame();
             break;
         default:
 
