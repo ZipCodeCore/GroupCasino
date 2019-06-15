@@ -152,8 +152,8 @@ public class Slots extends Games implements GamblerGameInterface {
 
     @Override
     void endGame() {
-        Handler handler = new Handler();
-        handler.run();
+//        Handler handler = new Handler();
+//        handler.run();
     }
 
     @Override
