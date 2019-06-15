@@ -1,8 +1,8 @@
 package io.zipcoder.casino.player;
 
 public class Player {
-private String name;
-private Double account;
+private String name = "Elvis";
+private Double account = 0.0;
 private Boolean isPlaying = false;
 
     public Boolean getPlaying() {
@@ -15,6 +15,14 @@ private Boolean isPlaying = false;
 
 
     public Player(){};
+
+    public Player(Double account) {
+        this.account = account;
+    }
+
+    public Player(String name) {
+        this.name = name;
+    }
 
     public Player(String name, Double account) {
         this.account = account;
