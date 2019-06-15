@@ -12,8 +12,8 @@ public class Craps extends Games implements GamblerGameInterface {
     private CrapsPlayer crapsPlayer;
     public CrapsDataHandler data = new CrapsDataHandler();
     private Integer stage;
-    private Boolean comeFirstRound = true;
-    private Boolean passFirstRound = true;
+//    private Boolean comeFirstRound = true;
+//    private Boolean passFirstRound = true;
 
 
 
@@ -44,24 +44,27 @@ public class Craps extends Games implements GamblerGameInterface {
                     stage0Play(input);
                     break;
                 case 1:
-                    if (comeFirstRound) {
-                        data.setFirstLineBet(data.getConsole().getDoubleInput("Let's get started! \n" + ""+"Place Your Come bets!"));
-                    }
+//                    if (comeFirstRound) {
+                        data.setFirstLineBet(data.getConsole().getDoubleInput("Let's get started! \n Losing rolls: [2] [3] [12]. \n Winning rolls: [7] [11]. \n Any other roll becomes the on number\n" + "\n"+ "Place Your bets!"));
+                    //}
                     if(hasMoenytoBet(data.getFirstLineBet(), crapsPlayer.player)){
                         data.setCurrentRoll(crapsPlayer.roll());
                         stage1Play(data.getFirstLineBet());
                     }
                     break;
                 case 2:
-                    if(passFirstRound) {
-                        data.setSecondLineBet(data.getConsole().getDoubleInput(" Make your passline bets!"));
-                        data.setFieldBetType(data.getConsole().getIntegerInput("What prop number bet do you want to make?"));
-                        data.setFieldBet(data.getConsole().getDoubleInput("how much do you want to bet on this?"));
-                    }
-                    if(hasMoenytoBet(data.getSecondLineBet() + data.getFieldBet(), crapsPlayer.player)){
-                        data.setCurrentRoll(crapsPlayer.roll());
-                        stage2Play(data.getSecondLineBet(), data.getFieldBet(), data.getFieldBetType());
-                        }
+//                    if(passFirstRound) {
+                        data.setSecondLineBet(data.getConsole().getDoubleInput("Winning rolls: [" + data.getOnNumber() + "] \n Make your passline bets!"));
+                        data.setMakePropBet(data.getConsole().getStringInput("Would you like to make a prop bet"));
+                        if (data.getMakePropBet().toLowerCase().equals("yes")) {
+                            data.setFieldBetType(data.getConsole().getIntegerInput("What prop bet do you want to make?"));
+                            data.setFieldBet(data.getConsole().getDoubleInput("how much do you want to bet on this?"));
+                        } else {}
+                    //}
+                        //if (hasMoenytoBet(data.getSecondLineBet() + data.getFieldBet(), crapsPlayer.player)) {
+                            data.setCurrentRoll(crapsPlayer.roll());
+                            stage2Play(data.getSecondLineBet(), data.getFieldBet(), data.getFieldBetType());
+                        //}
                     break;
             }
         }
@@ -85,15 +88,15 @@ public class Craps extends Games implements GamblerGameInterface {
 
 
     public void stage1Play(Double firstLineBet){
-        if (comeFirstRound)
+       // if (comeFirstRound)
         withdraw(firstLineBet);
-        comeFirstRound= false;
+        //comeFirstRound= false;
 
         if(data.getCurrentRoll().equals(2) || data.getCurrentRoll().equals(3) || data.getCurrentRoll().equals(12)) {
             display(" you rolled a " + data.getCurrentRoll() +  "\n" + "Sorry you crapped out!  \n you now have " + crapsPlayer.player.getAccount());
-            stage = 0;
-            comeFirstRound = true;
-            passFirstRound = true;
+            stage = 1;
+           // comeFirstRound = true;
+           // passFirstRound = true;
         } else if (data.getCurrentRoll().equals(7) || data.getCurrentRoll().equals(11)) {
             deposit(calcPayment(firstLineBet, data.getFirstLineOdds()));
             display(" you rolled a " + data.getCurrentRoll() +  "\n" + "you won " +  calcPayment(data.getFirstLineOdds(), firstLineBet) + "! you now have " + crapsPlayer.player.getAccount());
@@ -111,16 +114,17 @@ public class Craps extends Games implements GamblerGameInterface {
 
 
     public void stage2Play(Double secondLineBet, Double fieldBet, Integer fieldBetNumber ){
-        if(passFirstRound) {
+        //if(passFirstRound) {
             withdraw(secondLineBet);
             withdraw(fieldBet);
-        }
-        passFirstRound = false;
+        //}
+        //passFirstRound = false;
+
         if(data.getCurrentRoll().equals(7)) {
             display(" you rolled a " + data.getCurrentRoll() +  "\n" + "Sorry you crapped out!  \n you now have " + crapsPlayer.player.getAccount());
-            stage = 0;
-            comeFirstRound = true;
-            passFirstRound = true;
+            stage = 1;
+            //comeFirstRound = true;
+            //passFirstRound = true;
         } else if (data.getCurrentRoll().equals(fieldBetNumber)) {
             Double wins = calcPayment(fieldBet, data.getfieldOdds(fieldBetNumber));
             deposit(wins);
@@ -132,7 +136,6 @@ public class Craps extends Games implements GamblerGameInterface {
         } else {
             display("Excuse me, I didn't understand");
         }
-
     }
 
     @Override

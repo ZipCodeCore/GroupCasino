@@ -15,9 +15,8 @@ public class CrapsDataHandler {
     private Double firstLineOdds = 2.0;
     private Double secondLineOdds = 2.0;
     private Integer currentRoll;
+    private String makePropBet;
     private HashMap<Integer , Double> fieldOdds = new HashMap();
-
-
     public Double getfieldOdds(Integer key) {
         return  fieldOdds.get(key);
     }
@@ -110,6 +109,14 @@ public class CrapsDataHandler {
 
     public void setCurrentRoll(Integer currentRoll) {
         this.currentRoll = currentRoll;
+    }
+
+    public String getMakePropBet() {
+        return makePropBet;
+    }
+
+    public void setMakePropBet(String makePropBet) {
+        this.makePropBet = makePropBet;
     }
 
 

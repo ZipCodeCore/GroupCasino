@@ -175,7 +175,7 @@ public class CrapsTest {
         craps.data.setCurrentRoll(7);
         craps.stage2Play(10.0, 10.0, 5);
 
-        Integer actual = 0;
+        Integer actual = 1;
         Integer expected = craps.getStage();
 
         Assert.assertEquals(expected, actual);
