@@ -18,11 +18,6 @@ public class PalacePlayer implements Dealer{
     }
 
     @Override
-    public Hand dealBlackJackHand(BlackJack_Player player) {
-        return null;
-    }
-
-    @Override
     public Card dealCard(Integer numberOfCards) {
         return null;
     }
