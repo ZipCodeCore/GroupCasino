@@ -1,6 +1,8 @@
 package io.zipcoder.casino.games;
 
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import io.zipcoder.casino.Handler;
+import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,11 +10,12 @@ import static org.junit.Assert.*;
 
 public class CrapsDataHandlerTest {
     CrapsDataHandler data = new CrapsDataHandler();
+    Handler handler= new Handler();
 
     @Test
     public void getOnNumber() {
         Handler handler = new Handler();
-        handler.createPlayer("", 100.0);
+
         Craps craps = new Craps();
 
         data.setOnNumber(10);
@@ -121,7 +124,6 @@ public class CrapsDataHandlerTest {
         Assert.assertEquals(expected, actual);
     }
 
-
     @Test
     public void getFirstLineOdds() {
         data.setFirstLineOdds(10.0);
@@ -158,4 +160,54 @@ public class CrapsDataHandlerTest {
         Assert.assertEquals(expected,actual);
     }
 
+    @Test
+    public void getQuit() {
+        data.setQuit("yes");
+        String actual = data.getQuit();
+        String expected = "yes";
+
+        Assert.assertEquals(expected,actual);
+
+    }
+
+    @Test
+    public void setQuit() {
+        data.setQuit("yes");
+        String actual = data.getQuit();
+        String expected = "yes";
+
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void getMakePropBet() {
+        data.setMakePropBet("no");
+        String actual = data.getMakePropBet();
+        String expected = "no";
+
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void setMakePropBet() {
+        data.setMakePropBet("no");
+        String actual = data.getMakePropBet();
+        String expected = "no";
+
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void getConsole() {
+        Console actual = data.getConsole();
+        Console expected = handler.console;
+    }
+
+    @Test
+    public void setConsole() {
+        data.setConsole(handler.console);
+        Console actual = data.getConsole();
+        Console expected = handler.console;
+
+    }
 }

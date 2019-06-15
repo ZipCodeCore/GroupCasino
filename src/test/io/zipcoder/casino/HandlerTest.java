@@ -22,4 +22,31 @@ public class HandlerTest {
 
     }
 
+
+    @Test
+    public void testAccountInputneg() {
+        Handler handler = new Handler();
+        Boolean actual = handler.testAccountInput(-2445.0);
+        Boolean expeceted = false;
+
+        Assert.assertEquals(expeceted,actual);
+    }
+
+    @Test
+    public void testAccountInputOver() {
+        Handler handler = new Handler();
+        Boolean actual = handler.testAccountInput(Double.MAX_VALUE+10);
+        Boolean expeceted = false;
+
+        Assert.assertEquals(expeceted,actual);
+    }
+
+    @Test
+    public void testAccountInputHappy() {
+        Handler handler = new Handler();
+        Boolean actual = handler.testAccountInput(1000.0);
+        Boolean expeceted = true;
+
+        Assert.assertEquals(expeceted,actual);
+    }
 }

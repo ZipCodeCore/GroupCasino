@@ -6,22 +6,36 @@ import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.player.RoulettePlayer;
 import io.zipcoder.casino.utilities.Console;
 
+
 //
 public class Handler {
-    private Console console = new Console(System.in, System.out);
+    public Console console = new Console(System.in, System.out);
     public Player player;
     private Integer integerInput;
     private String name = "";
     private Double account = 0.0;
+    private Boolean accoutIsSet = false;
     private Boolean hasStarted = false;
+    private Double tempDeposit;
+
 
 
 public void run() {
     if (!hasStarted) {
         getNameInput();
-        getAccountBalanceInput();
-        createPlayer(name, account);
+
+        while (!accoutIsSet){
+            getAccountBalanceInput();
+
+            if (testAccountInput(tempDeposit)) {
+                account = tempDeposit;
+                accoutIsSet= true;
+            } else {
+                console.println("Invalid input");}
+            createPlayer(name, account);
+        }
     }
+
 
     hasStarted = true;
 
@@ -53,13 +67,13 @@ public void run() {
             Slots slots = new Slots();
             break;
         default:
+
             System.out.println("you blew it");
     }
 }
 
     public Player createPlayer (String name, Double account) {
         return player = new Player(name, account);
-
     }
 
     public void getNameInput() {
@@ -67,7 +81,14 @@ public void run() {
     }
 
     public void getAccountBalanceInput() {
-       this.account = console.getDoubleInput("How much do you want to deposit in your account?");
+       this.tempDeposit = console.getDoubleInput("How much do you want to deposit in your account?");
+    }
+
+    public Boolean testAccountInput (Double tempDeposit) {
+        if (tempDeposit > 0 && tempDeposit < Double.MAX_VALUE) {
+            return true;
+        } else
+            return false;
     }
 
     public void getGameInput() {
