@@ -1,10 +1,18 @@
 package io.zipcoder.casino;
 import io.zipcoder.casino.games.*;
+import io.zipcoder.casino.player.CardGamePlayer;
 import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
+
 import io.zipcoder.casino.player.SlotsPlayer;
+
+import io.zipcoder.casino.player.RoulettePlayer;
+
 import io.zipcoder.casino.utilities.Console;
+
+import javax.smartcardio.Card;
+
 //
 public class Handler {
     private Console console = new Console(System.in, System.out);
@@ -15,9 +23,13 @@ public class Handler {
 
 
 public void run() {
+    if (player ==null) {
     getNameInput();
     getAccountBalanceInput();
-    createPlayer(name, account);
+    createPlayer(name, account);}
+
+
+
     System.out.println("0 blackjack -- 1 go fish -- 2 roulette -- 3 craps -- 4 slots ");
     getGameInput();
 
@@ -29,15 +41,17 @@ public void run() {
             break;
         case 1 :
             GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-            GoFish goFish = new GoFish(goFishPlayer);
-            goFish.startTheGame();
+            GoFish goFish = new GoFish(goFishPlayer, console);
+            goFish.runGame();
             break;
         case 2:
-            Roulette roulette = new Roulette();
+            RoulettePlayer roulettePlayer = new RoulettePlayer(name, account);
+            Roulette roulette = new Roulette(roulettePlayer);
+            roulette.play();
             break;
         case 3:
             CrapsPlayer crapsPlayer = new CrapsPlayer(player);
-            Craps craps = new Craps(crapsPlayer);
+            Craps craps = new Craps(crapsPlayer,console);
             craps.runGame();
             break;
         case 4:
@@ -52,6 +66,7 @@ public void run() {
 
     public Player createPlayer (String name, Double account) {
         return player = new Player(name, account);
+
     }
 
     public void getNameInput() {

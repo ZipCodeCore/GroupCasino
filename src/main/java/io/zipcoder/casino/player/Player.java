@@ -14,7 +14,7 @@ private Boolean isPlaying = false;
     }
 
 
-    public Player(){};
+    public Player(){}
 
     public Player(String name, Double account) {
         this.account = account;
