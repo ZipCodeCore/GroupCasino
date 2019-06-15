@@ -15,29 +15,13 @@ public class Handler {
     private String name = "";
     private Double account = 0.0;
     private Boolean accoutIsSet = false;
-    private Boolean hasStarted = false;
     private Double tempDeposit;
 
 
 
-public void run() {
-    if (!hasStarted) {
-        getNameInput();
-
-        while (!accoutIsSet){
-            getAccountBalanceInput();
-
-            if (testAccountInput(tempDeposit)) {
-                account = tempDeposit;
-                accoutIsSet= true;
-            } else {
-                console.println("Invalid input");}
-            createPlayer(name, account);
-        }
-    }
+public void run(Handler handler) {
 
 
-    hasStarted = true;
 
     System.out.println("0 blackjack -- 1 go fish -- 2 roulette -- 3 craps -- 4 slots ");
     getGameInput();
@@ -60,7 +44,7 @@ public void run() {
             break;
         case 3:
             CrapsPlayer crapsPlayer = new CrapsPlayer(player);
-            Craps craps = new Craps(crapsPlayer,console);
+            Craps craps = new Craps(crapsPlayer,console, handler);
             craps.runGame();
             break;
         case 4:
@@ -93,5 +77,11 @@ public void run() {
 
     public void getGameInput() {
         this.integerInput = console.getIntegerInput("What game would you like to play?");
+    }
+
+    public void setUpPlayer(){
+        getNameInput();
+        getAccountBalanceInput();
+        createPlayer(name, tempDeposit);
     }
 }

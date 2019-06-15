@@ -13,7 +13,7 @@ public class CrapsTest {
     Player player = handler.createPlayer("", 1000.0);
     CrapsPlayer crapsPlayer = new CrapsPlayer(player);
     Craps craps = new Craps(crapsPlayer);
-    CrapsDataHandler data = new CrapsDataHandler();
+
 
     @Test
     public void calcPayment() {
@@ -252,23 +252,54 @@ public class CrapsTest {
 
         craps.stage1Play(100.0);
 
-        Boolean actual = false;
-        Boolean expeceted = craps.data.getPassFirstRound();
+
+        Boolean expeceted1 = false;
+        Boolean actual1 = craps.data.getComeFirstRound();
 
         craps.resetFirstRoundState();
 
-        Boolean actual1 = true;
-        Boolean expeceted1 = craps.data.getPassFirstRound();
+        Boolean expeceted = true;
+        Boolean actual = craps.data.getComeFirstRound();
 
         Assert.assertEquals(actual,expeceted);
         Assert.assertEquals(actual1,expeceted1);
     }
 
+
     @Test
     public void checkForPropBet() {
+
+
+        Boolean actual1 = craps.checkForPropBet("yes");;
+        Boolean expeceted = true;
+        Assert.assertEquals(actual1,expeceted);
+
     }
 
     @Test
+    public void checkForPropBetUppercase() {
+
+
+        Boolean actual1 = craps.checkForPropBet("Yes");;
+        Boolean expeceted = true;
+        Assert.assertEquals(actual1,expeceted);
+
+    }
+
+    @Test
+    public void checkForPropBetNum() {
+
+
+        Boolean actual1 = craps.checkForPropBet("3258235");;
+        Boolean expeceted = false;
+        Assert.assertEquals(actual1,expeceted);
+
+    }
+
+
+
+    @Test
     public void keepPlayingOrQuit() {
+
     }
 }

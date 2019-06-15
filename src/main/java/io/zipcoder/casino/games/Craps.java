@@ -1,18 +1,15 @@
 package io.zipcoder.casino.games;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import com.sun.xml.internal.fastinfoset.util.CharArray;
+
 import io.zipcoder.casino.Handler;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
-import java.security.ProtectionDomain;
-import java.util.HashMap;
-import java.util.TreeMap;
 
 public class Craps extends Games implements GamblerGameInterface {
     private CrapsPlayer crapsPlayer;
+    public Handler handler;
     public CrapsDataHandler data = new CrapsDataHandler();
 
 
@@ -28,9 +25,10 @@ public class Craps extends Games implements GamblerGameInterface {
 
     }
 
-    public Craps(CrapsPlayer player, Console console) {
+    public Craps(CrapsPlayer player, Console console, Handler handler) {
         this.crapsPlayer = player;
         data.setConsole(console);
+        this.handler =handler;
         crapsPlayer.player.setPlaying(true);
         data.setStage(0);
 
@@ -150,8 +148,8 @@ public class Craps extends Games implements GamblerGameInterface {
 
     @Override
     void endGame() {
-        Handler handler = new Handler();
-        handler.run();
+
+        handler.run(handler);
     }
 
     @Override
@@ -211,7 +209,6 @@ public class Craps extends Games implements GamblerGameInterface {
                     "Prop Bet Type: " + data.getFieldBetType() + "\n" +
                     "Prob Bet: " + data.getFieldBet() + "\n" + "\n" +
                             "*-----------------------------------*\n";
-
     }
 
     protected String  displayWinningRoll(Double wins){

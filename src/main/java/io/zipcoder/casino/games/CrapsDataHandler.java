@@ -8,15 +8,15 @@ import java.util.HashMap;
 public class CrapsDataHandler {
     private String quit;
     private Console console;
-    private Integer onNumber;
+    private Integer onNumber = 0;
     private Double firstLineBet = 0.0;
     private Double secondLineBet = 0.0 ;
     private Double fieldBet = 0.0;
     private Integer fieldBetType =0;
     private Double firstLineOdds = 2.0;
     private Double secondLineOdds = 2.0;
-    private Integer currentRoll;
-    private String makePropBet;
+    private Integer currentRoll = 0;
+    private String makePropBet = "";
     private Integer stage;
     private Boolean comeFirstRound = true;
     private Boolean passFirstRound = true;
