@@ -13,8 +13,8 @@ public class GoFish extends Games {
     Console console;
     private GoFishPlayer mainPlayer;
     private GoFishPlayer otherPlayer = new GoFishPlayer();
-    private GoFishPlayer activePlayer;
-    private GoFishPlayer passivePlayer;
+    private GoFishPlayer activePlayer = new GoFishPlayer();
+    private GoFishPlayer passivePlayer = new GoFishPlayer();
     Boolean switchP = true;
 
     private boolean isPlaying = true;
@@ -33,29 +33,29 @@ public class GoFish extends Games {
 
     }
     public void runGame () {
-        console.println("Hey " + mainPlayer.getName() + "! \nWelcome to GOFISH GAME");
+        console.println("Hey " + mainPlayer.getName() + "! \nWelcome to GO FISH GAME");
         String userInput = console.getStringInput("Do you want to play?");
         if (readyToPlay(userInput)) {
             dealHands();
             while (deck.getDeck().size() > 0) {
-                    //setActivePlayer(switchP);
+                    setActivePlayer(switchP);
 
 
 
-                console.println(seeHand(mainPlayer));
+                console.println(seeHand(activePlayer));
 
-                console.println(seeHand(otherPlayer) + "other");
+                console.println(seeHand(passivePlayer) + "other");
 
 
                 String input = searchFor();
-                ArrayList temp = checkHand(input, otherPlayer);
+                ArrayList temp = checkHand(input, passivePlayer);
 
                 if (!temp.isEmpty()) {
-                    removeFromHand(temp, otherPlayer);
-                    addToHand(temp, mainPlayer);
+                    removeFromHand(temp, passivePlayer);
+                    addToHand(temp, activePlayer);
                 }
                 else {
-                    deck.dealSingleCard(mainPlayer);
+                    deck.dealSingleCard(activePlayer);
                 }
             }
         }
@@ -85,16 +85,16 @@ public class GoFish extends Games {
         player.setHand(temp);
     }
 
-//    public void setActivePlayer (Boolean isActive) {
-//        if (isActive) {
-//            mainPlayer = activePlayer;
-//            otherPlayer = passivePlayer;
-//        }
-//        else {
-//            mainPlayer = passivePlayer;
-//            otherPlayer = activePlayer;
-//        }
-//    }
+    public void setActivePlayer (Boolean isActive) {
+        if (isActive) {
+            this.mainPlayer = activePlayer;
+            this.otherPlayer = passivePlayer;
+        }
+        else {
+            this.mainPlayer = passivePlayer;
+            this.otherPlayer = activePlayer;
+        }
+    }
 
     public void update(Double amount) {
         Double result = mainPlayer.getAccount() + amount;
