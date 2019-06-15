@@ -12,6 +12,7 @@ public class Slots extends Games implements GamblerGameInterface {
     SlotsPlayer slotsPlayer;
     private Double currentBet;
     public Console console;
+    private Integer bet;
 
 
     public Player player;
@@ -29,79 +30,105 @@ public class Slots extends Games implements GamblerGameInterface {
         this.slotsPlayer = player;
         this.console = console;
     }
+//
+//    }  public static void main(String[] args) {
 
-    public static void main(String[] args) {
 
+    public void runGame() {
+        display("Welcome to the slots " + slotsPlayer.player.getName() + "! \n");
+//        Slots  = new Slots();
 
-// public void runGame() {
-//       display("Welcome to the slots " +slotsPlayer.player.getName() + "! \n");
-        Slots bestSlot = new Slots();
-
-        int max = bestSlot.characters.length;
+        int max = characters.length;
         int min = 1;
         int range = max - min + 1;
-
+        slotsPlayer.setPlaying(true);
 
         // generate random numbers within 1 to 6
-    // Random rnd = new Random();
+        // Random rnd = new Random();
         // rnd.setSeed(2L);
-        for (int i = 0; i <= 2; i++) {
-            for (int j = 0; j <= 2; j++) {
-                int rand = (int) (Math.random() * range);
-                System.out.print(bestSlot.characters[rand]);
-                bestSlot.toSave[i][j] = bestSlot.characters[rand];
-
-            }
-
-            System.out.println();
-        }
-
+        do {
+            Integer bet = console.getIntegerInput("How much would you like to bet? 1, 3 or 5?");
 //
-//      for (int i = 0; i < bestSlot.characters.length; i++) {
-//           bestSlot.checkIfWin(bestSlot.characters[i]);
+            if (validateInputBet(bet)) {
+                console.println("please, choose between 1 or 3 or 5");
+                continue;
+            }
+            //check user input here for bet
+
+            // if user input == 1||3||5
+            // ==> set useer input to bet;
+            for (int i = 0; i <= 2; i++) {
+                for (int j = 0; j <= 2; j++) {
+                    int rand = (int) (Math.random() * range);
+                    System.out.print(characters[rand]);
+                    toSave[i][j] = characters[rand];
+                }
+                System.out.println();
+            }
+//      for (int i = 0; i < .characters.length; i++) {
+//           .checkIfWin(.characters[i]);
 //      }
-//     endGame();
-          bestSlot.CheckWins();
+            CheckWins(bet);
+            System.out.println();
+            String tryAgain = console.getStringInput("do you want to play again?");
+
+            if (tryAgain.equals("no")) {
+                slotsPlayer.setPlaying(false);
+            }
+        } while (slotsPlayer.getPlaying().equals(true));
+
+
+        endGame();
+//          CheckWins();
     }
 
-    public void CheckWins() {
+    public Boolean validateInputBet(Integer bet) {
+        if (bet != 1 || bet != 3 || bet != 5) {
+            return false;
+        }
+        return true;
+    }
+
+    public Integer CheckWins(Integer bet) {
         int countPaylines = 0;
-        int bet = 5;
+        if (!validateInputBet(bet)) {
+            console.println("please, choose between 1 or 3 or 5");
 
-        if (bet >= 1) {
-            if (toSave[1][0] == toSave[1][1] && toSave[1][1] == toSave[1][2]) {
-                System.out.println();
-                System.out.println("you won horizontal middle");
-                countPaylines++;
+
+            if (bet >= 1) {
+                if (toSave[1][0] == toSave[1][1] && toSave[1][1] == toSave[1][2]) {
+                    System.out.println();
+                    System.out.println("you won horizontal middle");
+                    countPaylines++;
+                }
+            }
+            if (bet >= 3) {
+                if (toSave[0][0] == toSave[0][1] && toSave[0][1] == toSave[0][2]) {
+                    System.out.println();
+                    System.out.println("you won horizontal top");
+                    countPaylines++;
+                }
+                if (toSave[2][0] == toSave[2][1] && toSave[2][1] == toSave[2][2]) {
+                    System.out.println();
+                    System.out.println("you won horizontal bottom");
+                    countPaylines++;
+                }
+            }
+            if (bet >= 5) {
+                if (toSave[2][0] == toSave[1][1] && toSave[1][1] == toSave[0][2]) {
+                    System.out.println();
+                    System.out.println("you won diagonally right");
+                    countPaylines++;
+                }
+                if (toSave[0][0] == toSave[1][1] && toSave[1][1] == toSave[2][2]) {
+                    System.out.println();
+                    System.out.println("you won diagonally left ");
+                    countPaylines++;
+                }
+
             }
         }
-        if (bet >= 3) {
-            if (toSave[0][0] == toSave[0][1] && toSave[0][1] == toSave[0][2]) {
-                System.out.println();
-                System.out.println("you won horizontal top");
-                countPaylines++;
-            }
-            if (toSave[2][0] == toSave[2][1] && toSave[2][1] == toSave[2][2]) {
-                System.out.println();
-                System.out.println("you won horizontal bottom");
-                countPaylines++;
-            }
-        }
-        if (bet >= 5) {
-            if (toSave[2][0] == toSave[1][1] && toSave[1][1] == toSave[0][2]) {
-                System.out.println();
-                System.out.println("you won diagonally right");
-                countPaylines++;
-            }
-            if (toSave[0][0] == toSave[1][1] && toSave[1][1] == toSave[2][2]) {
-                System.out.println();
-                System.out.println("you won diagonally left ");
-                countPaylines++;
-            }
-
-        }
-
-//        bestSlots.
+        return countPaylines;
     }
 
 

@@ -43,7 +43,7 @@ public void run() {
         case 4:
             SlotsPlayer slotsPlayer = new SlotsPlayer(player);
             Slots slots = new Slots(slotsPlayer, console);
-//            slots.runGame();
+            slots.runGame();
             break;
         default:
             System.out.println("you blew it");
