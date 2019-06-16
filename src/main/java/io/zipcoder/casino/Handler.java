@@ -7,6 +7,8 @@ import io.zipcoder.casino.player.RoulettePlayer;
 import io.zipcoder.casino.player.SlotsPlayer;
 import io.zipcoder.casino.utilities.Console;
 
+import java.util.Scanner;
+
 
 //
 public class Handler {
@@ -42,8 +44,18 @@ while (true) {
         case 2:
             RoulettePlayer roulettePlayer = new RoulettePlayer(player.getName(), player.getAccount());
             Roulette roulette = new Roulette(roulettePlayer);
-            roulette.runGame();
-            player.setAccount(roulettePlayer.getAccount());
+            Scanner scanner = new Scanner(System.in);
+            boolean isNextRound = false;
+            do {
+                roulette.runGame();
+                player.setAccount(roulettePlayer.getAccount());
+                String continuePlaying = console.getStringInput("Do you want to continue playing (Y/N)?");
+                if (continuePlaying != null && continuePlaying.equalsIgnoreCase("Y")) {
+                    isNextRound = true;
+                } else {
+                    isNextRound = false;
+                }
+            } while (isNextRound);
             break;
         case 3:
             CrapsPlayer crapsPlayer = new CrapsPlayer(player);
