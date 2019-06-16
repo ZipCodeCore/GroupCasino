@@ -17,23 +17,24 @@ public class Handler {
     private Double account = 0.0;
     private Boolean accoutIsSet = false;
     private Double tempDeposit;
+    public Handler handler;
 
 
 
-public void run(Handler handler) {
+public void run() {
 
 
-
-    System.out.println("0 blackjack -- 1 go fish -- 2 roulette -- 3 craps -- 4 slots ");
+while (true) {
+    System.out.println("WELCOME TO THE BIG TROUBLE CASINO \n PICK FROM ONE OF OUR GAMES \n \n 0 blackjack -- 1 go fish -- 2 roulette -- 3 craps -- 4 slots \n");
     getGameInput();
 
 
 
     switch (integerInput) {
-        case 0 :
+        case 0:
             Blackjack blackjack = new Blackjack();
             break;
-        case 1 :
+        case 1:
             GoFishPlayer goFishPlayer = new GoFishPlayer(player);
             GoFish goFish = new GoFish(goFishPlayer, console);
             goFish.runGame();
@@ -45,7 +46,7 @@ public void run(Handler handler) {
             break;
         case 3:
             CrapsPlayer crapsPlayer = new CrapsPlayer(player);
-            Craps craps = new Craps(crapsPlayer,console, handler);
+            Craps craps = new Craps(crapsPlayer, console /*,handler*/);
             craps.runGame();
             break;
         case 4:
@@ -56,6 +57,7 @@ public void run(Handler handler) {
         default:
 
             System.out.println("you blew it");
+        }
     }
 }
 
@@ -88,3 +90,4 @@ public void run(Handler handler) {
         createPlayer(name, tempDeposit);
     }
 }
+//
