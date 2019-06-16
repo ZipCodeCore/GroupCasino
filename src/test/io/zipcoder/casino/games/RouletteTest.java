@@ -19,19 +19,8 @@ public class RouletteTest {
 
 
 
-    @Test
-    public void endGameTest() {
 
-    }
 
-    @Test
-    public void getResultsTest() {
-
-    }
-    @Test
-    public void displayTest() {
-
-    }
     @Test
     public void calcPaymentTest() {
 
@@ -55,12 +44,49 @@ public class RouletteTest {
 
     }
 
-    @Test
-    public void updateAccountDoubleTest() {
-        //this.roulette.updateAccount(1.5);
-        Double actual = this.roulette.roulettePlayer.getAccount();
-        Assert.assertEquals(1.5, actual.doubleValue(), 0.0);
 
+    @Test
+    public void isWinnerEvenTest() {
+     boolean actual = this.roulette.isWinner("even",2);
+     Assert.assertEquals(true,actual);
 
     }
+
+    @Test
+    public void isWinnerOddTest() {
+        boolean actual = this.roulette.isWinner("odd",3);
+        Assert.assertEquals(true,actual);
+
+    }
+    @Test
+    public void isWinnerRedTest() {
+        boolean actual = this.roulette.isWinner("red",12);
+        Assert.assertEquals(true,actual);
+
+    }
+    @Test
+    public void isWinnerBlackTest() {
+        boolean actual = this.roulette.isWinner("black",35);
+        Assert.assertEquals(true,actual);
+
+    }
+    @Test
+    public void isFirstTwelveTest() {
+        boolean actual = this.roulette.isWinner("1st12",12);
+        Assert.assertEquals(true,actual);
+
+    }
+    @Test
+    public void isSecondTwelveTest() {
+        boolean actual = this.roulette.isWinner("2nd12",13);
+        Assert.assertEquals(true,actual);
+
+    }
+    @Test
+    public void isThirdTwelveTest() {
+        boolean actual = this.roulette.isWinner("3rd12",35);
+        Assert.assertEquals(true,actual);
+
+    }
+
 }

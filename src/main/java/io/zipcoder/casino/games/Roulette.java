@@ -137,10 +137,10 @@ public class Roulette extends Games implements GamblerGameInterface {
         else if(betPosition.equalsIgnoreCase("odd") && random % 2 != 0) {
             return true;
         }
-        else if(betPosition.equalsIgnoreCase("red") && redList.contains(random)) {
+        else if(betPosition.equalsIgnoreCase("red") && redList.contains(Integer.toString(random))) {
             return true;
         }
-        else if(betPosition.equalsIgnoreCase("black") && blackList.contains(random)) {
+        else if(betPosition.equalsIgnoreCase("black") && blackList.contains(Integer.toString(random))) {
             return true;
         }
         else if(betPosition.equalsIgnoreCase("1st12") && random <= 12 && random >=1) {
