@@ -15,14 +15,14 @@ public class Handler {
     private Integer integerInput;
     private String name = "";
     private Double account = 0.0;
-    private Boolean accoutIsSet = false;
     private Double tempDeposit;
-    public Handler handler;
 
 
 
 public void run() {
-
+    getNameInput();
+    getAccountBalanceInput();
+    createPlayer(name, tempDeposit);
 
 while (true) {
     System.out.println("WELCOME TO THE BIG TROUBLE CASINO \n PICK FROM ONE OF OUR GAMES \n \n 0 blackjack -- 1 go fish -- 2 roulette -- 3 craps -- 4 slots \n");
@@ -85,10 +85,5 @@ while (true) {
         this.integerInput = console.getIntegerInput("What game would you like to play?");
     }
 
-    public void setUpPlayer(){
-        getNameInput();
-        getAccountBalanceInput();
-        createPlayer(name, tempDeposit);
-    }
 }
 //
