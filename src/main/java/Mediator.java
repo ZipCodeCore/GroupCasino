@@ -4,9 +4,11 @@ import java.util.ArrayList;
 public class Mediator {
     private Console console;
     private Person person;
+    private Boolean gameContinue;
 
     public Mediator() {
         this.console = new Console(System.in, System.out);
+        gameContinue = true;
     }
 
 
@@ -15,18 +17,12 @@ public class Mediator {
         this.person = makePerson();
         console.println("You are currently in the lounge");
         printOptions();
-        String action = console.getStringInput("What would you like to do?");
-        while (!action.equals("quit")) {
-            String prompt = getPrompt(action);
-            action = console.getStringInput(prompt);
+        while (gameContinue) {
+            String input = console.getStringInput("What would you like to do?");
+            parseInput(input);
         }
     }
 
-    public String getPrompt(String action) {
-        String prompt = "";
-        parseInput(action);
-        return prompt;
-    }
 
     private void playCraps() {
     }
@@ -86,19 +82,47 @@ public class Mediator {
         console.println("You have returned to the beautiful lounge.");
     }
 
-    public void parseInput(String input){
-//        Act act = new Act(input);
-//        switch (action) {
-//            case "": printOptions(); break;
-//            case "drink": getDrink(); break;
-//            case "eat": getFood(); break;
-//            case "palace": playPalace(); break;
-//            case "poker": playPoker(); break;
-//            case "cee-lo": playCeeLo(); break;
-//            case "blackjack": playBlackJack(); break;
-//            case "craps": playCraps(); break;
-//            default: prompt = "Have you considered playing a game?"; break;
-//        }
+    public String parseInput(String input){
+        Action action = new Action(input);
+        Act act = action.getAct();
+        switch (act) {
+            case QUIT:
+                leaveGame();
+                break;
+            case PLAY:
+                printOptions();
+                break;
+            case DRINK:
+                getDrink();
+                break;
+            case EAT:
+                getFood();
+                break;
+            case PALACE:
+                playPalace();
+                break;
+            case POKER:
+                playPoker();
+                break;
+            case CEELO:
+                playCeeLo();
+                break;
+            case BLACKJACK:
+                playBlackJack();
+                break;
+            case CRAPS:
+                playCraps();
+                break;
+            case LOUNGE:
+                enterLounge();
+                break;
+        }
+        return "We're not sure what you meant by that. Can you be more specific?";
+    }
+
+    private void leaveGame() {
+        console.println("We're sorry to see you go!");
+        gameContinue = false;
     }
 
     public Boolean checkAge() {
