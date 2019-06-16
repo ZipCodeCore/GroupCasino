@@ -4,7 +4,7 @@ public class BlackJack_Player extends Player implements Gambling {
 
     private Person player;
     Integer bet;
-    
+
 
 
 
