@@ -4,9 +4,9 @@ import java.util.List;
 public class Poker extends CardGame {
 
     List<Card> communityCard;
- //   List<PokerTurn> turns;
     Integer pool = 0;
     Integer lastBet = 0;
+    Integer sameBetCount = 0;
     List<PokerPlayer> pokerPlayerList;  // to store all player
     Console console;
 
@@ -15,14 +15,13 @@ public class Poker extends CardGame {
         this.console = console;
         pokerPlayerList = new ArrayList<>();
         /* TODO: after the changes of Players array to Single player, store the
-        *  TODO: player to list and make some poker AI into the list
-        * */
+         * TODO: player to list and make some poker AI into the list
+         * */
     }
-
-    public Boolean didWin(Player player) {return false;}
 
     public void playGame() {
         while (!onePlayerStanding() && !showDownTime()) {
+            initializeBet();
             determineTurnToPlay();
         }
         PokerPlayer winner = showDown();
@@ -31,18 +30,18 @@ public class Poker extends CardGame {
     }
 
     private void determineTurnToPlay() {
-        if(communityCard.size() == 0)
+        if (communityCard.size() == 0)
             preFlop();
         else
             postFlop();
-
     }
 
     private void preFlop() {
-        // small blind
-        // big blind
+        update(pokerPlayerList.get(0).smallBlind());
+        update(pokerPlayerList.get(1).smallBlind());
+
         // distribute hand
-        // startBetting
+        startBetting(2);
         // flop
     }
 
@@ -62,53 +61,73 @@ public class Poker extends CardGame {
         return communityCard.size() >= 5;
     }
 
-    public void startBetting () {
-        // loop {
-        // next person choose from fold, call, raise
-        //  end loop if both condition are met
-        // everyone who is not folded bet same amount
-        //    OR
-        //  number of folded player == players.size-1 (the one left wins)
-        // }
-        lastBet = 0;
-        while (true)
+    public void startBetting(Integer startingPlayerIndex) {
+        Integer currentPlayerIndex = startingPlayerIndex;
+
+        // keep betting when everyone hasn't bet same
+        // and when there is still 2 or more unfolded player
+        while(!onePlayerStanding() && !everyoneBetSame())
         {
-            playersChooseAction(lastBet);
-            if(onePlayerStanding() || everyoneBetSame())
-                break;
+            if (!pokerPlayerList.get(currentPlayerIndex).isFolded())
+                update(pokerPlayerList.get(currentPlayerIndex).getBetFromAction(console, lastBet));
+
+            currentPlayerIndex++;
+            if (currentPlayerIndex >= pokerPlayerList.size())
+                currentPlayerIndex = 0;
         }
     }
 
-    private void playersChooseAction(Integer lastBet) {
-        for (PokerPlayer pokerPlayer : pokerPlayerList)
-            if (!pokerPlayer.isFolded())
-                updatePool(pokerPlayer.getBetFromAction(console, lastBet));
+    private void initializeBet() {
+        lastBet = 0;
+        sameBetCount = 0;
+    }
 
+    private void update(Integer betFromAction) {
+        if (betFromAction != null) {
+            updatePool(betFromAction);
+            updateSameBetCount(betFromAction);
+            updateLastBet(betFromAction);
+        }
     }
 
     private void updatePool(Integer betFromAction) {
-        if (betFromAction != null) {
-            pool += betFromAction;
-            lastBet = betFromAction;
-        }
+        pool += betFromAction;
+    }
 
+
+    private void updateSameBetCount(Integer betFromAction) {
+        if (betFromAction.equals(lastBet))
+            sameBetCount++;
+        else
+            sameBetCount = 0;
+    }
+
+    private void updateLastBet(Integer betFromAction) {
+        lastBet = betFromAction;
     }
 
     private Boolean isNPC(PokerPlayer player) {
         return player instanceof PokerNPC;
     }
 
-    private Boolean onePlayerStanding() {
+    private Integer getNumOfFoldedPlayer()
+    {
         Integer numOfFoldedPlayer = 0;
         for (PokerPlayer pokerPlayer : pokerPlayerList)
             if (pokerPlayer.isFolded())
                 numOfFoldedPlayer++;
 
-        return numOfFoldedPlayer == pokerPlayerList.size()-1;
+        return numOfFoldedPlayer;
+    }
+
+    private Boolean onePlayerStanding() {
+
+
+        return getNumOfFoldedPlayer() == pokerPlayerList.size()-1;
     }
 
     private Boolean everyoneBetSame() {
-        return true;
+        return sameBetCount == pokerPlayerList.size() - getNumOfFoldedPlayer();
     }
 
     private void awardPool(PokerPlayer winner) {
