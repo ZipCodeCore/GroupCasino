@@ -1,18 +1,15 @@
 package io.zipcoder.casino.games;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import com.sun.xml.internal.fastinfoset.util.CharArray;
+
 import io.zipcoder.casino.Handler;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
-import java.security.ProtectionDomain;
-import java.util.HashMap;
-import java.util.TreeMap;
 
 public class Craps extends Games implements GamblerGameInterface {
     private CrapsPlayer crapsPlayer;
+    public Handler handler;
     public CrapsDataHandler data = new CrapsDataHandler();
 
 
@@ -28,9 +25,10 @@ public class Craps extends Games implements GamblerGameInterface {
 
     }
 
-    public Craps(CrapsPlayer player, Console console) {
+    public Craps(CrapsPlayer player, Console console /*, Handler handler*/) {
         this.crapsPlayer = player;
         data.setConsole(console);
+        this.handler = handler;
         crapsPlayer.player.setPlaying(true);
         data.setStage(0);
 
@@ -53,9 +51,10 @@ public class Craps extends Games implements GamblerGameInterface {
                         data.setCurrentRoll(crapsPlayer.roll());
                         stage1Play(data.getFirstLineBet());
                     }
+                    keepPlayingOrQuit();
                     break;
                 case 2:
-                    keepPlayingOrQuit();
+//                    keepPlayingOrQuit();
                    if(data.getPassFirstRound()) {
                         data.setSecondLineBet(data.getConsole().getDoubleInput("Winning roll: [" + data.getOnNumber() + "] \n Make your come out bet!"));
                         data.setMakePropBet(data.getConsole().getStringInput("Would you like to make a prop bet"));
@@ -69,10 +68,10 @@ public class Craps extends Games implements GamblerGameInterface {
                             data.setCurrentRoll(crapsPlayer.roll());
                             stage2Play(data.getSecondLineBet(), data.getFieldBet(), data.getFieldBetType());
                        }
+                    keepPlayingOrQuit();
                     break;
             }
         }
-        endGame();
     }
 
 /*----------------STAGE 0---------------*/
@@ -100,6 +99,7 @@ public class Craps extends Games implements GamblerGameInterface {
         if(data.getCurrentRoll().equals(2) || data.getCurrentRoll().equals(3) || data.getCurrentRoll().equals(12)) {
             display("you rolled a " + data.getCurrentRoll() +  "\n" + "SORRY YOU CRAPPED OUT!");
             data.setStage(1);
+            resetBets();
             display(displayCurrentState());
             resetFirstRoundState();
         } else if (data.getCurrentRoll().equals(7) || data.getCurrentRoll().equals(11)) {
@@ -130,6 +130,7 @@ public class Craps extends Games implements GamblerGameInterface {
             display("YOU ROLLED A " + data.getCurrentRoll() +  "\n" + "SORRY YOU CRAPPED OUT!");
             data.setStage(1);
             display(displayCurrentState());
+            resetBets();
             resetFirstRoundState();
         } else if (data.getCurrentRoll().equals(fieldBetNumber)) {
             display(displayCurrentState());
@@ -150,8 +151,12 @@ public class Craps extends Games implements GamblerGameInterface {
 
     @Override
     void endGame() {
-        Handler handler = new Handler();
-        handler.run();
+        deposit(data.getFirstLineBet());
+        deposit(data.getSecondLineBet());
+        deposit(data.getFieldBet());
+
+
+        crapsPlayer.player.setPlaying(false);
     }
 
     @Override
@@ -211,7 +216,6 @@ public class Craps extends Games implements GamblerGameInterface {
                     "Prop Bet Type: " + data.getFieldBetType() + "\n" +
                     "Prob Bet: " + data.getFieldBet() + "\n" + "\n" +
                             "*-----------------------------------*\n";
-
     }
 
     protected String  displayWinningRoll(Double wins){
@@ -229,6 +233,12 @@ public class Craps extends Games implements GamblerGameInterface {
         data.setPassFirstRound(true);
     }
 
+    protected void resetBets() {
+        data.setFirstLineBet(0.0);
+        data.setSecondLineBet(0.0);
+        data.setFieldBet(0.0);
+        data.setFieldBetType(0);
+    }
 
 
 
