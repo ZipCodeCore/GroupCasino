@@ -7,6 +7,8 @@ import io.zipcoder.casino.player.RoulettePlayer;
 import io.zipcoder.casino.player.SlotsPlayer;
 import io.zipcoder.casino.utilities.Console;
 
+import java.util.Scanner;
+
 
 //
 public class Handler {
@@ -15,14 +17,14 @@ public class Handler {
     private Integer integerInput;
     private String name = "";
     private Double account = 0.0;
-    private Boolean accoutIsSet = false;
     private Double tempDeposit;
-    public Handler handler;
 
 
 
 public void run() {
-
+    getNameInput();
+    getAccountBalanceInput();
+    createPlayer(name, tempDeposit);
 
 while (true) {
     System.out.println("WELCOME TO THE BIG TROUBLE CASINO \n PICK FROM ONE OF OUR GAMES \n \n 0 blackjack -- 1 go fish -- 2 roulette -- 3 craps -- 4 slots \n");
@@ -42,8 +44,18 @@ while (true) {
         case 2:
             RoulettePlayer roulettePlayer = new RoulettePlayer(player.getName(), player.getAccount());
             Roulette roulette = new Roulette(roulettePlayer);
-            roulette.runGame();
-            player.setAccount(roulettePlayer.getAccount());
+            Scanner scanner = new Scanner(System.in);
+            boolean isNextRound = false;
+            do {
+                roulette.runGame();
+                player.setAccount(roulettePlayer.getAccount());
+                String continuePlaying = console.getStringInput("Do you want to continue playing (Y/N)?");
+                if (continuePlaying != null && continuePlaying.equalsIgnoreCase("Y")) {
+                    isNextRound = true;
+                } else {
+                    isNextRound = false;
+                }
+            } while (isNextRound);
             break;
         case 3:
             CrapsPlayer crapsPlayer = new CrapsPlayer(player);
@@ -85,10 +97,5 @@ while (true) {
         this.integerInput = console.getIntegerInput("What game would you like to play?");
     }
 
-    public void setUpPlayer(){
-        getNameInput();
-        getAccountBalanceInput();
-        createPlayer(name, tempDeposit);
-    }
 }
 //
