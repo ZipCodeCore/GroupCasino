@@ -47,7 +47,7 @@ while (true) {
             break;
         case 3:
             CrapsPlayer crapsPlayer = new CrapsPlayer(player);
-            Craps craps = new Craps(crapsPlayer, console /*,handler*/);
+            Craps craps = new Craps(crapsPlayer, console);
             craps.runGame();
             break;
         case 4:

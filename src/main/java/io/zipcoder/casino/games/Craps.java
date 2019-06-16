@@ -99,6 +99,7 @@ public class Craps extends Games implements GamblerGameInterface {
         if(data.getCurrentRoll().equals(2) || data.getCurrentRoll().equals(3) || data.getCurrentRoll().equals(12)) {
             display("you rolled a " + data.getCurrentRoll() +  "\n" + "SORRY YOU CRAPPED OUT!");
             data.setStage(1);
+            resetBets();
             display(displayCurrentState());
             resetFirstRoundState();
         } else if (data.getCurrentRoll().equals(7) || data.getCurrentRoll().equals(11)) {
@@ -129,6 +130,7 @@ public class Craps extends Games implements GamblerGameInterface {
             display("YOU ROLLED A " + data.getCurrentRoll() +  "\n" + "SORRY YOU CRAPPED OUT!");
             data.setStage(1);
             display(displayCurrentState());
+            resetBets();
             resetFirstRoundState();
         } else if (data.getCurrentRoll().equals(fieldBetNumber)) {
             display(displayCurrentState());
@@ -149,6 +151,10 @@ public class Craps extends Games implements GamblerGameInterface {
 
     @Override
     void endGame() {
+        deposit(data.getFirstLineBet());
+        deposit(data.getSecondLineBet());
+        deposit(data.getFieldBet());
+
         crapsPlayer.player.setPlaying(false);
     }
 
@@ -226,6 +232,11 @@ public class Craps extends Games implements GamblerGameInterface {
         data.setPassFirstRound(true);
     }
 
+    protected void resetBets() {
+        data.setFirstLineBet(0.0);
+        data.setSecondLineBet(0.0);
+        data.setFieldBet(0.0);
+    }
 
 
 
