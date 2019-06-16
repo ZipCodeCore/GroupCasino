@@ -3,6 +3,10 @@ import java.util.ArrayList;
 public abstract class Hand {
     private  ArrayList<Card> cards;
 
+    public Hand(ArrayList<Card> cards) {
+        this.cards = cards;
+    }
+
     public void sort() {
         CardComparator comparator = new CardComparator();
         cards.sort(comparator);

@@ -9,11 +9,12 @@ public class CardTest {
 
     @Test
     public void flipTest1() {
-        Integer faceDown = -1;
-        Card card = new Card(faceDown, Rank.ACE, Suit.DIAMOND);
+        Integer faceDownToEveryone = -1;
+        Card card = new Card(faceDownToEveryone, Rank.ACE, Suit.DIAMOND);
         card.flip();
-        Integer expected = 14;
+        Integer expected = 1;
         Integer actual = card.getValue();
+        Assert.assertTrue(card.isFaceUpToEveryone());
         Assert.assertEquals(expected, actual);
 
     }
@@ -22,17 +23,28 @@ public class CardTest {
         Integer faceDown = 1;
         Card card = new Card(faceDown, Rank.ACE, Suit.DIAMOND);
         card.flip();
-        Integer expected = 14;
-        Integer actual = card.getValue();
+        Integer expected = 1;
+        Integer actual = card.getRankNumber();
+        Assert.assertTrue(card.isFaceDownToEveryone());
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    public void flipTest3() {
+        Integer faceDown = 0;
+        Card card = new Card(faceDown, Rank.ACE, Suit.DIAMOND);
+        card.flip();
+        Integer expected = 1;
+        Integer actual = card.getRankNumber();
+        Assert.assertTrue(card.isFaceUpToEveryone());
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void getValueTest1() {
-        Integer faceDown = 1;
-        Card card = new Card(faceDown, Rank.SIX, Suit.HEART);
+        Integer faceUp = 1;
+        Card card = new Card(faceUp, Rank.SIX, Suit.HEART);
 
-        Integer expected = 14;
+        Integer expected = 6;
         Integer actual = card.getValue();
         Assert.assertEquals(expected, actual);
     }
@@ -42,16 +54,25 @@ public class CardTest {
         Integer faceDown = -1;
         Card card = new Card(faceDown, Rank.JACK, Suit.SPADE);
 
-        Integer expected = 14;
+        Integer expected = 0;
         Integer actual = card.getValue();
         Assert.assertEquals(expected, actual);
     }
     @Test
     public void getValueTest3() {
-        Integer faceDown = 1;
-        Card card = new Card(faceDown, Rank.KING, Suit.CLUB);
+        Integer faceUpToMe = 0;
+        Card card = new Card(faceUpToMe, Rank.KING, Suit.CLUB);
 
-        Integer expected = 14;
+        Integer expected = 0;
+        Integer actual = card.getValue();
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    public void getValueTest4() {
+        Integer faceUp = 1;
+        Card card = new Card(faceUp, Rank.QUEEN, Suit.HEART);
+
+        Integer expected = 12;
         Integer actual = card.getValue();
         Assert.assertEquals(expected, actual);
     }
