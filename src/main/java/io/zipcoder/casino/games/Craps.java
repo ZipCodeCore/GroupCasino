@@ -25,7 +25,7 @@ public class Craps extends Games implements GamblerGameInterface {
 
     }
 
-    public Craps(CrapsPlayer player, Console console, Handler handler) {
+    public Craps(CrapsPlayer player, Console console /*, Handler handler*/) {
         this.crapsPlayer = player;
         data.setConsole(console);
         this.handler = handler;
@@ -51,9 +51,10 @@ public class Craps extends Games implements GamblerGameInterface {
                         data.setCurrentRoll(crapsPlayer.roll());
                         stage1Play(data.getFirstLineBet());
                     }
+                    keepPlayingOrQuit();
                     break;
                 case 2:
-                    keepPlayingOrQuit();
+//                    keepPlayingOrQuit();
                    if(data.getPassFirstRound()) {
                         data.setSecondLineBet(data.getConsole().getDoubleInput("Winning roll: [" + data.getOnNumber() + "] \n Make your come out bet!"));
                         data.setMakePropBet(data.getConsole().getStringInput("Would you like to make a prop bet"));
@@ -67,10 +68,10 @@ public class Craps extends Games implements GamblerGameInterface {
                             data.setCurrentRoll(crapsPlayer.roll());
                             stage2Play(data.getSecondLineBet(), data.getFieldBet(), data.getFieldBetType());
                        }
+                    keepPlayingOrQuit();
                     break;
             }
         }
-        endGame();
     }
 
 /*----------------STAGE 0---------------*/
@@ -148,8 +149,7 @@ public class Craps extends Games implements GamblerGameInterface {
 
     @Override
     void endGame() {
-
-        handler.run(handler);
+        crapsPlayer.player.setPlaying(false);
     }
 
     @Override
