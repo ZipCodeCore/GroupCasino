@@ -11,11 +11,6 @@ public class House implements Dealer {
 
     private Integer houseWallet;
     private Integer payoutRatio;
-
-    public Decks getDecks() {
-        return decks;
-    }
-
     private Decks decks;
 
 
@@ -50,20 +45,13 @@ public class House implements Dealer {
     public Integer getPayoutRatio() {
         return payoutRatio;
     }
-
-    @Override
-    public Hand dealRound(Integer numberOfCards, Boolean faceUp) {
-        return null;
+    public Decks getDecks() {
+        return decks;
     }
 
     @Override
-    public Hand dealHand(Integer numberOfC) {
-        return null;
-    }
-
-    @Override
-    public Card dealCard(Integer numberOfCards) {
-        return null;
+    public Card dealCard() {
+        return decks.getCards().remove(0);
     }
 
     @Override
