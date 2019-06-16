@@ -10,11 +10,12 @@ public class CardComparatorTest {
     public void sortTest() {
         ArrayList<Card> cards = new ArrayList<>();
         CardComparator comp = new CardComparator();
+        cards.add(new Card(1,Rank.ACE,Suit.DIAMOND));
         cards.add(new Card(1,Rank.ACE,Suit.SPADE));
+        cards.add(new Card(1,Rank.SIX,Suit.HEART));
         cards.add(new Card(1,Rank.SIX,Suit.SPADE));
-        cards.add(new Card(1,Rank.TWO,Suit.SPADE));
-        cards.add(new Card(1,Rank.KING,Suit.SPADE));
-        cards.add(new Card(1,Rank.QUEEN,Suit.SPADE));
+        cards.add(new Card(1,Rank.SIX,Suit.DIAMOND));
+        cards.add(new Card(1,Rank.SIX,Suit.CLUB));
 
         cards.sort(comp);
         System.out.println(cards);

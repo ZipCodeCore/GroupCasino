@@ -54,8 +54,12 @@ public class Poker extends CardGame {
     }
 
     private PokerPlayer showDown() {
-        // compare communityCard + player hand against list
+        // make an array of everyone's point
+        // for each player
+        // determine the point they got by add communityCard + player hand
+        // send it to evalulate
         // return winner
+
 
         return null;
     }

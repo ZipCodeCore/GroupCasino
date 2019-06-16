@@ -10,18 +10,18 @@ public class PokerHandTest {
     @Before
     public void setUp()
     {
-        pokerHand = new PokerHand();
+//        pokerHand = new PokerHand();
     }
     @Test
     public void pokerHandSizeTest() {
-        PokerHand pokerHand = new PokerHand();
+//        PokerHand pokerHand = new PokerHand();
         Assert.assertEquals(2, (int) pokerHand.numberOfCardsInHand());
     }
 
     @Test
     public void pokerUniqueTest() {
         // assuming only 1 deck
-        PokerHand pokerHand = new PokerHand();
+ //       PokerHand pokerHand = new PokerHand();
  //       Assert.assertNotEquals(pokerHand.getCards().get(0),pokerHand.getCards().get(1));
     }
 }

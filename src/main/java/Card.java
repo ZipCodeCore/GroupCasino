@@ -50,4 +50,8 @@ public class Card {
         else if (isFaceUpToMe()) setFaceUpToEveryone();
     }
 
+    @Override
+    public String toString() {
+        return rank.getRankString()+suit.getSuitImage();
+    }
 }

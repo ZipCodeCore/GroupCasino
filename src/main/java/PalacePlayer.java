@@ -4,7 +4,7 @@ public class PalacePlayer implements Dealer{
 
     public PalacePlayer(Person player) {
 
-        this.hand = new PalaceHand();
+ //       this.hand = new PalaceHand();
     }
 
 
