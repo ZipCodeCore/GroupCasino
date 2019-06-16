@@ -8,7 +8,16 @@ import static org.junit.Assert.*;
 public class PersonTest {
     @Test
     public void constructorTest() {
-        Person p = new Person(100.0, "Foo Bar", 21);
+        Integer age = 21;
+        Double wallet = 100.0;
+        String name = "Foo";
+        Person p = new Person(wallet, name, age);
         assertNotNull(p);
+        Integer actualAge = p.getAge();
+        assertEquals(age, actualAge);
+        Double actualWallet = 100.0;
+        assertEquals(wallet, actualWallet);
+        String actualName = p.getName();
+        assertEquals(name, actualName);
     }
 }

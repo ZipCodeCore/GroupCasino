@@ -30,5 +30,9 @@ public class PileOfCards {
             return null;
         }
     }
+    public Stack<Card> getCards() {
+        return cards;
+    }
+
 
 }
