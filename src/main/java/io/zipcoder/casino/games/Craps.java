@@ -155,6 +155,7 @@ public class Craps extends Games implements GamblerGameInterface {
         deposit(data.getSecondLineBet());
         deposit(data.getFieldBet());
 
+
         crapsPlayer.player.setPlaying(false);
     }
 
@@ -236,6 +237,7 @@ public class Craps extends Games implements GamblerGameInterface {
         data.setFirstLineBet(0.0);
         data.setSecondLineBet(0.0);
         data.setFieldBet(0.0);
+        data.setFieldBetType(0);
     }
 
 
