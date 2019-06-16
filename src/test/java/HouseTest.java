@@ -57,21 +57,14 @@ public class HouseTest {
         assertNull(decks);
     }
 
-    @Test
-    public void dealRoundTest() {
-        Decks decks = new Decks(1);
-        House house = new House(2, decks);
-    }
-
-    @Test
-    public void dealHandTest() {
-        Decks decks = new Decks(1);
-        House house = new House(2, decks);
-    }
 
     @Test
     public void dealCardTest() {
         Decks decks = new Decks(1);
         House house = new House(2, decks);
+        Card card = house.dealCard();
+        assertNotEquals(decks.getCards().size(), 52);
+        assertNotNull(card);
+
     }
 }
