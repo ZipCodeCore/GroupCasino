@@ -1,8 +1,4 @@
-import java.lang.reflect.Array;
-import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public abstract class Hand {
     private  ArrayList<Card> cards;
@@ -26,6 +22,4 @@ public abstract class Hand {
     public Integer numberOfCardsInHand() {
         return cards.size();
     }
-
-    public List<Card> getCards() {return Collections.unmodifiableList(cards);}
 }

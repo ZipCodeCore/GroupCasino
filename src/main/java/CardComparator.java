@@ -4,6 +4,11 @@ public class CardComparator implements Comparator<Card> {
 
     @Override
     public int compare(Card cardOne, Card cardTwo) {
-        return cardOne.getRankNumber()-cardTwo.getRankNumber();
+
+        Integer value = cardOne.getRankNumber()-cardTwo.getRankNumber();
+
+        if (value == 0)
+            value = cardOne.getSuit().compareTo(cardTwo.getSuit());
+        return value;
     }
 }

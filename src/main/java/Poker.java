@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Poker extends CardGame {
 
@@ -9,14 +10,16 @@ public class Poker extends CardGame {
     Integer sameBetCount = 0;
     List<PokerPlayer> pokerPlayerList;  // to store all player
     Console console;
+    House house;
 
-    public Poker(PokerPlayer[] players, Console console) {
-        super(players, 1);
+    public Poker(PokerPlayer player, Console console) {
+        super(player, 1);
         this.console = console;
         pokerPlayerList = new ArrayList<>();
         /* TODO: after the changes of Players array to Single player, store the
          * TODO: player to list and make some poker AI into the list
          * */
+
     }
 
     public void playGame() {
@@ -38,7 +41,7 @@ public class Poker extends CardGame {
 
     private void preFlop() {
         update(pokerPlayerList.get(0).smallBlind());
-        update(pokerPlayerList.get(1).smallBlind());
+        update(pokerPlayerList.get(1).bigBlind());
         // dealtCard
         startBetting(2);
         // flop
@@ -47,12 +50,13 @@ public class Poker extends CardGame {
 
     private void postFlop() {
         startBetting(0);
-        // add card
+        // if is not showDown time, add card
     }
 
     private PokerPlayer showDown() {
         // compare communityCard + player hand against list
         // return winner
+
         return null;
     }
 
