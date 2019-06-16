@@ -76,7 +76,7 @@ public class Roulette extends Games implements GamblerGameInterface {
 
     }
 
-    public void play() {
+    public void runGame() {
 
         // Get Bet Amount
         Scanner sc = new Scanner(System.in);
