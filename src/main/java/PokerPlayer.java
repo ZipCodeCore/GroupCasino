@@ -2,9 +2,9 @@ import exceptions.NegativeBetException;
 import exceptions.NotEnoughChipException;
 
 public class PokerPlayer extends Player implements Gambling {
-    private Hand hand = new PokerHand();
+    private PokerHand hand;
     private Boolean folded = false;
-    private Integer chips;
+    private Integer chips = 0;
 
     public PokerPlayer(Person p) {
         super(p);
@@ -19,6 +19,8 @@ public class PokerPlayer extends Player implements Gambling {
     public void fold() {
         folded = true;
     }
+    public void getReady() { folded = false; }
+
 
     public Integer raise(Integer lastPlayerBet, Integer amountToRaise) throws NegativeBetException {
         if (amountToRaise < 0)

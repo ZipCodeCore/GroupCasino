@@ -39,15 +39,14 @@ public class Poker extends CardGame {
     private void preFlop() {
         update(pokerPlayerList.get(0).smallBlind());
         update(pokerPlayerList.get(1).smallBlind());
-
-        // distribute hand
+        // dealtCard
         startBetting(2);
         // flop
     }
 
 
     private void postFlop() {
-        // startBetting
+        startBetting(0);
         // add card
     }
 

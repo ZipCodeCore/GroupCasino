@@ -2,6 +2,8 @@ import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Decks {
     private ArrayList<Card> cards;
@@ -12,8 +14,8 @@ public class Decks {
         for (int i = 0; i < numberOfDecks; i++) cards.addAll(deckOfCards);
     }
 
-    protected  ArrayList<Card> getCards() {
-        return cards;
+    protected List<Card> getCards() {
+        return Collections.unmodifiableList(cards);
     }
 
     protected ArrayList<Card> buildOneDeck() {
