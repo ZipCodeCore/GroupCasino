@@ -40,13 +40,14 @@ while (true) {
             goFish.runGame();
             break;
         case 2:
-            RoulettePlayer roulettePlayer = new RoulettePlayer(name, account);
+            RoulettePlayer roulettePlayer = new RoulettePlayer(player.getName(), player.getAccount());
             Roulette roulette = new Roulette(roulettePlayer);
-            roulette.play();
+            roulette.runGame();
+            player.setAccount(roulettePlayer.getAccount());
             break;
         case 3:
             CrapsPlayer crapsPlayer = new CrapsPlayer(player);
-            Craps craps = new Craps(crapsPlayer, console /*,handler*/);
+            Craps craps = new Craps(crapsPlayer, console);
             craps.runGame();
             break;
         case 4:
