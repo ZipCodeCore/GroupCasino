@@ -1,21 +1,29 @@
+
+import java.util.Collections;
+import java.util.Random;
+
 public class House implements Dealer {
 
 
     public void payout() {}
     public void takeBets() {}
 
-    public Chips moneyToChips(Double moneyAmount, Player player) { return new Chips(100.0); }
-
-
 
     private Integer houseWallet;
     private Integer payoutRatio;
 
+    public Decks getDecks() {
+        return decks;
+    }
+
+    private Decks decks;
 
 
-    public House(Integer payoutRatio) {
+    public House(Integer payoutRatio, Decks decks) {
         this.houseWallet = 0;
         this.payoutRatio = payoutRatio;
+        this.decks = decks;
+
     }
 
     public Integer payout(Integer originalBetAmount) {
@@ -44,7 +52,7 @@ public class House implements Dealer {
     }
 
     @Override
-    public Hand dealRound(Integer numberOfCards, Boolean faceDown) {
+    public Hand dealRound(Integer numberOfCards, Boolean faceUp) {
         return null;
     }
 
@@ -60,6 +68,6 @@ public class House implements Dealer {
 
     @Override
     public void shuffle() {
-
+        Collections.shuffle(decks.getCards());
     }
 }
