@@ -1,3 +1,5 @@
+import exceptions.NegativeBetException;
+
 public interface Gambling {
-    public Integer bet(Integer numOfChipsToBet) ;
+    Integer bet(Integer numOfChipsToBet) throws NegativeBetException;
 }
