@@ -1,13 +1,25 @@
 public enum Act {
-    QUIT ("leave", "Quit", "quit", "q", "leave game", "end", "end game"),
-    PLAY ("play game", "games", "game", "play a game", "play games", "Game", "Games", "Play Game"),
-    BLACKJACK ("blackjack", "blackJack", "BlackJack", "BJ", "2"),
-    POKER ("Texas Hold 'Em", "Poker", "poker", "3"),
-    PALACE ("palace", "Palace"),
-    CRAPS ("Dolio style craps", "craps", "DS craps", "Craps", "CRAPS", "Dolio"),
-    CEELO("Cee lo", "CEE-lo", "CEELO", "ceelo", "cee-lo", "ceeLO", "ceelow", "cee-LOW"),
-    LOUNGE("lounge", "Lounge", "lobby", "Lobby", "first");
 
-    Act(String ...input) {}
+    QUIT("leave", "end", "quit", "q", "leave game", "end game"),
+    PLAY("play game", "games", "game", "play a game", "play games", "gamble"),
+    BLACKJACK("blackjack", "bj", "2"),
+    POKER("Texas Hold 'em", "poker", "3"),
+    PALACE("palace", "1"),
+    CRAPS("craps", "dolio style craps", "dolio-style craps", "ds craps", "dolio"),
+    CEELO("cee lo", "cee-lo", "ceelow", "cee-low", "ceelo"),
+    DRINK("drink", "get a drink", "bar", "water"),
+    EAT("eat", "get a bite to eat", "food", "restaurant", "grub", "chow", "dinner", "snacks"),
+    LOUNGE("lounge", "lobby", "restroom", "rest room", "resting room");
+
+    private String[] inputPossibilities;
+
+    Act(String ...input) {
+        inputPossibilities = input;
+    }
+
+
+    public String[] getInputPossibilities() {
+        return inputPossibilities;
+    }
 
 }
