@@ -8,11 +8,22 @@ import java.util.ArrayList;
 
 public class GoFishPlayer extends CardGamePlayer {
 
+    Integer score;
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
 
     public GoFishPlayer() {}
 
     public GoFishPlayer(Player player) {
         super(player);
+        score = 0;
     }
 
     public void endturn() {};
