@@ -29,9 +29,10 @@ public class Card {
         return (faceUp == 1);
     }
 
-    public Integer getRank() {
+    public Integer getRankNumber() {
         return rank.getRankNumber();
     }
+    public Rank getRank() {return rank;}
 
     public Suit getSuit() {
         return suit;
