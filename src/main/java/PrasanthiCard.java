@@ -1,5 +1,6 @@
 public class PrasanthiCard {
     public PrasanthiCard() {
+
     }
 
     private static String drawBack() {
@@ -9,7 +10,7 @@ public class PrasanthiCard {
         //24c5
     }
 
-    private static String drawCard(Rank rank, Suit suit) {
+    public static String drawCard(Rank rank, Suit suit) {
         return String.format("+-----+\n" + "|%s|\n" +
                 "|%2s|\n" + "|%s|\n" +
                 "+-----+", rank.getRankImage(), suit.getSuitImage(), rank.getRankImage());
@@ -25,7 +26,7 @@ public class PrasanthiCard {
         return String.format("  |  %2s |  ", suitImage);
     }
 
-    public static void main(String[] args) {
+    public static void drawAllCards() {
         for(Rank rank : Rank.values()) System.out.print(drawFirstCardRow());
         System.out.println();
         for(Rank rank : Rank.values()) System.out.print(drawRankCardRow(rank.getRankImage()));

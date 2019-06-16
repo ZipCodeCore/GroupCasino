@@ -3,7 +3,7 @@ public class DStyleCrapsPlayer extends Player{
     Integer chips;
     public DStyleCrapsPlayer(Person player) {
         this.person=player;
-        House house=new House(2);
+        House house=new House(2, null);
         chips=house.moneyToChips(20.0);
 
     }
