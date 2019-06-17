@@ -7,9 +7,11 @@ abstract class CardGame extends Game{
     public CardGame(Player[] players, Integer numberOfDecks) {
         super(players);
         this.decks = new Decks(numberOfDecks);
-
     }
 
-    private String getValue() {return "";}
+    public CardGame(Player players, Integer numberOfDecks) {
+        super(players);
+        this.decks = new Decks(numberOfDecks);
+    }
 
 }

@@ -6,6 +6,7 @@ public class PrasanthiPalace {
     }
     public static void run() {
         Mediator mediator = new Mediator();
-        mediator.parseInput();
+        mediator.enterLounge();
+
     }
 }
