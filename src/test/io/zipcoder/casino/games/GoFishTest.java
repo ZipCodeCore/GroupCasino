@@ -187,5 +187,15 @@ public class GoFishTest {
     }
 
 
+    @Test
+    public void playAgainTest() {
+        String choice = "YES";
+        Assert.assertTrue(goFish.playAgain(choice));
     }
+    @Test
+    public void playAgainTest1() {
+        String choice = "no";
+        Assert.assertFalse(goFish.playAgain(choice));
+    }
+}
 

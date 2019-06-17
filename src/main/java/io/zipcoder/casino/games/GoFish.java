@@ -19,6 +19,8 @@ public class GoFish extends Games {
     private GoFishPlayer currentPlayer;
     private ArrayList<Card> hand = new ArrayList<Card>();
     private boolean isPlaying = true;
+    private boolean breakTheGame = false;
+
     private Deck deck = new Deck();
     Integer computerScore = 0;
 
@@ -33,17 +35,31 @@ public class GoFish extends Games {
 
     public void runGame () {
         console.println("Hey " + goFishPlayer.getName() + "! \nWelcome to GO FISH GAME\n");
+        while (isPlaying) {
             dealHands();
             currentPlayer = goFishPlayer;
             while (deck.getDeck().size() > 0) {
                 if (currentPlayer == goFishPlayer) {
                     playerTurn();
-                }
-                else {
+                } else {
                     compTurn();
                 }
-        }
+            }
             getWinner();
+            String choice = console.getStringInput("would you like to play again?");
+            isPlaying = playAgain(choice);
+        }
+
+    }
+
+    public boolean playAgain(String choice) {
+
+        if (choice.equalsIgnoreCase("yes")) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public Boolean checkForFour (GoFishPlayer player) {
@@ -112,41 +128,43 @@ public class GoFish extends Games {
         console.println(seeHand(hand));
 
         String input = searchFor();
-        while (!checkProperPick(input, goFishPlayer)) {
-            console.println("no such card in your hand, impossible move, try again");
-            input = searchFor();
-        }
-        ArrayList temp = checkHand(input, computer);
+        if (!breakTheGame) {
+            while (!checkProperPick(input, goFishPlayer)) {
+                console.println("no such card in your hand, impossible move, try again");
+                input = searchFor();
+            }
+            ArrayList temp = checkHand(input, computer);
 
-        while (!temp.isEmpty()) {
-            removeFromHand(temp, computer);
-            addToHand(temp, goFishPlayer);
-            console.println("You got card/s from computer");
-            console.println(seeHand(temp));
-            console.getStringInput("");
+            while (!temp.isEmpty()) {
+                removeFromHand(temp, computer);
+                addToHand(temp, goFishPlayer);
+                console.println("You got card/s from computer");
+                console.println(seeHand(temp));
+                console.getStringInput("");
+
+                if (checkForFour(goFishPlayer)) {
+                    console.println(goFishPlayer.getName() + ", look at this!!! Boomoooooooom! 4 of the kind\n");
+                    removeFour(input, hand);
+                    goFishPlayer.setHand(hand);
+                    updateScore(goFishPlayer);
+                }
+
+                console.println("your hand: \n" + seeHandByPlayer(goFishPlayer));
+
+                input = searchFor();
+                temp = checkHand(input, computer);
+
+            }
+            goFishAction(goFishPlayer);
 
             if (checkForFour(goFishPlayer)) {
-                console.println( goFishPlayer.getName()+ ", look at this!!! Boomoooooooom! 4 of the kind\n");
+                console.println(goFishPlayer.getName() + ", look at this!!! Boomoooooooom! 4 of the kind\n");
                 removeFour(input, hand);
                 goFishPlayer.setHand(hand);
                 updateScore(goFishPlayer);
             }
-
-            console.println("your hand: \n" + seeHandByPlayer(goFishPlayer));
-
-            input = searchFor();
-            temp = checkHand(input, computer);
-
+            currentPlayer = computer;
         }
-        goFishAction(goFishPlayer);
-
-        if (checkForFour(goFishPlayer)) {
-            console.println( goFishPlayer.getName()+ ", look at this!!! Boomoooooooom! 4 of the kind\n");
-            removeFour(input, hand);
-            goFishPlayer.setHand(hand);
-            updateScore(goFishPlayer);
-        }
-        currentPlayer = computer;
     }
 
     public void compTurn() {
@@ -264,6 +282,10 @@ public class GoFish extends Games {
 
     public String searchFor() {
         String userInput = console.getStringInput("What are you looking for?");
+        if (userInput.equalsIgnoreCase("exit")) {
+            console.println("Good bye!");
+            breakTheGame = true;
+        }
         return userInput.toUpperCase();
     }
 
@@ -284,9 +306,8 @@ public class GoFish extends Games {
         else return null;
     }
     public void goFishAction(GoFishPlayer player) {
-        console.println("no such cand in the hand!\nYOU GO FISH!");
+        console.println("no such card in the hand!\nYOU GO FISH!");
         deck.dealSingleCard(player);
-
     }
 
 
@@ -300,11 +321,6 @@ public class GoFish extends Games {
     @Override
     boolean getResults() {
         return false;
-    }
-
-    @Override
-    public void display(String output) {
-        super.display(output);
     }
 
 }
