@@ -9,14 +9,36 @@ import java.util.ArrayList;
 public class CardGamePlayer {
     private Player player;
     private ArrayList<Card> hand;
+    private Integer score;
+    private String name;
 
-    public CardGamePlayer (Player player) {
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
         this.player = player;
-
     }
 
 
-    public ArrayList<Card> getHand() {
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+
+
+    public CardGamePlayer (Player player) {
+        this.player = player;
+    }
+    public CardGamePlayer () {
+
+    }
+        public ArrayList<Card> getHand() {
         return hand;
     }
 
@@ -26,7 +48,10 @@ public class CardGamePlayer {
 
     public void endturn() {};
 
-    public CardGamePlayer(){};
+    public CardGamePlayer(String name, Integer score) {
+        this.name = name;
+        this.score = score;
+    }
 
     public String getName() {
         return player.getName();
