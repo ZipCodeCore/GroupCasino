@@ -251,11 +251,6 @@ public class GoFish extends Games {
         player.setHand(temp);
     }
 
-    public void update(Double amount) {
-        Double result = goFishPlayer.getAccount() + amount;
-        goFishPlayer.setAccount(result);
-    }
-
     public void dealHands () {
         deck.deal(5, goFishPlayer);
         deck.deal(5, computer);

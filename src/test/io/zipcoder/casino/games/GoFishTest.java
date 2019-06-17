@@ -18,21 +18,6 @@ public class GoFishTest {
     GoFish goFish = new GoFish(goFishPlayer,console);
 
 
-
-
-    @Test
-    public void createOtherPlayersTest() {
-        GoFish goFish = new GoFish();
-        Integer expected = 2;
-        //Integer actual = goFish.createOtherPlayers(expected).size();
-        //Assert.assertEquals(expected,actual);
-    }
-
-    @Test
-    public void runGoFishGameStart() {
-
-    }
-
     @Test
     public void removeFourTest() {
         GoFish goFish = new GoFish();
@@ -181,11 +166,6 @@ public class GoFishTest {
         Integer actual = goFishPlayer.getHand().size();
         Assert.assertFalse(goFish.checkForFour(goFishPlayer));
     }
-    @Test
-    public void RunGame() {
-        goFish.runGame();
-    }
-
 
     @Test
     public void playAgainTest() {
@@ -197,5 +177,69 @@ public class GoFishTest {
         String choice = "no";
         Assert.assertFalse(goFish.playAgain(choice));
     }
+
+    @Test
+    public void removeFromHandTest() {
+        ArrayList<Card> hand = new ArrayList<Card>(4);
+        Card card1 = new Card(CardValue.KING, Suit.CLUBS);
+        Card card2 = new Card(CardValue.ACE, Suit.CLUBS);
+        Card card3 = new Card(CardValue.ACE, Suit.CLUBS);
+        Card card4 = new Card(CardValue.ACE, Suit.CLUBS);
+        Card card5 = new Card(CardValue.TWO, Suit.CLUBS);
+        hand.add(card1);
+        hand.add(card2);
+        hand.add(card3);
+        hand.add(card4);
+        hand.add(card5);
+        ArrayList<Card> cardsRemove = new ArrayList<Card>();
+        cardsRemove.add(card1);
+        goFishPlayer.setHand(hand);
+        goFish.removeFromHand(cardsRemove,goFishPlayer);
+        Integer expected = 4;
+        Integer actual = goFishPlayer.getHand().size();
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
+    public void removeFromHandTest1() {
+        ArrayList<Card> hand = new ArrayList<Card>(4);
+        Card card1 = new Card(CardValue.KING, Suit.CLUBS);
+        Card card2 = new Card(CardValue.ACE, Suit.CLUBS);
+        Card card3 = new Card(CardValue.ACE, Suit.CLUBS);
+        Card card4 = new Card(CardValue.ACE, Suit.CLUBS);
+        Card card5 = new Card(CardValue.TWO, Suit.CLUBS);
+        hand.add(card1);
+        hand.add(card2);
+        hand.add(card3);
+        hand.add(card4);
+        hand.add(card5);
+        ArrayList<Card> cardsRemove = new ArrayList<Card>();
+        cardsRemove.addAll(hand);
+        goFishPlayer.setHand(hand);
+        goFish.removeFromHand(cardsRemove,goFishPlayer);
+        Assert.assertTrue(goFishPlayer.getHand().isEmpty());
+    }
+
+    @Test
+    public void addToHandTest() {
+        ArrayList<Card> hand = new ArrayList<Card>(4);
+        Card card1 = new Card(CardValue.KING, Suit.CLUBS);
+        Card card2 = new Card(CardValue.ACE, Suit.CLUBS);
+        Card card3 = new Card(CardValue.ACE, Suit.CLUBS);
+        Card card4 = new Card(CardValue.ACE, Suit.CLUBS);
+        Card card5 = new Card(CardValue.TWO, Suit.CLUBS);
+        hand.add(card1);
+        hand.add(card2);
+        hand.add(card3);
+        hand.add(card4);
+        hand.add(card5);
+        ArrayList<Card> cardsToAdd = new ArrayList<Card>();
+        cardsToAdd.add(card1);
+        goFishPlayer.setHand(hand);
+        goFish.addToHand(cardsToAdd,goFishPlayer);
+        Integer expected = 6;
+        Integer actual = goFishPlayer.getHand().size();
+        Assert.assertEquals(expected,actual);
+    }
+
 }
 
