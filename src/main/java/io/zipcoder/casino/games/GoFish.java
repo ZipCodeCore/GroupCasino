@@ -122,9 +122,7 @@ public class GoFish extends Games {
 
     public void playerTurn() {
         hand = goFishPlayer.getHand();
-
         console.println( goFishPlayer.getName() + " your turn now! Your score is " + goFishPlayer.getScore() + "\n");
-
         console.println(seeHand(hand));
 
         String input = searchFor();
@@ -191,7 +189,6 @@ public class GoFish extends Games {
                 computer.setHand(hand);
                 computerScore++;
             }
-
             compValueInt = compPickValue();
             compValueString = getCardValue(compValueInt);
             temp = checkHand(compValueString, goFishPlayer);
@@ -304,7 +301,6 @@ public class GoFish extends Games {
         console.println("no such card in the hand!\nYOU GO FISH!");
         deck.dealSingleCard(player);
     }
-
 
     @Override
     void nextTurn() {
