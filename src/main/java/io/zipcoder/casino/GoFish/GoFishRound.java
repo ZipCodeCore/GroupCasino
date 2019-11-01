@@ -1,7 +1,8 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.GoFish;
+
+import io.zipcoder.casino.Card;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class GoFishRound {
 

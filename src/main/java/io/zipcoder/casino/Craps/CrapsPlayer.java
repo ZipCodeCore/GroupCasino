@@ -1,4 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Craps;
+
+import io.zipcoder.casino.Player;
 
 public class CrapsPlayer {
 

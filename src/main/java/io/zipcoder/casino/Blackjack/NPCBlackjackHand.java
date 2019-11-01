@@ -1,4 +1,7 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Blackjack;
+
+import io.zipcoder.casino.Blackjack.BlackjackHand;
+import io.zipcoder.casino.Blackjack.BlackjackPlayer;
 
 public class NPCBlackjackHand extends BlackjackHand {
 

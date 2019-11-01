@@ -1,5 +1,7 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.Interfaces.GamblingPlayer;
+
 public class Player implements GamblingPlayer {
 
     private String firstName;

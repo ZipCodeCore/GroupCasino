@@ -1,6 +1,10 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.GoFish;
 
-import java.lang.reflect.Array;
+import io.zipcoder.casino.Card;
+import io.zipcoder.casino.CardGame;
+import io.zipcoder.casino.Interfaces.Game;
+import io.zipcoder.casino.Player;
+
 import java.util.ArrayList;
 
 public class GoFishGame extends CardGame implements Game {
