@@ -11,12 +11,11 @@ public class GoFishGame extends CardGame implements Game {
 
     private GoFishPlayer player;
     private GoFishNPC opponent;
-    ArrayList<GoFishRound> hands;
     ArrayList <Card> playerSuites;
     ArrayList <Card> npcSuites;
 
-    public GoFishGame(GoFishPlayer player) {
-        this.player = player;
+    public GoFishGame(Player player) {
+        this.player = new GoFishPlayer(player);
     }
 
     public void startPlay(){
