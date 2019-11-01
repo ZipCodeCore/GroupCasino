@@ -56,4 +56,12 @@ public class Player {
         this.chipsInHand = chipsInHand;
     }
 
+    public void displayGameMenu() {
+
+    }
+
+    public void handleChoices(int choice) {
+
+    }
+
 }

@@ -46,12 +46,8 @@ public class BlackjackHand {
         this.player = player;
     }
 
-    public int playLoop(){
+    public int playChoice(){
         return 0;
-    }
-
-    public void basicChoice() {
-
     }
 
     public int determineHandValue() {

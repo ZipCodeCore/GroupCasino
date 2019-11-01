@@ -10,10 +10,13 @@ public class BlackjackPlayer extends Player implements GamblingPlayer {
         super(firstName, lastName, age, balance, chipsInHand);
     }
 
-    public void play() {
+    public void getOptions() {
 
     }
 
+    public void handleOptions(int choice) {
+
+    }
 
     public void deposit(double amount) {
 

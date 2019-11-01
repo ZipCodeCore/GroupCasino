@@ -11,7 +11,7 @@ public class BlackjackGame extends CardGame implements GamblingGame {
     private ArrayList<Player> players;
     private ArrayList<BlackjackHand> hands;
 
-    public BlackjackGame(double minBet, double maxBet, int numPlayers, Player incomingPlayer) {
+    public BlackjackGame(double minBet, double maxBet, int numPlayers, BlackjackPlayer incomingPlayer) {
         this.minBet = minBet;
         this.maxBet = maxBet;
     }
