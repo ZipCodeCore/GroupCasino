@@ -1,19 +1,19 @@
 package io.zipcoder.casino;
 
-public class Player {
+public class Player implements GamblingPlayer {
 
     private String firstName;
     private String lastName;
     private int age;
     private double balance;
-    private double chipsInHand;
+    private double initialBalance;
 
-    public Player(String firstName, String lastName, int age, double balance, double chipsInHand) {
+    public Player(String firstName, String lastName, int age, double balance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.balance = balance;
-        this.chipsInHand = chipsInHand;
+        this.initialBalance = this.balance;
     }
 
     public String getFirstName() {
@@ -32,10 +32,6 @@ public class Player {
         return balance;
     }
 
-    public double getChipsInHand() {
-        return chipsInHand;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -52,15 +48,7 @@ public class Player {
         this.balance = balance;
     }
 
-    public void setChipsInHand(double chipsInHand) {
-        this.chipsInHand = chipsInHand;
-    }
-
-    public void displayGameMenu() {
-
-    }
-
-    public void handleChoices(int choice) {
+    public void deposit(double amount) {
 
     }
 

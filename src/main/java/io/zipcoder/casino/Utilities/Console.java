@@ -1,11 +1,10 @@
-package io.zipcoder.casino.utilities;
+package io.zipcoder.casino.Utilities;
 
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**

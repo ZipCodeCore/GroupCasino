@@ -54,11 +54,10 @@ public class BlackjackHand {
         return 0;
     }
 
-    public void splitHand() {
-
+    //
+    public BlackjackHand splitHand() {
+        return null;
     }
 
-    public void addCard() {
 
-    }
 }

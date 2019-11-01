@@ -7,7 +7,7 @@ public class NPCBlackjackHand extends BlackjackHand {
     }
 
     @Override
-    public int playLoop() {
+    public int playChoice() {
         return 0;
     }
 

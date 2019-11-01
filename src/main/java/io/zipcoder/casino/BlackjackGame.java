@@ -8,17 +8,29 @@ public class BlackjackGame extends CardGame implements GamblingGame {
     public static final HashMap<String, Integer> cardMap = null;
     private double minBet;
     private double maxBet;
-    private ArrayList<Player> players;
+    private BlackjackPlayer player;
+    private BlackjackNPCPlayer dealer;
     private ArrayList<BlackjackHand> hands;
+    private int numDecks;
 
     public BlackjackGame(double minBet, double maxBet, int numPlayers, BlackjackPlayer incomingPlayer) {
         this.minBet = minBet;
         this.maxBet = maxBet;
+        this.player = incomingPlayer;
     }
 
     public void startPlay() {
 
     }
+
+    public ArrayList<BlackjackHand> initialDeal() {
+        return null;
+    }
+
+    public BlackjackNPCPlayer createDealer() {
+        return null;
+    }
+
 
     public void roundOfPlay() {
 
@@ -28,31 +40,36 @@ public class BlackjackGame extends CardGame implements GamblingGame {
 
     }
 
-    public void checkDeck() {
-
-    }
-
-    public void initialDeal() {
-
-    }
-
-    public void modifyNPCRoster () {
-
+    public boolean checkDeck() {
+        return false;
     }
 
     public void displayTable() {
 
     }
 
-    public void chooseWinners() {
-
+    // returns 0 if you lost, bet size if you pushed, 2x/2.5x bet size if you won
+    public double calculateWinnings (BlackjackHand handToEvaluate) {
+        return 0.0;
     }
 
-    public void wager(double amount) {
-
+    public double getWager() {
+        return 0.0;
     }
 
     public void payOut(double amount) {
 
     }
+
+    //    public ArrayList<Player> createNPCs () {
+//        return null;
+//    }
+
+//    public ArrayList<Player> seatPlayers () {
+//        return null;
+//    }
+//
+//    public ArrayList<Player> modifyNPCRoster () {
+//        return null;
+//    }
 }

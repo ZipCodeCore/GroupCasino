@@ -1,12 +1,13 @@
 package io.zipcoder.casino;
 
-public class BlackjackNPCPlayer extends Player {
+public class BlackjackNPCPlayer {
 
     private int threshold;
     private boolean isDealer;
+    private Player player;
 
-    public BlackjackNPCPlayer(String firstName, String lastName, int age, double balance, double chipsInHand, int threshold, boolean isDealer) {
-        super(firstName, lastName, age, balance, chipsInHand);
+    public BlackjackNPCPlayer(Player player, int threshold, boolean isDealer) {
+        this.player = player;
         this.threshold = threshold;
         this.isDealer = isDealer;
     }
@@ -14,5 +15,14 @@ public class BlackjackNPCPlayer extends Player {
     public int getThreshold() {
         return threshold;
     }
+
+    public boolean isDealer() {
+        return isDealer;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
 
 }

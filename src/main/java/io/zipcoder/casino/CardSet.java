@@ -20,8 +20,17 @@ public class CardSet {
     }
 
 
-    public void drawCard(){
+    public Card removeFirstCard(){
         // removes first card!
+        return null;
+    }
+
+    public CardSet removeCard(Card cardToRemove) {
+        return null;
+    }
+
+    public CardSet addCard(Card cardToAdd) {
+        return null;
     }
 
 }
