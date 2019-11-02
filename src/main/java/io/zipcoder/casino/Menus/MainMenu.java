@@ -8,16 +8,17 @@ import java.util.HashMap;
 
 public class MainMenu implements Menu {
 
-    private HashMap<Integer, Object> choiceMap;
+    private HashMap<Integer, Menu> choiceMap;
 
     @Override
     public void displayMenu() {
+        choiceMap = new HashMap<Integer, Menu>();
 
     }
 
     @Override
     public void handleChoice(int choice) {
-
+        choiceMap.get(choice).displayMenu();
     }
 
     public Player newPlayerDialogue() {
