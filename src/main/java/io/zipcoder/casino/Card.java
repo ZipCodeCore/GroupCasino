@@ -26,11 +26,16 @@ public class Card implements Comparable<Card>{
     }
 
     public int compareTo (Card card2) {
-        return Integer.compare(Card.RANKS.indexOf(this.rank), Card.RANKS.indexOf(card2.rank));
+        if (!this.rank.equals(card2.rank)) {
+            return Integer.compare(Card.RANKS.indexOf(this.rank), Card.RANKS.indexOf(card2.rank));
+        } else {
+            int res = Card.SUIT_SYMBOLS.get(this.suit).compareTo(Card.SUIT_SYMBOLS.get(card2.suit));
+            return (res > 0) ?  1 : (res == 0 ) ? 0 : -1;
+        }
     }
 
     public boolean equals (Card card2) {
-        if (this.compareTo(card2) == 0) {
+        if (this.rank.equals(card2.rank)) {
             return true;
         } else {
             return false;

@@ -26,7 +26,7 @@ public class CardTest {
 
     @Test
     public void compareToTest2() {
-        Assert.assertTrue(card1.compareTo(new Card("7","S")) == 0);
+        Assert.assertTrue(card1.compareTo(new Card("7","S")) == 1);
     }
 
     @Test
@@ -40,8 +40,13 @@ public class CardTest {
     }
 
     @Test
+    public void compareToTest5() {
+        Assert.assertTrue(card1.compareTo(new Card("A","D")) == -1);
+    }
+
+    @Test
     public void testToString() {
-        Assert.assertEquals("A\u2666", new Card("A","D").toString());
+        Assert.assertEquals("7\u2666", new Card("7","D").toString());
     }
 
     @Test
@@ -60,9 +65,9 @@ public class CardTest {
     }
 
     @Test
-    public void sortTest() {
+    public void sortToTestOrderingRulesTest() {
         Card[] cards = new Card[] {card1, new Card("3","C"), new Card("7","S"), new Card("A","D"), new Card("K","S"), new Card("J","C"), new Card("Q","D")};
-        Card[] expected = new Card[] {new Card("3","C"), card1,  new Card("7","S"), new Card("J","C"), new Card("Q","D"), new Card("K","S"), new Card("A","D")};
+        Card[] expected = new Card[] {new Card("3","C"),  new Card("7","S"), card1, new Card("J","C"), new Card("Q","D"), new Card("K","S"), new Card("A","D")};
         ArrayList<Card> cardAL = new ArrayList<Card>(Arrays.asList(cards));
         Collections.sort(cardAL);
 
@@ -71,4 +76,5 @@ public class CardTest {
         }
 
     }
+
 }

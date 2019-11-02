@@ -48,7 +48,7 @@ public class CardSetTest {
     public void getCardsTest5() {
         int count = 0;
         for (Card card: fiveDecks.getCards()) {
-            if (card.compareTo(new Card("A","C")) == 0) {
+            if (card.equals(new Card("A","C"))) {
                 count++;
             }
         }
@@ -151,5 +151,20 @@ public class CardSetTest {
                 && new Card("2","C").strictEquals(fiveDecks.getCards().get(1))
                 && new Card("2","D").strictEquals(fiveDecks.getCards().get(2))
                 && new Card("2","H").strictEquals(fiveDecks.getCards().get(3)));
+    }
+
+    @Test
+    public void sortandShuffleTest() {
+        ArrayList<Card> fiveDecksClone = (ArrayList<Card>) fiveDecks.getCards().clone();
+        Collections.sort(fiveDecksClone);
+        fiveDecks.sort();
+        Assert.assertTrue("one",fiveDecksClone.equals(fiveDecks.getCards()));
+        fiveDecks.shuffle();
+        Assert.assertFalse("two",fiveDecksClone.equals(fiveDecks.getCards()));
+        fiveDecks.sort();
+        // the card objects are in a different order, so we have to loop to test if they're isomorphic
+        for (int i = 0; i < fiveDecks.getCards().size(); i++) {
+            Assert.assertTrue(fiveDecks.getCards().get(i).equals(fiveDecksClone.get(i)));
+        }
     }
 }

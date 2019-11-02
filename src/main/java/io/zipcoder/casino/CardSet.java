@@ -64,6 +64,6 @@ public class CardSet {
     public void shuffle() {
 
         Collections.shuffle(this.cards);
-        ArrayList<Card> c = this.cards;
+        //ArrayList<Card> c = this.cards;
     }
 }
