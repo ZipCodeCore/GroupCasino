@@ -15,14 +15,19 @@ public class GoFishGame extends CardGame implements Game {
     ArrayList <Card> playerSuites;
     ArrayList <Card> npcSuites;
 
-    public String getName() {
-        return name;
-    }
 
     public GoFishGame(Player player) {
         this.player = new GoFishPlayer(player);
     }
 
+    public String getName() {
+        return name;
+    }
+
+
+
+
+    //populates player deals hands
     public void startPlay(){
 
     }
