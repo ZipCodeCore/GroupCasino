@@ -14,6 +14,7 @@ public class GameMenu implements Menu {
     private HashMap<Integer, GameObject> gameMap;
     private GameRepo gameRepo;
     private Console console;
+    private String name = "Game Menu";
 
     public GameMenu(Player player) {
         this.gameRepo = new GameRepo(player);

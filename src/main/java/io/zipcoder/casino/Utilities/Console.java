@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -30,6 +32,25 @@ public final class Console {
     public String getStringInput(String prompt, Object... args) {
         println(prompt, args);
         return input.nextLine();
+    }
+
+    public boolean cardCheck (String input) {
+        ArrayList<String> choices = new ArrayList<String>(Arrays.asList(new String[] {"2","3","4","5","6","7","8","9","10","J","Q","K","A"}));
+        return choices.contains(input);
+    }
+
+    public String getCardRankInput(String prompt) {
+        print(prompt);
+        String input = getInput("Choose a card to take (2-10,J,Q,K,A): ").toUpperCase();
+        while (true) {
+            if (cardCheck(input)) break;
+            else {
+                println("Invalid card rank");
+                print(prompt);
+                input = getInput("Choose a card: ");
+            }
+        }
+        return input;
     }
 
 //    public Double getDoubleInput(String prompt, Object... args) {
