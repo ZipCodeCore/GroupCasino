@@ -21,7 +21,7 @@ public class GameMenuTest {
         GameMenu gameMenu = new GameMenu(gameRepo);
         HashMap<Integer,GameObject> map = gameMenu.getGameMap();
 
-        Assert.assertEquals(GameRepo.NUM_ADULT_GAMES+GameRepo.NUM_KID_GAMES, map.size());
+        Assert.assertEquals(GameRepo.NUM_ADULT_GAMES + GameRepo.NUM_KID_GAMES, map.size());
 
     }
 
@@ -33,10 +33,24 @@ public class GameMenuTest {
         GameMenu gameMenu = new GameMenu(gameRepo);
         HashMap<Integer,GameObject> map = gameMenu.getGameMap();
 
-        Assert.assertEquals(GameRepo.NUM_ADULT_GAMES+GameRepo.NUM_KID_GAMES, map.size());
+        Assert.assertEquals(GameRepo.NUM_KID_GAMES, map.size());
     }
 
     @Test
-    public void handleChoices() {
+    public void printTestAdult() {
+        Player player = new Player("June", "Cleaver", 35, 0.00);
+        GameRepo gameRepo = new GameRepo(player);
+
+        GameMenu gameMenu = new GameMenu(gameRepo);
+        gameMenu.displayGameMenu();
+    }
+
+    @Test
+    public void printTestKid() {
+        Player player = new Player("Beaver", "Cleaver", 13, 0.00);
+        GameRepo gameRepo = new GameRepo(player);
+
+        GameMenu gameMenu = new GameMenu(gameRepo);
+        gameMenu.displayGameMenu();
     }
 }

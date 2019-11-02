@@ -25,7 +25,7 @@ public class GameMenu {
     public void displayGameMenu() {
         // temporary
         for (int gameNum : gameMap.keySet()) {
-            System.out.println(String.format("%d: %s", gameNum, gameMap.get(gameNum)));
+            System.out.println(String.format("%d: %s", gameNum, ((GameObject) gameMap.get(gameNum)).getName()));
         }
 
     }
