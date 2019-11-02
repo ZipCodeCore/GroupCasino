@@ -9,15 +9,15 @@ public class Card implements Comparable<Card>{
 
     private String rank;
     private String suit; //H,C,S,D
-    private static final ArrayList<String> ranks;
-    private static final HashMap<String,String> suitSymbols;
+    public static final ArrayList<String> RANKS;
+    public static final HashMap<String,String> SUIT_SYMBOLS;
     static {
-        ranks = new ArrayList<String>(Arrays.asList(new String[]{"2","3","4","5","6","7","8","9","10","J","Q","K","A"}));
-        suitSymbols = new HashMap<String, String>();
-        suitSymbols.put("H","\\u2665");
-        suitSymbols.put("S","\\u2660");
-        suitSymbols.put("C","\\u2663");
-        suitSymbols.put("D","\\u2666");
+        RANKS = new ArrayList<String>(Arrays.asList(new String[]{"2","3","4","5","6","7","8","9","10","J","Q","K","A"}));
+        SUIT_SYMBOLS = new HashMap<String, String>();
+        SUIT_SYMBOLS.put("H","\u2665");
+        SUIT_SYMBOLS.put("S","\u2660");
+        SUIT_SYMBOLS.put("C","\u2663");
+        SUIT_SYMBOLS.put("D","\u2666");
     }
 
     public Card(String rank, String suit) {
@@ -26,11 +26,27 @@ public class Card implements Comparable<Card>{
     }
 
     public int compareTo (Card card2) {
-        return Integer.compare(Card.ranks.indexOf(this.rank), Card.ranks.indexOf(card2.rank));
+        return Integer.compare(Card.RANKS.indexOf(this.rank), Card.RANKS.indexOf(card2.rank));
+    }
+
+    public boolean equals (Card card2) {
+        if (this.compareTo(card2) == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean strictEquals (Card card2) {
+        if (this.compareTo(card2) == 0 && this.suit == card2.suit) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public String toString() {
-        return this.rank + suitSymbols.get(this.suit);
+        return this.rank + SUIT_SYMBOLS.get(this.suit);
     }
 }

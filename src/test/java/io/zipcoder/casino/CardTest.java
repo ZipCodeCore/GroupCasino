@@ -41,22 +41,22 @@ public class CardTest {
 
     @Test
     public void testToString() {
-        Assert.assertEquals("A\\u2666", new Card("A","D").toString());
+        Assert.assertEquals("A\u2666", new Card("A","D").toString());
     }
 
     @Test
     public void testToString2() {
-        Assert.assertEquals("7\\u2665", card1.toString());
+        Assert.assertEquals("7\u2665", card1.toString());
     }
 
     @Test
     public void testToString3() {
-        Assert.assertEquals("3\\u2663", new Card("3","C").toString());
+        Assert.assertEquals("3\u2663", new Card("3","C").toString());
     }
 
     @Test
     public void testToString4() {
-        Assert.assertEquals("7\\u2660", new Card("7","S").toString());
+        Assert.assertEquals("7\u2660", new Card("7","S").toString());
     }
 
     @Test
