@@ -1,7 +1,11 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Craps;
+
+import io.zipcoder.casino.DiceGame;
+import io.zipcoder.casino.Interfaces.GamblingGame;
 
 public class CrapsGame extends DiceGame implements GamblingGame {
 
+    private String name = "Craps";
     private double minBet;
     private double maxBet;
     private CrapsPlayer player;
@@ -10,6 +14,9 @@ public class CrapsGame extends DiceGame implements GamblingGame {
     private int currentRoll;        //any roll after the first
 
 
+    public String getName() {
+        return name;
+    }
 
     @Override
     //deduct from chip balance

@@ -1,4 +1,8 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Blackjack;
+
+import io.zipcoder.casino.CardGame;
+import io.zipcoder.casino.Interfaces.GamblingGame;
+import io.zipcoder.casino.Player;
 
 
 import java.util.ArrayList;
@@ -6,6 +10,7 @@ import java.util.HashMap;
 
 public class BlackjackGame extends CardGame implements GamblingGame {
 
+    private String name = "Blackjack";
     public static final HashMap<String, Integer> cardMap = null;
     private double minBet;
     private double maxBet;
@@ -14,14 +19,23 @@ public class BlackjackGame extends CardGame implements GamblingGame {
     private ArrayList<BlackjackHand> hands;
     private int numDecks;
 
-    public BlackjackGame(double minBet, double maxBet, int numPlayers, BlackjackPlayer incomingPlayer) {
+    public BlackjackGame(double minBet, double maxBet, int numPlayers, Player incomingPlayer) {
         this.minBet = minBet;
         this.maxBet = maxBet;
-        this.player = incomingPlayer;
+        this.player = new BlackjackPlayer(incomingPlayer);
+    }
+
+    public BlackjackGame(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     public void startPlay() {
-
+        System.out.println("Blackjack, sucka!");
     }
 
     public ArrayList<BlackjackHand> initialDeal() {
