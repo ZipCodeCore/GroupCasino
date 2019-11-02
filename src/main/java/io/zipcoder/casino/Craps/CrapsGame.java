@@ -2,15 +2,30 @@ package io.zipcoder.casino.Craps;
 
 import io.zipcoder.casino.DiceGame;
 import io.zipcoder.casino.Interfaces.GamblingGame;
+import io.zipcoder.casino.Player;
 
 public class CrapsGame extends DiceGame implements GamblingGame {
 
+    private String name = "Craps";
     private double minBet;
     private double maxBet;
     private CrapsPlayer player;
     private int numberOfRolls;      //an integer from 1-4
     private int firstRoll;          //saves your first roll to try to match with later rolls
     private int currentRoll;        //any roll after the first
+
+
+    //Craps Game Constructor
+    public CrapsGame (player) {
+        this.minBet = minBet;
+        this.maxBet = maxBet;
+        CrapsPlayer newPlayer = new CrapsPlayer(player);
+    }
+
+    //Getter for name of the game
+    public String getGameName (){
+        return this.name; }
+
 
 
 
@@ -29,6 +44,7 @@ public class CrapsGame extends DiceGame implements GamblingGame {
     @Override
     //creates dice and runs a roundOfPlay
     public void startPlay() {
+
 
     }
 
