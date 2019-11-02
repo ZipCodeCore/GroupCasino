@@ -2,12 +2,13 @@ package io.zipcoder.casino.Blackjack;
 
 import io.zipcoder.casino.CardGame;
 import io.zipcoder.casino.Interfaces.GamblingGame;
+import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BlackjackGame extends CardGame implements GamblingGame {
+public class BlackjackGame extends CardGame implements Game {
 
     private String name = "Blackjack";
     public static final HashMap<String, Integer> cardMap = null;
@@ -67,13 +68,6 @@ public class BlackjackGame extends CardGame implements GamblingGame {
         return 0.0;
     }
 
-    public double getWager() {
-        return 0.0;
-    }
-
-    public void payOut(double amount) {
-
-    }
 
     //    public ArrayList<Player> createNPCs () {
 //        return null;
