@@ -28,8 +28,13 @@ public class BlackjackGame extends CardGame implements GamblingGame {
         this.name = name;
     }
 
-    public void startPlay() {
+    @Override
+    public String getName() {
+        return name;
+    }
 
+    public void startPlay() {
+        System.out.println("Blackjack, sucka!");
     }
 
     public ArrayList<BlackjackHand> initialDeal() {

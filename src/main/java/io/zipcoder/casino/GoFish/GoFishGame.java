@@ -34,6 +34,7 @@ public class GoFishGame extends CardGame implements Game {
     public void endChoice(){
 
     }
+
     public ArrayList<GoFishRound> initialDeal;
 
     public Player checkForWin(){

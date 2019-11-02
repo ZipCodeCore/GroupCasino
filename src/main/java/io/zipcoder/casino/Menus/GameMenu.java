@@ -32,7 +32,7 @@ public class GameMenu {
 
     // switch cases based on the name of the game
     public void handleChoices(int choice) {
-
+        gameMap.get(choice).startPlay();
     }
 
 

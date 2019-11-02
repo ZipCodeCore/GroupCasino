@@ -53,4 +53,14 @@ public class GameMenuTest {
         GameMenu gameMenu = new GameMenu(gameRepo);
         gameMenu.displayGameMenu();
     }
+
+    @Test
+    public void printTestAdulttemp() {
+        Player player = new Player("June", "Cleaver", 35, 0.00);
+        GameRepo gameRepo = new GameRepo(player);
+
+        GameMenu gameMenu = new GameMenu(gameRepo);
+        gameMenu.displayGameMenu();
+        gameMenu.handleChoices(2);
+    }
 }
