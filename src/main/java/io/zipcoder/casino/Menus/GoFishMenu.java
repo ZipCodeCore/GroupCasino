@@ -2,7 +2,7 @@ package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.Interfaces.Menu;
 
-public class TellerMenu implements Menu {
+public class GoFishMenu implements Menu {
 
     @Override
     public void displayMenu() {
@@ -13,5 +13,4 @@ public class TellerMenu implements Menu {
     public void handleChoice(int choice) {
 
     }
-
 }

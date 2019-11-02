@@ -1,16 +1,22 @@
 package io.zipcoder.casino.Menus;
 
+import io.zipcoder.casino.GameObject;
+import io.zipcoder.casino.Interfaces.Menu;
 import io.zipcoder.casino.Player;
 
-public class MainMenu {
+import java.util.HashMap;
 
-    
+public class MainMenu implements Menu {
 
-    public void displayMainMenu() {
+    private HashMap<Integer, Object> choiceMap;
+
+    @Override
+    public void displayMenu() {
 
     }
 
-    public void handleChoices(int choice) {
+    @Override
+    public void handleChoice(int choice) {
 
     }
 

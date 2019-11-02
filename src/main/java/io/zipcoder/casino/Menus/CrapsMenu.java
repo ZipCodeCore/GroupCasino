@@ -1,12 +1,16 @@
 package io.zipcoder.casino.Menus;
 
-public class CrapsMenu {
+import io.zipcoder.casino.Interfaces.Menu;
 
-    public void getOptions() {
+public class CrapsMenu implements Menu {
+
+    @Override
+    public void displayMenu() {
 
     }
 
-    public void handleOptions(int choice) {
+    @Override
+    public void handleChoice(int choice) {
 
     }
 
