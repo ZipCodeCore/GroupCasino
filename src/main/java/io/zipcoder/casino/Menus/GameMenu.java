@@ -31,6 +31,11 @@ public class GameMenu implements Menu {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public void displayMenu() {
         // temporary
         for (int gameNum : gameMap.keySet()) {

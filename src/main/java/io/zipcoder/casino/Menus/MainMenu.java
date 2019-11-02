@@ -30,8 +30,14 @@ public class MainMenu implements Menu {
 
         // temporary
         for (int gameNum : choiceMap.keySet()) {
-//            console.println(String.format("%d: %s", gameNum, (choiceMap.get(gameNum)).getName()));
+            console.println(String.format("%d: %s", gameNum, (choiceMap.get(gameNum)).getName()));
         }
+        console.menuChoice(2);
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override

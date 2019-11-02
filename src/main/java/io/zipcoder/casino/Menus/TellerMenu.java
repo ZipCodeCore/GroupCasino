@@ -13,6 +13,11 @@ public class TellerMenu implements Menu {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public void displayMenu() {
 
     }
