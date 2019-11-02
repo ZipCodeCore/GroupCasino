@@ -5,6 +5,11 @@ import io.zipcoder.casino.Interfaces.GamblingGame;
 
 public class RRGame extends DiceGame implements GamblingGame {
 
+    private String name = "Russian Dice Roulette";
+
+    public String getName() {
+        return name;
+    }
 
     @Override
     public double getWager() {

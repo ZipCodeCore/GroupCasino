@@ -9,10 +9,15 @@ import java.util.ArrayList;
 
 public class GoFishGame extends CardGame implements Game {
 
+    private String name = "Go Fish";
     private GoFishPlayer player;
     private GoFishNPC opponent;
     ArrayList <Card> playerSuites;
     ArrayList <Card> npcSuites;
+
+    public String getName() {
+        return name;
+    }
 
     public GoFishGame(Player player) {
         this.player = new GoFishPlayer(player);
