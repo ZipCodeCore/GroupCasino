@@ -12,7 +12,17 @@ import java.util.HashMap;
 public class BlackjackGame extends CardGame implements Game {
 
     private String name = "Blackjack";
-    public static final HashMap<String, Integer> cardMap = null;
+    public static final HashMap<String, Integer> cardMap = new HashMap<String,Integer>();
+    static {
+        for (int i = 2; i <= 10; i++) {
+            cardMap.put(String.valueOf(i), i);
+        }
+        cardMap.put("J",10);
+        cardMap.put("Q",10);
+        cardMap.put("K",10);
+        cardMap.put("A",11);
+    }
+
     private double minBet;
     private double maxBet;
     private BlackjackPlayer player;
@@ -79,8 +89,13 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public void initialDeal() {
-        this.hands.add(new BlackjackHand(40.00, this.player, this.shoe.removeFirstCard(), this.shoe.removeFirstCard()));
-        this.hands.add(new BlackjackHand(40.00, (BlackjackPlayer) this.dealer, this.shoe.removeFirstCard(), this.shoe.removeFirstCard()));
+        BlackjackHand playerHand = new BlackjackHand(40.00, this.player, this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
+        this.hands.add(playerHand);
+        this.player.addHand(playerHand);
+
+        BlackjackHand dealerHand = new BlackjackHand(40.00, (BlackjackPlayer) this.dealer, this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
+        this.hands.add(dealerHand);
+        this.dealer.addHand(dealerHand);
     }
 
     public void roundOfPlay() {

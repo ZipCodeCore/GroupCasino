@@ -25,6 +25,14 @@ public class Card implements Comparable<Card>{
         this.suit = suit;
     }
 
+    public String getRank() {
+        return rank;
+    }
+
+    public String getSuit() {
+        return suit;
+    }
+
     public int compareTo (Card card2) {
         if (!this.rank.equals(card2.rank)) {
             return Integer.compare(Card.RANKS.indexOf(this.rank), Card.RANKS.indexOf(card2.rank));

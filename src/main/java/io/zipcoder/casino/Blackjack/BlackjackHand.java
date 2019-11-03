@@ -5,6 +5,7 @@ import io.zipcoder.casino.CardSet;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class BlackjackHand {
 
@@ -58,7 +59,26 @@ public class BlackjackHand {
     }
 
     public int determineHandValue() {
+        //ArrayList<Integer> values = mapCardValues();
+
         return 0;
+    }
+
+    public ArrayList<Integer> mapCardValues(CardSet cards) {
+        ArrayList<Integer> values = new ArrayList<Integer>();
+        for (Card card: cards.getCards()) {
+            values.add(BlackjackGame.cardMap.get(card.getRank()));
+        }
+        Collections.sort(values,Collections.reverseOrder());
+        return values;
+    }
+
+    public int arraySum(ArrayList<Integer> array) {
+        int sum = 0;
+        for (int number : array) {
+            sum += number;
+        }
+        return sum;
     }
 
     //
