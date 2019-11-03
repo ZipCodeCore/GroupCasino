@@ -30,29 +30,14 @@ public class BlackjackHand {
         return bet;
     }
 
-    public int getValue() {
-        return value;
-    }
-
     public BlackjackPlayer getPlayer() {
         return player;
-    }
-
-    public void setCards(CardSet cards) {
-        this.cards = cards;
     }
 
     public void setBet(double bet) {
         this.bet = bet;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public void setPlayer(BlackjackPlayer player) {
-        this.player = player;
-    }
 
     public void clear() {
         this.cards.clear();
@@ -70,7 +55,7 @@ public class BlackjackHand {
         return 0;
     }
 
-    public int determineHandValue() {
+    public int getValue() {
         ArrayList<Integer> values = mapCardValues(this.cards);
         int sumValue = arraySum(values);
         if (sumValue <= 21) {
