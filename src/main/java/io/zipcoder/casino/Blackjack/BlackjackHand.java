@@ -38,6 +38,9 @@ public class BlackjackHand {
         this.bet = bet;
     }
 
+    public void setCards(CardSet cards) { //just for testing
+        this.cards = cards;
+    }
 
     public void clear() {
         this.cards.clear();
@@ -53,6 +56,10 @@ public class BlackjackHand {
 
     public int playChoice(){
         return 0;
+    }
+
+    public void hit() {
+
     }
 
     public int getValue() {

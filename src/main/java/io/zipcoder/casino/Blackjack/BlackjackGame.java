@@ -35,7 +35,7 @@ public class BlackjackGame extends CardGame implements Game {
         this.minBet = minBet;
         this.maxBet = maxBet;
         this.player = new BlackjackPlayer(incomingPlayer);
-        this.dealer = new BlackjackNPCPlayer(new Player("Mr.", "Roboto", 50, 1000000.00), 16, true);
+        this.dealer = new BlackjackNPCPlayer(new Player("Mr.", "Roboto", 50, 1000000.00), 17, true);
         this.numDecks = 5;
         this.hands = new ArrayList<BlackjackHand>(0);
     }
@@ -83,17 +83,17 @@ public class BlackjackGame extends CardGame implements Game {
 
     public void startPlay() {
         new BlackjackMenu(this).displayMenu();
-        checkShoe();
         initialDeal();
         System.out.println("Blackjack, sucka!");
     }
 
     public void initialDeal() {
-        BlackjackHand playerHand = new BlackjackHand(40.00, this.player, this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
+        checkShoe();
+        BlackjackHand playerHand = new BlackjackHand(this.minBet, this.player, this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
         this.hands.add(playerHand);
         this.player.addHand(playerHand);
 
-        BlackjackHand dealerHand = new BlackjackHand(40.00, (BlackjackPlayer) this.dealer, this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
+        BlackjackHand dealerHand = new BlackjackHand(0.00, (BlackjackPlayer) this.dealer, this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
         this.hands.add(dealerHand);
         this.dealer.addHand(dealerHand);
     }
@@ -122,9 +122,35 @@ public class BlackjackGame extends CardGame implements Game {
 
     }
 
-    // returns 0 if you lost, bet size if you pushed, 2x/2.5x bet size if you won
+    public Double initialWinnerCheck() { // looking for blackjacks
+        BlackjackHand dealerHand = this.dealer.getHands().get(0); // dealer only ever has one hand
+        BlackjackHand playerHand = this.player.getHands().get(0); // player starts with only one hand
+        int dealerValue = dealerHand.getValue();
+        int playerValue = playerHand.getValue();
+
+        if (dealerValue == 21 && playerValue < 21) { //lose to blackjack
+            return 0.0;
+        } else if (dealerValue < 21 && playerValue == 21 ) { //win w/ blackjack
+            return 2.5 * playerHand.getBet();
+        } else if (dealerValue == 21 && 21 == playerValue) { //push w/blackjacks
+            return playerHand.getBet();
+        }
+        return null;
+    }
+
+    // returns 0 if you lost, bet size if you pushed, 2x bet size if you won
     public double calculateWinnings (BlackjackHand handToEvaluate) {
-        return 0.0;
+
+        BlackjackHand dealerHand = this.dealer.getHands().get(0); // dealer only ever has one hand
+        int dealerValue = dealerHand.getValue();
+        int playerValue = handToEvaluate.getValue();
+        if (playerValue > dealerValue) {
+            return 2 * handToEvaluate.getBet();
+        } else if (playerValue == dealerValue) {
+            return handToEvaluate.getBet();
+        } else {
+            return 0.0;
+        }
     }
 
 }
