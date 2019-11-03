@@ -215,6 +215,18 @@ public final class Console {
         return Integer.valueOf(input);
     }
 
+    public Integer getInteger(String prompt) {
+        String input = getInput(prompt);
+        while (true) {
+            if (integerCheck(input)) break;
+            else {
+                println("Enter a number.");
+                input = getInput(prompt);
+            }
+        }
+        return Integer.valueOf(input);
+    }
+
     public Integer getInteger(int max) {
         String input = getInput();
         while (true) {

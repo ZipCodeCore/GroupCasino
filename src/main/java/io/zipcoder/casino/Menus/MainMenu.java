@@ -22,17 +22,26 @@ public class MainMenu implements Menu {
         int count = 0;
         choiceMap.put(++count, new GameMenu(this.player));
         choiceMap.put(++count, new TellerMenu(this.player));
-
+        choiceMap.put(++count, new NullMenu());
     }
+
+//    public static void main(String[] args) {
+//        Player player = new Player("Herb", "Tarlek", 45, 0.00);
+//        MainMenu mainmenu = new MainMenu(player);
+//        mainmenu.displayMenu();
+//    }
 
     @Override
     public void displayMenu() {
+        console.clearScreen();
 
         // temporary
         for (int gameNum : choiceMap.keySet()) {
             console.println(String.format("%d: %s", gameNum, (choiceMap.get(gameNum)).getName()));
         }
-        console.menuChoice(2);
+
+        handleChoice(console.menuChoice(this.choiceMap.size()));
+
     }
 
     @Override
@@ -42,10 +51,7 @@ public class MainMenu implements Menu {
 
     @Override
     public void handleChoice(int choice) {
+        System.out.println(choice);
         choiceMap.get(choice).displayMenu();
-    }
-
-    public Player newPlayerDialogue() {
-        return null;
     }
 }

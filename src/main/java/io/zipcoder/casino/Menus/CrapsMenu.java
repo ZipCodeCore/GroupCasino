@@ -19,7 +19,9 @@ public class CrapsMenu implements Menu {
 
     @Override
     public void displayMenu() {
+        console.clearScreen();
 
+        console.println("Craaaaaps");
     }
 
     @Override

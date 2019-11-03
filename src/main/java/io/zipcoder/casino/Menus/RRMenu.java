@@ -19,7 +19,9 @@ public class RRMenu implements Menu {
 
     @Override
     public void displayMenu() {
+        console.clearScreen();
 
+        console.println("Da");
     }
 
     @Override

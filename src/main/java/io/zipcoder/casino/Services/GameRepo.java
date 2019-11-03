@@ -4,6 +4,7 @@ import io.zipcoder.casino.Blackjack.BlackjackGame;
 import io.zipcoder.casino.Craps.CrapsGame;
 import io.zipcoder.casino.GoFish.GoFishGame;
 import io.zipcoder.casino.GameObject;
+import io.zipcoder.casino.Menus.NullGame;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.RR.RRGame;
 ;
@@ -28,6 +29,7 @@ public class GameRepo {
             this.gamesMap.put(counter,new RRGame());
             counter++;
         }
+        this.gamesMap.put(counter, new NullGame(player));
 
     }
 

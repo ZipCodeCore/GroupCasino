@@ -1,16 +1,14 @@
 package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.Interfaces.Menu;
+import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Utilities.Console;
 
-public class BlackjackMenu implements Menu {
+public class NullMenu implements Menu {
 
-    private Console console;
-    private String name = "Blackjack Menu";
+    private String name = "Quit";
+    private Console console = new Console(System.in, System.out);
 
-    public BlackjackMenu() {
-        this.console = new Console (System.in, System.out);
-    }
 
     @Override
     public String getName() {
@@ -28,6 +26,4 @@ public class BlackjackMenu implements Menu {
     public void handleChoice(int choice) {
 
     }
-
-
 }

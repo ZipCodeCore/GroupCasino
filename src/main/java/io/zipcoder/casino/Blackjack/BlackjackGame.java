@@ -68,16 +68,4 @@ public class BlackjackGame extends CardGame implements Game {
         return 0.0;
     }
 
-
-    //    public ArrayList<Player> createNPCs () {
-//        return null;
-//    }
-
-//    public ArrayList<Player> seatPlayers () {
-//        return null;
-//    }
-//
-//    public ArrayList<Player> modifyNPCRoster () {
-//        return null;
-//    }
 }
