@@ -26,7 +26,7 @@ public class BlackjackPlayerTest {
 
     @Test
     public void addHandTest1() {
-        BlackjackHand blackjackHand = new BlackjackHand(45.00, blackjackPlayer);
+        BlackjackHand blackjackHand = new BlackjackHand(45.00, blackjackPlayer, null, null);
         Assert.assertTrue(blackjackPlayer.getHands().size() == 0);
         Assert.assertFalse(blackjackPlayer.getHands().contains(blackjackHand));
         blackjackPlayer.addHand(blackjackHand);
@@ -36,9 +36,9 @@ public class BlackjackPlayerTest {
 
     @Test
     public void addHandTest2() {
-        BlackjackHand blackjackHand = new BlackjackHand(45.00, blackjackPlayer);
+        BlackjackHand blackjackHand = new BlackjackHand(45.00, blackjackPlayer, null, null);
         blackjackPlayer.addHand(blackjackHand);
-        BlackjackHand blackjackHand2 = new BlackjackHand(55.00, blackjackPlayer);
+        BlackjackHand blackjackHand2 = new BlackjackHand(55.00, blackjackPlayer, null, null);
         blackjackPlayer.addHand(blackjackHand2);
         Assert.assertTrue(blackjackPlayer.getHands().size() == 2);
         Assert.assertTrue(blackjackPlayer.getHands().contains(blackjackHand2));
@@ -47,9 +47,9 @@ public class BlackjackPlayerTest {
 
     @Test
     public void removeHandTest() {
-        BlackjackHand blackjackHand = new BlackjackHand(45.00, blackjackPlayer);
+        BlackjackHand blackjackHand = new BlackjackHand(45.00, blackjackPlayer, null, null);
         blackjackPlayer.addHand(blackjackHand);
-        BlackjackHand blackjackHand2 = new BlackjackHand(55.00, blackjackPlayer);
+        BlackjackHand blackjackHand2 = new BlackjackHand(55.00, blackjackPlayer, null, null);
         blackjackPlayer.addHand(blackjackHand2);
         Assert.assertTrue(blackjackPlayer.getHands().size() == 2);
         Assert.assertTrue(blackjackPlayer.getHands().contains(blackjackHand2));
