@@ -1,5 +1,6 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,7 +9,13 @@ import static org.junit.Assert.*;
 public class PlayerMenuTest {
 
     @Test
-    public void displayPlayerMenu() {
+    public void runPlayerMenutest() {
+//        Console console = new Console(System.in,System.out);
+//        PlayerMenu playerMenu = new PlayerMenu();
+//        playerMenu.runPlayerMenu();
+
+
+
     }
 
     @Test
@@ -28,19 +35,19 @@ public class PlayerMenuTest {
     }
 
     @Test
-    public void gameMenuLogicTest2() {
-        GameMenu gameMenu = new GameMenu();
-        String expected = "You would be playing Roulette now.";
-        String actual = gameMenu.gameMenuLogic(5);
+    public void PlayerMenuLogicTest2() {
+        PlayerMenu playerMenu = new PlayerMenu();
+        String expected = "should be taking you to existing player repository";
+        String actual = playerMenu.playerMenuLogic(1);
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void gameMenuLogicTest3() {
-        GameMenu gameMenu = new GameMenu();
-        String expected = "You would be playing Go Fish now.";
-        String actual = gameMenu.gameMenuLogic(1);
+    public void PlayerMenuLogicTest3() {
+        PlayerMenu playerMenu = new PlayerMenu();
+        String expected = "thank you come again!";
+        String actual = playerMenu.playerMenuLogic(3);
 
         Assert.assertEquals(expected, actual);
     }

@@ -8,8 +8,12 @@ public class PlayerMenu {
     Player currentPlayer ;
     PlayerRepository playerRepo;
     Casino casino;
+    private Integer playerInput;
 
-    public PlayerMenu( ) {
+    public void runPlayerMenu( ) {
+       displayPlayerMenu();
+       Integer playerInput = getPlayerInput();
+       playerMenuLogic(playerInput);
 
 
     }
@@ -23,7 +27,7 @@ public class PlayerMenu {
     }
 
     public Integer getPlayerInput(){
-        Integer playerInput = console.getIntegerInput(":");
+        this.playerInput = console.getIntegerInput(":");
         return getPlayerInput();
     }
 
