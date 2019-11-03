@@ -22,7 +22,7 @@ public class GameRepo {
         this.gamesMap.put(counter,new GoFishGame(player));
         counter++;
         if (player.getAge() >= 21) {
-            this.gamesMap.put(counter,new BlackjackGame(0.0, 0.0, 1,player));
+            this.gamesMap.put(counter,new BlackjackGame(0.0, 0.0, player));
             counter++;
             this.gamesMap.put(counter,new CrapsGame(player));
             counter++;

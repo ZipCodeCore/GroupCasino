@@ -1,8 +1,8 @@
 package io.zipcoder.casino.Blackjack;
 
 import io.zipcoder.casino.CardGame;
-import io.zipcoder.casino.Interfaces.GamblingGame;
 import io.zipcoder.casino.Interfaces.Game;
+import io.zipcoder.casino.Menus.BlackjackMenu;
 import io.zipcoder.casino.Player;
 
 import java.util.ArrayList;
@@ -19,14 +19,18 @@ public class BlackjackGame extends CardGame implements Game {
     private ArrayList<BlackjackHand> hands;
     private int numDecks;
 
-    public BlackjackGame(double minBet, double maxBet, int numPlayers, Player incomingPlayer) {
+    public BlackjackGame(double minBet, double maxBet, Player incomingPlayer) {
         this.minBet = minBet;
         this.maxBet = maxBet;
         this.player = new BlackjackPlayer(incomingPlayer);
     }
 
-    public BlackjackGame(String name) {
-        this.name = name;
+    public void setMinBet(double minBet) {
+        this.minBet = minBet;
+    }
+
+    public void setMaxBet(double maxBet) {
+        this.maxBet = maxBet;
     }
 
     @Override
@@ -34,7 +38,17 @@ public class BlackjackGame extends CardGame implements Game {
         return name;
     }
 
+    public double getMinBet() {
+        return minBet;
+    }
+
+    public double getMaxBet() {
+        return maxBet;
+    }
+
     public void startPlay() {
+        new BlackjackMenu(this).displayMenu();
+
         System.out.println("Blackjack, sucka!");
     }
 
