@@ -43,15 +43,15 @@ public class GameMenu {
                 blackjack.launchBlackjack();*/
                 return "You would be playing Blackjack now.";
             case 3:
-                console.print("You would be playing craps now");
+                console.print("You would be playing craps now.");
                 /*Craps craps = new Craps;
                 craps.launchCraps();*/
-                break;
+                return "You would be playing craps now.";
             case 4:
-                console.print("You would be playing Chutes and Ladders now");
+                console.print("You would be playing Chutes and Ladders now.");
                 /*ChutesAndLadders chutesAndLadders = new ChutesAndLadders;()
                 chutesAndLadders.launchChutesAndLadders()*/
-                break;
+                return "You would be playing Chutes and Ladders now.";
             case 5:
                 console.print("You would be playing Roulette now.");
                 /*Roulette roulette = new Roulette;
@@ -59,17 +59,17 @@ public class GameMenu {
                  */
                 return "You would be playing Roulette now.";
             case 6:
-                console.print("You would be playing Slots now");
+                console.print("You would be playing Slots now.");
                 /*Slots slots = new Slots();
                 slots.launchSlots();
                  */
-                break;
+                return "You would be playing Slots now";
             case 7:
-                console.print("This will take you back to the Casino menu");
+                console.print("This will take you back to the Casino menu.");
                 /*Casino casino = new Casino();
                 casino.launchCasinoMenu
                  */
-                break;
+                return "This will take you back to the Casino menu.";
         }
         return null;
     }
