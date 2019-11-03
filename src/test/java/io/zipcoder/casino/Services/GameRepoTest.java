@@ -18,7 +18,7 @@ public class GameRepoTest {
 
         HashMap<Integer, GameObject> map = gameRepo.getGamesMap();
 
-        Assert.assertEquals(GameRepo.NUM_ADULT_GAMES + GameRepo.NUM_KID_GAMES, map.size());
+        Assert.assertEquals(GameRepo.NUM_ADULT_GAMES + GameRepo.NUM_KID_GAMES + 1, map.size());
 
     }
 
@@ -29,7 +29,7 @@ public class GameRepoTest {
 
         HashMap<Integer, GameObject> map = gameRepo.getGamesMap();
 
-        Assert.assertEquals(GameRepo.NUM_KID_GAMES, map.size());
+        Assert.assertEquals(GameRepo.NUM_KID_GAMES + 1, map.size());
     }
 
 }
