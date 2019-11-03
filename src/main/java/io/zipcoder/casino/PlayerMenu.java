@@ -9,8 +9,10 @@ public class PlayerMenu {
     PlayerRepository playerRepo;
     Casino casino;
 
-    public PlayerMenu( ) {
+    public void runPlayerMenu( ) {
        displayPlayerMenu();
+       Integer playerInput = getPlayerInput();
+       playerMenuLogic(playerInput);
 
     }
 
@@ -28,7 +30,7 @@ public class PlayerMenu {
     }
 
 
-    public void playerMenuLogic(Integer playerInput){
+    public String playerMenuLogic(Integer playerInput){
         switch (playerInput){
             case 1:
             console.print("should be taking you to existing player repository");
