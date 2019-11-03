@@ -10,15 +10,15 @@ public class PlayerMenu {
     Casino casino;
 
     public PlayerMenu( ) {
-       displayPlayerMenu();
+
 
     }
 
     public void displayPlayerMenu(){
-        console.print("Welcome stranger! Have I seen you before?");
-        console.print("(1) - Yes, My name is :");
-        console.print("(2) - No it is my first time!");
-        console.print("(3) - Never mind, forgot my wallet T^T");
+        console.println("Welcome stranger! Have I seen you before?");
+        console.println("(1) - Yes, My name is :");
+        console.println("(2) - No it is my first time!");
+        console.println("(3) - Never mind, forgot my wallet T^T");
         getPlayerInput();
     }
 
@@ -28,17 +28,20 @@ public class PlayerMenu {
     }
 
 
-    public void playerMenuLogic(Integer playerInput){
+    public String playerMenuLogic(Integer playerInput){
         switch (playerInput){
             case 1:
-            console.print("should be taking you to existing player repository");
-            break;
+                console.print("should be taking you to existing player repository");
+                return "should be taking you to existing player repository";
             case 2:
-            console.print("should be taking you to create a player menu");
-            break;
+                console.print("should be taking you to create a player menu");
+                return "should be taking you to create a player menu";
+
             case 3:
                 console.print("thank you come again!");
-                System.exit(0);
+                return "thank you come again!";
+
+                //System.exit(0);
 
         }
 
@@ -46,7 +49,7 @@ public class PlayerMenu {
 
 
 
-
+return null;
     }
 
 
