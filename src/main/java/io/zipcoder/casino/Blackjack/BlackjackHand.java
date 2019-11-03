@@ -54,14 +54,39 @@ public class BlackjackHand {
         this.player = player;
     }
 
+    public void clear() {
+        this.cards.clear();
+    }
+
+    public void addCard(Card card) {
+        this.cards.addCard(card);
+    }
+
+    public int size() {
+        return this.cards.size();
+    }
+
     public int playChoice(){
         return 0;
     }
 
     public int determineHandValue() {
-        //ArrayList<Integer> values = mapCardValues();
-
-        return 0;
+        ArrayList<Integer> values = mapCardValues(this.cards);
+        int sumValue = arraySum(values);
+        if (sumValue <= 21) {
+            return sumValue;
+        } else {
+            if (values.contains(11)) {
+                int numAces = values.size() - values.indexOf(11);
+                for (int i = 1; i <= numAces; i++) { // loop through, turning 11's into 1's until it's legal
+                    sumValue -= 10;
+                    if (sumValue <= 21) {
+                        return sumValue;
+                    }
+                }
+            }
+            return 0; //bust
+        }
     }
 
     public ArrayList<Integer> mapCardValues(CardSet cards) {

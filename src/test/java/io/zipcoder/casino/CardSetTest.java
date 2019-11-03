@@ -108,6 +108,20 @@ public class CardSetTest {
     }
 
     @Test
+    public void clearTest() {
+        Assert.assertEquals(52,oneDeck.size());
+        oneDeck.clear();
+        Assert.assertEquals(0,oneDeck.size());
+    }
+
+    @Test
+    public void clearTest2() {
+        Assert.assertEquals(0,empty.size());
+        oneDeck.clear();
+        Assert.assertEquals(0,empty.size());
+    }
+
+    @Test
     public void addCard2() {
         empty.addCard(new Card("A","D"));
         empty.addCard(new Card("4","H"));
