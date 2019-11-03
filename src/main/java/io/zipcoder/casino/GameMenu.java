@@ -32,7 +32,7 @@ public class GameMenu {
     public void gameMenuLogic(Integer playerInput){
         switch(playerInput){
             case 1:
-                console.print("You would be playing Go Fish now.")
+                console.print("You would be playing Go Fish now.");
                 /*GoFish goFish = new GoFish();
                 goFish.launchGoFish;*/
                 break;
@@ -44,7 +44,7 @@ public class GameMenu {
             case 3:
                 console.print("You would be playing craps now");
                 /*Craps craps = new Craps*/
-                craps.
+
 
         }
     }
