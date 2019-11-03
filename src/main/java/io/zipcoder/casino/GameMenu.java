@@ -5,6 +5,7 @@ import io.zipcoder.casino.utilities.Console;
 
 public class GameMenu {
     Console console = new Console(System.in, System.out);
+    private Integer playerInput;
 
     public void runGameMenu(){
         displayGameMenu();
@@ -25,27 +26,52 @@ public class GameMenu {
     }
 
     public Integer getPlayerInput(){
-        Integer playerInput = console.getIntegerInput(":");
+        this.playerInput = console.getIntegerInput(":");
         return playerInput;
     }
 
-    public void gameMenuLogic(Integer playerInput){
-        switch(playerInput){
+    public String gameMenuLogic(Integer playerInput) {
+        switch (playerInput) {
             case 1:
-                console.print("You would be playing Go Fish now.")
+                console.print("You would be playing Go Fish now.");
                 /*GoFish goFish = new GoFish();
-                goFish.launchGoFish;*/
-                break;
+                goFish.launchGoFish();*/
+                return "You would be playing Go Fish now.";
             case 2:
-                console.print("You would be playing blackjack now.");
+                console.print("You would be playing Blackjack now.");
                 /*Blackjack blackjack = new blackjack();
-                blackjack.launchBlackjack;*/
-                break;
+                blackjack.launchBlackjack();*/
+                return "You would be playing Blackjack now.";
             case 3:
-                console.print("You would be playing craps now");
-                /*Craps craps = new Craps*/
-                craps.
-
+                console.print("You would be playing craps now.");
+                /*Craps craps = new Craps;
+                craps.launchCraps();*/
+                return "You would be playing craps now.";
+            case 4:
+                console.print("You would be playing Chutes and Ladders now.");
+                /*ChutesAndLadders chutesAndLadders = new ChutesAndLadders;()
+                chutesAndLadders.launchChutesAndLadders()*/
+                return "You would be playing Chutes and Ladders now.";
+            case 5:
+                console.print("You would be playing Roulette now.");
+                /*Roulette roulette = new Roulette;
+                roulette.launchRoulette();
+                 */
+                return "You would be playing Roulette now.";
+            case 6:
+                console.print("You would be playing Slots now.");
+                /*Slots slots = new Slots();
+                slots.launchSlots();
+                 */
+                return "You would be playing Slots now";
+            case 7:
+                console.print("This will take you back to the Casino menu.");
+                /*Casino casino = new Casino();
+                casino.launchCasinoMenu
+                 */
+                return "This will take you back to the Casino menu.";
         }
+        return null;
     }
 }
+
