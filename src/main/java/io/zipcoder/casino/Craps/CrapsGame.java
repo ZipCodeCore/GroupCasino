@@ -3,6 +3,7 @@ package io.zipcoder.casino.Craps;
 import io.zipcoder.casino.DiceGame;
 import io.zipcoder.casino.Interfaces.GamblingGame;
 import io.zipcoder.casino.Interfaces.Game;
+import io.zipcoder.casino.Menus.CrapsMenu;
 import io.zipcoder.casino.Player;
 
 public class CrapsGame extends DiceGame implements Game {
@@ -30,21 +31,20 @@ public class CrapsGame extends DiceGame implements Game {
     @Override
     //creates dice and runs a roundOfPlay
     public void startPlay() {
+        new CrapsMenu(this).displayMenu();
+        roundOfPlay();
+    }
 
+    @Override
+    //runs a new game of craps
+    public void roundOfPlay() {
         setThePointRoll = DiceGame.roll(2);
-
     }
 
     @Override
     //implements menu whether you want to quit or go again
     public void endChoice() {
 
-    }
-
-    @Override
-    //runs a new game of craps
-    public void roundOfPlay() {
-    //menu for
     }
 
     public boolean winOnFirst (int setThePointRoll){
