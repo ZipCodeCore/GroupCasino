@@ -117,7 +117,15 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public Double betChoice () {
-        return console.getCurrency("Bet size (press Enter to stand up): ", this.minBet, this.maxBet);
+        double wager;
+        console.println("Current bankroll: %.2f", this.player.getPlayer().getBalance());
+        wager = console.getCurrency("Bet size (press Enter to stand up): ", this.minBet, this.maxBet);
+        if (gameServices.wager(wager, this.player.getPlayer())) {
+            return wager;
+        } else {
+            console.println("Your mouth is writing checks that your wallet can't cash.");
+            return betChoice();
+        }
     }
 
 
@@ -126,6 +134,7 @@ public class BlackjackGame extends CardGame implements Game {
 
         checkShoe();
         BlackjackHand playerHand = new BlackjackHand(betSize, this.player, this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
+
         this.hands.add(playerHand);
         this.player.addHand(playerHand);
 
@@ -142,7 +151,6 @@ public class BlackjackGame extends CardGame implements Game {
                 value = hand.playChoice(this.shoe);
                 this.displayTable(false);
             }
-            console.println("done:", value);
         }
         for (BlackjackHand hand : this.dealer.getHands()) {
             int value = -1;
@@ -150,7 +158,6 @@ public class BlackjackGame extends CardGame implements Game {
                 value = hand.playChoice(this.shoe);
                 this.displayTable(false);
             }
-            console.println("done:", value);
         }
         displayTable(true);
     }
@@ -181,7 +188,7 @@ public class BlackjackGame extends CardGame implements Game {
         //temporary
         console.clearScreen();
 
-        console.println(String.format("***Blackjack***\nTable stakes: $%.2f min / $%.2f max\n", this.minBet, this.maxBet));
+        console.println(String.format("*** Blackjack ***\nPlayer balance: $%.2f\nTable stakes: $%.2f min / $%.2f max\n", this.player.getPlayer().getBalance(),this.minBet, this.maxBet));
         console.println("Dealer");
         BlackjackHand dealerHand = this.dealer.getHands().get(0);
         for (Card card : dealerHand.getCards().getCards()) {
@@ -238,8 +245,10 @@ public class BlackjackGame extends CardGame implements Game {
         int playerValue = handToEvaluate.getValue();
         if (playerValue > dealerValue) {
             if (handToEvaluate.getCards().size() == 2 && handToEvaluate.getValue() == 21) {
+                gameServices.payOut(2.5 * handToEvaluate.getBet(), this.player.getPlayer());
                 return 2.5 * handToEvaluate.getBet();
             }
+            gameServices.payOut(2 * handToEvaluate.getBet(), this.player.getPlayer());
             return 2 * handToEvaluate.getBet();
         } else if (playerValue == dealerValue) {
             return handToEvaluate.getBet();

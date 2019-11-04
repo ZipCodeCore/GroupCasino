@@ -5,7 +5,9 @@ import io.zipcoder.casino.Player;
 
 public class GameServices implements GamblingGame {
 
-    public boolean getWager(double amount, Player player) {
+    // need to instantiate this in each game. Call it via gameServices.wager(), etc.
+
+    public boolean wager(double amount, Player player) {
         double balance = player.getBalance();
         if (amount > balance) {
             return false;

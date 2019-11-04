@@ -1,13 +1,10 @@
 package io.zipcoder.casino.Services;
 
 import io.zipcoder.casino.Blackjack.BlackjackGame;
-import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Player;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class GameServicesTest {
 
@@ -22,18 +19,18 @@ public class GameServicesTest {
 
     @Test
     public void getWagerTest() {
-        Assert.assertFalse(gameServices.getWager(300.00, player));
+        Assert.assertFalse(gameServices.wager(300.00, player));
     }
 
     @Test
     public void getWagerTest2() {
-        Assert.assertTrue(gameServices.getWager(100.00, player));
+        Assert.assertTrue(gameServices.wager(100.00, player));
         Assert.assertEquals(100.00, player.getBalance(), .01);
     }
 
     @Test
     public void getWagerTest3() {
-        Assert.assertTrue(gameServices.getWager(199.00, player));
+        Assert.assertTrue(gameServices.wager(199.00, player));
         Assert.assertEquals(1.00, player.getBalance(), .01);
     }
 
