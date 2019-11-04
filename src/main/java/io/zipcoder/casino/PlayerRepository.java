@@ -6,6 +6,10 @@ public class PlayerRepository {
 
     HashMap<String, Player> playerDataBase;
 
+    public PlayerRepository() {
+        playerDataBase = new HashMap<>();
+    }
+
     Player findPlayer(String playerName) {
         return playerDataBase.get(playerName);
     }
