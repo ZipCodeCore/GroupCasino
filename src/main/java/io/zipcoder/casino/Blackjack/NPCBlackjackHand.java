@@ -3,6 +3,7 @@ package io.zipcoder.casino.Blackjack;
 import io.zipcoder.casino.Blackjack.BlackjackHand;
 import io.zipcoder.casino.Blackjack.BlackjackPlayer;
 import io.zipcoder.casino.Card;
+import io.zipcoder.casino.CardSet;
 
 public class NPCBlackjackHand extends BlackjackHand {
 
@@ -11,8 +12,20 @@ public class NPCBlackjackHand extends BlackjackHand {
     }
 
     @Override
-    public int playChoice() {
-        return 0;
+    public int playChoice(CardSet shoe) {
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+        }
+        if (this.getValue() <= ((BlackjackNPCPlayer) this.getPlayer()).getThreshold()) {
+            int val = hit(shoe.removeFirstCard());
+            if (val != 0) {
+                return -1;
+            } else {
+                return 0;
+            }
+        }
+            return this.getValue();
     }
 
 }

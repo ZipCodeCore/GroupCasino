@@ -203,6 +203,32 @@ public final class Console {
         return Double.valueOf(input);
     }
 
+    public Double getCurrency(String prompt, double min, double max) {
+        print(prompt);
+        String input = getInput("$");
+        while (true) {
+            if (input.equals("")) {
+                return null;
+            }
+            if (currencyCheck(input)) {
+                double amount = Double.parseDouble(input);
+                if (amount >= min && amount <= max) {
+                    break;
+                } else {
+                    println(String.format("Enter a number between %.2f and %.2f", min, max));
+                    print(prompt);
+                    input = getInput("$");
+                }
+            }
+            else {
+                println("Enter a valid number");
+                print(prompt);
+                input = getInput("$");
+            }
+        }
+        return Double.valueOf(input);
+    }
+
     public Integer getInteger() {
         String input = getInput();
         while (true) {
