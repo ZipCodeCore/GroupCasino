@@ -9,11 +9,15 @@ public class GameMenu {
     private Integer playerInput;
     private Player currentPlayer;
     Casino casino = new Casino();
+    boolean running = true;
 
     public void runGameMenu(Player currentPlayer){
-        displayGameMenu();
-        Integer playerInput = getPlayerInput();
-        gameMenuLogic(playerInput);
+        this.currentPlayer = currentPlayer;
+        while(running) {
+            displayGameMenu();
+            Integer playerInput = getPlayerInput();
+            gameMenuLogic(playerInput);
+        }
     }
 
     public void displayGameMenu(){
@@ -72,7 +76,7 @@ public class GameMenu {
                 highAndLow.runHighOrLow(currentPlayer);
                 break;
             case 8:
-                casino.runCasinoMenu(currentPlayer);
+                running = false;
                 break;
 
         }
