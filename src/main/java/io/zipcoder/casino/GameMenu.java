@@ -1,12 +1,14 @@
 package io.zipcoder.casino;
 
 
+import io.zipcoder.casino.Games.HighAndLow;
 import io.zipcoder.casino.utilities.Console;
 
 public class GameMenu {
     Console console = new Console(System.in, System.out);
     private Integer playerInput;
     private Player currentPlayer;
+    Casino casino = new Casino();
 
     public void runGameMenu(Player currentPlayer){
         displayGameMenu();
@@ -22,7 +24,8 @@ public class GameMenu {
         console.println("(4) - Chutes & Ladders");
         console.println("(5) - Roulette");
         console.println("(6) - Slots");
-        console.println("(7) - Return to Casino");
+        console.println("(7) - High or Low");
+        console.println("(8) - Return to Casino");
     }
 
     public Integer getPlayerInput(){
@@ -65,7 +68,10 @@ public class GameMenu {
                  */
                 return "You would be playing Slots now";
             case 7:
-                Casino casino = new Casino();
+                HighAndLow highAndLow = new HighAndLow();
+                highAndLow.runHighOrLow(currentPlayer);
+                break;
+            case 8:
                 casino.runCasinoMenu(currentPlayer);
                 break;
 
