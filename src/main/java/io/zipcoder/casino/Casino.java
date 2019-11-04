@@ -5,13 +5,15 @@ import io.zipcoder.casino.utilities.Console;
 public class Casino {
     private Player currentPlayer;
     Console console = new Console(System.in, System.out);
+    boolean running = true;
 
     public void runCasinoMenu(Player currentPlayer){
         this.currentPlayer = currentPlayer;
-        displayCasinoMenu();
-        Integer playerInput = getPlayerInput();
-        casinoMenuLogic(playerInput);
-
+        while(running) {
+            displayCasinoMenu();
+            Integer playerInput = getPlayerInput();
+            casinoMenuLogic(playerInput);
+        }
     }
 
     public void displayCasinoMenu(){
@@ -43,8 +45,7 @@ public class Casino {
                 gameMenu.runGameMenu(currentPlayer);
                 break;
             case 2:
-                PlayerMenu playerMenu = new PlayerMenu();
-                playerMenu.runPlayerMenu();
+                running = false;
                 break;
         }
     }
