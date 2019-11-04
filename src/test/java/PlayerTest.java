@@ -1,10 +1,15 @@
 import io.zipcoder.casino.Player;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class PlayerTest {
 
-//Player constructor test
+
+
+
+
+    //Player constructor test
     @Test
     public void constructorTest (){
         // Given
@@ -34,37 +39,105 @@ public class PlayerTest {
         Assert.assertEquals(expectedInitialBalance, actualInitialBalance, 0.0000001);
     }
 
-
+    
     @Test
     public void getFirstName() {
+        // Given
+        Player testPlayer = new Player("John", "Doe", 52, 327.0);
+        String expected = "John";
+
+        // Then
+        String actual = testPlayer.getFirstName();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void getLastName() {
+        // Given
+        Player testPlayer = new Player("John", "Doe", 52, 327.0);
+        String expected = "Doe";
+
+        // Then
+        String actual = testPlayer.getLastName();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void getAge() {
+        // Given
+        Player testPlayer = new Player("John", "Doe", 52, 327.0);
+        Integer expected = 52;
+
+        // Then
+        Integer actual = testPlayer.getAge();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void getBalance() {
+        // Given
+        Player testPlayer = new Player("John", "Doe", 52, 327.0);
+        Double expected = 327.0;
+
+        // Then
+        Double actual = testPlayer.getBalance();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void setFirstName() {
+        // Given
+        Player testPlayer = new Player("John", "Doe", 52, 327.0);
+        String expected = "Robert";
+
+        // When
+        testPlayer.setFirstName(expected);
+
+        // Then
+        String  actual = testPlayer.getFirstName();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void setLastName() {
+        // Given
+        Player testPlayer = new Player("John", "Doe", 52, 327.0);
+        String expected = "DelPriore";
+
+        // When
+        testPlayer.setLastName(expected);
+
+        // Then
+        String  actual = testPlayer.getLastName();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void setAge() {
+        // Given
+        Player testPlayer = new Player("John", "Doe", 52, 327.0);
+        Integer expected = 45;
+
+        // When
+        testPlayer.setAge(expected);
+
+        // Then
+        Integer actual = testPlayer.getAge();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void setBalance() {
+        // Given
+        Player testPlayer = new Player("John", "Doe", 52, 327.0);
+        Double expected = 435.0;
+
+        // When
+        testPlayer.setBalance(expected);
+
+        // Then
+        Double actual = testPlayer.getBalance();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test

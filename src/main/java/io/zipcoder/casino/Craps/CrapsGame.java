@@ -12,9 +12,9 @@ public class CrapsGame extends DiceGame implements Game {
     private double minBet;
     private double maxBet;
     private CrapsPlayer player;
-    private int numberOfRolls;      //an integer from 1-4
-    private int setThePointRoll;    //saves your first roll to try to match with later rolls
-    private int currentRoll;        //any roll after the first
+//    private int numberOfRolls;      //an integer from 1-4
+    private Integer setThePointRoll;    //saves your first roll to try to match with later rolls
+    private Integer currentRoll;        //any roll after the first
 
 
     //Craps Game Constructor
@@ -39,6 +39,25 @@ public class CrapsGame extends DiceGame implements Game {
     //runs a new game of craps
     public void roundOfPlay() {
         setThePointRoll = DiceGame.roll(2);
+        if (winOnFirst(setThePointRoll) == true) {
+            calculatePayout();  //write what happens
+        }
+        else if (loseOnFirst(setThePointRoll) == true) {
+            calculatePayout();  //write what happens
+        }
+        else {
+            for (int i = 0; i < 3; i++) {
+                currentRoll = DiceGame.roll(2);
+                if (winOnSubsequent(currentRoll) == true) {
+                    calculatePayout();
+                    break;
+                }
+                else if (loseOnSubsequent(currentRoll) == true){
+                    calculatePayout();
+                    break;
+                }
+            }
+        }
     }
 
     @Override
@@ -57,16 +76,14 @@ public class CrapsGame extends DiceGame implements Game {
         else {return false;}
     }
 
-    public boolean winOnSubsequent (int firstRoll, int currentRoll){
+    public boolean winOnSubsequent (Integer currentRoll){
+        if (currentRoll == setThePointRoll) {return true;}
         return false;
     }
 
-    public boolean loseOnSubsequent (int firstRoll, int currentRoll){
-        if(numberOfRolls > 1 && currentRoll == 7)
-        { return true;}
-        else if (numberOfRolls == 4 && currentRoll != firstRoll){
-            return true;}
-        else return false;
+    public boolean loseOnSubsequent (Integer currentRoll){
+        if (currentRoll == 7) {return true;}
+        return false;
     }
 
     public Integer calculatePayoutMultiplier (){
