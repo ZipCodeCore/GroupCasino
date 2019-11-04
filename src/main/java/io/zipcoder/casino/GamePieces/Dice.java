@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Dice {
 
-    Integer rollDice(Integer numberOfDice){
+    public Integer rollDice(Integer numberOfDice){
         Random r = new Random();
         Integer sum = 0;
         for(int i = 0; i < numberOfDice; i++){
