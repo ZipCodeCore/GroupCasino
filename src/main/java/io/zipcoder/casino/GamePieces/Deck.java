@@ -2,7 +2,7 @@ package io.zipcoder.casino.GamePieces;
 
 import java.util.ArrayList;
 import java.util.*;
-
+/*
 public class Deck {
 
     ArrayList<Card> deck = new ArrayList<>();
@@ -22,3 +22,4 @@ public class Deck {
         return null;
     }
 }
+*/
