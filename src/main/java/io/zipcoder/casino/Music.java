@@ -1,59 +1,8 @@
 package io.zipcoder.casino;
 
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-
-import javax.swing.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-
-
-public class Music {
-
-    public static void main(String[] args){
-        playMusic("src/music/(Menu) All of Me Instrumental.wav");
-    }
-
-    public static void playMusic(String filepath) {
-        InputStream music;
-        try {
-            music = new FileInputStream(new File(filepath));
-            AudioStream audios = new AudioStream(music);
-            AudioPlayer.player.start(audios);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error");
-        }
-    }
-    public static void stopMusic(String filepath) {
-        InputStream music;
-        try {
-            music = new FileInputStream(new File(filepath));
-            AudioStream audios = new AudioStream(music);
-              if (audios != null)
-            {
-                AudioPlayer.player.stop(audios);
-            }
-        }
-        catch (IOException e)
-        {
-            System.err.println(e);
-        }
-    }
-}
-
-
-// Java program to play an Audio
-// file using Clip Object
-
-/*
-package io.zipcoder.casino;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -61,18 +10,18 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+// Java program to play an Audio
+// file using Clip Object
 public class Music
 {
 
     // to store current position
     Long currentFrame;
     Clip clip;
-
     // current status of clip
     String status;
-
     AudioInputStream audioInputStream;
-    static String filePath;
+    public static String filePath;
 
     // constructor to initialize streams and clip
     public Music()
@@ -90,6 +39,71 @@ public class Music
         clip.open(audioInputStream);
 
         clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+    public static void main(String[] args)
+    {
+        try
+        {
+            filePath = "src/music/(Menu) All of Me Instrumental.wav";
+            Music audioPlayer =
+                    new Music();
+
+            audioPlayer.play();
+            Scanner sc = new Scanner(System.in);
+
+            while (true)
+            {
+                System.out.println("1. pause");
+                System.out.println("2. resume");
+                System.out.println("3. restart");
+                System.out.println("4. stop");
+                System.out.println("5. Jump to specific time");
+                int c = sc.nextInt();
+                audioPlayer.gotoChoice(c);
+                if (c == 4)
+                    break;
+            }
+            sc.close();
+        }
+
+        catch (Exception ex)
+        {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+
+        }
+    }
+
+    // Work as the user enters his choice
+
+    private void gotoChoice(int c)
+            throws IOException, LineUnavailableException, UnsupportedAudioFileException
+    {
+        switch (c)
+        {
+            case 1:
+                pause();
+                break;
+            case 2:
+                resumeAudio();
+                break;
+            case 3:
+                restart();
+                break;
+            case 4:
+                stop();
+                break;
+            case 5:
+                System.out.println("Enter time (" + 0 +
+                        ", " + clip.getMicrosecondLength() + ")");
+                Scanner sc = new Scanner(System.in);
+                long c1 = sc.nextLong();
+                jump(c1);
+                break;
+
+        }
+
     }
 
     // Method to play the audio
@@ -179,4 +193,3 @@ public class Music
 
 }
 
-*/
