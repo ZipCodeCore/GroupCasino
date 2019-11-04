@@ -30,12 +30,8 @@ public class CrapsGame extends DiceGame implements Game {
     @Override
     //creates dice and runs a roundOfPlay
     public void startPlay() {
-    //welcome or begin round menu display
-        //starts round of play;
 
-        DiceGame crapsDice;
-    crapsDice = new DiceGame.roll(2) {
-    }
+        setThePointRoll = DiceGame.roll(2);
 
     }
 
