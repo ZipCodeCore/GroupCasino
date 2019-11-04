@@ -1,6 +1,7 @@
 package io.zipcoder.casino;
 
 
+import io.zipcoder.casino.Games.ChutesAndLadders;
 import io.zipcoder.casino.Games.HighAndLow;
 import io.zipcoder.casino.utilities.Console;
 
@@ -55,10 +56,9 @@ public class GameMenu {
                 craps.launchCraps();*/
                 return "You would be playing craps now.";
             case 4:
-                console.print("You would be playing Chutes and Ladders now.");
-                /*ChutesAndLadders chutesAndLadders = new ChutesAndLadders;()
-                chutesAndLadders.launchChutesAndLadders()*/
-                return "You would be playing Chutes and Ladders now.";
+                ChutesAndLadders chutesAndLadders = new ChutesAndLadders();
+                chutesAndLadders.runChutesAndLadders(currentPlayer);
+                break
             case 5:
                 console.print("You would be playing Roulette now.");
                 /*Roulette roulette = new Roulette;
