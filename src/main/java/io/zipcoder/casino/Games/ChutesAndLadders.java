@@ -43,11 +43,15 @@ public class ChutesAndLadders implements Game {
 
     public String startNewGame(){
         String winner = "";
-        while (currentGame){
+        while (currentGame) {
             Integer playerPosition = playerTurn();
-            Integer aiPosition = aiTurn();
             playerTurn();
+            playerChutesAndLadders(playerPosition);
             aiTurn();
+            Integer aiPosition = aiTurn();
+            aiChutesAndLadder(aiPosition);
+
+
             if(playerPosition >= 100){
                 winner = "Player";
                 break;
@@ -74,70 +78,98 @@ public class ChutesAndLadders implements Game {
         return currentPosition;
     }
 
-    public Integer chutes(Integer position) {
+    public Integer chutesAndLaddersChecker(Integer position) {
         Integer newPosition = 0;
         switch (position) {
+            case 1:
+                newPosition = 38;
+                break;
+            case 4:
+                newPosition = 14;
+                break;
+            case 9:
+                newPosition = 31;
+                break;
             case 16:
                 newPosition = 6;
-                console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
-                return newPosition;
-            break;
+                break;
+            case 21:
+                newPosition = 42;
+                break;
+            case 28:
+                newPosition = 84;
+                break;
+            case 36:
+                newPosition = 44;
+                break;
+            case 51:
+                newPosition = 67;
+                break;
+            case 71:
+                newPosition = 91;
+                break;
             case 47:
                 newPosition = 26;
-                console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
-                return newPosition;
-            break;
+                break;
             case 49:
                 newPosition = 11;
-                console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
-                return newPosition;
-            break;
+                break;
             case 56:
                 newPosition = 53;
-                console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
-                return newPosition;
-            break;
+                break;
             case 62:
                 newPosition = 19;
-                console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
-                return newPosition;
-            break;
+                break;
             case 64:
                 newPosition = 60;
-                console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
-                return newPosition;
-            break;
+                break;
+            case 80:
+                newPosition = 100;
+                break;
             case 87:
                 newPosition = 24;
-                console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
-                return newPosition;
-            break;
+                break;
             case 93:
                 newPosition = 73;
-                console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
-                return newPosition;
-            break;
+                break;
             case 95:
                 newPosition = 75;
-                console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
-                return newPosition;
-            break;
+                break;
             case 98:
                 newPosition = 78;
-                console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
-                return newPosition;
-            break;
+                break;
             default:
                 return position;
         }
+        return newPosition;
     }
 
-    public void playerLadders(Integer position){
+    public Integer playerChutesAndLadders(Integer position) {
+        Integer newPosition = chutesAndLaddersChecker(position);
+        if (position > newPosition) {
+            console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
+            return newPosition;
+        } else if (position < newPosition){
+            console.println("Hooray! You've hit a ladder! You're now at %d.", newPosition);
+            return newPosition;
+        }
+        return position;
+    }
 
+    public Integer aiChutesAndLadder(Integer position){
+        Integer newPosition = chutesAndLaddersChecker(position);
+        if (position > newPosition) {
+            console.println("Uh-oh! I've hit a chute! You're back at %d", newPosition);
+            return newPosition;
+        } else if (position < newPosition){
+            console.println("Hooray! I've hit a ladder! I'm now at %d.", newPosition);
+            return newPosition;
+        }
+        return position;
     }
 
     public String checkWinner(){
-
+        return null;
     }
 
 
