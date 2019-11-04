@@ -3,27 +3,27 @@ package io.zipcoder.casino;
 import io.zipcoder.casino.utilities.Console;
 
 public class Casino {
-
+    private Player currentPlayer;
     Console console = new Console(System.in, System.out);
 
-    public void runCasinoMenu(){
+    public void runCasinoMenu(Player currentPlayer){
+        this.currentPlayer = currentPlayer;
         displayCasinoMenu();
         Integer playerInput = getPlayerInput();
+        casinoMenuLogic(playerInput);
 
     }
 
     public void displayCasinoMenu(){
-        console.print("Welcome to Big 3 casino!");
-        console.print("What would you like to do?");
-        console.print("(1) - Return to Player Menu");
-        console.print("(2) - Display Game Menu");
-        console.print("(3) - Exit Casino");
-
+        console.println(String.format("Welcome to Big 3 casino, %s",currentPlayer.getName()));
+        console.println("What would you like to do?");
+        console.println("(1) - Display Game Menu");
+        console.println("(2) - Return to Player Menu");
     }
 
     public void goToGameMenu(){
         GameMenu gameMenu = new GameMenu();
-        gameMenu.runGameMenu();
+        gameMenu.runGameMenu(currentPlayer);
     }
 
     public void exitCasino(){
@@ -39,17 +39,13 @@ public class Casino {
     public void casinoMenuLogic(Integer playerInput){
         switch (playerInput){
             case 1:
-                console.print("You will go to Player Menu");
-            //PlayerMenu playerMenu = new PlayerMenu();
-                //playerMenu.launchPlayerMenu;
+                GameMenu gameMenu = new GameMenu();
+                gameMenu.runGameMenu(currentPlayer);
                 break;
             case 2:
-                console.print("This will display Game Menu");
-                GameMenu gameMenu = new GameMenu();
-                gameMenu.runGameMenu();
+                PlayerMenu playerMenu = new PlayerMenu();
+                playerMenu.runPlayerMenu();
                 break;
-            case 3:
-                console.print("You will exit casino");
         }
     }
 }
