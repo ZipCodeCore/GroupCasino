@@ -33,7 +33,7 @@ public class GameMenu {
         return playerInput;
     }
 
-    public String gameMenuLogic(Integer playerInput) {
+    public String gameMenuLogic(Integer playerInput){
         switch (playerInput) {
             case 1:
                 console.print("You would be playing Go Fish now.");
