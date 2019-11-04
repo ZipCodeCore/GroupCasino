@@ -19,15 +19,21 @@ public class ChutesAndLadders implements Game {
     private boolean running = true;
     private boolean currentGame = true;
 
-    public void runChutesAndLadders(Player currentPlayer){
+    public void runChutesAndLadders(Player currentPlayer) {
         setUpGame();
-        while(running){
-            console.println("Welcome to Chutes and Ladders!");
+        while (running) {
+            console.println("Welcome to Chutes and Ladders, %s!", currentPlayer);
             console.println("In this house, the player always goes first! Step on up!");
-            startNewGame();
-
+            String winner = startNewGame();
+            if (winner.equals("Player")) {
+                console.println("Congratulations! You won!");
+            } else if (winner.equals("Ai")) {
+                console.println("Oh, Too bad! I won! Better lucky next time!");
             }
+            Integer playAgainInput = playAgain();
+            playAgainOrMain(playAgainInput);
         }
+    }
 
 
     public void setUpGame(){
@@ -166,8 +172,23 @@ public class ChutesAndLadders implements Game {
         return position;
     }
 
-    public String checkWinner(){
-        return null;
+    public Integer playAgain(){
+        console.println("Would you like to play again?");
+        console.println("(1) - Yes");
+        console.println("(2) - No");
+        Integer playerInput = console.getIntegerInput(":");
+        return playerInput;
+    }
+
+    public void playAgainOrMain(Integer playAgainInput){
+        switch (playAgainInput){
+            case 1:
+                runChutesAndLadders(currentPlayer);
+                break;
+            case 2:
+                running = false;
+                break;
+        }
     }
 
 
