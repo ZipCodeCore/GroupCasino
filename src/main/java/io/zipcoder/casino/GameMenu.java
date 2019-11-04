@@ -58,7 +58,7 @@ public class GameMenu {
             case 4:
                 ChutesAndLadders chutesAndLadders = new ChutesAndLadders();
                 chutesAndLadders.runChutesAndLadders(currentPlayer);
-                break
+                break;
             case 5:
                 console.print("You would be playing Roulette now.");
                 /*Roulette roulette = new Roulette;
