@@ -2,13 +2,20 @@ package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.Blackjack.BlackjackGame;
 import io.zipcoder.casino.Interfaces.Menu;
+import io.zipcoder.casino.Music;
 import io.zipcoder.casino.Utilities.Console;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 
 public class BlackjackMenu implements Menu {
 
     private Console console;
     private String name = "Blackjack Menu";
     private BlackjackGame blackjackGame;
+    Music blackJackMusic = null;
+    Music mainMusic = null;
 
     public BlackjackMenu(BlackjackGame blackjackGame) {
         this.console = new Console (System.in, System.out);
@@ -22,6 +29,15 @@ public class BlackjackMenu implements Menu {
 
     @Override
     public void displayMenu() {
+        try {
+            Music.filePath = "src/music/(BlackJack) Glide with me.wav";
+            blackJackMusic = new Music();
+            blackJackMusic.play();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+
         console.clearScreen();
         // temporary
         console.println("Choose table stakes:");
