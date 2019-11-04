@@ -26,7 +26,7 @@ public class BlackjackHandTest {
         blackjackGame = new BlackjackGame(0.0, 0.0, player);
         bjp = blackjackGame.getPlayer();
         blackjackGame.checkShoe();
-        blackjackGame.initialDeal();
+        blackjackGame.initialDeal(blackjackGame.getMinBet());
         hand = bjp.getHands().get(0);
     }
 

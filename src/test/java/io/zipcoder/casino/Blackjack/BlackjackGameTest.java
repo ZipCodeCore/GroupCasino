@@ -58,7 +58,7 @@ public class BlackjackGameTest {
 
     @Test
     public void initialDealPlayerTest() {
-        blackjackGame.initialDeal();
+        blackjackGame.initialDeal(blackjackGame.getMinBet());
         ArrayList<BlackjackHand> allHands = blackjackGame.getHands();
         BlackjackHand playerHand = allHands.get(0);
         Assert.assertEquals(blackjackGame.getPlayer(), playerHand.getPlayer());
@@ -69,7 +69,7 @@ public class BlackjackGameTest {
     }
     @Test
     public void initialDealDealerTest() {
-        blackjackGame.initialDeal();
+        blackjackGame.initialDeal(blackjackGame.getMinBet());
         ArrayList<BlackjackHand> allHands = blackjackGame.getHands();
         BlackjackHand playerHand = allHands.get(1);
         Assert.assertEquals(blackjackGame.getDealer(), playerHand.getPlayer());
@@ -125,8 +125,7 @@ public class BlackjackGameTest {
     public void InitialDealWinningTest() { // bj push
         blackjackGame.setMinBet(5.00);
         blackjackGame.setMaxBet(25.00);
-        blackjackGame.checkShoe();
-        blackjackGame.initialDeal();
+        blackjackGame.initialDeal(blackjackGame.getMinBet());
 
         CardSet pCards = new CardSet(0);
         pCards.addCard(new Card("A","H"));
@@ -147,7 +146,7 @@ public class BlackjackGameTest {
     public void InitialDealWinningTest1() { // bj win
         blackjackGame.setMinBet(5.00);
         blackjackGame.setMaxBet(25.00);
-        blackjackGame.initialDeal();
+        blackjackGame.initialDeal(blackjackGame.getMinBet());
 
         CardSet pCards = new CardSet(0);
         pCards.addCard(new Card("J","H"));
@@ -168,7 +167,7 @@ public class BlackjackGameTest {
     public void InitialDealWinningTest2() { // bj loss
         blackjackGame.setMinBet(5.00);
         blackjackGame.setMaxBet(25.00);
-        blackjackGame.initialDeal();
+        blackjackGame.initialDeal(blackjackGame.getMinBet());
 
         CardSet pCards = new CardSet(0);
         pCards.addCard(new Card("5","H"));
@@ -189,7 +188,7 @@ public class BlackjackGameTest {
     public void InitialDealWinningTest3() { // normal
         blackjackGame.setMinBet(5.00);
         blackjackGame.setMaxBet(25.00);
-        blackjackGame.initialDeal();
+        blackjackGame.initialDeal(blackjackGame.getMinBet());
 
         CardSet pCards = new CardSet(0);
         pCards.addCard(new Card("A","H"));
@@ -206,5 +205,13 @@ public class BlackjackGameTest {
         Assert.assertEquals(null, blackjackGame.initialWinnerCheck());
     }
 
+    @Test
+    public void displayTableTest() {
+        blackjackGame.setMinBet(5.00);
+        blackjackGame.setMaxBet(25.00);
+        blackjackGame.initialDeal(blackjackGame.getMinBet());
 
+        blackjackGame.displayTable(false);
+
+    }
 }

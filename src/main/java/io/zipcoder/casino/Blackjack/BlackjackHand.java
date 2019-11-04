@@ -2,6 +2,7 @@ package io.zipcoder.casino.Blackjack;
 
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardSet;
+import io.zipcoder.casino.Utilities.Console;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ public class BlackjackHand {
     private double bet;
     private int value;
     private BlackjackPlayer player;
+    private Console console = new Console(System.in, System.out);
 
     public BlackjackHand(double bet, BlackjackPlayer player, Card card1, Card card2) {
         this.bet = bet;
@@ -54,12 +56,32 @@ public class BlackjackHand {
         return this.cards.size();
     }
 
-    public int playChoice(){
-        return 0;
+    public int playChoice(CardSet shoe){
+        console.println("1. Hit\n2. Stay\n");
+
+        switch (console.menuChoice(2)) {
+            case 1:
+                int val = hit(shoe.removeFirstCard());
+                if (val != 0) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            case 2:
+                return this.getValue();
+        }
+        return -1;
     }
 
-    public void hit() {
+    public int hit(Card card) {
+        this.cards.addCard(card);
+        this.value = getValue();
+        return this.value;
+    }
 
+    public void splitHand() {
+        Card card = this.cards.removeFirstCard();
+        this.player.addHand(new BlackjackHand(this.bet, this.player, card, null));
     }
 
     public int getValue() {
@@ -96,11 +118,6 @@ public class BlackjackHand {
             sum += number;
         }
         return sum;
-    }
-
-    //
-    public BlackjackHand splitHand() {
-        return null;
     }
 
 

@@ -1,10 +1,12 @@
 package io.zipcoder.casino.Blackjack;
 
+import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardGame;
 import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.BlackjackMenu;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Utilities.Console;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +24,7 @@ public class BlackjackGame extends CardGame implements Game {
         cardMap.put("K",10);
         cardMap.put("A",11);
     }
+    private Console console = new Console(System.in, System.out);
 
     private double minBet;
     private double maxBet;
@@ -83,23 +86,65 @@ public class BlackjackGame extends CardGame implements Game {
 
     public void startPlay() {
         new BlackjackMenu(this).displayMenu();
-        initialDeal();
-        System.out.println("Blackjack, sucka!");
+        roundStart();
     }
 
-    public void initialDeal() {
+    public void roundStart() {
+        Double betSize = betChoice();
+        if (betSize != null) {
+            initialDeal(betSize);
+            displayTable(false);
+
+            roundOfPlay();
+            clearHands();
+            roundStart();
+        }
+
+    }
+
+    public Double betChoice () {
+        return console.getCurrency("Bet size (Enter to stand up): ", this.minBet, this.maxBet);
+    }
+
+
+
+    public void initialDeal(double betSize) {
+
         checkShoe();
-        BlackjackHand playerHand = new BlackjackHand(this.minBet, this.player, this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
+        BlackjackHand playerHand = new BlackjackHand(betSize, this.player, this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
         this.hands.add(playerHand);
         this.player.addHand(playerHand);
 
-        BlackjackHand dealerHand = new BlackjackHand(0.00, (BlackjackPlayer) this.dealer, this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
+        NPCBlackjackHand dealerHand = new NPCBlackjackHand(0.00, (BlackjackPlayer) this.dealer, this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
         this.hands.add(dealerHand);
         this.dealer.addHand(dealerHand);
+
     }
 
     public void roundOfPlay() {
+        for (BlackjackHand hand : this.player.getHands()) {
+            int value = -1;
+            while (value < 0) {
+                value = hand.playChoice(this.shoe);
+                this.displayTable(false);
+            }
+            console.println("done:", value);
+        }
+        for (BlackjackHand hand : this.dealer.getHands()) {
+            int value = -1;
+            while (value < 0) {
+                value = hand.playChoice(this.shoe);
+                this.displayTable(false);
+            }
+            console.println("done:", value);
+        }
+        displayTable(true);
+    }
 
+    public void clearHands() {
+        this.hands.clear();
+        this.player.getHands().clear();
+        this.dealer.getHands().clear();
     }
 
     public void endChoice() {
@@ -118,7 +163,35 @@ public class BlackjackGame extends CardGame implements Game {
         return newShoe;
     }
 
-    public void displayTable() {
+    public void displayTable(boolean showWinnings) {
+        //temporary
+        console.clearScreen();
+
+        console.println(String.format("***Blackjack***\nTable stakes: $%.2f min / $%.2f max\n", this.minBet, this.maxBet));
+        console.println("Dealer");
+        BlackjackHand dealerHand = this.dealer.getHands().get(0);
+        for (Card card : dealerHand.getCards().getCards()) {
+            console.print(card.toString() + " ");
+        }
+        console.println("");
+        console.println(this.player.getPlayer().getFirstName());
+        ArrayList<BlackjackHand> playerHands =  this.player.getHands();
+        for (BlackjackHand hand : playerHands) {
+            for (Card card : hand.getCards().getCards()) {
+                console.print(card.toString() + " ");
+            }
+            console.println("  $%.2f", hand.getBet());
+            if (showWinnings) {
+                double winnings = calculateWinnings(hand);
+                if (winnings == hand.getBet()) {
+                    console.println("Push");
+                } else if (winnings == 0.0) {
+                    console.println("Dealer wins");
+                } else {
+                    console.println(String.format("Winnings: $%.2f",winnings));
+                }
+            }
+        }
 
     }
 
