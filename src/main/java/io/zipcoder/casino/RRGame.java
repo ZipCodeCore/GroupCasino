@@ -1,5 +1,7 @@
 package io.zipcoder.casino;
 
+import sun.jvm.hotspot.utilities.Assert;
+
 public class RRGame extends DiceGame implements GamblingGame {
 
 
@@ -26,6 +28,13 @@ public class RRGame extends DiceGame implements GamblingGame {
     @Override
     public void roundOfPlay() {
 
+           public int testRoll() {
+            int expected = DiceGame.roll(1, 6);
+        }
+
+        Assert.assertTrue((expected >=1 && expected <=6));
+
+    }
     }
 
     public int selectTargetNum () {
