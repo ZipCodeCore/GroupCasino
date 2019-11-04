@@ -43,7 +43,8 @@ public class CrapsGame extends DiceGame implements Game {
             calculatePayout();  //write what happens
         }
         else if (loseOnFirst(setThePointRoll) == true) {
-            calculatePayout();  //write what happens
+            calculatePayout();  //write what happens    I don't think we need this - we've already deducted our bet
+            //and if we lose there is no payout to calculate
         }
         else {
             for (int i = 0; i < 3; i++) {
@@ -53,13 +54,13 @@ public class CrapsGame extends DiceGame implements Game {
                     break;
                 }
                 else if (loseOnSubsequent(currentRoll) == true){
-                    calculatePayout();
+                    calculatePayout();  //again not sure if we need to calculate payout here if we've lost
                     break;
                 }
             }
         }
     }
-
+            //I think it would be cool to see a menu or display after each roll letting us know what we rolled
     @Override
     //implements menu whether you want to quit or go again
     public void endChoice() {
