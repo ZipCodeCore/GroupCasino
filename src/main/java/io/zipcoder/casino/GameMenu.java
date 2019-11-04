@@ -6,23 +6,23 @@ import io.zipcoder.casino.utilities.Console;
 public class GameMenu {
     Console console = new Console(System.in, System.out);
     private Integer playerInput;
+    private Player currentPlayer;
 
-    public void runGameMenu(){
+    public void runGameMenu(Player currentPlayer){
         displayGameMenu();
         Integer playerInput = getPlayerInput();
         gameMenuLogic(playerInput);
     }
 
     public void displayGameMenu(){
-        console.print("Hi! Welcome to the game menu!\nHere are the games you can play:");
-        console.print("(1) - Go Fish");
-        console.print("(2) - Blackjack");
-        console.print("(3) - Craps");
-        console.print("(4) - Chutes & Ladders");
-        console.print("(5) - Roulette");
-        console.print("(6) - Slots");
-        console.print("(7) - Return to Casino");
-        getPlayerInput();
+        console.println("Hi! Welcome to the game menu!\nHere are the games you can play:");
+        console.println("(1) - Go Fish");
+        console.println("(2) - Blackjack");
+        console.println("(3) - Craps");
+        console.println("(4) - Chutes & Ladders");
+        console.println("(5) - Roulette");
+        console.println("(6) - Slots");
+        console.println("(7) - Return to Casino");
     }
 
     public Integer getPlayerInput(){
@@ -65,11 +65,10 @@ public class GameMenu {
                  */
                 return "You would be playing Slots now";
             case 7:
-                console.print("This will take you back to the Casino menu.");
-                /*Casino casino = new Casino();
-                casino.launchCasinoMenu
-                 */
-                return "This will take you back to the Casino menu.";
+                Casino casino = new Casino();
+                casino.runCasinoMenu(currentPlayer);
+                break;
+
         }
         return null;
     }
