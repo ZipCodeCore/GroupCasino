@@ -1,13 +1,18 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Blackjack;
 
-public class BlackjackNPCPlayer {
+import io.zipcoder.casino.Player;
+
+import java.util.ArrayList;
+
+public class BlackjackNPCPlayer extends BlackjackPlayer {
 
     private int threshold;
     private boolean isDealer;
+    private ArrayList<BlackjackHand> hands;
     private Player player;
 
     public BlackjackNPCPlayer(Player player, int threshold, boolean isDealer) {
-        this.player = player;
+        super(player);
         this.threshold = threshold;
         this.isDealer = isDealer;
     }

@@ -1,33 +1,54 @@
 package io.zipcoder.casino.Menus;
 
+import io.zipcoder.casino.GameObject;
+import io.zipcoder.casino.Interfaces.Menu;
+import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameRepo;
+import io.zipcoder.casino.Utilities.Console;
 
 import java.util.HashMap;
 
-public class GameMenu {
+public class GameMenu implements Menu {
 
     //maps the choice number to the name of the game
-    private HashMap<Integer, String> choices;
+    private HashMap<Integer, GameObject> gameMap;
     private GameRepo gameRepo;
+    private Console console;
+    private String name = "Game Menu";
 
-    // gets a set of allowed game based on player and
-    public void displayGameMenu() {
-
+    public GameMenu(Player player) {
+        this.gameRepo = new GameRepo(player);
+        this.gameMap = gameRepo.getGamesMap();
+        this.console = new Console(System.in, System.out);
     }
 
-    // switch cases based on the name of the game
-    public void handleChoices(String choice) {
-
+    public HashMap<Integer, GameObject> getGameMap() {
+        return gameMap;
     }
 
-    // takes numerical input and uses map to return game name string
-    public String mapChoice () {
-        return null;
+    public GameRepo getGameRepo() {
+        return gameRepo;
     }
 
-    // create the number/name mapping
-    public HashMap<Integer, String> makeMap () {
-        return null;
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void displayMenu() {
+        console.clearScreen();
+        // temporary
+        for (int gameNum : gameMap.keySet()) {
+            console.println(String.format("%d: %s", gameNum, ((GameObject) gameMap.get(gameNum)).getName()));
+        }
+
+        handleChoice(console.menuChoice(gameMap.size()));
+    }
+
+    @Override
+    public void handleChoice(int choice) {
+        gameMap.get(choice).startPlay();
     }
 
 }

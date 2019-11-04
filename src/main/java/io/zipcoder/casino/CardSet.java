@@ -1,6 +1,8 @@
 package io.zipcoder.casino;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class CardSet {
 
@@ -8,7 +10,18 @@ public class CardSet {
 
     public CardSet(int numDecks) {
         //creates shuffled set of cards
-        this.cards = null;
+        ArrayList<Card> cardSet = new ArrayList<Card>(numDecks * 52);
+        if (numDecks > 0) {
+            for (int i = 0; i < numDecks; i++) {
+                for (String rank : Card.RANKS) {
+                    for (String suit : Card.SUIT_SYMBOLS.keySet()) {
+                        cardSet.add(new Card(rank, suit));
+                    }
+                }
+            }
+        }
+
+        this.cards = cardSet;
     }
 
     public ArrayList<Card> getCards() {
@@ -16,21 +29,45 @@ public class CardSet {
     }
 
     public int size() {
-        return 0;
+        return this.cards.size();
     }
 
-
-    public Card removeFirstCard(){
+    public Card removeFirstCard() {
         // removes first card!
-        return null;
+        if (this.cards.size() > 0) {
+            return this.cards.remove(0);
+        } else {
+            return null;
+        }
     }
 
-    public CardSet removeCard(Card cardToRemove) {
-        return null;
+    public boolean removeCard(Card cardToRemove) {
+        if (this.cards.size() > 0) {
+            for (int i = 0; i < this.cards.size(); i++) {
+                if (cardToRemove.strictEquals(this.cards.get(i))) {
+                    this.cards.remove(i);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    public CardSet addCard(Card cardToAdd) {
-        return null;
+    public void addCard(Card cardToAdd) {
+        this.cards.add(cardToAdd);
     }
 
+    public void clear() {
+        this.cards.clear();
+    }
+
+    public void sort() {
+        Collections.sort(this.cards);
+    }
+
+    public void shuffle() {
+
+        Collections.shuffle(this.cards);
+        //ArrayList<Card> c = this.cards;
+    }
 }

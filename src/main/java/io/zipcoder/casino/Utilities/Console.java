@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -30,6 +32,25 @@ public final class Console {
     public String getStringInput(String prompt, Object... args) {
         println(prompt, args);
         return input.nextLine();
+    }
+
+    public boolean cardCheck (String input) {
+        ArrayList<String> choices = new ArrayList<String>(Arrays.asList(new String[] {"2","3","4","5","6","7","8","9","10","J","Q","K","A"}));
+        return choices.contains(input);
+    }
+
+    public String getCardRankInput(String prompt) {
+        print(prompt);
+        String input = getInput("Choose a card to take (2-10,J,Q,K,A): ").toUpperCase();
+        while (true) {
+            if (cardCheck(input)) break;
+            else {
+                println("Invalid card rank");
+                print(prompt);
+                input = getInput("Choose a card: ");
+            }
+        }
+        return input;
     }
 
 //    public Double getDoubleInput(String prompt, Object... args) {
@@ -68,7 +89,7 @@ public final class Console {
     }
 
     public void print(String output, Object... args) {
-        System.out.printf(output, args);
+        this.output.printf(output, args);
     }
 
     public void println(String output, Object... args) {
@@ -77,18 +98,16 @@ public final class Console {
 
     public String getInput() {
         print("> ");
-        Scanner scanner = new Scanner(System.in);
 
-        String input = scanner.nextLine(); //get input from user
+        String input = this.input.nextLine(); //get input from user
 
         return input;
     }
 
     public String getInput(String prompt) {
         print(prompt);
-        Scanner scanner = new Scanner(System.in);
 
-        String input = scanner.nextLine(); //get input from user
+        String input = this.input.nextLine(); //get input from user
 
         return input;
     }
@@ -184,6 +203,32 @@ public final class Console {
         return Double.valueOf(input);
     }
 
+    public Double getCurrency(String prompt, double min, double max) {
+        print(prompt);
+        String input = getInput("$");
+        while (true) {
+            if (input.equals("")) {
+                return null;
+            }
+            if (currencyCheck(input)) {
+                double amount = Double.parseDouble(input);
+                if (amount >= min && amount <= max) {
+                    break;
+                } else {
+                    println(String.format("Enter a number between %.2f and %.2f", min, max));
+                    print(prompt);
+                    input = getInput("$");
+                }
+            }
+            else {
+                println("Enter a valid number");
+                print(prompt);
+                input = getInput("$");
+            }
+        }
+        return Double.valueOf(input);
+    }
+
     public Integer getInteger() {
         String input = getInput();
         while (true) {
@@ -191,6 +236,18 @@ public final class Console {
             else {
                 println("Enter a number");
                 input = getInput();
+            }
+        }
+        return Integer.valueOf(input);
+    }
+
+    public Integer getInteger(String prompt) {
+        String input = getInput(prompt);
+        while (true) {
+            if (integerCheck(input)) break;
+            else {
+                println("Enter a number.");
+                input = getInput(prompt);
             }
         }
         return Integer.valueOf(input);
@@ -213,6 +270,11 @@ public final class Console {
             }
         }
         return Integer.valueOf(input);
+    }
+
+    public Integer menuChoice(int max) {
+        print("Menu choice: ");
+        return getInteger(max);
     }
 
 }

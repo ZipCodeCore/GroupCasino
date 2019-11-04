@@ -1,29 +1,40 @@
 package io.zipcoder.casino.Services;
 
-import io.zipcoder.casino.Game;
+import io.zipcoder.casino.Blackjack.BlackjackGame;
+import io.zipcoder.casino.Craps.CrapsGame;
+import io.zipcoder.casino.GoFish.GoFishGame;
 import io.zipcoder.casino.GameObject;
+import io.zipcoder.casino.Menus.NullGame;
 import io.zipcoder.casino.Player;
-
-import java.util.ArrayList;
+import io.zipcoder.casino.RR.RRGame;
+;
+import java.util.HashMap;
 
 public class GameRepo {
 
-    private ArrayList<GameObject> gamesList;
+    public static final int NUM_ADULT_GAMES = 3;
+    public static final int NUM_KID_GAMES = 1;
+    private HashMap<Integer, GameObject> gamesMap;
 
-    public GameRepo(ArrayList<GameObject> gamesList) {
-        this.gamesList = gamesList;
+    public GameRepo(Player player) {
+        int counter = 1;
+        this.gamesMap = new HashMap<Integer, GameObject>();
+        this.gamesMap.put(counter,new GoFishGame(player));
+        counter++;
+        if (player.getAge() >= 21) {
+            this.gamesMap.put(counter,new BlackjackGame(0.0, 0.0, player));
+            counter++;
+            this.gamesMap.put(counter,new CrapsGame(player));
+            counter++;
+            this.gamesMap.put(counter,new RRGame());
+            counter++;
+        }
+        this.gamesMap.put(counter, new NullGame(player));
+
     }
 
-    public ArrayList<GameObject> getGamesList() {
-        return this.gamesList;
-    }
-
-    public ArrayList<GameObject> getGamesList(Player player) {
-        return null;
-    }
-
-    public Game getGame() {
-        return null;
+    public HashMap<Integer, GameObject> getGamesMap() {
+        return this.gamesMap;
     }
 
 }
