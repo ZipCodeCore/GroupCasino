@@ -6,6 +6,7 @@ import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.BlackjackMenu;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.Utilities.Console;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class BlackjackGame extends CardGame implements Game {
         cardMap.put("A",11);
     }
     private Console console = new Console(System.in, System.out);
+    private GameServices gameServices = new GameServices();
 
     private double minBet;
     private double maxBet;
@@ -100,9 +102,14 @@ public class BlackjackGame extends CardGame implements Game {
         Double betSize = betChoice();
         if (betSize != null) {
             initialDeal(betSize);
-            displayTable(false);
 
-            roundOfPlay();
+            if (initialWinnerCheck()) {
+                displayTable(true);
+            } else {
+                displayTable(false);
+
+                roundOfPlay();
+            }
             clearHands();
             roundStart();
         }
@@ -209,20 +216,18 @@ public class BlackjackGame extends CardGame implements Game {
         return message;
     }
 
-    public Double initialWinnerCheck() { // looking for blackjacks
+    public boolean initialWinnerCheck() { // looking for blackjacks
         BlackjackHand dealerHand = this.dealer.getHands().get(0); // dealer only ever has one hand
         BlackjackHand playerHand = this.player.getHands().get(0); // player starts with only one hand
         int dealerValue = dealerHand.getValue();
         int playerValue = playerHand.getValue();
 
-        if (dealerValue == 21 && playerValue < 21) { //lose to blackjack
-            return 0.0;
-        } else if (dealerValue < 21 && playerValue == 21 ) { //win w/ blackjack
-            return 2.5 * playerHand.getBet();
-        } else if (dealerValue == 21 && 21 == playerValue) { //push w/blackjacks
-            return playerHand.getBet();
+        if (dealerValue == 21 && playerValue < 21  //lose to blackjack
+            || dealerValue < 21 && playerValue == 21   //win w/ blackjack
+            || dealerValue == 21 && 21 == playerValue) { //push w/blackjacks
+            return true;
         }
-        return null;
+        return false;
     }
 
     // returns 0 if you lost, bet size if you pushed, 2x bet size if you won
@@ -232,6 +237,9 @@ public class BlackjackGame extends CardGame implements Game {
         int dealerValue = dealerHand.getValue();
         int playerValue = handToEvaluate.getValue();
         if (playerValue > dealerValue) {
+            if (handToEvaluate.getCards().size() == 2 && handToEvaluate.getValue() == 21) {
+                return 2.5 * handToEvaluate.getBet();
+            }
             return 2 * handToEvaluate.getBet();
         } else if (playerValue == dealerValue) {
             return handToEvaluate.getBet();

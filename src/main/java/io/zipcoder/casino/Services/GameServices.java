@@ -1,14 +1,21 @@
 package io.zipcoder.casino.Services;
 
 import io.zipcoder.casino.Interfaces.GamblingGame;
+import io.zipcoder.casino.Player;
 
 public class GameServices implements GamblingGame {
 
-    public double getWager() {
-        return 0.0;
+    public boolean getWager(double amount, Player player) {
+        double balance = player.getBalance();
+        if (amount > balance) {
+            return false;
+        } else {
+            player.setBalance(balance - amount);
+            return true;
+        }
     }
 
-    public void payOut(double amount) {
-
+    public void payOut(double amount, Player player) {
+        player.setBalance(player.getBalance() + amount);
     }
 }

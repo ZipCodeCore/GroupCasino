@@ -139,7 +139,8 @@ public class BlackjackGameTest {
         BlackjackHand dealerHand = dealer.getHands().get(0);
         dealerHand.setCards(dCards);
 
-        Assert.assertEquals(5.0, blackjackGame.initialWinnerCheck(), .01);
+        Assert.assertEquals(5.0, blackjackGame.calculateWinnings(playerHand), .01);
+        Assert.assertEquals(true, blackjackGame.initialWinnerCheck());
     }
 
     @Test
@@ -160,7 +161,8 @@ public class BlackjackGameTest {
         BlackjackHand dealerHand = dealer.getHands().get(0);
         dealerHand.setCards(dCards);
 
-        Assert.assertEquals(12.50, blackjackGame.initialWinnerCheck(), .01);
+        Assert.assertEquals(12.50, blackjackGame.calculateWinnings(playerHand), .01);
+        Assert.assertEquals(true, blackjackGame.initialWinnerCheck());
     }
 
     @Test
@@ -181,7 +183,8 @@ public class BlackjackGameTest {
         BlackjackHand dealerHand = dealer.getHands().get(0);
         dealerHand.setCards(dCards);
 
-        Assert.assertEquals(0.0, blackjackGame.initialWinnerCheck(), .01);
+        Assert.assertEquals(0.0, blackjackGame.calculateWinnings(playerHand), .01);
+        Assert.assertEquals(true, blackjackGame.initialWinnerCheck());
     }
 
     @Test
@@ -202,7 +205,8 @@ public class BlackjackGameTest {
         BlackjackHand dealerHand = dealer.getHands().get(0);
         dealerHand.setCards(dCards);
 
-        Assert.assertEquals(null, blackjackGame.initialWinnerCheck());
+        //Assert.assertEquals(5.0, blackjackGame.calculateWinnings(playerHand));
+        Assert.assertEquals(false, blackjackGame.initialWinnerCheck());
     }
 
     @Test
