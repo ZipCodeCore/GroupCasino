@@ -1,16 +1,14 @@
 package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.Interfaces.Menu;
+import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Utilities.Console;
 
-public class RRMenu implements Menu {
+public class NullMenu implements Menu {
 
-    private Console console;
-    private String name = "Russian Roulette Dice Menu";
+    private String name = "Quit";
+    private Console console = new Console(System.in, System.out);
 
-    public RRMenu() {
-        this.console = new Console (System.in, System.out);
-    }
 
     @Override
     public String getName() {
@@ -21,7 +19,7 @@ public class RRMenu implements Menu {
     public void displayMenu() {
         console.clearScreen();
 
-        console.println("Da");
+
     }
 
     @Override

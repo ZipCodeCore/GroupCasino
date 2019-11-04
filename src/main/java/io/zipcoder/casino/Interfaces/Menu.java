@@ -6,4 +6,6 @@ public interface Menu {
 
     void handleChoice(int choice);
 
+    String getName ();
+
 }

@@ -31,11 +31,19 @@ public class GameMenu implements Menu {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public void displayMenu() {
+        console.clearScreen();
         // temporary
         for (int gameNum : gameMap.keySet()) {
             console.println(String.format("%d: %s", gameNum, ((GameObject) gameMap.get(gameNum)).getName()));
         }
+
+        handleChoice(console.menuChoice(gameMap.size()));
     }
 
     @Override
