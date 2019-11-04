@@ -43,6 +43,12 @@ public class BlackjackGame extends CardGame implements Game {
         this.hands = new ArrayList<BlackjackHand>(0);
     }
 
+    public static void main(String[] args) { // for testing
+        Player player = new Player ("Lem", "Jukes", 23,300.00);
+        BlackjackGame blackjackGame = new BlackjackGame(0.0,0.0,player);
+        blackjackGame.startPlay();
+    }
+
     public void setMinBet(double minBet) {
         this.minBet = minBet;
     }
@@ -90,6 +96,7 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public void roundStart() {
+        console.println("");
         Double betSize = betChoice();
         if (betSize != null) {
             initialDeal(betSize);
@@ -103,7 +110,7 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public Double betChoice () {
-        return console.getCurrency("Bet size (Enter to stand up): ", this.minBet, this.maxBet);
+        return console.getCurrency("Bet size (press Enter to stand up): ", this.minBet, this.maxBet);
     }
 
 
@@ -180,19 +187,26 @@ public class BlackjackGame extends CardGame implements Game {
             for (Card card : hand.getCards().getCards()) {
                 console.print(card.toString() + " ");
             }
-            console.println("  $%.2f", hand.getBet());
+            console.print("  $%.2f", hand.getBet());
             if (showWinnings) {
-                double winnings = calculateWinnings(hand);
-                if (winnings == hand.getBet()) {
-                    console.println("Push");
-                } else if (winnings == 0.0) {
-                    console.println("Dealer wins");
-                } else {
-                    console.println(String.format("Winnings: $%.2f",winnings));
-                }
+                console.print(winningMessage(hand));
             }
+            console.println("");
         }
 
+    }
+
+    public String winningMessage(BlackjackHand hand) {
+        String message = " ----> ";
+        double winnings = calculateWinnings(hand);
+        if (winnings == hand.getBet()) {
+            message += "Push";
+        } else if (winnings == 0.0) {
+            message += "Dealer wins";
+        } else {
+            message += String.format("Winnings: $%.2f",winnings);
+        }
+        return message;
     }
 
     public Double initialWinnerCheck() { // looking for blackjacks

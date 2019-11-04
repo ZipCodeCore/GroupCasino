@@ -44,6 +44,7 @@ public class GameMenu implements Menu {
         }
 
         handleChoice(console.menuChoice(gameMap.size()));
+        displayMenu();
     }
 
     @Override
