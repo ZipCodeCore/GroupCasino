@@ -4,8 +4,10 @@ public class Card extends GameComponent{
     private CardSuit suit;
     private CardValue cardValue;
 
-    public Card() {
 
+    public Card(CardValue cardValue, CardSuit suit) {
+        this.cardValue = cardValue;
+        this.suit = suit;
     }
 
     public CardSuit getSuit()

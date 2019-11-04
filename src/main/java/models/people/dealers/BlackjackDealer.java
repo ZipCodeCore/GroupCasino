@@ -8,8 +8,16 @@ public class BlackjackDealer extends Dealer {
     Dealer blackjackDealer;
     BlackjackHand hand = new BlackjackHand();
 
-    public BlackjackDealer(Dealer dealer) {
-        this.blackjackDealer = dealer;
+    public BlackjackDealer(String firstName, String lastName, double balance) {
+        super(firstName, lastName, balance);
+    }
+
+    public Dealer getBlackjackDealer() {
+        return blackjackDealer;
+    }
+
+    public void setBlackjackDealer(Dealer blackjackDealer) {
+        this.blackjackDealer = blackjackDealer;
     }
 
     public Card hit() {
