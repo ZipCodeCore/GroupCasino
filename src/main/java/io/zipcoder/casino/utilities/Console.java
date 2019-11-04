@@ -12,10 +12,17 @@ public final class Console {
     private final Scanner input;
     private final PrintStream output;
 
-    public Console(InputStream in, PrintStream out) {
+    private Console(InputStream in, PrintStream out) {
         this.input = new Scanner(in);
         this.output = out;
     }
+
+    static Console console = new Console(System.in, System.out);
+
+    public static Console getInstance(){
+        return console;
+    }
+
 
     public void print(String val, Object... args) {
         output.format(val, args);
