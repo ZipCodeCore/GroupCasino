@@ -32,6 +32,10 @@ public class CrapsGame extends DiceGame implements Game {
     public void startPlay() {
 
 
+        DiceGame crapsDice;
+    crapsDice = new DiceGame.roll(2) {
+    }
+
     }
 
     @Override
@@ -43,7 +47,7 @@ public class CrapsGame extends DiceGame implements Game {
     @Override
     //runs a new game of craps
     public void roundOfPlay() {
-
+    //menu for
     }
 
     public boolean winOnFirst (int setThePointRoll){
@@ -61,7 +65,11 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     public boolean loseOnSubsequent (int firstRoll, int currentRoll){
-        return false;
+        if(numberOfRolls > 1 && currentRoll == 7)
+        { return true;}
+        else if (numberOfRolls == 4 && currentRoll != firstRoll){
+            return true;}
+        else return false;
     }
 
     public Integer calculatePayoutMultiplier (){
