@@ -7,18 +7,26 @@ import java.util.ArrayList;
 
 public class GoFishPlayer {
 
-    private CardSet hand;
+    private ArrayList<GoFishRound>hands;
     private Player player;
 
     public GoFishPlayer(Player player){
         this.player = player;
+        this.hands = new ArrayList<GoFishRound>();
     }
 
+    public ArrayList<GoFishRound>getHands() {
+        return hands;
+    }
     public Player getPlayer() {
         return player;
     }
-
-    public CardSet getHand() {
-        return hand;
+    public void addHand(GoFishRound hand){
+        hands.add(hand);
     }
+    public void removeHand(GoFishRound hand){
+        hands.remove(hand);
+    }
+
+
 }

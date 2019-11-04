@@ -1,5 +1,6 @@
 package io.zipcoder.casino.Menus;
 
+import io.zipcoder.casino.GoFish.GoFishGame;
 import io.zipcoder.casino.Interfaces.Menu;
 import io.zipcoder.casino.Utilities.Console;
 
@@ -7,9 +8,11 @@ public class GoFishMenu implements Menu {
 
     private Console console;
     private String name = "Go Fish Menu";
+    private GoFishGame goFishGame;
 
-    public GoFishMenu() {
+    public GoFishMenu(GoFishGame goFishGame) {
         this.console = new Console (System.in, System.out);
+        this.goFishGame = goFishGame;
     }
 
     @Override
@@ -21,7 +24,10 @@ public class GoFishMenu implements Menu {
     public void displayMenu() {
         console.clearScreen();
 
+
+
         console.println("Go Fiiiiiish");
+
 
     }
 

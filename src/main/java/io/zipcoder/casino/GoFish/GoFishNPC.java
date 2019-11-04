@@ -3,19 +3,21 @@ package io.zipcoder.casino.GoFish;
 import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Player;
 
-public class GoFishNPC {
-    private CardSet hand;
-    private Player player;
+import java.util.ArrayList;
 
-    public GoFishNPC (Player player){
-        this.player = player;
+public class GoFishNPC extends GoFishPlayer{
+
+    private Player opponent;
+    private ArrayList<GoFishRound>hands;
+
+    public GoFishNPC (Player opponent){
+        super(opponent);
+
     }
 
     public Player getPlayer(){
-        return player;
+        return opponent;
     }
 
-    public CardSet getHand() {
-        return hand;
-    }
+
 }

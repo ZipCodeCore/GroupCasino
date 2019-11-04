@@ -31,6 +31,7 @@ public class BlackjackGame extends CardGame implements Game {
     private CardSet shoe;
     private int numDecks;
 
+
     public BlackjackGame(double minBet, double maxBet, Player incomingPlayer) {
         this.minBet = minBet;
         this.maxBet = maxBet;

@@ -15,7 +15,7 @@ public class GoFishRound {
     private GoFishPlayer opponent;
     String cardChoice;
 
-    public GoFishRound(GoFishPlayer player, GoFishPlayer opponent) {
+    public GoFishRound(GoFishPlayer player, Card card1, Card card2, Card card3, Card card4, Card card5, Card card6, Card card7) {
         this.player = player;
         this.opponent = opponent;
         this.console = new Console(System.in, System.out);
