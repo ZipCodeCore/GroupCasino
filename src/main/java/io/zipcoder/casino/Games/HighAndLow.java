@@ -12,18 +12,19 @@ public class HighAndLow {
     Dice dice = new Dice();
     GameMenu gameMenu = new GameMenu();
     private Player currentPlayer;
+    boolean running;
 
-    public void runHighOrLow(Player currentPlayer){
+    public void runHighOrLow(Player currentPlayer) {
+        while(running)
         this.currentPlayer = currentPlayer;
         console.println("Welcome to High and Low!");
-
         Integer firstRoll = firstRoll();
         Integer highOrLowBet = doYouWantToBet();
         Integer secondRoll = secondRoll();
 
         winOrLose(firstRoll, secondRoll, highOrLowBet);
-
         Integer playAgainInput = playAgain();
+        playAgainOrMain(playAgainInput);
     }
 
     public Integer firstRoll(){
@@ -64,13 +65,14 @@ public class HighAndLow {
         return playerInput;
     }
 
-    public void playAgainOrMain(Integer playAgainInput) {
+    public void playAgainOrMain(Integer playAgainInput){
         switch (playAgainInput){
             case 1:
                 runHighOrLow(currentPlayer);
                 break;
             case 2:
                 gameMenu.runGameMenu(currentPlayer);
+                running = false;
                 break;
         }
     }
