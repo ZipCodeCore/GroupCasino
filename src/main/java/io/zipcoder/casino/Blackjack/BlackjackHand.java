@@ -1,22 +1,28 @@
 package io.zipcoder.casino.Blackjack;
 
 import io.zipcoder.casino.Card;
+import io.zipcoder.casino.CardSet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class BlackjackHand {
 
-    private ArrayList<Card> cards;
+    private CardSet cards;
     private double bet;
     private int value;
     private BlackjackPlayer player;
 
-    public BlackjackHand(double bet, BlackjackPlayer player) {
+    public BlackjackHand(double bet, BlackjackPlayer player, Card card1, Card card2) {
         this.bet = bet;
         this.player = player;
+        this.cards = new CardSet(0);
+        this.cards.addCard(card1);
+        this.cards.addCard(card2);
     }
 
-    public ArrayList<Card> getCards() {
+    public CardSet getCards() {
         return cards;
     }
 
@@ -32,7 +38,7 @@ public class BlackjackHand {
         return player;
     }
 
-    public void setCards(ArrayList<Card> cards) {
+    public void setCards(CardSet cards) {
         this.cards = cards;
     }
 
@@ -53,7 +59,26 @@ public class BlackjackHand {
     }
 
     public int determineHandValue() {
+        //ArrayList<Integer> values = mapCardValues();
+
         return 0;
+    }
+
+    public ArrayList<Integer> mapCardValues(CardSet cards) {
+        ArrayList<Integer> values = new ArrayList<Integer>();
+        for (Card card: cards.getCards()) {
+            values.add(BlackjackGame.cardMap.get(card.getRank()));
+        }
+        Collections.sort(values,Collections.reverseOrder());
+        return values;
+    }
+
+    public int arraySum(ArrayList<Integer> array) {
+        int sum = 0;
+        for (int number : array) {
+            sum += number;
+        }
+        return sum;
     }
 
     //

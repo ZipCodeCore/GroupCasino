@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Interfaces;
 
-public interface GamblingGame extends Game {
+public interface GamblingGame {
 
     double getWager();
 

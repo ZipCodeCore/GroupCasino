@@ -3,12 +3,12 @@ package io.zipcoder.casino.Menus;
 import io.zipcoder.casino.Interfaces.Menu;
 import io.zipcoder.casino.Utilities.Console;
 
-public class CrapsMenu implements Menu {
+public class RRMenu implements Menu {
 
     private Console console;
-    private String name = "Craps Menu";
+    private String name = "Russian Roulette Dice Menu";
 
-    public CrapsMenu() {
+    public RRMenu() {
         this.console = new Console (System.in, System.out);
     }
 
@@ -21,12 +21,11 @@ public class CrapsMenu implements Menu {
     public void displayMenu() {
         console.clearScreen();
 
-        console.println("Craaaaaps");
+        console.println("Da");
     }
 
     @Override
     public void handleChoice(int choice) {
 
     }
-
 }
