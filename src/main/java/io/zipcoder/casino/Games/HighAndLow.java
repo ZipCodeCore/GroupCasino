@@ -9,7 +9,6 @@ import io.zipcoder.casino.utilities.Console;
 public class HighAndLow {
     Console console = new Console(System.in, System.out);
     Dice dice = new Dice();
-    GameMenu gameMenu = new GameMenu();
     private Player currentPlayer;
     private boolean running;
 
