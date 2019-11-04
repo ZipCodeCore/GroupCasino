@@ -15,7 +15,7 @@ public class Casino {
     }
 
     public void displayCasinoMenu(){
-        console.println(String.format("Welcome to Big 3 casino, %s",currentPlayer.getName()));
+        console.println(String.format("Welcome to Big 3 casino, %s", currentPlayer.getName()));
         console.println("What would you like to do?");
         console.println("(1) - Display Game Menu");
         console.println("(2) - Return to Player Menu");
@@ -43,8 +43,8 @@ public class Casino {
                 gameMenu.runGameMenu(currentPlayer);
                 break;
             case 2:
-                PlayerMenu playerMenu = new PlayerMenu();
-                playerMenu.runPlayerMenu();
+                //PlayerMenu playerMenu = new PlayerMenu();
+                //playerMenu.runPlayerMenu();
                 break;
         }
     }
