@@ -1,4 +1,4 @@
-package io.zipcoder.casino.utilities;
+package services;
 
 
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package MainApplication;
 
 
 public class Casino {
