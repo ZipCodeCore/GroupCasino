@@ -45,9 +45,7 @@ public class ChutesAndLadders implements Game {
         String winner = "";
         while (currentGame) {
             Integer playerPosition = playerTurn();
-            playerTurn();
             playerChutesAndLadders(playerPosition);
-            aiTurn();
             Integer aiPosition = aiTurn();
             aiChutesAndLadder(aiPosition);
 
