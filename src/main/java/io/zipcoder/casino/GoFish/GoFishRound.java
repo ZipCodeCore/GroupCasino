@@ -7,29 +7,33 @@ import io.zipcoder.casino.Utilities.Console;
 import java.util.ArrayList;
 
 public class GoFishRound {
-    public Console console;
 
+    Console console;
     private GoFishPlayer currentPlayer;
     private ArrayList<Card> newSuites;
     private GoFishPlayer player;
     private GoFishPlayer opponent;
+    String cardChoice;
 
     public GoFishRound(GoFishPlayer player, GoFishPlayer opponent) {
         this.player = player;
         this.opponent = opponent;
         this.console = new Console(System.in, System.out);
 
+
+
     }
     public ArrayList<Card> playRound(){
+
         return null;
     }
 
     //Fish for card from opponent
-    public String chooseCard(){
-        System.out.println();
-        console.getStringInput("Choose a card to take! (2-10, J, Q, K, or A)");
-        ;
+    public void requestCard(String input){
+        console.getCardRankInput(cardChoice);
+
     }
+
     //Performed after successful callout
     //if card retrieved matches card drawn, player repeats chooseCard
     public Card retrieveCard (String requestedCard){

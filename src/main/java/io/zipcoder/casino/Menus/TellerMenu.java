@@ -1,12 +1,25 @@
 package io.zipcoder.casino.Menus;
 
-public class TellerMenu {
+import io.zipcoder.casino.Interfaces.Menu;
+import io.zipcoder.casino.Player;
 
-    public void getOptions() {
+public class TellerMenu implements Menu {
+
+    private Player player;
+    private String name = "Teller Menu";
+
+    public TellerMenu(Player player) {
+        this.player = player;
+    }
+
+    @Override
+    public void displayMenu() {
 
     }
 
-    public void handleOptions(int choice) {
+    @Override
+    public void handleChoice(int choice) {
 
     }
+
 }

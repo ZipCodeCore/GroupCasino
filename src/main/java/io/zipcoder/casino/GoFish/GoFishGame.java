@@ -35,7 +35,7 @@ public class GoFishGame extends CardGame implements Game {
     public void roundOfPlay(){
 
     }
-
+    //Option to quit game or play another round
     public void endChoice(){
 
     }
