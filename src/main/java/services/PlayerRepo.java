@@ -12,7 +12,7 @@ public class PlayerRepo {
 
     }
 
-    public ArrayList<Player> getPlayers() //changedtogetPlayers and returns arrayList
+    public ArrayList<Player> getPlayers() //changed method to getPlayers and return value to arrayList
     {
         return playerRepo;
     }
