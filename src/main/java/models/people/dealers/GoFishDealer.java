@@ -8,8 +8,8 @@ public class GoFishDealer extends Dealer {
     Dealer goFishDealer;
     GoFishHand hand = new GoFishHand();
 
-    public GoFishDealer(Dealer dealer) {
-        this.goFishDealer = dealer;
+    public GoFishDealer(String firstName, String lastName, double balance) {
+        super(firstName, lastName, balance);
     }
 
     public Integer askForCard(){
