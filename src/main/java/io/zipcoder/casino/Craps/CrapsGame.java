@@ -12,12 +12,12 @@ public class CrapsGame extends DiceGame implements Game {
     private double maxBet;
     private CrapsPlayer player;
     private int numberOfRolls;      //an integer from 1-4
-    private int firstRoll;          //saves your first roll to try to match with later rolls
+    private int setThePointRoll;    //saves your first roll to try to match with later rolls
     private int currentRoll;        //any roll after the first
 
 
     //Craps Game Constructor
-    public CrapsGame (Player player) {
+    public CrapsGame (double minBet, double maxBet, Player player) {
         this.minBet = minBet;
         this.maxBet = maxBet;
         CrapsPlayer newPlayer = new CrapsPlayer(player);
@@ -51,12 +51,14 @@ public class CrapsGame extends DiceGame implements Game {
     //menu for
     }
 
-    public boolean winOnFirst (int firstRoll){
-        return false;
+    public boolean winOnFirst (int setThePointRoll){
+        if (setThePointRoll == 7 || setThePointRoll == 11) {return true;}
+        else {return false;}
     }
 
-    public boolean loseOnFirst (int firstRoll){
-        return false;
+    public boolean loseOnFirst (int setThePointRoll){
+        if (setThePointRoll == 2 || setThePointRoll == 3 || setThePointRoll == 12){return true;}
+        else {return false;}
     }
 
     public boolean winOnSubsequent (int firstRoll, int currentRoll){
