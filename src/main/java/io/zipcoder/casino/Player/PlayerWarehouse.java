@@ -5,13 +5,16 @@ import java.util.HashMap;
 
 public class PlayerWarehouse {
 
-    private HashMap <String, Player> warehouse = new HashMap<String, Player>();
+    private HashMap <String, Player> warehouse;
+
+    public PlayerWarehouse() {
+        this.warehouse = new HashMap<String, Player>();
+    }
 
     public void addPlayer(String ID, String pwd){
-
         Player newUser = new Player(ID, pwd);
-        warehouse.put(newUser.ID, newUser);
-
+        String key = newUser.ID+newUser.pwd;
+        warehouse.put(key, newUser);
     }
 
     public Player getPlayer(String idNum){
