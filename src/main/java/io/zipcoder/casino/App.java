@@ -70,7 +70,9 @@ public class App {
                 "1.) Go Fish\n" +
                 "2.) Yahtzee\n" +
                 "3.) BlackJack\n" +
-                "4.) Craps");
+                "4.) Craps\n" +
+                "5.) Go to Main Menu");
+
         selectGameActions(userInput);
     }  // select game
 
@@ -92,16 +94,19 @@ public class App {
             case 4:
                 Craps newCraps = new Craps();
                 newCraps.startGame();
+            case 5:
+                mainMenu();
                 break;
             default:
                 menu.print("Error! Invalid Selection!\n\n");
-                selectGame();
                 break;
         }
+
+        selectGame();
     }  // game actions
 
     private Boolean authenticatePlayer(){
-        return false;
+        return true;
     }
 
     private void createPlayer(){
