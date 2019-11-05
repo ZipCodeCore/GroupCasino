@@ -61,6 +61,7 @@ public class GoFish implements Game {
     public void playerTurn(){
 
         System.out.println(playerHand.displayHand());
+        System.out.println(computerHand.displayHand());
 
         String userInput = input.getStringInput("Which value would you like to ask for? ");
 

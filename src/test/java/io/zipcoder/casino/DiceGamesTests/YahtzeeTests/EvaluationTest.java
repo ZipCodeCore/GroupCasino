@@ -11,7 +11,7 @@ public class EvaluationTest {
 
     @Before
     public void doThisFirst(){
-        detect = new Yahtzee(new Player());
+        //detect = new Yahtzee(new Player());
     }
 
     @Test
