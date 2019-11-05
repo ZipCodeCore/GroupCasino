@@ -57,5 +57,23 @@ public final class Console {
     public Integer getIntegerInput(String prompt, Object... args) {
         return getLongInput(prompt, args).intValue();
     }
+
+
+    public void newln() {
+        print("\n");
+    }
+
+    public void delay(Integer milliSeconds) {
+        try { Thread.sleep(milliSeconds); }
+        catch (InterruptedException e) {
+            System.out.println("Error, Interrupted");
+        }
+    }
+
+    public void dotDotDot() {
+        delay(200); print(".");
+        delay(300); print(".");
+        delay(400); print(".");
+    }
 }
 
