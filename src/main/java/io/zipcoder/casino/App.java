@@ -40,8 +40,7 @@ public class App {
 
         switch (userSelection) {
             case 1:
-                this.userId = this.menu.getStringInput("Enter your ID:");
-                this.userPassword = this.menu.getStringInput("Enter your password:");
+
                 this.menu.println("Logging in ...\n");
 
                 if (authenticatePlayer()) {
@@ -62,14 +61,14 @@ public class App {
                 break;
             case 2:
                 this.menu.println("Creating new account ...\n");
-                this.userId = this.menu.getStringInput("Enter your ID:");
-                this.userPassword = this.menu.getStringInput("Enter your password:");
 
-                if (authenticatePlayer()) this.menu.println("This user already exists, please log in.\n");
-
-                createPlayer();
-                selectGameToPlay();
-
+                if (authenticatePlayer()){
+                    this.menu.println("This user already exists, please log in.\n");
+                    mainMenu();
+                } else {
+                    createPlayer();
+                    selectGameToPlay();
+                }
                 break;
 
             case 3:
@@ -130,6 +129,9 @@ public class App {
 
 
     private Boolean authenticatePlayer(){
+        this.userId = this.menu.getStringInput("Enter your ID:");
+        this.userPassword = this.menu.getStringInput("Enter your password:");
+
         this.newPlayer = warehouse.getPlayer(this.userId+this.userPassword);
         return this.newPlayer != null;
     }
