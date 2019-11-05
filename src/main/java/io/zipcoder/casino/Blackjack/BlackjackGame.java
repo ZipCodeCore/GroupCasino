@@ -177,13 +177,22 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public void roundOfPlay() {
-        for (BlackjackHand hand : this.player.getHands()) {
+        int handNum = this.player.getHands().size();
+        for (int i = 0; i < handNum; i++) {
             int value = -1;
             while (value < 0) {
-                value = hand.playChoice(this.shoe);
+                value = this.player.getHands().get(i).playChoice(this.shoe);
+                handNum = this.player.getHands().size();
                 this.displayTable(false);
             }
         }
+//        for (BlackjackHand hand : this.player.getHands()) {
+//            int value = -1;
+//            while (value < 0) {
+//                value = hand.playChoice(this.shoe);
+//                this.displayTable(false);
+//            }
+//        }
         for (BlackjackHand hand : this.dealer.getHands()) {
             int value = -1;
             while (value < 0) {

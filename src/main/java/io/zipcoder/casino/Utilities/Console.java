@@ -255,7 +255,7 @@ public final class Console {
     }
 
     public Integer getInteger(int max) {
-        String input = getInput();
+        String input = getInput().substring(0,1);
         while (true) {
             if (integerCheck(input)) {
                 if (Integer.parseInt(input) >= 1 && Integer.parseInt(input) <= max) {

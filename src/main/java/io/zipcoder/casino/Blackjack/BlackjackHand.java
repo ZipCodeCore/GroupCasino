@@ -20,8 +20,15 @@ public class BlackjackHand {
         this.bet = bet;
         this.player = player;
         this.cards = new CardSet(0);
-        this.cards.addCard(card1);
-        this.cards.addCard(card2);
+        if (card2 != null) {
+            this.cards.addCard(new Card("5", "H"));
+            this.cards.addCard(new Card("5", "D"));
+        } else {
+            this.cards.addCard(card1);
+            if (card2 != null) {
+                this.cards.addCard(card2);
+            }
+        }
     }
 
     public CardSet getCards() {
@@ -58,25 +65,33 @@ public class BlackjackHand {
     }
 
     public int playChoice(CardSet shoe){
-        if (this.cards.size() == 2 && this.cards.getCards().get(0).equals(this.cards.getCards().get(1))) {
-            splitHand();
-            return -1;
-        } else { // normal case
-            console.println("1. Hit\n2. Stay\n");
 
+        if (this.cards.size() == 2 && this.cards.getCards().get(0).equals(this.cards.getCards().get(1))) { //splitzies
+            console.println("1. Split\n2. Play this hand\n");
             switch (console.menuChoice(2)) {
                 case 1:
-                    int val = hit(shoe.removeFirstCard());
-                    if (val != 0) {
-                        return -1;
-                    } else {
-                        return 0;
-                    }
+                    splitHand();
+                    return -1;
                 case 2:
-                    return this.getValue();
+                    break;
             }
-            return -1;
         }
+        // normal case
+        console.println("1. Hit\n2. Stay\n");
+
+        switch (console.menuChoice(2)) {
+            case 1:
+                int val = hit(shoe.removeFirstCard());
+                if (val != 0) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            case 2:
+                return this.getValue();
+        }
+        return -1;
+
     }
 
     public int hit(Card card) {
