@@ -119,14 +119,18 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public Double betChoice () {
-        double wager;
+        Double wager;
         console.println("[DEALER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance());
         wager = console.getCurrency("[DEALER]: Bet size (press Enter to stand up): ", this.minBet, this.maxBet);
-        if (gameServices.wager(wager, this.player.getPlayer())) {
-            return wager;
+        if (wager != null) {
+            if (gameServices.wager(wager, this.player.getPlayer())) {
+                return wager;
+            } else {
+                console.println(String.format("[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
+                return betChoice();
+            }
         } else {
-            console.println(String.format("[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
-            return betChoice();
+            return null;
         }
     }
 
