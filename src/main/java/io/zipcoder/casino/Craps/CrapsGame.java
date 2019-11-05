@@ -108,7 +108,7 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     public Integer calculatePayoutMultiplier (){
-        //catch statements
+
         return null;
     }
 
