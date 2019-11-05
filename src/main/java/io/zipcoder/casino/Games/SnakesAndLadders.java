@@ -65,7 +65,7 @@ public class SnakesAndLadders implements Game {
     public String aiTurn(Integer aiPosition){
         console.getStringInput("Now it's my turn! Press enter.");
         aiPosition = aiDiceRoll();
-        aiSnakesAndLadder(aiPosition);
+        aiSnakesAndLadders(aiPosition);
         if (aiPosition >= 100){
             return "Ai";
         }
@@ -141,7 +141,7 @@ public class SnakesAndLadders implements Game {
         return position;
     }
 
-    public Integer aiSnakesAndLadder(Integer position){
+    public Integer aiSnakesAndLadders(Integer position){
         Integer newPosition = snakesAndLaddersCheckerViaMap(position);
         if (position > newPosition) {
             console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
