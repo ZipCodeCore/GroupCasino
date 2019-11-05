@@ -19,8 +19,8 @@ public class App {
 
     public void App (){
 
-        menu = new Console(System.in,System.out);
-        menu.print("Welcome to Casino 5! \n\n");
+        this.menu = new Console(System.in,System.out);
+        this.menu.print("Welcome to Casino 5! \n\n");
 
         mainMenu();  // log in ...
 
@@ -29,7 +29,7 @@ public class App {
 
     private void mainMenu(){
         int userInput;
-        userInput = menu.getIntegerInput("What would you like to do?\n" +
+        userInput = this.menu.getIntegerInput("What would you like to do?\n" +
                 "1.) Log In\n" +
                 "2.) Create Account\n" +
                 "3.) Exit");
@@ -40,17 +40,20 @@ public class App {
 
         switch (userSelection) {
             case 1:
-                userId = menu.getStringInput("Enter your ID:");
-                userPassword = menu.getStringInput("Enter your password:");
+                this.userId = this.menu.getStringInput("Enter your ID:");
+                this.userPassword = this.menu.getStringInput("Enter your password:");
+                this.menu.println("Logging in ...\n");
 
                 if (authenticatePlayer()) {
                     selectGameToPlay();
                 } else {
-                    menu.print("We could not find this user. Please try again!\n\n");
+                    this.menu.print("We could not find this user. Please try again!\n\n");
                     counter++;
-                    if ((counter > 2)) {
+                    this.userId = "";
+                    this.userPassword = "";
+                    if ((counter > 1)) {
                         counter = 0;
-                        menu.print("You exceeded the allowed number of tries!\n\n");
+                        this.menu.print("You exceeded the allowed number of tries!\n\n");
                         mainMenu();
                     } else {
                         mainMenuActions(userSelection);
@@ -58,17 +61,21 @@ public class App {
                 }
                 break;
             case 2:
+                this.menu.println("Creating new account ...\n");
+                this.userId = this.menu.getStringInput("Enter your ID:");
+                this.userPassword = this.menu.getStringInput("Enter your password:");
+
                 createPlayer();
                 selectGameToPlay();
                 break;
 
             case 3:
-                menu.print("Have a great day!");
+                this.menu.print("Have a great day!");
                 System.exit(0);
                 break;
 
             default:
-                menu.print("Error! Please enter another option!");
+                this.menu.print("Error! Please enter another option!");
                 mainMenu();
 
         } // main menu actions
@@ -95,7 +102,7 @@ public class App {
                 newGoFish.startGame();
                 break;
             case 2:
-                Yahtzee newYahtzee = new Yahtzee(newPlayer);
+                Yahtzee newYahtzee = new Yahtzee(this.newPlayer);
                 newYahtzee.startGame();
                 break;
             case 3:
@@ -118,13 +125,13 @@ public class App {
 
 
     private Boolean authenticatePlayer(){
-        newPlayer = new Player( userId,userPassword);
-
-        return false;
+        this.newPlayer = warehouse.getPlayer(this.userId);
+        return this.newPlayer != null;
     }
 
     private void createPlayer(){
-        newPlayer = new Player( userId,userPassword);
+        warehouse.addPlayer(this.userId,this.userPassword);
+        this.newPlayer = warehouse.getPlayer(this.userId);
     }
 
 } // class
