@@ -209,16 +209,13 @@ public class BlackjackGame extends CardGame implements Game {
                 "\nTable stakes: $%.2f min / $%.2f max\n", this.minBet, this.maxBet));
         console.println("[Dealer's Hand]:");
         BlackjackHand dealerHand = this.dealer.getHands().get(0);
-        for (Card card : dealerHand.getCards().getCards()) {
-            console.print(card.toString() + " ");
-        }
+
+        console.print(dealerHand.getCards().toASCII());
         console.println("\n");
         console.println(String.format("[%s's Hand(s)]:",this.player.getPlayer().getFirstName()));
         ArrayList<BlackjackHand> playerHands =  this.player.getHands();
         for (BlackjackHand hand : playerHands) {
-            for (Card card : hand.getCards().getCards()) {
-                console.print(card.toString() + " ");
-            }
+            console.print(hand.getCards().toASCII());
             console.print("  $%.2f", hand.getBet());
             if (showWinnings) {
                 console.print(winningMessage(hand));
