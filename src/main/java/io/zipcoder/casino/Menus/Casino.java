@@ -7,12 +7,13 @@ import io.zipcoder.casino.Utilities.Console;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class Casino {
 
     private static Console console = new Console(System.in, System.out);
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws InterruptedException {
         // write your tests before you start fucking with this
         Casino.prologue();
         Player player = Casino.newPlayerDialogue();
@@ -22,13 +23,45 @@ public class Casino {
         Casino.displayEnding();
     }
 
-    public static void prologue () {
-        console.println("You had a really long day at work and decide to take the edge off by visiting the local casino,\n" +
-                "'Maybe if I win some big bucks I'll get out of this boring job of mine.', You think to yourself. \n"+
-                "The same thought always crosses your mind when passing by the big flashy sign embroidered with flashing poker chips.\n" +
-                        "But tonight is a little different... \n" + "\n" + "Tonight you're feeling lucky. \uD83C\uDF40" + "\n" + "\n" + "\n" + "\n" +
-                "------------------------------------------------------------------------------------------------------\n");
+    public static void printWithDelays(String data, TimeUnit unit, long delay)
+            throws InterruptedException {
+        for (char ch : data.toCharArray()) {
+            System.out.print(ch);
+            unit.sleep(delay);
+        }
     }
+
+    public static void prologue () throws InterruptedException {
+        printWithDelays("\nYou had a really long day at work and decide to take the edge off by visiting the local casino.\n",TimeUnit.MILLISECONDS, 50);
+        TimeUnit.SECONDS.sleep(1);
+        printWithDelays("\"Maybe if I win some big bucks I'll get out of this boring job of mine,\" You think to yourself. \n", TimeUnit.MILLISECONDS, 50);
+        TimeUnit.SECONDS.sleep(1);
+        printWithDelays("The same thought always crosses your mind when passing by the big flashy sign embroidered with flashing poker chips.\n", TimeUnit.MILLISECONDS, 50);
+        TimeUnit.SECONDS.sleep(1);
+        printWithDelays("But tonight is a little different... \n" + "\n" + "\n", TimeUnit.MILLISECONDS, 50);
+        TimeUnit.SECONDS.sleep(1);
+        printWithDelays("Tonight you're feeling lucky. \uD83C\uDF40" + "\n" + "\n" + "\n" + "\n", TimeUnit.MILLISECONDS, 50);
+
+        TimeUnit.SECONDS.sleep(2);
+        printWithDelays("------------------------------------------------------------------------------------------------------------------------------\n",TimeUnit.MILLISECONDS, 10);
+        printWithDelays("       ,----,.                                                                                                              \n" +
+                "     ,'   ,' |                                                                                          ,--.     ,----..    \n" +
+                "   ,'   .'   |              ,----,             ,----..      ,---,          .--.--.       ,---,        ,--.'|    /   /   \\   \n" +
+                " ,----.'    .'            .'   .' \\           /   /   \\    '  .' \\        /  /    '.  ,`--.' |    ,--,:  : |   /   .     :  \n" +
+                " |    |   .'            ,----,'    |         |   :     :  /  ;    '.     |  :  /`. /  |   :  : ,`--.'`|  ' :  .   /   ;.  \\ \n" +
+                " :    :  |--,           |    :  .  ;         .   |  ;. / :  :       \\    ;  |  |--`   :   |  ' |   :  :  | | .   ;   /  ` ; \n" +
+                " :    |  ;.' \\          ;    |.'  /          .   ; /--`  :  |   /\\   \\   |  :  ;_     |   :  | :   |   \\ | : ;   |  ; \\ ; | \n" +
+                " |    |      |          `----'/  ;           ;   | ;     |  :  ' ;.   :   \\  \\    `.  '   '  ; |   : '  '; | |   :  | ; | ' \n" +
+                " `----'.'\\   ;            /  ;  /            |   : |     |  |  ;/  \\   \\   `----.   \\ |   |  | '   ' ;.    ; .   |  ' ' ' : \n" +
+                "   __  \\  .  |           ;  /  /-,           .   | '___  '  :  | \\  \\ ,'   __ \\  \\  | '   :  ; |   | | \\   | '   ;  \\; /  | \n" +
+                " /   /\\/  /  :          /  /  /.`|           '   ; : .'| |  |  '  '--'    /  /`--'  / |   |  ' '   : |  ; .'  \\   \\  ',  /  \n" +
+                "/ ,,/  ',-   .  ___   ./__;      :           '   | '/  : |  :  :         '--'.     /  '   :  | |   | '`--'     ;   :    /   \n" +
+                "\\ ''\\       ;  /  .\\  |   :    .'            |   :    /  |  | ,'           `--'---'   ;   |.'  '   : |          \\   \\ .'    \n" +
+                " \\   \\    .'   \\  ; | ;   | .'                \\   \\ .'   `--''                        '---'    ;   |.'           `---`      \n" +
+                "  `--`-,-'      `--\"  `---'                    `---`                                           '---'                     ", TimeUnit.NANOSECONDS, 100);
+        printWithDelays("\n------------------------------------------------------------------------------------------------------------------------------\n",TimeUnit.MILLISECONDS, 10);
+    }
+
 
     public static Player newPlayerDialogue() {
         String firstName = console.getInput("((You walk up to the entrance and get greeted by a tall, stocky man with a handlebar mustache))\n" +

@@ -24,7 +24,7 @@ public class RRMenu implements Menu {
     public void displayMenu() {
         //Starts playing music!
         try {
-            Music.filePath = "src/music/(Craps) Amor maior - Higher Love.wav";
+            Music.filePath = "src/music/(Roulette) Kirby Star Allies Music.wav";
             rouletteMusic = new Music();
             rouletteMusic.play();
         } catch (Exception ex) {
