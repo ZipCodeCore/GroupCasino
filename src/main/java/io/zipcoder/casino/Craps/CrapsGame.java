@@ -54,33 +54,6 @@ public class CrapsGame extends DiceGame implements Game {
     //runs a new game of craps
     public void roundOfPlay() {
         Double betSize = betChoice();
-<<<<<<< HEAD
-            userRollsDiceSetPoint();
-            if (winOnFirst(setThePointRoll) == true) {
-                winningMessageFirstRoll();
-                calculateWinnings(betSize, setThePointRoll, numRolls);
-            } else if (loseOnFirst(setThePointRoll) == true) {
-                losingMessageFirstRoll();
-            } else {
-                displayPointRoll(setThePointRoll);
-                for (int i = 0; i < 3; i++) {
-                    userRollsDiceCurrentPoint();
-                    displayCurrentRoll(currentRoll);
-                    if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
-                        winOnSubsequentMessage();
-                        calculateWinnings(betSize, setThePointRoll, numRolls);
-                        break;
-                    } else if (loseOnSubsequent(currentRoll) == true) {
-                        loseOnSubsequentMessage();
-                        break;
-                    }
-                    if (i == 2) {
-                        losingMessageOutOfRolls();
-                    }
-                    numRolls = i + 1;
-                }
-            }
-=======
         userRollsDiceSetPoint();
         if (winOnFirst(setThePointRoll) == true) {
             winningMessageFirstRoll();
@@ -106,7 +79,6 @@ public class CrapsGame extends DiceGame implements Game {
                 numRolls = i + 1;
             }
         }
->>>>>>> d53a448dfe49dbe6cd02e39710b99a436a161240
     }
 
     public Double betChoice(){
