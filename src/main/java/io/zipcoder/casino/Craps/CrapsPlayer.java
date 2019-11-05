@@ -13,5 +13,9 @@ public class CrapsPlayer {
         this.player = player;
     }
 
+    public Player getPlayer(){
+        return this.player;
+    }
+
 
 }

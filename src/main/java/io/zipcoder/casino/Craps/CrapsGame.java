@@ -67,12 +67,12 @@ public class CrapsGame extends DiceGame implements Game {
 
     }
 
-    public boolean winOnFirst (int setThePointRoll){
+    public boolean winOnFirst (Integer setThePointRoll){
         if (setThePointRoll == 7 || setThePointRoll == 11) {return true;}
         else {return false;}
     }
 
-    public boolean loseOnFirst (int setThePointRoll){
+    public boolean loseOnFirst (Integer setThePointRoll){
         if (setThePointRoll == 2 || setThePointRoll == 3 || setThePointRoll == 12){return true;}
         else {return false;}
     }
