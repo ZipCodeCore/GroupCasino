@@ -4,6 +4,7 @@ import io.zipcoder.casino.CardGames.BlackJack;
 import io.zipcoder.casino.CardGames.GoFish;
 import io.zipcoder.casino.DiceGames.Craps;
 import io.zipcoder.casino.DiceGames.Yahtzee;
+import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 public class App {
@@ -11,6 +12,7 @@ public class App {
     private Console menu;
     private String userId = "";
     private String userPassword = "";
+    private Player newPlayer = new Player();
 
     public void App (){
 
@@ -84,7 +86,7 @@ public class App {
                 newGoFish.startGame();
                 break;
             case 2:
-                Yahtzee newYahtzee = new Yahtzee();
+                Yahtzee newYahtzee = new Yahtzee(newPlayer);
                 newYahtzee.startGame();
                 break;
             case 3:
