@@ -7,8 +7,8 @@ public class KlondikeDealer extends Dealer {
     Dealer klondikeDealer;
     KlondikeHand hand = new KlondikeHand();
 
-    public KlondikeDealer(Dealer dealer) {
-        this.klondikeDealer = dealer;
+    public KlondikeDealer(String firstName, String lastName, double balance) {
+        super(firstName, lastName, balance);
     }
 
     public Integer rollDice(Dice dice){

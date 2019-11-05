@@ -1,13 +1,17 @@
 package models.games;
 
+import models.Lobby;
 import models.gamecomponents.DeckOfCards;
 import models.people.dealers.Dealer;
 import models.people.players.Player;
+import services.Console;
 
 abstract class CardGame {
     DeckOfCards deckOfCards;
     Dealer dealer;
     Player player;
+    // made a new object called console cause Console class had getIntegerInput which was static
+    Console console = new Console(System.in, System.out);
 
     public CardGame() {
     }
@@ -18,20 +22,18 @@ abstract class CardGame {
         this.player = player;
     }
 
-    public void startGame() {
-
-    }
 
     public Boolean determineWin() {
         return null;
     }
 
     public void quitGame() {
-
+        Lobby lobby = new Lobby();
+        lobby.selectGameMenu();
     }
 
-    public void getMenu() {
 
-    }
+
+
 
 }
