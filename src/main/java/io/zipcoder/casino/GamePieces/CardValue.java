@@ -11,18 +11,17 @@ public enum CardValue {
     EIGHT(8),
     NINE(9),
     TEN(10),
-    JACK(11),
-    QUEEN(12),
-    KING(13),
-    ACE(14);
+    JACK(10),
+    QUEEN(10),
+    KING(10),
+    ACE(11);
 
-    private int cardValue;
-
+    private final int value;
     private CardValue (int value){
-        this.cardValue = value;
+        this.value = value;
     }
 
-    public int getCardValue() {
-        return cardValue;
+    public int getValue() {
+        return value;
     }
 }

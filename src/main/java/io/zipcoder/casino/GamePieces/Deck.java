@@ -12,7 +12,7 @@ public class Deck {
 
     public Deck(){
         this.deck = deck;
-        for(int i =0; i < 13; i++){
+        for(int i =1; i <= 11; i++){
             CardValue value = CardValue.values()[i];
             for(int j= 0; j < 4;j++){
                 Card card= new Card(value, Suit.values()[j]);
@@ -29,6 +29,7 @@ public class Deck {
     }
 
     public Card draw(){
+
 
         Card drawCard = deck.remove(0);
         console.println(drawCard.toString());

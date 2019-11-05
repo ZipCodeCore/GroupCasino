@@ -6,8 +6,10 @@ import io.zipcoder.casino.GamePieces.Deck;
 import io.zipcoder.casino.utilities.Console;
 
 public class BlackJack implements Game, GamblingGame{
+
+    Deck deck = new Deck();
     Console console = new Console(System.in, System.out);
-    Card[] hand = new Card[6];
+    Card[] playerHand = new Card[6];
     Card[] dealerHand = new Card[6];
     Player dealer = new Player( "Dealer", 100000);
 
@@ -18,13 +20,19 @@ public class BlackJack implements Game, GamblingGame{
     @Override
     public void runGame(Player currentPlayer) {
         while(running)
-        console.println("Welcome to BlackJack!");
-        //draw two cards for current player and Dealer
+        console.println("Welcome to BlackJack! Let's begin!");
+        deck.shuffle();
+        initialHand();
+        viewDealerHand();
+        viewCurrentHand();
         console.println("How much would you like to los- I mean bet?");
         placeBet(currentPlayer);
         console.println("Would you like to 'hit' or 'stay'?");
+        viewDealerHand();
         viewCurrentHand();
         hitOrStay();
+        checkHand(playerHand);
+        checkHand(dealerHand);
 
 
     }
@@ -48,7 +56,10 @@ public class BlackJack implements Game, GamblingGame{
 
     }
     public void viewCurrentHand(){
-        console.println(String.valueOf(hand[0]) + " " + String.valueOf(hand[1]));
+        console.println("Your hand is " + String.valueOf(playerHand[0]) + " " + String.valueOf(playerHand[1]));
+    }
+    public void viewDealerHand(){
+        console.println("Dealer hand is " + String.valueOf(dealerHand[0]));
     }
     public void hitOrStay(){
         String playerInput = console.getStringInput(":");
@@ -61,9 +72,28 @@ public class BlackJack implements Game, GamblingGame{
         }
     }
     public void hit(){
+        if(playerHand[2] == null){
+            playerHand[2] = deck.draw();
+        }else if(playerHand[2] != null){
+            playerHand[3] = deck.draw();
+        }else if (playerHand[3] != null){
+            playerHand[4] = deck.draw();
+        }else if (playerHand[4] != null){
+            specialFive();
+        }
+
+    }
+    public Boolean notBusted(Integer handValue){
+        if(handValue > 21){
+            isLoser();
+        }
+            return true;
+
 
     }
     public void stay(){
+        console.println("You chose to stay");
+        viewCurrentHand();
 
     }
     public Boolean isWinner(){
@@ -71,6 +101,28 @@ public class BlackJack implements Game, GamblingGame{
     }
     public Boolean isLoser(){
 return null;
+    }
+    public void checkHand(Card[] hand){
+        int handValue = 0;
+        for (Integer i = 0; i < hand.length; i++){
+            if(hand[i] != null){
+            Card currentCard = hand[i];
+            handValue += currentCard.getCardValue().getValue();
+            }
+        }
+        if(notBusted(handValue));
+
+    }
+    public void initialHand(){
+        dealerHand[0]= deck.draw();
+        dealerHand[1]= deck.draw();
+
+        playerHand[0]= deck.draw();
+        playerHand[1]= deck.draw();
+
+    }
+    public void specialFive(){
+        isWinner();
     }
 
     @Override
