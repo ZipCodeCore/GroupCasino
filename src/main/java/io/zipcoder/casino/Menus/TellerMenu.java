@@ -52,12 +52,11 @@ public class TellerMenu implements Menu {
                 break;
             case 2:
                 cashOut();
-                displayMenu();
                 break;
             case 3:
                 // let's nix this, get it to just fall through back into MM
-                MainMenu mainmenu = new MainMenu(this.player);
-                mainmenu.displayMenu();
+//                MainMenu mainmenu = new MainMenu(this.player);
+//                mainmenu.displayMenu();
                 break;
         }
     }
@@ -86,11 +85,12 @@ public class TellerMenu implements Menu {
     public Double cashOut () {
         Double withdrawal = gameServices.withdraw(this.player);
         if (withdrawal != null) {
+            this.player.setWinnings(withdrawal - this.player.getInitialBalance());
             return withdrawal;
         } else {
             return 0.0;
         }
-        // cash out behaviors?
+
     }
 
 }
