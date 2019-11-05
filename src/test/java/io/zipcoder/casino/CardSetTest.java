@@ -79,9 +79,9 @@ public class CardSetTest {
 
     @Test
     public void removeFirstCard() {
-        Assert.assertTrue(new Card("2","S").strictEquals(oneDeck.removeFirstCard()));
+        Assert.assertTrue(new Card("A","H").strictEquals(oneDeck.removeFirstCard()));
         Assert.assertEquals(51,oneDeck.size());
-        Assert.assertTrue(new Card("2","C").strictEquals(oneDeck.removeFirstCard()));
+        Assert.assertTrue(new Card("A","D").strictEquals(oneDeck.removeFirstCard()));
         Assert.assertEquals(50,oneDeck.size());
     }
 
@@ -132,11 +132,11 @@ public class CardSetTest {
         empty.addCard(new Card("5","C"));
         empty.addCard(new Card("2","D"));
         Assert.assertEquals(5,empty.size());
-        Assert.assertTrue(new Card("A","D").strictEquals(empty.removeFirstCard()));
-        Assert.assertTrue(new Card("4","H").strictEquals(empty.removeFirstCard()));
-        Assert.assertTrue(empty.removeRank("7").size() == 1);
-        Assert.assertTrue(new Card("5","C").strictEquals(empty.removeFirstCard()));
         Assert.assertTrue(new Card("2","D").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(new Card("5","C").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(empty.removeRank("7").size() == 1);
+        Assert.assertTrue(new Card("4","H").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(new Card("A","D").strictEquals(empty.removeFirstCard()));
         Assert.assertTrue(null == empty.removeFirstCard());
     }
 
@@ -149,11 +149,11 @@ public class CardSetTest {
         empty.addCard(new Card("2","D"));
 
         empty.sort();
-        Assert.assertTrue(new Card("2","D").strictEquals(empty.removeFirstCard()));
-        Assert.assertTrue(new Card("4","H").strictEquals(empty.removeFirstCard()));
-        Assert.assertTrue(new Card("5","C").strictEquals(empty.removeFirstCard()));
-        Assert.assertTrue(new Card("7","S").strictEquals(empty.removeFirstCard()));
         Assert.assertTrue(new Card("A","D").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(new Card("7","S").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(new Card("5","C").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(new Card("4","H").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(new Card("2","D").strictEquals(empty.removeFirstCard()));
     }
 
     @Test

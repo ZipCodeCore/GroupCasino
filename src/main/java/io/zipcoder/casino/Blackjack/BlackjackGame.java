@@ -186,13 +186,6 @@ public class BlackjackGame extends CardGame implements Game {
                 this.displayTable(false);
             }
         }
-//        for (BlackjackHand hand : this.player.getHands()) {
-//            int value = -1;
-//            while (value < 0) {
-//                value = hand.playChoice(this.shoe);
-//                this.displayTable(false);
-//            }
-//        }
         for (BlackjackHand hand : this.dealer.getHands()) {
             int value = -1;
             while (value < 0) {
