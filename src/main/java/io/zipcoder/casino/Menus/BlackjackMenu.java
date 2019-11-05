@@ -4,11 +4,16 @@ import io.zipcoder.casino.Blackjack.BlackjackGame;
 import io.zipcoder.casino.Interfaces.Menu;
 import io.zipcoder.casino.Utilities.Console;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class BlackjackMenu implements Menu {
 
     private Console console;
     private String name = "Blackjack Menu";
     private BlackjackGame blackjackGame;
+
 
     public BlackjackMenu(BlackjackGame blackjackGame) {
         this.console = new Console (System.in, System.out);
@@ -22,15 +27,28 @@ public class BlackjackMenu implements Menu {
 
     @Override
     public void displayMenu() {
+
+
         console.clearScreen();
         // temporary
+        console.println(" .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
+                "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" +
+                "| |   ______     | || |   _____      | || |      __      | || |     ______   | || |  ___  ____   | || |     _____    | || |      __      | || |     ______   | || |  ___  ____   | |\n" +
+                "| |  |_   _ \\    | || |  |_   _|     | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | || |    |_   _|   | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | |\n" +
+                "| |    | |_) |   | || |    | |       | || |    / /\\ \\    | || |  / .'   \\_|  | || |   | |_/ /    | || |      | |     | || |    / /\\ \\    | || |  / .'   \\_|  | || |   | |_/ /    | |\n" +
+                "| |    |  __'.   | || |    | |   _   | || |   / ____ \\   | || |  | |         | || |   |  __'.    | || |   _  | |     | || |   / ____ \\   | || |  | |         | || |   |  __'.    | |\n" +
+                "| |   _| |__) |  | || |   _| |__/ |  | || | _/ /    \\ \\_ | || |  \\ `.___.'\\  | || |  _| |  \\ \\_  | || |  | |_' |     | || | _/ /    \\ \\_ | || |  \\ `.___.'\\  | || |  _| |  \\ \\_  | |\n" +
+                "| |  |_______/   | || |  |________|  | || ||____|  |____|| || |   `._____.'  | || | |____||____| | || |  `.___.'     | || ||____|  |____|| || |   `._____.'  | || | |____||____| | |\n" +
+                "| |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |\n" +
+                "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" +
+                " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n");
         console.println("Choose table stakes:");
         console.println("1. $5 min / $25 max");
         console.println("2. $20 min / $100 max");
         console.println("3. $50 min / $250 max");
         console.println("4. Set custom stakes ($5 - $500)");
-        console.println("");
-        handleChoice(console.menuChoice(4));
+        console.println("5. Stand up and go back to game list");
+        handleChoice(console.menuChoice(5));
     }
 
     @Override

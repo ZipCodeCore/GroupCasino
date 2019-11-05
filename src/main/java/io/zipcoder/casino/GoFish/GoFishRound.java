@@ -4,40 +4,76 @@ import java.util.Scanner;
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Utilities.Console;
+import sun.lwawt.macosx.CInputMethod;
 
+import javax.swing.*;
 import java.util.ArrayList;
-
 public class GoFishRound {
 
     private Console console = new Console(System.in, System.out);
     private ArrayList<Card> newSuites;
     private GoFishPlayer player;
-    private GoFishPlayer opponent;
-
-    private CardSet cards;
+    private NPCGoFishRound opponent;
+    private CardSet playersCards;
+    private CardSet opponentsCards;
 
     public GoFishRound(GoFishPlayer player, Card card1, Card card2, Card card3, Card card4, Card card5, Card card6, Card card7) {
         this.player = player;
+        this.console = new Console(System.in, System.out);
+        this.playersCards = new CardSet(0);
+        this.playersCards.addCard(card1);
+        this.playersCards.addCard(card2);
+        this.playersCards.addCard(card3);
+        this.playersCards.addCard(card4);
+        this.playersCards.addCard(card5);
+        this.playersCards.addCard(card6);
+        this.playersCards.addCard(card7);
+
+    }
+
+    public GoFishRound(NPCGoFishRound opponent, Card card8, Card card9, Card card10, Card card11, Card card12, Card card13, Card card14) {
         this.opponent = opponent;
         this.console = new Console(System.in, System.out);
+        this.opponentsCards = new CardSet(0);
+        this.opponentsCards.addCard(card8);
+        this.opponentsCards.addCard(card9);
+        this.opponentsCards.addCard(card10);
+        this.opponentsCards.addCard(card11);
+        this.opponentsCards.addCard(card12);
+        this.opponentsCards.addCard(card13);
+        this.opponentsCards.addCard(card14);
     }
+
+
 
 
     public String prompt(GoFishPlayer player) {
         String cardChoice = console.getCardRankInput("");
+       /* //removeCard(cardChoice);
+        //if(removeCard()){
+            scanForSuites();
+            prompt(player);
+        }else{
+        }
+        //if(cardChoice ==*/
         return null;
 
     }
 
+    public void searchHand(){
+        for (int i = 0; i < opponentsCards.size(); i++) {
 
+
+        }
+    }
 
 
     //Fish for card from opponent
     public boolean requestCard(CardSet cardToHand, CardSet cardFromHand, String cardChoice) {
         return false;
     }
-    public CardSet getCards(){
-        return cards;
+    public CardSet getPlayersCards(){
+        return playersCards;
     }
 
     public GoFishPlayer getPlayer(){

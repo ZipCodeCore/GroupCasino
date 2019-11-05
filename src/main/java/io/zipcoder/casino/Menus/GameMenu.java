@@ -2,10 +2,14 @@ package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.GameObject;
 import io.zipcoder.casino.Interfaces.Menu;
+import io.zipcoder.casino.Utilities.Music;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameRepo;
 import io.zipcoder.casino.Utilities.Console;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class GameMenu implements Menu {
@@ -15,6 +19,8 @@ public class GameMenu implements Menu {
     private GameRepo gameRepo;
     private Console console;
     private String name = "Game Menu";
+
+    Music mainMusic = null;
 
     public GameMenu(Player player) {
         this.gameRepo = new GameRepo(player);
@@ -36,7 +42,15 @@ public class GameMenu implements Menu {
     }
 
     @Override
-    public void displayMenu() {
+    public void displayMenu() throws InterruptedException {
+        try {
+            Music.filePath = "src/music/(Menu) All of Me Instrumental.wav";
+            mainMusic = new Music();
+            mainMusic.play();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
         console.clearScreen();
         // temporary
         for (int gameNum : gameMap.keySet()) {
@@ -48,7 +62,16 @@ public class GameMenu implements Menu {
     }
 
     @Override
-    public void handleChoice(int choice) {
+    public void handleChoice(int choice) throws InterruptedException {
+        try {
+            mainMusic.stop();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
         gameMap.get(choice).startPlay();
     }
 

@@ -7,6 +7,7 @@ import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.GoFishMenu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.Utilities.Music;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class GoFishGame extends CardGame implements Game {
     ArrayList <Card> playerSuites;
     ArrayList <Card> npcSuites;
     private int numDecks;
+    Music goFishMusic = null;
 
 
 
@@ -54,7 +56,7 @@ public class GoFishGame extends CardGame implements Game {
         this.hands.add(playerHand);
         this.player.addHand(playerHand);
 
-        GoFishRound opponentHand = new GoFishRound(this.opponent,this.shoe.removeFirstCard(), this.shoe.removeFirstCard(), this.shoe.removeFirstCard(), this.shoe.removeFirstCard(), this.shoe.removeFirstCard(), this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
+        NPCGoFishRound opponentHand = new NPCGoFishRound(this.opponent,this.shoe.removeFirstCard(), this.shoe.removeFirstCard(), this.shoe.removeFirstCard(), this.shoe.removeFirstCard(), this.shoe.removeFirstCard(), this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
         this.hands.add(opponentHand);
         this.opponent.addHand(opponentHand);
 

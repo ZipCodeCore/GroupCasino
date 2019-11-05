@@ -8,7 +8,12 @@ import io.zipcoder.casino.Menus.BlackjackMenu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.Utilities.Music;
 
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,6 +40,7 @@ public class BlackjackGame extends CardGame implements Game {
     private ArrayList<BlackjackHand> hands;
     private CardSet shoe;
     private int numDecks;
+    Music blackJackMusic = null;
 
 
     public BlackjackGame(double minBet, double maxBet, Player incomingPlayer) {
@@ -94,8 +100,29 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public void startPlay() {
+        //Starts playing music!
+        try {
+            Music.filePath = "src/music/(BlackJack) Glide with me.wav";
+            blackJackMusic = new Music();
+            blackJackMusic.play();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+
         new BlackjackMenu(this).displayMenu();
         roundStart();
+
+        //stops the music!
+        try {
+            blackJackMusic.stop();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
 
     public void roundStart() {
@@ -118,14 +145,18 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public Double betChoice () {
-        double wager;
-        console.println("Current bankroll: %.2f", this.player.getPlayer().getBalance());
-        wager = console.getCurrency("Bet size (press Enter to stand up): ", this.minBet, this.maxBet);
-        if (gameServices.wager(wager, this.player.getPlayer())) {
-            return wager;
+        Double wager;
+        console.println("[DEALER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance());
+        wager = console.getCurrency("[DEALER]: Bet size (press Enter to stand up): ", this.minBet, this.maxBet);
+        if (wager != null) {
+            if (gameServices.wager(wager, this.player.getPlayer())) {
+                return wager;
+            } else {
+                console.println(String.format("\n[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
+                return betChoice();
+            }
         } else {
-            console.println("Your mouth is writing checks that your wallet can't cash.");
-            return betChoice();
+            return null;
         }
     }
 
@@ -189,24 +220,33 @@ public class BlackjackGame extends CardGame implements Game {
         //temporary
         console.clearScreen();
 
-        console.println(String.format("*** Blackjack ***\nPlayer balance: $%.2f\nTable stakes: $%.2f min / $%.2f max\n", this.player.getPlayer().getBalance(),this.minBet, this.maxBet));
-        console.println("Dealer");
+        console.println(String.format(" .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
+                "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" +
+                "| |   ______     | || |   _____      | || |      __      | || |     ______   | || |  ___  ____   | || |     _____    | || |      __      | || |     ______   | || |  ___  ____   | |\n" +
+                "| |  |_   _ \\    | || |  |_   _|     | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | || |    |_   _|   | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | |\n" +
+                "| |    | |_) |   | || |    | |       | || |    / /\\ \\    | || |  / .'   \\_|  | || |   | |_/ /    | || |      | |     | || |    / /\\ \\    | || |  / .'   \\_|  | || |   | |_/ /    | |\n" +
+                "| |    |  __'.   | || |    | |   _   | || |   / ____ \\   | || |  | |         | || |   |  __'.    | || |   _  | |     | || |   / ____ \\   | || |  | |         | || |   |  __'.    | |\n" +
+                "| |   _| |__) |  | || |   _| |__/ |  | || | _/ /    \\ \\_ | || |  \\ `.___.'\\  | || |  _| |  \\ \\_  | || |  | |_' |     | || | _/ /    \\ \\_ | || |  \\ `.___.'\\  | || |  _| |  \\ \\_  | |\n" +
+                "| |  |_______/   | || |  |________|  | || ||____|  |____|| || |   `._____.'  | || | |____||____| | || |  `.___.'     | || ||____|  |____|| || |   `._____.'  | || | |____||____| | |\n" +
+                "| |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |\n" +
+                "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" +
+                " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n" + "\n" + "\n" + "\n" +
+
+                "\nTable stakes: $%.2f min / $%.2f max\n", this.minBet, this.maxBet));
+        console.println("[Dealer's Hand]:");
         BlackjackHand dealerHand = this.dealer.getHands().get(0);
-        for (Card card : dealerHand.getCards().getCards()) {
-            console.print(card.toString() + " ");
-        }
-        console.println("");
-        console.println(this.player.getPlayer().getFirstName());
+
+        console.print(dealerHand.getCards().toASCII());
+        console.println("\n");
+        console.println(String.format("[%s's Hand(s)]:",this.player.getPlayer().getFirstName()));
         ArrayList<BlackjackHand> playerHands =  this.player.getHands();
         for (BlackjackHand hand : playerHands) {
-            for (Card card : hand.getCards().getCards()) {
-                console.print(card.toString() + " ");
-            }
+            console.print(hand.getCards().toASCII());
             console.print("  $%.2f", hand.getBet());
             if (showWinnings) {
                 console.print(winningMessage(hand));
             }
-            console.println("");
+            console.println("\n");
         }
 
     }

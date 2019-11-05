@@ -35,6 +35,19 @@ public class GameServicesTest {
     }
 
     @Test
+    public void withdrawTest() {
+        Assert.assertEquals(200.00, gameServices.withdraw(player), .01);
+        Assert.assertEquals(0.00, player.getBalance(), .01);
+    }
+
+    @Test
+    public void withdrawTest2() {
+        player.setBalance(0.0);
+        Assert.assertEquals(0.00, gameServices.withdraw(player), .01);
+        Assert.assertEquals(0.00, player.getBalance(), .01);
+    }
+
+    @Test
     public void payOut() {
         gameServices.payOut(100.00, player);
         Assert.assertEquals(300.00, player.getBalance(), .01);
