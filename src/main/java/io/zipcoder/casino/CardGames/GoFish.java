@@ -34,6 +34,7 @@ public class GoFish implements Game {
 
             System.out.println("Player's Turn");
             playerTurn();
+            winGame = playerHand.evaluateHand();
 
 
             //System.out.println("Computer's Turn");
@@ -41,7 +42,7 @@ public class GoFish implements Game {
 
 
 
-        }while(winGame != true);
+        }while(winGame == false);
 
     }
 
@@ -79,9 +80,6 @@ public class GoFish implements Game {
         }
 
         System.out.println(playerHand.displayHand());
-
-       //System.out.println(playerHand.evaluateHand());
-
 
     }
 

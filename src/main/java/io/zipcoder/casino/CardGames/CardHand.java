@@ -55,22 +55,24 @@ public class CardHand {
         userHand.add(cardToAdd);
     }
 
-    /*public boolean evaluateHand(){
+    public boolean evaluateHand(){
         int counter = 0;
 
         for(Card checkCard : userHand){
+            counter = 0;
             for (Card card : userHand){
-                if(checkCard == card){
+                if(checkCard.getRank() == card.getRank()){
                     counter++;
                 }
-
             }
 
-            if(counter == 4){
+            if(counter == 2){
                 return true;
             }
+
+
         }
-*/
+
         return false;
     }
 
