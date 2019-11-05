@@ -79,7 +79,7 @@ public class MainMenu implements Menu {
             e.printStackTrace();
         }
         choiceMap.get(choice).displayMenu();
-
+        displayMenu();
     }
 }
 

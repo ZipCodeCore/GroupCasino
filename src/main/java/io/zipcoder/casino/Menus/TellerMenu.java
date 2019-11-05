@@ -7,7 +7,6 @@ import io.zipcoder.casino.Utilities.Console;
 
 import java.util.concurrent.TimeUnit;
 
-import static io.zipcoder.casino.Utilities.Console.printWithDelays;
 
 public class TellerMenu implements Menu {
 
@@ -52,6 +51,7 @@ public class TellerMenu implements Menu {
                 break;
             case 2:
                 cashOut();
+                Casino.displayEnding(this.player);
                 break;
             case 3:
                 // let's nix this, get it to just fall through back into MM
@@ -64,19 +64,19 @@ public class TellerMenu implements Menu {
     public void depositFunds() throws InterruptedException {
         double funds = console.getCurrency("[TELLER]: How much are you depositing?\n");
         if (funds == 0.0) {
-            printWithDelays("[TELLER]: Quit wastin' my time, buddy\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("[TELLER]: Quit wastin' my time, buddy\n", TimeUnit.MILLISECONDS, 50);
         } else if (funds > 10000.0) {
-            printWithDelays("[TELLER]: Whoa, jeez, OK: you just knock over a bank or something?\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("[TELLER]: Whoa, jeez, OK: you just knock over a bank or something?\n", TimeUnit.MILLISECONDS, 50);
             gameServices.deposit(funds, this.player);
-            printWithDelays("[TELLER]: Good luck, fancy pants!\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("[TELLER]: Good luck, fancy pants!\n", TimeUnit.MILLISECONDS, 50);
         } else if (funds <= 20.0){
-            printWithDelays("[TELLER]: Wow, are you sure that it's safe walkin' around with all that?\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("[TELLER]: Wow, are you sure that it's safe walkin' around with all that?\n", TimeUnit.MILLISECONDS, 50);
             gameServices.deposit(funds, this.player);
-            printWithDelays("[TELLER]: Don't spend it all in once place\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("[TELLER]: Don't spend it all in once place\n", TimeUnit.MILLISECONDS, 50);
         } else {
             console.println(String.format("Depositing $%.2f",funds));
             gameServices.deposit(funds, this.player);
-            printWithDelays("[TELLER]: Good luck at the tables\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("[TELLER]: Good luck at the tables\n", TimeUnit.MILLISECONDS, 50);
         }
 
         console.getInput("\nPress Enter to continue\n");

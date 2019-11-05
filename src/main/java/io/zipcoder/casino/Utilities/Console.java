@@ -279,7 +279,7 @@ public final class Console {
     }
 
     //Makes a type writer effect on screen
-    public static void printWithDelays(String data, TimeUnit unit, long delay)
+    public void printWithDelays(String data, TimeUnit unit, long delay)
             throws InterruptedException {
         for (char ch : data.toCharArray()) {
             System.out.print(ch);
