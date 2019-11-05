@@ -44,26 +44,26 @@ public class CrapsGame extends DiceGame implements Game {
     public void roundOfPlay() {
         setThePointRoll = DiceGame.roll(2);
         if (winOnFirst(setThePointRoll) == true) {
-            System.out.println(String.format("You rolled a %f. Congratulations! You are already a winner!!!", currentRoll));
+            System.out.println(String.format("You rolled a %d Congratulations! You are already a winner!!!", currentRoll));
             calculatePayout();
         }
         else if (loseOnFirst(setThePointRoll) == true) {
-                System.out.println(String.format("You rolled a %f and lost on the first roll. This is unfortunate.....", currentRoll));
+                System.out.println(String.format("You rolled a %d and lost on the first roll. This is unfortunate.....", currentRoll));
             }
         else {
             for (int i = 0; i < 3; i++) {
                 currentRoll = DiceGame.roll(2);
                 if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
-                    System.out.println(String.format("Hooray! You rolled a %f. You won!!", currentRoll)); //if time, map a custom answer depending on whether you won on the first, second, or third roll
+                    System.out.println(String.format("Hooray! You rolled a %f You won!!", currentRoll)); //if time, map a custom answer depending on whether you won on the first, second, or third roll
                     calculatePayout();
                     break;
                 }
                 else if (loseOnSubsequent(currentRoll) == true){
-                    System.out.println(String.format("You rolled a %f. It appears that the odds were not in your favor today. Better luck next time.....", currentRoll));
+                    System.out.println(String.format("You rolled a %d It appears that the odds were not in your favor today. Better luck next time.....", currentRoll));
                     break;
                 }
                 else{
-                    System.out.println(String.format("You rolled a %f.", currentRoll));
+                    System.out.println(String.format("You rolled a %d", currentRoll));
                 }
             }
         }
