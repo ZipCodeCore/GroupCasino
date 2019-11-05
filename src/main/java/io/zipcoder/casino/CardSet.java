@@ -113,4 +113,19 @@ public class CardSet {
         output += "\n";
         return output;
     }
+
+    public String toASCIISuite() {
+        int numCards = this.size();
+        String[] emptyArray = new String[numCards+1];
+        Arrays.setAll(emptyArray,(index) -> "");
+
+        String output = toASCII();
+        output += " ";
+        output += String.join("\u2514-------\u2518 ", emptyArray);
+        output += "\n";
+        output += "  ";
+        output += String.join("\u2514-------\u2518 ", emptyArray);
+        output += "\n";
+        return output;
+    }
 }
