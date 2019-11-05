@@ -29,7 +29,7 @@ public class BlackjackMenu implements Menu {
         console.println("2. $20 min / $100 max");
         console.println("3. $50 min / $250 max");
         console.println("4. Set custom stakes ($5 - $500)");
-
+        console.println("");
         handleChoice(console.menuChoice(4));
     }
 

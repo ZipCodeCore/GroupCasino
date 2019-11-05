@@ -2,6 +2,7 @@ package io.zipcoder.casino.Blackjack;
 
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardSet;
+import io.zipcoder.casino.Utilities.Console;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ public class BlackjackHand {
     private double bet;
     private int value;
     private BlackjackPlayer player;
+    private Console console = new Console(System.in, System.out);
 
     public BlackjackHand(double bet, BlackjackPlayer player, Card card1, Card card2) {
         this.bet = bet;
@@ -30,38 +32,75 @@ public class BlackjackHand {
         return bet;
     }
 
-    public int getValue() {
-        return value;
-    }
-
     public BlackjackPlayer getPlayer() {
         return player;
-    }
-
-    public void setCards(CardSet cards) {
-        this.cards = cards;
     }
 
     public void setBet(double bet) {
         this.bet = bet;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setCards(CardSet cards) { //just for testing
+        this.cards = cards;
     }
 
-    public void setPlayer(BlackjackPlayer player) {
-        this.player = player;
+    public void clear() {
+        this.cards.clear();
     }
 
-    public int playChoice(){
-        return 0;
+    public void addCard(Card card) {
+        this.cards.addCard(card);
     }
 
-    public int determineHandValue() {
-        //ArrayList<Integer> values = mapCardValues();
+    public int size() {
+        return this.cards.size();
+    }
 
-        return 0;
+    public int playChoice(CardSet shoe){
+        console.println("1. Hit\n2. Stay\n");
+
+        switch (console.menuChoice(2)) {
+            case 1:
+                int val = hit(shoe.removeFirstCard());
+                if (val != 0) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            case 2:
+                return this.getValue();
+        }
+        return -1;
+    }
+
+    public int hit(Card card) {
+        this.cards.addCard(card);
+        this.value = getValue();
+        return this.value;
+    }
+
+    public void splitHand() {
+        Card card = this.cards.removeFirstCard();
+        this.player.addHand(new BlackjackHand(this.bet, this.player, card, null));
+    }
+
+    public int getValue() {
+        ArrayList<Integer> values = mapCardValues(this.cards);
+        int sumValue = arraySum(values);
+        if (sumValue <= 21) {
+            return sumValue;
+        } else {
+            if (values.contains(11)) {
+                int numAces = values.size() - values.indexOf(11);
+                for (int i = 1; i <= numAces; i++) { // loop through, turning 11's into 1's until it's legal
+                    sumValue -= 10;
+                    if (sumValue <= 21) {
+                        return sumValue;
+                    }
+                }
+            }
+            return 0; //bust
+        }
     }
 
     public ArrayList<Integer> mapCardValues(CardSet cards) {
@@ -79,11 +118,6 @@ public class BlackjackHand {
             sum += number;
         }
         return sum;
-    }
-
-    //
-    public BlackjackHand splitHand() {
-        return null;
     }
 
 

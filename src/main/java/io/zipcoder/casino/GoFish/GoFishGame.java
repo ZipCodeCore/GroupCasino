@@ -6,10 +6,14 @@ import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.GoFishMenu;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Utilities.Console;
 
 import java.util.ArrayList;
 
 public class GoFishGame extends CardGame implements Game {
+
+
+    private Console console = new Console(System.in,System.out);
 
     private String name = "Go Fish";
     private GoFishPlayer player;
@@ -25,6 +29,8 @@ public class GoFishGame extends CardGame implements Game {
     public GoFishGame(Player player) {
         this.player = new GoFishPlayer(player);
         this.opponent = new GoFishNPC(new Player("Baity", "McSwitch", 55,0));
+        this.numDecks = 1;
+        this.hands = new ArrayList<GoFishRound>(0);
     }
 
 
@@ -69,12 +75,20 @@ public class GoFishGame extends CardGame implements Game {
     public void roundOfPlay(){
 
     }
+
+
     //Option to quit game or play another round
     public void endChoice(){
 
     }
 
-    public ArrayList<GoFishRound> initialDeal;
+    public GoFishPlayer getPlayer() {
+        return player;
+    }
+
+    public GoFishNPC getOpponent(){
+        return opponent;
+    }
 
     public Player checkForWin(){
         return null;

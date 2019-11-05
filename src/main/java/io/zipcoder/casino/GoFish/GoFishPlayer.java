@@ -18,9 +18,11 @@ public class GoFishPlayer {
     public ArrayList<GoFishRound>getHands() {
         return hands;
     }
+
     public Player getPlayer() {
         return player;
     }
+
     public void addHand(GoFishRound hand){
         hands.add(hand);
     }

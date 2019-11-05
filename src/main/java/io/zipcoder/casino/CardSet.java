@@ -57,6 +57,10 @@ public class CardSet {
         this.cards.add(cardToAdd);
     }
 
+    public void clear() {
+        this.cards.clear();
+    }
+
     public void sort() {
         Collections.sort(this.cards);
     }
