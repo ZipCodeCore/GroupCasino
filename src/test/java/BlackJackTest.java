@@ -24,8 +24,8 @@ public class BlackJackTest {
     @Test
     public void dealerHitOrStayTest(){}
 
-    @Test
-    public void hitTest(Player deck, Player player) {}
+    //@Test
+    //public void hitTest(Player deck, Player player) {}
 
     @Test
     public void stayTest(){}
@@ -33,11 +33,11 @@ public class BlackJackTest {
     @Test
     public void distributeWinningsTest(){}
 
-    @Test
-    public void checkCardValueTest(Card firstCard, Card secondCard){}
+    //@Test
+    //public void checkCardValueTest(Card firstCard, Card secondCard){}
 
-    @Test
-    public void getWinnerTest(CardHand dealer, CardHand player){}
+    //@Test
+    //public void getWinnerTest(CardHand dealer, CardHand player){}
 
     @Test
     public void promptLeaveGameTest() {}
