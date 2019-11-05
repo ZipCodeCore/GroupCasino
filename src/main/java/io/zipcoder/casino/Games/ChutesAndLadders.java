@@ -12,14 +12,14 @@ import java.util.Random;
 public class ChutesAndLadders implements Game {
     Console console = new Console(System.in, System.out);
     Dice dice = new Dice();
-    ChutesLaddersPiece piece = new ChutesLaddersPiece();
-    ChutesLaddersPiece playerPiece = new ChutesLaddersPiece();
-    ChutesLaddersPiece aiPiece = new ChutesLaddersPiece();
+    private ChutesLaddersPiece playerPiece = new ChutesLaddersPiece();
+    private ChutesLaddersPiece aiPiece = new ChutesLaddersPiece();
     private Player currentPlayer;
     private boolean running = true;
     private boolean currentGame = true;
 
     public void runChutesAndLadders(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
         setUpGame();
         while (running) {
             console.println("Welcome to Chutes and Ladders, %s!", currentPlayer);
@@ -39,45 +39,57 @@ public class ChutesAndLadders implements Game {
     public void setUpGame(){
     }
 
-    public Integer[] createBoard(){
-        Integer[] board = new Integer[101];
-        for(int i = 0; i < board.length; i++){
-            board[i] = i;
-        }
-        return board;
-    }
-
     public String startNewGame(){
-        String winner = "";
+        Integer playerPosition = playerPiece.getCurrentPosition();
+        Integer aiPosition = aiPiece.getCurrentPosition();
         while (currentGame) {
-            Integer playerPosition = playerTurn();
-            playerChutesAndLadders(playerPosition);
-            Integer aiPosition = aiTurn();
-            aiChutesAndLadder(aiPosition);
-
-
-            if(playerPosition >= 100){
-                winner = "Player";
-                break;
-            } else if (aiPosition >= 100){
-                winner = "Ai";
-                break;
+            String playerWinner = playerTurn(playerPosition);
+            if(playerWinner.equals("Player")) {
+                currentGame = false;
+                return playerWinner;
+            }
+            String aiWinner = aiTurn(aiPosition);
+            if (aiWinner.equals("Ai")){
+                currentGame = false;
+                return aiWinner;
             }
         }
-        return winner;
+        return null;
+    }
+
+    public String playerTurn(Integer playerPosition){
+        console.getStringInput("Roll the dye");
+        playerPosition = playerDiceRoll();
+        if(playerPosition >= 100){
+            return "Player";
+        }
+        playerChutesAndLadders(playerPosition);
+        return "no winner yet";
+    }
+
+    public String aiTurn(Integer aiPosition){
+        console.getStringInput("Now it's my turn!");
+        aiPosition = aiDiceRoll();
+        if (aiPosition >= 100){
+            return "Ai";
+        }
+        aiChutesAndLadder(aiPosition);
+        return "no winner yet";
     }
 
 
-    public Integer playerTurn(){
+    public Integer playerDiceRoll(){
         Integer roll = dice.rollDice(1);
-        Integer currentPosition = playerPiece.getCurrentPosition() + roll;
+        playerPiece.setCurrentPosition(playerPiece.getCurrentPosition() + roll);
+        Integer currentPosition = playerPiece.getCurrentPosition();
         console.println("You've rolled a %d. Your current position is now %d.", roll, currentPosition);
         return currentPosition;
     }
 
-    public Integer aiTurn(){
+    public Integer aiDiceRoll(){
         Integer roll = dice.rollDice(1);
-        Integer currentPosition = aiPiece.getCurrentPosition() + roll;
+        aiPiece.setCurrentPosition(aiPiece.getCurrentPosition() + roll);
+        Integer currentPosition = aiPiece.getCurrentPosition();
         console.println("I've rolled a %d. My current position is now %d.", roll, currentPosition);
         return currentPosition;
     }
@@ -152,9 +164,11 @@ public class ChutesAndLadders implements Game {
         Integer newPosition = chutesAndLaddersChecker(position);
         if (position > newPosition) {
             console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
+            playerPiece.setCurrentPosition(newPosition);
             return newPosition;
         } else if (position < newPosition){
             console.println("Hooray! You've hit a ladder! You're now at %d.", newPosition);
+            playerPiece.setCurrentPosition(newPosition);
             return newPosition;
         }
         return position;
@@ -163,7 +177,7 @@ public class ChutesAndLadders implements Game {
     public Integer aiChutesAndLadder(Integer position){
         Integer newPosition = chutesAndLaddersChecker(position);
         if (position > newPosition) {
-            console.println("Uh-oh! I've hit a chute! You're back at %d", newPosition);
+            console.println("Uh-oh! I've hit a chute! I'm back at %d", newPosition);
             return newPosition;
         } else if (position < newPosition){
             console.println("Hooray! I've hit a ladder! I'm now at %d.", newPosition);
