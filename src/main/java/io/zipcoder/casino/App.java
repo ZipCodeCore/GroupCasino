@@ -5,6 +5,7 @@ import io.zipcoder.casino.CardGames.GoFish;
 import io.zipcoder.casino.DiceGames.Craps;
 import io.zipcoder.casino.DiceGames.Yahtzee;
 import io.zipcoder.casino.Player.Player;
+import io.zipcoder.casino.Player.PlayerWarehouse;
 import io.zipcoder.casino.utilities.Console;
 
 public class App {
@@ -12,13 +13,14 @@ public class App {
     private Console menu;
     private String userId = "";
     private String userPassword = "";
-    private Player newPlayer = new Player( userId,userPassword);
+    private Player newPlayer;
+    private PlayerWarehouse warehouse = new PlayerWarehouse();
     private int counter = 0;
 
     public void App (){
 
-        menu = new Console(System.in,System.out);
-        menu.print("Welcome to Casino 5! \n\n");
+        this.menu = new Console(System.in,System.out);
+        this.menu.print("Welcome to Casino 5! \n\n");
 
         mainMenu();  // log in ...
 
@@ -27,7 +29,7 @@ public class App {
 
     private void mainMenu(){
         int userInput;
-        userInput = menu.getIntegerInput("What would you like to do?\n" +
+        userInput = this.menu.getIntegerInput("What would you like to do?\n" +
                 "1.) Log In\n" +
                 "2.) Create Account\n" +
                 "3.) Exit");
@@ -38,17 +40,19 @@ public class App {
 
         switch (userSelection) {
             case 1:
-                userId = menu.getStringInput("Enter your ID:");
-                userPassword = menu.getStringInput("Enter your password:");
+
+                this.menu.println("Logging in ...\n");
 
                 if (authenticatePlayer()) {
-                    selectGame();
+                    selectGameToPlay();
                 } else {
-                    menu.print("We could not find this user. Please try again!\n\n");
+                    this.menu.print("We could not find this user. Please try again!\n\n");
                     counter++;
-                    if ((counter > 2)) {
+                    this.userId = "";
+                    this.userPassword = "";
+                    if ((counter > 1)) {
                         counter = 0;
-                        menu.print("You exceeded the allowed number of tries!\n\n");
+                        this.menu.print("You exceeded the allowed number of tries!\n\n");
                         mainMenu();
                     } else {
                         mainMenuActions(userSelection);
@@ -56,25 +60,31 @@ public class App {
                 }
                 break;
             case 2:
-                createPlayer();
+                this.menu.println("Creating new account ...\n");
+
+                if (authenticatePlayer()){
+                    this.menu.println("This user already exists, please log in.\n");
+                    mainMenu();
+                } else {
+                    createPlayer();
+                    selectGameToPlay();
+                }
                 break;
 
             case 3:
-                menu.print("Have a great day!");
+                this.menu.print("Have a great day!");
                 System.exit(0);
                 break;
 
             default:
-                menu.print("Error! Please enter another option!");
+                this.menu.print("Error! Please enter another option!");
                 mainMenu();
 
         } // main menu actions
 
     }  // menuActions
 
-
-
-    private void selectGame() {
+    private void selectGameToPlay() {
         int userInput;
         userInput = menu.getIntegerInput("Please select game to play\n" +
                 "1.) Go Fish\n" +
@@ -83,22 +93,22 @@ public class App {
                 "4.) Craps\n" +
                 "5.) Go to Main Menu");
 
-        selectGameActions(userInput);
+        selectGameToPlayActions(userInput);
     }  // select game
 
-    private void selectGameActions(Integer gameSelected){
+    private void selectGameToPlayActions(Integer gameSelected){
         switch (gameSelected){
 
             case 1:
-                GoFish newGoFish = new GoFish();
+                GoFish newGoFish = new GoFish(this.newPlayer);
                 newGoFish.startGame();
                 break;
             case 2:
-                Yahtzee newYahtzee = new Yahtzee(newPlayer);
+                Yahtzee newYahtzee = new Yahtzee(this.newPlayer);
                 newYahtzee.startGame();
                 break;
             case 3:
-                BlackJack newBlackJack = new BlackJack();
+                BlackJack newBlackJack = new BlackJack(this.newPlayer);
                 newBlackJack.startGame();
                 break;
             case 4:
@@ -112,15 +122,23 @@ public class App {
                 break;
         }
 
-        selectGame();
+        selectGameToPlay();
+
+
     }  // game actions
 
+
     private Boolean authenticatePlayer(){
-        return false;
+        this.userId = this.menu.getStringInput("Enter your ID:");
+        this.userPassword = this.menu.getStringInput("Enter your password:");
+
+        this.newPlayer = warehouse.getPlayer(this.userId+this.userPassword);
+        return this.newPlayer != null;
     }
 
     private void createPlayer(){
-
+        warehouse.addPlayer(this.userId,this.userPassword);
+        this.newPlayer = warehouse.getPlayer(this.userId+this.userPassword);
     }
 
 } // class

@@ -15,7 +15,7 @@ public class Player {
         this.ID = ID;
         this.pwd = password;
         this.balance = 0.0;
-        this.cardHand = new CardHand();
+        //this.cardHand = new CardHand();
     }
 
 
