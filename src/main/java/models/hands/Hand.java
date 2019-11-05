@@ -4,7 +4,7 @@ import models.gamecomponents.GameComponent;
 
 import java.util.ArrayList;
 
-public class Hand {
+public abstract class Hand {
     ArrayList<GameComponent> hand;
 
 
