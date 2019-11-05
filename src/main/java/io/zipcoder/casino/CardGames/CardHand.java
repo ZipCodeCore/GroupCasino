@@ -14,7 +14,7 @@ public class CardHand {
     }
 
     public String displayHand(){
-        //ollections.sort(userHand); TODO - do this later
+        //Collections.sort(userHand); TODO - do this later
        return userHand.toString();
     }
 
