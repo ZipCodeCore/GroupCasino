@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
+import io.zipcoder.casino.TestGames.SnakesAndLaddersTester;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -168,6 +169,51 @@ public class SnakesAndLaddersTest {
         aiPiece.setCurrentPosition(aiPiece.getCurrentPosition() + roll);
 
         Integer actual = aiPiece.getCurrentPosition();
+        Assert.assertEquals(expected,actual);
+    }
+
+    /*@Test
+    public void aiTurnTest1(){
+        SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
+        SnakesAndLaddersTester snakesAndLadders = new SnakesAndLaddersTester();
+        aiPiece.setCurrentPosition(99);
+        Integer aiPosition = 100;
+        String expected = "Ai";
+        String actual = snakesAndLadders.aiTurn(aiPosition);
+        Assert.assertEquals(expected,actual);
+    }*/
+
+    @Test
+    public void aiTurnTest2(){
+        SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
+        SnakesAndLaddersTester snakesAndLadders = new SnakesAndLaddersTester();
+        aiPiece.setCurrentPosition(99);
+        Integer aiPosition = 45;
+        String expected = "no winner yet";
+        String actual = snakesAndLadders.aiTurn(aiPosition);
+        Assert.assertEquals(expected,actual);
+    }
+
+    /*@Test
+    public void playerTurnTest1(){
+        SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
+        SnakesAndLaddersTester snakesAndLadders = new SnakesAndLaddersTester();
+        playerPiece.setCurrentPosition(99);
+        Integer aiPosition = 100;
+        String expected = "Ai";
+        String actual = snakesAndLadders.playerTurn(aiPosition);
+        Assert.assertEquals(expected,actual);
+    }*/
+
+    @Test
+    public void playerTurnTest2(){
+        SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
+        SnakesAndLaddersTester snakesAndLadders = new SnakesAndLaddersTester();
+        playerPiece.setCurrentPosition(99);
+        Integer aiPosition = 22;
+        String expected = "no winner yet";
+        String actual = snakesAndLadders.playerTurn(aiPosition);
+        playerPiece.setCurrentPosition(100);
         Assert.assertEquals(expected,actual);
     }
 
