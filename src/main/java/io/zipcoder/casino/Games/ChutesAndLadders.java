@@ -53,6 +53,7 @@ public class ChutesAndLadders implements Game {
                 currentGame = false;
                 return aiWinner;
             }
+
         }
         return null;
     }
@@ -82,6 +83,7 @@ public class ChutesAndLadders implements Game {
         Integer roll = dice.rollDice(1);
         playerPiece.setCurrentPosition(playerPiece.getCurrentPosition() + roll);
         Integer currentPosition = playerPiece.getCurrentPosition();
+        diceArt(roll);
         console.println("You've rolled a %d. Your current position is now %d.", roll, currentPosition);
         return currentPosition;
     }
@@ -90,6 +92,7 @@ public class ChutesAndLadders implements Game {
         Integer roll = dice.rollDice(1);
         aiPiece.setCurrentPosition(aiPiece.getCurrentPosition() + roll);
         Integer currentPosition = aiPiece.getCurrentPosition();
+        diceArt(roll);
         console.println("I've rolled a %d. My current position is now %d.", roll, currentPosition);
         return currentPosition;
     }
@@ -201,6 +204,55 @@ public class ChutesAndLadders implements Game {
                 break;
             case 2:
                 running = false;
+                break;
+        }
+    }
+
+
+
+    public void diceArt(Integer roll){
+        switch(roll){
+            case 1:
+                console.println("+-----+\n" +
+                        "|     |\n" +
+                        "|  o  |\n" +
+                        "|     |\n" +
+                        "+-----+");
+                break;
+            case 2:
+                console.println("+-----+\n" +
+                        "| o   |\n" +
+                        "|     |\n" +
+                        "|   o |\n" +
+                        "+-----+");
+                break;
+            case 3:
+                console.println("+-----+\n" +
+                        "| o   |\n" +
+                        "|  o  |\n" +
+                        "|   o |\n" +
+                        "+-----+");
+                break;
+            case 4:
+                console.println("+-----+\n" +
+                        "| o o |\n" +
+                        "|     |\n" +
+                        "| o o |\n" +
+                        "+-----+");
+                break;
+            case 5:
+                console.println("+-----+\n" +
+                        "| o o |\n" +
+                        "|  o  |\n" +
+                        "| o o |\n" +
+                        "+-----+");
+                break;
+            case 6:
+                console.println("+-----+\n" +
+                        "| o o |\n" +
+                        "| o o |\n" +
+                        "| o o |\n" +
+                        "+-----+");
                 break;
         }
     }
