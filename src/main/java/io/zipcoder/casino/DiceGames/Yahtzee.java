@@ -4,8 +4,6 @@ import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
-import java.util.Arrays;
-
 public class Yahtzee implements Game {
     private Player user;
     private static Console console = new Console(System.in, System.out);
@@ -14,7 +12,7 @@ public class Yahtzee implements Game {
 
     private Dice[] myDice;
     int points;
-    private String[] availableOptions = {"","1s", "2s", "3s", "4s", "5s","6s","3 of a kind","4 of a kind",
+    private String[] availableOptions = {" ","1s", "2s", "3s", "4s", "5s","6s","3 of a kind","4 of a kind",
                                               "Small Straight", "Large Straight", "Full House", "Yahtzee", "Chance"};
 
 
@@ -38,7 +36,6 @@ public class Yahtzee implements Game {
 
     public void promptLeaveGame(){
         console.getStringInput("Would you like to play again?\n1. Play again\n2. Exit");
-
     }
     public void displayResults(){
          console.println("Your final score is: " + this.points);
