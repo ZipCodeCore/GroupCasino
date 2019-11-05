@@ -14,7 +14,7 @@ public class Yahtzee implements Game {
 
     private Dice[] myDice;
     int points;
-    private String[] availableOptionsNames = {"","1s", "2s", "3s", "4s", "5s","6s","3 of a kind","4 of a kind",
+    private String[] availableOptions = {"","1s", "2s", "3s", "4s", "5s","6s","3 of a kind","4 of a kind",
                                               "Small Straight", "Large Straight", "Full House", "Yahtzee", "Chance"};
 
 
@@ -29,8 +29,8 @@ public class Yahtzee implements Game {
     public void startGame(){
 
         for(int i = 0; i < 13; i++) {
-            //rollDice
-            //chooseEvaluation
+            threeDiceRolls();
+            checkForEvaluation();
         }
         displayResults();
         promptLeaveGame();
@@ -54,14 +54,8 @@ public class Yahtzee implements Game {
     }
 
 
-/*
-// Following methods for rolling dice and choosing which ones to keep---------------------------------------------------
 
-    public void resetDice(){
-        for(int i = 0; i < myDice.length; i++){
-            myDice[i].setKept(false);
-        }
-    }
+// Following methods for rolling dice and choosing which ones to keep---------------------------------------------------
 
     public void threeDiceRolls(){
         resetDice();
@@ -70,6 +64,12 @@ public class Yahtzee implements Game {
         roll5Dice();
         chooseToKeep();
         roll5Dice();
+    }
+
+    public void resetDice(){
+        for(int i = 0; i < myDice.length; i++){
+            myDice[i].setKept(false);
+        }
     }
 
     public void roll5Dice(){
@@ -102,18 +102,18 @@ public class Yahtzee implements Game {
 
 // Following methods are for evaluating the dice at the end of three rolls----------------------------------------------
 
-    public int checkForEvaluation(Dice[] dice){
+    public int checkForEvaluation(){
         int choice = 0;
         boolean evaluated = false;
         Integer[] diceValues = getDiceValues();
 
-        for(int i = 1; i < availableOptionsNames.length; i++){
-            console.println((i) + ".  " + availableOptionsNames[i]);
+        for(int i = 1; i < availableOptions.length; i++){
+            console.println((i) + ".  " + availableOptions[i]);
         }
 
         while(!evaluated){
             try{
-                for(Dice s: dice){
+                for(Dice s: this.myDice){
                     console.println(s.toString());
                 }
                 choice = console.getIntegerInput("Which one do you want to choose? ");
@@ -121,11 +121,11 @@ public class Yahtzee implements Game {
                 else if(choice < 1 || choice > 13){
                     console.println("Please pick an option within the bounds.");
                 }
-                else if(this.availableOptionsName[choice].equals(" ")){
+                else if(this.availableOptions[choice].equals(" ")){
                     console.println("Box already picked.  Please choose again.");
                 }
                 else{
-                    availableOptionsNames[choice] = " ";
+                    availableOptions[choice] = " ";
                     evaluated = true;
                 }
             }
@@ -152,7 +152,7 @@ public class Yahtzee implements Game {
         }
         return 0;
     }
-*/
+
 
     public int checkForFaces(Integer[] diceValues, int valueToLookFor){
         int results = 0;
@@ -279,7 +279,7 @@ public class Yahtzee implements Game {
         }
         return 50;
     }
-/*
+
     public Integer[] getDiceValues(){
         Integer[] values = new Integer[5];
         for(int i = 0; i < this.myDice.length; i++){
@@ -288,6 +288,6 @@ public class Yahtzee implements Game {
         return values;
 
     }
-*/
+
 
 }
