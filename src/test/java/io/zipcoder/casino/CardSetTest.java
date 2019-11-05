@@ -8,8 +8,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static org.junit.Assert.*;
-
 public class CardSetTest {
 
     private CardSet empty;
@@ -81,30 +79,34 @@ public class CardSetTest {
 
     @Test
     public void removeFirstCard() {
-        Assert.assertTrue(new Card("2","S").strictEquals(oneDeck.removeFirstCard()));
+        Assert.assertTrue(new Card("A","H").strictEquals(oneDeck.removeFirstCard()));
         Assert.assertEquals(51,oneDeck.size());
-        Assert.assertTrue(new Card("2","C").strictEquals(oneDeck.removeFirstCard()));
+        Assert.assertTrue(new Card("A","D").strictEquals(oneDeck.removeFirstCard()));
         Assert.assertEquals(50,oneDeck.size());
     }
 
     @Test
     public void removeCard() {
-        Assert.assertTrue(oneDeck.removeCard(new Card("K","C")));
-        Assert.assertEquals(51,oneDeck.size());
-        Assert.assertFalse(oneDeck.removeCard(new Card("K","C")));
-        Assert.assertEquals(51,oneDeck.size());
-        Assert.assertFalse(empty.removeCard(new Card("K","C")));
+        ArrayList<Card> foundCards = oneDeck.removeRank("K");
+        for (Card card : foundCards) {
+            Assert.assertTrue(card.getRank() == "K");
+        }
+
+        Assert.assertTrue(4 == foundCards.size());
+        Assert.assertEquals(48,oneDeck.size());
+        Assert.assertTrue(0 == oneDeck.removeRank("K").size());
+        Assert.assertEquals(48,oneDeck.size());
+
     }
 
     @Test
     public void addCard() {
         oneDeck.addCard(new Card("K","C"));
-        Assert.assertTrue(oneDeck.removeCard(new Card("K","C")));
-        Assert.assertEquals(52,oneDeck.size());
-        Assert.assertTrue(oneDeck.removeCard(new Card("K","C")));
-        Assert.assertEquals(51,oneDeck.size());
-        Assert.assertFalse(oneDeck.removeCard(new Card("K","C")));
-        Assert.assertEquals(51,oneDeck.size());
+        Assert.assertTrue(oneDeck.removeRank("K").size() == 5);
+        Assert.assertEquals(48,oneDeck.size());
+        Assert.assertTrue(oneDeck.removeRank("K").size() == 0);
+        Assert.assertEquals(48,oneDeck.size());
+
 
     }
 
@@ -130,11 +132,11 @@ public class CardSetTest {
         empty.addCard(new Card("5","C"));
         empty.addCard(new Card("2","D"));
         Assert.assertEquals(5,empty.size());
-        Assert.assertTrue(new Card("A","D").strictEquals(empty.removeFirstCard()));
-        Assert.assertTrue(new Card("4","H").strictEquals(empty.removeFirstCard()));
-        Assert.assertTrue(empty.removeCard(new Card("7","S")));
-        Assert.assertTrue(new Card("5","C").strictEquals(empty.removeFirstCard()));
         Assert.assertTrue(new Card("2","D").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(new Card("5","C").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(empty.removeRank("7").size() == 1);
+        Assert.assertTrue(new Card("4","H").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(new Card("A","D").strictEquals(empty.removeFirstCard()));
         Assert.assertTrue(null == empty.removeFirstCard());
     }
 
@@ -147,11 +149,11 @@ public class CardSetTest {
         empty.addCard(new Card("2","D"));
 
         empty.sort();
-        Assert.assertTrue(new Card("2","D").strictEquals(empty.removeFirstCard()));
-        Assert.assertTrue(new Card("4","H").strictEquals(empty.removeFirstCard()));
-        Assert.assertTrue(new Card("5","C").strictEquals(empty.removeFirstCard()));
-        Assert.assertTrue(new Card("7","S").strictEquals(empty.removeFirstCard()));
         Assert.assertTrue(new Card("A","D").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(new Card("7","S").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(new Card("5","C").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(new Card("4","H").strictEquals(empty.removeFirstCard()));
+        Assert.assertTrue(new Card("2","D").strictEquals(empty.removeFirstCard()));
     }
 
     @Test
@@ -184,7 +186,7 @@ public class CardSetTest {
     }
 
     @Test
-    public void toASCIItest() {
+    public void toASCIITest() {
         CardSet cards = new CardSet(0);
         cards.addCard(new Card("A","H"));
         cards.addCard(new Card("K","D"));
@@ -197,5 +199,21 @@ public class CardSetTest {
 
         Console console = new Console(System.in, System.out);
         console.println(cards.toASCII());
+    }
+
+    @Test
+    public void toASCIISuiteTest() {
+        CardSet cards = new CardSet(0);
+        cards.addCard(new Card("A","H"));
+        cards.addCard(new Card("K","D"));
+        cards.addCard(new Card("Q","S"));
+        cards.addCard(new Card("J","C"));
+        cards.addCard(new Card("10","H"));
+        cards.addCard(new Card("9","D"));
+        cards.addCard(new Card("8","S"));
+        cards.addCard(new Card("7","C"));
+
+        Console console = new Console(System.in, System.out);
+        console.println(cards.toASCIISuite());
     }
 }

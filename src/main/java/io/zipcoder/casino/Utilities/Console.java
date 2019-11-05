@@ -255,7 +255,7 @@ public final class Console {
     }
 
     public Integer getInteger(int max) {
-        String input = getInput();
+        String input = getInput().substring(0,1);
         while (true) {
             if (integerCheck(input)) {
                 if (Integer.parseInt(input) >= 1 && Integer.parseInt(input) <= max) {
@@ -274,12 +274,12 @@ public final class Console {
     }
 
     public Integer menuChoice(int max) {
-        print("Menu choice: ");
+        print("\nMenu choice: \n");
         return getInteger(max);
     }
 
     //Makes a type writer effect on screen
-    public static void printWithDelays(String data, TimeUnit unit, long delay)
+    public void printWithDelays(String data, TimeUnit unit, long delay)
             throws InterruptedException {
         for (char ch : data.toCharArray()) {
             System.out.print(ch);
