@@ -28,7 +28,6 @@ public class SnakesAndLadders implements Game {
     public void setUpGame(){
         running = true;
         currentGame = true;
-        String winner = "";
         playerPiece.setCurrentPosition(0);
         aiPiece.setCurrentPosition(0);
     }
@@ -92,7 +91,7 @@ public class SnakesAndLadders implements Game {
         return currentPosition;
     }
 
-    public Integer SnakesAndLaddersCheckerViaMap(Integer position){
+    public Integer snakesAndLaddersCheckerViaMap(Integer position){
         Integer newPosition = 0;
         HashMap<Integer, Integer> snakesMap = new HashMap<>();
         HashMap<Integer, Integer> laddersMap = new HashMap<>();
@@ -129,7 +128,7 @@ public class SnakesAndLadders implements Game {
         }
 
     public Integer playerSnakesAndLadders(Integer position) {
-        Integer newPosition = SnakesAndLaddersCheckerViaMap(position);
+        Integer newPosition = snakesAndLaddersCheckerViaMap(position);
         if (position > newPosition) {
             console.println("Uh-oh! You've hit a Snake! You're back at %d", newPosition);
             playerPiece.setCurrentPosition(newPosition);
@@ -143,7 +142,7 @@ public class SnakesAndLadders implements Game {
     }
 
     public Integer aiSnakesAndLadder(Integer position){
-        Integer newPosition = SnakesAndLaddersCheckerViaMap(position);
+        Integer newPosition = snakesAndLaddersCheckerViaMap(position);
         if (position > newPosition) {
             console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
             aiPiece.setCurrentPosition(newPosition);
@@ -177,11 +176,12 @@ public class SnakesAndLadders implements Game {
     @Override
     public void approachTable(Player currentPlayer) {
         console.println("You approach the Snakes and Ladders table. What would you like to do?");
+        while(running) {
         console.println("(1) - Play the game");
         console.println("(2) - Read the rules");
         console.println("(3) - Return to the game menu");
         Integer playerInput = console.getIntegerInput(":");
-        while(running) {
+
             switch (playerInput) {
                 case 1:
                     runGame(currentPlayer);
@@ -189,8 +189,6 @@ public class SnakesAndLadders implements Game {
                     break;
                 case 2:
                     showRules();
-                    approachTable(currentPlayer);
-                    running = false;
                     break;
                 case 3:
                     running = false;
