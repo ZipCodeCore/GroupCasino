@@ -1,6 +1,10 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.CardGames.BlackJack;
 import io.zipcoder.casino.CardGames.GoFish;
+import io.zipcoder.casino.DiceGames.Craps;
+import io.zipcoder.casino.DiceGames.Yahtzee;
+import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 public class App {
@@ -8,6 +12,8 @@ public class App {
     private Console menu;
     private String userId = "";
     private String userPassword = "";
+    private Player newPlayer = new Player( userId,userPassword);
+    private int counter = 0;
 
     public void App (){
 
@@ -35,8 +41,19 @@ public class App {
                 userId = menu.getStringInput("Enter your ID:");
                 userPassword = menu.getStringInput("Enter your password:");
 
-                authenticatePlayer();
-                selectGame();
+                if (authenticatePlayer()) {
+                    selectGame();
+                } else {
+                    menu.print("We could not find this user. Please try again!\n\n");
+                    counter++;
+                    if ((counter > 2)) {
+                        counter = 0;
+                        menu.print("You exceeded the allowed number of tries!\n\n");
+                        mainMenu();
+                    } else {
+                        mainMenuActions(userSelection);
+                    }
+                }
                 break;
             case 2:
                 createPlayer();
@@ -48,19 +65,14 @@ public class App {
                 break;
 
             default:
-                System.out.println("Error! Please enter another option!");
+                menu.print("Error! Please enter another option!");
                 mainMenu();
-        }
+
+        } // main menu actions
 
     }  // menuActions
 
-    private void authenticatePlayer(){
 
-    }
-
-    private void createPlayer(){
-
-    }
 
     private void selectGame() {
         int userInput;
@@ -68,8 +80,11 @@ public class App {
                 "1.) Go Fish\n" +
                 "2.) Yahtzee\n" +
                 "3.) BlackJack\n" +
-                "4.) Craps");
-    }
+                "4.) Craps\n" +
+                "5.) Go to Main Menu");
+
+        selectGameActions(userInput);
+    }  // select game
 
     private void selectGameActions(Integer gameSelected){
         switch (gameSelected){
@@ -79,17 +94,33 @@ public class App {
                 newGoFish.startGame();
                 break;
             case 2:
-
+                Yahtzee newYahtzee = new Yahtzee(newPlayer);
+                newYahtzee.startGame();
                 break;
             case 3:
+                BlackJack newBlackJack = new BlackJack();
+                newBlackJack.startGame();
                 break;
             case 4:
+                Craps newCraps = new Craps();
+                newCraps.startGame();
+            case 5:
+                mainMenu();
                 break;
             default:
-                menu.print("Error! Invalid Selection!");
-                selectGame();
+                menu.print("Error! Invalid Selection!\n\n");
                 break;
         }
+
+        selectGame();
+    }  // game actions
+
+    private Boolean authenticatePlayer(){
+        return false;
+    }
+
+    private void createPlayer(){
+
     }
 
 } // class

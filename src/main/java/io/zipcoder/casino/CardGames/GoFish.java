@@ -16,6 +16,12 @@ public class GoFish {
 
     public void startGame(){
 
+        goFishDeck.shuffleDeck();
+
+        System.out.println(goFishDeck.drawCard().toString());
+        System.out.println(goFishDeck.drawCard().toString());
+        System.out.println(goFishDeck.drawCard().toString());
+
     }
 
     public boolean askForCard(Player thisPlayer, int cardNumber){return false;}
