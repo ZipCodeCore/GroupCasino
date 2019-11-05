@@ -90,7 +90,7 @@ public class CrapsGame extends DiceGame implements Game {
             console.println(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
             betChoice();
         }
-        else if (wager <= this.minBet || wager >= this.maxBet) {
+        else if (wager < this.minBet || wager > this.maxBet) {
             console.println("\n[CROUPIER]: You're not playing within the table limits, %s.", this.player.getPlayer().getLastName());
             betChoice();
         }
