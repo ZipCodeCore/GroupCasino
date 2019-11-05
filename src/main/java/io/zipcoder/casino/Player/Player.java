@@ -4,6 +4,7 @@ import io.zipcoder.casino.CardGames.CardHand;
 
 public class Player {
 
+<<<<<<< HEAD
     int ID;
     int pwd;
     double balance;
@@ -17,5 +18,7 @@ public class Player {
         this.balance = 0.0;
         this.cardHand = new CardHand;
     }
+=======
+>>>>>>> dev
 
 }
