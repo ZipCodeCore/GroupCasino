@@ -101,7 +101,7 @@ public class App {
         switch (gameSelected){
 
             case 1:
-                GoFish newGoFish = new GoFish();
+                GoFish newGoFish = new GoFish(this.newPlayer);
                 newGoFish.startGame();
                 break;
             case 2:
@@ -109,7 +109,7 @@ public class App {
                 newYahtzee.startGame();
                 break;
             case 3:
-                BlackJack newBlackJack = new BlackJack();
+                BlackJack newBlackJack = new BlackJack(this.newPlayer);
                 newBlackJack.startGame();
                 break;
             case 4:
@@ -124,6 +124,8 @@ public class App {
         }
 
         selectGameToPlay();
+
+
     }  // game actions
 
 
