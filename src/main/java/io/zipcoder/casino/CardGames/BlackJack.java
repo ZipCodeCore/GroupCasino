@@ -9,9 +9,12 @@ import javax.smartcardio.Card;
 
 public class BlackJack {
 
+
     public void startGame() {}
 
-    public void promptHitOrStay(){}
+    public void promptHitOrStay(){
+
+    }
 
     public void dealerHitOrStay(){}
 
