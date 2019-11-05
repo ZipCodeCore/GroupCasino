@@ -13,7 +13,9 @@ public class GoFish {
 
     public void startGame(){}
 
-    public boolean askForCard(Player thisPlayer, int cardNumber){}
+    public boolean askForCard(Player thisPlayer, int cardNumber){
+        return false;
+    }
 
     public void tradeCards(ArrayList fromPlayer, ArrayList toPlayer){}
 
