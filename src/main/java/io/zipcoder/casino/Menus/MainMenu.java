@@ -43,6 +43,25 @@ public class MainMenu implements Menu {
     @Override
     public void displayMenu() throws InterruptedException {
         console.clearScreen();
+        console.println("      .======================================.\n" +
+                "      | ___ ___ ___               _   _   _  |\n" +
+                "      | \\_/ \\_/ \\_/ C|||C|||C||| |-| |-| |-| |\n" +
+                "      | _|_ _|_ _|_  ||| ||| ||| |_| |_| |_| |\n" +
+                "      '===================================== ,sSSSs\n" +
+                "                 MILL'S WATERING HOLE       SSSS \"(\n" +
+                "           .:.                              SSS@ =/  \\~/\n" +
+                "          C|||'                             SSSS_(_  _Y_\n" +
+                "        ___|||______________________________SS/  ) ) /.-\n" +
+                "       [____________________________________] \\   /\\//\n" +
+                "        |   ____    ____    ____    ____   | \\|==(\\_/\n" +
+                "        |  (____)  (____)  (____)  (____)  | (/   ;\n" +
+                "        |  |    |  |    |  |    |  |    |  | |____|\n" +
+                "        |  |    |  |    |  |    |  |    |  |  \\  |\\\n" +
+                "        |  |    |  |    |  |    |  |    |  |   ) ) )\n" +
+                "        |  |____|  |____|  |____|  |____|  |  (  |/\n" +
+                "        |  I====I  I====I  I====I  I====I  |  /\\ |\n" +
+                "           |    |  |    |  |    |  |    |  | /.(=\\\n" +
+                "                                               Y\\_\\" + "\n" + "\n");
         try {
             Music.filePath = "src/music/(Menu) All of Me Instrumental.wav";
             mainMusic = new Music();

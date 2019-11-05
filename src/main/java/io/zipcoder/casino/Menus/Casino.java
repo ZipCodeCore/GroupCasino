@@ -92,11 +92,12 @@ public class Casino {
     public static void displayEnding(Player player) throws InterruptedException {
         Music losingHorn = null;
         Music tadaMusic = null;
+        Music neutral = null;
         //There's a "happy" and "sad" ending that's pertinent on if you won or lost money, even if it's just a $1!
         //Play again option that restarts the game?
 
 
-        if (player.getWinnings() <= 0) {
+        if (player.getWinnings() < 0) {
             //Sad ending:
             try {
                 console.println("    _____\n" +
@@ -112,7 +113,8 @@ public class Casino {
                 tadaMusic.play();
                 TimeUnit.SECONDS.sleep(5);
                 tadaMusic.stop();
-                console.printWithDelays(String.format("\nDisgruntled and with your spirits broken, you hobble home with $%.2f less in your pocket.\n Guess tonight just wasn't the night.\n", player.getWinnings()), TimeUnit.MILLISECONDS, 50);
+                console.printWithDelays(String.format("\nDisgruntled and with your spirits broken, you hobble home with $%.2f less in your pocket.\nGuess tonight just wasn't the night.\n", player.getWinnings()), TimeUnit.MILLISECONDS, 50);
+                TimeUnit.SECONDS.sleep(3);
             } catch (Exception ex) {
                 System.out.println("Error with playing sound.");
                 ex.printStackTrace();
@@ -121,7 +123,7 @@ public class Casino {
 
 
             //Happy ending:
-        }else{
+        } else if (player.getWinnings() > 0)
             try {
                 console.println("   ||====================================================================||\n" +
                         "   ||//$\\\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\//$\\\\||\n" +
@@ -147,17 +149,43 @@ public class Casino {
                         "||\\\\$//\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\\\$//||\n" +
                         "||====================================================================||\n");
                 Music.filePath = "src/music/(Happy ending) Windows 3.1 - Tada.wav";
-                tadaMusic = new Music();
-                tadaMusic.play();
+                losingHorn = new Music();
+                losingHorn.play();
                 TimeUnit.SECONDS.sleep(2);
-                tadaMusic.stop();
+                losingHorn.stop();
                 console.printWithDelays("\nScore! You ended up bagging (insert their initial balance - current balance).\n" +
                         "You head home with some pep in your step and even treat yourself to a scrumptious meal.\n", TimeUnit.MILLISECONDS, 50);
+                TimeUnit.SECONDS.sleep(3);
+            } catch (Exception ex) {
+                System.out.println("Error with playing sound.");
+                ex.printStackTrace();
+
+                //Neutral ending
+            }
+        else {
+            try {
+                console.println("\n" +
+                        "                   .------. \n" +
+                        ".------.           |A .   |      \n" +
+                        "|A_  _ |    .------; / \\  |   \"YOU WIN SOME,    \n" +
+                        "|( \\/ )|-----. _   |(_,_) |     YOU LOSE SOME.\"\n" +
+                        "| \\  / | /\\  |( )  |  I  A| \n" +
+                        "|  \\/ A|/  \\ |_x_) |------'   \n" +
+                        "`-----+'\\  / | Y  A|             -GAYLE FORMAN \n" +
+                        "      |  \\/ A|-----' \n" +
+                        "       `------'  ");
+                Music.filePath = "src/music/(Craps) Amor maior - Higher Love.wav";
+                neutral = new Music();
+                neutral.play();
+                TimeUnit.SECONDS.sleep(3);
+                neutral.stop();
+                console.printWithDelays("You left without winning or losing money, but hey at least you had fun!\n", TimeUnit.MILLISECONDS, 50);
+                TimeUnit.SECONDS.sleep(3);
             } catch (Exception ex) {
                 System.out.println("Error with playing sound.");
                 ex.printStackTrace();
             }
+            System.exit(0);
         }
-        System.exit(0);
     }
 }

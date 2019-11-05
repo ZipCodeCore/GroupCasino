@@ -147,7 +147,7 @@ public class BlackjackGame extends CardGame implements Game {
     public Double betChoice () {
         Double wager;
         console.println("[DEALER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance());
-        wager = console.getCurrency("[DEALER]: Bet size (press Enter to stand up): ", this.minBet, this.maxBet);
+        wager = console.getCurrency("[DEALER]: Bet size (or press Enter to stand up): ", this.minBet, this.maxBet);
         if (wager != null) {
             if (gameServices.wager(wager, this.player.getPlayer())) {
                 return wager;
@@ -257,7 +257,7 @@ public class BlackjackGame extends CardGame implements Game {
         if (winnings == hand.getBet()) {
             message += "Push";
         } else if (winnings == 0.0) {
-            message += "Dealer wins";
+            message += "((Dealer wins))";
         } else {
             message += String.format("Winnings: $%.2f",winnings);
         }

@@ -4,13 +4,17 @@ import io.zipcoder.casino.Interfaces.Menu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.Utilities.Music;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
 public class TellerMenu implements Menu {
 
-
+    Music tellerMusic = null;
     private Console console;
     private Player player;
     private String name = "Teller Menu";
@@ -30,13 +34,39 @@ public class TellerMenu implements Menu {
     public void displayMenu() throws InterruptedException {
         console.clearScreen();
 
-        console.println("Teller...");
+        //plays music!
+        try {
+            Music.filePath = "src/music/(Teller) Casino slot -SOUND EFFECTS.wav";
+            tellerMusic = new Music();
+            tellerMusic.play();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+        console.println("          .-------.\n" +
+                "       oO{-JACKPOT-}Oo\n" +
+                "       .=============. __\n" +
+                "       | [a] [X] [o] |(  )\n" +
+                "       | [$] [$] [$] | ||\n" +
+                "       | [X] [o] [$] | ||\n" +
+                "       |             |_||\n" +
+                "       | xxx ::::::: |--'\n" +
+                "       | ooo ::::::: |\n" +
+                "       | $$$ ::::::: |\n" +
+                "       |             |\n" +
+                "       |      __ === |\n" +
+                "       |_____/__\\____|\n" +
+                "      /###############\\\n" +
+                "     /#################\\\n" +
+                "    |#JGS###############|\n" +"\n" + "\n");
+
+        console.printWithDelays("[TELLER]: What can I do for ya?\n",TimeUnit.MILLISECONDS, 50);
 
         // temporary
-        console.println("1. Deposit funds");
+        console.println("\n1. Deposit funds");
         console.println("2. Cash out");
         console.println("3. Back to lobby");
-        console.println(String.format("Current balance: $%.2f\n", player.getBalance()));
+        console.println(String.format("\nCurrent balance: $%.2f\n", player.getBalance()));
 
         handleChoice(console.getInteger(3));
     }
@@ -51,12 +81,32 @@ public class TellerMenu implements Menu {
                 break;
             case 2:
                 cashOut();
+
+                try {
+                    tellerMusic.stop();
+                } catch (UnsupportedAudioFileException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                }
+                console.clearScreen();
                 Casino.displayEnding(this.player);
                 break;
             case 3:
                 // let's nix this, get it to just fall through back into MM
 //                MainMenu mainmenu = new MainMenu(this.player);
 //                mainmenu.displayMenu();
+                try {
+                    tellerMusic.stop();
+                } catch (UnsupportedAudioFileException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
@@ -74,9 +124,10 @@ public class TellerMenu implements Menu {
             gameServices.deposit(funds, this.player);
             console.printWithDelays("[TELLER]: Don't spend it all in once place\n", TimeUnit.MILLISECONDS, 50);
         } else {
-            console.println(String.format("Depositing $%.2f",funds));
+            console.println(String.format("\nDepositing $%.2f\n",funds));
+            console.printWithDelays(". . .",TimeUnit.SECONDS,1);
             gameServices.deposit(funds, this.player);
-            console.printWithDelays("[TELLER]: Good luck at the tables\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("\n[TELLER]: Here you go! Good luck at the tables.\n", TimeUnit.MILLISECONDS, 50);
         }
 
         console.getInput("\nPress Enter to continue\n");

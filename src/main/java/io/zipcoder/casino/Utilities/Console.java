@@ -274,7 +274,7 @@ public final class Console {
     }
 
     public Integer menuChoice(int max) {
-        print("Menu choice: ");
+        print("\nMenu choice: \n");
         return getInteger(max);
     }
 
