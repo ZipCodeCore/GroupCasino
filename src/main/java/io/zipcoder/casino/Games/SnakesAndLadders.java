@@ -21,7 +21,7 @@ public class SnakesAndLadders implements Game {
 
     public void runSnakesAndLadders(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
-        runGame(currentPlayer);
+        approachTable(currentPlayer);
     }
 
     public String startNewGame(){
@@ -46,20 +46,21 @@ public class SnakesAndLadders implements Game {
     public String playerTurn(Integer playerPosition){
         console.getStringInput("Roll the dye");
         playerPosition = playerDiceRoll();
+        playerSnakesAndLadders(playerPosition);
         if(playerPosition >= 100){
             return "Player";
         }
-        playerSnakesAndLadders(playerPosition);
+
         return "no winner yet";
     }
 
     public String aiTurn(Integer aiPosition){
         console.getStringInput("Now it's my turn!");
         aiPosition = aiDiceRoll();
+        aiSnakesAndLadder(aiPosition);
         if (aiPosition >= 100){
             return "Ai";
         }
-        aiSnakesAndLadder(aiPosition);
         return "no winner yet";
     }
 
@@ -128,7 +129,7 @@ public class SnakesAndLadders implements Game {
                 newPosition = 60;
                 break;
             case 80:
-                newPosition = 100;
+                newPosition = 99;
                 break;
             case 87:
                 newPosition = 24;
@@ -235,7 +236,7 @@ public class SnakesAndLadders implements Game {
                 "and racing to the value of 100 points, the final spot on the board.\n" +
                 "But beware! Certain spots on the board will send you down the backs of the Snakes!\n" +
                 "Likewise, certain spots on the board will push you closer to your goal.\n" +
-                "Roll the dice and see who gets there first!");
+                "Roll the dice and see who gets there first!\n\n");
     }
 
 
@@ -250,14 +251,15 @@ public class SnakesAndLadders implements Game {
         while(running) {
             switch (playerInput) {
                 case 1:
-                    runSnakesAndLadders(currentPlayer);
+                    runGame(currentPlayer);
+                    running = false;
                     break;
                 case 2:
                     showRules();
+                    approachTable(currentPlayer);
+                    running = false;
                     break;
                 case 3:
-                    GameMenu gameMenu = new GameMenu();
-                    gameMenu.runGameMenu(currentPlayer);
                     running = false;
                     break;
             }
