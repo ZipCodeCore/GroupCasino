@@ -4,12 +4,13 @@ import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
-public class Craps implements Game {
+public class Craps implements Game, GamblingGame {
 
-    Console console = new Console(System.in, System.out);
-    boolean running;
-    Dice dice;
-    boolean puckOn;
+    private Console console = new Console(System.in, System.out);
+    private boolean running;
+    private Dice dice;
+    private boolean puckOn;
+    private int puckVal;
 
     public Craps() {
         dice = new Dice();
@@ -48,23 +49,51 @@ public class Craps implements Game {
         while (running) {
 
             if(comeOutRoll()) {
+                do {
 
-            } else {
-                running = playAgain();
+                    placeBet(currentPlayer);
+
+                } while (passRoll());
             }
-
+            running = playAgain();
         }
-
-
     }
 
     private boolean comeOutRoll() {
-        Integer roll = dice.rollDice(2);
+        console.println("\nHit Return to Throw the Come-Out Roll");
+        console.getStringInput("");
 
-        console.println("You roll a " + roll + "!");
+        Integer roll = dice.rollDice(1);
+
+
+        console.println("You Rolled a " + roll + "!");
 
         if (roll.equals(2) || roll.equals(3) || roll.equals(12)) {
             console.println("Craps!");
+            return false;
+        } else if (roll.equals(7) || roll.equals(11)) {
+            console.println("Natural Roll! Pass Line Wins!");
+            return false;
+        } else {
+            console.println("The point is now " + roll + "!");
+            puckOn = true;
+            puckVal = roll;
+            return true;
+        }
+    }
+
+    private boolean passRoll() {
+        console.println("\nHit Return to Roll the Dice");
+        console.getStringInput("");
+
+        Integer roll = dice.rollDice(2);
+        console.println("You Rolled a " + roll + "!");
+
+        if (roll.equals(puckVal)) {
+            console.println("You Hit the Point Value!");
+            return false;
+        } else if (roll.equals(7)) {
+            console.println("Seven-Out! The Pass Line Losses!");
             return false;
         } else {
             return true;
@@ -89,7 +118,17 @@ public class Craps implements Game {
     }
 
     @Override
-    public void exitGame() {
+    public void placeBet(Player currentPlayer) {
+
+    }
+
+    @Override
+    public void returnWinnings(Player currentPlayer) {
+
+    }
+
+    @Override
+    public void exitGame(Player currentPlayer) {
 
     }
 }
