@@ -1,5 +1,6 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.Utilities.Console;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -180,5 +181,21 @@ public class CardSetTest {
         for (int i = 0; i < fiveDecks.getCards().size(); i++) {
             Assert.assertTrue(fiveDecks.getCards().get(i).equals(fiveDecksClone.get(i)));
         }
+    }
+
+    @Test
+    public void toASCIItest() {
+        CardSet cards = new CardSet(0);
+        cards.addCard(new Card("A","H"));
+        cards.addCard(new Card("K","D"));
+        cards.addCard(new Card("Q","S"));
+        cards.addCard(new Card("J","C"));
+        cards.addCard(new Card("10","H"));
+        cards.addCard(new Card("9","D"));
+        cards.addCard(new Card("8","S"));
+        cards.addCard(new Card("7","C"));
+
+        Console console = new Console(System.in, System.out);
+        console.println(cards.toASCII());
     }
 }

@@ -25,8 +25,8 @@ public class CrapsGame extends DiceGame implements Game {
     private Integer setThePointRoll;    //saves your first roll to try to match with later rolls
     private Integer currentRoll;        //any roll after the first
     String r;
-    Integer counter;
     Integer numRolls = 0;
+    Integer counter=0;
     private Console console = new Console(System.in, System.out);
     private GameServices gameServices = new GameServices();
 
@@ -68,11 +68,11 @@ public class CrapsGame extends DiceGame implements Game {
                     userRollsDiceCurrentPoint();
                     displayCurrentRoll(currentRoll);
                     if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
-                        console.println(String.format("Hooray!!!!!!\nYou rolled a %d.\nYou won!!", currentRoll)); //if time, map a custom answer depending on whether you won on the first, second, or third roll
+                        winOnSubsequentMessage();
                         calculatePayout();
                         break;
                     } else if (loseOnSubsequent(currentRoll) == true) {
-                        console.println(String.format("It appears that the odds were not in your favor today.\nBetter luck next time.....\n-----------------------------------------------\n\n", currentRoll));
+                        loseOnSubsequentMessage();
                         break;
                     }
                     if (i == 2){losingMessageOutOfRolls();}
@@ -85,17 +85,15 @@ public class CrapsGame extends DiceGame implements Game {
     public Double betChoice(){
         Double wager;
         console.println(String.format("[CROUPIER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance()));
-        wager = console.getCurrency("[CROUPIER]: Bet size (press Enter to stand up): ", this.minBet,this.maxBet);
-        if (wager != null){
+        wager = console.getCurrency(String.format("[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: Bet size (press Enter to stand up): ", this.minBet,this.maxBet));
+        if (wager != null && wager <= this.player.getPlayer().getBalance()){
             if (gameServices.wager(wager, this.player.getPlayer())) {
-                return wager;
-            } else {
+                return wager;}}
+            else if (wager > this.player.getPlayer().getBalance()){
                 console.println(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
-                return betChoice();
+                betChoice();
             }
-        }else {
-            return null;
-        }
+        return wager;
     }
 
     public Double calculateWinnings(Double wager, Integer setThePointRoll, Integer numRolls){
@@ -175,14 +173,13 @@ public class CrapsGame extends DiceGame implements Game {
     public void userRollsDiceSetPoint() {
         console.getInput("\nPress Enter to roll the dice\n");
         tossPointRoll();
+        counter++;
     }
 
     public void userRollsDiceCurrentPoint() {
         console.getInput(String.format("-------------------------------------------------\nSet the Point Roll: %d\nPress Enter to roll the dice\n", setThePointRoll));
         tossCurrentRoll();
     }
-
-
 
     public Integer tossPointRoll() {
         setThePointRoll = DiceGame.roll(2);
@@ -206,12 +203,21 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     public void losingMessageOutOfRolls() {
-        console.println(String.format("You are out of rolls.\nYou seem to have lost.\nThis is unfortunate.....\n:(\n-----------------------------------------\n\n", setThePointRoll));
+        console.println(String.format("You are out of rolls.\nYou seem to have lost.\nThis is unfortunate.....\n:(\n-----------------------------------------\n\n"));
     }
 
     public Integer tossCurrentRoll() {
         currentRoll = DiceGame.roll(2);
         return currentRoll;
+    }
+
+
+    public void winOnSubsequentMessage () {
+        console.println(String.format("Hooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, counter));
+    }
+
+    public void loseOnSubsequentMessage () {
+        console.println(String.format("It appears that the odds were not in your favor today.\nBetter luck next time.....\n-----------------------------------------------\n\n"));
     }
 }
 

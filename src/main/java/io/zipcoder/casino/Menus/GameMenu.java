@@ -42,7 +42,7 @@ public class GameMenu implements Menu {
     }
 
     @Override
-    public void displayMenu() {
+    public void displayMenu() throws InterruptedException {
         try {
             Music.filePath = "src/music/(Menu) All of Me Instrumental.wav";
             mainMusic = new Music();
@@ -62,7 +62,7 @@ public class GameMenu implements Menu {
     }
 
     @Override
-    public void handleChoice(int choice) {
+    public void handleChoice(int choice) throws InterruptedException {
         try {
             mainMusic.stop();
         } catch (UnsupportedAudioFileException e) {

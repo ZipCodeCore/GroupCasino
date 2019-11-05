@@ -57,6 +57,12 @@ public class CardSet {
         this.cards.add(cardToAdd);
     }
 
+    public void addCards(ArrayList<Card> cardsToAdd) {
+        for (Card card : cardsToAdd) {
+            this.cards.add(card);
+        }
+    }
+
     public void clear() {
         this.cards.clear();
     }
@@ -69,5 +75,42 @@ public class CardSet {
 
         Collections.shuffle(this.cards);
         //ArrayList<Card> c = this.cards;
+    }
+
+
+    public String toASCII() {
+        int numCards = this.size();
+        String[] emptyArray = new String[numCards+1];
+        Arrays.setAll(emptyArray,(index) -> "");
+
+        String output = String.join("\u250C-------\u2510 ", emptyArray);
+        output += "\n";
+        for (Card card : this.cards) {
+            if (card.getRank().length() == 1) {
+                output += String.format("| %s     | ", card.getRank());
+            } else {
+                output += String.format("|%s     | ", card.getRank());
+            }
+        }
+        output += "\n";
+        output += String.join("|       | ", emptyArray);
+        output += "\n";
+        for (Card card : this.cards) {
+            output += String.format("|   %s   | ", Card.SUIT_SYMBOLS.get(card.getSuit()));
+        }
+        output += "\n";
+        output += String.join("|       | ", emptyArray);
+        output += "\n";
+        for (Card card : this.cards) {
+            if (card.getRank().length() == 1) {
+                output += String.format("|     %s | ", card.getRank());
+            } else {
+                output += String.format("|     %s| ", card.getRank());
+            }
+        }
+        output += "\n";
+        output += String.join("\u2514-------\u2518 ", emptyArray);
+        output += "\n";
+        return output;
     }
 }

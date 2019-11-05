@@ -9,6 +9,7 @@ public class Player implements GamblingPlayer {
     private int age;
     private double balance;
     private double initialBalance;
+    private double winnings;
 
     public Player(String firstName, String lastName, int age, double balance) {
         this.firstName = firstName;
@@ -32,6 +33,22 @@ public class Player implements GamblingPlayer {
 
     public double getBalance() {
         return balance;
+    }
+
+    public double getInitialBalance() {
+        return initialBalance;
+    }
+
+    public double getWinnings() {
+        return winnings;
+    }
+
+    public void setWinnings(double winnings) {
+        this.winnings = winnings;
+    }
+
+    public void setInitialBalance(double initialBalance) {
+        this.initialBalance = initialBalance;
     }
 
     public void setFirstName(String firstName) {
