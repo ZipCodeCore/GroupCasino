@@ -35,6 +35,8 @@ public class BlackJack implements Game, GamblingGame{
         viewDealerHand();
         viewCurrentHand();
         hitOrStay();
+        checkHand(playerHand);
+        checkHand(dealerHand);
 
 
     }
@@ -86,7 +88,17 @@ public class BlackJack implements Game, GamblingGame{
         }
 
     }
+    public Boolean notBusted(Integer handValue){
+        if(handValue > 21){
+            isLoser();
+        }
+            return true;
+
+
+    }
     public void stay(){
+        console.println("You chose to stay");
+        viewCurrentHand();
 
     }
     public Boolean isWinner(){
@@ -95,13 +107,16 @@ public class BlackJack implements Game, GamblingGame{
     public Boolean isLoser(){
 return null;
     }
-    public Integer checkPlayerHand(){
+    public void checkHand(Card[] hand){
         int handValue = 0;
-        for (Integer i = 0; i < playerHand.length; i++){
-            Card currentCard = playerHand[i];
+        for (Integer i = 0; i < hand.length; i++){
+            if(hand[i] != null){
+            Card currentCard = hand[i];
             handValue += currentCard.getCardValue().getValue();
+            }
         }
-        return null;
+        if(notBusted(handValue));
+
     }
     public void initialHand(){
         dealerHand[0]= deck.draw();
