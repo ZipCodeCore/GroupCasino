@@ -8,6 +8,10 @@ import javax.smartcardio.Card;
 
 
 public class BlackJack {
+    private Player user;
+    private int answerHitOrStay;
+    private int wageBucket;
+    private int blackJackDeck;
 
 
     public void startGame() {}
@@ -16,7 +20,7 @@ public class BlackJack {
 
     }
 
-    public void dealerHitOrStay(){}
+    public void dealerHitOrStay(){}  //
 
     public void hit(Player deck, Player player) {}
 
