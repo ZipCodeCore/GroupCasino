@@ -14,7 +14,7 @@ public class PlayerMenu {
         playerRepo.addPlayer(new Player("Test", 500));
     }
 
-    public void runPlayerMenu( ) {
+    public void runPlayerMenu( ){
         while (running) {
             displayPlayerMenu();
             Integer playerInput = getPlayerInput();
@@ -53,7 +53,7 @@ public class PlayerMenu {
 
 
 
-    public String playerMenuLogic(Integer playerInput) {
+    public String playerMenuLogic(Integer playerInput){
         Casino casino = new Casino();
         Player player = null;
 
