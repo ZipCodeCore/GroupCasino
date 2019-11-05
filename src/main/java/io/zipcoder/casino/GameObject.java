@@ -10,7 +10,7 @@ public class GameObject implements Game {
         return this.name;
     }
 
-    public void startPlay(){
+    public void startPlay() throws InterruptedException {
 
     }
 
