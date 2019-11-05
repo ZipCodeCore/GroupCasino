@@ -7,7 +7,7 @@ public class Player {
     String ID;
     String pwd;
     double balance;
-    CardHand cardHand;
+    public CardHand cardHand;
 
 
 

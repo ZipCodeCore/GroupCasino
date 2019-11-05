@@ -17,9 +17,11 @@ public class GoFishTest {
 
     @Test
     public void game() {
+      
         GoFish newgame = new GoFish(new Player("i","0"));
 
         newgame.startGame();
+
     }
 
 }
