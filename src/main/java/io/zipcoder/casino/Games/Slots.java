@@ -17,7 +17,7 @@ public class Slots implements Game, GamblingGame {
         //perf
     }
 
-    public void exitGame(){
+    public void exitGame(Player currentPlayer){
 
     }
     public void placeBet(Player currentPlayer){

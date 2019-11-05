@@ -14,7 +14,7 @@ public class GoFish implements Game {
     }
 
     @Override
-    public void exitGame() {
+    public void exitGame(Player currentPlayer) {
 
     }
 }

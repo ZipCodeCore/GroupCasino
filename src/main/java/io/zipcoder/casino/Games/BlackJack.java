@@ -74,7 +74,7 @@ return null;
     }
 
     @Override
-    public void exitGame() {
+    public void exitGame(Player currentPlayer) {
 
     }
 
