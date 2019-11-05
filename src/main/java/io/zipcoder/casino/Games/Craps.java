@@ -61,6 +61,7 @@ public class Craps implements Game, GamblingGame {
 
                 } while (passRoll());
             }
+
             running = playAgain();
         }
     }
