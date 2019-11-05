@@ -32,6 +32,14 @@ public class CrapsGameTest {
     }
 
     @Test
+    //tests whether win on first works on 8
+    public void winOnFirstTest3(){
+        setThePointRoll = 8;
+        Assert.assertFalse(crapsGame.winOnFirst(setThePointRoll));
+
+    }
+
+    @Test
     //tests whether win on first works on 11
     public void winOnFirstTest2(){
         setThePointRoll = 11;
