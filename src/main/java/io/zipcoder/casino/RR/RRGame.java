@@ -2,23 +2,14 @@ package io.zipcoder.casino.RR;
 
 import io.zipcoder.casino.DiceGame;
 import io.zipcoder.casino.Interfaces.GamblingGame;
+import io.zipcoder.casino.Interfaces.Game;
 
-public class RRGame extends DiceGame implements GamblingGame {
+public class RRGame extends DiceGame implements Game {
 
     private String name = "Russian Dice Roulette";
 
     public String getName() {
         return name;
-    }
-
-    @Override
-    public double getWager() {
-        return 0.0;
-    }
-
-    @Override
-    public void payOut(double amount) {
-
     }
 
     @Override
