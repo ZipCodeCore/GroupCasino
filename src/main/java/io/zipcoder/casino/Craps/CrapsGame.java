@@ -138,6 +138,7 @@ public class CrapsGame extends DiceGame implements Game {
                 return setThePointRoll;
             }
         else notR();
+        return 0;
     }
 
     public void notR () {
