@@ -120,12 +120,12 @@ public class BlackjackGame extends CardGame implements Game {
 
     public Double betChoice () {
         double wager;
-        console.println("Current bankroll: %.2f", this.player.getPlayer().getBalance());
-        wager = console.getCurrency("Bet size (press Enter to stand up): ", this.minBet, this.maxBet);
+        console.println("[DEALER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance());
+        wager = console.getCurrency("[DEALER]: Bet size (press Enter to stand up): ", this.minBet, this.maxBet);
         if (gameServices.wager(wager, this.player.getPlayer())) {
             return wager;
         } else {
-            console.println("Your mouth is writing checks that your wallet can't cash.");
+            console.println(String.format("[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
             return betChoice();
         }
     }
@@ -190,14 +190,14 @@ public class BlackjackGame extends CardGame implements Game {
         //temporary
         console.clearScreen();
 
-        console.println(String.format("*** Blackjack ***\nPlayer balance: $%.2f\nTable stakes: $%.2f min / $%.2f max\n", this.player.getPlayer().getBalance(),this.minBet, this.maxBet));
-        console.println("Dealer");
+        console.println(String.format("*** Blackjack ***\nTable stakes: $%.2f min / $%.2f max\n", this.minBet, this.maxBet));
+        console.println("[Dealer's Hand]:");
         BlackjackHand dealerHand = this.dealer.getHands().get(0);
         for (Card card : dealerHand.getCards().getCards()) {
             console.print(card.toString() + " ");
         }
-        console.println("");
-        console.println(this.player.getPlayer().getFirstName());
+        console.println("\n");
+        console.println(String.format("[%s's Hand(s)]:",this.player.getPlayer().getFirstName()));
         ArrayList<BlackjackHand> playerHands =  this.player.getHands();
         for (BlackjackHand hand : playerHands) {
             for (Card card : hand.getCards().getCards()) {
@@ -207,7 +207,7 @@ public class BlackjackGame extends CardGame implements Game {
             if (showWinnings) {
                 console.print(winningMessage(hand));
             }
-            console.println("");
+            console.println("\n");
         }
 
     }
