@@ -15,7 +15,6 @@ public class BlackjackMenu implements Menu {
     private String name = "Blackjack Menu";
     private BlackjackGame blackjackGame;
     Music blackJackMusic = null;
-    Music mainMusic = null;
 
     public BlackjackMenu(BlackjackGame blackjackGame) {
         this.console = new Console (System.in, System.out);
@@ -29,6 +28,7 @@ public class BlackjackMenu implements Menu {
 
     @Override
     public void displayMenu() {
+        //Starts playing music!
         try {
             Music.filePath = "src/music/(BlackJack) Glide with me.wav";
             blackJackMusic = new Music();

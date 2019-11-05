@@ -1,12 +1,14 @@
 package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.Interfaces.Menu;
+import io.zipcoder.casino.Music;
 import io.zipcoder.casino.Utilities.Console;
 
 public class RRMenu implements Menu {
 
     private Console console;
     private String name = "Russian Roulette Dice Menu";
+    Music rouletteMusic = null;
 
     public RRMenu() {
         this.console = new Console (System.in, System.out);
@@ -19,6 +21,15 @@ public class RRMenu implements Menu {
 
     @Override
     public void displayMenu() {
+        //Starts playing music!
+        try {
+            Music.filePath = "src/music/(Craps) Amor maior - Higher Love.wav";
+            rouletteMusic = new Music();
+            rouletteMusic.play();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
         console.clearScreen();
 
         console.println("Da");
