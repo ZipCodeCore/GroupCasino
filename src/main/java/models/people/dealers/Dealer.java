@@ -2,7 +2,7 @@ package models.people.dealers;
 
 import models.hands.Hand;
 
-public abstract class Dealer {
+public class Dealer {
 
     public Dealer() {
 

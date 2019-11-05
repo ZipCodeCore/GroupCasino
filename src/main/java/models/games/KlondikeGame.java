@@ -11,11 +11,7 @@ public class KlondikeGame extends DiceGame implements Game, GamblingGame {
     Dealer dealer;
 
 
-    public KlondikeGame(){
-
-    }
-
-    public KlondikeGame(Player player) {
+    public KlondikeGame(Player player, Dealer klondikeDealer) {
         this.player = player;
 
     }

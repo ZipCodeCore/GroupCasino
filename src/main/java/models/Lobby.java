@@ -4,22 +4,63 @@ import models.games.BlackjackGame;
 import models.games.CrapsGame;
 import models.games.GoFishGame;
 import models.games.KlondikeGame;
+import models.people.dealers.BlackjackDealer;
 import models.people.dealers.Dealer;
+import models.people.dealers.GoFishDealer;
+import models.people.dealers.KlondikeDealer;
 import models.people.players.Player;
 import services.Console;
+import services.PlayerRepo;
+import services.PlayerService;
 
 public class Lobby {
-    Console console = new Console(System.in, System.out);
-    Player player;
+    private Console console = new Console(System.in, System.out);
+    private Player player;
+    private PlayerRepo playerRepo;
+    private PlayerService playerService = new PlayerService();
 
+    public Lobby(PlayerRepo playerRepo){
+        this.playerRepo = playerRepo;
+    }
 
-    public Player checkIn() {
-        String name = console.getStringInput("Hello, What is your name?");
-        Integer age = console.getIntegerInput("How old are you?");
-        Double money = console.getDoubleInput("How much money are you putting on the line today?");
-        player = new Player(name, age, money);
+    public Integer intro() {
+        Integer input = console.getIntegerInput("Hello and welcome to the Casino. Have you been here before?\n" +
+                "1. Yes" +
+                "2. No");
+        checkInMenu(input);
+        return input;
+    }
 
-        return player;
+    public Player checkInMenu(Integer input) {
+        switch (input) {
+            case 1:
+                Integer playerId = console.getIntegerInput("Great! What is your account ID?");
+                player = playerRepo.getPlayerById(playerId);
+                console.print("I have found your profile. Please proceed.");
+                getChips();
+                break;
+            case 2:
+                String name = console.getStringInput("What is your name?");
+                Integer age = console.getIntegerInput("How old are you?");
+                Player newPlayer = new Player(name, age);
+                playerRepo.addPlayer(newPlayer);
+                player = newPlayer;
+                console.print("Your account has been created. The ID is: " + playerService.getId());
+                getChips();
+            default:
+                console.print("Invalid selection. Please try again.");
+                intro();
+                break;
+        } return player;
+    }
+
+    public Double getChips() {
+        Double input = console.getDoubleInput("How much money would you like to play with?");
+        playerService.depositMoney(input, player);
+        console.print("Here you go!");
+        console.print("Your current balance is " + playerService.getBalance(player) + ".");
+        selectGameMenu();
+        return input;
     }
 
     public void selectGameMenu() {
@@ -37,31 +78,31 @@ public class Lobby {
     private void menuActions(Integer input) {
         switch (input) {
             case 1:
-                BlackjackGame blackjackGame = new BlackjackGame();
+                Dealer dealer = new Dealer();
+                BlackjackDealer blackjackDealer = new BlackjackDealer(dealer);
+                BlackjackGame blackjackGame = new BlackjackGame(player, blackjackDealer);
                 blackjackGame.getMenu();
                 break;
-
             case 2:
-                Dealer dealer = new Dealer();
-                GoFishGame goFishGame = new GoFishGame(player, dealer);
+                dealer = new Dealer();
+                GoFishDealer goFishDealer = new GoFishDealer(dealer);
+                GoFishGame goFishGame = new GoFishGame(player, goFishDealer);
                 goFishGame.getMenu();
                 break;
-
             case 3:
-                KlondikeGame klondikeGame = new KlondikeGame();
+                dealer = new Dealer();
+                KlondikeDealer klondikeDealer = new KlondikeDealer(dealer);
+                KlondikeGame klondikeGame = new KlondikeGame(player, klondikeDealer);
                 klondikeGame.getMenu();
                 break;
-
             case 4:
                 CrapsGame crapsGame = new CrapsGame();
                 crapsGame.getMenu();
                 break;
-
             case 5:
                 console.print("Bye!");
                 System.exit(0);
                 break;
-
             default:
                 console.print("\nInvalid selection. Please try again.");
                 selectGameMenu();
@@ -70,7 +111,8 @@ public class Lobby {
     }
 
     public void leaveCasino() {
-
+        console.print(("Bye!"));
+        System.exit(0);
     }
 
 

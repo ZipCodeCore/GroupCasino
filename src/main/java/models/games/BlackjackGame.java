@@ -2,6 +2,7 @@ package models.games;
 
 import Interfaces.GamblingGame;
 import Interfaces.Game;
+import models.people.dealers.BlackjackDealer;
 import models.people.dealers.Dealer;
 import models.people.players.Player;
 
@@ -9,9 +10,13 @@ public class BlackjackGame extends CardGame implements Game, GamblingGame {
 
     Double minimumBet;
     Double betAmount;
+    Player player;
+    Dealer dealer;
 
 
-    public BlackjackGame(){
+    public BlackjackGame(Player player, BlackjackDealer dealer){
+        this.player = player;
+        this.dealer = dealer;
 
     }
 
