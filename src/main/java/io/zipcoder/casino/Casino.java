@@ -23,8 +23,9 @@ public class Casino {
         console.println(String.format("Welcome to Big 3 Casino, %s!",currentPlayer.getName()));
         console.println("What would you like to do?");
         console.println("(1) - Display Game Menu");
-        console.println("(2) - See your history");
-        console.println("(3) - Return to Player Menu");
+        console.println("(2) - Check your Balance");
+        console.println("(3) - See your History");
+        console.println("(4) - Return to Player Menu");
     }
 
     public void goToGameMenu(){
@@ -59,13 +60,15 @@ public class Casino {
                 gameMenu.runGameMenu(currentPlayer);
                 break;
             case 2:
+                console.println(String.format("Your current balance is $%d.00", currentPlayer.getBalance()));
+            case 3:
                 if(currentPlayer.getHistory().isEmpty()){
                     console.println("Sorry! You do not yet have a gaming history. Play some games to get one!\n");
                 } else {
                     console.println(printHistory());
                 }
                 break;
-            case 3:
+            case 4:
                 running = false;
                 break;
         }
