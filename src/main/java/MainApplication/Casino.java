@@ -9,5 +9,6 @@ public class Casino {
         // write your tests before you start fucking with this
         PlayerRepo playerRepo = new PlayerRepo();
         Lobby lobby = new Lobby(playerRepo);
+        lobby.intro();
     }
 }

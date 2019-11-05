@@ -18,6 +18,9 @@ public class Lobby {
     private Player player;
     private PlayerRepo playerRepo;
     private PlayerService playerService = new PlayerService();
+    private String firstName;
+    private String lastName;
+    private double balance;
 
     public Lobby(PlayerRepo playerRepo){
         this.playerRepo = playerRepo;
@@ -78,20 +81,20 @@ public class Lobby {
     private void menuActions(Integer input) {
         switch (input) {
             case 1:
-                Dealer dealer = new Dealer();
-                BlackjackDealer blackjackDealer = new BlackjackDealer(dealer);
+                //Dealer dealer = new Dealer();
+                BlackjackDealer blackjackDealer = new BlackjackDealer(firstName, lastName, balance);
                 BlackjackGame blackjackGame = new BlackjackGame(player, blackjackDealer);
                 blackjackGame.getMenu();
                 break;
             case 2:
-                dealer = new Dealer();
-                GoFishDealer goFishDealer = new GoFishDealer(dealer);
+                //dealer = new Dealer(firstName, lastName, balance);
+                GoFishDealer goFishDealer = new GoFishDealer(firstName, lastName, balance);
                 GoFishGame goFishGame = new GoFishGame(player, goFishDealer);
                 goFishGame.getMenu();
                 break;
             case 3:
-                dealer = new Dealer();
-                KlondikeDealer klondikeDealer = new KlondikeDealer(dealer);
+                //dealer = new Dealer();
+                KlondikeDealer klondikeDealer = new KlondikeDealer(firstName, lastName, balance);
                 KlondikeGame klondikeGame = new KlondikeGame(player, klondikeDealer);
                 klondikeGame.getMenu();
                 break;
