@@ -176,6 +176,14 @@ public class Yahtzee implements Game {
         return 0;
     }
 
+    public Integer[] getDiceValues(){
+        Integer[] values = new Integer[5];
+        for(int i = 0; i < this.myDice.length; i++){
+            values[i] = this.myDice[i].getValue();
+        }
+        return values;
+
+    }
 
     public int checkForFaces(Integer[] diceValues, int valueToLookFor){
         int results = 0;
@@ -302,16 +310,6 @@ public class Yahtzee implements Game {
         }
         return 50;
     }
-
-    public Integer[] getDiceValues(){
-        Integer[] values = new Integer[5];
-        for(int i = 0; i < this.myDice.length; i++){
-            values[i] = this.myDice[i].getValue();
-        }
-        return values;
-
-    }
-
 
     // getters and setters----------------------------------------------------------------------------------------------
 

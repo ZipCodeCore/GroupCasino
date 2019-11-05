@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class EvaluationTest {
+
     Yahtzee detect;
 
     @Before
@@ -111,7 +112,6 @@ public class EvaluationTest {
         int actual = detect.checkForLargeStraight(thisIsMyDice);
         Assert.assertEquals(expected,actual);
     }
-
 
     @Test
     public void getYahtzee(){
