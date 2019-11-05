@@ -84,16 +84,14 @@ public class CrapsGame extends DiceGame implements Game {
         Double wager;
         console.println(String.format("[CROUPIER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance()));
         wager = console.getCurrency(String.format("[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: Bet size (press Enter to stand up): ", this.minBet,this.maxBet));
-        if (wager != null){
+        if (wager != null && wager <= this.player.getPlayer().getBalance()){
             if (gameServices.wager(wager, this.player.getPlayer())) {
-                return wager;
-            } else {
+                return wager;}}
+            else if (wager > this.player.getPlayer().getBalance()){
                 console.println(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
-                return betChoice();
+                betChoice();
             }
-        }else {
-            return null;
-        }
+        return wager;
     }
 
     @Override
