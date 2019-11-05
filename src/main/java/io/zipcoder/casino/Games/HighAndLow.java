@@ -5,19 +5,18 @@ import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
-import java.lang.invoke.SwitchPoint;
 
 public class HighAndLow {
     Console console = new Console(System.in, System.out);
     Dice dice = new Dice();
-    GameMenu gameMenu = new GameMenu();
     private Player currentPlayer;
-    boolean running;
+    private boolean running;
 
     public void runHighOrLow(Player currentPlayer) {
-        while(running)
         this.currentPlayer = currentPlayer;
-        console.println("Welcome to High and Low!");
+        while(running)
+
+        console.println("Welcome to High and Low!\n");
         Integer firstRoll = firstRoll();
         Integer highOrLowBet = doYouWantToBet();
         Integer secondRoll = secondRoll();
@@ -71,7 +70,6 @@ public class HighAndLow {
                 runHighOrLow(currentPlayer);
                 break;
             case 2:
-                gameMenu.runGameMenu(currentPlayer);
                 running = false;
                 break;
         }

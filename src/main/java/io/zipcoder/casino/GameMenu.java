@@ -1,6 +1,7 @@
 package io.zipcoder.casino;
 
 
+import io.zipcoder.casino.Games.SnakesAndLadders;
 import io.zipcoder.casino.Games.HighAndLow;
 import io.zipcoder.casino.utilities.Console;
 
@@ -9,11 +10,15 @@ public class GameMenu {
     private Integer playerInput;
     private Player currentPlayer;
     Casino casino = new Casino();
+    boolean running = true;
 
     public void runGameMenu(Player currentPlayer){
-        displayGameMenu();
-        Integer playerInput = getPlayerInput();
-        gameMenuLogic(playerInput);
+        this.currentPlayer = currentPlayer;
+        while(running) {
+            displayGameMenu();
+            Integer playerInput = getPlayerInput();
+            gameMenuLogic(playerInput);
+        }
     }
 
     public void displayGameMenu(){
@@ -21,7 +26,7 @@ public class GameMenu {
         console.println("(1) - Go Fish");
         console.println("(2) - Blackjack");
         console.println("(3) - Craps");
-        console.println("(4) - Chutes & Ladders");
+        console.println("(4) - Snakes & Ladders");
         console.println("(5) - Roulette");
         console.println("(6) - Slots");
         console.println("(7) - High or Low");
@@ -51,10 +56,9 @@ public class GameMenu {
                 craps.launchCraps();*/
                 return "You would be playing craps now.";
             case 4:
-                console.print("You would be playing Chutes and Ladders now.");
-                /*ChutesAndLadders chutesAndLadders = new ChutesAndLadders;()
-                chutesAndLadders.launchChutesAndLadders()*/
-                return "You would be playing Chutes and Ladders now.";
+                SnakesAndLadders SnakesAndLadders = new SnakesAndLadders();
+                SnakesAndLadders.runSnakesAndLadders(currentPlayer);
+                break;
             case 5:
                 console.print("You would be playing Roulette now.");
                 /*Roulette roulette = new Roulette;
@@ -72,7 +76,7 @@ public class GameMenu {
                 highAndLow.runHighOrLow(currentPlayer);
                 break;
             case 8:
-                casino.runCasinoMenu(currentPlayer);
+                running = false;
                 break;
 
         }
