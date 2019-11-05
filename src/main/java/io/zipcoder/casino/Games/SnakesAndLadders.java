@@ -4,14 +4,16 @@ import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
 import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class SnakesAndLadders implements Game {
-    Console console = new Console(System.in, System.out);
-    Dice dice = new Dice();
+    private Console console = new Console(System.in, System.out);
+    private Dice dice = new Dice();
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
     private SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
     private Player currentPlayer;
@@ -76,7 +78,7 @@ public class SnakesAndLadders implements Game {
         Integer roll = dice.rollDice(1);
         playerPiece.setCurrentPosition(playerPiece.getCurrentPosition() + roll);
         Integer currentPosition = playerPiece.getCurrentPosition();
-        dice.diceArt(roll);
+        console.println(dice.diceArt(roll));
         console.println("You've rolled a %d. Your current position is now %d.", roll, currentPosition);
         return currentPosition;
     }
@@ -85,7 +87,7 @@ public class SnakesAndLadders implements Game {
         Integer roll = dice.rollDice(1);
         aiPiece.setCurrentPosition(aiPiece.getCurrentPosition() + roll);
         Integer currentPosition = aiPiece.getCurrentPosition();
-        dice.diceArt(roll);
+        console.println(dice.diceArt(roll));
         console.println("I've rolled a %d. My current position is now %d.", roll, currentPosition);
         return currentPosition;
     }
@@ -125,73 +127,6 @@ public class SnakesAndLadders implements Game {
             }
             return newPosition;
         }
-
-
-    /*public Integer SnakesAndLaddersChecker(Integer position) {
-        Integer newPosition = 0;
-        switch (position) {
-            case 1:
-                newPosition = 38;
-                break;
-            case 4:
-                newPosition = 14;
-                break;
-            case 9:
-                newPosition = 31;
-                break;
-            case 16:
-                newPosition = 6;
-                break;
-            case 21:
-                newPosition = 42;
-                break;
-            case 28:
-                newPosition = 84;
-                break;
-            case 36:
-                newPosition = 44;
-                break;
-            case 51:
-                newPosition = 67;
-                break;
-            case 71:
-                newPosition = 91;
-                break;
-            case 47:
-                newPosition = 26;
-                break;
-            case 49:
-                newPosition = 11;
-                break;
-            case 56:
-                newPosition = 53;
-                break;
-            case 62:
-                newPosition = 19;
-                break;
-            case 64:
-                newPosition = 60;
-                break;
-            case 80:
-                newPosition = 99;
-                break;
-            case 87:
-                newPosition = 24;
-                break;
-            case 93:
-                newPosition = 73;
-                break;
-            case 95:
-                newPosition = 75;
-                break;
-            case 98:
-                newPosition = 78;
-                break;
-            default:
-                return position;
-        }
-        return newPosition;
-    }*/
 
     public Integer playerSnakesAndLadders(Integer position) {
         Integer newPosition = SnakesAndLaddersCheckerViaMap(position);
@@ -239,12 +174,11 @@ public class SnakesAndLadders implements Game {
     }
 
 
-
     @Override
     public void approachTable(Player currentPlayer) {
         console.println("You approach the Snakes and Ladders table. What would you like to do?");
         console.println("(1) - Play the game");
-        console.println("(2) - Hear the rules");
+        console.println("(2) - Read the rules");
         console.println("(3) - Return to the game menu");
         Integer playerInput = console.getIntegerInput(":");
         while(running) {
@@ -275,8 +209,12 @@ public class SnakesAndLadders implements Game {
             String winner = startNewGame();
             if (winner.equals("Player")) {
                 console.println("Congratulations! You won!");
+                LocalDateTime now = LocalDateTime.now();
+                currentPlayer.addHistory("You won at Snakes and Ladders. ** " + dtf.format(now) + "!");
             } else if (winner.equals("Ai")) {
                 console.println("Oh, Too bad! I won! Better lucky next time!");
+                LocalDateTime now = LocalDateTime.now();
+                currentPlayer.addHistory("You lost at Snakes and Ladders. ** " + dtf.format(now));
             }
             exitGame(currentPlayer);
         }
@@ -291,12 +229,11 @@ public class SnakesAndLadders implements Game {
         Integer playerInput = console.getIntegerInput(":");
         switch (playerInput){
             case 1:
-                runSnakesAndLadders(currentPlayer);
+                runGame(currentPlayer);
                 break;
             case 2:
                 running = false;
                 break;
         }
-
     }
 }
