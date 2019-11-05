@@ -181,9 +181,11 @@ public class ChutesAndLadders implements Game {
         Integer newPosition = chutesAndLaddersChecker(position);
         if (position > newPosition) {
             console.println("Uh-oh! I've hit a chute! I'm back at %d", newPosition);
+            aiPiece.setCurrentPosition(newPosition);
             return newPosition;
         } else if (position < newPosition){
             console.println("Hooray! I've hit a ladder! I'm now at %d.", newPosition);
+            aiPiece.setCurrentPosition(newPosition);
             return newPosition;
         }
         return position;
