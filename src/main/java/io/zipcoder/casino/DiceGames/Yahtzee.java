@@ -9,18 +9,21 @@ import java.util.Arrays;
 public class Yahtzee implements Game {
     private Player user;
     private static Console console = new Console(System.in, System.out);
-    private boolean[] availableOptions = new boolean[14];
-    private String[] availableOptionsNames = {"","1s", "2s", "3s", "4s", "5s","6s","3 of a kind","4 of a kind",
-            "Small Straight", "Large Straight", "Full House", "Yahtzee", "Chance"};
+
+    private boolean continuePlay;
+
     private Dice[] myDice;
     int points;
+    private String[] availableOptionsNames = {"","1s", "2s", "3s", "4s", "5s","6s","3 of a kind","4 of a kind",
+                                              "Small Straight", "Large Straight", "Full House", "Yahtzee", "Chance"};
+
+
 
     public Yahtzee(Player player){
         this.user = player;
-        Arrays.fill(this.availableOptions, true);
-        this.availableOptions[0] = false;
         this.myDice = createDice();
         this.points = 0;
+        continuePlay = false;
     }
 
     public void startGame(){
@@ -30,13 +33,16 @@ public class Yahtzee implements Game {
             //chooseEvaluation
         }
         displayResults();
+        promptLeaveGame();
     }
 
     public void promptLeaveGame(){
+        console.getStringInput("Would you like to play again?\n1. Play again\n2. Exit");
 
     }
     public void displayResults(){
          console.println("Your final score is: " + this.points);
+         console.getStringInput("Press enter to continue ");
     }
 
     public Dice[] createDice(){
@@ -115,11 +121,10 @@ public class Yahtzee implements Game {
                 else if(choice < 1 || choice > 13){
                     console.println("Please pick an option within the bounds.");
                 }
-                else if(this.availableOptions[choice] == false){
+                else if(this.availableOptionsName[choice].equals(" ")){
                     console.println("Box already picked.  Please choose again.");
                 }
                 else{
-                    availableOptions[choice] = false;
                     availableOptionsNames[choice] = " ";
                     evaluated = true;
                 }
@@ -147,6 +152,7 @@ public class Yahtzee implements Game {
         }
         return 0;
     }
+*/
 
     public int checkForFaces(Integer[] diceValues, int valueToLookFor){
         int results = 0;
@@ -273,7 +279,7 @@ public class Yahtzee implements Game {
         }
         return 50;
     }
-
+/*
     public Integer[] getDiceValues(){
         Integer[] values = new Integer[5];
         for(int i = 0; i < this.myDice.length; i++){
@@ -282,5 +288,6 @@ public class Yahtzee implements Game {
         return values;
 
     }
-    */
+*/
+
 }
