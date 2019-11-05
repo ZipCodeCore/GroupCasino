@@ -57,6 +57,12 @@ public class CardSet {
         this.cards.add(cardToAdd);
     }
 
+    public void addCards(ArrayList<Card> cardsToAdd) {
+        for (Card card : cardsToAdd) {
+            this.cards.add(card);
+        }
+    }
+
     public void clear() {
         this.cards.clear();
     }
