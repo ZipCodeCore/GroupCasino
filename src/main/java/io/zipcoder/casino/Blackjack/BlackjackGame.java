@@ -126,7 +126,7 @@ public class BlackjackGame extends CardGame implements Game {
             if (gameServices.wager(wager, this.player.getPlayer())) {
                 return wager;
             } else {
-                console.println(String.format("[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
+                console.println(String.format("\n[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
                 return betChoice();
             }
         } else {
@@ -194,7 +194,19 @@ public class BlackjackGame extends CardGame implements Game {
         //temporary
         console.clearScreen();
 
-        console.println(String.format("*** Blackjack ***\nTable stakes: $%.2f min / $%.2f max\n", this.minBet, this.maxBet));
+        console.println(String.format(" .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
+                "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" +
+                "| |   ______     | || |   _____      | || |      __      | || |     ______   | || |  ___  ____   | || |     _____    | || |      __      | || |     ______   | || |  ___  ____   | |\n" +
+                "| |  |_   _ \\    | || |  |_   _|     | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | || |    |_   _|   | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | |\n" +
+                "| |    | |_) |   | || |    | |       | || |    / /\\ \\    | || |  / .'   \\_|  | || |   | |_/ /    | || |      | |     | || |    / /\\ \\    | || |  / .'   \\_|  | || |   | |_/ /    | |\n" +
+                "| |    |  __'.   | || |    | |   _   | || |   / ____ \\   | || |  | |         | || |   |  __'.    | || |   _  | |     | || |   / ____ \\   | || |  | |         | || |   |  __'.    | |\n" +
+                "| |   _| |__) |  | || |   _| |__/ |  | || | _/ /    \\ \\_ | || |  \\ `.___.'\\  | || |  _| |  \\ \\_  | || |  | |_' |     | || | _/ /    \\ \\_ | || |  \\ `.___.'\\  | || |  _| |  \\ \\_  | |\n" +
+                "| |  |_______/   | || |  |________|  | || ||____|  |____|| || |   `._____.'  | || | |____||____| | || |  `.___.'     | || ||____|  |____|| || |   `._____.'  | || | |____||____| | |\n" +
+                "| |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |\n" +
+                "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" +
+                " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n" + "\n" + "\n" + "\n" +
+
+                "\nTable stakes: $%.2f min / $%.2f max\n", this.minBet, this.maxBet));
         console.println("[Dealer's Hand]:");
         BlackjackHand dealerHand = this.dealer.getHands().get(0);
         for (Card card : dealerHand.getCards().getCards()) {

@@ -4,6 +4,7 @@ import io.zipcoder.casino.Interfaces.Menu;
 import io.zipcoder.casino.Utilities.Music;
 import io.zipcoder.casino.Utilities.Console;
 
+
 public class RRMenu implements Menu {
 
     private Console console;
@@ -23,7 +24,7 @@ public class RRMenu implements Menu {
     public void displayMenu() {
         //Starts playing music!
         try {
-            Music.filePath = "src/music/(Craps) Amor maior - Higher Love.wav";
+            Music.filePath = "src/music/(Roulette) Kirby Star Allies Music.wav";
             rouletteMusic = new Music();
             rouletteMusic.play();
         } catch (Exception ex) {
