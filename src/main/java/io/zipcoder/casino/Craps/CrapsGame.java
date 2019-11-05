@@ -5,6 +5,7 @@ import io.zipcoder.casino.Interfaces.GamblingGame;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.CrapsMenu;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Utilities.Console;
 
 import java.util.Scanner;
 
@@ -23,9 +24,9 @@ public class CrapsGame extends DiceGame implements Game {
     //    private int numberOfRolls;      //an integer from 1-4
     private Integer setThePointRoll;    //saves your first roll to try to match with later rolls
     private Integer currentRoll;        //any roll after the first
-    Scanner scanner = new Scanner(System.in);
     String r;
     Integer counter;
+    Console console = new Console(System.in, System.out);
 
 
     //Craps Game Constructor
@@ -51,13 +52,13 @@ public class CrapsGame extends DiceGame implements Game {
     //runs a new game of craps
     public void roundOfPlay() {
         userRollsDiceSetPoint();
-        displayPointRoll(setThePointRoll);
         if (winOnFirst(setThePointRoll) == true) {
             winningMessageFirstRoll();
             calculatePayout();
         } else if (loseOnFirst(setThePointRoll) == true) {
             losingMessageFirstRoll();
         } else {
+            displayPointRoll(setThePointRoll);
             for (int i = 0; i < 3; i++) {
                 userRollsDiceCurrentPoint();
                 displayCurrentRoll(currentRoll);
@@ -76,15 +77,15 @@ public class CrapsGame extends DiceGame implements Game {
     @Override
     //implements menu whether you want to quit or go again
     public void endChoice() {
-        System.out.println("You have finished this game of Craps. Would you like to play again? (Y/N)");
-        if (scanner.next().toUpperCase().equals("N")) {
-            System.out.println("Have a good rest of your day.");
+        String endChoiceInput = console.getInput("You have finished this game of Craps. Would you like to play again? (Y/N)\n");
+        if (endChoiceInput.toUpperCase().equals("N")) {
+            console.println("Have a good rest of your day.");
             //also, return to the main menu
-        } else if (scanner.next().toUpperCase().equals("Y")) {
-            System.out.println("That's great!!!");
+        } else if (endChoiceInput.toUpperCase().equals("Y")) {
+            console.println("That's great!!!");
             startPlay();
         } else {
-            System.out.println("That's not a valid selection. Please choose again.");
+            console.println("That's not a valid selection. Please choose again.");
             endChoice();
         }
     }
@@ -132,26 +133,26 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     public void userRollsDiceSetPoint() {
-        System.out.println("\nPress r to roll the dice\n");
-        String r = scanner.next().toLowerCase();
-        try { if (!r.equals("r")){
-            throw new Exception("Invalid Choice!");}}
-
-        catch (Exception e) {
-            userRollsDiceSetPoint();
-        }
+        console.getInput("\nPress Enter to roll the dice\n");
+//        String r = scanner.next().toLowerCase();
+//        try { if (!r.equals("r")){
+//            throw new Exception("Invalid Choice!");}}
+//
+//        catch (Exception e) {
+//            userRollsDiceSetPoint();
+//        }
         tossPointRoll();
     }
 
     public void userRollsDiceCurrentPoint() {
-        System.out.println("\nPress r to roll the dice\n");
-        String r = scanner.next().toLowerCase();
-        try { if (!r.equals("r")){
-            throw new Exception("Invalid Choice!");}}
-
-        catch (Exception e) {
-            userRollsDiceSetPoint();
-        }
+        console.getInput("\nPress Enter to roll the dice\n");
+//        String r = scanner.next().toLowerCase();
+//        try { if (!r.equals("r")){
+//            throw new Exception("Invalid Choice!");}}
+//
+//        catch (Exception e) {
+//            userRollsDiceSetPoint();
+//        }
         tossCurrentRoll();
     }
 
