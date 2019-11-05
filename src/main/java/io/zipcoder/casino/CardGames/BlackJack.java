@@ -10,6 +10,7 @@ import java.sql.SQLOutput;
 //import javax.smartcardio.Card;
 
 
+
 public class BlackJack implements GamblingGame {
     Console input = new Console(System.in, System.out);
     GamblingPlayer gamblingPlayer;
@@ -17,6 +18,9 @@ public class BlackJack implements GamblingGame {
     Deck blackJackDeck;
     CardHand computerHand;
     boolean winGame = false;
+
+
+    private Player user;
 
     private int answerHitOrStay;
     private int wageBucket;

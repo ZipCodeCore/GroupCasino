@@ -5,13 +5,21 @@ import java.util.ArrayList;
 
 
 public class Dice {
+
+    // fields-----------------------------------------------------------------------------------------------------------
+
     private boolean kept;
     private int value;
+
+    // constructor------------------------------------------------------------------------------------------------------
 
     public Dice(){
         kept = false;
         value = 0;
     }
+
+    // methods----------------------------------------------------------------------------------------------------------
+
     public void rollDice(){
         this.value = (int)(Math.random() * ((6 - 1) + 1)) + 1;
     }
@@ -19,6 +27,8 @@ public class Dice {
     public void keptOrRolled(){
         kept = !kept;
     }
+
+    // getters and setters----------------------------------------------------------------------------------------------
 
     public boolean isKept() {
         return kept;
@@ -31,6 +41,9 @@ public class Dice {
     public int getValue() {
         return value;
     }
+
+    // toString---------------------------------------------------------------------------------------------------------
+
     public String toString(){
         return String.format("Value: %d  : Keeping: %b", value, kept);
     }
