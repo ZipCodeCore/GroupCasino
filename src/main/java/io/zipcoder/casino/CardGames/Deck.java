@@ -34,8 +34,9 @@ public class Deck {
        // for(Card card : deckOfCards)
             //System.out.println(card.toString());
 
-        //System.out.println(shuffleDeck().toString());
-        //System.out.println(deckOfCards.size());
+        System.out.println(shuffleDeck().toString());
+        System.out.println(deckOfCards.size());
+        System.out.println(drawCard());
     }
 
     public void dealCards(int numberOfCards){
@@ -43,16 +44,15 @@ public class Deck {
     }
 
 
-    /*public Card drawCard(){
-        if (deckOfCards.size() > 0){
-            Card drawnCard = deckOfCards.get(deckOfCards.size() - 1);
-            deckOfCards.remove(deckOfCards.size() - 1);
+    public Card drawCard(){
+        if (!deckOfCards.isEmpty()){
+            Card drawnCard = deckOfCards.pop();
             return drawnCard;
         } else
             System.out.println("Deck is empty");
 
         return null;
-    }*/
+    }
 
 }
 
