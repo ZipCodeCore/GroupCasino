@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.*;
 
 public class Deck {
+
     Console console = new Console(System.in,System.out);
     ArrayList<Card> deck = new ArrayList<>();
 
@@ -17,6 +18,7 @@ public class Deck {
                 Card card= new Card(value, Suit.values()[j]);
                 this.deck.add(card);
             }
+
         }
     }
 
@@ -27,9 +29,10 @@ public class Deck {
     }
 
     public Card draw(){
-        Card drawnCard = deck.remove(0);
 
-        console.println(drawnCard.toString());
-        return drawnCard;
+        Card drawCard = deck.remove(0);
+        console.println(drawCard.toString());
+        return drawCard;
+
     }
 }

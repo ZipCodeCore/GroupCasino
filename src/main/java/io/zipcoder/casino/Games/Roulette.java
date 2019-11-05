@@ -3,10 +3,15 @@
 import io.zipcoder.casino.Player;
 
 
+
 public class Roulette implements Game, GamblingGame{
     @Override
+
     public void approachTable(Player currentPLayer) {
 
+
+
+    public void runGame(Player currentPlayer){
 
         //prompting player to place bet
         // prompting to pick number
@@ -22,6 +27,7 @@ public class Roulette implements Game, GamblingGame{
     public void placeBet(Player currentPlayer){
 
     }
+
     @Override
     public void returnWinnings(Player currentPlayer){
 
@@ -31,5 +37,6 @@ public class Roulette implements Game, GamblingGame{
     public void runGame(Player currentPlayer) {
 
     }
+
 }
 */
