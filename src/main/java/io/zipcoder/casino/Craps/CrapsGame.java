@@ -26,6 +26,7 @@ public class CrapsGame extends DiceGame implements Game {
     private Integer currentRoll;        //any roll after the first
     String r;
     Integer counter;
+    Integer numRolls = 0;
     private Console console = new Console(System.in, System.out);
     private GameServices gameServices = new GameServices();
 
@@ -75,9 +76,10 @@ public class CrapsGame extends DiceGame implements Game {
                         break;
                     }
                     if (i == 2){losingMessageOutOfRolls();}
+                    numRolls = i + 1;
                 }
             }
-        }
+        }calculateWinnings(betSize, setThePointRoll, numRolls);
     }
 
     public Double betChoice(){
@@ -94,6 +96,23 @@ public class CrapsGame extends DiceGame implements Game {
         }else {
             return null;
         }
+    }
+
+    public Double calculateWinnings(Double wager, Integer setThePointRoll, Integer numRolls){
+        // PUT THE PAY TABLE HERE
+        if (setThePointRoll == 4 || setThePointRoll == 10){
+            gameServices.payOut((7 - numRolls) * wager, this.player.getPlayer());
+            return (7 - numRolls) * wager;
+            }
+        else if (setThePointRoll == 5 || setThePointRoll == 9){
+            gameServices.payOut((6 - numRolls) * wager, this.player.getPlayer());
+            return (6 - numRolls) * wager;
+        }
+        else if (setThePointRoll == 6 || setThePointRoll == 8){
+            gameServices.payOut((5 - numRolls) * wager, this.player.getPlayer());
+            return (5 - numRolls) * wager;
+        }
+        return 0.0;
     }
 
     @Override
