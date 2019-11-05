@@ -12,7 +12,7 @@ public class App {
     private Console menu;
     private String userId = "";
     private String userPassword = "";
-    private Player newPlayer = new Player();
+    private Player newPlayer = new Player( userId,userPassword);
 
     public void App (){
 
