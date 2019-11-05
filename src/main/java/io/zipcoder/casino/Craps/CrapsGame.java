@@ -5,6 +5,7 @@ import io.zipcoder.casino.Interfaces.GamblingGame;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.CrapsMenu;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.Utilities.Console;
 
 import java.util.Scanner;
@@ -21,19 +22,19 @@ public class CrapsGame extends DiceGame implements Game {
     private double minBet;
     private double maxBet;
     private CrapsPlayer player;
-    //    private int numberOfRolls;      //an integer from 1-4
     private Integer setThePointRoll;    //saves your first roll to try to match with later rolls
     private Integer currentRoll;        //any roll after the first
     String r;
     Integer counter;
-    Console console = new Console(System.in, System.out);
+    private Console console = new Console(System.in, System.out);
+    private GameServices gameServices = new GameServices();
 
 
     //Craps Game Constructor
-    public CrapsGame(double minBet, double maxBet, Player player) {
+    public CrapsGame(double minBet, double maxBet, Player incomingPlayer) {
         this.minBet = minBet;
         this.maxBet = maxBet;
-        CrapsPlayer newPlayer = new CrapsPlayer(player);
+        this.player = new CrapsPlayer(incomingPlayer);
     }
 
     public String getName() {
@@ -51,33 +52,54 @@ public class CrapsGame extends DiceGame implements Game {
     @Override
     //runs a new game of craps
     public void roundOfPlay() {
-        userRollsDiceSetPoint();
-        if (winOnFirst(setThePointRoll) == true) {
-            winningMessageFirstRoll();
-            calculatePayout();
-        } else if (loseOnFirst(setThePointRoll) == true) {
-            losingMessageFirstRoll();
-        } else {
-            displayPointRoll(setThePointRoll);
-            for (int i = 0; i < 3; i++) {
-                userRollsDiceCurrentPoint();
-                displayCurrentRoll(currentRoll);
-                if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
-                    System.out.println(String.format("Hooray! You rolled a %d. You won!!", currentRoll)); //if time, map a custom answer depending on whether you won on the first, second, or third roll
-                    calculatePayout();
-                    break;
-                } else if (loseOnSubsequent(currentRoll) == true) {
-                    System.out.println(String.format("You rolled a %d. It appears that the odds were not in your favor today. Better luck next time.....", currentRoll));
-                    break;
+        console.println("");
+        Double betSize = betChoice();
+        if(betSize != null){
+            userRollsDiceSetPoint();
+            if (winOnFirst(setThePointRoll) == true) {
+                winningMessageFirstRoll();
+                calculatePayout();
+            } else if (loseOnFirst(setThePointRoll) == true) {
+                losingMessageFirstRoll();
+            } else {
+                displayPointRoll(setThePointRoll);
+                for (int i = 0; i < 3; i++) {
+                    userRollsDiceCurrentPoint();
+                    displayCurrentRoll(currentRoll);
+                    if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
+                        console.println(String.format("Hooray!!!!!!\nYou rolled a %d.\nYou won!!", currentRoll)); //if time, map a custom answer depending on whether you won on the first, second, or third roll
+                        calculatePayout();
+                        break;
+                    } else if (loseOnSubsequent(currentRoll) == true) {
+                        console.println(String.format("It appears that the odds were not in your favor today.\nBetter luck next time.....\n-----------------------------------------------\n\n", currentRoll));
+                        break;
+                    }
+                    if (i == 2){losingMessageOutOfRolls();}
                 }
             }
+        }
+    }
+
+    public Double betChoice(){
+        Double wager;
+        console.println(String.format("[CROUPIER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance()));
+        wager = console.getCurrency("[CROUPIER]: Bet size (press Enter to stand up): ", this.minBet,this.maxBet);
+        if (wager != null){
+            if (gameServices.wager(wager, this.player.getPlayer())) {
+                return wager;
+            } else {
+                console.println(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
+                return betChoice();
+            }
+        }else {
+            return null;
         }
     }
 
     @Override
     //implements menu whether you want to quit or go again
     public void endChoice() {
-        String endChoiceInput = console.getInput("You have finished this game of Craps. Would you like to play again? (Y/N)\n");
+        String endChoiceInput = console.getInput("You have finished this game of Craps.\nWould you like to play again? (Y/N)\n");
         if (endChoiceInput.toUpperCase().equals("N")) {
             console.println("Have a good rest of your day.");
             //also, return to the main menu
@@ -112,7 +134,6 @@ public class CrapsGame extends DiceGame implements Game {
             return true;
         }
         return false;
-
     }
 
     public boolean loseOnSubsequent(Integer currentRoll) {
@@ -134,35 +155,13 @@ public class CrapsGame extends DiceGame implements Game {
 
     public void userRollsDiceSetPoint() {
         console.getInput("\nPress Enter to roll the dice\n");
-//        String r = scanner.next().toLowerCase();
-//        try { if (!r.equals("r")){
-//            throw new Exception("Invalid Choice!");}}
-//
-//        catch (Exception e) {
-//            userRollsDiceSetPoint();
-//        }
         tossPointRoll();
     }
 
     public void userRollsDiceCurrentPoint() {
-        console.getInput("\nPress Enter to roll the dice\n");
-//        String r = scanner.next().toLowerCase();
-//        try { if (!r.equals("r")){
-//            throw new Exception("Invalid Choice!");}}
-//
-//        catch (Exception e) {
-//            userRollsDiceSetPoint();
-//        }
+        console.getInput(String.format("-------------------------------------------------\nSet the Point Roll: %d\nPress Enter to roll the dice\n", setThePointRoll));
         tossCurrentRoll();
     }
-
-//    public Integer RollPointNum(String r) {
-//        if (r.equals("r")) {
-//            setThePointRoll = DiceGame.roll(2);
-//            return setThePointRoll;
-//        } else notR();
-//        return 0;
-//    }
 
 
 
@@ -172,19 +171,23 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     public void displayPointRoll(Integer setThePointRoll) {
-        System.out.println(String.format("You have rolled a %d on your first roll", setThePointRoll));
+        console.println(String.format("You have rolled a %d for your set the point roll.", setThePointRoll));
     }
 
     public void displayCurrentRoll(Integer currentRoll) {
-        System.out.println(String.format("You have rolled a %d for this roll", currentRoll));
+        console.println(String.format("You have rolled a %d for this roll.", currentRoll));
     }
 
     public void winningMessageFirstRoll() {
-        System.out.println(String.format("You rolled a %d on the first roll!  Congratulations!! You are a winner!!!", setThePointRoll));
+        console.println(String.format("You rolled a %d on the first roll!\nCongratulations!!\nYou are a winner!!!\n------------------------------------------\n\n", setThePointRoll));
     }
 
     public void losingMessageFirstRoll() {
-        System.out.println(String.format("You rolled a %d and have lost on the first roll! This is unfortunate..... :( ", setThePointRoll));
+        console.println(String.format("You rolled a %d and have lost on the first roll!\nThis is unfortunate.....\n:(\n-------------------------------------------\n\n", setThePointRoll));
+    }
+
+    public void losingMessageOutOfRolls() {
+        console.println(String.format("You are out of rolls.\nYou seem to have lost.\nThis is unfortunate.....\n:(\n-----------------------------------------\n\n", setThePointRoll));
     }
 
     public Integer tossCurrentRoll() {
