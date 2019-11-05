@@ -5,7 +5,6 @@ import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Utilities.Console;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class BlackjackHand {
@@ -62,7 +61,7 @@ public class BlackjackHand {
             splitHand();
             return -1;
         } else { // normal case
-            console.println("1. Hit\n2. Stay\n");
+            console.printWithDelays("1. Hit\n2. Stay\n");
 
             switch (console.menuChoice(2)) {
                 case 1:

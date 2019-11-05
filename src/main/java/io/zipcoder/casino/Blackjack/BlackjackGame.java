@@ -1,6 +1,5 @@
 package io.zipcoder.casino.Blackjack;
 
-import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardGame;
 import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Interfaces.Game;
@@ -126,7 +125,7 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public void roundStart() {
-        console.println("");
+        console.printWithDelays("");
         Double betSize = betChoice();
         if (betSize != null) {
             initialDeal(betSize);
@@ -146,13 +145,13 @@ public class BlackjackGame extends CardGame implements Game {
 
     public Double betChoice () {
         Double wager;
-        console.println("[DEALER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance());
+        console.printWithDelays("[DEALER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance());
         wager = console.getCurrency("[DEALER]: Bet size (or press Enter to stand up): ", this.minBet, this.maxBet);
         if (wager != null) {
             if (gameServices.wager(wager, this.player.getPlayer())) {
                 return wager;
             } else {
-                console.println(String.format("\n[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
+                console.printWithDelays(String.format("\n[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
                 return betChoice();
             }
         } else {
@@ -220,7 +219,7 @@ public class BlackjackGame extends CardGame implements Game {
         //temporary
         console.clearScreen();
 
-        console.println(String.format(" .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
+        console.printWithDelays(String.format(" .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
                 "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" +
                 "| |   ______     | || |   _____      | || |      __      | || |     ______   | || |  ___  ____   | || |     _____    | || |      __      | || |     ______   | || |  ___  ____   | |\n" +
                 "| |  |_   _ \\    | || |  |_   _|     | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | || |    |_   _|   | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | |\n" +
@@ -233,12 +232,12 @@ public class BlackjackGame extends CardGame implements Game {
                 " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n" + "\n" + "\n" + "\n" +
 
                 "\nTable stakes: $%.2f min / $%.2f max\n", this.minBet, this.maxBet));
-        console.println("[Dealer's Hand]:");
+        console.printWithDelays("[Dealer's Hand]:");
         BlackjackHand dealerHand = this.dealer.getHands().get(0);
 
         console.print(dealerHand.getCards().toASCII());
-        console.println("\n");
-        console.println(String.format("[%s's Hand(s)]:",this.player.getPlayer().getFirstName()));
+        console.printWithDelays("\n");
+        console.printWithDelays(String.format("[%s's Hand(s)]:",this.player.getPlayer().getFirstName()));
         ArrayList<BlackjackHand> playerHands =  this.player.getHands();
         for (BlackjackHand hand : playerHands) {
             console.print(hand.getCards().toASCII());
@@ -246,7 +245,7 @@ public class BlackjackGame extends CardGame implements Game {
             if (showWinnings) {
                 console.print(winningMessage(hand));
             }
-            console.println("\n");
+            console.printWithDelays("\n");
         }
 
     }

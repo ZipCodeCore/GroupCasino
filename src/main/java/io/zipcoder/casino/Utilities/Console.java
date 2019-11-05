@@ -31,7 +31,7 @@ public final class Console {
 //    }
 
     public String getStringInput(String prompt, Object... args) {
-        println(prompt, args);
+        printWithDelays(prompt, args);
         return input.nextLine();
     }
 
@@ -46,7 +46,7 @@ public final class Console {
         while (true) {
             if (cardCheck(input)) break;
             else {
-                println("Invalid card rank");
+                printWithDelays("Invalid card rank");
                 print(prompt);
                 input = getInput("Choose a card: ");
             }
@@ -85,7 +85,7 @@ public final class Console {
 
     public void clearScreen() {
         for (int i = 0; i <100; i++) {
-            println(" ");
+            printWithDelays(" ");
         }
     }
 
@@ -93,7 +93,7 @@ public final class Console {
         this.output.printf(output, args);
     }
 
-    public void println(String output, Object... args) {
+    public void printWithDelays(String output, Object... args) {
         print(output + "\n", args);
     }
 
@@ -136,7 +136,7 @@ public final class Console {
             output += rows[i];
         }
 
-        println(output);
+        printWithDelays(output);
 
         return getInteger(numOptions);
 
@@ -164,7 +164,7 @@ public final class Console {
             output += rows[i];
         }
 
-        println(output);
+        printWithDelays(output);
 
         return Integer.toString(getInteger(numOptions));
 
@@ -183,7 +183,7 @@ public final class Console {
         while (true) {
             if (currencyCheck(input)) break;
             else {
-                println("Enter a number");
+                printWithDelays("Enter a number");
                 input = getInput("$");
             }
         }
@@ -196,7 +196,7 @@ public final class Console {
         while (true) {
             if (currencyCheck(input)) break;
             else {
-                println("Enter a valid number");
+                printWithDelays("Enter a valid number");
                 print(prompt);
                 input = getInput("$");
             }
@@ -216,13 +216,13 @@ public final class Console {
                 if (amount >= min && amount <= max) {
                     break;
                 } else {
-                    println(String.format("Enter a number between %.2f and %.2f", min, max));
+                    printWithDelays(String.format("Enter a number between %.2f and %.2f", min, max));
                     print(prompt);
                     input = getInput("$");
                 }
             }
             else {
-                println("Enter a valid number");
+                printWithDelays("Enter a valid number");
                 print(prompt);
                 input = getInput("$");
             }
@@ -235,7 +235,7 @@ public final class Console {
         while (true) {
             if (integerCheck(input)) break;
             else {
-                println("Enter a number");
+                printWithDelays("Enter a number");
                 input = getInput();
             }
         }
@@ -247,7 +247,7 @@ public final class Console {
         while (true) {
             if (integerCheck(input)) break;
             else {
-                println("Enter a number.");
+                printWithDelays("Enter a number.");
                 input = getInput(prompt);
             }
         }
@@ -261,12 +261,12 @@ public final class Console {
                 if (Integer.parseInt(input) >= 1 && Integer.parseInt(input) <= max) {
                     break;
                 } else {
-                    println("Enter a number between 1 and " + Integer.toString(max));
+                    printWithDelays("Enter a number between 1 and " + Integer.toString(max));
                     input = getInput();
                 }
             }
             else {
-                println("Enter a number");
+                printWithDelays("Enter a number");
                 input = getInput();
             }
         }

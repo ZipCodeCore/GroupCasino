@@ -43,7 +43,7 @@ public class TellerMenu implements Menu {
             System.out.println("Error with playing sound.");
             ex.printStackTrace();
         }
-        console.println("          .-------.\n" +
+        console.printWithDelays("          .-------.\n" +
                 "       oO{-JACKPOT-}Oo\n" +
                 "       .=============. __\n" +
                 "       | [a] [X] [o] |(  )\n" +
@@ -63,10 +63,10 @@ public class TellerMenu implements Menu {
         console.printWithDelays("[TELLER]: What can I do for ya?\n",TimeUnit.MILLISECONDS, 50);
 
         // temporary
-        console.println("\n1. Deposit funds");
-        console.println("2. Cash out");
-        console.println("3. Back to lobby");
-        console.println(String.format("\nCurrent balance: $%.2f\n", player.getBalance()));
+        console.printWithDelays("\n1. Deposit funds");
+        console.printWithDelays("2. Cash out");
+        console.printWithDelays("3. Back to lobby");
+        console.printWithDelays(String.format("\nCurrent balance: $%.2f\n", player.getBalance()));
 
         handleChoice(console.getInteger(3));
     }
@@ -124,7 +124,7 @@ public class TellerMenu implements Menu {
             gameServices.deposit(funds, this.player);
             console.printWithDelays("[TELLER]: Don't spend it all in once place\n", TimeUnit.MILLISECONDS, 50);
         } else {
-            console.println(String.format("\nDepositing $%.2f\n",funds));
+            console.printWithDelays(String.format("\nDepositing $%.2f\n",funds));
             console.printWithDelays(". . .",TimeUnit.SECONDS,1);
             gameServices.deposit(funds, this.player);
             console.printWithDelays("\n[TELLER]: Here you go! Good luck at the tables.\n", TimeUnit.MILLISECONDS, 50);

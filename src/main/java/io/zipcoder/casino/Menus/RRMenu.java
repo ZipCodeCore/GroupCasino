@@ -33,7 +33,7 @@ public class RRMenu implements Menu {
         }
         console.clearScreen();
 
-        console.println("Da");
+        console.printWithDelays("Da");
     }
 
     @Override

@@ -1,18 +1,21 @@
 package io.zipcoder.casino.Craps;
 
 import io.zipcoder.casino.DiceGame;
-import io.zipcoder.casino.Interfaces.GamblingGame;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.CrapsMenu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.Utilities.Music;
 
-import java.util.Scanner;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class CrapsGame extends DiceGame implements Game {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Player player = new Player ("Jeff","Smith", 28, 300.00);
         CrapsGame crapsGame = new CrapsGame(10.00,50.00,player);
         crapsGame.startPlay();
@@ -29,6 +32,7 @@ public class CrapsGame extends DiceGame implements Game {
     Integer counter=1;
     private Console console = new Console(System.in, System.out);
     private GameServices gameServices = new GameServices();
+    Music crapsMusic = null;
 
 
     //Craps Game Constructor
@@ -44,15 +48,42 @@ public class CrapsGame extends DiceGame implements Game {
 
     @Override
     //creates dice and runs a roundOfPlay
-    public void startPlay() {
+    public void startPlay() throws InterruptedException {
+
+        //Starts playing music!
+        try {
+            Music.filePath = "src/music/(Craps) Amor maior - Higher Love.wav";
+            crapsMusic = new Music();
+            crapsMusic.play();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
         new CrapsMenu(this).displayMenu();
+        console.print(" \n::::::::  :::::::::      :::     :::::::::   ::::::::  \n" +
+                ":+:    :+: :+:    :+:   :+: :+:   :+:    :+: :+:    :+: \n" +
+                "+:+        +:+    +:+  +:+   +:+  +:+    +:+ +:+        \n" +
+                "+#+        +#++:++#:  +#++:++#++: +#++:++#+  +#++:++#++ \n" +
+                "+#+        +#+    +#+ +#+     +#+ +#+               +#+ \n" +
+                "#+#    #+# #+#    #+# #+#     #+# #+#        #+#    #+# \n" +
+                " ########  ###    ### ###     ### ###         ########  \n");
         roundOfPlay();
+        try {
+            crapsMusic.stop();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
         endChoice();
+
     }
 
     @Override
     //runs a new game of craps
-    public void roundOfPlay() {
+    public void roundOfPlay() throws InterruptedException {
         Double betSize = betChoice();
         userRollsDiceSetPoint();
         if (winOnFirst(setThePointRoll) == true) {
@@ -81,17 +112,17 @@ public class CrapsGame extends DiceGame implements Game {
         }
     }
 
-    public Double betChoice(){
+    public Double betChoice() throws InterruptedException {
         Double wager;
-        console.println(String.format("\n[CROUPIER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance()));
-        wager = console.getCurrency(String.format("[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: Bet size (press Enter to stand up): ", this.minBet, this.maxBet));
+        console.printWithDelays(String.format("\nCurrent bankroll: $%.2f", this.player.getPlayer().getBalance()), TimeUnit.MILLISECONDS, 50);
+        wager = console.getCurrency(String.format("\n[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: Bet size (press Enter to stand up): ", this.minBet, this.maxBet));
 
          if (wager > this.player.getPlayer().getBalance()){
-            console.println(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
+            console.printWithDelays(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()), TimeUnit.MILLISECONDS, 50);
             betChoice();
         }
         else if (wager < this.minBet || wager > this.maxBet) {
-            console.println("\n[CROUPIER]: You're not playing within the table limits, %s.", this.player.getPlayer().getLastName());
+            console.printWithDelays("\n[CROUPIER]: You're not playing within the table limits, %s.", this.player.getPlayer().getLastName(), TimeUnit.MILLISECONDS, 50);
             betChoice();
         }
         else if (wager != null) {
@@ -124,16 +155,16 @@ public class CrapsGame extends DiceGame implements Game {
 
     @Override
     //implements menu whether you want to quit or go again
-    public void endChoice() {
-        String endChoiceInput = console.getInput("You have finished this game of Craps.\nWould you like to play again? (Y/N)\n");
+    public void endChoice() throws InterruptedException {
+        String endChoiceInput = console.getInput("\n[CROUPIER]: You have finished this game of Craps.\n\nWould you like to play again? (Y/N)\n");
         if (endChoiceInput.toUpperCase().equals("N")) {
-            console.println("Have a good rest of your day.");
+            console.printWithDelays("\n[CROUPIER]: Have a good rest of your day.\n");
             //also, return to the main menu
         } else if (endChoiceInput.toUpperCase().equals("Y")) {
-            console.println("That's great!!!");
+            console.printWithDelays("\n[CROUPIER]: That's great!!!\n");
             startPlay();
         } else {
-            console.println("That's not a valid selection. Please choose again.");
+            console.printWithDelays("\n[CROUPIER]: That's not a valid selection. Please choose again.\n");
             endChoice();
         }
     }
@@ -175,13 +206,13 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     public void userRollsDiceSetPoint() {
-        console.getInput("\nPress Enter to roll the dice\n");
+        console.getInput("\n((Press Enter to roll the dice))\n" + "\n");
         tossPointRoll();
         counter++;
     }
 
     public void userRollsDiceCurrentPoint() {
-        console.getInput(String.format("-------------------------------------------------\nSet the Point Roll: %d\nPress Enter to roll the dice\n", setThePointRoll));
+        console.getInput(String.format("-------------------------------------------------\nSet the Point Roll: %d\nPress Enter to roll the dice\n", setThePointRoll), TimeUnit.MILLISECONDS, 50);
         tossCurrentRoll();
     }
 
@@ -190,24 +221,25 @@ public class CrapsGame extends DiceGame implements Game {
         return setThePointRoll;
     }
 
-    public void displayPointRoll(Integer setThePointRoll) {
-        console.println(String.format("You have rolled a %d for your set the point roll.", setThePointRoll));
+    public void displayPointRoll(Integer setThePointRoll) throws InterruptedException {
+        console.printWithDelays(String.format("\n((You have rolled a %d for your set the point roll.))\n", setThePointRoll), TimeUnit.MILLISECONDS, 50);
+
     }
 
-    public void displayCurrentRoll(Integer currentRoll) {
-        console.println(String.format("You have rolled a %d for this roll.", currentRoll));
+    public void displayCurrentRoll(Integer currentRoll) throws InterruptedException {
+        console.printWithDelays(String.format("\n((You have rolled a %d for this roll.))\n", currentRoll), TimeUnit.MILLISECONDS, 50);
     }
 
-    public void winningMessageFirstRoll() {
-        console.println(String.format("You rolled a %d on the first roll!\nCongratulations!!\nYou are a winner!!!\n------------------------------------------\n\n", setThePointRoll));
+    public void winningMessageFirstRoll() throws InterruptedException {
+        console.printWithDelays(String.format("\n((You rolled a %d on the first roll! \nCongratulations!!\n You are a winner!!!))\n------------------------------------------\n\n", setThePointRoll), TimeUnit.MILLISECONDS, 50);
     }
 
-    public void losingMessageFirstRoll() {
-        console.println(String.format("You rolled a %d and have lost on the first roll!\nThis is unfortunate.....\n:(\n-------------------------------------------\n\n", setThePointRoll));
+    public void losingMessageFirstRoll() throws InterruptedException {
+        console.printWithDelays(String.format("\nYou rolled a %d and have lost on the first roll!\nThis is unfortunate.....\n:(\n-------------------------------------------\n\n", setThePointRoll), TimeUnit.MILLISECONDS, 50);
     }
 
-    public void losingMessageOutOfRolls() {
-        console.println(String.format("You are out of rolls.\nYou seem to have lost.\nThis is unfortunate.....\n:(\n-----------------------------------------\n\n"));
+    public void losingMessageOutOfRolls() throws InterruptedException {
+        console.printWithDelays(String.format("\nYou are out of rolls.\nYou seem to have lost.\nThis is unfortunate.....\n:(\n-----------------------------------------\n\n"), TimeUnit.MILLISECONDS, 50);
     }
 
     public Integer tossCurrentRoll() {
@@ -216,12 +248,12 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
 
-    public void winOnSubsequentMessage () {
-        console.println(String.format("Hooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, counter));
+    public void winOnSubsequentMessage () throws InterruptedException {
+        console.printWithDelays(String.format("\nHooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, counter), TimeUnit.MILLISECONDS, 50);
     }
 
-    public void loseOnSubsequentMessage () {
-        console.println(String.format("It appears that the odds were not in your favor today.\nBetter luck next time.....\n-----------------------------------------------\n\n"));
+    public void loseOnSubsequentMessage () throws InterruptedException {
+        console.printWithDelays(String.format("\nIt appears that the odds were not in your favor today.\nBetter luck next time.....\n-----------------------------------------------\n\n"), TimeUnit.MILLISECONDS, 50);
     }
 }
 
