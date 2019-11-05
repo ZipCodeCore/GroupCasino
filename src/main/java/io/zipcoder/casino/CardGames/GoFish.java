@@ -7,7 +7,7 @@ import java.util.Stack;
 
 public class GoFish {
 
-    Player user = new Player();
+    Player user = new Player("1234", "password");
     Deck goFishDeck = new Deck(1);
 
     Integer pointAccumulated;
