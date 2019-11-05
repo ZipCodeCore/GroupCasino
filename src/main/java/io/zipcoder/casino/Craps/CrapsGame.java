@@ -78,8 +78,8 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     public boolean winOnSubsequent (Integer currentRoll){
-        if (currentRoll == setThePointRoll) {return true;}
-        return false;
+        if (currentRoll.equals(setThePointRoll)) {return true;}
+         else return false;
     }
 
     public boolean loseOnSubsequent (Integer currentRoll){
