@@ -41,16 +41,18 @@ public class CardSet {
         }
     }
 
-    public boolean removeCard(Card cardToRemove) {
+    public ArrayList<Card> removeRank(String rankToRemove) {
+        ArrayList<Card> foundCards = new ArrayList<Card>();
         if (this.cards.size() > 0) {
             for (int i = 0; i < this.cards.size(); i++) {
-                if (cardToRemove.strictEquals(this.cards.get(i))) {
+                if (rankToRemove.equals(this.cards.get(i).getRank())) {
+                    foundCards.add(this.cards.get(i));
                     this.cards.remove(i);
-                    return true;
+                    i--;
                 }
             }
         }
-        return false;
+        return foundCards;
     }
 
     public void addCard(Card cardToAdd) {
@@ -109,6 +111,21 @@ public class CardSet {
             }
         }
         output += "\n";
+        output += String.join("\u2514-------\u2518 ", emptyArray);
+        output += "\n";
+        return output;
+    }
+
+    public String toASCIISuite() {
+        int numCards = this.size();
+        String[] emptyArray = new String[numCards+1];
+        Arrays.setAll(emptyArray,(index) -> "");
+
+        String output = toASCII();
+        output += " ";
+        output += String.join("\u2514-------\u2518 ", emptyArray);
+        output += "\n";
+        output += "  ";
         output += String.join("\u2514-------\u2518 ", emptyArray);
         output += "\n";
         return output;

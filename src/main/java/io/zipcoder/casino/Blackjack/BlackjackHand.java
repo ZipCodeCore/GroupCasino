@@ -50,6 +50,7 @@ public class BlackjackHand {
 
     public void addCard(Card card) {
         this.cards.addCard(card);
+
     }
 
     public int size() {
@@ -57,20 +58,25 @@ public class BlackjackHand {
     }
 
     public int playChoice(CardSet shoe){
-        console.println("1. Hit\n2. Stay\n");
+        if (this.cards.size() == 2 && this.cards.getCards().get(0).equals(this.cards.getCards().get(1))) {
+            splitHand();
+            return -1;
+        } else { // normal case
+            console.println("1. Hit\n2. Stay\n");
 
-        switch (console.menuChoice(2)) {
-            case 1:
-                int val = hit(shoe.removeFirstCard());
-                if (val != 0) {
-                    return -1;
-                } else {
-                    return 0;
-                }
-            case 2:
-                return this.getValue();
+            switch (console.menuChoice(2)) {
+                case 1:
+                    int val = hit(shoe.removeFirstCard());
+                    if (val != 0) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                case 2:
+                    return this.getValue();
+            }
+            return -1;
         }
-        return -1;
     }
 
     public int hit(Card card) {
