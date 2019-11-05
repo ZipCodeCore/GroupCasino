@@ -30,4 +30,9 @@ public class CrapsMenu implements Menu {
 
     }
 
+    public void displayPointRoll (Integer setThePointRoll){
+        console.clearScreen();
+        console.println(String.format("You have rolled a: %d on your first roll", setThePointRoll));
+    }
+
 }

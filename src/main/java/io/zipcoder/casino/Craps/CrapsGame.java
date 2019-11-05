@@ -49,7 +49,7 @@ public class CrapsGame extends DiceGame implements Game {
         else {
             for (int i = 0; i < 3; i++) {
                 currentRoll = DiceGame.roll(2);
-                if (winOnSubsequent(currentRoll) == true) {
+                if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
                     calculatePayout();
                     break;
                 }
@@ -77,9 +77,11 @@ public class CrapsGame extends DiceGame implements Game {
         else {return false;}
     }
 
-    public boolean winOnSubsequent (Integer currentRoll){
+
+    public boolean winOnSubsequent (Integer currentRoll, Integer setThePointRoll){
         if (currentRoll.equals(setThePointRoll)) {return true;}
-         else return false;
+        return false;
+
     }
 
     public boolean loseOnSubsequent (Integer currentRoll){

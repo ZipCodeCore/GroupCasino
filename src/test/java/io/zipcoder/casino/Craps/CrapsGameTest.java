@@ -68,7 +68,7 @@ public class CrapsGameTest {
     public void winOnSubsequentTest(){
         setThePointRoll = 8;
         currentRoll = 8;
-        Assert.assertTrue(crapsGame.winOnSubsequent(currentRoll));
+        Assert.assertTrue(crapsGame.winOnSubsequent(currentRoll, setThePointRoll));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class CrapsGameTest {
     public void winOnSubsequentTest2(){
         setThePointRoll = 8;
         currentRoll = 5;
-        Assert.assertFalse(crapsGame.winOnSubsequent(currentRoll));
+        Assert.assertFalse(crapsGame.winOnSubsequent(currentRoll, setThePointRoll));
     }
 
     @Test
