@@ -1,5 +1,6 @@
 package io.zipcoder.casino.CardGames;
 
+import io.zipcoder.casino.Player.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,9 +17,11 @@ public class GoFishTest {
 
     @Test
     public void game() {
-//        GoFish newgame = new GoFish();
-//
-//        newgame.startGame();
+      
+        GoFish newgame = new GoFish(new Player("i","0"));
+
+        newgame.startGame();
+
     }
 
 }

@@ -12,7 +12,9 @@ public class EvaluationTest {
 
     @Before
     public void doThisFirst(){
+
         detect = new Yahtzee(new Player("1234", "password"));
+
     }
 
     @Test
