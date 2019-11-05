@@ -4,24 +4,26 @@ import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
+import java.util.Collections;
+
 public class Craps implements Game, GamblingGame {
 
     private Console console = new Console(System.in, System.out);
+    private Integer playerBet;
     private boolean running;
     private Dice dice;
-    private boolean puckOn;
     private int puckVal;
 
     public Craps() {
         dice = new Dice();
-        puckOn = false;
         running = false;
+        playerBet = 0;
     }
 
 
     @Override
     public void approachTable(Player currentPLayer) {
-        console.println("As you approach the Craps table you hear yelling and shouting");
+        console.print("As you approach the Craps table you hear yelling and shouting");
         console.dotDotDot();
         console.newln();
         console.println("Would you like to play?");
@@ -54,12 +56,10 @@ public class Craps implements Game, GamblingGame {
         running = true;
         while (running) {
 
-            if(comeOutRoll()) {
-                do {
+            placeBet(currentPlayer);
 
-                    placeBet(currentPlayer);
-
-                } while (passRoll());
+            if(comeOutRoll(currentPlayer)) {
+                while (passRoll(currentPlayer));
             }
 
             running = playAgain();
@@ -72,16 +72,16 @@ public class Craps implements Game, GamblingGame {
 
         console.delay(500);
         Integer roll1 = dice.rollDice(1);
-        dice.diceArt(roll1);
+        console.println(dice.diceArt(roll1));
         console.delay(500);
         Integer roll2 = dice.rollDice(1);
-        dice.diceArt(roll2);
+        console.println(dice.diceArt(roll2));
 
         Integer rollVal = roll1 + roll2;
         return rollVal;
     }
 
-    private boolean comeOutRoll() {
+    private boolean comeOutRoll(Player currentPlayer) {
         console.println("\nHit Return to Throw the Come-Out Roll");
         Integer roll = roll();
         console.println("You Rolled " + roll + "!");
@@ -94,17 +94,17 @@ public class Craps implements Game, GamblingGame {
         } else if (roll.equals(7) || roll.equals(11)) {
             console.dotDotDot();
             console.println("Natural Roll! Pass Line Wins!");
+            returnWinnings(currentPlayer);
             return false;
         } else {
             console.dotDotDot();
             console.println("The point is now " + roll + "!");
-            puckOn = true;
             puckVal = roll;
             return true;
         }
     }
 
-    private boolean passRoll() {
+    private boolean passRoll(Player currentPlayer) {
         console.println("\nHit Return to Roll the Dice");
         Integer roll = roll();
         console.println("You Rolled a " + roll + "!");
@@ -112,6 +112,7 @@ public class Craps implements Game, GamblingGame {
         if (roll.equals(puckVal)) {
             console.dotDotDot();
             console.println("You Hit the Point Value!");
+            returnWinnings(currentPlayer);
             return false;
         } else if (roll.equals(7)) {
             console.print("Seven-Out! The Pass Line Losses");
@@ -143,11 +144,31 @@ public class Craps implements Game, GamblingGame {
     @Override
     public void placeBet(Player currentPlayer) {
 
+        boolean correctVal = false;
+        while (!correctVal) {
+            console.println("How much would you like to bet?\t Balance " + currentPlayer.getBalance());
+            Integer betAmount = console.getIntegerInput(":");
+
+            if (currentPlayer.getBalance() >= betAmount && betAmount >= 0) {
+                currentPlayer.changeBalance(-1 * betAmount);
+                playerBet = betAmount;
+                correctVal = true;
+            } else {
+                console.print("You don't have that much money");
+                console.dotDotDot();
+                console.delay(1000);
+                correctVal = false;
+            }
+        }
     }
 
     @Override
     public void returnWinnings(Player currentPlayer) {
-
+        console.println("You won " + playerBet * 2);
+        currentPlayer.changeBalance(playerBet * 2);
+        console.println("Your balance is now " + currentPlayer.getBalance());
+        playerBet = 0;
+        console.delay(1000);
     }
 
     @Override

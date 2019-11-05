@@ -1,6 +1,7 @@
 package io.zipcoder.casino;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
 
@@ -11,6 +12,7 @@ public class Player {
     public Player(String name, Integer initialBalance) {
         this.name = name;
         this.balance = initialBalance;
+        this.gameHistory = new ArrayList<>();
     }
 
     public String getName() {
@@ -21,8 +23,18 @@ public class Player {
         return balance;
     }
 
-    public void changBalance(Integer amount) {
+    public void placeBet(Integer amount) {this.balance -= amount;}
+
+    public void changeBalance(Integer amount) {
         this.balance += amount;
+    }
+
+    public ArrayList<String> getHistory(){
+        return gameHistory;
+    }
+
+    public void addHistory(String results){
+        gameHistory.add(results);
     }
 
 }
