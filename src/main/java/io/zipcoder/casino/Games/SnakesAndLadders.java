@@ -91,7 +91,7 @@ public class SnakesAndLadders implements Game {
         return currentPosition;
     }
 
-    public Integer SnakesAndLaddersCheckerViaMap(Integer position){
+    public Integer snakesAndLaddersCheckerViaMap(Integer position){
         Integer newPosition = 0;
         HashMap<Integer, Integer> snakesMap = new HashMap<>();
         HashMap<Integer, Integer> laddersMap = new HashMap<>();
@@ -128,7 +128,7 @@ public class SnakesAndLadders implements Game {
         }
 
     public Integer playerSnakesAndLadders(Integer position) {
-        Integer newPosition = SnakesAndLaddersCheckerViaMap(position);
+        Integer newPosition = snakesAndLaddersCheckerViaMap(position);
         if (position > newPosition) {
             console.println("Uh-oh! You've hit a Snake! You're back at %d", newPosition);
             playerPiece.setCurrentPosition(newPosition);
@@ -142,7 +142,7 @@ public class SnakesAndLadders implements Game {
     }
 
     public Integer aiSnakesAndLadder(Integer position){
-        Integer newPosition = SnakesAndLaddersCheckerViaMap(position);
+        Integer newPosition = snakesAndLaddersCheckerViaMap(position);
         if (position > newPosition) {
             console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
             aiPiece.setCurrentPosition(newPosition);
