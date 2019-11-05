@@ -42,7 +42,7 @@ public class App {
                 userPassword = menu.getStringInput("Enter your password:");
 
                 if (authenticatePlayer()) {
-                    selectGame();
+                    selectGameToPlay();
                 } else {
                     menu.print("We could not find this user. Please try again!\n\n");
                     counter++;
@@ -57,6 +57,7 @@ public class App {
                 break;
             case 2:
                 createPlayer();
+                selectGameToPlay();
                 break;
 
             case 3:
@@ -74,7 +75,7 @@ public class App {
 
 
 
-    private void selectGame() {
+    private void selectGameToPlay() {
         int userInput;
         userInput = menu.getIntegerInput("Please select game to play\n" +
                 "1.) Go Fish\n" +
@@ -83,10 +84,10 @@ public class App {
                 "4.) Craps\n" +
                 "5.) Go to Main Menu");
 
-        selectGameActions(userInput);
+        selectGameToPlayActions(userInput);
     }  // select game
 
-    private void selectGameActions(Integer gameSelected){
+    private void selectGameToPlayActions(Integer gameSelected){
         switch (gameSelected){
 
             case 1:
@@ -112,7 +113,7 @@ public class App {
                 break;
         }
 
-        selectGame();
+        selectGameToPlay();
     }  // game actions
 
     private Boolean authenticatePlayer(){
