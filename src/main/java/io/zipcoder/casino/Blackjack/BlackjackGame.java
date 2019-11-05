@@ -6,7 +6,9 @@ import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.BlackjackMenu;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.Utilities.Console;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +27,7 @@ public class BlackjackGame extends CardGame implements Game {
         cardMap.put("A",11);
     }
     private Console console = new Console(System.in, System.out);
+    private GameServices gameServices = new GameServices();
 
     private double minBet;
     private double maxBet;
@@ -34,6 +37,7 @@ public class BlackjackGame extends CardGame implements Game {
     private CardSet shoe;
     private int numDecks;
 
+
     public BlackjackGame(double minBet, double maxBet, Player incomingPlayer) {
         this.minBet = minBet;
         this.maxBet = maxBet;
@@ -41,6 +45,12 @@ public class BlackjackGame extends CardGame implements Game {
         this.dealer = new BlackjackNPCPlayer(new Player("Mr.", "Roboto", 50, 1000000.00), 17, true);
         this.numDecks = 5;
         this.hands = new ArrayList<BlackjackHand>(0);
+    }
+
+    public static void main(String[] args) { // for testing
+        Player player = new Player ("Lem", "Jukes", 23,300.00);
+        BlackjackGame blackjackGame = new BlackjackGame(0.0,0.0,player);
+        blackjackGame.startPlay();
     }
 
     public void setMinBet(double minBet) {
@@ -90,12 +100,18 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public void roundStart() {
+        console.println("");
         Double betSize = betChoice();
         if (betSize != null) {
             initialDeal(betSize);
-            displayTable(false);
 
-            roundOfPlay();
+            if (initialWinnerCheck()) {
+                displayTable(true);
+            } else {
+                displayTable(false);
+
+                roundOfPlay();
+            }
             clearHands();
             roundStart();
         }
@@ -103,7 +119,19 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public Double betChoice () {
-        return console.getCurrency("Bet size (Enter to stand up): ", this.minBet, this.maxBet);
+        Double wager;
+        console.println("[DEALER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance());
+        wager = console.getCurrency("[DEALER]: Bet size (press Enter to stand up): ", this.minBet, this.maxBet);
+        if (wager != null) {
+            if (gameServices.wager(wager, this.player.getPlayer())) {
+                return wager;
+            } else {
+                console.println(String.format("\n[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
+                return betChoice();
+            }
+        } else {
+            return null;
+        }
     }
 
 
@@ -112,6 +140,7 @@ public class BlackjackGame extends CardGame implements Game {
 
         checkShoe();
         BlackjackHand playerHand = new BlackjackHand(betSize, this.player, this.shoe.removeFirstCard(), this.shoe.removeFirstCard());
+
         this.hands.add(playerHand);
         this.player.addHand(playerHand);
 
@@ -128,7 +157,6 @@ public class BlackjackGame extends CardGame implements Game {
                 value = hand.playChoice(this.shoe);
                 this.displayTable(false);
             }
-            console.println("done:", value);
         }
         for (BlackjackHand hand : this.dealer.getHands()) {
             int value = -1;
@@ -136,7 +164,6 @@ public class BlackjackGame extends CardGame implements Game {
                 value = hand.playChoice(this.shoe);
                 this.displayTable(false);
             }
-            console.println("done:", value);
         }
         displayTable(true);
     }
@@ -167,48 +194,65 @@ public class BlackjackGame extends CardGame implements Game {
         //temporary
         console.clearScreen();
 
-        console.println(String.format("***Blackjack***\nTable stakes: $%.2f min / $%.2f max\n", this.minBet, this.maxBet));
-        console.println("Dealer");
+        console.println(String.format(" .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
+                "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" +
+                "| |   ______     | || |   _____      | || |      __      | || |     ______   | || |  ___  ____   | || |     _____    | || |      __      | || |     ______   | || |  ___  ____   | |\n" +
+                "| |  |_   _ \\    | || |  |_   _|     | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | || |    |_   _|   | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | |\n" +
+                "| |    | |_) |   | || |    | |       | || |    / /\\ \\    | || |  / .'   \\_|  | || |   | |_/ /    | || |      | |     | || |    / /\\ \\    | || |  / .'   \\_|  | || |   | |_/ /    | |\n" +
+                "| |    |  __'.   | || |    | |   _   | || |   / ____ \\   | || |  | |         | || |   |  __'.    | || |   _  | |     | || |   / ____ \\   | || |  | |         | || |   |  __'.    | |\n" +
+                "| |   _| |__) |  | || |   _| |__/ |  | || | _/ /    \\ \\_ | || |  \\ `.___.'\\  | || |  _| |  \\ \\_  | || |  | |_' |     | || | _/ /    \\ \\_ | || |  \\ `.___.'\\  | || |  _| |  \\ \\_  | |\n" +
+                "| |  |_______/   | || |  |________|  | || ||____|  |____|| || |   `._____.'  | || | |____||____| | || |  `.___.'     | || ||____|  |____|| || |   `._____.'  | || | |____||____| | |\n" +
+                "| |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |\n" +
+                "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" +
+                " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n" + "\n" + "\n" + "\n" +
+
+                "\nTable stakes: $%.2f min / $%.2f max\n", this.minBet, this.maxBet));
+        console.println("[Dealer's Hand]:");
         BlackjackHand dealerHand = this.dealer.getHands().get(0);
         for (Card card : dealerHand.getCards().getCards()) {
             console.print(card.toString() + " ");
         }
-        console.println("");
-        console.println(this.player.getPlayer().getFirstName());
+        console.println("\n");
+        console.println(String.format("[%s's Hand(s)]:",this.player.getPlayer().getFirstName()));
         ArrayList<BlackjackHand> playerHands =  this.player.getHands();
         for (BlackjackHand hand : playerHands) {
             for (Card card : hand.getCards().getCards()) {
                 console.print(card.toString() + " ");
             }
-            console.println("  $%.2f", hand.getBet());
+            console.print("  $%.2f", hand.getBet());
             if (showWinnings) {
-                double winnings = calculateWinnings(hand);
-                if (winnings == hand.getBet()) {
-                    console.println("Push");
-                } else if (winnings == 0.0) {
-                    console.println("Dealer wins");
-                } else {
-                    console.println(String.format("Winnings: $%.2f",winnings));
-                }
+                console.print(winningMessage(hand));
             }
+            console.println("\n");
         }
 
     }
 
-    public Double initialWinnerCheck() { // looking for blackjacks
+    public String winningMessage(BlackjackHand hand) {
+        String message = " ----> ";
+        double winnings = calculateWinnings(hand);
+        if (winnings == hand.getBet()) {
+            message += "Push";
+        } else if (winnings == 0.0) {
+            message += "Dealer wins";
+        } else {
+            message += String.format("Winnings: $%.2f",winnings);
+        }
+        return message;
+    }
+
+    public boolean initialWinnerCheck() { // looking for blackjacks
         BlackjackHand dealerHand = this.dealer.getHands().get(0); // dealer only ever has one hand
         BlackjackHand playerHand = this.player.getHands().get(0); // player starts with only one hand
         int dealerValue = dealerHand.getValue();
         int playerValue = playerHand.getValue();
 
-        if (dealerValue == 21 && playerValue < 21) { //lose to blackjack
-            return 0.0;
-        } else if (dealerValue < 21 && playerValue == 21 ) { //win w/ blackjack
-            return 2.5 * playerHand.getBet();
-        } else if (dealerValue == 21 && 21 == playerValue) { //push w/blackjacks
-            return playerHand.getBet();
+        if (dealerValue == 21 && playerValue < 21  //lose to blackjack
+            || dealerValue < 21 && playerValue == 21   //win w/ blackjack
+            || dealerValue == 21 && 21 == playerValue) { //push w/blackjacks
+            return true;
         }
-        return null;
+        return false;
     }
 
     // returns 0 if you lost, bet size if you pushed, 2x bet size if you won
@@ -218,6 +262,11 @@ public class BlackjackGame extends CardGame implements Game {
         int dealerValue = dealerHand.getValue();
         int playerValue = handToEvaluate.getValue();
         if (playerValue > dealerValue) {
+            if (handToEvaluate.getCards().size() == 2 && handToEvaluate.getValue() == 21) {
+                gameServices.payOut(2.5 * handToEvaluate.getBet(), this.player.getPlayer());
+                return 2.5 * handToEvaluate.getBet();
+            }
+            gameServices.payOut(2 * handToEvaluate.getBet(), this.player.getPlayer());
             return 2 * handToEvaluate.getBet();
         } else if (playerValue == dealerValue) {
             return handToEvaluate.getBet();

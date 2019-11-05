@@ -1,13 +1,12 @@
 package io.zipcoder.casino.RR;
 
 import io.zipcoder.casino.DiceGame;
-import io.zipcoder.casino.Interfaces.GamblingGame;
 import io.zipcoder.casino.Menus.RRMenu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.Interfaces.Game;
 
-
-public class RRGame extends DiceGame implements GamblingGame {
+public class RRGame extends DiceGame implements Game {
 
 
     private Console console = new Console(System.in, System.out);
@@ -38,16 +37,6 @@ public class RRGame extends DiceGame implements GamblingGame {
 
     public String getName() {
         return name;
-    }
-
-    @Override
-    public double getWager() {
-        return 0.0;
-    }
-
-    @Override
-    public void payOut(double amount) {
-
     }
 
     @Override
