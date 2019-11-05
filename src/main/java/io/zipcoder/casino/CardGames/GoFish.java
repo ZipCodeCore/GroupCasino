@@ -1,12 +1,14 @@
 package io.zipcoder.casino.CardGames;
 
+import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
 import java.util.Stack;
+import static java.lang.System.in;
 
-public class GoFish {
+public class GoFish implements Game {
 
     private  int points;
     private Player user;
@@ -27,23 +29,59 @@ public class GoFish {
 
     public void startGame(){
 
-        goFishDeck.shuffleDeck();
+        initializeHands();
 
-        System.out.println(goFishDeck.drawCard().toString());
-        System.out.println(goFishDeck.drawCard().toString());
-        System.out.println(goFishDeck.drawCard().toString());
+        do{
+
+
+
+        }while(winGame == false);
+
+        /*System.out.println("Player 1: " + playerHand.displayHand());
+        System.out.println("Player 2: " + computerHand.displayHand());*/
 
     }
 
-    public boolean askForCard(Player thisPlayer, int cardNumber){return false;}
+    public void initializeHands(){
 
-    public void tradeCards(ArrayList fromPlayer, ArrayList toPlayer){}
+        //initialize deck and shuffle
+        goFishDeck = new Deck(1);
+        goFishDeck.shuffleDeck();
+
+        //initialize players' hand and deal cards
+        playerHand = new CardHand(goFishDeck.dealCards(5));
+        computerHand = new CardHand(goFishDeck.dealCards(5));
+
+
+    }
+
+    public void playerTurn(){}
+
+    public void computerTurn(){}
+
+    public boolean askForCard(Player thisPlayer, String card){
+
+
+
+        return false;
+    }
+
+    public void tradeCards(ArrayList fromPlayer, ArrayList toPlayer){
+
+
+    }
+
+    public void displayCards(CardHand currentPlayer){
+    }
 
     public void dropCards (Player playerToDrop){
 
     }
 
-    public void promptLeaveGame(){}
+    public void promptLeaveGame(){
 
-    public void displayResults (){}
+    }
+
+    public void displayResults (){
+    }
 }
