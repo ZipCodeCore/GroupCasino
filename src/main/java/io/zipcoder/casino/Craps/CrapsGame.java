@@ -26,7 +26,7 @@ public class CrapsGame extends DiceGame implements Game {
     private Integer currentRoll;        //any roll after the first
     String r;
     Integer numRolls = 0;
-    Integer counter=0;
+    Integer counter=1;
     private Console console = new Console(System.in, System.out);
     private GameServices gameServices = new GameServices();
 
@@ -53,46 +53,51 @@ public class CrapsGame extends DiceGame implements Game {
     @Override
     //runs a new game of craps
     public void roundOfPlay() {
-        console.println("");
         Double betSize = betChoice();
-        if(betSize != null){
-            userRollsDiceSetPoint();
-            if (winOnFirst(setThePointRoll) == true) {
-                winningMessageFirstRoll();
-                calculateWinnings(betSize, setThePointRoll, numRolls);
-            } else if (loseOnFirst(setThePointRoll) == true) {
-                losingMessageFirstRoll();
-            } else {
-                displayPointRoll(setThePointRoll);
-                for (int i = 0; i < 3; i++) {
-                    userRollsDiceCurrentPoint();
-                    displayCurrentRoll(currentRoll);
-                    if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
-                        winOnSubsequentMessage();
-                        calculateWinnings(betSize, setThePointRoll, numRolls);
-                        break;
-                    } else if (loseOnSubsequent(currentRoll) == true) {
-                        loseOnSubsequentMessage();
-                        break;
-                    }
-                    if (i == 2){losingMessageOutOfRolls();}
-                    numRolls = i + 1;
+        userRollsDiceSetPoint();
+        if (winOnFirst(setThePointRoll) == true) {
+            winningMessageFirstRoll();
+            calculateWinnings(betSize, setThePointRoll, numRolls);
+        } else if (loseOnFirst(setThePointRoll) == true) {
+            losingMessageFirstRoll();
+        } else {
+            displayPointRoll(setThePointRoll);
+            for (int i = 0; i < 3; i++) {
+                userRollsDiceCurrentPoint();
+                displayCurrentRoll(currentRoll);
+                if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
+                    winOnSubsequentMessage();
+                    calculateWinnings(betSize, setThePointRoll, numRolls);
+                    break;
+                } else if (loseOnSubsequent(currentRoll) == true) {
+                    loseOnSubsequentMessage();
+                    break;
                 }
+                if (i == 2) {
+                    losingMessageOutOfRolls();
+                }
+                numRolls = i + 1;
             }
         }
     }
 
     public Double betChoice(){
         Double wager;
-        console.println(String.format("[CROUPIER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance()));
-        wager = console.getCurrency(String.format("[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: Bet size (press Enter to stand up): ", this.minBet,this.maxBet));
-        if (wager != null && wager <= this.player.getPlayer().getBalance()){
-            if (gameServices.wager(wager, this.player.getPlayer())) {
-                return wager;}}
-            else if (wager > this.player.getPlayer().getBalance()){
-                console.println(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
-                betChoice();
-            }
+        console.println(String.format("\n[CROUPIER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance()));
+        wager = console.getCurrency(String.format("[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: Bet size (press Enter to stand up): ", this.minBet, this.maxBet));
+
+         if (wager > this.player.getPlayer().getBalance()){
+            console.println(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
+            betChoice();
+        }
+        else if (wager <= this.minBet || wager >= this.maxBet) {
+            console.println("\n[CROUPIER]: You're not playing within the table limits, %s.", this.player.getPlayer().getLastName());
+            betChoice();
+        }
+        else if (wager != null) {
+             //this.player.getPlayer().setBalance(this.balance - wager);
+            return wager;
+        }
         return wager;
     }
 
