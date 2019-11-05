@@ -68,7 +68,7 @@ public class Casino {
                     console.println(printHistory());
                 }
                 break;
-            case 3:
+            case 4:
                 running = false;
                 break;
         }
