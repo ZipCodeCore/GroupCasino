@@ -6,6 +6,8 @@ import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.CrapsMenu;
 import io.zipcoder.casino.Player;
 
+import java.util.Scanner;
+
 public class CrapsGame extends DiceGame implements Game {
 
     private String name = "Craps";
@@ -15,6 +17,7 @@ public class CrapsGame extends DiceGame implements Game {
 //    private int numberOfRolls;      //an integer from 1-4
     private Integer setThePointRoll;    //saves your first roll to try to match with later rolls
     private Integer currentRoll;        //any roll after the first
+    Scanner scanner = new Scanner(System.in);
 
 
     //Craps Game Constructor
@@ -33,6 +36,7 @@ public class CrapsGame extends DiceGame implements Game {
     public void startPlay() {
         new CrapsMenu(this).displayMenu();
         roundOfPlay();
+        endChoice();
     }
 
     @Override
@@ -40,31 +44,47 @@ public class CrapsGame extends DiceGame implements Game {
     public void roundOfPlay() {
         setThePointRoll = DiceGame.roll(2);
         if (winOnFirst(setThePointRoll) == true) {
-            calculatePayout();  //write what happens
+            System.out.println(String.format("You rolled a %f. Congratulations! You are already a winner!!!", currentRoll));
+            calculatePayout();
         }
         else if (loseOnFirst(setThePointRoll) == true) {
-            calculatePayout();  //write what happens    I don't think we need this - we've already deducted our bet
-            //and if we lose there is no payout to calculate
-        }
+                System.out.println(String.format("You rolled a %f and lost on the first roll. This is unfortunate.....", currentRoll));
+            }
         else {
             for (int i = 0; i < 3; i++) {
                 currentRoll = DiceGame.roll(2);
                 if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
+                    System.out.println(String.format("Hooray! You rolled a %f. You won!!", currentRoll)); //if time, map a custom answer depending on whether you won on the first, second, or third roll
                     calculatePayout();
                     break;
                 }
                 else if (loseOnSubsequent(currentRoll) == true){
-                    calculatePayout();  //again not sure if we need to calculate payout here if we've lost
+                    System.out.println(String.format("You rolled a %f. It appears that the odds were not in your favor today. Better luck next time.....", currentRoll));
                     break;
+                }
+                else{
+                    System.out.println(String.format("You rolled a %f.", currentRoll));
                 }
             }
         }
     }
-            //I think it would be cool to see a menu or display after each roll letting us know what we rolled
+
     @Override
     //implements menu whether you want to quit or go again
     public void endChoice() {
-
+        System.out.println("You have finished this game of Craps. Would you like to play again? (Y/N)");
+        if (scanner.next().toUpperCase().equals("N")) {
+            System.out.println("Have a good rest of your day.");
+            //also, return to the main menu
+        }
+        else if (scanner.next().toUpperCase().equals("Y")) {
+            System.out.println("That's great!!!");
+            startPlay();
+        }
+        else {
+            System.out.println("That's not a valid selection. Please choose again.");
+            endChoice();
+        }
     }
 
     public boolean winOnFirst (Integer setThePointRoll){
