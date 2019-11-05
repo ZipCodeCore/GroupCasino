@@ -149,7 +149,7 @@ public class Craps implements Game, GamblingGame {
             Integer betAmount = console.getIntegerInput(":");
 
             if (currentPlayer.getBalance() >= betAmount && betAmount >= 0) {
-                currentPlayer.changBalance(-1 * betAmount);
+                currentPlayer.changeBalance(-1 * betAmount);
                 playerBet = betAmount;
                 correctVal = true;
             } else {
@@ -164,7 +164,7 @@ public class Craps implements Game, GamblingGame {
     @Override
     public void returnWinnings(Player currentPlayer) {
         console.println("You won " + playerBet * 2);
-        currentPlayer.changBalance(playerBet * 2);
+        currentPlayer.changeBalance(playerBet * 2);
         console.println("Your balance is now " + currentPlayer.getBalance());
         playerBet = 0;
         console.delay(1000);
