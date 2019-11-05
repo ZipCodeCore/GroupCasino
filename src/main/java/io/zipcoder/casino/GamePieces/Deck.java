@@ -4,7 +4,7 @@ import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
 import java.util.*;
-/*
+
 public class Deck {
 
     Console console = new Console(System.in,System.out);
@@ -37,4 +37,3 @@ public class Deck {
 
     }
 }
-*/
