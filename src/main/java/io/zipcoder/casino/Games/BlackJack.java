@@ -19,8 +19,9 @@ public class BlackJack implements Game, GamblingGame{
 
 
     @Override
-    public void runGame(Player currentPlayer) {
+    public void runGame(Player currentplayer) {
         while(running){
+
         console.println("Welcome to BlackJack! Let's begin!");
         deck.shuffle();
         initialHand();
@@ -41,6 +42,7 @@ public class BlackJack implements Game, GamblingGame{
     }
     @Override
     public void approachTable(Player currentPLayer) {
+        this.currentPlayer = currentPLayer;
         console.println("You approach the BlackJack table. What would you like to do?");
         console.println("(1) - Play the game");
         console.println("(2) - Read the rules");
@@ -70,7 +72,7 @@ public class BlackJack implements Game, GamblingGame{
     @Override
     public void placeBet(Player currentPlayer) {
         Integer playerBet = console.getIntegerInput(":");
-        currentPlayer.changBalance(playerBet);
+        currentPlayer.placeBet(playerBet);
         pot += playerBet;
 
     }
