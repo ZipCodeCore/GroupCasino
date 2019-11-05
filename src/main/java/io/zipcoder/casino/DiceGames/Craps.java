@@ -1,6 +1,10 @@
 package io.zipcoder.casino.DiceGames;
 
-public class Craps {
+import io.zipcoder.casino.Interfaces.GamblingPlayer;
+
+public class Craps{
+    private String[] availableOptionsCrapsNames = {"Roll the Die ","YO Levine the Dancing Queen", "Place Your Bets",
+                                                    "Winner Winner Chicken Dinner", "Nina Nina from Pasedena"};
 
     public void user(){}
     public void diceValues (){}
