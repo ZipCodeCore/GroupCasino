@@ -10,13 +10,11 @@ public class Yahtzee implements Game {
 
     private Player user;
     private static Console console = new Console(System.in, System.out);
-
-    private boolean continuePlay;
-
     private Dice[] myDice;
     int points;
     private String[] availableOptions = {" ","1s", "2s", "3s", "4s", "5s", "6s", "3 of a kind", "4 of a kind",
                                          "Small Straight", "Large Straight", "Full House", "Yahtzee", "Chance"};
+    private boolean continuePlay;
 
     // Constructor------------------------------------------------------------------------------------------------------
 
