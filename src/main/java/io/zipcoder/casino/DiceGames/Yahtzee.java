@@ -5,6 +5,7 @@ import io.zipcoder.casino.Player.Player;
 
 public class Yahtzee implements Game {
     private Player user;
+    private int[] scoreChoices;
 
 
     public void startGame(){
@@ -14,8 +15,6 @@ public class Yahtzee implements Game {
             //chooseEvaluation
         }
     }
-
-
     public void promptLeaveGame(){
 
     }
