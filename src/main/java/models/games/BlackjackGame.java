@@ -15,6 +15,21 @@ public class BlackjackGame extends CardGame implements Game, GamblingGame {
 
     }
 
+    public void getMenu() {
+        Integer input2 = console.getIntegerInput(
+                "\nDo you need instructions for this game?\n\n" +
+                        "1. Yes, I don't want to lose my money that easy\n" +
+                        "2. Heck no, I'm a baller.\n");
+    }
+
+    public void getMenu2() {
+
+    }
+
+    public void startGame() {
+
+    }
+
     public Double addToBet() {
         return null;
     }
@@ -34,5 +49,6 @@ public class BlackjackGame extends CardGame implements Game, GamblingGame {
     public Boolean dealerTurn(Dealer blackjackDealer) {
         return null;
     }
+
 
 }

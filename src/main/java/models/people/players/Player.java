@@ -8,7 +8,7 @@ public class Player {
     public Player() {
     }
 
-    public Player(String name, Integer age) {
+    public Player(String name, Integer age, Double balance) {
         this.name = name;
         this.age = age;
     }
