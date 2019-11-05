@@ -5,6 +5,7 @@ import io.zipcoder.casino.CardGames.GoFish;
 import io.zipcoder.casino.DiceGames.Craps;
 import io.zipcoder.casino.DiceGames.Yahtzee;
 import io.zipcoder.casino.Player.Player;
+import io.zipcoder.casino.Player.PlayerWarehouse;
 import io.zipcoder.casino.utilities.Console;
 
 public class App {
@@ -12,7 +13,8 @@ public class App {
     private Console menu;
     private String userId = "";
     private String userPassword = "";
-    private Player newPlayer = new Player( userId,userPassword);
+    private Player newPlayer;
+    private PlayerWarehouse warehouse = new PlayerWarehouse();
     private int counter = 0;
 
     public void App (){
@@ -73,8 +75,6 @@ public class App {
 
     }  // menuActions
 
-
-
     private void selectGameToPlay() {
         int userInput;
         userInput = menu.getIntegerInput("Please select game to play\n" +
@@ -116,12 +116,15 @@ public class App {
         selectGameToPlay();
     }  // game actions
 
+
     private Boolean authenticatePlayer(){
+        newPlayer = new Player( userId,userPassword);
+
         return false;
     }
 
     private void createPlayer(){
-
+        newPlayer = new Player( userId,userPassword);
     }
 
 } // class
