@@ -6,8 +6,13 @@ public class CardHand {
 
     ArrayList<Card> userHand = new ArrayList<Card>();
 
-    public void displayHand(){
-        userHand.toString();
+    public CardHand(ArrayList<Card> dealtCards){
+
+        userHand.addAll(dealtCards);
+    }
+
+    public String displayHand(){
+       return userHand.toString();
     }
 
     public void evaluateHand(){}
