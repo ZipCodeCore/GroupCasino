@@ -62,11 +62,11 @@ public class CrapsGame extends DiceGame implements Game {
                 userRollsDiceCurrentPoint();
                 displayCurrentRoll(currentRoll);
                 if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
-                    System.out.println(String.format("Hooray! You rolled a %d You won!!", currentRoll)); //if time, map a custom answer depending on whether you won on the first, second, or third roll
+                    System.out.println(String.format("Hooray! You rolled a %d. You won!!", currentRoll)); //if time, map a custom answer depending on whether you won on the first, second, or third roll
                     calculatePayout();
                     break;
                 } else if (loseOnSubsequent(currentRoll) == true) {
-                    System.out.println(String.format("You rolled a %d It appears that the odds were not in your favor today. Better luck next time.....", currentRoll));
+                    System.out.println(String.format("You rolled a %d. It appears that the odds were not in your favor today. Better luck next time.....", currentRoll));
                     break;
                 }
             }
