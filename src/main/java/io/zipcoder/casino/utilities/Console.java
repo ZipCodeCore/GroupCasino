@@ -26,7 +26,7 @@ public final class Console {
     }
 
     public String getStringInput(String prompt, Object... args) {
-        println(prompt, args);
+        print(prompt, args);
         return input.nextLine();
     }
 
