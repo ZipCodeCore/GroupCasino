@@ -135,7 +135,7 @@ public class Roulette implements Game, GamblingGame{
     @Override
     public void returnWinnings(Player currentPlayer){
        Integer winnings = pot * 2;
-       currentPlayer.changBalance(winnings);
+       currentPlayer.placeBet(winnings);
 
     }
     public boolean youLose(Player currentPlayer){
