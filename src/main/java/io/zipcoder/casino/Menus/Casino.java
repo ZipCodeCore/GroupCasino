@@ -56,9 +56,9 @@ public class Casino {
     public static void prologue () throws InterruptedException {
         printWithDelays("\nYou had a really long day at work and decide to take the edge off by visiting the local casino.\n",TimeUnit.MILLISECONDS, 50);
         TimeUnit.SECONDS.sleep(1);
-        printWithDelays("\"Maybe if I win some big bucks I'll get out of this boring job of mine,\" You think to yourself. \n", TimeUnit.MILLISECONDS, 50);
+        printWithDelays("\"Maybe if I win some big bucks I'll get out of this boring job of mine,\" you think to yourself. \n", TimeUnit.MILLISECONDS, 50);
         TimeUnit.SECONDS.sleep(1);
-        printWithDelays("The same thought always crosses your mind when passing by the big flashy sign embroidered with flashing poker chips.\n", TimeUnit.MILLISECONDS, 50);
+        printWithDelays("The same thought always crosses your mind when passing by the big neon sign embroidered with flashing poker chips.\n", TimeUnit.MILLISECONDS, 50);
         TimeUnit.SECONDS.sleep(1);
         printWithDelays("But tonight is a little different... \n" + "\n" + "\n", TimeUnit.MILLISECONDS, 50);
         TimeUnit.SECONDS.sleep(1);
