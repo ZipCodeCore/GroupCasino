@@ -5,8 +5,6 @@ import io.zipcoder.casino.Player.Player;
 //import javax.smartcardio.Card;
 
 
-
-
 public class BlackJack {
     private Player user;
     private int answerHitOrStay;
