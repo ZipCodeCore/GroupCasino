@@ -1,6 +1,4 @@
 package io.zipcoder.casino.Player;
 
-public class Player {
-
-
+public class GamblingPlayer {
 }
