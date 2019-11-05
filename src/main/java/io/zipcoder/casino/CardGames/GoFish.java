@@ -33,6 +33,9 @@ public class GoFish implements Game {
 
         do{
 
+            playerTurn();
+
+
 
 
         }while(winGame == false);
@@ -55,7 +58,20 @@ public class GoFish implements Game {
 
     }
 
-    public void playerTurn(){}
+    public void playerTurn(){
+
+        System.out.println(playerHand.displayHand());
+        System.out.println(computerHand.displayHand());
+
+        String userInput = input.getStringInput("Which value would you like to ask for? ");
+
+        userInput.toUpperCase();
+
+        System.out.println(computerHand.evaluateHand(userInput));
+
+        winGame = true;
+
+    }
 
     public void computerTurn(){}
 
