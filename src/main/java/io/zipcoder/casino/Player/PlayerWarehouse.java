@@ -5,9 +5,9 @@ import java.util.HashMap;
 
 public class PlayerWarehouse {
 
-    private HashMap <Integer, Player> warehouse = new HashMap<Integer, Player>();
+    private HashMap <String, Player> warehouse = new HashMap<String, Player>();
 
-    public void addPlayer(int ID, int pwd){
+    public void addPlayer(String ID, String pwd){
 
         Player newUser = new Player(ID, pwd);
         warehouse.put(newUser.ID, newUser);

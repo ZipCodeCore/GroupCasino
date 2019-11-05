@@ -4,18 +4,18 @@ import io.zipcoder.casino.CardGames.CardHand;
 
 public class Player {
 
-    int ID;
-    int pwd;
+    String ID;
+    String pwd;
     double balance;
     CardHand cardHand;
 
 
 
-    public Player(int ID, int password){
+    public Player(String ID, String password){
         this.ID = ID;
         this.pwd = password;
         this.balance = 0.0;
-        this.cardHand = new CardHand;
+        this.cardHand = new CardHand();
     }
 
 
