@@ -60,7 +60,7 @@ public class CrapsGame extends DiceGame implements Game {
             for (int i = 0; i < 3; i++) {
                 currentRoll = DiceGame.roll(2);
                 if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
-                    System.out.println(String.format("Hooray! You rolled a %f You won!!", currentRoll)); //if time, map a custom answer depending on whether you won on the first, second, or third roll
+                    System.out.println(String.format("Hooray! You rolled a %d You won!!", currentRoll)); //if time, map a custom answer depending on whether you won on the first, second, or third roll
                     calculatePayout();
                     break;
                 } else if (loseOnSubsequent(currentRoll) == true) {
