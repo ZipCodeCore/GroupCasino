@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class PlayerWarehouse {
 
-    HashMap <Integer, Player> warehouse = new HashMap<Integer, Player>();
+    private HashMap <Integer, Player> warehouse = new HashMap<Integer, Player>();
 
     public void addPlayer(int ID, int pwd){
 
@@ -13,4 +13,10 @@ public class PlayerWarehouse {
         warehouse.put(newUser.ID, newUser);
 
     }
+
+    public Player getPlayer(int idNum){
+        return warehouse.get(idNum);
+    }
+
+
 }
