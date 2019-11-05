@@ -1,7 +1,11 @@
+<<<<<<< HEAD:src/main/java/BlackJack.java
 import io.zipcoder.casino.CardGames.CardHand;
 import io.zipcoder.casino.Player.Player;
 
 import javax.smartcardio.Card;
+=======
+package io.zipcoder.casino.CardGames;
+>>>>>>> dev:src/main/java/io/zipcoder/casino/CardGames/BlackJack.java
 
 public class BlackJack {
 

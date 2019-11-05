@@ -5,7 +5,7 @@
 ## Minimum Viable Product (MVP)
 * Your application must have at the very least 4 games:
   * Go Fish a card game
-  * BlackJack a card game
+  * io.zipcoder.casino.CardGames.BlackJack a card game
   * Craps a dice game
   * An additional dice game
 
@@ -25,7 +25,7 @@
 
 ## Developmental Notes
 * `GoFish` is a friendly game and should not involve gambling.
-* `BlackJack` and `GoFish` are both card games and should therefore inherit from a common `CardGame`.
-* Any common logic or fields between the games should live CardGame class, **not** BlackJack **nor** GoFish.
+* `io.zipcoder.casino.CardGames.BlackJack` and `GoFish` are both card games and should therefore inherit from a common `CardGame`.
+* Any common logic or fields between the games should live CardGame class, **not** io.zipcoder.casino.CardGames.BlackJack **nor** GoFish.
 * You must have a completed and approved UML diagram before you proceed to do any development
 * All public methods should be tested.
