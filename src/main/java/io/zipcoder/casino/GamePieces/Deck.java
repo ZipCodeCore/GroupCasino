@@ -32,7 +32,7 @@ public class Deck {
 
 
         Card drawCard = deck.remove(0);
-        console.println(drawCard.toString());
+
         return drawCard;
 
     }
