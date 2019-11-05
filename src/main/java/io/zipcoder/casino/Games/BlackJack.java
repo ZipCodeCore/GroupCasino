@@ -24,7 +24,7 @@ public class BlackJack implements Game, GamblingGame{
     @Override
     public void runGame(Player currentPlayer) {
         while(running)
-        console.println("Welcome to BlackJack! Let's begin!");
+        console.println(';'"Welcome to BlackJack! Let's begin!");
         deck.shuffle();
         initialHand();
         viewDealerHand();
