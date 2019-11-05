@@ -13,6 +13,7 @@ public class App {
     private String userId = "";
     private String userPassword = "";
     private Player newPlayer = new Player( userId,userPassword);
+    private int counter = 0;
 
     public void App (){
 
@@ -43,8 +44,15 @@ public class App {
                 if (authenticatePlayer()) {
                     selectGame();
                 } else {
-                    menu.print("We could not find this user. Please create an account!\n\n");
-                    mainMenu();
+                    menu.print("We could not find this user. Please try again!\n\n");
+                    counter++;
+                    if ((counter > 2)) {
+                        counter = 0;
+                        menu.print("You exceeded the allowed number of tries!\n\n");
+                        mainMenu();
+                    } else {
+                        mainMenuActions(userSelection);
+                    }
                 }
                 break;
             case 2:
@@ -108,7 +116,7 @@ public class App {
     }  // game actions
 
     private Boolean authenticatePlayer(){
-        return true;
+        return false;
     }
 
     private void createPlayer(){
