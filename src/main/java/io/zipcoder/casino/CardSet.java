@@ -41,16 +41,18 @@ public class CardSet {
         }
     }
 
-    public boolean removeCard(Card cardToRemove) {
+    public ArrayList<Card> removeCard(Card cardToRemove) {
+        ArrayList<Card> foundCards = new ArrayList<Card>();
         if (this.cards.size() > 0) {
             for (int i = 0; i < this.cards.size(); i++) {
-                if (cardToRemove.strictEquals(this.cards.get(i))) {
+                if (cardToRemove.equals(this.cards.get(i))) {
+                    foundCards.add(this.cards.get(i));
                     this.cards.remove(i);
-                    return true;
+                    i--;
                 }
             }
         }
-        return false;
+        return foundCards;
     }
 
     public void addCard(Card cardToAdd) {
