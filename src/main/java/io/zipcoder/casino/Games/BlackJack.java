@@ -93,8 +93,9 @@ public class BlackJack implements Game, GamblingGame{
     public void hitOrStay(){
         String playerInput = console.getStringInput(":");
         if (playerInput.equals("hit")){
-            console.println("Would you like to 'hit' or 'stay'?");
             handOfPlayer = checkHand(playerHand);
+            console.println("Would you like to 'hit' or 'stay'?");
+
             hit();
 
 
@@ -104,6 +105,7 @@ public class BlackJack implements Game, GamblingGame{
 
         }else{
             console.println("Not a choice");
+            hitOrStay();
         }
 
     }
