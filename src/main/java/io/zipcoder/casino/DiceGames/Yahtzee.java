@@ -29,10 +29,13 @@ public class Yahtzee implements Game {
 
     public void startGame(){
 
+        console.println("Welcome to Yahtzee!");
+
         while(continuePlay) {
             for (int i = 0; i < 13; i++) {
                 beginDiceRolls();
-                checkForEvaluation();
+                int pointsAdded = checkForEvaluation();
+                updateScore(pointsAdded);
             }
             displayResults();
             promptLeaveGame();
@@ -46,6 +49,12 @@ public class Yahtzee implements Game {
             dice[i] = new Dice();
         }
         return dice;
+    }
+
+    private void updateScore(int pointsAdded) {
+        console.println("points added: " + pointsAdded);
+        this.points += pointsAdded;
+        console.println("Your current score is: " + this.points);
     }
 
     public void displayResults(){
@@ -73,15 +82,22 @@ public class Yahtzee implements Game {
         }
     }
 
-    // Following methods for rolling dice and choosing which ones to keep-----------------------------------------------
+    // Following methods are for rolling dice and choosing which ones to keep-------------------------------------------
 
     public void beginDiceRolls(){
         resetDice();
+        console.getStringInput("Press enter to make your first roll.");
+        console.println("First roll results:\n");
         roll5Dice();
         chooseToKeep();
+        console.getStringInput("Press enter to make your first roll.");
+        console.println("First roll results:\n");
         roll5Dice();
         chooseToKeep();
+        console.getStringInput("Press enter to make your final roll.");
+        console.println("Final roll results:\n");
         roll5Dice();
+        console.getStringInput("Press enter to continue.");
     }
 
     public void resetDice(){
