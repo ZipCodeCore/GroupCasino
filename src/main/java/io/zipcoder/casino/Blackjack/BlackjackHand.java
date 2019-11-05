@@ -20,15 +20,15 @@ public class BlackjackHand {
         this.bet = bet;
         this.player = player;
         this.cards = new CardSet(0);
+//        if (card2 != null) {
+//            this.cards.addCard(new Card("5", "H"));
+//            this.cards.addCard(new Card("5", "D"));
+//        } else {
+        this.cards.addCard(card1);
         if (card2 != null) {
-            this.cards.addCard(new Card("5", "H"));
-            this.cards.addCard(new Card("5", "D"));
-        } else {
-            this.cards.addCard(card1);
-            if (card2 != null) {
-                this.cards.addCard(card2);
-            }
+            this.cards.addCard(card2);
         }
+//        }
     }
 
     public CardSet getCards() {

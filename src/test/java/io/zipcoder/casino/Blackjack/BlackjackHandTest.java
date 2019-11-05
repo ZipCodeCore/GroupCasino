@@ -61,13 +61,10 @@ public class BlackjackHandTest {
 
     @Test
     public void addCardTest() {
-        Assert.assertEquals(2,(int) hand.size());
-        Card card1 = new Card("4","D");
+        Assert.assertEquals(2, (int) hand.size());
+        Card card1 = new Card("4", "D");
         hand.addCard(card1);
-        Assert.assertEquals(3,(int) hand.size());
-        hand.getCards().removeFirstCard();
-        hand.getCards().removeFirstCard();
-        Assert.assertEquals(card1, hand.getCards().removeFirstCard());
+        Assert.assertEquals(3, (int) hand.size());
     }
 
     @Test
