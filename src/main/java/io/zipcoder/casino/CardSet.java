@@ -41,11 +41,11 @@ public class CardSet {
         }
     }
 
-    public ArrayList<Card> removeCard(Card cardToRemove) {
+    public ArrayList<Card> removeRank(String rankToRemove) {
         ArrayList<Card> foundCards = new ArrayList<Card>();
         if (this.cards.size() > 0) {
             for (int i = 0; i < this.cards.size(); i++) {
-                if (cardToRemove.equals(this.cards.get(i))) {
+                if (rankToRemove.equals(this.cards.get(i).getRank())) {
                     foundCards.add(this.cards.get(i));
                     this.cards.remove(i);
                     i--;

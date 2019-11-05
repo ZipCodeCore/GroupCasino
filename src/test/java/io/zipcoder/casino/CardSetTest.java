@@ -8,8 +8,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static org.junit.Assert.*;
-
 public class CardSetTest {
 
     private CardSet empty;
@@ -89,14 +87,14 @@ public class CardSetTest {
 
     @Test
     public void removeCard() {
-        ArrayList<Card> foundCards = oneDeck.removeCard(new Card("K","C"));
+        ArrayList<Card> foundCards = oneDeck.removeRank("K");
         for (Card card : foundCards) {
             Assert.assertTrue(card.getRank() == "K");
         }
 
         Assert.assertTrue(4 == foundCards.size());
         Assert.assertEquals(48,oneDeck.size());
-        Assert.assertTrue(0 == oneDeck.removeCard(new Card("K","C")).size());
+        Assert.assertTrue(0 == oneDeck.removeRank("K").size());
         Assert.assertEquals(48,oneDeck.size());
 
     }
@@ -104,9 +102,9 @@ public class CardSetTest {
     @Test
     public void addCard() {
         oneDeck.addCard(new Card("K","C"));
-        Assert.assertTrue(oneDeck.removeCard(new Card("K","C")).size() == 5);
+        Assert.assertTrue(oneDeck.removeRank("K").size() == 5);
         Assert.assertEquals(48,oneDeck.size());
-        Assert.assertTrue(oneDeck.removeCard(new Card("K","C")).size() == 0);
+        Assert.assertTrue(oneDeck.removeRank("K").size() == 0);
         Assert.assertEquals(48,oneDeck.size());
 
 
@@ -136,7 +134,7 @@ public class CardSetTest {
         Assert.assertEquals(5,empty.size());
         Assert.assertTrue(new Card("A","D").strictEquals(empty.removeFirstCard()));
         Assert.assertTrue(new Card("4","H").strictEquals(empty.removeFirstCard()));
-        Assert.assertTrue(empty.removeCard(new Card("7","S")).size() == 1);
+        Assert.assertTrue(empty.removeRank("7").size() == 1);
         Assert.assertTrue(new Card("5","C").strictEquals(empty.removeFirstCard()));
         Assert.assertTrue(new Card("2","D").strictEquals(empty.removeFirstCard()));
         Assert.assertTrue(null == empty.removeFirstCard());
