@@ -11,7 +11,9 @@ import java.util.Scanner;
 public class CrapsGame extends DiceGame implements Game {
 
     public static void main(String[] args) {
-
+        Player player = new Player ("Jeff","Smith", 28, 300.00);
+        CrapsGame crapsGame = new CrapsGame(10.00,50.00,player);
+        crapsGame.startPlay();
     }
 
     private String name = "Craps";
