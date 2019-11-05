@@ -44,15 +44,17 @@ public class CrapsGame extends DiceGame implements Game {
     @Override
     //runs a new game of craps
     public void roundOfPlay() {
-        setThePointRoll = DiceGame.roll(2);
+        userRollsDiceSetPoint();
+        displayPointRoll(setThePointRoll);
         if (winOnFirst(setThePointRoll) == true) {
-            System.out.println(String.format("You rolled a %d Congratulations! You are already a winner!!!", currentRoll));
+            winningMessageFirstRoll();
             calculatePayout();
         } else if (loseOnFirst(setThePointRoll) == true) {
-            System.out.println(String.format("You rolled a %d and lost on the first roll. This is unfortunate.....", currentRoll));
+            losingMessageFirstRoll();
         } else {
             for (int i = 0; i < 3; i++) {
-                currentRoll = DiceGame.roll(2);
+                userRollsDiceCurrentPoint();
+                displayCurrentRoll(currentRoll);
                 if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
                     System.out.println(String.format("Hooray! You rolled a %f You won!!", currentRoll)); //if time, map a custom answer depending on whether you won on the first, second, or third roll
                     calculatePayout();
@@ -60,8 +62,6 @@ public class CrapsGame extends DiceGame implements Game {
                 } else if (loseOnSubsequent(currentRoll) == true) {
                     System.out.println(String.format("You rolled a %d It appears that the odds were not in your favor today. Better luck next time.....", currentRoll));
                     break;
-                } else {
-                    System.out.println(String.format("You rolled a %d", currentRoll));
                 }
             }
         }
@@ -125,28 +125,65 @@ public class CrapsGame extends DiceGame implements Game {
         return 0.0;
     }
 
-    public String userRollsDice() {
+    public void userRollsDiceSetPoint() {
         System.out.println("\nPress r to roll the dice\n");
         String r = scanner.next().toLowerCase();
-        counter++;
-        return r;
-    }
+        try { if (!r.equals("r")){
+            throw new Exception("Invalid Choice!");}}
 
-        public Integer RollPointNum (String r){
-            if (r.equals("r")) {
-                setThePointRoll = DiceGame.roll(2);
-                return setThePointRoll;
-            }
-        else notR();
-        return 0;
-    }
-
-    public void notR () {
-        if( r != "r"){
-            System.out.println("Invalid choice!");
-           userRollsDice();
-
+        catch (Exception e) {
+            userRollsDiceSetPoint();
         }
+        tossPointRoll();
+    }
+
+    public void userRollsDiceCurrentPoint() {
+        System.out.println("\nPress r to roll the dice\n");
+        String r = scanner.next().toLowerCase();
+        try { if (!r.equals("r")){
+            throw new Exception("Invalid Choice!");}}
+
+        catch (Exception e) {
+            userRollsDiceSetPoint();
+        }
+        tossCurrentRoll();
+    }
+
+//    public Integer RollPointNum(String r) {
+//        if (r.equals("r")) {
+//            setThePointRoll = DiceGame.roll(2);
+//            return setThePointRoll;
+//        } else notR();
+//        return 0;
+//    }
+
+
+
+    public Integer tossPointRoll() {
+        setThePointRoll = DiceGame.roll(2);
+        return setThePointRoll;
+    }
+
+    public void displayPointRoll(Integer setThePointRoll) {
+        System.out.println(String.format("You have rolled a %d on your first roll", setThePointRoll));
+    }
+
+    public void displayCurrentRoll(Integer currentRoll) {
+        System.out.println(String.format("You have rolled a %d for this roll", currentRoll));
+    }
+
+    public void winningMessageFirstRoll() {
+        System.out.println(String.format("You rolled a %d on the first roll!  Congratulations!! You are a winner!!!", setThePointRoll));
+    }
+
+    public void losingMessageFirstRoll() {
+        System.out.println(String.format("You rolled a %d and have lost on the first roll! This is unfortunate..... :( ", setThePointRoll));
+    }
+
+    public Integer tossCurrentRoll() {
+        currentRoll = DiceGame.roll(2);
+        return currentRoll;
     }
 }
+
 
