@@ -65,8 +65,11 @@ public class App {
                 this.userId = this.menu.getStringInput("Enter your ID:");
                 this.userPassword = this.menu.getStringInput("Enter your password:");
 
+                if (authenticatePlayer()) this.menu.println("This user already exists, please log in.\n");
+
                 createPlayer();
                 selectGameToPlay();
+
                 break;
 
             case 3:
@@ -125,13 +128,13 @@ public class App {
 
 
     private Boolean authenticatePlayer(){
-        this.newPlayer = warehouse.getPlayer(this.userId);
+        this.newPlayer = warehouse.getPlayer(this.userId+this.userPassword);
         return this.newPlayer != null;
     }
 
     private void createPlayer(){
         warehouse.addPlayer(this.userId,this.userPassword);
-        this.newPlayer = warehouse.getPlayer(this.userId);
+        this.newPlayer = warehouse.getPlayer(this.userId+this.userPassword);
     }
 
 } // class
