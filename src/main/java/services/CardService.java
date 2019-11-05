@@ -15,7 +15,7 @@ public class CardService {
     }
 
     public void setDeckOfCards(Stack<Card> deckOfCards) {
-        this.deckOfCards = deckOfCards;  // I guess
+        this.deckOfCards = deckOfCards;
     }
 
     public DeckOfCards shuffle(DeckOfCards deck) {

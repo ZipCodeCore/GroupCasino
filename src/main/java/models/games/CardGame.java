@@ -7,9 +7,9 @@ import models.people.players.Player;
 import services.Console;
 
 abstract class CardGame {
-    DeckOfCards deckOfCards;
-    Dealer dealer;
-    Player player;
+    private DeckOfCards deckOfCards;
+    private Dealer dealer;
+    private Player player;
     // made a new object called console cause Console class had getIntegerInput which was static
     Console console = new Console(System.in, System.out);
 
