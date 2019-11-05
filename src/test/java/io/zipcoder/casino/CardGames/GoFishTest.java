@@ -16,9 +16,9 @@ public class GoFishTest {
 
     @Test
     public void game() {
-        GoFish newgame = new GoFish();
-
-        newgame.startGame();
+//        GoFish newgame = new GoFish();
+//
+//        newgame.startGame();
     }
 
 }
