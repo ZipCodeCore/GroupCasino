@@ -5,6 +5,9 @@ import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class SnakesAndLadders implements Game {
     Console console = new Console(System.in, System.out);
@@ -40,7 +43,7 @@ public class SnakesAndLadders implements Game {
     }
 
     public String playerTurn(Integer playerPosition){
-        console.getStringInput("Roll the dye");
+        console.getStringInput("Press Enter to roll the dice.");
         playerPosition = playerDiceRoll();
         playerSnakesAndLadders(playerPosition);
         if(playerPosition >= 100){
@@ -51,7 +54,7 @@ public class SnakesAndLadders implements Game {
     }
 
     public String aiTurn(Integer aiPosition){
-        console.getStringInput("Now it's my turn!");
+        console.getStringInput("Now it's my turn! Press enter.");
         aiPosition = aiDiceRoll();
         aiSnakesAndLadder(aiPosition);
         if (aiPosition >= 100){
@@ -79,7 +82,44 @@ public class SnakesAndLadders implements Game {
         return currentPosition;
     }
 
-    public Integer SnakesAndLaddersChecker(Integer position) {
+    public Integer SnakesAndLaddersCheckerViaMap(Integer position){
+        Integer newPosition = 0;
+        HashMap<Integer, Integer> snakesMap = new HashMap<>();
+        HashMap<Integer, Integer> laddersMap = new HashMap<>();
+
+            snakesMap.put(16,6);
+            snakesMap.put(46,26);
+            snakesMap.put(49,11);
+            snakesMap.put(56,53);
+            snakesMap.put(62,19);
+            snakesMap.put(64,60);
+            snakesMap.put(87,24);
+            snakesMap.put(93,73);
+            snakesMap.put(95,75);
+            snakesMap.put(98,78);
+
+            laddersMap.put(1,38);
+            laddersMap.put(4,14);
+            laddersMap.put(9,31);
+            laddersMap.put(21,42);
+            laddersMap.put(28,84);
+            laddersMap.put(36,44);
+            laddersMap.put(51,67);
+            laddersMap.put(71,91);
+            laddersMap.put(80,99);
+
+            if(laddersMap.containsKey(position)){
+                newPosition = laddersMap.get(position);
+            } else if (snakesMap.containsKey(position)){
+                newPosition = snakesMap.get(position);
+            } else {
+                newPosition = position;
+            }
+            return newPosition;
+        }
+
+
+    /*public Integer SnakesAndLaddersChecker(Integer position) {
         Integer newPosition = 0;
         switch (position) {
             case 1:
@@ -143,10 +183,10 @@ public class SnakesAndLadders implements Game {
                 return position;
         }
         return newPosition;
-    }
+    }*/
 
     public Integer playerSnakesAndLadders(Integer position) {
-        Integer newPosition = SnakesAndLaddersChecker(position);
+        Integer newPosition = SnakesAndLaddersCheckerViaMap(position);
         if (position > newPosition) {
             console.println("Uh-oh! You've hit a Snake! You're back at %d", newPosition);
             playerPiece.setCurrentPosition(newPosition);
@@ -160,7 +200,7 @@ public class SnakesAndLadders implements Game {
     }
 
     public Integer aiSnakesAndLadder(Integer position){
-        Integer newPosition = SnakesAndLaddersChecker(position);
+        Integer newPosition = SnakesAndLaddersCheckerViaMap(position);
         if (position > newPosition) {
             console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
             aiPiece.setCurrentPosition(newPosition);
@@ -180,7 +220,7 @@ public class SnakesAndLadders implements Game {
         console.println("Snakes and Ladders finds its origins in Ancient India, where it\n" +
                 "was first created under the name Moksha Patam.\n" +
                 "It was used to teach children values, rewarding proper behavior with\n" +
-                "a boost in point value, via climing a ladder, or punishing a player\n" +
+                "a boost in point value, via climbing a ladder, or punishing a player\n" +
                 "in point value for bad behavior, via sliding down the back of a snake.\n\n" +
                 "Commercially known in the West as Chutes and Ladders, the game has been published by Milton Bradley\n" +
                 "since the 1940's, and players compete by rolling dice and\n" +
