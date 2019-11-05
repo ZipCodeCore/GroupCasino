@@ -17,8 +17,8 @@ public class Casino {
         Casino.prologue();
         Player player = Casino.newPlayerDialogue();
 
-        MainMenu mainmenu = new MainMenu(player);
-        mainmenu.displayMenu();
+        MainMenu mainMenu = new MainMenu(player);
+        mainMenu.displayMenu();
         Casino.displayEnding();
     }
 

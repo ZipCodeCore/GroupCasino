@@ -43,6 +43,7 @@ public class MainMenu implements Menu {
 
     @Override
     public void displayMenu() {
+        console.clearScreen();
         try {
             Music.filePath = "src/music/(Menu) All of Me Instrumental.wav";
             mainMusic = new Music();
