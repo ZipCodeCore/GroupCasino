@@ -28,7 +28,6 @@ public class SnakesAndLadders implements Game {
     public void setUpGame(){
         running = true;
         currentGame = true;
-        String winner = "";
         playerPiece.setCurrentPosition(0);
         aiPiece.setCurrentPosition(0);
     }
