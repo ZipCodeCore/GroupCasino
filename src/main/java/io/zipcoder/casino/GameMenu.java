@@ -1,17 +1,18 @@
 package io.zipcoder.casino;
 
 
+import io.zipcoder.casino.Games.BlackJack;
 import io.zipcoder.casino.Games.Craps;
 import io.zipcoder.casino.Games.SnakesAndLadders;
 import io.zipcoder.casino.Games.HighAndLow;
 import io.zipcoder.casino.utilities.Console;
 
 public class GameMenu {
-    Console console = new Console(System.in, System.out);
+    private Console console = new Console(System.in, System.out);
     private Integer playerInput;
     private Player currentPlayer;
     Casino casino = new Casino();
-    boolean running = true;
+    private boolean running = true;
 
     public void runGameMenu(Player currentPlayer){
         this.currentPlayer = currentPlayer;
@@ -47,10 +48,10 @@ public class GameMenu {
                 goFish.launchGoFish();*/
                 return "You would be playing Go Fish now.";
             case 2:
-                console.print("You would be playing Blackjack now.");
-                /*Blackjack blackjack = new blackjack();
-                blackjack.launchBlackjack();*/
-                return "You would be playing Blackjack now.";
+
+                BlackJack blackjack = new BlackJack();
+                blackjack.approachTable(currentPlayer);
+                break;
             case 3:
                 Craps craps = new Craps();
                 craps.approachTable(currentPlayer);
@@ -58,7 +59,7 @@ public class GameMenu {
             case 4:
                 SnakesAndLadders SnakesAndLadders = new SnakesAndLadders();
                 SnakesAndLadders.runSnakesAndLadders(currentPlayer);
-                break;
+                return "You would be playing Snakes and Ladders now.";
             case 5:
                 console.print("You would be playing Roulette now.");
                 /*Roulette roulette = new Roulette;
@@ -74,7 +75,7 @@ public class GameMenu {
             case 7:
                 HighAndLow highAndLow = new HighAndLow();
                 highAndLow.runHighOrLow(currentPlayer);
-                break;
+                return "You would be playing High and Low now.";
             case 8:
                 running = false;
                 break;
