@@ -287,5 +287,7 @@ public final class Console {
         }
     }
 
+    public void getInput(String s, TimeUnit milliseconds, int i) {
+    }
 }
 

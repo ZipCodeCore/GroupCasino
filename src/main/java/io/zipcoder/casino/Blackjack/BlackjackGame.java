@@ -8,8 +8,12 @@ import io.zipcoder.casino.Menus.BlackjackMenu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.Utilities.Music;
 
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,6 +40,7 @@ public class BlackjackGame extends CardGame implements Game {
     private ArrayList<BlackjackHand> hands;
     private CardSet shoe;
     private int numDecks;
+    Music blackJackMusic = null;
 
 
     public BlackjackGame(double minBet, double maxBet, Player incomingPlayer) {
@@ -95,8 +100,29 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public void startPlay() {
+        //Starts playing music!
+        try {
+            Music.filePath = "src/music/(BlackJack) Glide with me.wav";
+            blackJackMusic = new Music();
+            blackJackMusic.play();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+
         new BlackjackMenu(this).displayMenu();
         roundStart();
+
+        //stops the music!
+        try {
+            blackJackMusic.stop();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
 
     public void roundStart() {

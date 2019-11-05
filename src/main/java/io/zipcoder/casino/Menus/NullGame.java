@@ -21,7 +21,7 @@ public class NullGame extends CardGame implements Game {
         return name;
     }
 
-    public void startPlay() {
+    public void startPlay() throws InterruptedException {
         MainMenu mainmenu = new MainMenu(player);
         mainmenu.displayMenu();
     }

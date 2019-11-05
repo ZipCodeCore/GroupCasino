@@ -5,7 +5,12 @@ import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.Utilities.Console;
 
+import java.util.concurrent.TimeUnit;
+
+import static io.zipcoder.casino.Utilities.Console.printWithDelays;
+
 public class TellerMenu implements Menu {
+
 
     private Console console;
     private Player player;
@@ -23,7 +28,7 @@ public class TellerMenu implements Menu {
     }
 
     @Override
-    public void displayMenu() {
+    public void displayMenu() throws InterruptedException {
         console.clearScreen();
 
         console.println("Teller...");
@@ -38,7 +43,7 @@ public class TellerMenu implements Menu {
     }
 
     @Override
-    public void handleChoice(int choice) {
+    public void handleChoice(int choice) throws InterruptedException {
 
         switch (choice) {
             case 1:
@@ -57,25 +62,25 @@ public class TellerMenu implements Menu {
         }
     }
 
-    public void depositFunds() {
-        double funds = console.getCurrency("How much are you depositing? ");
+    public void depositFunds() throws InterruptedException {
+        double funds = console.getCurrency("[TELLER]: How much are you depositing?\n");
         if (funds == 0.0) {
-            console.println("Quit wastin' my time, buddy");
+            printWithDelays("[TELLER]: Quit wastin' my time, buddy\n", TimeUnit.MILLISECONDS, 50);
         } else if (funds > 10000.0) {
-            console.println("Whoa, jeez, OK: you just knock over a bank or something'?");
+            printWithDelays("[TELLER]: Whoa, jeez, OK: you just knock over a bank or something?\n", TimeUnit.MILLISECONDS, 50);
             gameServices.deposit(funds, this.player);
-            console.println("Good luck, fancy pants!");
+            printWithDelays("[TELLER]: Good luck, fancy pants!\n", TimeUnit.MILLISECONDS, 50);
         } else if (funds <= 20.0){
-            console.println("Wow, are you sure that it's safe walkin' around with all that?");
+            printWithDelays("[TELLER]: Wow, are you sure that it's safe walkin' around with all that?\n", TimeUnit.MILLISECONDS, 50);
             gameServices.deposit(funds, this.player);
-            console.println("Don't spend it all in once place");
+            printWithDelays("[TELLER]: Don't spend it all in once place\n", TimeUnit.MILLISECONDS, 50);
         } else {
             console.println(String.format("Depositing $%.2f",funds));
             gameServices.deposit(funds, this.player);
-            console.println("Good luck at the tables");
+            printWithDelays("[TELLER]: Good luck at the tables\n", TimeUnit.MILLISECONDS, 50);
         }
 
-        console.getInput("Press Enter to continue");
+        console.getInput("\nPress Enter to continue\n");
     }
 
     public Double cashOut () {
