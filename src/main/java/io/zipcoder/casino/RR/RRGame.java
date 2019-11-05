@@ -43,6 +43,7 @@ public class RRGame extends DiceGame implements Game {
     public void startPlay() {
         new RRMenu(this).displayMenu();
         roundOfPlay();
+
     }
 
     @Override

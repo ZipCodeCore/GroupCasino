@@ -20,4 +20,18 @@ public class GameServices implements GamblingGame {
     public void payOut(double amount, Player player) {
         player.setBalance(player.getBalance() + amount);
     }
+
+    public void deposit(double amount, Player player) {
+        payOut(amount, player);
+        player.setInitialBalance(player.getInitialBalance() + amount);
+    }
+
+    public Double withdraw(Player player) {
+        double withdrawal = player.getBalance();
+        if (wager(player.getBalance(), player)) {
+            return withdrawal;
+        } else {
+            return null;
+        }
+    }
 }
