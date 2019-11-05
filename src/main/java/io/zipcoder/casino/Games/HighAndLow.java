@@ -14,6 +14,7 @@ public class HighAndLow implements Game, GamblingGame{
     private Integer totalBetValue = 0;
     private Player currentPlayer;
     private boolean running = true;
+    private boolean didYouBet = true;
 
     public void runHighOrLow(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
@@ -21,7 +22,6 @@ public class HighAndLow implements Game, GamblingGame{
     }
 
     public Integer firstRoll(){
-        console.getStringInput("Press Enter to roll your first roll.\n\n");
         Integer roll = dice.rollDice(1);
         console.println(dice.diceArt(roll));
         Integer roll2 = dice.rollDice(1);
@@ -31,7 +31,7 @@ public class HighAndLow implements Game, GamblingGame{
         return sumOfRolls;
     }
 
-    public Integer doYouWantToBet(){
+    public Integer highOrLowBet(){
         console.println("Do you want to bet High or Low?");
         console.println("(1) - High");
         console.println("(2) - Low");
@@ -51,10 +51,6 @@ public class HighAndLow implements Game, GamblingGame{
 
     public void winOrLose(Integer firstRoll, Integer secondRoll, Integer highOrLowBet){
         if((firstRoll > secondRoll && highOrLowBet == 2) || (firstRoll < secondRoll && highOrLowBet == 1)){
-            console.println("Congratulations! You've won %d!", totalBetValue);
-            LocalDateTime now = LocalDateTime.now();
-            String addHistory = String.format("You won $%d.00 at High and Low! ** ", totalBetValue);
-            currentPlayer.addHistory(addHistory + dtf.format(now));
             returnWinnings(currentPlayer);
         } else {
             console.println(("Sorry, you've lost. Try again soon!"));
@@ -78,16 +74,17 @@ public class HighAndLow implements Game, GamblingGame{
     @Override
     public void approachTable(Player currentPlayer) {
         console.println("The High and Low table... reputed as the lowest of casino games.\n" +
-                "Diminishing returns for the despairing and unfortunate who have fallen too hard on their bad luck" +
-                "Desperation permeates from the eyes of those gathered around the table,\n" +
+                "Diminishing returns for the despairing and unfortunate who have fallen too hard on their bad luck.\n" +
+                "Desperation permeates from the eyes of those gathered around the moldy table,\n" +
                 "gravely placing their hopes to win back ANYTHING from their losses in this last-ditch game of chance.\n" +
                 "Have they really sunk that low to be playing this game?\n" +
-                "\"Have I,\" you think to yourself as you approach the table.\n\nWhat would you like to do?\n\n");
+                "\"Have I?\" you think to yourself as you approach the table.\n\nWhat would you like to do?\n\n");
+        while(running) {
         console.println("(1) - Play the game");
         console.println("(2) - Read the rules");
         console.println("(3) - Return to the game menu");
         Integer playerInput = console.getIntegerInput(":");
-        while(running) {
+
             switch (playerInput) {
                 case 1:
                     runGame(currentPlayer);
@@ -95,8 +92,6 @@ public class HighAndLow implements Game, GamblingGame{
                     break;
                 case 2:
                     showRules();
-                    approachTable(currentPlayer);
-                    running = false;
                     break;
                 case 3:
                     running = false;
@@ -108,12 +103,19 @@ public class HighAndLow implements Game, GamblingGame{
     @Override
     public void runGame(Player currentPlayer) {
         while(running) {
+            totalBetValue = 0;
             console.println("Welcome to High and Low, %s!\n", currentPlayer.getName());
             placeBet(currentPlayer);
             Integer firstRoll = firstRoll();
-            console.println("Again...");
-            placeBet(currentPlayer);
-            Integer highOrLowBet = doYouWantToBet();
+            if(didYouBet == true) {
+                console.println("Again...");
+                placeBet(currentPlayer);
+
+            } else {
+                console.println("Sorry, you did not bet the first roll.\n" +
+                        "But we'll be nice and still let you guess.");
+            }
+            Integer highOrLowBet = highOrLowBet();
             Integer secondRoll = secondRoll();
 
             winOrLose(firstRoll, secondRoll, highOrLowBet);
@@ -146,12 +148,20 @@ public class HighAndLow implements Game, GamblingGame{
         if(playerInput == 1){
             currentPlayer.placeBet(10);
             totalBetValue += 10;
+            didYouBet = true;
+        } else {
+            didYouBet = false;
         }
 
     }
 
     @Override
     public void returnWinnings(Player currentPlayer) {
-        currentPlayer.changBalance(totalBetValue);
+        console.println("Congratulations! You've won $%d.00!", totalBetValue);
+        LocalDateTime now = LocalDateTime.now();
+        String addHistory = String.format("You won $%d.00 at High and Low! ** ", totalBetValue);
+        currentPlayer.addHistory(addHistory + dtf.format(now));
+        currentPlayer.changeBalance(totalBetValue);
+
     }
 }

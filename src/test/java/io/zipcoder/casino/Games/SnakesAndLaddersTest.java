@@ -21,7 +21,30 @@ public class SnakesAndLaddersTest {
     }
 
     @Test
-    public void playerTurn(){
-
+    public void snakesAndLaddersCheckerViaMapTest1(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        Integer position = 16;
+        Integer expected = 6;
+        Integer actual = snakesAndLadders.snakesAndLaddersCheckerViaMap(position);
+        Assert.assertEquals(expected,actual);
     }
+    @Test
+    public void snakesAndLaddersCheckerViaMapTest2(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        Integer position = 1;
+        Integer expected = 38;
+        Integer actual = snakesAndLadders.snakesAndLaddersCheckerViaMap(position);
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void snakesAndLaddersCheckerViaMapTest3(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        Integer position = 34;
+        Integer expected = 34;
+        Integer actual = snakesAndLadders.snakesAndLaddersCheckerViaMap(position);
+        Assert.assertEquals(expected,actual);
+    }
+
+
 }
