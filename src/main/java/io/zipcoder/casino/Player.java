@@ -25,7 +25,7 @@ public class Player {
 
     public void placeBet(Integer amount) {this.balance -= amount;}
 
-    public void changBalance(Integer amount) {
+    public void changeBalance(Integer amount) {
         this.balance += amount;
     }
 

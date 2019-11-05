@@ -51,11 +51,7 @@ public class HighAndLow implements Game, GamblingGame{
 
     public void winOrLose(Integer firstRoll, Integer secondRoll, Integer highOrLowBet){
         if((firstRoll > secondRoll && highOrLowBet == 2) || (firstRoll < secondRoll && highOrLowBet == 1)){
-            console.println("Congratulations! You've won $%d.00!", totalBetValue);
-            LocalDateTime now = LocalDateTime.now();
-            String addHistory = String.format("You won $%d.00 at High and Low! ** ", totalBetValue);
-            currentPlayer.addHistory(addHistory + dtf.format(now));
-            currentPlayer.changBalance(totalBetValue);
+            returnWinnings(currentPlayer);
         } else {
             console.println(("Sorry, you've lost. Try again soon!"));
             LocalDateTime now = LocalDateTime.now();
@@ -161,6 +157,11 @@ public class HighAndLow implements Game, GamblingGame{
 
     @Override
     public void returnWinnings(Player currentPlayer) {
+        console.println("Congratulations! You've won $%d.00!", totalBetValue);
+        LocalDateTime now = LocalDateTime.now();
+        String addHistory = String.format("You won $%d.00 at High and Low! ** ", totalBetValue);
+        currentPlayer.addHistory(addHistory + dtf.format(now));
+        currentPlayer.changeBalance(totalBetValue);
 
     }
 }
