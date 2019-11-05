@@ -8,6 +8,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * You are advised against modifying this class.
@@ -275,6 +276,15 @@ public final class Console {
     public Integer menuChoice(int max) {
         print("Menu choice: ");
         return getInteger(max);
+    }
+
+    //Makes a type writer effect on screen
+    public static void printWithDelays(String data, TimeUnit unit, long delay)
+            throws InterruptedException {
+        for (char ch : data.toCharArray()) {
+            System.out.print(ch);
+            unit.sleep(delay);
+        }
     }
 
 }
