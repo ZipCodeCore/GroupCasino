@@ -10,11 +10,16 @@ public class CardHand {
 
     public void evaluateHand(){}
 
-    public void addCardToHand(Card cardToAdd){}
+    public void addCardToHand(Card cardToAdd){
+    }
 
-    public void removeCardFromHand(Card cardToRemove){}
+    public void removeCardFromHand(Card cardToRemove){
 
-    public void getCardFromDeck(int numberOfCards){}
+    }
+
+    public void getCardFromDeck(int numberOfCards){
+
+    }
 
 
 }
