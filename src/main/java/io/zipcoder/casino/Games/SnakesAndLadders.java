@@ -257,12 +257,18 @@ public class SnakesAndLadders implements Game {
         }
     }
 
+
     @Override
     public void runGame(Player currentPlayer) {
+        running = true;
+        currentGame = true;
+        String winner = "";
+        playerPiece.setCurrentPosition(0);
+        aiPiece.setCurrentPosition(0);
         while (running) {
             console.println("Welcome to Snakes and Ladders, %s!", currentPlayer.getName());
             console.println("In this house, the player always goes first! Step on up!");
-            String winner = startNewGame();
+            winner = startNewGame();
             if (winner.equals("Player")) {
                 console.println("Congratulations! You won!");
             } else if (winner.equals("Ai")) {
