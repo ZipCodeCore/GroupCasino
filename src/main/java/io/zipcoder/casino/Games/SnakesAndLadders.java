@@ -171,12 +171,11 @@ public class SnakesAndLadders implements Game {
     }
 
 
-
     @Override
     public void approachTable(Player currentPlayer) {
         console.println("You approach the Snakes and Ladders table. What would you like to do?");
         console.println("(1) - Play the game");
-        console.println("(2) - Hear the rules");
+        console.println("(2) - Read the rules");
         console.println("(3) - Return to the game menu");
         Integer playerInput = console.getIntegerInput(":");
         while(running) {
@@ -229,6 +228,5 @@ public class SnakesAndLadders implements Game {
                 running = false;
                 break;
         }
-
     }
 }
