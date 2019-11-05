@@ -1,6 +1,8 @@
 package io.zipcoder.casino.CardGames;
 
+import javax.print.DocFlavor;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CardHand {
 
@@ -12,10 +14,14 @@ public class CardHand {
     }
 
     public String displayHand(){
+        //ollections.sort(userHand); TODO - do this later
        return userHand.toString();
     }
 
-    public void evaluateHand(){}
+    public boolean evaluateHand(String card){
+
+        return userHand.contains(card);
+    }
 
     public void addCardToHand(Card cardToAdd){
 
