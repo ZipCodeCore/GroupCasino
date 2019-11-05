@@ -134,36 +134,13 @@ public class CrapsGame extends DiceGame implements Game {
 
     public void userRollsDiceSetPoint() {
         console.getInput("\nPress Enter to roll the dice\n");
-//        String r = scanner.next().toLowerCase();
-//        try { if (!r.equals("r")){
-//            throw new Exception("Invalid Choice!");}}
-//
-//        catch (Exception e) {
-//            userRollsDiceSetPoint();
-//        }
         tossPointRoll();
     }
 
     public void userRollsDiceCurrentPoint() {
         console.getInput("\nPress Enter to roll the dice\n");
-//        String r = scanner.next().toLowerCase();
-//        try { if (!r.equals("r")){
-//            throw new Exception("Invalid Choice!");}}
-//
-//        catch (Exception e) {
-//            userRollsDiceSetPoint();
-//        }
         tossCurrentRoll();
     }
-
-//    public Integer RollPointNum(String r) {
-//        if (r.equals("r")) {
-//            setThePointRoll = DiceGame.roll(2);
-//            return setThePointRoll;
-//        } else notR();
-//        return 0;
-//    }
-
 
 
     public Integer tossPointRoll() {
