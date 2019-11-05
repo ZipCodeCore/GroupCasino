@@ -4,45 +4,40 @@ import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
-import java.util.Arrays;
-
 public class Yahtzee implements Game {
+
+    // Fields-----------------------------------------------------------------------------------------------------------
+
     private Player user;
     private static Console console = new Console(System.in, System.out);
-
-    private boolean continuePlay;
-
     private Dice[] myDice;
     int points;
-    private String[] availableOptionsNames = {"","1s", "2s", "3s", "4s", "5s","6s","3 of a kind","4 of a kind",
-                                              "Small Straight", "Large Straight", "Full House", "Yahtzee", "Chance"};
+    private String[] availableOptions = {" ","1s", "2s", "3s", "4s", "5s", "6s", "3 of a kind", "4 of a kind",
+                                         "Small Straight", "Large Straight", "Full House", "Yahtzee", "Chance"};
+    private boolean continuePlay;
 
-
+    // Constructor------------------------------------------------------------------------------------------------------
 
     public Yahtzee(Player player){
         this.user = player;
         this.myDice = createDice();
         this.points = 0;
-        continuePlay = false;
+        continuePlay = true;
     }
+
+    // Methods----------------------------------------------------------------------------------------------------------
 
     public void startGame(){
 
-        for(int i = 0; i < 13; i++) {
-            //rollDice
-            //chooseEvaluation
+        while(continuePlay) {
+            for (int i = 0; i < 13; i++) {
+                beginDiceRolls();
+                checkForEvaluation();
+            }
+            displayResults();
+            promptLeaveGame();
+            if (!this.continuePlay) { return; }
         }
-        displayResults();
-        promptLeaveGame();
-    }
-
-    public void promptLeaveGame(){
-        console.getStringInput("Would you like to play again?\n1. Play again\n2. Exit");
-
-    }
-    public void displayResults(){
-         console.println("Your final score is: " + this.points);
-         console.getStringInput("Press enter to continue ");
     }
 
     public Dice[] createDice(){
@@ -53,23 +48,46 @@ public class Yahtzee implements Game {
         return dice;
     }
 
+    public void displayResults(){
+        console.println("Your final score is: " + this.getPoints());
+    }
 
-/*
-// Following methods for rolling dice and choosing which ones to keep---------------------------------------------------
-
-    public void resetDice(){
-        for(int i = 0; i < myDice.length; i++){
-            myDice[i].setKept(false);
+    public void promptLeaveGame(){
+        String exitOrNo = console.getStringInput("Would you like to play again?\n1. Play again\n2. Exit");
+        boolean c = false;
+        while (!c) {
+            switch (exitOrNo.toLowerCase()) {
+                case "1": case "play": case "play again":
+                    this.continuePlay = true;
+                    c = true;
+                    break;
+                case "2": case "exit":
+                    this.continuePlay = false;
+                    c = true;
+                    break;
+                default:
+                    console.println("Please choose one of the options.");
+                    exitOrNo = console.getStringInput("Would you like to play again?\n1. Play again\n2. Exit");
+                    break;
+            }
         }
     }
 
-    public void threeDiceRolls(){
+    // Following methods for rolling dice and choosing which ones to keep-----------------------------------------------
+
+    public void beginDiceRolls(){
         resetDice();
         roll5Dice();
         chooseToKeep();
         roll5Dice();
         chooseToKeep();
         roll5Dice();
+    }
+
+    public void resetDice(){
+        for(int i = 0; i < myDice.length; i++){
+            myDice[i].setKept(false);
+        }
     }
 
     public void roll5Dice(){
@@ -86,34 +104,37 @@ public class Yahtzee implements Game {
             for (int i = 0; i < this.myDice.length; i++) {
                 console.print((i + 1) + ". " + this.myDice[i].getValue() + " : " + this.myDice[i].isKept() + "\n");
             }
-            keepthis = console.getStringInput(" Enter the number of the dice to keep, then press enter\nType 'continue' when finished");
+            keepthis = console.getStringInput("Type the corresponding number of the dice and press enter to " +
+                                                      "switch it between keeping and re-rolling.\n" +
+                                                      "Type 'continue' when finished\n");
+
             switch (keepthis){
                 case "1": this.myDice[0].keptOrRolled();   break;
                 case "2": this.myDice[1].keptOrRolled();   break;
                 case "3": this.myDice[2].keptOrRolled();   break;
                 case "4": this.myDice[3].keptOrRolled();   break;
                 case "5": this.myDice[4].keptOrRolled();   break;
-                case "continue": keepthis = "roll"; break;
-                default: break;
+                case "continue": keepthis = "roll";        break;
+                default:                                   break;
             }
         }
     }
 
 
-// Following methods are for evaluating the dice at the end of three rolls----------------------------------------------
+    // Following methods are for evaluating the dice at the end of three rolls------------------------------------------
 
-    public int checkForEvaluation(Dice[] dice){
+    public int checkForEvaluation(){
         int choice = 0;
         boolean evaluated = false;
         Integer[] diceValues = getDiceValues();
 
-        for(int i = 1; i < availableOptionsNames.length; i++){
-            console.println((i) + ".  " + availableOptionsNames[i]);
+        for(int i = 1; i < availableOptions.length; i++){
+            console.println((i) + ".  " + availableOptions[i]);
         }
 
         while(!evaluated){
             try{
-                for(Dice s: dice){
+                for(Dice s: this.myDice){
                     console.println(s.toString());
                 }
                 choice = console.getIntegerInput("Which one do you want to choose? ");
@@ -121,11 +142,11 @@ public class Yahtzee implements Game {
                 else if(choice < 1 || choice > 13){
                     console.println("Please pick an option within the bounds.");
                 }
-                else if(this.availableOptionsName[choice].equals(" ")){
+                else if(this.availableOptions[choice].equals(" ")){
                     console.println("Box already picked.  Please choose again.");
                 }
                 else{
-                    availableOptionsNames[choice] = " ";
+                    availableOptions[choice] = " ";
                     evaluated = true;
                 }
             }
@@ -152,7 +173,15 @@ public class Yahtzee implements Game {
         }
         return 0;
     }
-*/
+
+    public Integer[] getDiceValues(){
+        Integer[] values = new Integer[5];
+        for(int i = 0; i < this.myDice.length; i++){
+            values[i] = this.myDice[i].getValue();
+        }
+        return values;
+
+    }
 
     public int checkForFaces(Integer[] diceValues, int valueToLookFor){
         int results = 0;
@@ -279,15 +308,30 @@ public class Yahtzee implements Game {
         }
         return 50;
     }
-/*
-    public Integer[] getDiceValues(){
-        Integer[] values = new Integer[5];
-        for(int i = 0; i < this.myDice.length; i++){
-            values[i] = this.myDice[i].getValue();
-        }
-        return values;
 
+    // getters and setters----------------------------------------------------------------------------------------------
+
+    public Player getUser() {
+        return user;
     }
-*/
 
+    public void setUser(Player user) {
+        this.user = user;
+    }
+
+    public Dice[] getMyDice() {
+        return myDice;
+    }
+
+    public void setMyDice(Dice[] myDice) {
+        this.myDice = myDice;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
 }
