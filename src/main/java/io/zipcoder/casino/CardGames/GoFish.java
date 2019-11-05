@@ -7,8 +7,10 @@ import java.util.Stack;
 
 public class GoFish {
 
-    Player user = new Player();
+    //Player user = new Player();
     Deck goFishDeck = new Deck(1);
+    CardHand playerHand1 = new CardHand();
+   // CardHand playerHand2 = new CardHand();
 
     Integer pointAccumulated;
     Integer hasCardQuestion;
@@ -18,9 +20,13 @@ public class GoFish {
 
         goFishDeck.shuffleDeck();
 
-        System.out.println(goFishDeck.drawCard().toString());
-        System.out.println(goFishDeck.drawCard().toString());
-        System.out.println(goFishDeck.drawCard().toString());
+
+    }
+    public void dealCards(){
+
+        Card newCard = goFishDeck.drawCard();
+
+        playerHand1.addCardToHand(newCard);
 
     }
 
@@ -28,11 +34,17 @@ public class GoFish {
 
     public void tradeCards(ArrayList fromPlayer, ArrayList toPlayer){}
 
+    public void displayCards(){
+        playerHand1.displayHand();
+    }
+
     public void dropCards (Player playerToDrop){
 
     }
 
-    public void promptLeaveGame(){}
+    public void promptLeaveGame(){
+
+    }
 
     public void displayResults (){}
 }

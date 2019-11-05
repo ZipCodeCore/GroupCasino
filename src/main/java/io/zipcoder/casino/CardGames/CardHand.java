@@ -6,12 +6,17 @@ public class CardHand {
 
     ArrayList<Card> userHand = new ArrayList<Card>();
 
-    public void displayHand(){}
+    public void displayHand(){
+        userHand.toString();
+    }
 
     public void evaluateHand(){}
 
     public void addCardToHand(Card cardToAdd){
+
+        userHand.add(cardToAdd);
     }
+
 
     public void removeCardFromHand(Card cardToRemove){
 

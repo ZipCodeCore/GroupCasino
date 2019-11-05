@@ -34,13 +34,15 @@ public class Deck {
         System.out.println(drawCard());
     }
 
-    public void dealCards(int numberOfCards){
+    public Card dealCards(int numberOfCards){
 
         for(int index = 0; index < numberOfCards; index++){
 
+            return deckOfCards.pop();
         }
 
 
+        return null;
     }
 
 
@@ -54,6 +56,7 @@ public class Deck {
 
         return null;
     }
+
 
 }
 
