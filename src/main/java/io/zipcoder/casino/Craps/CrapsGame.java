@@ -31,6 +31,7 @@ public class CrapsGame extends DiceGame implements Game {
     private GameServices gameServices = new GameServices();
 
 
+
     //Craps Game Constructor
     public CrapsGame(double minBet, double maxBet, Player incomingPlayer) {
         this.minBet = minBet;
@@ -95,7 +96,7 @@ public class CrapsGame extends DiceGame implements Game {
             betChoice();
         }
         else if (wager != null) {
-             //this.player.getPlayer().setBalance(this.balance - wager);
+             gameServices.wager(wager, this.player.getPlayer());
             return wager;
         }
         return wager;
