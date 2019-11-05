@@ -4,10 +4,6 @@ public class Card {
     private Suit suit;
     private CardValue cardValue;
 
-
-    private Suit suit;
-    private CardValue cardValue;
-
     public Card (CardValue cardValue, Suit suit){
         this.cardValue= cardValue;
         this.suit = suit;
