@@ -1,6 +1,5 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.GameMenu;
 import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
@@ -10,7 +9,7 @@ public class HighAndLow implements Game{
     Console console = new Console(System.in, System.out);
     Dice dice = new Dice();
     private Player currentPlayer;
-    private boolean running;
+    private boolean running = true;
 
     public void runHighOrLow(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
@@ -18,6 +17,7 @@ public class HighAndLow implements Game{
     }
 
     public Integer firstRoll(){
+        console.getStringInput("Press Enter to roll your first roll.");
         Integer roll = dice.rollDice(1);
         console.println(dice.diceArt(roll));
         Integer roll2 = dice.rollDice(1);
@@ -57,13 +57,13 @@ public class HighAndLow implements Game{
 
     public void showRules(){
         console.println("A simple game for meager winnings. At High and Low,\n" +
-                "you'll only be able to bet $1. Our pit boss will roll two dice and\n" +
+                "you'll only be able to bet $1. Simply roll two dice, and our pit boss will\n" +
                 "present to you the sum of the rolls and the chance to bet High or Low.\n" +
                 "If you believe the sum of the second roll will be higher, bet high.\n" +
                 "Likewise, if you believe the sum of the second roll will be lower, bet low.\n" +
-                "Pray for an early 2,3,11, or 12 because they are the easiest to predict again.\n" +
+                "Pray for an early 2,3,11, or 12 because they are the easiest to predict against.\n" +
                 "Hence why you're only allowed to be $1.\n\n" +
-                "What? We're not in the business of giving away money.");
+                "What? We're not in the business of giving away money.\n\n");
     }
 
     @Override
@@ -95,15 +95,15 @@ public class HighAndLow implements Game{
 
     @Override
     public void runGame(Player currentPlayer) {
-        while(running)
-            console.println("Welcome to High and Low!\n");
+        while(running) {
+            console.println("Welcome to High and Low, %s!\n", currentPlayer.getName());
             Integer firstRoll = firstRoll();
             Integer highOrLowBet = doYouWantToBet();
             Integer secondRoll = secondRoll();
 
             winOrLose(firstRoll, secondRoll, highOrLowBet);
             exitGame(currentPlayer);
-
+        }
     }
 
     @Override
