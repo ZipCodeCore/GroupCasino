@@ -2,12 +2,39 @@ package io.zipcoder.casino.RR;
 
 import io.zipcoder.casino.DiceGame;
 import io.zipcoder.casino.Interfaces.GamblingGame;
+import io.zipcoder.casino.Menus.RRMenu;
+import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Utilities.Console;
 
-import sun.jvm.hotspot.utilities.Assert;
 
 public class RRGame extends DiceGame implements GamblingGame {
 
+
+    private Console console = new Console(System.in, System.out);
     private String name = "Russian Dice Roulette";
+//    public static int roll (int numberOfDiceBeingRolled, int numOfSides)
+//    {
+//        Integer dieRoll1 = 0;
+//        for (int i = 1; i <= numberOfDiceBeingRolled; i++) {
+//            dieRoll1 += (int) (Math.random() * numOfSides + 1);
+//        }
+//        return dieRoll1;
+//    }
+    private Player player;
+
+//    public class RRGamePlayer {
+//
+//
+//
+//
+//        //RRGamePlayer Constructor
+//        public RRGamePlayer(Player player) {
+//
+//            this.player = player;
+//        }
+//
+//
+//    }
 
     public String getName() {
         return name;
@@ -25,7 +52,8 @@ public class RRGame extends DiceGame implements GamblingGame {
 
     @Override
     public void startPlay() {
-
+        new RRMenu(this).displayMenu();
+        roundOfPlay();
     }
 
     @Override
@@ -35,15 +63,24 @@ public class RRGame extends DiceGame implements GamblingGame {
 
     @Override
     public void roundOfPlay() {
-
-           public int testRoll() {
-            int expected = DiceGame.roll(1, 6);
+        Integer computerRoll=roll();
+        console.println("The House Rolled %d", computerRoll);
+        console.println("Your Current Balance Is %d", player.getBalance());
+        console.getInput("Press Enter To Roll");
+        Integer playerRoll = roll();
+        console.println("You Rolled %d", playerRoll);
+        if (playerRoll == computerRoll) {
+            console.println("You Lost!!!");
+            player.setBalance(0);
+        }
+        else {
+            player.setBalance(2*player.getBalance());
+            console.println("You Won!!! Your Balance Is Now %d",player.getBalance());
         }
 
-        Assert.assertTrue((expected >=1 && expected <=6));
 
     }
-    }
+
 
     public int selectTargetNum () {
         return 0;
