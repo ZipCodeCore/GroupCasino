@@ -176,6 +176,22 @@ public class SnakesAndLadders implements Game {
     @Override
     public void approachTable(Player currentPlayer) {
         console.println("You approach the Snakes and Ladders table. What would you like to do?");
+        console.println("Snakes and Ladders\n\n" +
+                "       ---_ ......._-_--.\n" +
+                "      (|\\ /      / /| \\  \\\n" +
+                "      /  /     .'  -=-'   `.\n" +
+                "     /  /    .'             )\n" +
+                "   _/  /   .'        _.)   /\n" +
+                "  / o   o        _.-' /  .'\n" +
+                "  \\          _.-'    / .'*|\n" +
+                "   \\______.-'//    .'.' \\*|\n" +
+                "    \\|  \\ | //   .'.' _ |*|\n" +
+                "     `   \\|//  .'.'_ _ _|*|\n" +
+                "      .  .// .'.' | _ _ \\*|\n" +
+                "      \\`-|\\_/ /    \\ _ _ \\*\\\n" +
+                "       `/'\\__/      \\ _ _ \\*\\\n" +
+                "      /^|            \\ _ _ \\*\n" +
+                "     '  `             \\ _ _ \\      ");
         while(running) {
         console.println("(1) - Play the game");
         console.println("(2) - Read the rules");
