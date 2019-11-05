@@ -35,9 +35,9 @@ public class Dice {
                 "|   o |\n" +
                 "+-----+");
         diceMap.put(4,"+-----+\n" +
-                "| o   |\n" +
-                "|  o  |\n" +
-                "|   o |\n" +
+                "| o o |\n" +
+                "|     |\n" +
+                "| o o |\n" +
                 "+-----+");
         diceMap.put(5,"+-----+\n" +
                 "| o o |\n" +

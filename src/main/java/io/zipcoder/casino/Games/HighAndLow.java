@@ -17,7 +17,7 @@ public class HighAndLow implements Game{
     }
 
     public Integer firstRoll(){
-        console.getStringInput("Press Enter to roll your first roll.");
+        console.getStringInput("Press Enter to roll your first roll.\n\n");
         Integer roll = dice.rollDice(1);
         console.println(dice.diceArt(roll));
         Integer roll2 = dice.rollDice(1);
@@ -69,8 +69,10 @@ public class HighAndLow implements Game{
     @Override
     public void approachTable(Player currentPlayer) {
         console.println("Small winnings at the High and Low table.\n" +
-                "Desperation lies deep in the eyes of those " +
-                "looking to buy back their losses. What would you like to do?");
+                "Desperation permeates from the eyes of those gathered around the table," +
+                "desperate to win back ANYTHING from their losses.\n" +
+                "Have they really sunk that low to be playing this game?\n" +
+                "You approach the table. What would you like to do?\n\n");
         console.println("(1) - Play the game");
         console.println("(2) - Read the rules");
         console.println("(3) - Return to the game menu");
@@ -114,7 +116,7 @@ public class HighAndLow implements Game{
         Integer playerInput = console.getIntegerInput(":");
         switch (playerInput){
             case 1:
-                runHighOrLow(currentPlayer);
+                runGame(currentPlayer);
                 break;
             case 2:
                 running = false;

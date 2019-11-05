@@ -222,7 +222,7 @@ public class SnakesAndLadders implements Game {
         Integer playerInput = console.getIntegerInput(":");
         switch (playerInput){
             case 1:
-                runSnakesAndLadders(currentPlayer);
+                runGame(currentPlayer);
                 break;
             case 2:
                 running = false;
