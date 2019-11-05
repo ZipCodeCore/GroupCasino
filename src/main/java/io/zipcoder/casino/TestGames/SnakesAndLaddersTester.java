@@ -1,16 +1,17 @@
-package io.zipcoder.casino.Games;
+package io.zipcoder.casino.TestGames;
 
-import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
 import io.zipcoder.casino.GamePieces.Dice;
+import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
+import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 
-public class SnakesAndLadders implements Game {
+public class SnakesAndLaddersTester implements Game {
     private Console console = new Console(System.in, System.out);
     private Dice dice = new Dice();
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -52,7 +53,7 @@ public class SnakesAndLadders implements Game {
     }
 
     public String playerTurn(Integer playerPosition){
-        console.getStringInput("Press Enter to roll the dice.");
+        //console.getStringInput("Press Enter to roll the dice.");
         playerPosition = playerDiceRoll();
         playerSnakesAndLadders(playerPosition);
         if(playerPosition >= 100){
@@ -63,7 +64,7 @@ public class SnakesAndLadders implements Game {
     }
 
     public String aiTurn(Integer aiPosition){
-        console.getStringInput("Now it's my turn! Press enter.");
+        //console.getStringInput("Now it's my turn! Press enter.");
         aiPosition = aiDiceRoll();
         aiSnakesAndLadders(aiPosition);
         if (aiPosition >= 100){
