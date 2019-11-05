@@ -10,38 +10,38 @@ import static java.lang.System.in;
 
 public class GoFish implements Game {
 
-    private  int points;
     private Player user;
+
     Console input = new Console(System.in, System.out);
 
-    //Player user = new Player();
     Deck goFishDeck;
     CardHand playerHand;
     CardHand computerHand;
     boolean winGame = false;
-    Integer pointAccumulated;
-    Integer hasCardQuestion;
 
     public GoFish(Player player) {
         this.user = player;
-        this.points = 0;
+
     }
 
     public void startGame(){
 
         initializeHands();
 
+        System.out.println("Loading Go Fish....");
+
         do{
 
+            System.out.println("Player's Turn");
             playerTurn();
 
 
+            //System.out.println("Computer's Turn");
+            //computerTurn();
 
 
-        }while(winGame == false);
 
-        /*System.out.println("Player 1: " + playerHand.displayHand());
-        System.out.println("Player 2: " + computerHand.displayHand());*/
+        }while(winGame != true);
 
     }
 
@@ -61,38 +61,36 @@ public class GoFish implements Game {
     public void playerTurn(){
 
         System.out.println(playerHand.displayHand());
-        System.out.println(computerHand.displayHand());
 
         String userInput = input.getStringInput("Which value would you like to ask for? ");
-
         userInput.toUpperCase();
 
-        System.out.println(computerHand.evaluateHand(userInput));
+        if(computerHand.lookForCard(userInput) == true){
 
-        winGame = true;
+            System.out.println("The computer has this card");
+
+            playerHand.tradeCards(computerHand.removeCardsFromHand(userInput));
+
+
+        }else{
+            System.out.println("Go Fish!");
+
+            playerHand.getCardFromDeck(goFishDeck.drawCard());
+        }
+
+        System.out.println(playerHand.displayHand());
+
+       //System.out.println(playerHand.evaluateHand());
+
+
+    }
+
+    public void computerTurn(){
+
+
 
     }
 
-    public void computerTurn(){}
-
-    public boolean askForCard(Player thisPlayer, String card){
-
-
-
-        return false;
-    }
-
-    public void tradeCards(ArrayList fromPlayer, ArrayList toPlayer){
-
-
-    }
-
-    public void displayCards(CardHand currentPlayer){
-    }
-
-    public void dropCards (Player playerToDrop){
-
-    }
 
     public void promptLeaveGame(){
 
