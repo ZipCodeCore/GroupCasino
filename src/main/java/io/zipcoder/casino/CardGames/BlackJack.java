@@ -13,6 +13,9 @@ public class BlackJack {
     private int wageBucket;
     private int blackJackDeck;
 
+    public BlackJack(Player player) {
+        this.user = player;
+    }
 
     public void startGame() {}
 
