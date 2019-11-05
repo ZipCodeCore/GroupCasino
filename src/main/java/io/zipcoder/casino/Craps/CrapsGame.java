@@ -59,7 +59,7 @@ public class CrapsGame extends DiceGame implements Game {
             userRollsDiceSetPoint();
             if (winOnFirst(setThePointRoll) == true) {
                 winningMessageFirstRoll();
-                calculatePayout();
+                calculateWinnings(betSize, setThePointRoll, numRolls);
             } else if (loseOnFirst(setThePointRoll) == true) {
                 losingMessageFirstRoll();
             } else {
@@ -69,7 +69,7 @@ public class CrapsGame extends DiceGame implements Game {
                     displayCurrentRoll(currentRoll);
                     if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
                         winOnSubsequentMessage();
-                        calculatePayout();
+                        calculateWinnings(betSize, setThePointRoll, numRolls);
                         break;
                     } else if (loseOnSubsequent(currentRoll) == true) {
                         loseOnSubsequentMessage();
@@ -79,7 +79,7 @@ public class CrapsGame extends DiceGame implements Game {
                     numRolls = i + 1;
                 }
             }
-        }calculateWinnings(betSize, setThePointRoll, numRolls);
+        }
     }
 
     public Double betChoice(){
@@ -98,7 +98,11 @@ public class CrapsGame extends DiceGame implements Game {
 
     public Double calculateWinnings(Double wager, Integer setThePointRoll, Integer numRolls){
         // PUT THE PAY TABLE HERE
-        if (setThePointRoll == 4 || setThePointRoll == 10){
+        if (setThePointRoll == 7 || setThePointRoll == 11){
+            gameServices.payOut(2 * wager, this.player.getPlayer());
+            return 2 * wager;
+        }
+        else if (setThePointRoll == 4 || setThePointRoll == 10){
             gameServices.payOut((7 - numRolls) * wager, this.player.getPlayer());
             return (7 - numRolls) * wager;
             }
@@ -163,11 +167,6 @@ public class CrapsGame extends DiceGame implements Game {
     public Integer calculatePayoutMultiplier() {
         //catch statements
         return null;
-    }
-
-    public double calculatePayout() {
-        //multiplier * initial wager + initial wager
-        return 0.0;
     }
 
     public void userRollsDiceSetPoint() {
