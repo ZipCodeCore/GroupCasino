@@ -34,14 +34,14 @@ public class MainMenu implements Menu {
         choiceMap.put(++count, new NullMenu());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Player player = new Player("Herb", "Tarlek", 45, 0.00);
         MainMenu mainMenu = new MainMenu(player);
         mainMenu.displayMenu();
     }
 
     @Override
-    public void displayMenu() {
+    public void displayMenu() throws InterruptedException {
         console.clearScreen();
         try {
             Music.filePath = "src/music/(Menu) All of Me Instrumental.wav";
@@ -68,7 +68,7 @@ public class MainMenu implements Menu {
     }
 
     @Override
-    public void handleChoice(int choice) {
+    public void handleChoice(int choice) throws InterruptedException {
         try {
             mainMusic.stop();
         } catch (UnsupportedAudioFileException e) {

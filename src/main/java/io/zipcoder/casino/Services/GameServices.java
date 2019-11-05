@@ -23,6 +23,7 @@ public class GameServices implements GamblingGame {
 
     public void deposit(double amount, Player player) {
         payOut(amount, player);
+        player.setInitialBalance(player.getInitialBalance() + amount);
     }
 
     public Double withdraw(Player player) {
