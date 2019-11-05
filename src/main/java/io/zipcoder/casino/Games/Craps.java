@@ -14,7 +14,7 @@ public class Craps implements Game {
     }
 
     @Override
-    public void exitGame() {
+    public void exitGame(Player currentPlayer) {
 
     }
 }

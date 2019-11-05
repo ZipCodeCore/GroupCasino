@@ -14,7 +14,7 @@ public class BlackJack implements Game {
     }
 
     @Override
-    public void exitGame() {
+    public void exitGame(Player currentPlayer) {
 
     }
 }

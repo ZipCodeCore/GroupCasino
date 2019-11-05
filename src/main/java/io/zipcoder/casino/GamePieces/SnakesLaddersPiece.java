@@ -1,6 +1,6 @@
 package io.zipcoder.casino.GamePieces;
 
-public class ChutesLaddersPiece {
+public class SnakesLaddersPiece {
     private Integer currentPosition = 0;
 
     public Integer getCurrentPosition() {

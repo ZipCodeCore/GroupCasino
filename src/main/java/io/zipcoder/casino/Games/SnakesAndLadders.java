@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.GamePieces.ChutesLaddersPiece;
+import io.zipcoder.casino.GameMenu;
+import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
 import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
@@ -9,34 +10,18 @@ import java.util.Arrays;
 import java.util.Random;
 
 
-public class ChutesAndLadders implements Game {
+public class SnakesAndLadders implements Game {
     Console console = new Console(System.in, System.out);
     Dice dice = new Dice();
-    private ChutesLaddersPiece playerPiece = new ChutesLaddersPiece();
-    private ChutesLaddersPiece aiPiece = new ChutesLaddersPiece();
+    private SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
+    private SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
     private Player currentPlayer;
     private boolean running = true;
     private boolean currentGame = true;
 
-    public void runChutesAndLadders(Player currentPlayer) {
+    public void runSnakesAndLadders(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
-        setUpGame();
-        while (running) {
-            console.println("Welcome to Chutes and Ladders, %s!", currentPlayer);
-            console.println("In this house, the player always goes first! Step on up!");
-            String winner = startNewGame();
-            if (winner.equals("Player")) {
-                console.println("Congratulations! You won!");
-            } else if (winner.equals("Ai")) {
-                console.println("Oh, Too bad! I won! Better lucky next time!");
-            }
-            Integer playAgainInput = playAgain();
-            playAgainOrMain(playAgainInput);
-        }
-    }
-
-
-    public void setUpGame(){
+        runGame(currentPlayer);
     }
 
     public String startNewGame(){
@@ -64,7 +49,7 @@ public class ChutesAndLadders implements Game {
         if(playerPosition >= 100){
             return "Player";
         }
-        playerChutesAndLadders(playerPosition);
+        playerSnakesAndLadders(playerPosition);
         return "no winner yet";
     }
 
@@ -74,7 +59,7 @@ public class ChutesAndLadders implements Game {
         if (aiPosition >= 100){
             return "Ai";
         }
-        aiChutesAndLadder(aiPosition);
+        aiSnakesAndLadder(aiPosition);
         return "no winner yet";
     }
 
@@ -97,7 +82,7 @@ public class ChutesAndLadders implements Game {
         return currentPosition;
     }
 
-    public Integer chutesAndLaddersChecker(Integer position) {
+    public Integer SnakesAndLaddersChecker(Integer position) {
         Integer newPosition = 0;
         switch (position) {
             case 1:
@@ -163,10 +148,10 @@ public class ChutesAndLadders implements Game {
         return newPosition;
     }
 
-    public Integer playerChutesAndLadders(Integer position) {
-        Integer newPosition = chutesAndLaddersChecker(position);
+    public Integer playerSnakesAndLadders(Integer position) {
+        Integer newPosition = SnakesAndLaddersChecker(position);
         if (position > newPosition) {
-            console.println("Uh-oh! You've hit a chute! You're back at %d", newPosition);
+            console.println("Uh-oh! You've hit a Snake! You're back at %d", newPosition);
             playerPiece.setCurrentPosition(newPosition);
             return newPosition;
         } else if (position < newPosition){
@@ -177,10 +162,10 @@ public class ChutesAndLadders implements Game {
         return position;
     }
 
-    public Integer aiChutesAndLadder(Integer position){
-        Integer newPosition = chutesAndLaddersChecker(position);
+    public Integer aiSnakesAndLadder(Integer position){
+        Integer newPosition = SnakesAndLaddersChecker(position);
         if (position > newPosition) {
-            console.println("Uh-oh! I've hit a chute! I'm back at %d", newPosition);
+            console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
             aiPiece.setCurrentPosition(newPosition);
             return newPosition;
         } else if (position < newPosition){
@@ -189,25 +174,6 @@ public class ChutesAndLadders implements Game {
             return newPosition;
         }
         return position;
-    }
-
-    public Integer playAgain(){
-        console.println("Would you like to play again?");
-        console.println("(1) - Yes");
-        console.println("(2) - No");
-        Integer playerInput = console.getIntegerInput(":");
-        return playerInput;
-    }
-
-    public void playAgainOrMain(Integer playAgainInput){
-        switch (playAgainInput){
-            case 1:
-                runChutesAndLadders(currentPlayer);
-                break;
-            case 2:
-                running = false;
-                break;
-        }
     }
 
 
@@ -258,21 +224,76 @@ public class ChutesAndLadders implements Game {
                 break;
         }
     }
+    public void showRules(){
+        console.println("Snakes and Ladders finds its origins in Ancient India, where it\n" +
+                "was first created under the name Moksha Patam.\n" +
+                "It was used to teach children values, rewarding proper behavior with\n" +
+                "a boost in point value, via climing a ladder, or punishing a player\n" +
+                "in point value for bad behavior, via sliding down the back of a snake.\n\n" +
+                "Commercially known in the West as Chutes and Ladders, the game has been published by Milton Bradley\n" +
+                "since the 1940's, and players compete by rolling dice and\n" +
+                "and racing to the value of 100 points, the final spot on the board.\n" +
+                "But beware! Certain spots on the board will send you down the backs of the Snakes!\n" +
+                "Likewise, certain spots on the board will push you closer to your goal.\n" +
+                "Roll the dice and see who gets there first!");
+    }
 
 
 
     @Override
-    public void approachTable(Player currentPLayer) {
-
+    public void approachTable(Player currentPlayer) {
+        console.println("You approach the Snakes and Ladders table. What would you like to do?");
+        console.println("(1) - Play the game");
+        console.println("(2) - Hear the rules");
+        console.println("(3) - Return to the game menu");
+        Integer playerInput = console.getIntegerInput(":");
+        while(running) {
+            switch (playerInput) {
+                case 1:
+                    runSnakesAndLadders(currentPlayer);
+                    break;
+                case 2:
+                    showRules();
+                    break;
+                case 3:
+                    GameMenu gameMenu = new GameMenu();
+                    gameMenu.runGameMenu(currentPlayer);
+                    running = false;
+                    break;
+            }
+        }
     }
 
     @Override
     public void runGame(Player currentPlayer) {
+        while (running) {
+            console.println("Welcome to Snakes and Ladders, %s!", currentPlayer.getName());
+            console.println("In this house, the player always goes first! Step on up!");
+            String winner = startNewGame();
+            if (winner.equals("Player")) {
+                console.println("Congratulations! You won!");
+            } else if (winner.equals("Ai")) {
+                console.println("Oh, Too bad! I won! Better lucky next time!");
+            }
+            exitGame(currentPlayer);
+        }
 
     }
 
     @Override
-    public void exitGame() {
+    public void exitGame(Player currentPlayer) {
+        console.println("Would you like to play again?");
+        console.println("(1) - Yes");
+        console.println("(2) - No");
+        Integer playerInput = console.getIntegerInput(":");
+        switch (playerInput){
+            case 1:
+                runSnakesAndLadders(currentPlayer);
+                break;
+            case 2:
+                running = false;
+                break;
+        }
 
     }
 }
