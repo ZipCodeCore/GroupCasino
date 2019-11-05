@@ -9,6 +9,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import static io.zipcoder.casino.Utilities.Console.printWithDelays;
 
 public class Casino {
 
@@ -51,13 +52,6 @@ public class Casino {
         Casino.displayEnding();
     }
 
-    public static void printWithDelays(String data, TimeUnit unit, long delay)
-            throws InterruptedException {
-        for (char ch : data.toCharArray()) {
-            System.out.print(ch);
-            unit.sleep(delay);
-        }
-    }
 
     public static void prologue () throws InterruptedException {
         printWithDelays("\nYou had a really long day at work and decide to take the edge off by visiting the local casino.\n",TimeUnit.MILLISECONDS, 50);
@@ -69,7 +63,6 @@ public class Casino {
         printWithDelays("But tonight is a little different... \n" + "\n" + "\n", TimeUnit.MILLISECONDS, 50);
         TimeUnit.SECONDS.sleep(1);
         printWithDelays("Tonight you're feeling lucky. \uD83C\uDF40" + "\n" + "\n" + "\n" + "\n", TimeUnit.MILLISECONDS, 50);
-
         TimeUnit.SECONDS.sleep(2);
         printWithDelays("------------------------------------------------------------------------------------------------------------------------------\n",TimeUnit.MILLISECONDS, 10);
         printWithDelays("       ,----,.                                                                                                              \n" +
@@ -100,7 +93,13 @@ public class Casino {
     }
 
 
-    public static void displayEnding() {
-        console.println("Lorem impsum ending...");
+    public static void displayEnding() throws InterruptedException {
+        //There's a "happy" and "sad" ending that's pertinent on if you won or lost money, even if it's just a $1!
+        //Play again option that restarts the game?
+
+        //Happy ending:
+
+        console.printWithDelays("Score! You ended up bagging (insert their initial balance - current balance).\n" +
+                "You head home with some pep in your step and even treat yourself to a scrumptious meal.",TimeUnit.MILLISECONDS, 50);
     }
 }
