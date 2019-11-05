@@ -34,11 +34,11 @@ public class MainMenu implements Menu {
         choiceMap.put(++count, new NullMenu());
     }
 
-//    public static void main(String[] args) {
-//        Player player = new Player("Herb", "Tarlek", 45, 0.00);
-//        MainMenu mainmenu = new MainMenu(player);
-//        mainmenu.displayMenu();
-//    }
+    public static void main(String[] args) {
+        Player player = new Player("Herb", "Tarlek", 45, 0.00);
+        MainMenu mainMenu = new MainMenu(player);
+        mainMenu.displayMenu();
+    }
 
     @Override
     public void displayMenu() {
