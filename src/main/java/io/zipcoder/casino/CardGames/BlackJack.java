@@ -8,12 +8,19 @@ import io.zipcoder.casino.Player.Player;
 
 
 public class BlackJack {
+    private Player user;
+    private int answerHitOrStay;
+    private int wageBucket;
+    private int blackJackDeck;
+
 
     public void startGame() {}
 
-    public void promptHitOrStay(){}
+    public void promptHitOrStay(){
 
-    public void dealerHitOrStay(){}
+    }
+
+    public void dealerHitOrStay(){}  //
 
     public void hit(Player deck, Player player) {}
 
