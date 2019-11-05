@@ -4,7 +4,6 @@ import io.zipcoder.casino.CardGames.CardHand;
 
 public class Player {
 
-
     int ID;
     int pwd;
     double balance;
