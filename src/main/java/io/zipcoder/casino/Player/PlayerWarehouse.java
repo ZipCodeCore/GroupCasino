@@ -14,7 +14,7 @@ public class PlayerWarehouse {
 
     }
 
-    public Player getPlayer(int idNum){
+    public Player getPlayer(String idNum){
         return warehouse.get(idNum);
     }
 
