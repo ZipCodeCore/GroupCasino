@@ -91,12 +91,9 @@ public class Casino {
     }
 
 
-    public static Player newPlayerDialogue() {
-
-
-
-        String firstName = console.getInput("((You walk up to the entrance and get greeted by a tall, stocky man with a handlebar mustache))\n" +
-                "\n[TELLER]: What's your first name?\n");
+    public static Player newPlayerDialogue() throws InterruptedException {
+        printWithDelays("\n" + "\n((You walk up to the entrance and get greeted by a tall, stocky man with a handlebar mustache))\n", TimeUnit.MILLISECONDS, 50);
+        String firstName = console.getInput("\n[TELLER]: What's your first name?\n");
         String lastName = console.getInput("\n[TELLER]: What's your last name? \n");
         int age = console.getInteger("\n[TELLER]: How old are you? \n");
         return new Player(firstName, lastName, age, 0.0);

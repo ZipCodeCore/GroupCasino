@@ -125,7 +125,7 @@ public class BlackjackGame extends CardGame implements Game {
         if (gameServices.wager(wager, this.player.getPlayer())) {
             return wager;
         } else {
-            console.println(String.format("[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
+            console.println(String.format("\n[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
             return betChoice();
         }
     }
