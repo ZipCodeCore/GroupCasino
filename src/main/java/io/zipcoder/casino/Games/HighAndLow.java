@@ -27,9 +27,13 @@ public class HighAndLow {
     }
 
     public Integer firstRoll(){
-        Integer roll = dice.rollDice(2);
-        console.println("The first result of the first roll is %d", roll);
-        return roll;
+        Integer roll = dice.rollDice(1);
+        console.println(dice.diceArt(roll));
+        Integer roll2 = dice.rollDice(1);
+        console.println(dice.diceArt(roll2));
+        Integer sumOfRolls = roll + roll2;
+        console.println("The first result of the first roll is %d", sumOfRolls);
+        return sumOfRolls;
     }
 
     public Integer doYouWantToBet(){
@@ -41,9 +45,13 @@ public class HighAndLow {
     }
 
     public Integer secondRoll(){
-        Integer roll = dice.rollDice(2);
-        console.println("The result of the second roll is %d", roll);
-        return roll;
+        Integer roll = dice.rollDice(1);
+        console.println(dice.diceArt(roll));
+        Integer roll2 = dice.rollDice(1);
+        console.println(dice.diceArt(roll2));
+        Integer sumOfRolls = roll + roll2;
+        console.println("The result of the second roll is %d", sumOfRolls);
+        return sumOfRolls;
     }
 
     public void winOrLose(Integer firstRoll, Integer secondRoll, Integer highOrLowBet){

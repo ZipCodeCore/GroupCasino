@@ -2,6 +2,7 @@ package io.zipcoder.casino.GamePieces;
 
 import io.zipcoder.casino.utilities.Console;
 
+import java.util.HashMap;
 import java.util.Random;
 
 public class Dice {
@@ -16,50 +17,38 @@ public class Dice {
         return sum;
     }
 
-    public void diceArt(Integer roll){
-        switch(roll){
-            case 1:
-                console.println("+-----+\n" +
-                        "|     |\n" +
-                        "|  o  |\n" +
-                        "|     |\n" +
-                        "+-----+");
-                break;
-            case 2:
-                console.println("+-----+\n" +
-                        "| o   |\n" +
-                        "|     |\n" +
-                        "|   o |\n" +
-                        "+-----+");
-                break;
-            case 3:
-                console.println("+-----+\n" +
-                        "| o   |\n" +
-                        "|  o  |\n" +
-                        "|   o |\n" +
-                        "+-----+");
-                break;
-            case 4:
-                console.println("+-----+\n" +
-                        "| o o |\n" +
-                        "|     |\n" +
-                        "| o o |\n" +
-                        "+-----+");
-                break;
-            case 5:
-                console.println("+-----+\n" +
-                        "| o o |\n" +
-                        "|  o  |\n" +
-                        "| o o |\n" +
-                        "+-----+");
-                break;
-            case 6:
-                console.println("+-----+\n" +
-                        "| o o |\n" +
-                        "| o o |\n" +
-                        "| o o |\n" +
-                        "+-----+");
-                break;
-        }
+    public String diceArt(Integer roll){
+        HashMap<Integer,String> diceMap = new HashMap<>();
+        diceMap.put(1,"+-----+\n" +
+                "|     |\n" +
+                "|  o  |\n" +
+                "|     |\n" +
+                "+-----+");
+        diceMap.put(2,"+-----+\n" +
+                "| o   |\n" +
+                "|     |\n" +
+                "|   o |\n" +
+                "+-----+");
+        diceMap.put(3,"+-----+\n" +
+                "| o   |\n" +
+                "|  o  |\n" +
+                "|   o |\n" +
+                "+-----+");
+        diceMap.put(4,"+-----+\n" +
+                "| o   |\n" +
+                "|  o  |\n" +
+                "|   o |\n" +
+                "+-----+");
+        diceMap.put(5,"+-----+\n" +
+                "| o o |\n" +
+                "|  o  |\n" +
+                "| o o |\n" +
+                "+-----+");
+        diceMap.put(6,"+-----+\n" +
+                "| o o |\n" +
+                "| o o |\n" +
+                "| o o |\n" +
+                "+-----+");
+        return diceMap.get(roll);
     }
 }
