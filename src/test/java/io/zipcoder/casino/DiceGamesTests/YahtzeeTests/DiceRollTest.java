@@ -19,6 +19,14 @@ public class DiceRollTest {
 
     @Test
     public void Test1(){
+        roller.roll5Dice();
+        roller.getMyDice();
+        Integer[] diceValues = roller.getDiceValues();
 
+        for(Integer s: diceValues){
+            Assert.assertTrue(s < 7);
+            Assert.assertTrue(s > 0);
+        }
+        Assert.assertNotEquals(1,0);
     }
 }

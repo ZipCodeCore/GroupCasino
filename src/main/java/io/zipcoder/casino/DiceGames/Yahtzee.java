@@ -24,24 +24,21 @@ public class Yahtzee implements Game {
         this.user = player;
         this.myDice = createDice();
         this.points = 0;
-        continuePlay = false;
+        continuePlay = true;
     }
 
     // Methods----------------------------------------------------------------------------------------------------------
 
     public void startGame(){
 
-        for(int i = 0; i < 13; i++) {
-            beginDiceRolls();
-            checkForEvaluation();
-        }
-        displayResults();
-        promptLeaveGame();
-        if(this.continuePlay){
-            return;
-        }
-        else{
-
+        while(continuePlay) {
+            for (int i = 0; i < 13; i++) {
+                beginDiceRolls();
+                checkForEvaluation();
+            }
+            displayResults();
+            promptLeaveGame();
+            if (!this.continuePlay) { return; }
         }
     }
 
@@ -54,21 +51,27 @@ public class Yahtzee implements Game {
     }
 
     public void displayResults(){
-        console.println("Your final score is: " + this.points);
-        console.getStringInput("Press enter to continue ");
+        console.println("Your final score is: " + this.getPoints());
     }
 
     public void promptLeaveGame(){
         String exitOrNo = console.getStringInput("Would you like to play again?\n1. Play again\n2. Exit");
-        switch (exitOrNo.toLowerCase()){
-
-            case "1": case "play": case "play again":
-                this.continuePlay = true;
-                break;
-            case "2": case "exit":
-                this.continuePlay = false;
-                break;
-
+        boolean c = false;
+        while (!c) {
+            switch (exitOrNo.toLowerCase()) {
+                case "1": case "play": case "play again":
+                    this.continuePlay = true;
+                    c = true;
+                    break;
+                case "2": case "exit":
+                    this.continuePlay = false;
+                    c = true;
+                    break;
+                default:
+                    console.println("Please choose one of the options.");
+                    exitOrNo = console.getStringInput("Would you like to play again?\n1. Play again\n2. Exit");
+                    break;
+            }
         }
     }
 
