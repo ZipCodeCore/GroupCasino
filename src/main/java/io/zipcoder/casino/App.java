@@ -40,8 +40,7 @@ public class App {
 
         switch (userSelection) {
             case 1:
-                this.userId = this.menu.getStringInput("Enter your ID:");
-                this.userPassword = this.menu.getStringInput("Enter your password:");
+
                 this.menu.println("Logging in ...\n");
 
                 if (authenticatePlayer()) {
@@ -62,14 +61,14 @@ public class App {
                 break;
             case 2:
                 this.menu.println("Creating new account ...\n");
-                this.userId = this.menu.getStringInput("Enter your ID:");
-                this.userPassword = this.menu.getStringInput("Enter your password:");
 
-                if (authenticatePlayer()) this.menu.println("This user already exists, please log in.\n");
-
-                createPlayer();
-                selectGameToPlay();
-
+                if (authenticatePlayer()){
+                    this.menu.println("This user already exists, please log in.\n");
+                    mainMenu();
+                } else {
+                    createPlayer();
+                    selectGameToPlay();
+                }
                 break;
 
             case 3:
@@ -101,7 +100,7 @@ public class App {
         switch (gameSelected){
 
             case 1:
-                GoFish newGoFish = new GoFish();
+                GoFish newGoFish = new GoFish(this.newPlayer);
                 newGoFish.startGame();
                 break;
             case 2:
@@ -109,7 +108,7 @@ public class App {
                 newYahtzee.startGame();
                 break;
             case 3:
-                BlackJack newBlackJack = new BlackJack();
+                BlackJack newBlackJack = new BlackJack(this.newPlayer);
                 newBlackJack.startGame();
                 break;
             case 4:
@@ -124,10 +123,15 @@ public class App {
         }
 
         selectGameToPlay();
+
+
     }  // game actions
 
 
     private Boolean authenticatePlayer(){
+        this.userId = this.menu.getStringInput("Enter your ID:");
+        this.userPassword = this.menu.getStringInput("Enter your password:");
+
         this.newPlayer = warehouse.getPlayer(this.userId+this.userPassword);
         return this.newPlayer != null;
     }
