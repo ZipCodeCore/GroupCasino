@@ -21,10 +21,15 @@ public class RRMenu implements Menu {
         this.rrGame = rrGame;
     }
 
+    public boolean isPlay() {
+        return play;
+    }
+
     @Override
     public String getName() {
         return name;
     }
+
 
     @Override
     public void displayMenu() {
@@ -45,8 +50,8 @@ public class RRMenu implements Menu {
         console.println("Next You Will Roll A Die ");
         console.println("If Your Roll Does Not Match The House's Roll, Your Balance Is Doubled ");
         console.println("If Your Roll Matches The House, You Lose All Your Balance ");
-        int choice = console.getInteger("Press 1 to play or 2 to exit.");
-        handleChoice(console.menuChoice(2));
+        int choice = console.getInteger("Press 1 to play or 2 to exit.\n");
+        handleChoice(choice);
     }
 
     @Override
@@ -54,13 +59,13 @@ public class RRMenu implements Menu {
         switch (choice) {
             case 1:
                 play = true;
-                rrGame.startPlay();
+                rrGame.roundOfPlay();
              break;
 
             case 2:
                 play = false;
                 MainMenu mainMenu = new MainMenu(this.player);
-                mainMenu.displayMenu();
+
         }
         
     }

@@ -26,7 +26,7 @@ public class GameRepo {
             counter++;
             this.gamesMap.put(counter,new CrapsGame(player));
             counter++;
-            this.gamesMap.put(counter,new RRGame());
+            this.gamesMap.put(counter,new RRGame(player));
             counter++;
         }
         this.gamesMap.put(counter, new NullGame(player));
