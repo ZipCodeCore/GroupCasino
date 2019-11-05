@@ -1,6 +1,9 @@
 package io.zipcoder.casino;
 
 import io.zipcoder.casino.utilities.Console;
+import java.util.Date;
+
+import java.util.ArrayList;
 
 public class Casino {
     private Player currentPlayer;
@@ -20,7 +23,8 @@ public class Casino {
         console.println(String.format("Welcome to Big 3 Casino, %s!",currentPlayer.getName()));
         console.println("What would you like to do?");
         console.println("(1) - Display Game Menu");
-        console.println("(2) - Return to Player Menu");
+        console.println("(2) - See your history");
+        console.println("(3) - Return to Player Menu");
     }
 
     public void goToGameMenu(){
@@ -38,6 +42,16 @@ public class Casino {
         return playerInput;
     }
 
+    public String printHistory(){
+        StringBuilder sb = new StringBuilder();
+        Integer historyCounter = 0;
+        for(String result : currentPlayer.getHistory()){
+            sb.append(currentPlayer.getHistory().get(historyCounter)).append("\n");
+            historyCounter++;
+        }
+        return sb.toString();
+    }
+
     public void casinoMenuLogic(Integer playerInput){
         switch (playerInput){
             case 1:
@@ -45,6 +59,13 @@ public class Casino {
                 gameMenu.runGameMenu(currentPlayer);
                 break;
             case 2:
+                if(currentPlayer.getHistory().isEmpty()){
+                    console.println("Sorry! You do not yet have a gaming history. Play some games to get one!\n");
+                } else {
+                    console.println(printHistory());
+                }
+                break;
+            case 3:
                 running = false;
                 break;
         }

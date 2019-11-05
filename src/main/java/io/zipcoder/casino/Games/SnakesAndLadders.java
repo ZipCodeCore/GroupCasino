@@ -4,13 +4,17 @@ import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
 import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.time.LocalDateTime;
 
 import java.util.HashMap;
 
 
 public class SnakesAndLadders implements Game {
-    Console console = new Console(System.in, System.out);
-    Dice dice = new Dice();
+    private Console console = new Console(System.in, System.out);
+    private Dice dice = new Dice();
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
     private SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
     private Player currentPlayer;
@@ -206,8 +210,12 @@ public class SnakesAndLadders implements Game {
             String winner = startNewGame();
             if (winner.equals("Player")) {
                 console.println("Congratulations! You won!");
+                LocalDateTime now = LocalDateTime.now();
+                currentPlayer.addHistory("You won at Snakes and Ladders. ** " + dtf.format(now) + "!");
             } else if (winner.equals("Ai")) {
                 console.println("Oh, Too bad! I won! Better lucky next time!");
+                LocalDateTime now = LocalDateTime.now();
+                currentPlayer.addHistory("You lost at Snakes and Ladders. ** " + dtf.format(now));
             }
             exitGame(currentPlayer);
         }
