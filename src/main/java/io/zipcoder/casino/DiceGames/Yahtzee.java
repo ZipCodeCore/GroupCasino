@@ -11,7 +11,7 @@ public class Yahtzee implements Game {
     private Player user;
     private static Console console = new Console(System.in, System.out);
     private Dice[] myDice;
-    int points;
+    private int points;
     private String[] availableOptions = {" ","1s", "2s", "3s", "4s", "5s", "6s", "3 of a kind", "4 of a kind",
                                          "Small Straight", "Large Straight", "Full House", "Yahtzee", "Chance"};
     private boolean continuePlay;
@@ -74,7 +74,10 @@ public class Yahtzee implements Game {
         while (!c) {
 
             exitOrNo = console.getStringInput("Would you like to play again?\n1. Play again\n2. Exit");
-            if(exitOrNo.equals("")){ exitOrNo = " "; }
+
+            if(exitOrNo.equals("")){
+                exitOrNo = " ";
+            }
 
             switch (exitOrNo.charAt(0)) {
                 case '1': case 'p': case 'P':
