@@ -35,7 +35,7 @@ public class Lobby {
         switch (input) {
             case 1:
                 Integer playerId = console.getIntegerInput("Great! What is your account ID?");
-                player = playerRepo.getPlayerById(playerId);
+                player = playerService.getPlayerById(playerId, playerRepo);
                 console.print("I have found your profile. Please proceed.");
                 getChips();
                 break;
@@ -43,7 +43,7 @@ public class Lobby {
                 String name = console.getStringInput("What is your name?");
                 Integer age = console.getIntegerInput("How old are you?");
                 Player newPlayer = new Player(name, age);
-                playerRepo.addPlayer(newPlayer);
+                playerService.addPlayer(newPlayer, playerRepo);
                 player = newPlayer;
                 console.print("Your account has been created. The ID is: " + playerService.getId());
                 getChips();
