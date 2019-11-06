@@ -85,9 +85,6 @@ public class RRMenu implements Menu {
 
             case 2:
                 play = false;
-                MainMenu mainMenu = new MainMenu(this.player);
-
-
         }
         
     }

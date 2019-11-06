@@ -31,7 +31,7 @@ public class MainMenu implements Menu {
         int count = 0;
         choiceMap.put(++count, new GameMenu(this.player));
         choiceMap.put(++count, new TellerMenu(this.player));
-        choiceMap.put(++count, new NullMenu());
+        choiceMap.put(++count, new NullMenu(this.player));
     }
 
     public static void main(String[] args) throws InterruptedException {

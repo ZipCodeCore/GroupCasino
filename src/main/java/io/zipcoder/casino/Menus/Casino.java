@@ -49,17 +49,17 @@ public class Casino {
     }
 
 
-    public static void prologue() throws InterruptedException {
+    public static void prologue() {
         console.printWithDelays("\nYou had a really long day at work and decide to take the edge off by visiting the local casino.\n");
-        TimeUnit.SECONDS.sleep(2);
+        console.sleep(2);
         console.printWithDelays("\"Maybe if I win some big bucks I'll get out of this boring job of mine,\" you think to yourself. \n");
-        TimeUnit.SECONDS.sleep(2);
+        console.sleep(2);
         console.printWithDelays("The same thought always crosses your mind when passing by the big neon sign embroidered with flashing poker chips.\n");
-        TimeUnit.SECONDS.sleep(2);
+        console.sleep(2);
         console.printWithDelays("But tonight is a little different... \n" + "\n" + "\n");
-        TimeUnit.SECONDS.sleep(2);
+        console.sleep(2);
         console.printWithDelays("Tonight you're feeling lucky. \uD83C\uDF40" + "\n" + "\n" + "\n" + "\n");
-        TimeUnit.SECONDS.sleep(2);
+        console.sleep(2);
         console.printWithDelays("------------------------------------------------------------------------------------------------------------------------------\n");
         console.printWithDelays("       ,----,.                                                                                                              \n" +
                 "     ,'   ,' |                                                                                          ,--.     ,----..    \n" +
@@ -80,7 +80,7 @@ public class Casino {
     }
 
 
-    public static Player newPlayerDialogue() throws InterruptedException {
+    public static Player newPlayerDialogue() {
         console.printWithDelays("\n" + "\n((You walk up to the entrance and get greeted by a tall, stocky man with a handlebar mustache))\n", 50);
 
         String firstName = console.getInput("\n[TELLER]: What's your first name?\n");
@@ -90,7 +90,7 @@ public class Casino {
     }
 
 
-    public static void displayEnding(Player player) throws InterruptedException {
+    public static void displayEnding(Player player)  {
         Music losingHorn = null;
         Music tadaMusic = null;
         Music neutral = null;
