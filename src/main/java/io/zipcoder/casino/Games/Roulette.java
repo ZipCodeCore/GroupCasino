@@ -15,6 +15,7 @@ public class Roulette implements Game, GamblingGame{
     private Integer spinNum;
     private Integer placeBetInt;
     private boolean isWinner;
+    private Boolean isOddEvenGame;
     public void runRoulette(Player currentPlayer){
         this.currentPlayer = currentPlayer;
         approachTable(currentPlayer);
@@ -41,22 +42,24 @@ public class Roulette implements Game, GamblingGame{
 
     @Override
     public void runGame(Player currentPlayer){
-    while (running){
-        placeBet(currentPlayer);
-        playersPick(currentPlayer);
-        winningNumber();
-        if(isWinner){
-            returnWinnings(currentPlayer);
-        }else if (youLose(currentPlayer))
-
-        exitGame(currentPlayer);
-    }
+        while (running){
+            placeBet(currentPlayer);
+            playersPick(currentPlayer);
+            winningNumber();
+            if(isWinner()){
+                returnWinnings(currentPlayer);
+            }else {
+                youLose(currentPlayer);
+            }
+            exitGame(currentPlayer);
+        }
         //prompting player to place bet
         // prompting to pick number
         //call spinner to generate winning number
         // if player number == winning number
         // return winnings
     }
+
     @Override
     public void exitGame(Player currentPlayer){
         console.println("Would you like to play again?");
@@ -97,16 +100,18 @@ public class Roulette implements Game, GamblingGame{
     }
 
     public Integer playerBetInt(Integer playerInput) {
+        isOddEvenGame = false;
         console.println("Pick a number 0 - 36");
         Integer playerBet = console.getIntegerInput(":");
         if(playerBet < 0 || playerBet > 36){
             console.println("Try again! Pick a number 0 - 36");
             playerBet = console.getIntegerInput(":");
         }
+        placeBetInt = playerBet;
         return playerBet;
     }
     public void playerBetOddEven(Integer playerInput) {
-        String betPlacement = "";
+        isOddEvenGame = true;
         console.println("Odds or Even?");
         console.println("(1) - Odd");
         console.println("(2) - Even");
@@ -115,22 +120,28 @@ public class Roulette implements Game, GamblingGame{
             console.println("Try again!");
             console.getIntegerInput(":");
         } else if (playerBet == 1) {
-            betPlacement = "Odd";
+            placeBetInt = 1;
         } else if (playerBet == 2) {
-            betPlacement = "Even";
+            placeBetInt = 0;
+
 
         }
     }
     public Integer winningNumber (){
-        Integer spinNum = RouletteSpinner.winningNumber();
+        spinNum = RouletteSpinner.winningNumber();
         console.println(spinNum.toString());
         return spinNum;
     }
-    public boolean isWinner(Player currentPlayer){
-        if(spinNum == placeBetInt){
-            return isWinner;
+
+    /**
+     * This method checks to see if the player's bet wins compared to the winning number.
+     * @return a true false value if the player won or not.
+     */
+    public boolean isWinner(){
+        if(isOddEvenGame) {
+            return spinNum % 2 == placeBetInt;
         }
-        return false;
+        return spinNum.equals(placeBetInt);
     }
     @Override
     public void returnWinnings(Player currentPlayer){
