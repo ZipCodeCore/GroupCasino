@@ -22,6 +22,7 @@ public class BlackJack implements GamblingGame {
 
 
 
+
     private Player user;
 
     private int answerHitOrStay;
@@ -33,12 +34,83 @@ public class BlackJack implements GamblingGame {
         this.gamblingPlayer = new GamblingPlayer(user);
     }
 
+    public GamblingPlayer getGamblingPlayer() {
+        return gamblingPlayer;
+    }
+
+    public void setGamblingPlayer(GamblingPlayer gamblingPlayer) {
+        this.gamblingPlayer = gamblingPlayer;
+    }
+
+    public CardHand getGamblingPlayerHand() {
+        return gamblingPlayerHand;
+    }
+
+    public void setGamblingPlayerHand(CardHand gamblingPlayerHand) {
+        this.gamblingPlayerHand = gamblingPlayerHand;
+    }
+
+    public Deck getBlackJackDeck() {
+        return blackJackDeck;
+    }
+
+    public void setBlackJackDeck(Deck blackJackDeck) {
+        this.blackJackDeck = blackJackDeck;
+    }
+
+    public CardHand getComputerHand() {
+        return computerHand;
+    }
+
+    public void setComputerHand(CardHand computerHand) {
+        this.computerHand = computerHand;
+    }
+
+    public boolean isWinGame() {
+        return winGame;
+    }
+
+    public void setWinGame(boolean winGame) {
+        this.winGame = winGame;
+    }
+
+    public Player getUser() {
+        return user;
+    }
+
+    public void setUser(Player user) {
+        this.user = user;
+    }
+
+    public int getAnswerHitOrStay() {
+        return answerHitOrStay;
+    }
+
+    public void setAnswerHitOrStay(int answerHitOrStay) {
+        this.answerHitOrStay = answerHitOrStay;
+    }
+
+    public int getWageBucket() {
+        return wageBucket;
+    }
+
+    public void setWageBucket(int wageBucket) {
+        this.wageBucket = wageBucket;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
 
     public void startGame() {
         promptUserForWagerAmount();
         initializeblackJackHands();
-        checkHandForAce(gamblingPlayerHand);
-        checkHandForAce(computerHand);
+        checkHandForAces(gamblingPlayerHand);
+        checkHandForAces(computerHand);
         checkHandValue(gamblingPlayerHand);
         checkHandValue(computerHand);
 
@@ -84,20 +156,23 @@ public class BlackJack implements GamblingGame {
         return blackJacHandValue;
     }
 
-    public Integer checkScore(Integer blackJackHandValue)    {
-        if(blackJackHandValue > 21 && checkHandForAce())    {
-            if
+//    public Integer checkScore(Integer blackJackHandValue, Integer numberOfAces)    {
+//        if(blackJackHandValue > 21)    {
+//            if(checkHandForAces(CardHand hand) > 0) {
+//
+//            }
+//
+//        }
+//
+//    }
 
-        }
-
-    }
-
-    public boolean checkHandForAce(CardHand hand) {
+    public Integer checkHandForAces(CardHand hand) {
+        Integer aceCounter = 0;
         for (int i = 0; i < hand.userHand.size(); i++) {
             if(card.getRank() == Rank.ACE)  {
-                return true;
+                aceCounter++;
             }
-        }   return false;
+        }   return aceCounter;
     }
 
 
