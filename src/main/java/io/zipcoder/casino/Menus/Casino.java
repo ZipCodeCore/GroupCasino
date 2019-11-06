@@ -2,8 +2,8 @@ package io.zipcoder.casino.Menus;
 
 
 import io.zipcoder.casino.Player;
-import io.zipcoder.casino.Utilities.Console;
-import io.zipcoder.casino.Utilities.Music;
+import io.zipcoder.casino.utilities.Console;
+import io.zipcoder.casino.Utility.Music;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -100,7 +100,7 @@ public class Casino {
         if (player.getWinnings() < 0) {
             //Sad ending:
             try {
-                console.println("    _____\n" +
+                console.printWithDelays("    _____\n" +
                         "   /.---.\\\n" +
                         "   |`````|\n" +
                         "   \\     /\n" +
@@ -125,7 +125,7 @@ public class Casino {
             //Happy ending:
         } else if (player.getWinnings() > 0)
             try {
-                console.println("   ||====================================================================||\n" +
+                console.printWithDelays("   ||====================================================================||\n" +
                         "   ||//$\\\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\//$\\\\||\n" +
                         "   ||(100)==================| FEDERAL RESERVE NOTE |================(100)||\n" +
                         "   ||\\\\$//        ~         '------========--------'                \\\\$//||\n" +
@@ -164,7 +164,7 @@ public class Casino {
             }
         else {
             try {
-                console.println("\n" +
+                console.printWithDelays("\n" +
                         "                   .------. \n" +
                         ".------.           |A .   |      \n" +
                         "|A_  _ |    .------; / \\  |   \"YOU WIN SOME,    \n" +
@@ -173,19 +173,19 @@ public class Casino {
                         "|  \\/ A|/  \\ |_x_) |------'   \n" +
                         "`-----+'\\  / | Y  A|             -GAYLE FORMAN \n" +
                         "      |  \\/ A|-----' \n" +
-                        "       `------'  ");
+                        "       `------'  " + "\n" + "\n");
                 Music.filePath = "src/music/(Craps) Amor maior - Higher Love.wav";
                 neutral = new Music();
                 neutral.play();
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(2);
                 neutral.stop();
-                console.printWithDelays("You left without winning or losing money, but hey at least you had fun!\n", TimeUnit.MILLISECONDS, 50);
+                console.printWithDelays("You left without winning or losing money, but hey at least you had fun!\n\n\n", TimeUnit.MILLISECONDS, 50);
                 TimeUnit.SECONDS.sleep(3);
             } catch (Exception ex) {
                 System.out.println("Error with playing sound.");
                 ex.printStackTrace();
             }
-            System.exit(0);
         }
+        System.exit(0);
     }
 }

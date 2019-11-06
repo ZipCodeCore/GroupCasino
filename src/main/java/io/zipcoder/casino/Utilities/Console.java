@@ -1,4 +1,4 @@
-package io.zipcoder.casino.Utilities;
+package io.zipcoder.casino.utilities;
 
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public final class Console {
     private final Scanner input;
     private final PrintStream output;
-    static final int DEFAULT_DELAY = 10;
+    static final int DEFAULT_CASINO_DELAY = 10;
 
     public Console(InputStream in, PrintStream out) {
         this.input = new Scanner(in);
@@ -39,7 +39,7 @@ public final class Console {
         while (true) {
             if (cardCheck(input)) break;
             else {
-                println("Invalid card rank");
+                printWithDelays("Invalid card rank");
                 print(prompt);
                 input = getInput("Choose a card: ");
             }
@@ -47,35 +47,6 @@ public final class Console {
         }
         return input;
     }
-
-//    public Double getDoubleInput(String prompt, Object... args) {
-//        String stringInput = getStringInput(prompt, args);
-//        try {
-//            Double doubleInput = Double.parseDouble(stringInput);
-//            return doubleInput;
-//        } catch (NumberFormatException nfe) { // TODO - Eliminate recursive nature
-//            println("[ %s ] is an invalid user input!", stringInput);
-//            println("Try inputting a numeric value!");
-//            return getDoubleInput(prompt, args);
-//        }
-//    }
-//
-//    public Long getLongInput(String prompt, Object... args) {
-//        String stringInput = getStringInput(prompt, args);
-//        try {
-//            Long longInput = Long.parseLong(stringInput);
-//            return longInput;
-//        } catch (NumberFormatException nfe) { // TODO - Eliminate recursive nature
-//            println("[ %s ] is an invalid user input!", stringInput);
-//            println("Try inputting an integer value!");
-//            return getLongInput(prompt, args);
-//        }
-//    }
-
-//    public Integer getIntegerInput(String prompt, Object... args) {
-//        return getLongInput(prompt, args).intValue();
-//    }
-
 
     public void clearScreen() {
         for (int i = 0; i <100; i++) {
@@ -108,7 +79,7 @@ public final class Console {
     }
 
 
-    public Integer getInput(String[] options) {
+    public Integer getInput(String[] options) throws InterruptedException {
 
         clearScreen();
 
@@ -130,13 +101,13 @@ public final class Console {
             output += rows[i];
         }
 
-        println(output);
+        printWithDelays(output);
 
         return getInteger(numOptions);
 
     }
 
-    public String getInput(String header, String[] options) {
+    public String getInput(String header, String[] options) throws InterruptedException {
 
         clearScreen();
 
@@ -158,7 +129,7 @@ public final class Console {
             output += rows[i];
         }
 
-        println(output);
+        printWithDelays(output);
 
         return Integer.toString(getInteger(numOptions));
 
@@ -172,12 +143,12 @@ public final class Console {
         return input.matches("^[0-9]{1,3}(?:,?[0-9]{3})*(?:\\.[0-9]{2})?$");
     }
 
-    public Double getCurrency() {
+    public Double getCurrency() throws InterruptedException {
         String input = getInput("$");
         while (true) {
             if (currencyCheck(input)) break;
             else {
-                println("Enter a number");
+                printWithDelays("Enter a number");
                 input = getInput("$");
             }
         }
@@ -190,7 +161,7 @@ public final class Console {
         while (true) {
             if (currencyCheck(input)) break;
             else {
-                println("Enter a valid number");
+                printWithDelays("Enter a valid number");
                 print(prompt);
                 input = getInput("$");
             }
@@ -210,13 +181,13 @@ public final class Console {
                 if (amount >= min && amount <= max) {
                     break;
                 } else {
-                    println(String.format("Enter a number between %.2f and %.2f", min, max));
+                    printWithDelays(String.format("Enter a number between %.2f and %.2f", min, max));
                     print(prompt);
                     input = getInput("$");
                 }
             }
             else {
-                println("Enter a valid number");
+                printWithDelays("Enter a valid number");
                 print(prompt);
                 input = getInput("$");
             }
@@ -229,7 +200,7 @@ public final class Console {
         while (true) {
             if (integerCheck(input)) break;
             else {
-                println("Enter a number");
+                printWithDelays("Enter a number");
                 input = getInput();
             }
         }
@@ -241,7 +212,7 @@ public final class Console {
         while (true) {
             if (integerCheck(input)) break;
             else {
-                println("Enter a number.");
+                printWithDelays("Enter a number.");
                 input = getInput(prompt);
             }
         }
@@ -255,12 +226,12 @@ public final class Console {
                 if (Integer.parseInt(input) >= 1 && Integer.parseInt(input) <= max) {
                     break;
                 } else {
-                    println("Enter a number between 1 and " + Integer.toString(max));
+                    printWithDelays("Enter a number between 1 and " + Integer.toString(max));
                     input = getInput();
                 }
             }
             else {
-                println("Enter a number");
+                printWithDelays("Enter a number");
                 input = getInput();
             }
         }
@@ -273,40 +244,34 @@ public final class Console {
     }
 
     //Makes a type writer effect on screen
-    public void printWithDelays(String data, TimeUnit unit, long delay)
-            throws InterruptedException {
-        for (char ch : data.toCharArray()) {
-            print(Character.toString(ch));
-            unit.sleep(delay);
+    public void printWithDelays(String data, TimeUnit unit, long delay) {
+        try {
+            for (char ch : data.toCharArray()) {
+                print(Character.toString(ch));
+                TimeUnit.MILLISECONDS.sleep(Console.DEFAULT_CASINO_DELAY);
+            }
+        } catch (InterruptedException e){
+            for (char ch : data.toCharArray()) {
+                print(Character.toString(ch));
+                e.printStackTrace();
+            }
         }
     }
 
     //Makes a type writer effect on screen
-    public void printWithDelays(String data, long delay)
-            throws InterruptedException {
-        for (char ch : data.toCharArray()) {
-            print(Character.toString(ch));
-            TimeUnit.MILLISECONDS.sleep(delay);
-        }
+    public void printWithDelays(String data, long delay) {
+        printWithDelays(data, TimeUnit.MILLISECONDS, delay);
     }
 
     //Makes a type writer effect on screen
-    public void printWithDelays(String data, long delay, int pauseAfter)
-            throws InterruptedException {
-        for (char ch : data.toCharArray()) {
-            print(Character.toString(ch));
-            TimeUnit.MILLISECONDS.sleep(delay);
-        }
+    public void printWithDelays(String data, long delay, int pauseAfter) {
+        printWithDelays(data, delay);
         sleep(pauseAfter);
     }
 
     //Makes a type writer effect on screen
-    public void printWithDelays(String data)
-            throws InterruptedException {
-        for (char ch : data.toCharArray()) {
-            print(Character.toString(ch));
-            TimeUnit.MILLISECONDS.sleep(Console.DEFAULT_DELAY);
-        }
+    public void printWithDelays(String data) {
+        printWithDelays(data, Console.DEFAULT_CASINO_DELAY);
     }
 
     public void sleep(int millis) {
@@ -318,7 +283,6 @@ public final class Console {
 
     public void getInput(String s, TimeUnit milliseconds, int i) {
     }
-
 
 }
 

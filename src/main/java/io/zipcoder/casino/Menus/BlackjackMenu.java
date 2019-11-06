@@ -2,11 +2,7 @@ package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.Blackjack.BlackjackGame;
 import io.zipcoder.casino.Interfaces.Menu;
-import io.zipcoder.casino.Utilities.Console;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
+import io.zipcoder.casino.utilities.Console;
 
 public class BlackjackMenu implements Menu {
 

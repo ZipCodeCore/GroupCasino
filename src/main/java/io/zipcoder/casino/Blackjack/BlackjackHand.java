@@ -3,12 +3,10 @@ package io.zipcoder.casino.Blackjack;
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Services.GameServices;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BlackjackHand {
@@ -70,32 +68,25 @@ public class BlackjackHand {
     }
 
     public int playChoice(CardSet shoe){
+        if (this.cards.size() == 2 && this.cards.getCards().get(0).equals(this.cards.getCards().get(1))) {
+            splitHand();
+            return -1;
+        } else { // normal case
+            console.printWithDelays("1. Hit\n2. Stay\n");
 
-        if (this.cards.size() == 2 && this.cards.getCards().get(0).equals(this.cards.getCards().get(1))) { //splitzies
-            console.println("1. Split\n2. Play this hand\n");
             switch (console.menuChoice(2)) {
                 case 1:
-                    splitHand();
-                    return -1;
+                    int val = hit(shoe.removeFirstCard());
+                    if (val != 0) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
                 case 2:
-                    break;
+                    return this.getValue();
             }
+            return -1;
         }
-        // normal case
-        console.println("1. Hit\n2. Stay\n");
-
-        switch (console.menuChoice(2)) {
-            case 1:
-                int val = hit(shoe.removeFirstCard());
-                if (val != 0) {
-                    return -1;
-                } else {
-                    return 0;
-                }
-            case 2:
-                return this.getValue();
-        }
-        return -1;
 
     }
 

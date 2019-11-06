@@ -3,9 +3,9 @@ package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.Interfaces.Menu;
 
-import io.zipcoder.casino.Utilities.Music;
+import io.zipcoder.casino.Utility.Music;
 import io.zipcoder.casino.Player;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -43,7 +43,7 @@ public class MainMenu implements Menu {
     @Override
     public void displayMenu() throws InterruptedException {
         console.clearScreen();
-        console.println("      .======================================.\n" +
+        console.printWithDelays("      .======================================.\n" +
                 "      | ___ ___ ___               _   _   _  |\n" +
                 "      | \\_/ \\_/ \\_/ C|||C|||C||| |-| |-| |-| |\n" +
                 "      | _|_ _|_ _|_  ||| ||| ||| |_| |_| |_| |\n" +
@@ -73,7 +73,7 @@ public class MainMenu implements Menu {
 
         // temporary
         for (int gameNum : choiceMap.keySet()) {
-            console.println(String.format("%d: %s", gameNum, (choiceMap.get(gameNum)).getName()));
+            console.printWithDelays(String.format("%d: %s", gameNum, (choiceMap.get(gameNum)).getName()));
         }
 
         handleChoice(console.menuChoice(this.choiceMap.size()));
@@ -98,6 +98,7 @@ public class MainMenu implements Menu {
             e.printStackTrace();
         }
         choiceMap.get(choice).displayMenu();
+        Casino.displayEnding(this.player);
         displayMenu();
     }
 }

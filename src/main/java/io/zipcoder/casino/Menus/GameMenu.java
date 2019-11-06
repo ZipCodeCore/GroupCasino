@@ -2,10 +2,10 @@ package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.GameObject;
 import io.zipcoder.casino.Interfaces.Menu;
-import io.zipcoder.casino.Utilities.Music;
+import io.zipcoder.casino.Utility.Music;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameRepo;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -53,7 +53,7 @@ public class GameMenu implements Menu {
             ex.printStackTrace();
         }
         console.clearScreen();
-        console.println("\n" +
+        console.printWithDelays("\n" +
                 "               .........\n" +
                 "              :~, *   * ~,\n" +
                 "              : ~, *   * ~.\n" +
@@ -70,7 +70,7 @@ public class GameMenu implements Menu {
                 "                                 ~,:,~\n");
         // temporary
         for (int gameNum : gameMap.keySet()) {
-            console.println(String.format("%d: %s", gameNum, ((GameObject) gameMap.get(gameNum)).getName()));
+            console.printWithDelays(String.format("%d: %s", gameNum, ((GameObject) gameMap.get(gameNum)).getName()));
         }
 
         handleChoice(console.menuChoice(gameMap.size()));

@@ -1,8 +1,7 @@
-package io.zipcoder.casino.Utilities;
+package io.zipcoder.casino.Utility;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

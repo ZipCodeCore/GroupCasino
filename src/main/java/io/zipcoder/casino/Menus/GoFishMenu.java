@@ -2,9 +2,8 @@ package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.GoFish.GoFishGame;
 import io.zipcoder.casino.Interfaces.Menu;
-import io.zipcoder.casino.Utilities.Music;
-import io.zipcoder.casino.Utilities.Console;
-import io.zipcoder.casino.Utilities.Music;
+import io.zipcoder.casino.Utility.Music;
+import io.zipcoder.casino.utilities.Console;
 
 public class GoFishMenu implements Menu {
 
@@ -38,7 +37,7 @@ public class GoFishMenu implements Menu {
 
 
 
-        console.println("Go Fiiiiiish");
+        console.printWithDelays("Go Fiiiiiish");
 
 
     }

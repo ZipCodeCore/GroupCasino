@@ -1,14 +1,13 @@
 package io.zipcoder.casino.Blackjack;
 
-import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardGame;
 import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.BlackjackMenu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
-import io.zipcoder.casino.Utilities.Console;
-import io.zipcoder.casino.Utilities.Music;
+import io.zipcoder.casino.Utility.Music;
+import io.zipcoder.casino.utilities.Console;
 
 
 import javax.sound.sampled.LineUnavailableException;
@@ -126,7 +125,7 @@ public class BlackjackGame extends CardGame implements Game {
     }
 
     public void roundStart() {
-        console.println("");
+        console.printWithDelays("");
         Double betSize = betChoice();
         if (betSize != null) {
             initialDeal(betSize);
@@ -146,13 +145,13 @@ public class BlackjackGame extends CardGame implements Game {
 
     public Double betChoice () {
         Double wager;
-        console.println("[DEALER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance());
-        wager = console.getCurrency("[DEALER]: Bet size (or press Enter to stand up): ", this.minBet, this.maxBet);
+        console.printWithDelays(String.format("[DEALER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance()),10);
+        wager = console.getCurrency("[DEALER]: Bet size (or press Enter to stand up): ");
         if (wager != null) {
             if (gameServices.wager(wager, this.player.getPlayer())) {
                 return wager;
             } else {
-                console.println(String.format("\n[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
+                console.printWithDelays(String.format("\n[DEALER]: Your mouth is writing checks that your wallet can't cash, %s.", this.player.getPlayer().getLastName()));
                 return betChoice();
             }
         } else {
@@ -222,7 +221,7 @@ public class BlackjackGame extends CardGame implements Game {
         //temporary
         console.clearScreen();
 
-        console.println(String.format(" .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
+        System.out.println(String.format(" .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
                 "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" +
                 "| |   ______     | || |   _____      | || |      __      | || |     ______   | || |  ___  ____   | || |     _____    | || |      __      | || |     ______   | || |  ___  ____   | |\n" +
                 "| |  |_   _ \\    | || |  |_   _|     | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | || |    |_   _|   | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | |\n" +

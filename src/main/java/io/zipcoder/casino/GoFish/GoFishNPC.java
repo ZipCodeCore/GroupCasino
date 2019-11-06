@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class GoFishNPC extends GoFishPlayer{
 
     private Player opponent;
-    private ArrayList<GoFishRound>hands;
 
     public GoFishNPC (Player opponent) {
         super(opponent);

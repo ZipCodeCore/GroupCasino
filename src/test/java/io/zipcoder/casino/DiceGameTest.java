@@ -1,11 +1,10 @@
 package io.zipcoder.casino;
 
-import io.zipcoder.casino.DiceGame;
 import org.junit.Assert;
 import org.junit.Test;
 
 //import static org.junit.Assert.*;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 
 public class DiceGameTest {
 

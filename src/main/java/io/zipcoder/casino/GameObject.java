@@ -14,11 +14,11 @@ public class GameObject implements Game {
 
     }
 
-    public void roundOfPlay(){
+    public void roundOfPlay() throws InterruptedException {
 
     }
 
-    public void endChoice(){
+    public void endChoice() throws InterruptedException {
 
     }
 

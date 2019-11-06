@@ -6,9 +6,8 @@ import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.GoFishMenu;
 import io.zipcoder.casino.Player;
-import io.zipcoder.casino.Utilities.Console;
-import io.zipcoder.casino.Utilities.Music;
-import sun.management.snmp.jvmmib.JVM_MANAGEMENT_MIBOidTable;
+import io.zipcoder.casino.Utility.Music;
+import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,8 +27,7 @@ public class GoFishGame extends CardGame implements Game {
     private CardSet opponentsCards;
     private CardSet playerSuites;
     private CardSet opponentSuites;
-    Music goFishMusic = null;
-
+    private Music goFishMusic = null;
 
     public GoFishGame(Player player) {
         this.player = new GoFishPlayer(player);
@@ -53,6 +51,14 @@ public class GoFishGame extends CardGame implements Game {
     //populates player deals hands
     public void startPlay() {
         new GoFishMenu(this).displayMenu();
+        console.println("   >===>                         >=>                      \n" +
+                " >>    >=>                     >>     >>          >=>      \n" +
+                ">=>            >=>           >=>> >>       >===>  >=>      \n" +
+                ">=>          >=>  >=>          >=>   >=>  >=>     >=>>=>   \n" +
+                ">=>   >===> >=>    >=>         >=>   >=>   >==>   >=>  >=> \n" +
+                " >=>    >>   >=>  >=>          >=>   >=>     >=>  >>   >=> \n" +
+                "  >====>       >=>             >=>   >=>  >=>>=>  >=>  >=> \n" +
+                "                                                          \n");
         initialDeal();
     }
     public void initialDeal() {
