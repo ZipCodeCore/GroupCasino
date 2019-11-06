@@ -56,7 +56,7 @@ public class GameMenu {
             case 2:
 
                 BlackJack blackjack = new BlackJack();
-                blackjack.approachTable(currentPlayer);
+                blackjack.runBlackJack(currentPlayer);
                 break;
             case 3:
                 Craps craps = new Craps();
