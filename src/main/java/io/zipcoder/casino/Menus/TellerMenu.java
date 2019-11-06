@@ -45,12 +45,12 @@ public class TellerMenu implements Menu {
         }
         console.println("          .-------.\n" +
                 "       oO{-JACKPOT-}Oo\n" +
-                "       .=============. __\n" +
-                "       | [a] [X] [o] |(  )\n" +
-                "       | [$] [$] [$] | ||\n" +
-                "       | [X] [o] [$] | ||\n" +
-                "       |             |_||\n" +
-                "       | xxx ::::::: |--'\n" +
+                "       .=============.  __\n" +
+                "       |[\uD83E\uDD5D] [\uD83E\uDD5D] [\uD83D\uDD14]|(  )\n" +
+                "       |[\uD83C\uDF52] [\uD83C\uDF52] [\uD83C\uDF52]| ||\n" +
+                "       |[\uD83D\uDCB0] [\uD83D\uDD14] [\uD83D\uDCB0]| ||\n" +
+                "       |             |__||\n" +
+                "       | xxx ::::::: |---'\n" +
                 "       | ooo ::::::: |\n" +
                 "       | $$$ ::::::: |\n" +
                 "       |             |\n" +
@@ -58,7 +58,7 @@ public class TellerMenu implements Menu {
                 "       |_____/__\\____|\n" +
                 "      /###############\\\n" +
                 "     /#################\\\n" +
-                "    |#JGS###############|\n" +"\n" + "\n");
+                "    |###################|\n" +"\n" + "\n");
 
 
         console.printWithDelays("[TELLER]: What can I do for ya?\n\n",TimeUnit.MILLISECONDS, 50);

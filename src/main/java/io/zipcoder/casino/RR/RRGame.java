@@ -44,7 +44,7 @@ public class RRGame extends DiceGame implements Game {
     @Override
     public void endChoice() {
         //implements menu whether you want to quit or go again
-        String endChoiceInput = console.getInput(("[DEALER]: You have finished this Russian Roulette Game.\n\n[DEALER]: Would you like to play again? (Y/N)\n"));
+        String endChoiceInput = console.getInput(("[DEALER]: You have finished this Russian Roulette Game.\n[DEALER]: Would you like to play again? (Y/N)\n"));
         if (endChoiceInput.toUpperCase().equals("N")) {
             console.printWithDelays("\n[DEALER]: Have a good rest of your day.\n");
             console.sleep(2000);
@@ -75,7 +75,7 @@ public class RRGame extends DiceGame implements Game {
         }
         else {
             gameServices.payOut(this.player.getBalance(), this.player);
-            console.println(String.format("\n\nYou Won!!! Your Balance Is Now $%.2f",player.getBalance()));
+            console.println(String.format("\n\nYou Won!!! Your Balance Is Now $%.2f\n",player.getBalance()));
         }
         endChoice();
 
