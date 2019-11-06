@@ -20,7 +20,19 @@ public class Casino {
     }
 
     public void displayCasinoMenu(){
-        console.println(String.format("Welcome to Big 3 Casino, %s!",currentPlayer.getName()));
+        Console.clearScreen();
+        console.println("  /$$$$$$                      /$$                           /$$                 /$$       /$$                \n" +
+                " /$$__  $$                    |__/                          | $$                | $$      | $$                \n" +
+                "| $$  \\__/  /$$$$$$   /$$$$$$$ /$$ /$$$$$$$   /$$$$$$       | $$        /$$$$$$ | $$$$$$$ | $$$$$$$  /$$   /$$\n" +
+                "| $$       |____  $$ /$$_____/| $$| $$__  $$ /$$__  $$      | $$       /$$__  $$| $$__  $$| $$__  $$| $$  | $$\n" +
+                "| $$        /$$$$$$$|  $$$$$$ | $$| $$  \\ $$| $$  \\ $$      | $$      | $$  \\ $$| $$  \\ $$| $$  \\ $$| $$  | $$\n" +
+                "| $$    $$ /$$__  $$ \\____  $$| $$| $$  | $$| $$  | $$      | $$      | $$  | $$| $$  | $$| $$  | $$| $$  | $$\n" +
+                "|  $$$$$$/|  $$$$$$$ /$$$$$$$/| $$| $$  | $$|  $$$$$$/      | $$$$$$$$|  $$$$$$/| $$$$$$$/| $$$$$$$/|  $$$$$$$\n" +
+                " \\______/  \\_______/|_______/ |__/|__/  |__/ \\______/       |________/ \\______/ |_______/ |_______/  \\____  $$\n" +
+                "                                                                                                     /$$  | $$\n" +
+                "                                                                                                    |  $$$$$$/\n" +
+                "                                                                                                     \\______/ ");
+        console.println(String.format("Welcome to The Notorious B.I.G. 3 Casino, %s!",currentPlayer.getName()));
         console.println("What would you like to do?");
         console.println("(1) - Display Game Menu");
         console.println("(2) - Check your Balance");
@@ -34,23 +46,13 @@ public class Casino {
     }
 
     public void exitCasino(){
-        console.print("Thank you for visiting Big 3!");
+        console.print("Thank you for visiting The Notorious B.I.G. 3!");
 
     }
 
     public Integer getPlayerInput(){
         Integer playerInput = console.getIntegerInput(":");
         return playerInput;
-    }
-
-    public String printHistory(){
-        StringBuilder sb = new StringBuilder();
-        Integer historyCounter = 0;
-        for(String result : currentPlayer.getHistory()){
-            sb.append(currentPlayer.getHistory().get(historyCounter)).append("\n");
-            historyCounter++;
-        }
-        return sb.toString();
     }
 
     public void casinoMenuLogic(Integer playerInput){
@@ -66,7 +68,7 @@ public class Casino {
                 if(currentPlayer.getHistory().isEmpty()){
                     console.println("Sorry! You do not yet have a gaming history. Play some games to get one!\n");
                 } else {
-                    console.println(printHistory());
+                    console.println(currentPlayer.printHistory());
                 }
                 break;
             case 4:

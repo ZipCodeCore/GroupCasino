@@ -1,5 +1,6 @@
 package io.zipcoder.casino.Games;
 
+import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
 import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Player;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 public class SnakesAndLadders implements Game {
     private Console console = new Console(System.in, System.out);
     private Dice dice = new Dice();
+    private CasinoArt casinoArt = new CasinoArt();
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
     private SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
@@ -175,23 +177,9 @@ public class SnakesAndLadders implements Game {
 
     @Override
     public void approachTable(Player currentPlayer) {
-        console.println("You approach the Snakes and Ladders table. What would you like to do?\n\n");
-        console.println("Snakes and Ladders\n\n" +
-                "       ---_ ......._-_--.\n" +
-                "      (|\\ /      / /| \\  \\\n" +
-                "      /  /     .'  -=-'   `.\n" +
-                "     /  /    .'             )\n" +
-                "   _/  /   .'        _.)   /\n" +
-                "  / o   o        _.-' /  .'\n" +
-                "  \\          _.-'    / .'*|\n" +
-                "   \\______.-'//    .'.' \\*|\n" +
-                "    \\|  \\ | //   .'.' _ |*|\n" +
-                "     `   \\|//  .'.'_ _ _|*|\n" +
-                "      .  .// .'.' | _ _ \\*|\n" +
-                "      \\`-|\\_/ /    \\ _ _ \\*\\\n" +
-                "       `/'\\__/      \\ _ _ \\*\\\n" +
-                "      /^|            \\ _ _ \\*\n" +
-                "     '  `             \\ _ _ \\      ");
+        Console.clearScreen();
+        console.println(casinoArt.getCasinoArt( "snakesAndLadders"));
+        console.println("You approach the Snakes and Ladders table. What would you like to do?");
         while(running) {
         console.println("(1) - Play the game");
         console.println("(2) - Read the rules");
