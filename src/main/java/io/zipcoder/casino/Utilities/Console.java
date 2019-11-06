@@ -143,7 +143,7 @@ public final class Console {
         return input.matches("^[0-9]{1,3}(?:,?[0-9]{3})*(?:\\.[0-9]{2})?$");
     }
 
-    public Double getCurrency() throws InterruptedException {
+    public Double getCurrency() {
         String input = getInput("$");
         while (true) {
             if (currencyCheck(input)) break;
@@ -220,7 +220,10 @@ public final class Console {
     }
 
     public Integer getInteger(int max) {
-        String input = getInput().substring(0,1);
+        String input = getInput();
+        if (input.length() > 0){
+            input = input.substring(0,1);
+        }
         while (true) {
             if (integerCheck(input)) {
                 if (Integer.parseInt(input) >= 1 && Integer.parseInt(input) <= max) {
