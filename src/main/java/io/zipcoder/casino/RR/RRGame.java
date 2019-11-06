@@ -6,6 +6,11 @@ import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Interfaces.Game;
+import io.zipcoder.casino.Utility.Music;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 
 public class RRGame extends DiceGame implements Game {
     public static void main(String[] args) throws InterruptedException {
@@ -20,6 +25,7 @@ public class RRGame extends DiceGame implements Game {
     private GameServices gameServices = new GameServices();
     private Player player;
 
+
     public RRGame(Player player) {
         this.player = player;
     }
@@ -32,20 +38,21 @@ public class RRGame extends DiceGame implements Game {
     public void startPlay() throws InterruptedException {
         // store menu
         RRMenu rrMenu = new RRMenu(this);
-
         rrMenu.displayMenu();
     }
 
     @Override
     public void endChoice() {
         //implements menu whether you want to quit or go again
-        String endChoiceInput = console.getInput(("[DEALER]: You have finished this Russian Roulette Game.\n\nWould you like to play again? (Y/N)\n"));
+        String endChoiceInput = console.getInput(("[DEALER]: You have finished this Russian Roulette Game.\n\n[DEALER]: Would you like to play again? (Y/N)\n"));
         if (endChoiceInput.toUpperCase().equals("N")) {
             console.printWithDelays("\n[DEALER]: Have a good rest of your day.\n");
+            console.sleep(2000);
+
             //also, return to the main menu
         } else if (endChoiceInput.toUpperCase().equals("Y")) {
-
             roundOfPlay();
+
         } else {
             console.println("(That's not a valid selection. Please choose again.)");
             endChoice();
@@ -68,7 +75,7 @@ public class RRGame extends DiceGame implements Game {
         }
         else {
             gameServices.payOut(this.player.getBalance(), this.player);
-            console.println(String.format("You Won!!! Your Balance Is Now $%.2f",player.getBalance()));
+            console.println(String.format("\n\nYou Won!!! Your Balance Is Now $%.2f",player.getBalance()));
         }
         endChoice();
 

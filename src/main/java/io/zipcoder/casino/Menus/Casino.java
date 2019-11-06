@@ -24,7 +24,7 @@ public class Casino {
             introMusic = new Music();
             introMusic.play();
         } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
+            console.println("Error with playing sound.");
             ex.printStackTrace();
         }
 

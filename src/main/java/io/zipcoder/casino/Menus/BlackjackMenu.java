@@ -9,6 +9,7 @@ public class BlackjackMenu implements Menu {
     private Console console;
     private String name = "Blackjack Menu";
     private BlackjackGame blackjackGame;
+    BlackjackMenu mainmenu;
 
 
     public BlackjackMenu(BlackjackGame blackjackGame) {
@@ -43,7 +44,7 @@ public class BlackjackMenu implements Menu {
         console.println("2. $20 min / $100 max");
         console.println("3. $50 min / $250 max");
         console.println("4. Set custom stakes ($5 - $500)");
-        console.println("(Press Enter to stand up / Go back to Game Menu)");
+        console.println("5. Stand up / Go Back to Game menu" );
         handleChoice(console.menuChoice(5));
     }
 
@@ -66,6 +67,8 @@ public class BlackjackMenu implements Menu {
                 this.blackjackGame.setMinBet(getStakes());
                 this.blackjackGame.setMaxBet(5*this.blackjackGame.getMinBet());
                 break;
+            case 5:
+
         }
 
         double minBet = this.blackjackGame.getMinBet();
