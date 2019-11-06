@@ -2,8 +2,6 @@ package io.zipcoder.casino;
 
 import java.util.HashMap;
 
-
-
 public class CasinoArt {
     private HashMap<String,String> casinoArt = new HashMap<>();
 
