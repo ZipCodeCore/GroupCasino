@@ -8,6 +8,7 @@ public class KlondikeDealer extends Dealer {
   //  KlondikeHand hand = new KlondikeHand();
 
     public KlondikeDealer(String firstName, String lastName, double balance) {
+
         super(firstName, lastName, balance);
     }
 

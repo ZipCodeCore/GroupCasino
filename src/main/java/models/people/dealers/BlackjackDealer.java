@@ -13,10 +13,12 @@ public class BlackjackDealer extends Dealer {
     }
 
     public Dealer getBlackjackDealer() {
+
         return blackjackDealer;
     }
 
     public void setBlackjackDealer(Dealer blackjackDealer) {
+
         this.blackjackDealer = blackjackDealer;
     }
 
@@ -25,10 +27,12 @@ public class BlackjackDealer extends Dealer {
     }
 
     public Boolean stay() {
+
         return null;
     }
 
     public DeckOfCards shuffle(DeckOfCards deck) {
+
         return null;
     }
 
