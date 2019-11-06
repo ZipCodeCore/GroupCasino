@@ -6,21 +6,26 @@ import models.people.players.Player;
 public class PlayerService {
 
 
-    public static Double getBalance(Player player) {
+    public Double getBalance(Player player) {
         return null;
     }
 
-    public static Double depositMoney(Double depositAmt) {
+    public Double depositMoney(Double depositAmt, Player player) {
         return null;
     }
 
-    public static Double withdrawMoney(Double withdrawAmt) {
+    public Double withdrawMoney(Double withdrawAmt, Player player) {
         return null;
     }
 
-    public static Hand resetPlayerHands(Player player) {
+    public Hand resetPlayerHands(Player player) {
         return  null;
 
     }
+
+    public Integer getId() {
+        return null;
+    }
+
 
 }

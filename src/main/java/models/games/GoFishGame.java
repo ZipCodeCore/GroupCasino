@@ -22,5 +22,16 @@ public class GoFishGame extends CardGame implements Game {
     public Boolean dealerTurn(Dealer goFishDealer) {
         return null;
     }
+    public void getMenu() {
+        Integer input2 = console.getIntegerInput(
+                "\nDo you need instructions for this game?\n\n" +
+                        "1. Yes, I don't want to lose my money that easy\n" +
+                        "2. Heck no, I'm a baller.\n");
+    }
+
+    public void startGame() {
+
+    }
+
 
 }

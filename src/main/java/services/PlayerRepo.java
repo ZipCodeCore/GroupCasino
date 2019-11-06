@@ -16,11 +16,11 @@ public class PlayerRepo {
         return null;
     }
 
-    public Player getPlayerByName(String name) {
+    public Player getPlayerById(Integer id) {
         return null;
     }
 
-    public Boolean addPlayer() {
+    public Boolean addPlayer(Player player) {
         return null;
     }
 

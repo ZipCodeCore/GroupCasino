@@ -1,13 +1,24 @@
 package models.gamecomponents;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 public class DeckOfCards extends GameComponent {
-    private List<Card> deck;
+    private Stack<Card> stack;
+    private Random random = new Random();
 
     public DeckOfCards() {
-        this.deck = new ArrayList<Card>();
+        this.stack = new Stack<Card>();
+        CardSuit[] suits = CardSuit.values();
+        CardValue[] values = CardValue.values();
+        for(CardSuit suit: suits){
+            for(CardValue value: values){
+                Card card = new Card(value, suit);
+                stack.push(card);
+            }
+        }
+
     }
 
 }
+
