@@ -52,6 +52,15 @@ public class Dice {
             return String.format(this.value + " : " + "Re-roll");
         }
     }
+    public String toString2(){
+        if(this.isKept()){
+            return "Keep";
+        }
+        else{
+            return "Re-roll";
+        }
+    }
+
 
     public static ArrayList<Integer> playerDice = new ArrayList<Integer>(5);
 

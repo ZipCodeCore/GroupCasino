@@ -132,9 +132,8 @@ public class Yahtzee implements Game {
     public void chooseToKeep(){
         String keepthis = "";
         while(!keepthis.toLowerCase().equals("roll")) {
-            for(int i = 0; i < myDice.length; i++){
-                console.print(this.getDiceArt(myDice[i],i + 1));
-            }
+
+            console.print(this.getDiceArt(myDice));
             keepthis = console.getStringInput("\nType the corresponding number of the dice and press enter to "+
                                                       "switch it between keeping and re-rolling.\n" +
                                                       "Type 'continue' when finished\n");
@@ -160,9 +159,8 @@ public class Yahtzee implements Game {
         int choice = 0;
         boolean goodChoice = false;
 
-        for(int i = 0; i < myDice.length; i++){
-            console.print(this.getDiceArt(myDice[i],i + 1));
-        }
+        console.print(this.getDiceArt(myDice));
+        console.println("\n");
 
         for(int i = 1; i < availableOptions.length; i++) { console.println((i) + ".  " + availableOptions[i]); }
 
@@ -343,67 +341,70 @@ public class Yahtzee implements Game {
     //------------------------------------------------------------------------------------------------------------------
     // Method for getting ASCII dice art--------------------------------------------------------------------------------
 
-    public String getDiceArt(Dice dice, int index){
+    public String getDiceArt(Dice[] dice){
 
-        String keepOrReRoll;
-        if(dice.isKept()){
-            keepOrReRoll = "Keep";
-        }
-        else{
-            keepOrReRoll = "Re-roll";
-        }
-        String d1 = " ";
-        String d2 = " ";
-        String d3 = " ";
-        String d4 = " ";
-        String d5 = " ";
-        String d6 = " ";
-        String d7 = " ";
+        String[][] a =  {{" ", " ", " ", " ", " ", " ", " "},
+                         {" ", " ", " ", " ", " ", " ", " "},
+                         {" ", " ", " ", " ", " ", " ", " "},
+                         {" ", " ", " ", " ", " ", " ", " "},
+                         {" ", " ", " ", " ", " ", " ", " "}};
 
-        switch (dice.getValue()){
-            case 1:
-                d4 = "0";
-                break;
-            case 2:
-                d1 = "0";
-                d7 = "0";
-                break;
-            case 3:
-                d1 = "0";
-                d4 = "0";
-                d7 = "0";
-                break;
-            case 4:
-                d1 = "0";
-                d2 = "0";
-                d6 = "0";
-                d7 = "0";
-                break;
-            case 5:
-                d1 = "0";
-                d2 = "0";
-                d4 = "0";
-                d6 = "0";
-                d7 = "0";
-                break;
-            case 6:
-                d1 = "0";
-                d2 = "0";
-                d3 = "0";
-                d5 = "0";
-                d6 = "0";
-                d7 = "0";
-                break;
+        for(int i = 0; i < dice.length; i++){
+            switch(dice[i].getValue()){
+                case 1:
+                    a[i][3] = "0";
+                    break;
+                case 2:
+                    a[i][0] = "0";
+                    a[i][6] = "0";
+                    break;
+                case 3:
+                    a[i][0] = "0";
+                    a[i][3] = "0";
+                    a[i][6] = "0";
+                    break;
+                case 4:
+                    a[i][0] = "0";
+                    a[i][1] = "0";
+                    a[i][5] = "0";
+                    a[i][6] = "0";
 
+                    break;
+                case 5:
+                    a[i][0] = "0";
+                    a[i][1] = "0";
+                    a[i][3] = "0";
+                    a[i][5] = "0";
+                    a[i][6] = "0";
+                    break;
+                case 6:
+                    a[i][0] = "0";
+                    a[i][1] = "0";
+                    a[i][2] = "0";
+                    a[i][4] = "0";
+                    a[i][5] = "0";
+                    a[i][6] = "0";
+                    break;
+            }
         }
         return String.format(
-                        "     ###############\n"+
-                       "     #  %s       %s  #\n"+
-                        "     #             #\n"+
-               index + ".   #  %s   %s   %s  #     "+ keepOrReRoll + "\n"+
-                        "     #             #\n"+
-                       "     #  %s       %s  #\n"+
-                        "     ###############\n",
-                            d1,d2,d3,d4,d5,d6,d7);
+         " ############### "       +  "  ############### "      +  "  ############### "      + "  ############### "     + "  ###############\n"   +
+         " #  %s       %s  # "     +  "  #  %s       %s  # "    +  "  #  %s       %s  # "    + "  #  %s       %s  # "   + "  #  %s       %s  #\n" +
+         " #             # "       +  "  #             # "      +  "  #             # "      + "  #             # "     + "  #             #\n"  +
+         " #  %s   %s   %s  # "    +  "  #  %s   %s   %s  # "   +  "  #  %s   %s   %s  # "   + "  #  %s   %s   %s  # "  + "  #  %s   %s   %s  #\n"+
+         " #             # "       +  "  #             # "      +  "  #             # "      + "  #             # "     + "  #             #\n"  +
+         " #  %s       %s  # "     +  "  #  %s       %s  # "    +  "  #  %s       %s  # "    + "  #  %s       %s  # "   + "  #  %s       %s  #\n" +
+         " ############### "       +  "  ############### "      +  "  ############### "      + "  ############### "     + "  ###############\n\n",
+         a[0][0],a[0][1],             a[1][0],a[1][1],            a[2][0],a[2][1],            a[3][0],a[3][1],          a[4][0],a[4][1],
+         a[0][2],a[0][3],a[0][4],     a[1][2],a[1][3],a[1][4],    a[2][2],a[2][3],a[2][4],    a[3][2],a[3][3],a[3][4],  a[4][2],a[4][3],a[4][4],
+         a[0][5],a[0][6],             a[1][5],a[1][6],            a[2][5],a[2][6],            a[3][5],a[3][6],          a[4][5],a[4][6]) +
+
+         String.format("%18s %17s %17s %17s %17s",
+                 "1. " + myDice[0].toString2() + "     ",
+                 "2. " + myDice[1].toString2() + "     ",
+                 "3. " + myDice[2].toString2() + "     ",
+                 "4. " + myDice[3].toString2() + "     ",
+                 "5. " + myDice[4].toString2() + "     \n");
     }
+
 }
