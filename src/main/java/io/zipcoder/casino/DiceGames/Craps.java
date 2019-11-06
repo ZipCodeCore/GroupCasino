@@ -38,7 +38,7 @@ public class Craps implements GamblingGame {
 
 
     public void startGame() {
-
+        console.println("Welcome to Craps!");
         do {
             promptUserForWagerAmount();
             createDice();
@@ -47,12 +47,16 @@ public class Craps implements GamblingGame {
             turn++;
         }
         while (continuePlay == true);
+        promptLeaveGame();
     }
+
 
 
     public void crapsRoll() {
         for (Dice s : this.crapsDice) {
+            console.getStringInput("Press enter to roll.");
             s.rollDice();
+
         }
     }
 
@@ -61,18 +65,27 @@ public class Craps implements GamblingGame {
         if (turn == 0) {
             if (sum == 7 || sum == 11) {
                 crapsPlayer.getWinnings();
+                console.println("Winner Winner, Chicken Dinner! " );
                 continuePlay = false;
 
             } else if (sum == 2 || sum == 3 || sum == 12) {
+                console.println("You've Crapped out!!");
                 continuePlay = false;
+
             } else {
                 targetScore = sum;
+                console.println("You've rolled a " + sum);
             }
         } else {
             if (sum == 7) {
+                console.println("You've Crapped out!!");
                 continuePlay = false;
             } else if (sum == targetScore) {
+                console.println("Your Last Roll Was " + sum + "\nYour Target Score is " + targetScore);
                 crapsPlayer.getWinnings();
+
+                console.println("Winner Winner, Chicken Dinner! " );
+
                 continuePlay = false;
             }
 
@@ -92,10 +105,14 @@ public class Craps implements GamblingGame {
 
 
     public void promptLeaveGame() {
+        console.println("Do you want to play again?");
+
     }
 
 
     public void displayResults() {
+
+
     }
 
 
