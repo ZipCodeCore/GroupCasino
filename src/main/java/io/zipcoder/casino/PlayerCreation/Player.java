@@ -45,11 +45,8 @@ public class Player {
     public String printHistory() {
         StringBuilder sb = new StringBuilder();
         Integer historyCounter = 0;
-        for (int i = gameHistory.size() - 1; i >= gameHistory.size() - 5; i--) {
-            if (gameHistory.get(i) == null) {
-                break;
-            }
-            sb.append(getHistory().get(historyCounter)).append("\n");
+        for(String history : gameHistory){
+            sb.append(gameHistory.get(0));
         }
         return sb.toString();
     }

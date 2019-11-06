@@ -6,6 +6,8 @@ import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
+import io.zipcoder.casino.utilities.Sound;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
@@ -23,6 +25,8 @@ public class SnakesAndLadders implements Game {
     private CasinoArt art = new CasinoArt();
     private boolean running = true;
     private boolean currentGame = true;
+    private Sound loseSound;
+    private Sound diceSound;
 
     public void runSnakesAndLadders(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
@@ -34,6 +38,8 @@ public class SnakesAndLadders implements Game {
         currentGame = true;
         playerPiece.setCurrentPosition(0);
         aiPiece.setCurrentPosition(0);
+        loseSound = new Sound("wahwah.wav");
+        diceSound = new Sound("dice_roll.wav");
     }
 
     public String startNewGame(){
@@ -77,10 +83,12 @@ public class SnakesAndLadders implements Game {
 
 
     public Integer playerDiceRoll(){
+        Console.clearScreen();
         Integer roll = dice.rollDice(1);
         playerPiece.setCurrentPosition(playerPiece.getCurrentPosition() + roll);
         Integer currentPosition = playerPiece.getCurrentPosition();
         console.println(dice.diceArt(roll));
+        diceSound.play();
         console.println("You've rolled a %d. Your current position is now %d.", roll, currentPosition);
         return currentPosition;
     }
@@ -201,6 +209,7 @@ public class SnakesAndLadders implements Game {
                 LocalDateTime now = LocalDateTime.now();
                 currentPlayer.addHistory("You won at Snakes and Ladders. ** " + dateTimeFormatter.format(now) + "!");
             } else if (winner.equals("Ai")) {
+                loseSound.play();
                 console.println(text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.AIWINS));
                 LocalDateTime now = LocalDateTime.now();
                 currentPlayer.addHistory("You lost at Snakes and Ladders. ** " + dateTimeFormatter.format(now));
