@@ -5,8 +5,8 @@ import models.people.players.Player;
 
 
 public static class PlayerService {
-    Player player1 = new Player();
-    Double balance;
+    static Player player1 = new Player();
+    static Double balance;
 
     public PlayerService(Player player1) {
         this.player1 = player1;
@@ -28,8 +28,8 @@ public static class PlayerService {
     }
 
     public static Double withdrawMoney(Double withdrawAmt) {
-        Player player1 = new Player();
-        Double balance = player1.getBalance();
+
+        balance = player1.getBalance();
         balance -= withdrawAmt;
 
         return balance;
