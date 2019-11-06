@@ -23,24 +23,14 @@ public class EvaluationTest {
         int actual = detect.checkForFaces(thisIsMyDice, 1);
         int expected = 4;
         Assert.assertEquals(expected,actual);
-        Integer[] thisIsMyDice2 = {1,5,5,5,5};
-        int expected2 = 20;
-        int actual2 = detect.checkForFaces(thisIsMyDice2, 5);
-        Assert.assertEquals(expected2,actual2);
-
     }
 
     @Test
-    public void getChanceValueTest(){
-        Integer[] thisIsMyDice = {1,1,1,1,5};
-        int actual = detect.chance(thisIsMyDice);
-        int expected = 9;
-        Assert.assertEquals(expected,actual);
+    public void getFacePointsTest2(){
         Integer[] thisIsMyDice2 = {1,5,5,5,5};
-        int expected2 = 21;
-        int actual2 = detect.chance(thisIsMyDice2);
+        int actual2 = detect.checkForFaces(thisIsMyDice2, 5);
+        int expected2 = 20;
         Assert.assertEquals(expected2,actual2);
-
     }
 
     @Test
@@ -65,6 +55,14 @@ public class EvaluationTest {
         int expected = 17;
         int actual = detect.checkFor4Kind(thisIsMyDice);
         Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void get4Kind2(){
+        Integer[] thisIsMyDice2 = {2,4,2,2,1};
+        int expected2 = 0;
+        int actual2 = detect.checkFor4Kind(thisIsMyDice2);
+        Assert.assertEquals(expected2,actual2);
     }
 
     @Test
@@ -129,5 +127,22 @@ public class EvaluationTest {
         int expected = 0;
         int actual = detect.checkForYahtzee(thisIsMyDice);
         Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void getChanceValueTest(){
+        Integer[] thisIsMyDice = {2,1,1,1,5};
+        int actual = detect.chance(thisIsMyDice);
+        int expected = 10;
+        Assert.assertEquals(expected,actual);
+
+    }
+
+    @Test
+    public void getChanceValueTest2(){
+        Integer[] thisIsMyDice2 = {1,5,4,5,5};
+        int actual2 = detect.chance(thisIsMyDice2);
+        int expected2 = 20;
+        Assert.assertEquals(expected2,actual2);
     }
 }
