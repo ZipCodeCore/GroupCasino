@@ -29,11 +29,24 @@ public class CrapsGameTest {
     }
 
     @Test
+    public void getFirstNameTest(){
+        String expected = "Zapp";
+        String actual = player.getFirstName();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getLastNameTest(){
+        String expected = "Brannigan";
+        String actual = player.getLastName();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     //tests whether win on first works on 7
     public void winOnFirstTest(){
         setThePointRoll = 7;
         Assert.assertTrue(crapsGame.winOnFirst(setThePointRoll));
-
     }
 
     @Test
@@ -77,6 +90,13 @@ public class CrapsGameTest {
     }
 
     @Test
+    //tests whether lose on first works on 2
+    public void loseOnFirstTest4() {
+        setThePointRoll = 8;
+        Assert.assertFalse(crapsGame.loseOnFirst(setThePointRoll));
+    }
+
+        @Test
     //tests whether win on subsequent works if they win
     public void winOnSubsequentTest(){
         setThePointRoll = 8;
@@ -204,6 +224,8 @@ public class CrapsGameTest {
         Assert.assertEquals(0.00, crapsGame.calculateWinnings(wager, setThePointRoll, numRolls), 0.001);
         Assert.assertEquals(150.00, player.getBalance(), 0.001);
     }
+
+
 
     //WRITE TEST OF ROUND OF PLAY FOR HOW DIFFERENT TYPES OF LOSSES EFFECT YOUR BALANCE
 

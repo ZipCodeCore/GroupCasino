@@ -28,10 +28,13 @@ public class CrapsGame extends DiceGame implements Game {
     private Integer setThePointRoll;    //saves your first roll to try to match with later rolls
     private Integer currentRoll;        //any roll after the first
     private Integer numRolls = 0;
-    private Integer counter=1;
     private Console console = new Console(System.in, System.out);
     private GameServices gameServices = new GameServices();
     Music crapsMusic = null;
+    private Integer die1Point;
+    private Integer die2Point;
+    private Integer die1Current;
+    private Integer die2Current;
 
 
     //Craps Game Constructor
@@ -41,33 +44,29 @@ public class CrapsGame extends DiceGame implements Game {
         this.player = new CrapsPlayer(incomingPlayer);
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return this.player.getPlayer().getFirstName();
+    }
+
+    public String getLastName() {
+        return this.player.getPlayer().getLastName();
     }
 
     @Override
-    //creates dice and runs a roundOfPlay
+    //creates and runs a roundOfPlay
     public void startPlay() throws InterruptedException {
         try {
             Music.filePath = "src/music/(Craps) Amor maior - Higher Love.wav";
             crapsMusic = new Music();
             crapsMusic.play();
         } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
+            console.println("Error with playing sound.");
             ex.printStackTrace();
         }
         new CrapsMenu(this).displayMenu();
 
         roundOfPlay();
-        try {
-            crapsMusic.stop();
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        }
+
         endChoice();
     }
 
@@ -76,14 +75,17 @@ public class CrapsGame extends DiceGame implements Game {
     public void roundOfPlay() throws InterruptedException {
         Double betSize = betChoice();
         userRollsDiceSetPoint();
+        displayPointRoll(setThePointRoll);
         if (winOnFirst(setThePointRoll) == true) {
+
             winningMessageFirstRoll();
             calculateWinnings(betSize, setThePointRoll, numRolls);
         } else if (loseOnFirst(setThePointRoll) == true) {
             losingMessageFirstRoll();
-        } else {
-            displayPointRoll(setThePointRoll);
+        }
+        else {
             for (int i = 0; i < 3; i++) {
+                numRolls = i + 1;
                 userRollsDiceCurrentPoint();
                 displayCurrentRoll(currentRoll);
                 if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
@@ -97,7 +99,6 @@ public class CrapsGame extends DiceGame implements Game {
                 if (i == 2) {
                     losingMessageOutOfRolls();
                 }
-                numRolls = i + 1;
             }
         }
     }
@@ -105,8 +106,7 @@ public class CrapsGame extends DiceGame implements Game {
     public Double betChoice(){
         Double wager;
         console.println(String.format("\nCurrent bankroll: $%.2f", this.player.getPlayer().getBalance()));
-        wager = console.getCurrency(String.format("\n[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: Bet size (press Enter to stand up): \n\n", this.minBet, this.maxBet));
-
+        wager = console.getCurrency(String.format("\n[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: What's your Bet? (Or press ENTER to leave the table)\n\n", this.minBet, this.maxBet));
          if (wager > this.player.getPlayer().getBalance()){
             console.println(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.\n", this.player.getPlayer().getLastName()));
             betChoice();
@@ -152,6 +152,15 @@ public class CrapsGame extends DiceGame implements Game {
     public void endChoice() throws InterruptedException {
         String endChoiceInput = console.getInput("\n[CROUPIER]: You have finished this game of Craps.\n\nWould you like to play again? (Y/N)\n");
         if (endChoiceInput.toUpperCase().equals("N")) {
+            try {
+                crapsMusic.stop();
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            }
             console.println("\n[CROUPIER]: Have a good rest of your day.\n");
             //also, return to the main menu
         } else if (endChoiceInput.toUpperCase().equals("Y")) {
@@ -194,60 +203,64 @@ public class CrapsGame extends DiceGame implements Game {
         return false;
     }
 
-    public Integer calculatePayoutMultiplier() {
-        //catch statements
-        return null;
-    }
-
     public void userRollsDiceSetPoint() {
         console.getInput("\nPress Enter to roll the dice\n");
-        tossPointRoll();
-        counter++;
+        die1Point = roll();
+        die2Point = roll();
+        tossPointRoll(die1Point, die2Point);
     }
 
     public void userRollsDiceCurrentPoint() {
         console.getInput(String.format("-------------------------------------------------\nSet the Point Roll: %d\nPress Enter to roll the dice\n", setThePointRoll));
-        tossCurrentRoll();
+        die1Current = roll();
+        die2Current = roll();
+        tossCurrentRoll(die1Current, die2Current);
+
     }
 
-    public Integer tossPointRoll() {
-        setThePointRoll = DiceGame.roll(2);
+
+    public Integer tossPointRoll(Integer die1Point, Integer die2Point) {
+        setThePointRoll = die1Point + die2Point ;
         return setThePointRoll;
     }
 
+
     public void displayPointRoll(Integer setThePointRoll) {
-        console.println(String.format("\n(( You have rolled a %d for your set the point roll. ))\n", setThePointRoll));
+        console.println("\n-------------------------------------------------");
+        console.println("SET THE POINT ROLL:\n" + DiceGame.diceToASCII(die1Point, die2Point) + "\n-------------------------------------------------");
+        //console.println(String.format("\n(( You have rolled a %d for your set the point roll. ))\n", setThePointRoll));
     }
 
     public void displayCurrentRoll(Integer currentRoll) {
+        console.println(DiceGame.diceToASCII(die1Current, die2Current));
         console.println(String.format("\n(( You have rolled a %d for this roll. ))\n", currentRoll));
     }
 
     public void winningMessageFirstRoll() {
-        console.println(String.format("\n(( You rolled a %d on the first roll! ))\n\nCongratulations!!\n\nYou are a winner!!!\n------------------------------------------\n\n", setThePointRoll));
+        console.println(String.format("\n(( You rolled a %d on the first roll! ))\n\nCongratulations!!\n\nYou are a winner!!!\n-------------------------------------------------\n\n", setThePointRoll));
     }
 
     public void losingMessageFirstRoll() {
-        console.println(String.format("\n(( You rolled a %d and have lost on the first roll! ))\n\nThis is unfortunate.....\n\n:(\n-------------------------------------------\n\n", setThePointRoll));
+        console.println(String.format("\n(( You rolled a %d and have lost on the first roll! ))\n\nThis is unfortunate.....\n\n:(\n-------------------------------------------------\n\n", setThePointRoll));
     }
 
     public void losingMessageOutOfRolls() {
-        console.println(String.format("(( You are out of rolls. ))\nYou seem to have lost.\nThis is unfortunate.....\n:(\n-----------------------------------------\n\n"));
+        console.println(String.format("(( You are out of rolls. ))\nYou seem to have lost.\nThis is unfortunate.....\n:(\n-------------------------------------------------\n\n"));
+
     }
 
-    public Integer tossCurrentRoll() {
-        currentRoll = DiceGame.roll(2);
+    public Integer tossCurrentRoll(Integer die1Current, Integer die2Current) {
+        currentRoll = die1Current + die2Current;
         return currentRoll;
     }
 
 
     public void winOnSubsequentMessage () throws InterruptedException {
-        console.printWithDelays(String.format("Hooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, counter),50);
-        counter = 0;
+        console.printWithDelays(String.format("Hooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, numRolls),50);
     }
 
     public void loseOnSubsequentMessage () {
-        console.println(String.format("It appears that the odds were not in your favor today. Better luck next time.....\n-----------------------------------------------\n\n"));
+        console.println(String.format("It appears that the odds were not in your favor today. Better luck next time.....\n-------------------------------------------------\n\n"));
     }
 }
 

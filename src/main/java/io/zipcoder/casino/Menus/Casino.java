@@ -90,6 +90,9 @@ public class Casino {
         return new Player(firstName, lastName, age, 0.0);
     }
 
+    public static void rouletteEnding(){
+
+    }
 
     public static void displayEnding(Player player)  {
         Music losingHorn = null;
