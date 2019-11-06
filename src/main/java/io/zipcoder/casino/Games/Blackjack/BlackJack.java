@@ -8,7 +8,10 @@ import io.zipcoder.casino.GamePieces.Card;
 
 import io.zipcoder.casino.Games.GamblingGame;
 import io.zipcoder.casino.Games.Game;
-import io.zipcoder.casino.Games.SnakesAndLadders.SnakesAndLaddersLanguage;
+
+import io.zipcoder.casino.Menus.Casino;
+
+
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.GamePieces.Deck;
 import io.zipcoder.casino.utilities.Console;
@@ -19,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 
 public class BlackJack implements Game, GamblingGame {
 
-
+    Casino casino = new Casino();
     Deck deck = new Deck();
     Console console = new Console(System.in, System.out);
     Card[] playerHand = new Card[6];
@@ -29,6 +32,7 @@ public class BlackJack implements Game, GamblingGame {
     private boolean currentGame = true;
     private CasinoArt art = new CasinoArt();
     boolean running = true;
+    boolean alsoRunning = true;
     Integer pot = 0;
     Integer handOfPlayer = checkHand(playerHand);
     Integer handOfDealer = checkHand(dealerHand);
@@ -36,10 +40,18 @@ public class BlackJack implements Game, GamblingGame {
     private Player winner = null;
     private Integer totalEarnings = 0;
 
+    public void runBlackJack(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+        approachTable(currentPlayer);
+    }
+
+
+
+
 
     @Override
     public void runGame(Player currentplayer) {
-        while(running){
+        while(alsoRunning){
 
         console.println("Welcome to BlackJack! Let's begin!");
 
@@ -64,6 +76,7 @@ public class BlackJack implements Game, GamblingGame {
 
     @Override
     public void approachTable(Player currentPLayer) {
+        while(alsoRunning) {
         Console.clearScreen();
         this.currentPlayer = currentPLayer;
         console.println(art.getCasinoArt(CasinoArt.Art.BLACKJACK));
@@ -72,19 +85,21 @@ public class BlackJack implements Game, GamblingGame {
         console.println("(2) - Read the rules");
         console.println("(3) - Return to the game menu");
         Integer playerInput = console.getIntegerInput(":");
-        while(running) {
+
             switch (playerInput) {
                 case 1:
                     runGame(currentPlayer);
-                    running = false;
+
                     break;
                 case 2:
 
                     approachTable(currentPlayer);
-                    running = false;
+
                     break;
                 case 3:
-                     running = false;
+                    casino.goToGameMenu();
+                    alsoRunning = false;
+
                     break;
             }
         }
@@ -244,9 +259,11 @@ public class BlackJack implements Game, GamblingGame {
             case 1:
                // Card[] playerHand = playerHand[6];
                 runGame(currentPlayer);
+                alsoRunning = false;
                 break;
             case 2:
                 approachTable(currentPlayer);
+                alsoRunning =false;
                 break;
 
     }

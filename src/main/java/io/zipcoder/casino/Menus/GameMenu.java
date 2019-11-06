@@ -21,24 +21,12 @@ public class GameMenu {
     public void runGameMenu(Player currentPlayer){
         this.currentPlayer = currentPlayer;
         while(running) {
-            displayGameMenu();
+            Console.clearScreen();
+            console.println(art.getCasinoArt(CasinoArt.Art.GAMEMENU));
+            Console.displayGameMenu();
             Integer playerInput = getPlayerInput();
             gameMenuLogic(playerInput);
         }
-    }
-
-    public void displayGameMenu(){
-        Console.clearScreen();
-        console.println(art.getCasinoArt(CasinoArt.Art.GAMEMENU));
-        console.println("Hi! Welcome to the game menu!\nHere are the games you can play:");
-        console.println("(1) - Go Fish");
-        console.println("(2) - Blackjack");
-        console.println("(3) - Craps");
-        console.println("(4) - Snakes & Ladders");
-        console.println("(5) - Roulette");
-        console.println("(6) - SlotMachine");
-        console.println("(7) - High or Low");
-        console.println("(8) - Return to Casino");
     }
 
     public Integer getPlayerInput(){
@@ -56,7 +44,7 @@ public class GameMenu {
             case 2:
 
                 BlackJack blackjack = new BlackJack();
-                blackjack.approachTable(currentPlayer);
+                blackjack.runBlackJack(currentPlayer);
                 break;
             case 3:
                 Craps craps = new Craps();
@@ -69,13 +57,10 @@ public class GameMenu {
             case 5:
                 Roulette roulette = new Roulette();
                 roulette.runRoulette(currentPlayer);
-
                 return "You would be playing Roulette now.";
             case 6:
-                console.print("You would be playing SlotMachine now.");
                 Slots slots = new Slots();
                 slots.runSlots(currentPlayer);
-
                 return "You would be playing SlotMachine now";
             case 7:
                 HighAndLow highAndLow = new HighAndLow();
