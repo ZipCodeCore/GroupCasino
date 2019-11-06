@@ -115,10 +115,12 @@ public class App {
                 break;
             case 3:
                 BlackJack newBlackJack = new BlackJack(this.newPlayer);
+                addMoney();
                 newBlackJack.startGame();
                 break;
             case 4:
                 Craps newCraps = new Craps(this.newPlayer);
+                addMoney();
                 newCraps.startGame();
             case 5:
                 mainMenu();
@@ -154,6 +156,12 @@ public class App {
         } catch (InterruptedException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    private void addMoney (){
+        double amount;
+        amount = this.menu.getDoubleInput("How much money you would like to add to your account?");
+        this.newPlayer.setBalance(amount);
     }
 
 } // class
