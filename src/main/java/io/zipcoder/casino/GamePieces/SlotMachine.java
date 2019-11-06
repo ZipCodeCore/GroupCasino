@@ -10,7 +10,7 @@ public class SlotMachine {
 
     Console console = new Console(System.in, System.out);
 
-    Integer[][] slotMachine = new Integer[2][2];
+    Integer[][] slotMachine = new Integer[3][3];
 
     public static Integer randNum(){
         Random random = new Random();

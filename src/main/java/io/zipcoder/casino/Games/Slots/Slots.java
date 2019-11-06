@@ -19,7 +19,7 @@ public class Slots implements Game, GamblingGame {
     SlotMachine slotMachine = new SlotMachine();
     Player currentPlayer;
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    private CasinoArt casinoArt = new CasinoArt();
+    private CasinoArt art = new CasinoArt();
     private Boolean running = true;
     private Boolean currentGame  = true;
     private Integer pot;
@@ -31,7 +31,7 @@ public class Slots implements Game, GamblingGame {
     @Override
     public void approachTable(Player currentPLayer) {
         Console.clearScreen();
-        console.println(casinoArt.getCasinoArt("slots"));
+        console.println(art.getCasinoArt(CasinoArt.Art.SLOTS));
         console.println("You approach the Slot Machine. What would you like to do?");
         console.println("(1) - Play the game");
         console.println("(2) - Return to the game menu");
@@ -60,23 +60,29 @@ public class Slots implements Game, GamblingGame {
         while (running){
             placeBet(currentPlayer);
             pullLever();
-            if(isWinner){
+            if(isWinner()){
                 returnWinnings(currentPlayer);
             } else {
                 youLose(currentPlayer);
             }
             exitGame(currentPlayer);
         }
-        //prompting player to place bet
-       //pull lever to generate random multidimensional array(s)
-        //checking for matches along horizontals && diagonals && verticals
-        // return winnings
-        //perf
     }
 
     public void exitGame(Player currentPlayer){
-
-        console.println("Exit Game");
+        console.println("Would you like to play again?");
+        console.println("(1) - Yes");
+        console.println("(2) - No");
+        Integer playerInput = console.getIntegerInput(":");
+        switch (playerInput) {
+            case 1:
+                runGame(currentPlayer);
+                break;
+            case 2:
+                casino.goToGameMenu();
+                running = false;
+                break;
+        }
 
     }
     public void placeBet(Player currentPlayer){
@@ -85,9 +91,16 @@ public class Slots implements Game, GamblingGame {
     }
 
     public void pullLever(){
-        Integer[][] slots = new Integer[2][2];
+        slots = new Integer[3][3];
         slots = slotMachine.createMachine();
-        console.println(slots.toString());
+        for(int i = 0; i < slots.length; i++){
+            for(int j = 0; j <slots.length; j++){
+                console.print("[");
+                console.print(slots[i][j].toString());
+                console.print("]");
+            }
+            console.newln();
+        }
     }
 
     public Boolean isWinner(){
