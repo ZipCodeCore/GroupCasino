@@ -21,6 +21,7 @@ public class GoFishPlayerTest {
         Assert.assertEquals(player, goFishPlayer.getPlayer());
         Assert.assertEquals(6, goFishPlayer.getPlayer().getBalance(),.01);
 
+
     }
     @Test
     public void getPlayerNameTest(){

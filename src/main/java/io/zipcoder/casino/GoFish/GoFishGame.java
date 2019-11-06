@@ -139,7 +139,7 @@ public class GoFishGame extends CardGame implements Game {
         for (Card i : opponentsCards.getCards())
             cardFilter.add(i);
         cardPicker.addAll(cardFilter);
-        String pickedCard = cardPicker.get(rng.nextInt(cardPicker.size())).toString();
+        String pickedCard = cardPicker.get(rng.nextInt(cardPicker.size())).getRank();
         return pickedCard;
     }
 

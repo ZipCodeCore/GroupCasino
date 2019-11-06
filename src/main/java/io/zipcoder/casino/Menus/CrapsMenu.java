@@ -1,5 +1,6 @@
 package io.zipcoder.casino.Menus;
 
+import io.zipcoder.casino.Craps.CrapsGame;
 import io.zipcoder.casino.Interfaces.Menu;
 import io.zipcoder.casino.Utilities.Music;
 import io.zipcoder.casino.Utilities.Console;
@@ -10,7 +11,7 @@ public class CrapsMenu implements Menu {
     private String name = "Craps Menu";
     Music crapsMusic = null;
 
-    public CrapsMenu() {
+    public CrapsMenu(CrapsGame crapsGame) {
         this.console = new Console (System.in, System.out);
     }
 
@@ -39,5 +40,7 @@ public class CrapsMenu implements Menu {
     public void handleChoice(int choice) {
 
     }
+
+
 
 }

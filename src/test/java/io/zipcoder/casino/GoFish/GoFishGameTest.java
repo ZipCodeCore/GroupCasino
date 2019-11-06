@@ -30,9 +30,8 @@ public class GoFishGameTest {
         goFishMenu = new GoFishMenu(goFishGame);
         goFishPlayer = goFishGame.getPlayer();
         opponent = goFishGame.getOpponent();
-        this.playersCards = new CardSet(0);
-        this.opponentCards = new CardSet(0);
         shoe = new CardSet(1);
+
     }
 
     @Test
@@ -47,7 +46,9 @@ public class GoFishGameTest {
 
     @Test
     public void initialDealPlayer() {
-        goFishGame.initialDeal();
+        playersCards = new CardSet(0);
+        opponentCards = new CardSet(0);
+    //    goFishGame.initialDeal();
         ArrayList<Card> testHand = playersCards.getCards();
         int actual = testHand.size();
         int expected = 7;
@@ -56,7 +57,9 @@ public class GoFishGameTest {
 
     @Test
     public void initialDealOpponent() {
-        goFishGame.initialDeal();
+        playersCards = new CardSet(0);
+        opponentCards = new CardSet(0);
+ //       goFishGame.initialDeal();
         ArrayList<Card> testHand = opponentCards.getCards();
         int actual = testHand.size();
         int expected = 7;
@@ -66,7 +69,24 @@ public class GoFishGameTest {
 
     @Test
     public void npcPickACardTest(){
+        playersCards = new CardSet(0);
+        opponentCards = new CardSet(0);
+        opponentCards.addCard(new Card("A","S"));
+        opponentCards.addCard(new Card("A","H"));
+        opponentCards.addCard(new Card("A","D"));
+        opponentCards.addCard(new Card("K","C"));
+        opponentCards.addCard(new Card("2","H"));
+        opponentCards.addCard(new Card("K","D"));
+        opponentCards.addCard(new Card("5","C"));
 
+       /* ArrayList<Card> testHand = opponentCards.getCards();
+        String testCard = goFishGame.npcPickACard();
+        for (int i = 0; i < opponentCards.size(); i++) {
+            if (opponentCards.getCards(). == testCard) {
+
+            }
+        }
+*/
     }
 
     @Test
@@ -77,4 +97,5 @@ public class GoFishGameTest {
     public void scanForSuitesTest(){
 
     }
+
 }

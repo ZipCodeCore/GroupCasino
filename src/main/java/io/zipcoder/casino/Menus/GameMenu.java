@@ -43,6 +43,7 @@ public class GameMenu implements Menu {
 
     @Override
     public void displayMenu() throws InterruptedException {
+
         try {
             Music.filePath = "src/music/(Menu) All of Me Instrumental.wav";
             mainMusic = new Music();
@@ -52,6 +53,21 @@ public class GameMenu implements Menu {
             ex.printStackTrace();
         }
         console.clearScreen();
+        console.println("\n" +
+                "               .........\n" +
+                "              :~, *   * ~,\n" +
+                "              : ~, *   * ~.\n" +
+                "              :  ~........~\n" +
+                "              : *:         :      ~'~,\n" +
+                "              :  :         :    ~' *  ~,\n" +
+                "              ~* :    *    : ,~' *    * ~,\n" +
+                "               ~,:         :.~,*    *  ,~ :\n" +
+                "                ~:.........::  ~, *  ,~   :\n" +
+                "                            : *  ~,,~  *  :\n" +
+                "                            :* * * :  *   :\n" +
+                "                             ~, *  : *  ,~\n" +
+                "                               ~,  :  ,~\n" +
+                "                                 ~,:,~\n");
         // temporary
         for (int gameNum : gameMap.keySet()) {
             console.println(String.format("%d: %s", gameNum, ((GameObject) gameMap.get(gameNum)).getName()));

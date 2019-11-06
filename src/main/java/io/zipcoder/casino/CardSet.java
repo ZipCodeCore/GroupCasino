@@ -25,6 +25,7 @@ public class CardSet {
     }
 
     public ArrayList<Card> getCards() {
+        cards.trimToSize();
         return cards;
     }
 
@@ -35,7 +36,8 @@ public class CardSet {
     public Card removeFirstCard() {
         // removes first card!
         if (this.cards.size() > 0) {
-            return this.cards.remove(0);
+            Card card = this.cards.remove(this.cards.size()-1);
+            return card;
         } else {
             return null;
         }
@@ -46,8 +48,7 @@ public class CardSet {
         if (this.cards.size() > 0) {
             for (int i = 0; i < this.cards.size(); i++) {
                 if (rankToRemove.equals(this.cards.get(i).getRank())) {
-                    foundCards.add(this.cards.get(i));
-                    this.cards.remove(i);
+                    foundCards.add(this.cards.remove(i));
                     i--;
                 }
             }
@@ -110,6 +111,28 @@ public class CardSet {
                 output += String.format("|     %s| ", card.getRank());
             }
         }
+        output += "\n";
+        output += String.join("\u2514-------\u2518 ", emptyArray);
+        output += "\n";
+        return output;
+    }
+
+    public String toASCIIBlank() {
+        int numCards = this.size();
+        String[] emptyArray = new String[numCards+1];
+        Arrays.setAll(emptyArray,(index) -> "");
+
+        String output = String.join("\u250C-------\u2510 ", emptyArray);
+        output += "\n";
+        output += String.join("|       | ", emptyArray);
+        output += "\n";
+        output += String.join("|       | ", emptyArray);
+        output += "\n";
+        output += String.join("|       | ", emptyArray);
+        output += "\n";
+        output += String.join("|       | ", emptyArray);
+        output += "\n";
+        output += String.join("|       | ", emptyArray);
         output += "\n";
         output += String.join("\u2514-------\u2518 ", emptyArray);
         output += "\n";
