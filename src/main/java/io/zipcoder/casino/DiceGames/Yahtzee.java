@@ -46,11 +46,9 @@ public class Yahtzee implements Game {
                 console.println("First roll results:");
                 roll5Dice();
                 chooseToKeep();
-                console.getStringInput("Press enter to make your second roll.");
                 console.println("Second roll results:");
                 roll5Dice();
                 chooseToKeep();
-                console.getStringInput("Press enter to make your final roll.");
                 console.println("Final roll results:");
                 roll5Dice();
                 int pointsAdded = checkForEvaluation(chooseEvaluation(), getDiceValues());
@@ -133,7 +131,7 @@ public class Yahtzee implements Game {
         String keepthis = "";
         while(!keepthis.toLowerCase().equals("roll")) {
 
-            console.print(this.getDiceArt(myDice));
+            console.print(this.getDiceArt());
             keepthis = console.getStringInput("\nType the corresponding number of the dice and press enter to "+
                                                       "switch it between keeping and re-rolling.\n" +
                                                       "Type 'continue' when finished\n");
@@ -159,7 +157,7 @@ public class Yahtzee implements Game {
         int choice = 0;
         boolean goodChoice = false;
 
-        console.print(this.getDiceArt(myDice));
+        console.print(this.getDiceArt());
         console.println("\n");
 
         for(int i = 1; i < availableOptions.length; i++) { console.println((i) + ".  " + availableOptions[i]); }
@@ -341,7 +339,7 @@ public class Yahtzee implements Game {
     //------------------------------------------------------------------------------------------------------------------
     // Method for getting ASCII dice art--------------------------------------------------------------------------------
 
-    public String getDiceArt(Dice[] dice){
+    public String getDiceArt(){
 
         String[][] a =  {{" ", " ", " ", " ", " ", " ", " "},
                          {" ", " ", " ", " ", " ", " ", " "},
@@ -349,8 +347,8 @@ public class Yahtzee implements Game {
                          {" ", " ", " ", " ", " ", " ", " "},
                          {" ", " ", " ", " ", " ", " ", " "}};
 
-        for(int i = 0; i < dice.length; i++){
-            switch(dice[i].getValue()){
+        for(int i = 0; i < myDice.length; i++){
+            switch(myDice[i].getValue()){
                 case 1:
                     a[i][3] = "0";
                     break;
@@ -405,6 +403,7 @@ public class Yahtzee implements Game {
                  "3. " + myDice[2].toString2() + "     ",
                  "4. " + myDice[3].toString2() + "     ",
                  "5. " + myDice[4].toString2() + "     \n");
+
     }
 
 }
