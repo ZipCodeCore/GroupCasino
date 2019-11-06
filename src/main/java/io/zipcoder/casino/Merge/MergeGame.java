@@ -32,8 +32,10 @@ public class MergeGame {
         while (i < mid || j < stop + 1 ) {
             if (arrayIn[i] <= arrayIn[j]) {
                 copy[pos++] = arrayIn[i++];
+                copy[pos++] = arrayIn[j++];
             } else {
                 copy[pos++] = arrayIn[j++];
+                copy[pos++] = arrayIn[i++];
             }
         }
         return copy;
