@@ -26,6 +26,7 @@ public class Craps implements Game, GamblingGame {
 
     @Override
     public void approachTable(Player currentPLayer) {
+        Console.clearScreen();
         console.printFast("\n" +
                 "                                                      \n" +
                 "                                                      \n" +

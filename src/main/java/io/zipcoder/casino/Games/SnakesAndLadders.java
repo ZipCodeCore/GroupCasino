@@ -175,7 +175,7 @@ public class SnakesAndLadders implements Game {
 
     @Override
     public void approachTable(Player currentPlayer) {
-        console.println("You approach the Snakes and Ladders table. What would you like to do?\n\n");
+        Console.clearScreen();
         console.println("     _________              __                                      .___ .____                .___  .___                   \n" +
                 " /   _____/ ____ _____  |  | __ ____   ______ _____    ____    __| _/ |    |   _____     __| _/__| _/___________  ______\n" +
                 " \\_____  \\ /    \\\\__  \\ |  |/ // __ \\ /  ___/ \\__  \\  /    \\  / __ |  |    |   \\__  \\   / __ |/ __ |/ __ \\_  __ \\/  ___/\n" +
@@ -197,6 +197,7 @@ public class SnakesAndLadders implements Game {
                 "       `/'\\__/      \\ _ _ \\*\\\n" +
                 "      /^|            \\ _ _ \\*\n" +
                 "     '  `             \\ _ _ \\      ");
+        console.println("You approach the Snakes and Ladders table. What would you like to do?");
         while(running) {
         console.println("(1) - Play the game");
         console.println("(2) - Read the rules");

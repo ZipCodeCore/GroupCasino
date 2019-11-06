@@ -73,6 +73,7 @@ public class HighAndLow implements Game, GamblingGame{
 
     @Override
     public void approachTable(Player currentPlayer) {
+        Console.clearScreen();
         console.println(" ██░ ██  ██▓  ▄████  ██░ ██     ▄▄▄       ███▄    █ ▓█████▄     ██▓     ▒█████   █     █░\n" +
                 "▓██░ ██▒▓██▒ ██▒ ▀█▒▓██░ ██▒   ▒████▄     ██ ▀█   █ ▒██▀ ██▌   ▓██▒    ▒██▒  ██▒▓█░ █ ░█░\n" +
                 "▒██▀▀██░▒██▒▒██░▄▄▄░▒██▀▀██░   ▒██  ▀█▄  ▓██  ▀█ ██▒░██   █▌   ▒██░    ▒██░  ██▒▒█░ █ ░█ \n" +
