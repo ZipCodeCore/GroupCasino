@@ -1,5 +1,6 @@
 package io.zipcoder.casino.CardGames;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import io.zipcoder.casino.Interfaces.GamblingGame;
 import io.zipcoder.casino.Player.GamblingPlayer;
@@ -19,8 +20,6 @@ public class BlackJack implements GamblingGame {
     Deck blackJackDeck;
     CardHand computerHand;
     boolean winGame = false;
-
-
 
 
     private Player user;
@@ -113,8 +112,7 @@ public class BlackJack implements GamblingGame {
         checkHandForAces(computerHand);
         checkHandValue(gamblingPlayerHand);
         checkHandValue(computerHand);
-
-
+        checkScore(checkHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
 
 
     }
@@ -141,6 +139,7 @@ public class BlackJack implements GamblingGame {
         for (int i = 0; i < hand.userHand.size(); i++) {
             handValue = handValue + translateBlackJackValueFromRank(hand.userHand.get(i));
         }
+
         return handValue;
     }
 
@@ -156,23 +155,34 @@ public class BlackJack implements GamblingGame {
         return blackJacHandValue;
     }
 
-//    public Integer checkScore(Integer blackJackHandValue, Integer numberOfAces)    {
-//        if(blackJackHandValue > 21)    {
-//            if(checkHandForAces(CardHand hand) > 0) {
-//
-//            }
-//
-//        }
-//
-//    }
 
     public Integer checkHandForAces(CardHand hand) {
         Integer aceCounter = 0;
         for (int i = 0; i < hand.userHand.size(); i++) {
-            if(card.getRank() == Rank.ACE)  {
+            if (card.getRank() == Rank.ACE) {
                 aceCounter++;
             }
-        }   return aceCounter;
+        }
+        return aceCounter;
+    }
+
+    public Integer checkScore(Integer blackJackHandValue, Integer numberOfAces) {
+        if (numberOfAces == 1 && blackJackHandValue > 21) {
+            blackJackHandValue = blackJackHandValue - 10;
+        } else if (numberOfAces == 2 && blackJackHandValue > 21) {
+            if (blackJackHandValue - 10 <= 21) {
+                blackJackHandValue = blackJackHandValue - 10;
+            } else {
+                blackJackHandValue = blackJackHandValue - 20;
+            }
+        } else if (numberOfAces == 3 && blackJackHandValue > 21) {
+            if (blackJackHandValue - 20 <= 21) {
+                blackJackHandValue = blackJackHandValue - 20;
+            } else {
+                blackJackHandValue = blackJackHandValue - 30;
+            }
+        }
+        return blackJackHandValue;
     }
 
 
