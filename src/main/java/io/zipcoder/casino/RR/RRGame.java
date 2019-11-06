@@ -54,11 +54,11 @@ public class RRGame extends DiceGame implements Game {
     @Override
     public void roundOfPlay() {
         Integer computerRoll=roll();
-        console.println("The House Rolled %d", computerRoll);
+        console.println(String.format("The House Rolled %d", computerRoll));
         userRollsDice();
         //console.println("Your Current Balance Is %d", this.player.getBalance());
 
-        console.println("You Rolled %d", userDieNum);
+        console.println(String.format("You Rolled %d", userDieNum));
         if (userDieNum.equals(computerRoll)) {
             console.println("You Lost!!!");
             //player.setBalance(0);
@@ -68,7 +68,7 @@ public class RRGame extends DiceGame implements Game {
         }
         else {
             gameServices.payOut(this.player.getBalance(), this.player);
-            console.println("You Won!!! Your Balance Is Now $%.2f",player.getBalance());
+            console.println(String.format("You Won!!! Your Balance Is Now $%.2f",player.getBalance()));
         }
         endChoice();
 

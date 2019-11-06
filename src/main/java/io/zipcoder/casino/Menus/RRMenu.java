@@ -46,6 +46,7 @@ public class RRMenu implements Menu {
         }
         console.clearScreen();
 
+
         console.println("██████╗ ██╗   ██╗███████╗███████╗██╗ █████╗ ███╗   ██╗    ██████╗  ██████╗ ██╗   ██╗██╗     ███████╗████████╗████████╗███████╗\n" +
                 "██╔══██╗██║   ██║██╔════╝██╔════╝██║██╔══██╗████╗  ██║    ██╔══██╗██╔═══██╗██║   ██║██║     ██╔════╝╚══██╔══╝╚══██╔══╝██╔════╝\n" +
                 "██████╔╝██║   ██║███████╗███████╗██║███████║██╔██╗ ██║    ██████╔╝██║   ██║██║   ██║██║     █████╗     ██║      ██║   █████╗  \n" +
@@ -68,6 +69,8 @@ public class RRMenu implements Menu {
 
         int choice = console.getInteger("Press 1 to play or 2 to exit.\n");
         handleChoice(choice);
+
+        console.printWithDelays("Da");
     }
 
     @Override

@@ -198,7 +198,7 @@ public class CardSetTest {
         cards.addCard(new Card("7","C"));
 
         Console console = new Console(System.in, System.out);
-        console.println(cards.toASCII());
+        console.printWithDelays(cards.toASCII());
     }
 
     @Test
@@ -214,6 +214,6 @@ public class CardSetTest {
         cards.addCard(new Card("7","C"));
 
         Console console = new Console(System.in, System.out);
-        console.println(cards.toASCIISuite());
+        console.printWithDelays(cards.toASCIISuite());
     }
 }
