@@ -44,6 +44,7 @@ public class BlackJack implements Game, GamblingGame{
     }
     @Override
     public void approachTable(Player currentPLayer) {
+        Console.clearScreen();
         this.currentPlayer = currentPLayer;
         console.println("8 888888888o   8 8888                  .8.           ,o888888o.    8 8888     ,88'        8 8888       .8.           ,o888888o.    8 8888     ,88' \n" +
                 "8 8888    `88. 8 8888                 .888.         8888     `88.  8 8888    ,88'         8 8888      .888.         8888     `88.  8 8888    ,88'  \n" +

@@ -20,7 +20,7 @@ public class Casino {
     }
 
     public void displayCasinoMenu(){
-        console.println(String.format("Welcome to Big 3 Casino, %s!",currentPlayer.getName()));
+        console.println(String.format("Welcome to The Notorious B.I.G. 3 Casino, %s!",currentPlayer.getName()));
         console.println("What would you like to do?");
         console.println("(1) - Display Game Menu");
         console.println("(2) - Check your Balance");

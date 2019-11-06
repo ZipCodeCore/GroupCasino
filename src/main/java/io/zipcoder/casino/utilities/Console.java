@@ -75,5 +75,10 @@ public final class Console {
         delay(300); print(".");
         delay(400); print(".");
     }
+
+    public static void clearScreen() {
+        for(int i = 0; i <= 1000; i++)
+        System.out.print("\n");
+    }
 }
 
