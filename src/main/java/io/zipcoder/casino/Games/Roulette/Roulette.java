@@ -33,7 +33,7 @@ public class Roulette implements Game, GamblingGame {
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
         console.println(casinoArt.getCasinoArt("roulette"));
-        console.println("You approach the Roulette. What would you like to do?");
+        console.println("You approach the Roulette table. What would you like to do?");
         console.println("(1) - Play the game");
         console.println("(2) - Return to the game menu");
         Integer playerInput = console.getIntegerInput(":");
@@ -165,7 +165,7 @@ public class Roulette implements Game, GamblingGame {
             winnings = pot * 2;
             console.println("Congrats maybe you don't suck I'll give you "+ winnings);
             LocalDateTime now = LocalDateTime.now();
-            String addHistory = String.format("You won $%d.00 at High and Low! ** ", winnings);
+            String addHistory = String.format("You won $%d.00 at Roulette! ** ", winnings);
             currentPlayer.addHistory(addHistory + dtf.format(now));
             currentPlayer.changeBalance(winnings);
 
