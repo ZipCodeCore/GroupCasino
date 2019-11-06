@@ -10,42 +10,17 @@ import static java.lang.System.in;
 
 public class GoFish implements Game {
 
-    private  int points;
     private Player user;
+
     Console input = new Console(System.in, System.out);
 
-    //Player user = new Player();
     Deck goFishDeck;
     CardHand playerHand;
     CardHand computerHand;
     boolean winGame = false;
-    Integer pointAccumulated;
-    Integer hasCardQuestion;
 
     public GoFish(Player player) {
         this.user = player;
-        this.points = 0;
-    }
-
-    public void startGame(){
-
-        initializeHands();
-
-        do{
-
-            playerTurn();
-
-
-
-
-        }while(winGame == false);
-
-        /*System.out.println("Player 1: " + playerHand.displayHand());
-        System.out.println("Player 2: " + computerHand.displayHand());*/
-
-    }
-
-    public void initializeHands(){
 
         //initialize deck and shuffle
         goFishDeck = new Deck(1);
@@ -55,44 +30,120 @@ public class GoFish implements Game {
         playerHand = new CardHand(goFishDeck.dealCards(5));
         computerHand = new CardHand(goFishDeck.dealCards(5));
 
+    }
+
+    public void startGame(){
+
+
+        System.out.println("Loading Go Fish....");
+
+        do{
+
+            System.out.println("Player's Turn");
+            playerTurn();
+            winGame = evaluateHand(playerHand);
+
+
+            //System.out.println("Computer's Turn");
+            //computerTurn();
+
+
+
+        }while(winGame == false);
 
     }
+
 
     public void playerTurn(){
 
-        System.out.println(playerHand.displayHand());
-        System.out.println(computerHand.displayHand());
+        System.out.println(displayHand(playerHand));
 
         String userInput = input.getStringInput("Which value would you like to ask for? ");
-
         userInput.toUpperCase();
 
-        System.out.println(computerHand.evaluateHand(userInput));
+        if(haveCard(computerHand, userInput) == true){
 
-        winGame = true;
+            System.out.println("The computer has this card");
+            tradeCards(computerHand, userInput, playerHand);
+
+
+        }else{
+            System.out.println("Go Fish!");
+
+            goFishForCard(playerHand);
+        }
+
+        System.out.println(displayHand(playerHand));
 
     }
 
-    public void computerTurn(){}
+    public void computerTurn(){
 
-    public boolean askForCard(Player thisPlayer, String card){
+    }
 
 
+
+
+    public void tradeCards(CardHand tradingHand, String cardToRemove, CardHand receivingHand){
+
+        ArrayList<Card> tradingCards = new ArrayList<Card>();
+
+
+        for(Card card : tradingHand.userHand) {
+            if (card.toString().contains(cardToRemove)) {
+                Card temp = card;
+                tradingHand.userHand.remove(card);
+                tradingCards.add(temp);
+            }
+
+        }
+
+        receivingHand.userHand.addAll(tradingCards);
+
+    }
+
+    public boolean haveCard(CardHand opponent, String wantedCard){
+
+        for(Card card : opponent.userHand) {
+            if (card.toString().contains(wantedCard))
+                return true;
+        }
 
         return false;
     }
 
-    public void tradeCards(ArrayList fromPlayer, ArrayList toPlayer){
+    public void goFishForCard(CardHand hand){
 
-
+        hand.userHand.add(goFishDeck.drawCard());
     }
 
-    public void displayCards(CardHand currentPlayer){
+    public String displayHand(CardHand hand){
+
+        return hand.userHand.toString();
     }
 
-    public void dropCards (Player playerToDrop){
+    public boolean evaluateHand(CardHand hand){
+        int counter = 0;
 
+        for(Card checkCard : hand.userHand){
+            counter = 0;
+            for (Card card : hand.userHand){
+                if(checkCard.getRank() == card.getRank()){
+                    counter++;
+                }
+            }
+
+            if(counter == 2){
+                return true;
+            }
+
+
+        }
+
+        return false;
     }
+
+
 
     public void promptLeaveGame(){
 
