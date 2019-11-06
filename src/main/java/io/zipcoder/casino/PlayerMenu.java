@@ -9,7 +9,6 @@ import io.zipcoder.casino.utilities.Console;
 public class PlayerMenu {
     Console console = new Console(System.in,System.out);
     private PlayerRepository playerRepo;
-    private CasinoArt casinoArt = new CasinoArt();
     boolean running;
 
     public PlayerMenu() {
@@ -29,7 +28,7 @@ public class PlayerMenu {
 
     private void displayPlayerMenu(){
         Console.clearScreen();
-        console.println(casinoArt.getCasinoArt("playerMenu"));
+        console.println(CasinoArt.PLAYERMENU.toString());
         console.println("Welcome stranger! Have I seen you before?");
         console.println("(1) - Yes, My name is...");
         console.println("(2) - No it is my first time!");

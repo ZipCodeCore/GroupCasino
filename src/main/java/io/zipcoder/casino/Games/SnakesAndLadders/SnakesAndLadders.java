@@ -15,11 +15,9 @@ import java.util.HashMap;
 public class SnakesAndLadders implements Game {
     private Console console = new Console(System.in, System.out);
     private Dice dice = new Dice();
-    private CasinoArt casinoArt = new CasinoArt();
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
     private SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
-    private SnakesAndLaddersLanguage language = new SnakesAndLaddersLanguage();
     private Player currentPlayer;
     private boolean running = true;
     private boolean currentGame = true;
@@ -56,7 +54,7 @@ public class SnakesAndLadders implements Game {
     }
 
     public String playerTurn(Integer playerPosition){
-        console.getStringInput(language.getSnakesAndLaddersLanguage("diceRoll"));
+        console.getStringInput(SnakesAndLaddersLanguage.DICEROLL.toString());
         playerPosition = playerDiceRoll();
         playerSnakesAndLadders(playerPosition);
         if(playerPosition >= 100){
@@ -162,16 +160,16 @@ public class SnakesAndLadders implements Game {
 
 
     public void showRules(){
-        console.println(language.getSnakesAndLaddersLanguage("rules"));
+        console.println(SnakesAndLaddersLanguage.RULES.toString());
     }
 
 
     @Override
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
-        console.println(casinoArt.getCasinoArt( "snakesAndLadders"));
+        console.println(CasinoArt.SNAKESANDLADDERS.toString());
         while(running) {
-            console.println(language.getSnakesAndLaddersLanguage("approachTable"));
+            console.println(SnakesAndLaddersLanguage.APPROACHTABLE.toString());
             Integer playerInput = console.getIntegerInput(":");
             switch (playerInput) {
                 case 1:
@@ -197,11 +195,11 @@ public class SnakesAndLadders implements Game {
             console.println("In this house, the player always goes first! Step on up!");
             String winner = startNewGame();
             if (winner.equals("Player")) {
-                console.println(language.getSnakesAndLaddersLanguage("playerWins"));
+                console.println(SnakesAndLaddersLanguage.PLAYERWINS.toString());
                 LocalDateTime now = LocalDateTime.now();
                 currentPlayer.addHistory("You won at Snakes and Ladders. ** " + dateTimeFormatter.format(now) + "!");
             } else if (winner.equals("Ai")) {
-                console.println(language.getSnakesAndLaddersLanguage("aiWins"));
+                console.println(SnakesAndLaddersLanguage.AIWINS.toString());
                 LocalDateTime now = LocalDateTime.now();
                 currentPlayer.addHistory("You lost at Snakes and Ladders. ** " + dateTimeFormatter.format(now));
             }
@@ -212,7 +210,7 @@ public class SnakesAndLadders implements Game {
 
     @Override
     public void exitGame(Player currentPlayer) {
-        console.println(language.getSnakesAndLaddersLanguage("exitMenu"));
+        console.println(SnakesAndLaddersLanguage.EXITMENU.toString());
         Integer playerInput = console.getIntegerInput(":");
         switch (playerInput){
             case 1:
