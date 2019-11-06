@@ -43,7 +43,7 @@ public class MainMenu implements Menu {
     @Override
     public void displayMenu() throws InterruptedException {
         console.clearScreen();
-        console.printWithDelays("      .======================================.\n" +
+        console.println("      .======================================.\n" +
                 "      | ___ ___ ___               _   _   _  |\n" +
                 "      | \\_/ \\_/ \\_/ C|||C|||C||| |-| |-| |-| |\n" +
                 "      | _|_ _|_ _|_  ||| ||| ||| |_| |_| |_| |\n" +
@@ -73,7 +73,7 @@ public class MainMenu implements Menu {
 
         // temporary
         for (int gameNum : choiceMap.keySet()) {
-            console.printWithDelays(String.format("%d: %s", gameNum, (choiceMap.get(gameNum)).getName()));
+            console.println(String.format("%d: %s", gameNum, (choiceMap.get(gameNum)).getName()));
         }
 
         handleChoice(console.menuChoice(this.choiceMap.size()));

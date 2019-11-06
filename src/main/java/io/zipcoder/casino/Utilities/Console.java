@@ -248,7 +248,7 @@ public final class Console {
         try {
             for (char ch : data.toCharArray()) {
                 print(Character.toString(ch));
-                TimeUnit.MILLISECONDS.sleep(Console.DEFAULT_CASINO_DELAY);
+                TimeUnit.MILLISECONDS.sleep(delay);
             }
         } catch (InterruptedException e){
             for (char ch : data.toCharArray()) {

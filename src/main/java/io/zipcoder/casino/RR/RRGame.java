@@ -38,15 +38,15 @@ public class RRGame extends DiceGame implements Game {
     @Override
     public void endChoice() {
         //implements menu whether you want to quit or go again
-        String endChoiceInput = console.getInput("You have finished this Russian Roulette Game.\nWould you like to play again? (Y/N)\n");
+        String endChoiceInput = console.getInput(("[DEALER]: You have finished this Russian Roulette Game.\n\nWould you like to play again? (Y/N)\n"));
         if (endChoiceInput.toUpperCase().equals("N")) {
-            console.println("Have a good rest of your day.");
+            console.printWithDelays("\n[DEALER]: Have a good rest of your day.\n");
             //also, return to the main menu
         } else if (endChoiceInput.toUpperCase().equals("Y")) {
-            console.println("That's great!!!");
+
             roundOfPlay();
         } else {
-            console.println("That's not a valid selection. Please choose again.");
+            console.println("(That's not a valid selection. Please choose again.)");
             endChoice();
         }
 
@@ -54,15 +54,14 @@ public class RRGame extends DiceGame implements Game {
     @Override
     public void roundOfPlay() {
         Integer computerRoll=roll();
-        console.println(String.format("The House Rolled %d", computerRoll));
+        console.println(String.format("\n** The House rolled %d **\n", computerRoll));
         userRollsDice();
         //console.println("Your Current Balance Is %d", this.player.getBalance());
 
-        console.println(String.format("You Rolled %d", userDieNum));
+        console.println(String.format("\n** You rolled %d **\n", userDieNum));
         if (userDieNum.equals(computerRoll)) {
             console.println("You Lost!!!");
             //player.setBalance(0);
-
 
             //startPlay();
         }
@@ -74,7 +73,7 @@ public class RRGame extends DiceGame implements Game {
 
     }
     public Integer userRollsDice() {
-        console.getInput("\nPress Enter to roll the dice\n");
+        console.getInput("\n(Press Enter to roll the dice): \n");
         userDieNum=roll();
         return userDieNum;
     }

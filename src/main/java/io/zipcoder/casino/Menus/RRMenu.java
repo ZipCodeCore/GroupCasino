@@ -54,23 +54,25 @@ public class RRMenu implements Menu {
                 "██║  ██║╚██████╔╝███████║███████║██║██║  ██║██║ ╚████║    ██║  ██║╚██████╔╝╚██████╔╝███████╗███████╗   ██║      ██║   ███████╗\n" +
                 "╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝   ╚═╝      ╚═╝   ╚══════╝\n" +
                 "                                                                                                                              \n");
-        console.printWithDelays("Welcome To Russian Roulette!\n\n",TimeUnit.MILLISECONDS,30);
-        TimeUnit.MILLISECONDS.sleep(500);
-        console.printWithDelays("- First the House will roll a die\n", TimeUnit.MILLISECONDS,30);
-        TimeUnit.MILLISECONDS.sleep(500);
-        console.printWithDelays("- Your bet will be your ENTIRE balance\n", TimeUnit.MILLISECONDS,30);
-        TimeUnit.MILLISECONDS.sleep(500);
-        console.printWithDelays("- Next, you will roll a die:\n", TimeUnit.MILLISECONDS,30);
-        TimeUnit.MILLISECONDS.sleep(500);
-        console.printWithDelays("- If your roll DOES NOT Match the House's roll, your balance is doubled!\n", TimeUnit.MILLISECONDS,30);
-        TimeUnit.MILLISECONDS.sleep(500);
-        console.printWithDelays("- If your roll matches the house......You lose all your balance.\n\nAre you willing to risk it all to win it all?\n\n", TimeUnit.MILLISECONDS,60);
-        TimeUnit.MILLISECONDS.sleep(1000);
+        TimeUnit.SECONDS.sleep(2);
+        console.printWithDelays("Welcome To Russian Roulette!\n\n");
+        TimeUnit.SECONDS.sleep(2);
+        console.printWithDelays("- First the House will roll a die\n");
+        TimeUnit.SECONDS.sleep(2);
+        console.printWithDelays("- Your bet will be your ENTIRE balance\n");
+        TimeUnit.SECONDS.sleep(2);
+        console.printWithDelays("- Next, you will roll a die:\n");
+        TimeUnit.SECONDS.sleep(2);
+        console.printWithDelays("- If your roll DOES NOT match the House's roll, your balance is DOUBLED!\n");
+        TimeUnit.SECONDS.sleep(2);
+        console.printWithDelays("- If your roll matches the house......You lose all your balance.\n\n");
+        TimeUnit.SECONDS.sleep(3);
+        console.printWithDelays("Are you willing to risk it all to win it all?\n\n");
+        TimeUnit.SECONDS.sleep(3);
 
-        int choice = console.getInteger("Press 1 to play or 2 to exit.\n");
+        int choice = console.getInteger("(Press 1 to play or 2 to exit):\n\n");
         handleChoice(choice);
 
-        console.printWithDelays("Da");
     }
 
     @Override
@@ -84,6 +86,7 @@ public class RRMenu implements Menu {
             case 2:
                 play = false;
                 MainMenu mainMenu = new MainMenu(this.player);
+
 
         }
         

@@ -60,13 +60,14 @@ public class TellerMenu implements Menu {
                 "     /#################\\\n" +
                 "    |#JGS###############|\n" +"\n" + "\n");
 
-        console.printWithDelays("[TELLER]: What can I do for ya?\n",TimeUnit.MILLISECONDS, 50);
+
+        console.printWithDelays("[TELLER]: What can I do for ya?\n\n",TimeUnit.MILLISECONDS, 50);
 
         // temporary
-        console.printWithDelays("\n1. Deposit funds");
-        console.printWithDelays("2. Cash out");
-        console.printWithDelays("3. Back to lobby");
-        console.printWithDelays(String.format("\nCurrent balance: $%.2f\n", player.getBalance()));
+        console.println("1. Deposit funds");
+        console.println("2. Cash out");
+        console.println("3. Back to lobby");
+        console.println(String.format("\nCurrent balance: $%.2f\n", player.getBalance()));
 
         handleChoice(console.getInteger(3));
     }

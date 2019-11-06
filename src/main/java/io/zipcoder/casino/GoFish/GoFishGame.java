@@ -51,7 +51,7 @@ public class GoFishGame extends CardGame implements Game {
     //populates player deals hands
     public void startPlay() {
         new GoFishMenu(this).displayMenu();
-        console.println("   >===>                         >=>                      \n" +
+        console.println("\n   >===>                         >=>                      \n" +
                 " >>    >=>                     >>     >>          >=>      \n" +
                 ">=>            >=>           >=>> >>       >===>  >=>      \n" +
                 ">=>          >=>  >=>          >=>   >=>  >=>     >=>>=>   \n" +

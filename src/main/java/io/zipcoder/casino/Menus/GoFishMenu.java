@@ -37,9 +37,6 @@ public class GoFishMenu implements Menu {
 
 
 
-        console.printWithDelays("Go Fiiiiiish");
-
-
     }
 
     @Override
