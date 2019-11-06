@@ -53,7 +53,7 @@ public class CrapsGame extends DiceGame implements Game {
             crapsMusic = new Music();
             crapsMusic.play();
         } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
+            console.println("Error with playing sound.");
             ex.printStackTrace();
         }
         new CrapsMenu(this).displayMenu();
@@ -84,6 +84,7 @@ public class CrapsGame extends DiceGame implements Game {
         } else {
             displayPointRoll(setThePointRoll);
             for (int i = 0; i < 3; i++) {
+                numRolls = i + 1;
                 userRollsDiceCurrentPoint();
                 displayCurrentRoll(currentRoll);
                 if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
@@ -97,7 +98,6 @@ public class CrapsGame extends DiceGame implements Game {
                 if (i == 2) {
                     losingMessageOutOfRolls();
                 }
-                numRolls = i + 1;
             }
         }
     }
