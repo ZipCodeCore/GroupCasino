@@ -14,11 +14,6 @@ import static org.junit.Assert.*;
 
 public class DeckTest {
 
-    @Before
-    public void setUp(){}
-
-    @After
-    public void tearDown(){}
 
     @Test
     public void testDealCards(){
@@ -46,6 +41,21 @@ public class DeckTest {
 
         int expected = 52;
         int actual = newStack.size();
+
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testDrawCard(){
+        Deck newDeck = new Deck(1);
+        Card newCard = new Card();
+        Stack<Card> cardStack = new Stack<>();
+
+        cardStack = newDeck.shuffleDeck();
+
+        newCard = newDeck.drawCard();
+        int expected = 51;
+        int actual = cardStack.size();
 
         Assert.assertEquals(expected,actual);
     }
