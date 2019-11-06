@@ -16,7 +16,6 @@ public class DeckOfCards extends GameComponent {
                 deckOfCards.add(card);
             }
         }
-
     }
 
 
