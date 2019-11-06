@@ -31,10 +31,7 @@ public class App {
 
     private void mainMenu(){
         int userInput;
-        userInput = this.menu.getIntegerInput("What would you like to do?\n" +
-                "1.) Log In\n" +
-                "2.) Create Account\n" +
-                "3.) Exit");
+        userInput = this.menu.printMainMenu();
         mainMenuActions(userInput);
     }
 
@@ -42,14 +39,15 @@ public class App {
 
         switch (userSelection) {
             case 1:
-                this.menu.print("Logging in .");
-                pause(500);
-                this.menu.print(".");
-                pause(500);
-                this.menu.print(".\n\n");
-                //this.menu.println("Logging in ...\n");
-                pause(500);
+                // Log in
                 if (authenticatePlayer()) {
+                    this.menu.print("Logging in .");
+                    pause(500);
+                    this.menu.print(".");
+                    pause(500);
+                    this.menu.print(".\n\n");
+                    pause(500);
+
                     selectGameToPlay();
                 } else {
                     this.menu.print("We could not find this user. Please try again!\n\n");
@@ -67,10 +65,12 @@ public class App {
                 }
                 break;
             case 2:
-                this.menu.println("Creating new account ...\n");
+                // Create new account
                 pause(500);
+                this.menu.println("Creating new account ...\n");
                 if (authenticatePlayer()){
                     this.menu.println("This user already exists, please log in.\n");
+                    pause(1000);
                     mainMenu();
                 } else {
                     createPlayer();
@@ -79,12 +79,14 @@ public class App {
                 break;
 
             case 3:
+                // Exit
                 this.menu.print("Have a great day!");
                 System.exit(0);
                 break;
 
             default:
                 this.menu.print("Error! Please enter another option!");
+                pause(1000);
                 mainMenu();
 
         } // main menu actions
@@ -94,13 +96,8 @@ public class App {
     private void selectGameToPlay() {
         int userInput;
         pause(500);
-        menu.println("You are now logged in - enjoy the ride!\n");
-        userInput = menu.getIntegerInput("Please select game to play\n" +
-                "1.) Go Fish\n" +
-                "2.) Yahtzee\n" +
-                "3.) BlackJack\n" +
-                "4.) Craps\n" +
-                "5.) Go to Main Menu");
+        this.menu.println("You are now logged in - enjoy the ride!\n");
+        userInput = this.menu.printSelectGame();
 
         selectGameToPlayActions(userInput);
     }  // select game
@@ -127,7 +124,7 @@ public class App {
                 mainMenu();
                 break;
             default:
-                menu.print("Error! Invalid Selection!\n\n");
+                this.menu.print("Error! Invalid Selection!\n\n");
                 break;
         }
 
@@ -138,16 +135,16 @@ public class App {
 
 
     private Boolean authenticatePlayer(){
-        pause(1);
+        pause(1000);
         this.userId = this.menu.getStringInput("Enter your ID:");
         this.userPassword = this.menu.getStringInput("Enter your password:");
 
-        this.newPlayer = warehouse.getPlayer(this.userId+this.userPassword);
+        this.newPlayer = this.warehouse.getPlayer(this.userId+this.userPassword);
         return this.newPlayer != null;
     }
 
     private void createPlayer(){
-        warehouse.addPlayer(this.userId,this.userPassword);
+        this.warehouse.addPlayer(this.userId,this.userPassword);
         this.newPlayer = warehouse.getPlayer(this.userId+this.userPassword);
     }
 

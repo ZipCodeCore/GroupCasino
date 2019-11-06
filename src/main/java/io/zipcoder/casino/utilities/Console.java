@@ -57,5 +57,21 @@ public final class Console {
     public Integer getIntegerInput(String prompt, Object... args) {
         return getLongInput(prompt, args).intValue();
     }
+
+    public Integer printMainMenu(){
+        return getIntegerInput("What would you like to do?\n" +
+                "1.) Log In\n" +
+                "2.) Create Account\n" +
+                "3.) Exit");
+    }
+
+    public Integer printSelectGame(){
+        return getIntegerInput("Please select game to play\n" +
+                "1.) Go Fish\n" +
+                "2.) Yahtzee\n" +
+                "3.) BlackJack\n" +
+                "4.) Craps\n" +
+                "5.) Go to Main Menu");
+    }
 }
 
