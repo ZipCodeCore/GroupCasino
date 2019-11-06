@@ -23,7 +23,7 @@ public class App {
 
         this.menu = new Console(System.in,System.out);
         this.menu.print("Welcome to Casino 5! \n\n");
-        pause(1000);
+        consolePrintDelay(1000);
         mainMenu();  // log in ...
 
     }
@@ -42,16 +42,16 @@ public class App {
                 // Log in
                 if (authenticatePlayer()) {
                     this.menu.print("Logging in .");
-                    pause(500);
+                    consolePrintDelay(500);
                     this.menu.print(".");
-                    pause(500);
+                    consolePrintDelay(500);
                     this.menu.print(".\n\n");
-                    pause(500);
+                    consolePrintDelay(500);
 
                     selectGameToPlay();
                 } else {
                     this.menu.print("We could not find this user. Please try again!\n\n");
-                    pause(500);
+                    consolePrintDelay(500);
                     counter++;
                     this.userId = "";
                     this.userPassword = "";
@@ -66,11 +66,11 @@ public class App {
                 break;
             case 2:
                 // Create new account
-                pause(500);
+                consolePrintDelay(500);
                 this.menu.println("Creating new account ...\n");
                 if (authenticatePlayer()){
                     this.menu.println("This user already exists, please log in.\n");
-                    pause(1000);
+                    consolePrintDelay(1000);
                     mainMenu();
                 } else {
                     createPlayer();
@@ -86,7 +86,7 @@ public class App {
 
             default:
                 this.menu.print("Error! Please enter another option!\n\n");
-                pause(1000);
+                consolePrintDelay(1000);
                 mainMenu();
 
         } // main menu actions
@@ -95,7 +95,7 @@ public class App {
 
     private void selectGameToPlay() {
         int userInput;
-        pause(500);
+        consolePrintDelay(500);
         this.menu.println("You are now logged in - enjoy the ride!\n");
         userInput = this.menu.printSelectGame();
 
@@ -103,10 +103,10 @@ public class App {
     }  // select game
 
     private void selectGameToPlayActions(Integer gameSelected){
-        pause(1000);
+        consolePrintDelay(1000);
         this.menu.clearScreen();
         this.menu.printGameName(gameSelected);
-        pause(1000);
+        consolePrintDelay(1000);
         switch (gameSelected){
             case 1:
                 GoFish newGoFish = new GoFish(this.newPlayer);
@@ -118,12 +118,12 @@ public class App {
                 break;
             case 3:
                 BlackJack newBlackJack = new BlackJack(this.newPlayer);
-                addMoney();
+                addMoneyToPlayer();
                 newBlackJack.startGame();
                 break;
             case 4:
                 Craps newCraps = new Craps(this.newPlayer);
-                addMoney();
+                addMoneyToPlayer();
                 newCraps.startGame();
                 break;
             case 5:
@@ -141,7 +141,7 @@ public class App {
 
 
     private Boolean authenticatePlayer(){
-        pause(1000);
+        consolePrintDelay(1000);
         this.userId = this.menu.getStringInput("Enter your ID:");
         this.userPassword = this.menu.getStringInput("Enter your password:");
 
@@ -154,7 +154,7 @@ public class App {
         this.newPlayer = warehouse.getPlayer(this.userId+this.userPassword);
     }
 
-    private void pause (int miliSeconds){
+    private void consolePrintDelay (int miliSeconds){
         try {
             TimeUnit.MILLISECONDS.sleep(miliSeconds);
         } catch (InterruptedException e){
@@ -162,7 +162,7 @@ public class App {
         }
     }
 
-    private void addMoney (){
+    private void addMoneyToPlayer (){
         double amount;
         amount = this.menu.getDoubleInput("How much money would you like to add to your account?");
         this.newPlayer.addAmount(amount);
