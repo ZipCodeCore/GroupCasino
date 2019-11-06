@@ -23,8 +23,6 @@ public class BlackJack implements GamblingGame {
 
 
     private Player user;
-
-    private int answerHitOrStay;
     private int wageBucket;
     private Card card;
 
@@ -81,14 +79,6 @@ public class BlackJack implements GamblingGame {
         this.user = user;
     }
 
-    public int getAnswerHitOrStay() {
-        return answerHitOrStay;
-    }
-
-    public void setAnswerHitOrStay(int answerHitOrStay) {
-        this.answerHitOrStay = answerHitOrStay;
-    }
-
     public int getWageBucket() {
         return wageBucket;
     }
@@ -107,7 +97,7 @@ public class BlackJack implements GamblingGame {
 
     public void startGame() {
         promptUserForWagerAmount();
-        initializeblackJackHands();
+        initializeBlackJackHands();
         checkScore(checkHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
         checkScore(checkHandValue(computerHand), checkHandForAces(computerHand));
     }
@@ -122,7 +112,7 @@ public class BlackJack implements GamblingGame {
         }
     }
 
-    public void initializeblackJackHands() {
+    public void initializeBlackJackHands() {
 
         blackJackDeck = new Deck(1);
         blackJackDeck.shuffleDeck();
@@ -183,20 +173,24 @@ public class BlackJack implements GamblingGame {
 
 
     public void promptHitOrStay() {
-
         System.out.println(gamblingPlayerHand.displayHand());
         System.out.println(computerHand.displayHand());
+        Integer hitOrStayUserInput = input.getIntegerInput("Press 1 to hit or 2 to stay");
+        if(hitOrStayUserInput == 1) {
+
+        }
+
+    }
 
 
-        int userInput = input.getIntegerInput("Would you like to hit or stay?");
+
+    public void dealerHitOrStay(Integer hitOrStayUserInput) {
 
 
     }
 
-    public void dealerHitOrStay() {
-    }  //
-
     public void hit(Player deck, Player player) {
+
     }
 
     public void stay() {
