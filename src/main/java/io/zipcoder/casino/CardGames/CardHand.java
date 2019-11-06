@@ -1,6 +1,7 @@
 package io.zipcoder.casino.CardGames;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CardHand {
 
@@ -16,5 +17,7 @@ public class CardHand {
 
         return userHand.toString();
     }
+
+
 
 }
