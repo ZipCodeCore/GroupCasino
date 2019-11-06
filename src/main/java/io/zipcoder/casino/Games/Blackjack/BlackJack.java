@@ -21,7 +21,6 @@ public class BlackJack implements Game, GamblingGame {
     Card[] playerHand = new Card[6];
     Card[] dealerHand = new Card[6];
     private Player currentPlayer;
-    private CasinoArt casinoArt = new CasinoArt();
     Player dealer = new Player( "Dealer", 100000);
     private boolean currentGame = true;
     boolean running = true;
@@ -59,7 +58,7 @@ public class BlackJack implements Game, GamblingGame {
     public void approachTable(Player currentPLayer) {
         Console.clearScreen();
         this.currentPlayer = currentPLayer;
-        console.println(casinoArt.getCasinoArt("blackjack"));
+        console.println(CasinoArt.BLACKJACK.getCasinoArt());
         console.println("You approach the BlackJack table. What would you like to do?");
         console.println("(1) - Play the game");
         console.println("(2) - Read the rules");

@@ -16,7 +16,6 @@ public class HighAndLow implements Game, GamblingGame {
     private Dice dice = new Dice();
     private Integer totalBetValue = 0;
     private Player currentPlayer;
-    private CasinoArt casinoArt = new CasinoArt();
     private HighAndLowLanguage language = new HighAndLowLanguage();
     private boolean running = true;
     private boolean didYouBet = true;
@@ -70,7 +69,7 @@ public class HighAndLow implements Game, GamblingGame {
     @Override
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
-        console.println(casinoArt.getCasinoArt("highAndLow"));
+        console.println(CasinoArt.HIGHANDLOW.getCasinoArt());
         console.println(language.getHighAndLowLanguage("approachTable"));
         while(running) {
         console.println(language.getHighAndLowLanguage("approachTableMenu"));

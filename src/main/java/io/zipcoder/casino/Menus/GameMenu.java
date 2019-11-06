@@ -14,7 +14,6 @@ public class GameMenu {
     private Console console = new Console(System.in, System.out);
     private Integer playerInput;
     private Player currentPlayer;
-    private CasinoArt casinoArt = new CasinoArt();
     private boolean running = true;
 
     public void runGameMenu(Player currentPlayer){
@@ -28,7 +27,7 @@ public class GameMenu {
 
     public void displayGameMenu(){
         Console.clearScreen();
-        console.println(casinoArt.getCasinoArt("gameMenu"));
+        console.println(CasinoArt.GAMEMENU.getCasinoArt());
         console.println("Hi! Welcome to the game menu!\nHere are the games you can play:");
         console.println("(1) - Go Fish");
         console.println("(2) - Blackjack");
