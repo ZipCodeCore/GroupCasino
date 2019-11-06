@@ -61,13 +61,16 @@ public class RRGame extends DiceGame implements Game {
 
         console.println(String.format("\n** You rolled %d **\n", userDieNum));
         if (userDieNum.equals(computerRoll)) {
+            gameServices.wager(player.getBalance(),player);
             console.println("You Lost!!!");
+
             //player.setBalance(0);
 
             //startPlay();
         }
         else {
             gameServices.payOut(this.player.getBalance(), this.player);
+
             console.println(String.format("You Won!!! Your Balance Is Now $%.2f",player.getBalance()));
         }
         endChoice();

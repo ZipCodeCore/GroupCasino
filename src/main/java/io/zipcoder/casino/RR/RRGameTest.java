@@ -2,17 +2,14 @@ package io.zipcoder.casino.RR;
 
 
 import io.zipcoder.casino.DiceGame;
-import io.zipcoder.casino.RR.RRGame;
+import io.zipcoder.casino.Player;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
-import org.junit.Assert;
-import org.junit.Test;
 public class RRGameTest{
 
 //import static org.junit.Assert.*;
+
 
     @Test
     public void roll() {}
@@ -25,8 +22,51 @@ public class RRGameTest{
       @Test
       public void player(){
       }
+    @Test
+    public void getFirstName() {
+        // Given
+        Player testPlayer = new Player("Grace", "Bunde", 23, 500.00);
+        String expected = "Grace";
 
-            @Test
+        // Then
+        String actual = testPlayer.getFirstName();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getLastName() {
+        // Given
+        Player testPlayer = new Player("Grace", "Bunde", 23, 500.00);
+        String expected = "Bunde";
+
+        // Then
+        String actual = testPlayer.getLastName();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getAge() {
+        // Given
+        Player testPlayer = new Player("Grace", "Bunde", 23, 500.00);
+        Integer expected = 23;
+
+        // Then
+        Integer actual = testPlayer.getAge();
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    public void getBalance() {
+        // Given
+        Player testPlayer = new Player("Grace", "Bunde", 23, 500.00);
+        Double expected = 500.00;
+
+        // Then
+        Double actual = testPlayer.getBalance();
+        Assert.assertEquals(expected, actual);
+    }
+
+
+    @Test
               public void getWager() {
             }
 
@@ -44,7 +84,11 @@ public class RRGameTest{
 
             @Test
             public void roundOfPlay() {
-            }
+
+
+
+                }
+
 
             @Test
             public void selectTargetNum() {
@@ -53,4 +97,5 @@ public class RRGameTest{
             @Test
             public void evaluateResult() {
             }
+
 }
