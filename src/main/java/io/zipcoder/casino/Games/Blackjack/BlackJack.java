@@ -33,7 +33,7 @@ public class BlackJack implements Game, GamblingGame {
         initialHand();
         viewDealerHand();
         viewCurrentHand();
-        console.println("How much would you like to los- I mean bet?" + " Current balance: " + currentplayer.getBalance());
+        console.println("How much would you like to los- I mean bet?" + " Current balance: $" + currentplayer.getBalance());
         placeBet(currentPlayer);
         houseWin();
 
@@ -160,11 +160,13 @@ public class BlackJack implements Game, GamblingGame {
         viewCurrentHand();
 
     }
-    public Boolean isWinner(){
-    return null;
+    public void isWinner(Player currentPlayer){
+        Integer winnings = pot*2;
+    currentPlayer.changeBalance(winnings);
+    console.println("You won $"+ winnings);
     }
-    public Boolean isLoser(){
-return null;
+    public void isLoser(){
+        console.println("You lost $" + pot);
     }
 
     public Integer checkHand(Card[] hand){
@@ -197,7 +199,7 @@ return null;
 
     }
     public void specialFive(){
-        isWinner();
+        isWinner(currentPlayer);
     }
 
     @Override
@@ -270,7 +272,7 @@ private void houseWin(){
             console.println("Dealers Hand was " + handOfDealer);
             console.println("Congratulations you got BLACKJACK!");
 
-            isWinner();
+            isWinner(currentPlayer);
             exitGame(currentPlayer);
         }else if (checkForBlackjack(dealerHand)){
             Integer handOfPlayer = checkHand(playerHand);
@@ -292,7 +294,7 @@ private void houseWin(){
             console.println("Dealers Hand was " + handOfDealer);
             console.println("Congratulations you Won!");
 
-            isWinner();
+            isWinner(currentPlayer);
             exitGame(currentPlayer);
         }else if (checkHand(playerHand) < checkHand(dealerHand) && checkHand(dealerHand) <= 21){
 
@@ -308,7 +310,7 @@ private void houseWin(){
             console.println("Dealers Hand was " + handOfDealer);
             console.println("Congratulations you Won! Dealer Busted Out!");
 
-            isWinner();
+            isWinner(currentPlayer);
             exitGame(currentPlayer);
         }else {
 
