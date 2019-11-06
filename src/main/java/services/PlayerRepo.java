@@ -6,24 +6,24 @@ import java.util.ArrayList;
 
 public class PlayerRepo {
     ArrayList<Player> playerRepo;
+    PlayerService playerService = new PlayerService();
 
     public PlayerRepo() {
         this.playerRepo = new ArrayList();
-
-    }
-
-    public Player getPlayer() {
-        return null;
-    }
-
-    public Player getPlayerById(Integer id) {
-        return null;
     }
 
     public Boolean addPlayer(Player player) {
-        return null;
+       return this.playerRepo.add(player);
     }
 
+    public Player getPlayerById(Integer id) {
+        for (Player player : playerRepo) {
+            if (playerService.getId() == id) {
+                return player;
+            }
+        }
+        return null;
+    }
 
 
 }
