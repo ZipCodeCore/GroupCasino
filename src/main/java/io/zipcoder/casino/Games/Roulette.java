@@ -1,39 +1,36 @@
 package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.Casino;
+import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.RouletteSpinner;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Roulette implements Game, GamblingGame {
     Casino casino = new Casino();
     Console console = new Console(System.in, System.out);
     Player currentPlayer;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    private CasinoArt casinoArt = new CasinoArt();
     private boolean running = true;
     private boolean currentGame = true;
     private Integer pot;
     private Integer spinNum;
     private Integer placeBetInt;
-
-    public void runRoulette(Player currentPlayer) {
+    private boolean isWinner;
+    private Boolean isOddEvenGame;
+    private Integer winnings;
+    public void runRoulette(Player currentPlayer){
         this.currentPlayer = currentPlayer;
         approachTable(currentPlayer);
     }
 
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
-        console.println(" ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄  ▄            ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄ \n" +
-                "▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░▌          ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌\n" +
-                "▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌▐░▌          ▐░█▀▀▀▀▀▀▀▀▀  ▀▀▀▀█░█▀▀▀▀  ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ \n" +
-                "▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░▌          ▐░▌               ▐░▌          ▐░▌     ▐░▌          \n" +
-                "▐░█▄▄▄▄▄▄▄█░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░▌          ▐░█▄▄▄▄▄▄▄▄▄      ▐░▌          ▐░▌     ▐░█▄▄▄▄▄▄▄▄▄ \n" +
-                "▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░▌          ▐░░░░░░░░░░░▌     ▐░▌          ▐░▌     ▐░░░░░░░░░░░▌\n" +
-                "▐░█▀▀▀▀█░█▀▀ ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌          ▐░█▀▀▀▀▀▀▀▀▀      ▐░▌          ▐░▌     ▐░█▀▀▀▀▀▀▀▀▀ \n" +
-                "▐░▌     ▐░▌  ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌          ▐░▌               ▐░▌          ▐░▌     ▐░▌          \n" +
-                "▐░▌      ▐░▌ ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄      ▐░▌          ▐░▌     ▐░█▄▄▄▄▄▄▄▄▄ \n" +
-                "▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌     ▐░▌          ▐░▌     ▐░░░░░░░░░░░▌\n" +
-                " ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀       ▀            ▀       ▀▀▀▀▀▀▀▀▀▀▀ \n" +
-                "                                                                                                        \n\n");
+        console.println(casinoArt.getCasinoArt("roulette"));
         console.println("You approach the Roulette. What would you like to do?");
         console.println("(1) - Play the game");
         console.println("(2) - Return to the game menu");
@@ -54,16 +51,18 @@ public class Roulette implements Game, GamblingGame {
 
 
     @Override
-    public void runGame(Player currentPlayer) {
-        while (running) {
+    public void runGame(Player currentPlayer){
+        while (running){
             placeBet(currentPlayer);
             playersPick(currentPlayer);
             winningNumber();
-            if (isWinner(currentPlayer)) {
+            if(isWinner()){
                 returnWinnings(currentPlayer);
-            } else if (youLose(currentPlayer))
+            }else {
+                youLose(currentPlayer);
+            }
+            exitGame(currentPlayer);
 
-                exitGame(currentPlayer);
         }
         //prompting player to place bet
         // prompting to pick number
@@ -114,17 +113,19 @@ public class Roulette implements Game, GamblingGame {
     }
 
     public Integer playerBetInt(Integer playerInput) {
+        isOddEvenGame = false;
         console.println("Pick a number 0 - 36");
         Integer playerBet = console.getIntegerInput(":");
         if (playerBet < 0 || playerBet > 36) {
             console.println("Try again! Pick a number 0 - 36");
             playerBet = console.getIntegerInput(":");
         }
+        placeBetInt = playerBet;
         return playerBet;
     }
 
     public void playerBetOddEven(Integer playerInput) {
-        String betPlacement = "";
+        isOddEvenGame = true;
         console.println("Odds or Even?");
         console.println("(1) - Odd");
         console.println("(2) - Even");
@@ -133,31 +134,43 @@ public class Roulette implements Game, GamblingGame {
             console.println("Try again!");
             console.getIntegerInput(":");
         } else if (playerBet == 1) {
-            betPlacement = "Odd";
+            placeBetInt = 1;
         } else if (playerBet == 2) {
-            betPlacement = "Even";
+            placeBetInt = 0;
+
 
         }
     }
 
-    public Integer winningNumber() {
-        Integer spinNum = RouletteSpinner.winningNumber();
+    public Integer winningNumber (){
+        spinNum = RouletteSpinner.winningNumber();
         console.println(spinNum.toString());
         return spinNum;
     }
 
-    public boolean isWinner(Player currentPlayer) {
-        if (spinNum == placeBetInt) {
-            return true;
+
+    /**
+     * This method checks to see if the player's bet wins compared to the winning number.
+     * @return a true false value if the player won or not.
+     */
+    public boolean isWinner(){
+        if(isOddEvenGame) {
+            return spinNum % 2 == placeBetInt;
         }
-       return false;
+        return spinNum.equals(placeBetInt);
     }
 
+    // If we can I would like to find a way to return a higher odds for betting "number" vs. "odd/even"
     @Override
     public void returnWinnings(Player currentPlayer) {
-        if (isWinner(currentPlayer)) {
-            Integer winnings = pot * 2;
+        if (isWinner()) {
+            winnings = pot * 2;
+            console.println("Congrats maybe you don't suck I'll give you "+ winnings);
+            LocalDateTime now = LocalDateTime.now();
+            String addHistory = String.format("You won $%d.00 at High and Low! ** ", winnings);
+            currentPlayer.addHistory(addHistory + dtf.format(now));
             currentPlayer.changeBalance(winnings);
+
         }
 
     }

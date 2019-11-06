@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Casino {
     private Player currentPlayer;
     Console console = new Console(System.in, System.out);
+    private CasinoArt casinoArt = new CasinoArt();
     boolean running = true;
 
     public void runCasinoMenu(Player currentPlayer){
@@ -21,17 +22,7 @@ public class Casino {
 
     public void displayCasinoMenu(){
         Console.clearScreen();
-        console.println("  /$$$$$$                      /$$                           /$$                 /$$       /$$                \n" +
-                " /$$__  $$                    |__/                          | $$                | $$      | $$                \n" +
-                "| $$  \\__/  /$$$$$$   /$$$$$$$ /$$ /$$$$$$$   /$$$$$$       | $$        /$$$$$$ | $$$$$$$ | $$$$$$$  /$$   /$$\n" +
-                "| $$       |____  $$ /$$_____/| $$| $$__  $$ /$$__  $$      | $$       /$$__  $$| $$__  $$| $$__  $$| $$  | $$\n" +
-                "| $$        /$$$$$$$|  $$$$$$ | $$| $$  \\ $$| $$  \\ $$      | $$      | $$  \\ $$| $$  \\ $$| $$  \\ $$| $$  | $$\n" +
-                "| $$    $$ /$$__  $$ \\____  $$| $$| $$  | $$| $$  | $$      | $$      | $$  | $$| $$  | $$| $$  | $$| $$  | $$\n" +
-                "|  $$$$$$/|  $$$$$$$ /$$$$$$$/| $$| $$  | $$|  $$$$$$/      | $$$$$$$$|  $$$$$$/| $$$$$$$/| $$$$$$$/|  $$$$$$$\n" +
-                " \\______/  \\_______/|_______/ |__/|__/  |__/ \\______/       |________/ \\______/ |_______/ |_______/  \\____  $$\n" +
-                "                                                                                                     /$$  | $$\n" +
-                "                                                                                                    |  $$$$$$/\n" +
-                "                                                                                                     \\______/ ");
+        console.println(casinoArt.getCasinoArt("casinoLobby"));
         console.println(String.format("Welcome to The Notorious B.I.G. 3 Casino, %s!",currentPlayer.getName()));
         console.println("What would you like to do?");
         console.println("(1) - Display Game Menu");

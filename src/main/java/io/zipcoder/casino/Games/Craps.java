@@ -1,5 +1,6 @@
 package io.zipcoder.casino.Games;
 
+import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
@@ -12,6 +13,7 @@ public class Craps implements Game, GamblingGame {
 
     private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private Console console = new Console(System.in, System.out);
+    private CasinoArt casinoArt = new CasinoArt();
     private Integer playerBet;
     private boolean running;
     private Dice dice;
@@ -27,31 +29,7 @@ public class Craps implements Game, GamblingGame {
     @Override
     public void approachTable(Player currentPLayer) {
         Console.clearScreen();
-        console.printFast("\n" +
-                "                                                      \n" +
-                "                                                      \n" +
-                "  ,----..                                             \n" +
-                " /   /   \\                     ,-.----.               \n" +
-                "|   :     :  __  ,-.           \\    /  \\              \n" +
-                ".   |  ;. /,' ,'/ /|           |   :    |  .--.--.    \n" +
-                ".   ; /--` '  | |' | ,--.--.   |   | .\\ : /  /    '   \n" +
-                ";   | ;    |  |   ,'/       \\  .   : |: ||  :  /`./   \n" +
-                "|   : |    '  :  / .--.  .-. | |   |  \\ :|  :  ;_     \n" +
-                ".   | '___ |  | '   \\__\\/: . . |   : .  | \\  \\    `.  \n" +
-                "'   ; : .'|;  : |   ,\" .--.; | :     |`-'  `----.   \\ \n" +
-                "'   | '/  :|  , ;  /  /  ,.  | :   : :    /  /`--'  / \n" +
-                "|   :    /  ---'  ;  :   .'   \\|   | :   '--'.     /  \n" +
-                " \\   \\ .'         |  ,     .-./`---'.|     `--'---'   \n" +
-                "  `---`            `--`---'      `---`                \n" +
-                "                                                      \n");
-        console.printFast("              _______.\n" +
-                "   ______    | .   . |\\\n" +
-                "  /     /\\   |   .   |.\\\n" +
-                " /  '  /  \\  | .   . |.'|\n" +
-                "/_____/. . \\ |_______|.'|\n" +
-                "\\ . . \\    /  \\ ' .   \\'|\n" +
-                " \\ . . \\  /    \\____'__\\|\n" +
-                "  \\_____\\/\n\n");
+        console.printFast(casinoArt.getCasinoArt("craps"));
         console.printSlow("As you approach the Craps table you hear yelling and shouting");
         console.dotDotDot();
         console.newln();
