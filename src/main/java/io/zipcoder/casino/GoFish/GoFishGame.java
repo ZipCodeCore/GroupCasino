@@ -6,7 +6,7 @@ import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.GoFishMenu;
 import io.zipcoder.casino.Player;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
 

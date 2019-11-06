@@ -2,7 +2,7 @@ package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.Craps.CrapsGame;
 import io.zipcoder.casino.Interfaces.Menu;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 
 public class CrapsMenu implements Menu {
 

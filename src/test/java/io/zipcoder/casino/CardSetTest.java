@@ -1,6 +1,6 @@
 package io.zipcoder.casino;
 
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -198,7 +198,7 @@ public class CardSetTest {
         cards.addCard(new Card("7","C"));
 
         Console console = new Console(System.in, System.out);
-        console.printWithDelays(cards.toASCII());
+        console.println(cards.toASCII());
     }
 
     @Test
@@ -214,7 +214,7 @@ public class CardSetTest {
         cards.addCard(new Card("7","C"));
 
         Console console = new Console(System.in, System.out);
-        console.printWithDelays(cards.toASCIISuite());
+        console.println(cards.toASCIISuite());
     }
 
     @Test

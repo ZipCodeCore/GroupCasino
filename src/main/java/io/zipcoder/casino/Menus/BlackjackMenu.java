@@ -2,7 +2,7 @@ package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.Blackjack.BlackjackGame;
 import io.zipcoder.casino.Interfaces.Menu;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 
 public class BlackjackMenu implements Menu {
 
@@ -27,7 +27,7 @@ public class BlackjackMenu implements Menu {
 
         console.clearScreen();
         // temporary
-        console.printWithDelays(" .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
+        console.println(" .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
                 "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" +
                 "| |   ______     | || |   _____      | || |      __      | || |     ______   | || |  ___  ____   | || |     _____    | || |      __      | || |     ______   | || |  ___  ____   | |\n" +
                 "| |  |_   _ \\    | || |  |_   _|     | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | || |    |_   _|   | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | |\n" +
@@ -38,12 +38,12 @@ public class BlackjackMenu implements Menu {
                 "| |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |\n" +
                 "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" +
                 " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n");
-        console.printWithDelays("Choose table stakes:");
-        console.printWithDelays("1. $5 min / $25 max");
-        console.printWithDelays("2. $20 min / $100 max");
-        console.printWithDelays("3. $50 min / $250 max");
-        console.printWithDelays("4. Set custom stakes ($5 - $500)");
-        console.printWithDelays("5. Stand up and go back to game list");
+        console.println("Choose table stakes:");
+        console.println("1. $5 min / $25 max");
+        console.println("2. $20 min / $100 max");
+        console.println("3. $50 min / $250 max");
+        console.println("4. Set custom stakes ($5 - $500)");
+        console.println("5. Stand up and go back to game list");
         handleChoice(console.menuChoice(5));
     }
 
@@ -70,7 +70,7 @@ public class BlackjackMenu implements Menu {
 
         double minBet = this.blackjackGame.getMinBet();
         double maxBet = this.blackjackGame.getMaxBet();
-        console.printWithDelays(String.format("Minimum bet is %.2f; maximum bet is %.2f", minBet, maxBet));
+        console.println(String.format("Minimum bet is %.2f; maximum bet is %.2f", minBet, maxBet));
 
     }
 
@@ -79,9 +79,9 @@ public class BlackjackMenu implements Menu {
         if (minBet >= 5.00 && minBet <= 500.00) {
             return minBet;
         } else if (minBet < 5.00) {
-            console.printWithDelays("Tables have a $5.00 minimum");
+            console.println("Tables have a $5.00 minimum");
         } else {
-            console.printWithDelays("Tables have a $500.00 maximum");
+            console.println("Tables have a $500.00 maximum");
         }
         return getStakes();
      }

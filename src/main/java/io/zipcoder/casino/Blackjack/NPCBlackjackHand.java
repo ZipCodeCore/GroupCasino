@@ -1,10 +1,8 @@
 package io.zipcoder.casino.Blackjack;
 
-import io.zipcoder.casino.Blackjack.BlackjackHand;
-import io.zipcoder.casino.Blackjack.BlackjackPlayer;
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardSet;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 
 public class NPCBlackjackHand extends BlackjackHand {
 

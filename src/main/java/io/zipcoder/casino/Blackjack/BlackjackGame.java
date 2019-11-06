@@ -6,8 +6,8 @@ import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.BlackjackMenu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
-import io.zipcoder.casino.Utilities.Console;
-import io.zipcoder.casino.Utilities.Music;
+import io.zipcoder.casino.Utility.Music;
+import io.zipcoder.casino.utilities.Console;
 
 
 import javax.sound.sampled.LineUnavailableException;
@@ -145,8 +145,8 @@ public class BlackjackGame extends CardGame implements Game {
 
     public Double betChoice () {
         Double wager;
-        console.printWithDelays("[DEALER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance());
-        wager = console.getCurrency("[DEALER]: Bet size (or press Enter to stand up): ", this.minBet, this.maxBet);
+        console.printWithDelays(String.format("[DEALER]: Current bankroll: $%.2f", this.player.getPlayer().getBalance()),10);
+        wager = console.getCurrency("[DEALER]: Bet size (or press Enter to stand up): ");
         if (wager != null) {
             if (gameServices.wager(wager, this.player.getPlayer())) {
                 return wager;
@@ -221,7 +221,7 @@ public class BlackjackGame extends CardGame implements Game {
         //temporary
         console.clearScreen();
 
-        console.printWithDelays(String.format(" .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
+        System.out.println(String.format(" .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
                 "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" +
                 "| |   ______     | || |   _____      | || |      __      | || |     ______   | || |  ___  ____   | || |     _____    | || |      __      | || |     ______   | || |  ___  ____   | |\n" +
                 "| |  |_   _ \\    | || |  |_   _|     | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | || |    |_   _|   | || |     /  \\     | || |   .' ___  |  | || | |_  ||_  _|  | |\n" +
@@ -234,12 +234,12 @@ public class BlackjackGame extends CardGame implements Game {
                 " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n" + "\n" + "\n" + "\n" +
 
                 "\nTable stakes: $%.2f min / $%.2f max\n", this.minBet, this.maxBet));
-        console.printWithDelays("[Dealer's Hand]:");
+        console.println("[Dealer's Hand]:");
         BlackjackHand dealerHand = this.dealer.getHands().get(0);
 
         console.print(dealerHand.getCards().toASCII());
-        console.printWithDelays("\n");
-        console.printWithDelays(String.format("[%s's Hand(s)]:",this.player.getPlayer().getFirstName()));
+        console.println("\n");
+        console.println(String.format("[%s's Hand(s)]:",this.player.getPlayer().getFirstName()));
         ArrayList<BlackjackHand> playerHands =  this.player.getHands();
         for (BlackjackHand hand : playerHands) {
             console.print(hand.getCards().toASCII());
@@ -247,7 +247,7 @@ public class BlackjackGame extends CardGame implements Game {
             if (showWinnings) {
                 console.print(winningMessage(hand));
             }
-            console.printWithDelays("\n");
+            console.println("\n");
         }
 
     }

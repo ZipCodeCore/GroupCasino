@@ -1,8 +1,7 @@
 package io.zipcoder.casino.GoFish;
 
-import java.util.Scanner;
 import io.zipcoder.casino.Card;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
 

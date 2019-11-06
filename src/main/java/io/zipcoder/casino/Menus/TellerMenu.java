@@ -3,8 +3,8 @@ package io.zipcoder.casino.Menus;
 import io.zipcoder.casino.Interfaces.Menu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
-import io.zipcoder.casino.Utilities.Console;
-import io.zipcoder.casino.Utilities.Music;
+import io.zipcoder.casino.utilities.Console;
+import io.zipcoder.casino.Utility.Music;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -43,7 +43,7 @@ public class TellerMenu implements Menu {
             System.out.println("Error with playing sound.");
             ex.printStackTrace();
         }
-        console.printWithDelays("          .-------.\n" +
+        console.println("          .-------.\n" +
                 "       oO{-JACKPOT-}Oo\n" +
                 "       .=============. __\n" +
                 "       | [a] [X] [o] |(  )\n" +

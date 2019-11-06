@@ -3,11 +3,10 @@ package io.zipcoder.casino.Blackjack;
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Services.GameServices;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BlackjackHand {

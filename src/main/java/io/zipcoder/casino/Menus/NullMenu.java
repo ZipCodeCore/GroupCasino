@@ -1,8 +1,7 @@
 package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.Interfaces.Menu;
-import io.zipcoder.casino.Player;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 
 public class NullMenu implements Menu {
 

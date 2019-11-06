@@ -4,7 +4,7 @@ import io.zipcoder.casino.DiceGame;
 import io.zipcoder.casino.Menus.RRMenu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Interfaces.Game;
 
 public class RRGame extends DiceGame implements Game {

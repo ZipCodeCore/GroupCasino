@@ -1,14 +1,12 @@
 package io.zipcoder.casino.Craps;
 
 import io.zipcoder.casino.DiceGame;
-import io.zipcoder.casino.Interfaces.GamblingGame;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.CrapsMenu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
-import io.zipcoder.casino.Utilities.Console;
+import io.zipcoder.casino.utilities.Console;
 
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class CrapsGame extends DiceGame implements Game {

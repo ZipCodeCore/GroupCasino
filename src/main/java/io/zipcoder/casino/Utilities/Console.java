@@ -1,4 +1,4 @@
-package io.zipcoder.casino.Utilities;
+package io.zipcoder.casino.utilities;
 
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public final class Console {
     private final Scanner input;
     private final PrintStream output;
-    static final int DEFAULT_DELAY = 10;
+    static final int DEFAULT_CASINO_DELAY = 10;
 
     public Console(InputStream in, PrintStream out) {
         this.input = new Scanner(in);
@@ -24,7 +24,7 @@ public final class Console {
     }
 
     public String getStringInput(String prompt, Object... args) {
-        printWithDelays(prompt, args);
+        println(prompt, args);
         return input.nextLine();
     }
 
@@ -33,7 +33,7 @@ public final class Console {
         return choices.contains(input);
     }
 
-    public String getCardRankInput(String prompt) throws InterruptedException {
+    public String getCardRankInput(String prompt) {
         print(prompt);
         String input = getInput("Choose a card to take (2-10,J,Q,K,A): ").toUpperCase();
         while (true) {
@@ -47,38 +47,9 @@ public final class Console {
         return input;
     }
 
-//    public Double getDoubleInput(String prompt, Object... args) {
-//        String stringInput = getStringInput(prompt, args);
-//        try {
-//            Double doubleInput = Double.parseDouble(stringInput);
-//            return doubleInput;
-//        } catch (NumberFormatException nfe) { // TODO - Eliminate recursive nature
-//            println("[ %s ] is an invalid user input!", stringInput);
-//            println("Try inputting a numeric value!");
-//            return getDoubleInput(prompt, args);
-//        }
-//    }
-//
-//    public Long getLongInput(String prompt, Object... args) {
-//        String stringInput = getStringInput(prompt, args);
-//        try {
-//            Long longInput = Long.parseLong(stringInput);
-//            return longInput;
-//        } catch (NumberFormatException nfe) { // TODO - Eliminate recursive nature
-//            println("[ %s ] is an invalid user input!", stringInput);
-//            println("Try inputting an integer value!");
-//            return getLongInput(prompt, args);
-//        }
-//    }
-
-//    public Integer getIntegerInput(String prompt, Object... args) {
-//        return getLongInput(prompt, args).intValue();
-//    }
-
-
-    public void clearScreen() throws InterruptedException {
+    public void clearScreen() {
         for (int i = 0; i <100; i++) {
-            printWithDelays(" ");
+            println(" ");
         }
     }
 
@@ -183,7 +154,7 @@ public final class Console {
         return Double.valueOf(input);
     }
 
-    public Double getCurrency(String prompt) throws InterruptedException {
+    public Double getCurrency(String prompt) {
         print(prompt);
         String input = getInput("$");
         while (true) {
@@ -197,7 +168,7 @@ public final class Console {
         return Double.valueOf(input);
     }
 
-    public Double getCurrency(String prompt, double min, double max) throws InterruptedException {
+    public Double getCurrency(String prompt, double min, double max) {
         print(prompt);
         String input = getInput("$");
         while (true) {
@@ -223,7 +194,7 @@ public final class Console {
         return Double.valueOf(input);
     }
 
-    public Integer getInteger() throws InterruptedException {
+    public Integer getInteger() {
         String input = getInput();
         while (true) {
             if (integerCheck(input)) break;
@@ -235,7 +206,7 @@ public final class Console {
         return Integer.valueOf(input);
     }
 
-    public Integer getInteger(String prompt) throws InterruptedException {
+    public Integer getInteger(String prompt) {
         String input = getInput(prompt);
         while (true) {
             if (integerCheck(input)) break;
@@ -247,7 +218,7 @@ public final class Console {
         return Integer.valueOf(input);
     }
 
-    public Integer getInteger(int max) throws InterruptedException {
+    public Integer getInteger(int max) {
         String input = getInput().substring(0,1);
         while (true) {
             if (integerCheck(input)) {
@@ -266,46 +237,40 @@ public final class Console {
         return Integer.valueOf(input);
     }
 
-    public Integer menuChoice(int max) throws InterruptedException {
+    public Integer menuChoice(int max) {
         print("\nMenu choice: \n");
         return getInteger(max);
     }
 
     //Makes a type writer effect on screen
-    public void printWithDelays(String data, TimeUnit unit, long delay)
-            throws InterruptedException {
-        for (char ch : data.toCharArray()) {
-            print(Character.toString(ch));
-            unit.sleep(delay);
+    public void printWithDelays(String data, TimeUnit unit, long delay) {
+        try {
+            for (char ch : data.toCharArray()) {
+                print(Character.toString(ch));
+                TimeUnit.MILLISECONDS.sleep(Console.DEFAULT_CASINO_DELAY);
+            }
+        } catch (InterruptedException e){
+            for (char ch : data.toCharArray()) {
+                print(Character.toString(ch));
+                e.printStackTrace();
+            }
         }
     }
 
     //Makes a type writer effect on screen
-    public void printWithDelays(String data, long delay)
-            throws InterruptedException {
-        for (char ch : data.toCharArray()) {
-            print(Character.toString(ch));
-            TimeUnit.MILLISECONDS.sleep(delay);
-        }
+    public void printWithDelays(String data, long delay) {
+        printWithDelays(data, TimeUnit.MILLISECONDS, delay);
     }
 
     //Makes a type writer effect on screen
-    public void printWithDelays(String data, long delay, int pauseAfter)
-            throws InterruptedException {
-        for (char ch : data.toCharArray()) {
-            print(Character.toString(ch));
-            TimeUnit.MILLISECONDS.sleep(delay);
-        }
+    public void printWithDelays(String data, long delay, int pauseAfter) {
+        printWithDelays(data, delay);
         sleep(pauseAfter);
     }
 
     //Makes a type writer effect on screen
-    public void printWithDelays(String data)
-            throws InterruptedException {
-        for (char ch : data.toCharArray()) {
-            print(Character.toString(ch));
-            TimeUnit.MILLISECONDS.sleep(Console.DEFAULT_DELAY);
-        }
+    public void printWithDelays(String data) {
+        printWithDelays(data, Console.DEFAULT_CASINO_DELAY);
     }
 
     public void sleep(int millis) {
