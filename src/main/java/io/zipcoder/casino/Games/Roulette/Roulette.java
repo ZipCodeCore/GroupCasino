@@ -16,7 +16,6 @@ public class Roulette implements Game, GamblingGame {
     Console console = new Console(System.in, System.out);
     Player currentPlayer;
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    private CasinoArt casinoArt = new CasinoArt();
     private boolean running = true;
     private boolean currentGame = true;
     private Integer pot;
@@ -25,6 +24,7 @@ public class Roulette implements Game, GamblingGame {
     private boolean isWinner;
     private Boolean isOddEvenGame;
     private Integer winnings;
+    private CasinoArt art = new CasinoArt();
     public void runRoulette(Player currentPlayer){
         this.currentPlayer = currentPlayer;
         approachTable(currentPlayer);
@@ -32,7 +32,7 @@ public class Roulette implements Game, GamblingGame {
 
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
-        console.println(casinoArt.getCasinoArt("roulette"));
+        console.println(art.getCasinoArt(CasinoArt.Art.ROULETTE));
         console.println("You approach the Roulette. What would you like to do?");
         console.println("(1) - Play the game");
         console.println("(2) - Return to the game menu");

@@ -9,7 +9,7 @@ public class CasinoArtTest {
 
     @Test
     public void getCasinoArt1() {
-        CasinoArt casinoArt = new CasinoArt();
+        CasinoArt art = new CasinoArt();
         String game = "snakesAndLadders";
         String expected = "     _________              __                                      .___ .____                .___  .___                   \n" +
                 " /   _____/ ____ _____  |  | __ ____   ______ _____    ____    __| _/ |    |   _____     __| _/__| _/___________  ______\n" +
@@ -32,13 +32,13 @@ public class CasinoArtTest {
                 "       `/'\\__/      \\ _ _ \\*\\\n" +
                 "      /^|            \\ _ _ \\*\n" +
                 "     '  `             \\ _ _ \\      ";
-        String actual = casinoArt.getCasinoArt(game);
+        String actual = art.getCasinoArt(CasinoArt.Art.SNAKESANDLADDERS);
         Assert.assertEquals(expected,actual);
     }
 
     @Test
     public void getCasinoArt2() {
-        CasinoArt casinoArt = new CasinoArt();
+        CasinoArt art = new CasinoArt();
         String game = "gameMenu";
         String expected = "          _____                    _____                    _____                    _____                    _____          \n" +
                 "         /\\    \\                  /\\    \\                  /\\    \\                  /\\    \\                  /\\    \\         \n" +
@@ -62,13 +62,13 @@ public class CasinoArtTest {
                 "        \\::/____/                \\::/    /                \\::/    /                \\::/    /                \\::/    /        \n" +
                 "                                  \\/____/                  \\/____/                  \\/____/                  \\/____/         \n" +
                 "                                                                                                                             ";
-        String actual = casinoArt.getCasinoArt(game);
+        String actual = art.getCasinoArt(CasinoArt.Art.GAMEMENU);
         Assert.assertEquals(expected,actual);
     }
 
     @Test
     public void getCasinoArt3() {
-        CasinoArt casinoArt = new CasinoArt();
+        CasinoArt art = new CasinoArt();
         String game = "casinoLobby";
         String expected = "  /$$$$$$                      /$$                           /$$                 /$$       /$$                \n" +
                 " /$$__  $$                    |__/                          | $$                | $$      | $$                \n" +
@@ -81,7 +81,7 @@ public class CasinoArtTest {
                 "                                                                                                     /$$  | $$\n" +
                 "                                                                                                    |  $$$$$$/\n" +
                 "                                                                                                     \\______/ ";
-        String actual = casinoArt.getCasinoArt(game);
+        String actual = art.getCasinoArt(CasinoArt.Art.CASINOLOBBY);
         Assert.assertEquals(expected,actual);
     }
 }

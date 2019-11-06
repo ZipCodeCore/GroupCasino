@@ -3,11 +3,18 @@ package io.zipcoder.casino.Games.SnakesAndLadders;
 import java.util.HashMap;
 
 public class SnakesAndLaddersLanguage {
-    HashMap<String, String> snakesAndLaddersLanguage = new HashMap<>();
+    HashMap<Language,String> snakesHashMap = new HashMap<>();
 
+    public enum Language {
+        RULES,APPROACHTABLE,WELCOME,EXITMENU,DICEROLL,PLAYERWINS,AIWINS;
+    }
+
+    public String getSnakeLanguage(Language key) {
+        return snakesHashMap.get(key);
+    }
 
     public SnakesAndLaddersLanguage(){
-        this.snakesAndLaddersLanguage.put("rules", "Snakes and Ladders finds its origins in Ancient India, where it\n" +
+        snakesHashMap.put(Language.RULES, "Snakes and Ladders finds its origins in Ancient India, where it\n" +
                 "was first created under the name Moksha Patam.\n" +
                 "It was used to teach children values, rewarding proper behavior with\n" +
                 "a boost in point value, via climbing a ladder, or punishing a player\n" +
@@ -18,21 +25,16 @@ public class SnakesAndLaddersLanguage {
                 "But beware! Certain spots on the board will send you down the backs of the Snakes!\n" +
                 "Likewise, certain spots on the board will push you closer to your goal.\n" +
                 "Roll the dice and see who gets there first!\n\n");
-        this.snakesAndLaddersLanguage.put("approachTable", "You approach the Snakes and Ladders table. What would you like to do?\n" +
+        snakesHashMap.put(Language.APPROACHTABLE, "You approach the Snakes and Ladders table. What would you like to do?\n" +
                 "(1) - Play the game\n" +
                 "(2) - Read the rules\n" +
                 "(3) - Return to the game menu");
-        this.snakesAndLaddersLanguage.put("welcome", "Welcome to Snakes and Ladders, %s!\n" +
+        snakesHashMap.put(Language.WELCOME, "Welcome to Snakes and Ladders, %s!\n" +
                 "In this house, the player always goes first! Step on up!");
-        this.snakesAndLaddersLanguage.put("exitMenu", "Would you like to play again?\n(1) - Yes\n(2) - No");
-        this.snakesAndLaddersLanguage.put("diceRoll", "Press Enter to roll the dice.");
-        this.snakesAndLaddersLanguage.put("playerWins", "Congratulations! You won!");
-        this.snakesAndLaddersLanguage.put("aiWins", "Oh, Too bad! I won! Better lucky next time!");
+        snakesHashMap.put(Language.EXITMENU, "Would you like to play again?\n(1) - Yes\n(2) - No");
+        snakesHashMap.put(Language.DICEROLL, "Press Enter to roll the dice.");
+        snakesHashMap.put(Language.PLAYERWINS, "Congratulations! You won!");
+        snakesHashMap.put(Language.AIWINS, "Oh, Too bad! I won! Better lucky next time!");
+        }
 
-
-    }
-
-    public String getSnakesAndLaddersLanguage(String game){
-        return snakesAndLaddersLanguage.get(game);
-    }
 }

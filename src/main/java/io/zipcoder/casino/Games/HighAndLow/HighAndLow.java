@@ -4,6 +4,7 @@ import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Games.GamblingGame;
 import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.Menus.Casino;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
 import java.time.format.DateTimeFormatter;
@@ -16,8 +17,8 @@ public class HighAndLow implements Game, GamblingGame {
     private Dice dice = new Dice();
     private Integer totalBetValue = 0;
     private Player currentPlayer;
-    private CasinoArt casinoArt = new CasinoArt();
     private HighAndLowLanguage language = new HighAndLowLanguage();
+    private CasinoArt art = new CasinoArt();
     private boolean running = true;
     private boolean didYouBet = true;
 
@@ -70,7 +71,7 @@ public class HighAndLow implements Game, GamblingGame {
     @Override
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
-        console.println(casinoArt.getCasinoArt("highAndLow"));
+        console.println(art.getCasinoArt(CasinoArt.Art.HIGHANDLOW));
         console.println(language.getHighAndLowLanguage("approachTable"));
         while(running) {
         console.println(language.getHighAndLowLanguage("approachTableMenu"));
