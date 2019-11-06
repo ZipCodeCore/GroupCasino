@@ -31,7 +31,7 @@ public class MainMenu implements Menu {
         int count = 0;
         choiceMap.put(++count, new GameMenu(this.player));
         choiceMap.put(++count, new TellerMenu(this.player));
-        choiceMap.put(++count, new NullMenu());
+        choiceMap.put(++count, new NullMenu(this.player));
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -71,7 +71,6 @@ public class MainMenu implements Menu {
             ex.printStackTrace();
         }
 
-        // temporary
         for (int gameNum : choiceMap.keySet()) {
             console.println(String.format("%d: %s", gameNum, (choiceMap.get(gameNum)).getName()));
         }
@@ -98,7 +97,6 @@ public class MainMenu implements Menu {
             e.printStackTrace();
         }
         choiceMap.get(choice).displayMenu();
-        Casino.displayEnding(this.player);
         displayMenu();
     }
 }

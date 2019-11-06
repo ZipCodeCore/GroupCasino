@@ -33,7 +33,8 @@ public class RRGame extends DiceGame implements Game {
         // store menu
         RRMenu rrMenu = new RRMenu(this);
 
-           rrMenu.displayMenu();}
+        rrMenu.displayMenu();
+    }
 
     @Override
     public void endChoice() {
