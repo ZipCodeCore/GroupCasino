@@ -16,7 +16,7 @@ public class Craps implements GamblingGame {
     private boolean winGame;
     private Integer turn;
     private Integer targetScore;
-
+    private int sum;
     //------------- Constructor----------------------------
     public Craps(Player player) {
         this.crapsPlayer = new GamblingPlayer(player);
@@ -24,6 +24,7 @@ public class Craps implements GamblingGame {
         this.console = new Console(System.in, System.out);
         this.continuePlay = true;
         this.turn = 0;
+
 
     }
 
@@ -39,8 +40,10 @@ public class Craps implements GamblingGame {
 
     public void startGame() {
         console.println("Welcome to Craps!");
+        promptUserForWagerAmount();
+        turn = 0;
+        continuePlay = true;
         do {
-            promptUserForWagerAmount();
             createDice();
             crapsRoll();
             evaluateRoll();
@@ -53,15 +56,16 @@ public class Craps implements GamblingGame {
 
 
     public void crapsRoll() {
+        console.getStringInput("Press enter to roll.");
         for (Dice s : this.crapsDice) {
-            console.getStringInput("Press enter to roll.");
             s.rollDice();
-
         }
+        sum = crapsDice[0].getValue() + crapsDice[1].getValue();
+        console.println("You rolled a " + sum);
     }
 
     public void evaluateRoll() {
-        int sum = crapsDice[0].getValue() + crapsDice[1].getValue();
+
         if (turn == 0) {
             if (sum == 7 || sum == 11) {
                 crapsPlayer.getWinnings();
@@ -74,17 +78,19 @@ public class Craps implements GamblingGame {
 
             } else {
                 targetScore = sum;
-                console.println("You've rolled a " + sum);
+                console.println( "Your Target Score is " + targetScore);
+
             }
         } else {
             if (sum == 7) {
                 console.println("You've Crapped out!!");
                 continuePlay = false;
             } else if (sum == targetScore) {
-                console.println("Your Last Roll Was " + sum + "\nYour Target Score is " + targetScore);
+
                 crapsPlayer.getWinnings();
 
                 console.println("Winner Winner, Chicken Dinner! " );
+                console.println("Congratulations, your payout is $" + crapsPlayer.getPot());
 
                 continuePlay = false;
             }
@@ -95,7 +101,8 @@ public class Craps implements GamblingGame {
 
 
     public void promptUserForWagerAmount() {
-        double userWagerAmount = console.getDoubleInput("How much would you like to wager?");
+
+        double userWagerAmount = console.getDoubleInput("Your balance is now $ " + crapsPlayer.getBalance()+ "\nHow much would you like to wager?");
         boolean wagerAmountSuccessful = crapsPlayer.placeWager(userWagerAmount);
         while (!wagerAmountSuccessful) {
             userWagerAmount = console.getDoubleInput("Wager exceeds your balance. Please wage a smaller amount.");
@@ -105,11 +112,15 @@ public class Craps implements GamblingGame {
 
 
     public void promptLeaveGame() {
-        console.println("Do you want to play again?");
+
+        int userInput = console.getIntegerInput("Your balance is " + crapsPlayer.getBalance() + "\nDo you want to play again? \n" +
+                "1. Yes\n" + "2. No");
+        if (userInput == 1) {
+            startGame();
+
+        }
 
     }
-
-
     public void displayResults() {
 
 
