@@ -21,7 +21,7 @@ public class Yahtzee implements Game {
     public Yahtzee(Player player){
         this.user = player;
         this.myDice = createDice();
-        this.points = 0;
+        this.points = 0;dg
         continuePlay = true;
     }
 
