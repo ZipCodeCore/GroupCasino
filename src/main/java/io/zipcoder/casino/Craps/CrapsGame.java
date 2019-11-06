@@ -31,8 +31,10 @@ public class CrapsGame extends DiceGame implements Game {
     private Console console = new Console(System.in, System.out);
     private GameServices gameServices = new GameServices();
     Music crapsMusic = null;
-    private Integer die1;
-    private Integer die2;
+    private Integer die1Point;
+    private Integer die2Point;
+    private Integer die1Current;
+    private Integer die2Current;
 
 
     //Craps Game Constructor
@@ -82,8 +84,7 @@ public class CrapsGame extends DiceGame implements Game {
         Double betSize = betChoice();
 
         userRollsDiceSetPoint();
-        displayPointRollDie1ASCII(die1);
-        displayPointRollDie2ASCII(die2);
+        displayPointRoll(setThePointRoll);
         if (winOnFirst(setThePointRoll) == true) {
             winningMessageFirstRoll();
             calculateWinnings(betSize, setThePointRoll, numRolls);
@@ -202,53 +203,42 @@ public class CrapsGame extends DiceGame implements Game {
         return false;
     }
 
-    public Integer calculatePayoutMultiplier() {
-        //catch statements
-        return null;
-    }
-
     public void userRollsDiceSetPoint() {
         console.getInput("\nPress Enter to roll the dice\n");
-        die1 = rollFirstDie();
-        die2 = rollSecondDie();
-        tossPointRoll(die1, die2);
+        die1Point = roll();
+        die2Point = roll();
+        tossPointRoll(die1Point, die2Point);
     }
 
     public void userRollsDiceCurrentPoint() {
         console.getInput(String.format("-------------------------------------------------\nSet the Point Roll: %d\nPress Enter to roll the dice\n", setThePointRoll));
-        tossCurrentRoll();
+        die1Current = roll();
+        die2Current = roll();
+        tossCurrentRoll(die1Current, die2Current);
 
     }
 
-    public Integer rollFirstDie (){
-        return DiceGame.roll();
-    }
+//    public Integer rollFirstDie (){
+//        return die1Point =DiceGame.roll();
+//    }
+//
+//    public Integer rollSecondDie () {
+//        return DiceGame.roll();
+//    }
 
-    public Integer rollSecondDie () {
-        return DiceGame.roll();
-    }
-
-    public Integer tossPointRoll(Integer die1, Integer die2) {
-        setThePointRoll = die1+die2;
+    public Integer tossPointRoll(Integer die1Point, Integer die2Point) {
+        setThePointRoll = die1Point + die2Point ;
         return setThePointRoll;
-    }
-
-    public String displayPointRollDie1ASCII(Integer die1){
-        return DiceGame.diceToASCII(die1);
-    }
-
-    public String displayPointRollDie2ASCII(Integer die2){
-        return DiceGame.diceToASCII(die2);
-
     }
 
 
     public void displayPointRoll(Integer setThePointRoll) {
+        console.println(DiceGame.diceToASCII(die1Point, die2Point));
         console.println(String.format("\n(( You have rolled a %d for your set the point roll. ))\n", setThePointRoll));
     }
 
     public void displayCurrentRoll(Integer currentRoll) {
-        console.println(DiceGame.diceToASCII(currentRoll));
+        console.println(DiceGame.diceToASCII(die1Current, die2Current));
         console.println(String.format("\n(( You have rolled a %d for this roll. ))\n", currentRoll));
     }
 
@@ -265,8 +255,8 @@ public class CrapsGame extends DiceGame implements Game {
 
     }
 
-    public Integer tossCurrentRoll() {
-        currentRoll = DiceGame.roll(2);
+    public Integer tossCurrentRoll(Integer die1Current, Integer die2Current) {
+        currentRoll = die1Current + die2Current;
         return currentRoll;
     }
 
