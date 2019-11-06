@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Games.Blackjack;
 
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.GamePieces.Card;
 
 

@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Games.SnakesAndLadders;
 
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
 import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Games.Game;
@@ -131,7 +131,6 @@ public class SnakesAndLadders implements Game {
             return "no winner yet";
         }
     }
-
 
     public Integer diceRoll(boolean isPlayer) {
         Integer currentPosition = 0;

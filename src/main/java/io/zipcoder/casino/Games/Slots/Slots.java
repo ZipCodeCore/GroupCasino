@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Games.Slots;
 
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.GamePieces.SlotMachine;
 import io.zipcoder.casino.Games.GamblingGame;
 import io.zipcoder.casino.Games.Game;
