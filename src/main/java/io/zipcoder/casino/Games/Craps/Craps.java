@@ -6,6 +6,7 @@ import io.zipcoder.casino.Games.GamblingGame;
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
+import io.zipcoder.casino.utilities.Sound;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,10 +21,21 @@ public class Craps implements Game, GamblingGame {
     private Dice dice;
     private int puckVal;
 
+    private Sound spendSound;
+    private Sound moneySound;
+    private Sound loseSound;
+    private Sound diceSound;
+
     public Craps() {
         dice = new Dice();
         running = false;
         playerBet = 0;
+
+        spendSound = new Sound("spend_money.wav");
+        moneySound = new Sound("win_money.wav");
+        loseSound = new Sound("wahwah.wav");
+        diceSound = new Sound("dice_roll.wav");
+
     }
 
 
@@ -81,6 +93,7 @@ public class Craps implements Game, GamblingGame {
         console.dotDotDot(); console.newln();
 
         console.delay(500);
+        diceSound.play();
         Integer roll1 = dice.rollDice(1);
         console.printFast(dice.diceArt(roll1) + "\n");
         Integer roll2 = dice.rollDice(1);
@@ -100,12 +113,14 @@ public class Craps implements Game, GamblingGame {
             console.dotDotDot();
             console.newln();
             currentPlayer.addHistory("You lost $" + playerBet + " playing Craps ** " + timeFormatter.format(LocalDateTime.now()));
+            loseSound.play();
             return false;
         } else if (roll.equals(7) || roll.equals(11)) {
             console.dotDotDot();
             console.printSlow("Natural Roll! Pass Line Wins!\n");
             currentPlayer.addHistory("You won $" + playerBet + " playing Craps ** " + timeFormatter.format(LocalDateTime.now()));
             returnWinnings(currentPlayer);
+            moneySound.play();
             return false;
         } else {
             console.dotDotDot();
@@ -125,12 +140,14 @@ public class Craps implements Game, GamblingGame {
             console.printSlow("You Hit the Point Value!\n");
             currentPlayer.addHistory("You won $" + playerBet + " playing Craps ** " + timeFormatter.format(LocalDateTime.now()));
             returnWinnings(currentPlayer);
+            moneySound.play();
             return false;
         } else if (roll.equals(7)) {
             console.printSlow("Seven-Out! The Pass Line Losses");
             console.dotDotDot();
             console.newln();
             currentPlayer.addHistory("You lost $" + playerBet + " playing Craps ** " + timeFormatter.format(LocalDateTime.now()));
+            loseSound.play();
             return false;
         } else {
             return true;
@@ -166,6 +183,7 @@ public class Craps implements Game, GamblingGame {
             if (currentPlayer.getBalance() >= betAmount && betAmount >= 0) {
                 currentPlayer.changeBalance(-1 * betAmount);
                 playerBet = betAmount;
+                spendSound.play();
                 correctVal = true;
             } else {
                 console.printSlow("You don't have that much money");
