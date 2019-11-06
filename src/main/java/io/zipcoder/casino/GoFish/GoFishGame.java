@@ -59,10 +59,10 @@ public class GoFishGame extends CardGame implements Game {
             this.playersCards.addCard(this.shoe.removeFirstCard());
             this.opponentsCards.addCard(this.shoe.removeFirstCard());
         }
-        prompt(player);
+        playerTurn(player);
     }
 
-    public String prompt(GoFishPlayer player) {
+    public String playerTurn(GoFishPlayer player) {
         displayStatus();
         String cardChoice = console.getCardRankInput("");
         ArrayList<Card> stolenCards = opponentsCards.removeRank(cardChoice);
@@ -71,28 +71,94 @@ public class GoFishGame extends CardGame implements Game {
             String cardCheck = cardChoice;
             System.out.println("YOU HAVE SUCCESSFULLY TAKEN " + stolenCards.size() + stolenCards.get(0) + " FROM THE OPPONENT");
             playersCards.addCards(stolenCards);
-            scanForSuites(cardCheck);
-            prompt(player);
+            scanForPlayerSuites(cardCheck);
+            playerTurn(player);
 
         } else {
-            prompt(player);
+            console.println("OoOoOoO  GO FISH!  OoOoOoO");
+            Card fishedCard = this.shoe.removeFirstCard();
+            playersCards.addCard(fishedCard);
+            if (fishedCard.toString().equals(cardChoice)){
+            scanForPlayerSuites(fishedCard.toString());
+            playerTurn(player);
+            } else {
+                int suiteSuccess = playerSuites.size();
+                scanForPlayerSuites(fishedCard.toString());
+                if (suiteSuccess < playerSuites.size()){
+                    playerTurn(player);
+                } else {
+                    opponentTurn();
+                }
+            }
         }
-        //if(cardChoice ==
+
         return null;
+    }
+    public void opponentTurn() {
+
+        console.clearScreen();
+        displayStatus();
+        console.println("**** IT'S YOUR OPPONENTS TURN! ****"+ "\n" +"\n" +this.opponent.getPlayer()+" IS MAKING THEIR SELECTION..."+"\n "+"\n "+"\n");
+        String npcChoice = npcPickACard();
+        ArrayList<Card> npcStolenCards = playersCards.removeRank(npcChoice);
+        if (npcStolenCards.size()>0){
+            String npcCardCheck = npcChoice;
+            System.out.println("YOU HAVE SUCCESSFULLY TAKEN " + npcStolenCards.size() + npcStolenCards.get(0) + " FROM THE OPPONENT");
+            opponentsCards.addCards(npcStolenCards);
+            scanForPlayerSuites(npcCardCheck);
+            opponentTurn();
+
+        } else {
+            console.println("OoOoOoO  GO FISH!  OoOoOoO");
+            Card npcFishedCard = this.shoe.removeFirstCard();
+            opponentsCards.addCard(npcFishedCard);
+            if (npcFishedCard.toString().equals(npcChoice)){
+                scanForPlayerSuites(npcFishedCard.toString());
+                opponentTurn();
+            } else {
+                int npcSuiteSuccess = opponentSuites.size();
+                scanForPlayerSuites(npcFishedCard.toString());
+                if (npcSuiteSuccess < opponentSuites.size()){
+                    opponentTurn();
+                } else {
+                    playerTurn(player);
+                }
+            }
+        }
+
+
+
+
+    }
+
+    public String npcPickACard() {
+        Random rng = new Random();
+        ArrayList<Card> cardPicker = new ArrayList<>();
+        Set<Card> cardFilter = new TreeSet<>();
+        for (Card i : opponentsCards.getCards())
+            cardFilter.add(i);
+        cardPicker.addAll(cardFilter);
+        String pickedCard = cardPicker.get(rng.nextInt(cardPicker.size())).toString();
+        return pickedCard;
     }
 
     public void roundOfPlay() {
     }
 
-    public String checkForWin() {
+    public String checkForPlayerWin() {
         if (playerSuites.size() >= 7) {
             console.println("YOU WIN!");
         }
+        return playerTurn(player);
+    }
+    public String checkForOpponentWin() {
         if (opponentSuites.size() >= 7) {
             console.println("YOU LOOOOOOOOOOOSE!");
         }
-        return prompt(player);
+        return playerTurn(player);
     }
+
+
     //Option to quit game or play another round
     public void endChoice() {
     }
@@ -111,7 +177,7 @@ public class GoFishGame extends CardGame implements Game {
         displaySuite();
         displayPlayerHands();
     }
-    public void scanForSuites(String selectCard) {
+    public void scanForPlayerSuites(String selectCard) {
         ArrayList<Card>suiteChecker = playersCards.removeRank(selectCard);
         if (suiteChecker.size() == 4) {
             console.println("YOU SUCCESSFULLY MADE A SUITE OF " + suiteChecker.get(0));
@@ -130,23 +196,7 @@ public class GoFishGame extends CardGame implements Game {
         console.println("************************* PLAYER'S HAND *************************\n" + playerSuites.toASCII() + "\n" + "*****************************************************************");
     }
 
-    public String opponentTurn() {
-        console.clearScreen();
-        console.println("**** IT'S YOUR OPPONENTS TURN! ****"+ "\n" +"\n" +this.opponent.getPlayer()+" IS MAKING THEIR SELECTION..."+"\n "+"\n "+"\n");
-        String npcChoice = npcPickACard();
 
-    }
-
-
-    public String npcPickACard(){
-        Random rng = new Random();
-        ArrayList<Card> cardPicker = new ArrayList<>();
-        Set<Card>cardFilter = new TreeSet<>();
-        for (Card i : opponentsCards.getCards())
-            cardFilter.add(i);
-        cardPicker.addAll(cardFilter);
-        String pickedCard= cardPicker.get(rng.nextInt(cardPicker.size())).toString();
-        return pickedCard;
     }
 /*    public void checkShoe() {
         if (this.shoe == null || this.shoe.size() < this.numDecks * 26) {
@@ -158,6 +208,6 @@ public class GoFishGame extends CardGame implements Game {
         newShoe.shuffle();
         return newShoe;
     }*/
-}
+
 
 
