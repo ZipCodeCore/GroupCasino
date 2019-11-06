@@ -71,7 +71,6 @@ public class MainMenu implements Menu {
             ex.printStackTrace();
         }
 
-        // temporary
         for (int gameNum : choiceMap.keySet()) {
             console.println(String.format("%d: %s", gameNum, (choiceMap.get(gameNum)).getName()));
         }
@@ -98,7 +97,6 @@ public class MainMenu implements Menu {
             e.printStackTrace();
         }
         choiceMap.get(choice).displayMenu();
-        Casino.displayEnding(this.player);
         displayMenu();
     }
 }

@@ -99,7 +99,7 @@ public class GoFishGameTest {
     public void scanForSuitesTest(){
         playersCards = new CardSet(0);
         opponentCards = new CardSet(0);
-        playersCards.addCard(new Card("A",);
+        playersCards.addCard(new Card("A","C"));
         playersCards.addCard(new Card("A","H"));
         playersCards.addCard(new Card("A","D"));
         playersCards.addCard(new Card("A","C"));
@@ -108,7 +108,7 @@ public class GoFishGameTest {
         playersCards.addCard(new Card("5","H"));
 
         int testHand = playersCards.size();
-        goFishGame.scanForPlayerSuites("A");
+        //goFishGame.scanForSuites();
         int postScanHand = playersCards.size();
         System.out.println(playersCards.getCards().get(0).toString());
         Assert.assertEquals(testHand-4,postScanHand);
