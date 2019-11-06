@@ -28,7 +28,6 @@ public class CrapsGame extends DiceGame implements Game {
     private Integer setThePointRoll;    //saves your first roll to try to match with later rolls
     private Integer currentRoll;        //any roll after the first
     private Integer numRolls = 0;
-    private Integer counter=1;
     private Console console = new Console(System.in, System.out);
     private GameServices gameServices = new GameServices();
     Music crapsMusic = null;
@@ -212,7 +211,7 @@ public class CrapsGame extends DiceGame implements Game {
     public void userRollsDiceCurrentPoint() {
         console.getInput(String.format("-------------------------------------------------\nSet the Point Roll: %d\nPress Enter to roll the dice\n", setThePointRoll));
         tossCurrentRoll();
-        counter++;
+
     }
 
     public Integer tossPointRoll() {
@@ -238,6 +237,7 @@ public class CrapsGame extends DiceGame implements Game {
 
     public void losingMessageOutOfRolls() {
         console.println(String.format("(( You are out of rolls. ))\nYou seem to have lost.\nThis is unfortunate.....\n:(\n-----------------------------------------\n\n"));
+
     }
 
     public Integer tossCurrentRoll() {
@@ -247,8 +247,7 @@ public class CrapsGame extends DiceGame implements Game {
 
 
     public void winOnSubsequentMessage () throws InterruptedException {
-        console.printWithDelays(String.format("Hooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, counter),50);
-        counter = 0;
+        console.printWithDelays(String.format("Hooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, numRolls),50);
     }
 
     public void loseOnSubsequentMessage () {
