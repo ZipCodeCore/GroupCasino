@@ -84,7 +84,7 @@ public class BlackJack implements Game, GamblingGame {
                     running = false;
                     break;
                 case 3:
-                    running = false;
+                     running = false;
                     break;
             }
         }
