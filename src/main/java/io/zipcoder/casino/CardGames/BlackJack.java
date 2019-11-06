@@ -57,9 +57,13 @@ public class BlackJack implements GamblingGame {
 
     public void promptUserForWagerAmount() {
         double userWagerAmount = input.getDoubleInput("How much would you like to wager?");
-        gamblingPlayer.placeWage(userWagerAmount);
-        while(!placeWager)   {
+
+
+        boolean wagerAmountSuccessful = gamblingPlayer.placeWager(userWagerAmount);
+
+        while(!wagerAmountSuccessful)   {
             userWagerAmount = input.getDoubleInput("Wager exceeds your balance. Please wage a smaller amount.");
+            wagerAmountSuccessful = gamblingPlayer.placeWager(userWagerAmount);
         }
     }
 
