@@ -19,6 +19,5 @@ public class Player {
 
     public void setBalance(Double newBalance) {
         this.balance = newBalance;
-
     }
 }
