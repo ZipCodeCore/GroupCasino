@@ -51,40 +51,29 @@ public abstract class DiceGame extends GameObject {
                 output += "|       |  / ";
             }
         }
-        //output += String.join("|       |  / ", emptyArray);
         output += "\n";
-        output += String.join("|       | /  ", emptyArray);
+        for (int num : dice) {
+            if (num % 2 == 1) {
+                output += "|   \u2022   | /  ";
+            } else if (num == 6) {
+                output += "| \u2022   \u2022 | /  ";
+            } else {
+                output += "|       | /  ";
+            }
+        }
         output += "\n";
-        output += String.join("|       |/   ", emptyArray);
+        for (int num : dice) {
+            if (num >= 4) {
+                output += "| \u2022   \u2022 |/   ";
+            } else if (num > 1) {
+                output += "|     \u2022 |/   ";
+            } else {
+                output += "|       |/   ";
+            }
+        }
         output += "\n";
         output += String.join("\u2514-------\u2518    ", emptyArray);
         output += "\n";
-//        for (Card card : this.cards) {
-//            if (card.getRank().length() == 1) {
-//                output += String.format("| %s     | ", card.getRank());
-//            } else {
-//                output += String.format("|%s     | ", card.getRank());
-//            }
-//        }
-//        output += "\n";
-//        output += String.join("|       | ", emptyArray);
-//        output += "\n";
-//        for (Card card : this.cards) {
-//            output += String.format("|   %s   | ", Card.SUIT_SYMBOLS.get(card.getSuit()));
-//        }
-//        output += "\n";
-//        output += String.join("|       | ", emptyArray);
-//        output += "\n";
-//        for (Card card : this.cards) {
-//            if (card.getRank().length() == 1) {
-//                output += String.format("|     %s | ", card.getRank());
-//            } else {
-//                output += String.format("|     %s| ", card.getRank());
-//            }
-//        }
-//        output += "\n";
-//        output += String.join("\u2514-------\u2518 ", emptyArray);
-//        output += "\n";
         return output;
     }
 
