@@ -24,6 +24,7 @@ public class Roulette implements Game, GamblingGame {
     private boolean isWinner;
     private Boolean isOddEvenGame;
     private Integer winnings;
+    private CasinoArt art = new CasinoArt();
     public void runRoulette(Player currentPlayer){
         this.currentPlayer = currentPlayer;
         approachTable(currentPlayer);
@@ -31,7 +32,7 @@ public class Roulette implements Game, GamblingGame {
 
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
-        console.println(CasinoArt.ROULETTE.getCasinoArt());
+        console.println(art.getCasinoArt(CasinoArt.Art.ROULETTE));
         console.println("You approach the Roulette. What would you like to do?");
         console.println("(1) - Play the game");
         console.println("(2) - Return to the game menu");

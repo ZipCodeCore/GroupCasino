@@ -99,5 +99,9 @@ public final class Console {
         System.out.print("\n");
     }
 
+
+    public static void printSnakesAndLaddersRules(){
+        System.out.println();
+    }
 }
 

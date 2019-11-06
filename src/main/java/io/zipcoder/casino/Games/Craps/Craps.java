@@ -16,6 +16,7 @@ public class Craps implements Game, GamblingGame {
     private Console console = new Console(System.in, System.out);
     private Integer playerBet;
     private boolean running;
+    private CasinoArt art = new CasinoArt();
     private Dice dice;
     private int puckVal;
 
@@ -29,7 +30,7 @@ public class Craps implements Game, GamblingGame {
     @Override
     public void approachTable(Player currentPLayer) {
         Console.clearScreen();
-        console.printFast(CasinoArt.CRAPS.getCasinoArt());
+        console.printFast(art.getCasinoArt(CasinoArt.Art.CRAPS));
         console.printSlow("As you approach the Craps table you hear yelling and shouting");
         console.dotDotDot();
         console.newln();
