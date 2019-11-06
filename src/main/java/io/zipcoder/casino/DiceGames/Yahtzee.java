@@ -189,10 +189,10 @@ public class Yahtzee implements Game {
             case 4: return checkForFaces(diceValues, 4);
             case 5: return checkForFaces(diceValues, 5);
             case 6: return checkForFaces(diceValues, 6);
-            case 7: return checkFor3Kind(diceValues);
-            case 8: return checkFor4Kind(diceValues);
-            case 9: return checkForSmallStraight(diceValues);
-            case 10: return checkForLargeStraight(diceValues);
+            case 7: return checkForSameKind(diceValues, 3);
+            case 8: return checkForSameKind(diceValues,4);
+            case 9: return checkForStraight(diceValues, 4);
+            case 10: return checkForStraight(diceValues, 5);
             case 11: return checkForFullHouse(diceValues);
             case 12: return checkForYahtzee(diceValues);
             case 13: return chance(diceValues);
@@ -218,37 +218,22 @@ public class Yahtzee implements Game {
         return points;
     }
 
-    public int checkFor3Kind(Integer[] diceValues){
+    public int checkForSameKind(Integer[] diceValues, int threeOrFour){
         int counter;
-        for(int i = 0; i < diceValues.length - 2; i++){
+        for(int i = 0; i < diceValues.length - (threeOrFour - 1); i++){
             counter = 1;
             for(int j = i + 1; j < diceValues.length; j++){
                 if(diceValues[i] == diceValues[j]){
                     counter++;
                 }
             }
-            if(counter >= 3){ return this.chance(diceValues); }
-        }
-        return 0;
-    }
-
-    public int checkFor4Kind(Integer[] diceValues){
-        int counter;
-        for(int i = 0; i < diceValues.length - 3; i++){
-            counter = 1;
-            for(int j = i + 1; j < diceValues.length; j++){
-                if(diceValues[i] == diceValues[j]){
-                    counter++;
-                }
-            }
-
-            if(counter >= 4){ return this.chance(diceValues); }
+            if(counter >= threeOrFour){ return this.chance(diceValues); }
         }
         return 0;
     }
 
     public int checkForFullHouse(Integer[] diceValues){
-        if(this.checkFor3Kind(diceValues) != 0){
+        if(this.checkForSameKind(diceValues, 3) != 0){
             int counter;
             for(int i = 0; i < diceValues.length - 2; i++){
                 counter = 1;
@@ -265,7 +250,8 @@ public class Yahtzee implements Game {
         return 0;
     }
 
-    public int checkForSmallStraight(Integer[]diceValues){
+
+    public int checkForStraight(Integer[]diceValues, int size){
         boolean found1 = false;
         boolean found2 = false;
         boolean found3 = false;
@@ -281,36 +267,21 @@ public class Yahtzee implements Game {
             else if(diceValues[i] == 5){ found5 = true; }
             else if(diceValues[i] == 6){ found6 = true; }
         }
-        if((found1 && found2 && found3 && found4)||
-                (found2 && found3 && found4 && found5)||
-                (found3 && found4 && found5 && found6)){
-            return 30;
+        switch(size){
+            case 4:
+                if((found1 && found2 && found3 && found4)||
+                        (found2 && found3 && found4 && found5)||
+                        (found3 && found4 && found5 && found6)){
+                    return 30;
+                }
+            case 5:
+                if((found1 && found2 && found3 && found4 && found5)||
+                        (found2 && found3 && found4 && found5 && found6)){
+                    return 40;
+                }
+            default:
+                return 0;
         }
-        return 0;
-    }
-
-    public int checkForLargeStraight(Integer[]diceValues){
-        boolean found1 = false;
-        boolean found2 = false;
-        boolean found3 = false;
-        boolean found4 = false;
-        boolean found5 = false;
-        boolean found6 = false;
-
-        for (int i = 0; i < diceValues.length; i++){
-            if(diceValues[i] == 1){ found1 = true; }
-            else if(diceValues[i] == 2){ found2 = true; }
-            else if(diceValues[i] == 3){ found3 = true; }
-            else if(diceValues[i] == 4){ found4 = true; }
-            else if(diceValues[i] == 5){ found5 = true; }
-            else if(diceValues[i] == 6){ found6 = true; }
-        }
-        if((found1 && found2 && found3 && found4 && found5)||
-                (found2 && found3 && found4 && found5 && found6)){
-
-            return 40;
-        }
-        return 0;
     }
 
     public int checkForYahtzee(Integer[] diceValues){

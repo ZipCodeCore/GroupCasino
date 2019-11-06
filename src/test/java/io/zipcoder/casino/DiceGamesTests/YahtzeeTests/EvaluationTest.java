@@ -37,7 +37,7 @@ public class EvaluationTest {
     public void get3Kind(){
         Integer[] thisIsMyDice = {1,1,1,6,5};
         int expected = 14;
-        int actual = detect.checkFor3Kind(thisIsMyDice);
+        int actual = detect.checkForSameKind(thisIsMyDice, 3);
         Assert.assertEquals(expected,actual);
     }
 
@@ -45,7 +45,7 @@ public class EvaluationTest {
     public void get3Kind2(){
         Integer[] thisIsMyDice = {1,5,2,2,2};
         int expected = 12;
-        int actual = detect.checkFor3Kind(thisIsMyDice);
+        int actual = detect.checkForSameKind(thisIsMyDice, 3);
         Assert.assertEquals(expected,actual);
     }
 
@@ -53,15 +53,15 @@ public class EvaluationTest {
     public void get4Kind(){
         Integer[] thisIsMyDice = {4,4,4,4,1};
         int expected = 17;
-        int actual = detect.checkFor4Kind(thisIsMyDice);
+        int actual = detect.checkForSameKind(thisIsMyDice, 4);
         Assert.assertEquals(expected,actual);
     }
 
     @Test
     public void get4Kind2(){
-        Integer[] thisIsMyDice2 = {2,4,2,2,1};
+        Integer[] thisIsMyDice = {2,4,2,2,1};
         int expected2 = 0;
-        int actual2 = detect.checkFor4Kind(thisIsMyDice2);
+        int actual2 = detect.checkForSameKind(thisIsMyDice, 4);
         Assert.assertEquals(expected2,actual2);
     }
 
@@ -85,7 +85,7 @@ public class EvaluationTest {
     public void getSmallStraight(){
         Integer[] thisIsMyDice = {3,2,2,4,2};
         int expected = 0;
-        int actual = detect.checkForSmallStraight(thisIsMyDice);
+        int actual = detect.checkForStraight(thisIsMyDice, 4);
         Assert.assertEquals(expected,actual);
     }
 
@@ -93,7 +93,7 @@ public class EvaluationTest {
     public void getSmallStraight2(){
         Integer[] thisIsMyDice = {3,2,5,4,6};
         int expected = 30;
-        int actual = detect.checkForSmallStraight(thisIsMyDice);
+        int actual = detect.checkForStraight(thisIsMyDice, 4);
         Assert.assertEquals(expected,actual);
     }
 
@@ -101,7 +101,7 @@ public class EvaluationTest {
     public void getLargeStraight(){
         Integer[] thisIsMyDice = {3,2,5,4,2};
         int expected = 0;
-        int actual = detect.checkForLargeStraight(thisIsMyDice);
+        int actual = detect.checkForStraight(thisIsMyDice, 5);
         Assert.assertEquals(expected,actual);
     }
 
@@ -109,7 +109,7 @@ public class EvaluationTest {
     public void getLargeStraight2(){
         Integer[] thisIsMyDice = {3,2,5,4,6};
         int expected = 40;
-        int actual = detect.checkForLargeStraight(thisIsMyDice);
+        int actual = detect.checkForStraight(thisIsMyDice, 5);
         Assert.assertEquals(expected,actual);
     }
 
