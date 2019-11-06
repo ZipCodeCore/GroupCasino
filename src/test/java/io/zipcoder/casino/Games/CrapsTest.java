@@ -10,8 +10,7 @@ public class CrapsTest {
     @Test
     public void runGame() {
 
-        Craps craps = new Craps();
-        craps.runGame(new Player("Test", 500));
+
 
     }
 }
