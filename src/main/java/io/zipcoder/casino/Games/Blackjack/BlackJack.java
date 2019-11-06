@@ -1,17 +1,21 @@
-package io.zipcoder.casino.Games;
+package io.zipcoder.casino.Games.Blackjack;
 
+import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.Card;
-import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Games.GamblingGame;
+import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.GamePieces.Deck;
 import io.zipcoder.casino.utilities.Console;
 
-public class BlackJack implements Game, GamblingGame{
+public class BlackJack implements Game, GamblingGame {
 
     Deck deck = new Deck();
     Console console = new Console(System.in, System.out);
     Card[] playerHand = new Card[6];
     Card[] dealerHand = new Card[6];
     private Player currentPlayer;
+    private CasinoArt casinoArt = new CasinoArt();
     Player dealer = new Player( "Dealer", 100000);
     private boolean currentGame = true;
     boolean running = true;
@@ -48,16 +52,7 @@ public class BlackJack implements Game, GamblingGame{
     public void approachTable(Player currentPLayer) {
         Console.clearScreen();
         this.currentPlayer = currentPLayer;
-        console.println("8 888888888o   8 8888                  .8.           ,o888888o.    8 8888     ,88'        8 8888       .8.           ,o888888o.    8 8888     ,88' \n" +
-                "8 8888    `88. 8 8888                 .888.         8888     `88.  8 8888    ,88'         8 8888      .888.         8888     `88.  8 8888    ,88'  \n" +
-                "8 8888     `88 8 8888                :88888.     ,8 8888       `8. 8 8888   ,88'          8 8888     :88888.     ,8 8888       `8. 8 8888   ,88'   \n" +
-                "8 8888     ,88 8 8888               . `88888.    88 8888           8 8888  ,88'           8 8888    . `88888.    88 8888           8 8888  ,88'    \n" +
-                "8 8888.   ,88' 8 8888              .8. `88888.   88 8888           8 8888 ,88'            8 8888   .8. `88888.   88 8888           8 8888 ,88'     \n" +
-                "8 8888888888   8 8888             .8`8. `88888.  88 8888           8 8888 88'             8 8888  .8`8. `88888.  88 8888           8 8888 88'      \n" +
-                "8 8888    `88. 8 8888            .8' `8. `88888. 88 8888           8 888888<   88.        8 8888 .8' `8. `88888. 88 8888           8 888888<       \n" +
-                "8 8888      88 8 8888           .8'   `8. `88888.`8 8888       .8' 8 8888 `Y8. `88.       8 888'.8'   `8. `88888.`8 8888       .8' 8 8888 `Y8.     \n" +
-                "8 8888    ,88' 8 8888          .888888888. `88888.  8888     ,88'  8 8888   `Y8. `88o.    8 88'.888888888. `88888.  8888     ,88'  8 8888   `Y8.   \n" +
-                "8 888888888P   8 888888888888 .8'       `8. `88888.  `8888888P'    8 8888     `Y8. `Y888888 ' .8'       `8. `88888.  `8888888P'    8 8888     `Y8. \n\n\n");
+        console.println(casinoArt.getCasinoArt("blackjack"));
         console.println("You approach the BlackJack table. What would you like to do?");
         console.println("(1) - Play the game");
         console.println("(2) - Read the rules");

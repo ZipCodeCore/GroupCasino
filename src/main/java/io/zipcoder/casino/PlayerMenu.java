@@ -1,10 +1,15 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.Menus.Casino;
+import io.zipcoder.casino.PlayerCreation.Player;
+import io.zipcoder.casino.PlayerRepository;
 import io.zipcoder.casino.utilities.Console;
 
 public class PlayerMenu {
     Console console = new Console(System.in,System.out);
     private PlayerRepository playerRepo;
+    private CasinoArt casinoArt = new CasinoArt();
     boolean running;
 
     public PlayerMenu() {
@@ -24,14 +29,7 @@ public class PlayerMenu {
 
     private void displayPlayerMenu(){
         Console.clearScreen();
-        console.println("  _______ _            _   _       _             _                   ____   _____   _____     ____     _____          _             \n" +
-                " |__   __| |          | \\ | |     | |           (_)                 |  _ \\ |_   _| / ____|   |___ \\   / ____|        (_)            \n" +
-                "    | |  | |__   ___  |  \\| | ___ | |_ ___  _ __ _  ___  _   _ ___  | |_) |  | |  | |  __      __) | | |     __ _ ___ _ _ __   ___  \n" +
-                "    | |  | '_ \\ / _ \\ | . ` |/ _ \\| __/ _ \\| '__| |/ _ \\| | | / __| |  _ <   | |  | | |_ |    |__ <  | |    / _` / __| | '_ \\ / _ \\ \n" +
-                "    | |  | | | |  __/ | |\\  | (_) | || (_) | |  | | (_) | |_| \\__ \\ | |_) | _| |_ | |__| |_   ___) | | |___| (_| \\__ \\ | | | | (_) |\n" +
-                "    |_|  |_| |_|\\___| |_| \\_|\\___/ \\__\\___/|_|  |_|\\___/ \\__,_|___/ |____(_)_____(_)_____(_) |____/   \\_____\\__,_|___/_|_| |_|\\___/ \n" +
-                "                                                                                                                                    \n" +
-                "                                                                                                                                    ");
+        console.println(casinoArt.getCasinoArt("playerMenu"));
         console.println("Welcome stranger! Have I seen you before?");
         console.println("(1) - Yes, My name is...");
         console.println("(2) - No it is my first time!");

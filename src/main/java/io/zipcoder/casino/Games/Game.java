@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.Player;
+import io.zipcoder.casino.PlayerCreation.Player;
 
 public interface Game {
 

@@ -1,18 +1,22 @@
-package io.zipcoder.casino.Games;
+package io.zipcoder.casino.Games.HighAndLow;
 
+import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.Dice;
-import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Games.GamblingGame;
+import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 
-public class HighAndLow implements Game, GamblingGame{
+public class HighAndLow implements Game, GamblingGame {
     private Console console = new Console(System.in, System.out);
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private Dice dice = new Dice();
     private Integer totalBetValue = 0;
     private Player currentPlayer;
+    private CasinoArt casinoArt = new CasinoArt();
     private boolean running = true;
     private boolean didYouBet = true;
 
@@ -74,17 +78,7 @@ public class HighAndLow implements Game, GamblingGame{
     @Override
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
-        console.println(" ██░ ██  ██▓  ▄████  ██░ ██     ▄▄▄       ███▄    █ ▓█████▄     ██▓     ▒█████   █     █░\n" +
-                "▓██░ ██▒▓██▒ ██▒ ▀█▒▓██░ ██▒   ▒████▄     ██ ▀█   █ ▒██▀ ██▌   ▓██▒    ▒██▒  ██▒▓█░ █ ░█░\n" +
-                "▒██▀▀██░▒██▒▒██░▄▄▄░▒██▀▀██░   ▒██  ▀█▄  ▓██  ▀█ ██▒░██   █▌   ▒██░    ▒██░  ██▒▒█░ █ ░█ \n" +
-                "░▓█ ░██ ░██░░▓█  ██▓░▓█ ░██    ░██▄▄▄▄██ ▓██▒  ▐▌██▒░▓█▄   ▌   ▒██░    ▒██   ██░░█░ █ ░█ \n" +
-                "░▓█▒░██▓░██░░▒▓███▀▒░▓█▒░██▓    ▓█   ▓██▒▒██░   ▓██░░▒████▓    ░██████▒░ ████▓▒░░░██▒██▓ \n" +
-                " ▒ ░░▒░▒░▓   ░▒   ▒  ▒ ░░▒░▒    ▒▒   ▓▒█░░ ▒░   ▒ ▒  ▒▒▓  ▒    ░ ▒░▓  ░░ ▒░▒░▒░ ░ ▓░▒ ▒  \n" +
-                " ▒ ░▒░ ░ ▒ ░  ░   ░  ▒ ░▒░ ░     ▒   ▒▒ ░░ ░░   ░ ▒░ ░ ▒  ▒    ░ ░ ▒  ░  ░ ▒ ▒░   ▒ ░ ░  \n" +
-                " ░  ░░ ░ ▒ ░░ ░   ░  ░  ░░ ░     ░   ▒      ░   ░ ░  ░ ░  ░      ░ ░   ░ ░ ░ ▒    ░   ░  \n" +
-                " ░  ░  ░ ░        ░  ░  ░  ░         ░  ░         ░    ░           ░  ░    ░ ░      ░    \n" +
-                "                                                     ░                                   ");
-
+        console.println(casinoArt.getCasinoArt("highAndLow"));
         console.println("The High and Low table... reputed as the lowest of casino games.\n" +
                 "Diminishing returns for the despairing and unfortunate who have fallen too hard on their bad luck.\n" +
                 "Desperation permeates from the eyes of those gathered around the moldy table,\n" +
