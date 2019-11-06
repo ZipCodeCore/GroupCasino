@@ -89,7 +89,7 @@ public class BlackJack implements Game, GamblingGame {
     public void placeBet(Player currentPlayer) {
         Integer playerBet = console.getIntegerInput(":");
         currentPlayer.placeBet(playerBet);
-        pot += playerBet;
+        pot = playerBet;
 
     }
 
@@ -167,12 +167,14 @@ public class BlackJack implements Game, GamblingGame {
 
     }
     public void isWinner(Player currentPlayer){
-        Integer winnings = pot*2;
+        Integer winnings = pot * 2;
     currentPlayer.changeBalance(winnings);
     console.println("You won $"+ winnings);
+
     }
     public void isLoser(){
         console.println("You lost $" + pot);
+
     }
 
     public Integer checkHand(Card[] hand){
