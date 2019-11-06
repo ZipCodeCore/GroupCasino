@@ -23,5 +23,7 @@ public class GoFishPlayerTest {
 
     }
     @Test
-    public void addHandTest(){}
+    public void getPlayerNameTest(){
+
+    }
 }

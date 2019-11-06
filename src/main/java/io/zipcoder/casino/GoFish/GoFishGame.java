@@ -34,13 +34,15 @@ public class GoFishGame extends CardGame implements Game {
     public GoFishGame(Player player) {
         this.player = new GoFishPlayer(player);
         this.opponent = new GoFishNPC(new Player("Baity", "McSwitch", 55, 0));
-        //this.numDecks = 1;
         this.playersCards = new CardSet(0);
         this.opponentsCards = new CardSet(0);
+        this.playerSuites = new CardSet(0);
+        this.opponentSuites = new CardSet(0);
         this.shoe = new CardSet(1);
+
     }
 
- /*   public static void main(String[] args) { // for testing
+    public static void main(String[] args) { // for testing
         Player player = new Player("Lem", "Jukes", 23, 300.00);
         CardSet shoe = new CardSet(1);
         CardSet playersCards = new CardSet(0);
@@ -48,7 +50,6 @@ public class GoFishGame extends CardGame implements Game {
         GoFishGame goFishGame = new GoFishGame(player);
         goFishGame.startPlay();
     }
-*/
     //populates player deals hands
     public void startPlay() {
         new GoFishMenu(this).displayMenu();
@@ -193,7 +194,7 @@ public class GoFishGame extends CardGame implements Game {
         console.println("************************ PLAYER'S SUITES ************************\n" + playerSuites.toASCIISuite() + "\n" + "*****************************************************************");
     }
     public void displayPlayerHands(){
-        console.println("************************* PLAYER'S HAND *************************\n" + playerSuites.toASCII() + "\n" + "*****************************************************************");
+        console.println("************************* PLAYER'S HAND *************************\n" + playersCards.toASCII() + "\n" + "*****************************************************************");
     }
 
 
