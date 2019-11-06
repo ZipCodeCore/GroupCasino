@@ -86,12 +86,15 @@ public class CrapsGame extends DiceGame implements Game {
         userRollsDiceSetPoint();
         displayPointRoll(setThePointRoll);
         if (winOnFirst(setThePointRoll) == true) {
+            //displayPointRoll(setThePointRoll);
             winningMessageFirstRoll();
             calculateWinnings(betSize, setThePointRoll, numRolls);
         } else if (loseOnFirst(setThePointRoll) == true) {
+            //displayPointRoll(setThePointRoll);
             losingMessageFirstRoll();
-        } else {
-            displayPointRoll(setThePointRoll);
+        }
+        else {
+            //displayPointRoll(setThePointRoll);
             for (int i = 0; i < 3; i++) {
                 numRolls = i + 1;
                 userRollsDiceCurrentPoint();
@@ -218,13 +221,6 @@ public class CrapsGame extends DiceGame implements Game {
 
     }
 
-//    public Integer rollFirstDie (){
-//        return die1Point =DiceGame.roll();
-//    }
-//
-//    public Integer rollSecondDie () {
-//        return DiceGame.roll();
-//    }
 
     public Integer tossPointRoll(Integer die1Point, Integer die2Point) {
         setThePointRoll = die1Point + die2Point ;
@@ -233,8 +229,9 @@ public class CrapsGame extends DiceGame implements Game {
 
 
     public void displayPointRoll(Integer setThePointRoll) {
-        console.println(DiceGame.diceToASCII(die1Point, die2Point));
-        console.println(String.format("\n(( You have rolled a %d for your set the point roll. ))\n", setThePointRoll));
+        console.println("\n-------------------------------------------------");
+        console.println("SET THE POINT ROLL:\n" + DiceGame.diceToASCII(die1Point, die2Point) + "\n-------------------------------------------------");
+        //console.println(String.format("\n(( You have rolled a %d for your set the point roll. ))\n", setThePointRoll));
     }
 
     public void displayCurrentRoll(Integer currentRoll) {
@@ -243,15 +240,15 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     public void winningMessageFirstRoll() {
-        console.println(String.format("\n(( You rolled a %d on the first roll! ))\n\nCongratulations!!\n\nYou are a winner!!!\n------------------------------------------\n\n", setThePointRoll));
+        console.println(String.format("\n(( You rolled a %d on the first roll! ))\n\nCongratulations!!\n\nYou are a winner!!!\n-------------------------------------------------\n\n", setThePointRoll));
     }
 
     public void losingMessageFirstRoll() {
-        console.println(String.format("\n(( You rolled a %d and have lost on the first roll! ))\n\nThis is unfortunate.....\n\n:(\n-------------------------------------------\n\n", setThePointRoll));
+        console.println(String.format("\n(( You rolled a %d and have lost on the first roll! ))\n\nThis is unfortunate.....\n\n:(\n-------------------------------------------------\n\n", setThePointRoll));
     }
 
     public void losingMessageOutOfRolls() {
-        console.println(String.format("(( You are out of rolls. ))\nYou seem to have lost.\nThis is unfortunate.....\n:(\n-----------------------------------------\n\n"));
+        console.println(String.format("(( You are out of rolls. ))\nYou seem to have lost.\nThis is unfortunate.....\n:(\n-------------------------------------------------\n\n"));
 
     }
 
@@ -266,7 +263,7 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     public void loseOnSubsequentMessage () {
-        console.println(String.format("It appears that the odds were not in your favor today. Better luck next time.....\n-----------------------------------------------\n\n"));
+        console.println(String.format("It appears that the odds were not in your favor today. Better luck next time.....\n-------------------------------------------------\n\n"));
     }
 }
 
