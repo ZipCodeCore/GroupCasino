@@ -131,9 +131,12 @@ package io.zipcoder.casino;
 
 
 
-        public final String label;
+        public final String art;
 
         CasinoArt(String label) {
-            this.label = label;
+            this.art = label;
+        }
+        public String getCasinoArt(){
+            return art;
         }
     }

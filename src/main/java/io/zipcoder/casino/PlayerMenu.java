@@ -28,7 +28,7 @@ public class PlayerMenu {
 
     private void displayPlayerMenu(){
         Console.clearScreen();
-        console.println(CasinoArt.PLAYERMENU.toString());
+        console.println(CasinoArt.PLAYERMENU.getCasinoArt());
         console.println("Welcome stranger! Have I seen you before?");
         console.println("(1) - Yes, My name is...");
         console.println("(2) - No it is my first time!");

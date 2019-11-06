@@ -54,7 +54,7 @@ public class SnakesAndLadders implements Game {
     }
 
     public String playerTurn(Integer playerPosition){
-        console.getStringInput(SnakesAndLaddersLanguage.DICEROLL.toString());
+        console.getStringInput(SnakesAndLaddersLanguage.DICEROLL.getSnakeLanguage());
         playerPosition = playerDiceRoll();
         playerSnakesAndLadders(playerPosition);
         if(playerPosition >= 100){
@@ -160,16 +160,16 @@ public class SnakesAndLadders implements Game {
 
 
     public void showRules(){
-        console.println(SnakesAndLaddersLanguage.RULES.toString());
+        console.println(SnakesAndLaddersLanguage.RULES.getSnakeLanguage());
     }
 
 
     @Override
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
-        console.println(CasinoArt.SNAKESANDLADDERS.toString());
+        console.println(CasinoArt.SNAKESANDLADDERS.getCasinoArt());
         while(running) {
-            console.println(SnakesAndLaddersLanguage.APPROACHTABLE.toString());
+            console.println(SnakesAndLaddersLanguage.APPROACHTABLE.getSnakeLanguage());
             Integer playerInput = console.getIntegerInput(":");
             switch (playerInput) {
                 case 1:
@@ -195,11 +195,11 @@ public class SnakesAndLadders implements Game {
             console.println("In this house, the player always goes first! Step on up!");
             String winner = startNewGame();
             if (winner.equals("Player")) {
-                console.println(SnakesAndLaddersLanguage.PLAYERWINS.toString());
+                console.println(SnakesAndLaddersLanguage.PLAYERWINS.getSnakeLanguage());
                 LocalDateTime now = LocalDateTime.now();
                 currentPlayer.addHistory("You won at Snakes and Ladders. ** " + dateTimeFormatter.format(now) + "!");
             } else if (winner.equals("Ai")) {
-                console.println(SnakesAndLaddersLanguage.AIWINS.toString());
+                console.println(SnakesAndLaddersLanguage.AIWINS.getSnakeLanguage());
                 LocalDateTime now = LocalDateTime.now();
                 currentPlayer.addHistory("You lost at Snakes and Ladders. ** " + dateTimeFormatter.format(now));
             }
@@ -210,7 +210,7 @@ public class SnakesAndLadders implements Game {
 
     @Override
     public void exitGame(Player currentPlayer) {
-        console.println(SnakesAndLaddersLanguage.EXITMENU.toString());
+        console.println(SnakesAndLaddersLanguage.EXITMENU.getSnakeLanguage());
         Integer playerInput = console.getIntegerInput(":");
         switch (playerInput){
             case 1:

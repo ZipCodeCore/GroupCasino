@@ -69,7 +69,7 @@ public class HighAndLow implements Game, GamblingGame {
     @Override
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
-        console.println(CasinoArt.HIGHANDLOW.toString());
+        console.println(CasinoArt.HIGHANDLOW.getCasinoArt());
         console.println(language.getHighAndLowLanguage("approachTable"));
         while(running) {
         console.println(language.getHighAndLowLanguage("approachTableMenu"));

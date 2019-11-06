@@ -25,10 +25,14 @@ public enum SnakesAndLaddersLanguage{
         AIWINS("Oh, Too bad! I won! Better lucky next time!");
 
 
-    public final String label;
+    public final String text;
 
     SnakesAndLaddersLanguage(String label) {
-        this.label = label;
+        this.text = label;
+    }
+
+    public String getSnakeLanguage(){
+        return text;
     }
 
 }

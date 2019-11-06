@@ -27,7 +27,7 @@ public class GameMenu {
 
     public void displayGameMenu(){
         Console.clearScreen();
-        console.println(CasinoArt.GAMEMENU.toString());
+        console.println(CasinoArt.GAMEMENU.getCasinoArt());
         console.println("Hi! Welcome to the game menu!\nHere are the games you can play:");
         console.println("(1) - Go Fish");
         console.println("(2) - Blackjack");

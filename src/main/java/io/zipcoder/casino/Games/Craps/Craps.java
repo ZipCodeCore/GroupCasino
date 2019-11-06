@@ -29,7 +29,7 @@ public class Craps implements Game, GamblingGame {
     @Override
     public void approachTable(Player currentPLayer) {
         Console.clearScreen();
-        console.printFast(CasinoArt.CRAPS.toString());
+        console.printFast(CasinoArt.CRAPS.getCasinoArt());
         console.printSlow("As you approach the Craps table you hear yelling and shouting");
         console.dotDotDot();
         console.newln();
