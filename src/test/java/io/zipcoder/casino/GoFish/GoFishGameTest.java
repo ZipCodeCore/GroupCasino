@@ -21,6 +21,8 @@ public class GoFishGameTest {
     private CardSet playersCards;
     private CardSet opponentCards;
     private CardSet shoe;
+    private CardSet playerSuites;
+    private CardSet opponentSuites;
 
 
     @Before
@@ -95,6 +97,25 @@ public class GoFishGameTest {
     }
     @Test
     public void scanForSuitesTest(){
+        playersCards = new CardSet(0);
+        opponentCards = new CardSet(0);
+        playersCards.addCard(new Card("A",);
+        playersCards.addCard(new Card("A","H"));
+        playersCards.addCard(new Card("A","D"));
+        playersCards.addCard(new Card("A","C"));
+        playersCards.addCard(new Card("2","H"));
+        playersCards.addCard(new Card("K","D"));
+        playersCards.addCard(new Card("5","H"));
+
+        int testHand = playersCards.size();
+        goFishGame.scanForPlayerSuites("A");
+        int postScanHand = playersCards.size();
+        System.out.println(playersCards.getCards().get(0).toString());
+        Assert.assertEquals(testHand-4,postScanHand);
+
+
+
+
 
     }
 
