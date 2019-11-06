@@ -2,11 +2,14 @@ package io.zipcoder.casino.Blackjack;
 
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardSet;
+import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.Utilities.Console;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BlackjackHand {
 
@@ -15,13 +18,22 @@ public class BlackjackHand {
     private int value;
     private BlackjackPlayer player;
     private Console console = new Console(System.in, System.out);
+    private GameServices gameServices = new GameServices();
+    private Logger logger = Logger.getLogger(BlackjackHand.class.getName());
 
     public BlackjackHand(double bet, BlackjackPlayer player, Card card1, Card card2) {
         this.bet = bet;
         this.player = player;
         this.cards = new CardSet(0);
+//        if (card2 != null) {
+//            this.cards.addCard(new Card("5", "H"));
+//            this.cards.addCard(new Card("5", "D"));
+//        } else {
         this.cards.addCard(card1);
-        this.cards.addCard(card2);
+        if (card2 != null) {
+            this.cards.addCard(card2);
+        }
+//        }
     }
 
     public CardSet getCards() {
@@ -58,25 +70,33 @@ public class BlackjackHand {
     }
 
     public int playChoice(CardSet shoe){
-        if (this.cards.size() == 2 && this.cards.getCards().get(0).equals(this.cards.getCards().get(1))) {
-            splitHand();
-            return -1;
-        } else { // normal case
-            console.println("1. Hit\n2. Stay\n");
 
+        if (this.cards.size() == 2 && this.cards.getCards().get(0).equals(this.cards.getCards().get(1))) { //splitzies
+            console.println("1. Split\n2. Play this hand\n");
             switch (console.menuChoice(2)) {
                 case 1:
-                    int val = hit(shoe.removeFirstCard());
-                    if (val != 0) {
-                        return -1;
-                    } else {
-                        return 0;
-                    }
+                    splitHand();
+                    return -1;
                 case 2:
-                    return this.getValue();
+                    break;
             }
-            return -1;
         }
+        // normal case
+        console.println("1. Hit\n2. Stay\n");
+
+        switch (console.menuChoice(2)) {
+            case 1:
+                int val = hit(shoe.removeFirstCard());
+                if (val != 0) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            case 2:
+                return this.getValue();
+        }
+        return -1;
+
     }
 
     public int hit(Card card) {
@@ -88,6 +108,7 @@ public class BlackjackHand {
     public void splitHand() {
         Card card = this.cards.removeFirstCard();
         this.player.addHand(new BlackjackHand(this.bet, this.player, card, null));
+        gameServices.wager(this.bet, this.player.getPlayer());
     }
 
     public int getValue() {
@@ -114,7 +135,10 @@ public class BlackjackHand {
         for (Card card: cards.getCards()) {
             values.add(BlackjackGame.cardMap.get(card.getRank()));
         }
-        Collections.sort(values,Collections.reverseOrder());
+//        logger.log(Level.INFO, "==================");
+//        logger.log(Level.INFO, values.toString());
+        Collections.sort(values);
+//        logger.log(Level.INFO, values.toString());
         return values;
     }
 
@@ -125,6 +149,5 @@ public class BlackjackHand {
         }
         return sum;
     }
-
 
 }

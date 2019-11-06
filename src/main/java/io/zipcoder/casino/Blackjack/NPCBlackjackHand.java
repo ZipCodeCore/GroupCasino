@@ -4,8 +4,11 @@ import io.zipcoder.casino.Blackjack.BlackjackHand;
 import io.zipcoder.casino.Blackjack.BlackjackPlayer;
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardSet;
+import io.zipcoder.casino.Utilities.Console;
 
 public class NPCBlackjackHand extends BlackjackHand {
+
+    private Console console = new Console(System.in, System.out);
 
     public NPCBlackjackHand(double bet, BlackjackPlayer player, Card card1, Card card2) {
         super(bet, player, card1, card2);
@@ -13,10 +16,7 @@ public class NPCBlackjackHand extends BlackjackHand {
 
     @Override
     public int playChoice(CardSet shoe) {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-        }
+        console.sleep(500);
         if (this.getValue() <= ((BlackjackNPCPlayer) this.getPlayer()).getThreshold()) {
             int val = hit(shoe.removeFirstCard());
             if (val != 0) {

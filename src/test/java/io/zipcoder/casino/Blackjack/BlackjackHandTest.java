@@ -61,13 +61,10 @@ public class BlackjackHandTest {
 
     @Test
     public void addCardTest() {
-        Assert.assertEquals(2,(int) hand.size());
-        Card card1 = new Card("4","D");
+        Assert.assertEquals(2, (int) hand.size());
+        Card card1 = new Card("4", "D");
         hand.addCard(card1);
-        Assert.assertEquals(3,(int) hand.size());
-        hand.getCards().removeFirstCard();
-        hand.getCards().removeFirstCard();
-        Assert.assertEquals(card1, hand.getCards().removeFirstCard());
+        Assert.assertEquals(3, (int) hand.size());
     }
 
     @Test
@@ -88,7 +85,7 @@ public class BlackjackHandTest {
 
         ArrayList<Integer> actual = new ArrayList<Integer>();
         actual = hand.mapCardValues(cards);
-        ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(11,10,5,2));
+        ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(2, 5, 10, 11));
         Assert.assertEquals(expected, actual);
     }
 
@@ -102,7 +99,7 @@ public class BlackjackHandTest {
 
         ArrayList<Integer> actual = new ArrayList<Integer>();
         actual = hand.mapCardValues(cards);
-        ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(10,10,10,3));
+        ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(3,10,10,10));
         Assert.assertEquals(expected, actual);
     }
 
@@ -120,10 +117,10 @@ public class BlackjackHandTest {
     @Test
     public void getValueTest2() {
         hand.clear();
-        hand.addCard(new Card("A","S"));
         hand.addCard(new Card("3","H"));
         hand.addCard(new Card("5","D"));
         hand.addCard(new Card("4","C"));
+        hand.addCard(new Card("A","S"));
 
         Assert.assertEquals(13,hand.getValue());
     }
