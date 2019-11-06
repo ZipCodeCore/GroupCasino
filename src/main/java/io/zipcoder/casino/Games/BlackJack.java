@@ -50,7 +50,18 @@ public class BlackJack implements Game, GamblingGame{
 
     @Override
     public void approachTable(Player currentPLayer) {
+        Console.clearScreen();
         this.currentPlayer = currentPLayer;
+        console.println("8 888888888o   8 8888                  .8.           ,o888888o.    8 8888     ,88'        8 8888       .8.           ,o888888o.    8 8888     ,88' \n" +
+                "8 8888    `88. 8 8888                 .888.         8888     `88.  8 8888    ,88'         8 8888      .888.         8888     `88.  8 8888    ,88'  \n" +
+                "8 8888     `88 8 8888                :88888.     ,8 8888       `8. 8 8888   ,88'          8 8888     :88888.     ,8 8888       `8. 8 8888   ,88'   \n" +
+                "8 8888     ,88 8 8888               . `88888.    88 8888           8 8888  ,88'           8 8888    . `88888.    88 8888           8 8888  ,88'    \n" +
+                "8 8888.   ,88' 8 8888              .8. `88888.   88 8888           8 8888 ,88'            8 8888   .8. `88888.   88 8888           8 8888 ,88'     \n" +
+                "8 8888888888   8 8888             .8`8. `88888.  88 8888           8 8888 88'             8 8888  .8`8. `88888.  88 8888           8 8888 88'      \n" +
+                "8 8888    `88. 8 8888            .8' `8. `88888. 88 8888           8 888888<   88.        8 8888 .8' `8. `88888. 88 8888           8 888888<       \n" +
+                "8 8888      88 8 8888           .8'   `8. `88888.`8 8888       .8' 8 8888 `Y8. `88.       8 888'.8'   `8. `88888.`8 8888       .8' 8 8888 `Y8.     \n" +
+                "8 8888    ,88' 8 8888          .888888888. `88888.  8888     ,88'  8 8888   `Y8. `88o.    8 88'.888888888. `88888.  8888     ,88'  8 8888   `Y8.   \n" +
+                "8 888888888P   8 888888888888 .8'       `8. `88888.  `8888888P'    8 8888     `Y8. `Y888888 ' .8'       `8. `88888.  `8888888P'    8 8888     `Y8. \n\n\n");
         console.println("You approach the BlackJack table. What would you like to do?");
         console.println("(1) - Play the game");
         console.println("(2) - Read the rules");
@@ -99,8 +110,9 @@ public class BlackJack implements Game, GamblingGame{
     public void hitOrStay(){
         String playerInput = console.getStringInput(":");
         if (playerInput.equals("hit")){
-            console.println("Would you like to 'hit' or 'stay'?");
             handOfPlayer = checkHand(playerHand);
+            console.println("Would you like to 'hit' or 'stay'?");
+
             hit();
 
 
@@ -110,6 +122,7 @@ public class BlackJack implements Game, GamblingGame{
 
         }else{
             console.println("Not a choice");
+            hitOrStay();
         }
 
     }

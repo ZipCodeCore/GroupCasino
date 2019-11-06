@@ -175,8 +175,13 @@ public class SnakesAndLadders implements Game {
 
     @Override
     public void approachTable(Player currentPlayer) {
-        console.println("You approach the Snakes and Ladders table. What would you like to do?");
-        console.println("Snakes and Ladders\n\n" +
+        Console.clearScreen();
+        console.println("     _________              __                                      .___ .____                .___  .___                   \n" +
+                " /   _____/ ____ _____  |  | __ ____   ______ _____    ____    __| _/ |    |   _____     __| _/__| _/___________  ______\n" +
+                " \\_____  \\ /    \\\\__  \\ |  |/ // __ \\ /  ___/ \\__  \\  /    \\  / __ |  |    |   \\__  \\   / __ |/ __ |/ __ \\_  __ \\/  ___/\n" +
+                " /        \\   |  \\/ __ \\|    <\\  ___/ \\___ \\   / __ \\|   |  \\/ /_/ |  |    |___ / __ \\_/ /_/ / /_/ \\  ___/|  | \\/\\___ \\ \n" +
+                "/_______  /___|  (____  /__|_ \\\\___  >____  > (____  /___|  /\\____ |  |_______ (____  /\\____ \\____ |\\___  >__|  /____  >\n" +
+                "        \\/     \\/     \\/     \\/    \\/     \\/       \\/     \\/      \\/          \\/    \\/      \\/    \\/    \\/           \\/ \n\n\n" +
                 "       ---_ ......._-_--.\n" +
                 "      (|\\ /      / /| \\  \\\n" +
                 "      /  /     .'  -=-'   `.\n" +
@@ -192,6 +197,7 @@ public class SnakesAndLadders implements Game {
                 "       `/'\\__/      \\ _ _ \\*\\\n" +
                 "      /^|            \\ _ _ \\*\n" +
                 "     '  `             \\ _ _ \\      ");
+        console.println("You approach the Snakes and Ladders table. What would you like to do?");
         while(running) {
         console.println("(1) - Play the game");
         console.println("(2) - Read the rules");

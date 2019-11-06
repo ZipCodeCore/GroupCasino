@@ -23,6 +23,32 @@ public class Craps implements Game, GamblingGame {
 
     @Override
     public void approachTable(Player currentPLayer) {
+        Console.clearScreen();
+        console.println("\n" +
+                "                                                      \n" +
+                "                                                      \n" +
+                "  ,----..                                             \n" +
+                " /   /   \\                     ,-.----.               \n" +
+                "|   :     :  __  ,-.           \\    /  \\              \n" +
+                ".   |  ;. /,' ,'/ /|           |   :    |  .--.--.    \n" +
+                ".   ; /--` '  | |' | ,--.--.   |   | .\\ : /  /    '   \n" +
+                ";   | ;    |  |   ,'/       \\  .   : |: ||  :  /`./   \n" +
+                "|   : |    '  :  / .--.  .-. | |   |  \\ :|  :  ;_     \n" +
+                ".   | '___ |  | '   \\__\\/: . . |   : .  | \\  \\    `.  \n" +
+                "'   ; : .'|;  : |   ,\" .--.; | :     |`-'  `----.   \\ \n" +
+                "'   | '/  :|  , ;  /  /  ,.  | :   : :    /  /`--'  / \n" +
+                "|   :    /  ---'  ;  :   .'   \\|   | :   '--'.     /  \n" +
+                " \\   \\ .'         |  ,     .-./`---'.|     `--'---'   \n" +
+                "  `---`            `--`---'      `---`                \n" +
+                "                                                      \n");
+        console.println("              _______.\n" +
+                "   ______    | .   . |\\\n" +
+                "  /     /\\   |   .   |.\\\n" +
+                " /  '  /  \\  | .   . |.'|\n" +
+                "/_____/. . \\ |_______|.'|\n" +
+                "\\ . . \\    /  \\ ' .   \\'|\n" +
+                " \\ . . \\  /    \\____'__\\|\n" +
+                "  \\_____\\/\n\n");
         console.print("As you approach the Craps table you hear yelling and shouting");
         console.dotDotDot();
         console.newln();
