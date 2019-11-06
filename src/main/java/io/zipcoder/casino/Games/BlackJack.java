@@ -31,6 +31,7 @@ public class BlackJack implements Game, GamblingGame{
         viewCurrentHand();
         console.println("How much would you like to los- I mean bet?");
         placeBet(currentPlayer);
+        houseWin();
         console.println("Would you like to 'hit' or 'stay'?");
         viewDealerHand();
         viewCurrentHand();
@@ -38,6 +39,7 @@ public class BlackJack implements Game, GamblingGame{
         checkHand(playerHand);
         checkHand(dealerHand);
         dealerMove();
+        checksWinner();
         exitGame(currentPlayer);
         }
 
@@ -197,6 +199,7 @@ return null;
 
     @Override
     public void exitGame(Player currentPlayer) {
+
         console.println("Would you like to play again?");
         console.println("(1) - Yes");
         console.println("(2) - No");
@@ -215,32 +218,61 @@ return null;
     public void dealerMove(){
         Integer value = checkHand(dealerHand);
         Integer counter = 2;
-        while (value <= 15 && dealerHand[4] == null){
+
+        while (value <= 21) {
             dealerHand[counter] = deck.draw();
             counter++;
 
+            if (value == 16 || value == 17) {
+                //dealer cheat method
+            } else if (value >= 18 && value <= 21 && dealerHand[5] != null) {
+                console.println("Dealer Chose to stay");
 
+            } else if (value <= 21 && dealerHand[5] != null) {
+                console.println("Dealer wins Special Five");
+                isLoser();
+            } else if (value <= 15) {
+                dealerHand[counter] = deck.draw();
+                counter++;
+            } else if (value > 21) {
+                console.println("Dealer Bust...");
+                isWinner();
+            }
         }
 
 
 
-        if(value == 16 || value == 17){
-            //dealer cheat method
-        }else if (value >= 18 && value <= 21 && dealerHand[5] != null){
-            console.println("Dealer Chose to stay");
+    }
+    private Boolean checkForBlackjack(Card[] hand){
+        if (checkHand(hand) == 21){
+            return true;
+        }else{
+            return false;
+        }
 
-        }else if (value <= 21 && dealerHand[5] != null){
-            console.println("Dealer wins Special Five");
+    }
+private void houseWin(){
+        if (checkForBlackjack(dealerHand) && checkForBlackjack(playerHand)){
+            Integer handOfPlayer = checkHand(playerHand);
+            Integer handOfDealer = checkHand(dealerHand);
+            console.println("Your Hand was " + handOfPlayer);
+            console.println("Dealers Hand was " + handOfDealer);
+            console.println("The house wins!");
+
             isLoser();
-        }else if (value <= 15) {
-            dealerHand[counter] = deck.draw();
-            counter++;
-        }else if (value > 21){
-            console.println("Dealer Bust...");
+            exitGame(currentPlayer);
+        }else if(checkForBlackjack(playerHand)){
+            handOfPlayer = checkHand(playerHand);
+            handOfDealer = checkHand(dealerHand);
+            console.println("Your Hand was " + handOfPlayer);
+            console.println("Dealers Hand was " + handOfDealer);
+            console.println("Congratulations you Won!");
+
             isWinner();
-        }
-
-
+            exitGame(currentPlayer);
+        }else if (checkForBlackjack(dealerHand)){}
+}
+    private void checksWinner() {
         if(checkHand(playerHand) > checkHand(dealerHand) && checkHand(playerHand) <= 21){
             handOfPlayer = checkHand(playerHand);
             handOfDealer = checkHand(dealerHand);
@@ -258,7 +290,6 @@ return null;
 
             isLoser();
         }
-
     }
 
 }
