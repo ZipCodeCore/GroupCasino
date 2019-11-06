@@ -9,8 +9,8 @@ public class Player {
     protected double balance;
 
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void addAmount(double balance) {
+        this.balance += balance;
     }
 
     public Player(String ID, String password){
