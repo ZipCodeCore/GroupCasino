@@ -3,6 +3,7 @@ package io.zipcoder.casino;
 
 import io.zipcoder.casino.Games.BlackJack;
 import io.zipcoder.casino.Games.Craps;
+import io.zipcoder.casino.Games.Roulette;
 import io.zipcoder.casino.Games.SnakesAndLadders;
 import io.zipcoder.casino.Games.HighAndLow;
 import io.zipcoder.casino.utilities.Console;
@@ -61,10 +62,9 @@ public class GameMenu {
                 SnakesAndLadders.runSnakesAndLadders(currentPlayer);
                 return "You would be playing Snakes and Ladders now.";
             case 5:
-                console.print("You would be playing Roulette now.");
-                /*Roulette roulette = new Roulette;
-                roulette.launchRoulette();
-                 */
+                Roulette roulette = new Roulette();
+                roulette.runRoulette(currentPlayer);
+
                 return "You would be playing Roulette now.";
             case 6:
                 console.print("You would be playing Slots now.");

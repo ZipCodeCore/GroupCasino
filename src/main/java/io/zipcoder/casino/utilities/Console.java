@@ -59,6 +59,24 @@ public final class Console {
         return getLongInput(prompt, args).intValue();
     }
 
+    public void printFast(String val) {
+        int count = 0;
+        for (char c : val.toCharArray()) {
+            output.print(c);
+            count++;
+            if ((count % 5) == 0) {
+                delay(5);
+            }
+        }
+    }
+
+    public void printSlow(String val) {
+        for (char c : val.toCharArray()) {
+            output.print(c);
+            delay(15);
+        }
+    }
+
     public void newln() {
         print("\n");
     }

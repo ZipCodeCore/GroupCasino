@@ -1,16 +1,17 @@
-package io.zipcoder.casino.Games;
+package io.zipcoder.casino.TestGames;
 
-import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
 import io.zipcoder.casino.GamePieces.Dice;
+import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
+import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 
-public class SnakesAndLadders implements Game {
+public class SnakesAndLaddersTester implements Game {
     private Console console = new Console(System.in, System.out);
     private Dice dice = new Dice();
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -52,7 +53,7 @@ public class SnakesAndLadders implements Game {
     }
 
     public String playerTurn(Integer playerPosition){
-        console.getStringInput("Press Enter to roll the dice.");
+        //console.getStringInput("Press Enter to roll the dice.");
         playerPosition = playerDiceRoll();
         playerSnakesAndLadders(playerPosition);
         if(playerPosition >= 100){
@@ -63,7 +64,7 @@ public class SnakesAndLadders implements Game {
     }
 
     public String aiTurn(Integer aiPosition){
-        console.getStringInput("Now it's my turn! Press enter.");
+        //console.getStringInput("Now it's my turn! Press enter.");
         aiPosition = aiDiceRoll();
         aiSnakesAndLadders(aiPosition);
         if (aiPosition >= 100){
@@ -175,28 +176,7 @@ public class SnakesAndLadders implements Game {
 
     @Override
     public void approachTable(Player currentPlayer) {
-        console.println("You approach the Snakes and Ladders table. What would you like to do?\n\n");
-        console.println("     _________              __                                      .___ .____                .___  .___                   \n" +
-                " /   _____/ ____ _____  |  | __ ____   ______ _____    ____    __| _/ |    |   _____     __| _/__| _/___________  ______\n" +
-                " \\_____  \\ /    \\\\__  \\ |  |/ // __ \\ /  ___/ \\__  \\  /    \\  / __ |  |    |   \\__  \\   / __ |/ __ |/ __ \\_  __ \\/  ___/\n" +
-                " /        \\   |  \\/ __ \\|    <\\  ___/ \\___ \\   / __ \\|   |  \\/ /_/ |  |    |___ / __ \\_/ /_/ / /_/ \\  ___/|  | \\/\\___ \\ \n" +
-                "/_______  /___|  (____  /__|_ \\\\___  >____  > (____  /___|  /\\____ |  |_______ (____  /\\____ \\____ |\\___  >__|  /____  >\n" +
-                "        \\/     \\/     \\/     \\/    \\/     \\/       \\/     \\/      \\/          \\/    \\/      \\/    \\/    \\/           \\/ \n\n\n" +
-                "       ---_ ......._-_--.\n" +
-                "      (|\\ /      / /| \\  \\\n" +
-                "      /  /     .'  -=-'   `.\n" +
-                "     /  /    .'             )\n" +
-                "   _/  /   .'        _.)   /\n" +
-                "  / o   o        _.-' /  .'\n" +
-                "  \\          _.-'    / .'*|\n" +
-                "   \\______.-'//    .'.' \\*|\n" +
-                "    \\|  \\ | //   .'.' _ |*|\n" +
-                "     `   \\|//  .'.'_ _ _|*|\n" +
-                "      .  .// .'.' | _ _ \\*|\n" +
-                "      \\`-|\\_/ /    \\ _ _ \\*\\\n" +
-                "       `/'\\__/      \\ _ _ \\*\\\n" +
-                "      /^|            \\ _ _ \\*\n" +
-                "     '  `             \\ _ _ \\      ");
+        console.println("You approach the Snakes and Ladders table. What would you like to do?");
         while(running) {
         console.println("(1) - Play the game");
         console.println("(2) - Read the rules");

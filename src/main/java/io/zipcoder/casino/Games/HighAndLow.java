@@ -73,6 +73,17 @@ public class HighAndLow implements Game, GamblingGame{
 
     @Override
     public void approachTable(Player currentPlayer) {
+        console.println(" ██░ ██  ██▓  ▄████  ██░ ██     ▄▄▄       ███▄    █ ▓█████▄     ██▓     ▒█████   █     █░\n" +
+                "▓██░ ██▒▓██▒ ██▒ ▀█▒▓██░ ██▒   ▒████▄     ██ ▀█   █ ▒██▀ ██▌   ▓██▒    ▒██▒  ██▒▓█░ █ ░█░\n" +
+                "▒██▀▀██░▒██▒▒██░▄▄▄░▒██▀▀██░   ▒██  ▀█▄  ▓██  ▀█ ██▒░██   █▌   ▒██░    ▒██░  ██▒▒█░ █ ░█ \n" +
+                "░▓█ ░██ ░██░░▓█  ██▓░▓█ ░██    ░██▄▄▄▄██ ▓██▒  ▐▌██▒░▓█▄   ▌   ▒██░    ▒██   ██░░█░ █ ░█ \n" +
+                "░▓█▒░██▓░██░░▒▓███▀▒░▓█▒░██▓    ▓█   ▓██▒▒██░   ▓██░░▒████▓    ░██████▒░ ████▓▒░░░██▒██▓ \n" +
+                " ▒ ░░▒░▒░▓   ░▒   ▒  ▒ ░░▒░▒    ▒▒   ▓▒█░░ ▒░   ▒ ▒  ▒▒▓  ▒    ░ ▒░▓  ░░ ▒░▒░▒░ ░ ▓░▒ ▒  \n" +
+                " ▒ ░▒░ ░ ▒ ░  ░   ░  ▒ ░▒░ ░     ▒   ▒▒ ░░ ░░   ░ ▒░ ░ ▒  ▒    ░ ░ ▒  ░  ░ ▒ ▒░   ▒ ░ ░  \n" +
+                " ░  ░░ ░ ▒ ░░ ░   ░  ░  ░░ ░     ░   ▒      ░   ░ ░  ░ ░  ░      ░ ░   ░ ░ ░ ▒    ░   ░  \n" +
+                " ░  ░  ░ ░        ░  ░  ░  ░         ░  ░         ░    ░           ░  ░    ░ ░      ░    \n" +
+                "                                                     ░                                   ");
+
         console.println("The High and Low table... reputed as the lowest of casino games.\n" +
                 "Diminishing returns for the despairing and unfortunate who have fallen too hard on their bad luck.\n" +
                 "Desperation permeates from the eyes of those gathered around the moldy table,\n" +
