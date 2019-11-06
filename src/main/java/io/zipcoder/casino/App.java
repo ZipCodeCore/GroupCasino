@@ -8,6 +8,8 @@ import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.Player.PlayerWarehouse;
 import io.zipcoder.casino.utilities.Console;
 
+import java.util.concurrent.TimeUnit;
+
 public class App {
 
     private Console menu;
@@ -21,7 +23,7 @@ public class App {
 
         this.menu = new Console(System.in,System.out);
         this.menu.print("Welcome to Casino 5! \n\n");
-
+        pause(1000);
         mainMenu();  // log in ...
 
     }
@@ -40,13 +42,18 @@ public class App {
 
         switch (userSelection) {
             case 1:
-
-                this.menu.println("Logging in ...\n");
-
+                this.menu.print("Logging in .");
+                pause(500);
+                this.menu.print(".");
+                pause(500);
+                this.menu.print(".\n\n");
+                //this.menu.println("Logging in ...\n");
+                pause(500);
                 if (authenticatePlayer()) {
                     selectGameToPlay();
                 } else {
                     this.menu.print("We could not find this user. Please try again!\n\n");
+                    pause(500);
                     counter++;
                     this.userId = "";
                     this.userPassword = "";
@@ -61,7 +68,7 @@ public class App {
                 break;
             case 2:
                 this.menu.println("Creating new account ...\n");
-
+                pause(500);
                 if (authenticatePlayer()){
                     this.menu.println("This user already exists, please log in.\n");
                     mainMenu();
@@ -86,6 +93,8 @@ public class App {
 
     private void selectGameToPlay() {
         int userInput;
+        pause(500);
+        menu.println("You are now logged in - enjoy the ride!\n");
         userInput = menu.getIntegerInput("Please select game to play\n" +
                 "1.) Go Fish\n" +
                 "2.) Yahtzee\n" +
@@ -97,8 +106,8 @@ public class App {
     }  // select game
 
     private void selectGameToPlayActions(Integer gameSelected){
+        pause(1000);
         switch (gameSelected){
-
             case 1:
                 GoFish newGoFish = new GoFish(this.newPlayer);
                 newGoFish.startGame();
@@ -129,6 +138,7 @@ public class App {
 
 
     private Boolean authenticatePlayer(){
+        pause(1);
         this.userId = this.menu.getStringInput("Enter your ID:");
         this.userPassword = this.menu.getStringInput("Enter your password:");
 
@@ -139,6 +149,14 @@ public class App {
     private void createPlayer(){
         warehouse.addPlayer(this.userId,this.userPassword);
         this.newPlayer = warehouse.getPlayer(this.userId+this.userPassword);
+    }
+
+    private void pause (int miliSeconds){
+        try {
+            TimeUnit.MILLISECONDS.sleep(miliSeconds);
+        } catch (InterruptedException e){
+            System.out.println(e.getMessage());
+        }
     }
 
 } // class
