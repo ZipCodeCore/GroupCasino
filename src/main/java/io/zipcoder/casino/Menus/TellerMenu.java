@@ -45,12 +45,12 @@ public class TellerMenu implements Menu {
         }
         console.println("          .-------.\n" +
                 "       oO{-JACKPOT-}Oo\n" +
-                "       .=============.  __\n" +
-                "       |[\uD83D\uDD14] [\uD83D\uDCB0] [\uD83E\uDD5D]|(  )\n" +
-                "       |[\uD83C\uDF52] [\uD83C\uDF52] [\uD83C\uDF52]| ||\n" +
-                "       |[\uD83E\uDD5D] [\uD83D\uDD14] [\uD83D\uDCB0]| ||\n" +
-                "       |             |__||\n" +
-                "       | xxx ::::::: |---'\n" +
+                "       .=============.   __\n" +
+                "       |[\uD83D\uDD14] [\uD83D\uDCB0] [\uD83E\uDD5D]| (  )\n" +
+                "       |[\uD83C\uDF52] [\uD83C\uDF52] [\uD83C\uDF52]|  ||\n" +
+                "       |[\uD83E\uDD5D] [\uD83D\uDD14] [\uD83D\uDCB0]|  ||\n" +
+                "       |             |___||\n" +
+                "       | xxx ::::::: |----'\n" +
                 "       | ooo ::::::: |\n" +
                 "       | $$$ ::::::: |\n" +
                 "       |             |\n" +
@@ -123,11 +123,11 @@ public class TellerMenu implements Menu {
     }
 
     public void depositFunds() throws InterruptedException {
-        double funds = console.getCurrency("[TELLER]: How much are you depositing?\n");
+        double funds = console.getCurrency("\n[TELLER]: How much are you depositing?\n");
         if (funds == 0.0) {
-            console.printWithDelays("[TELLER]: Quit wastin' my time, buddy\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("\n[TELLER]: Quit wastin' my time, buddy\n", TimeUnit.MILLISECONDS, 50);
         } else if (funds > 10000.0) {
-            console.printWithDelays("[TELLER]: Whoa, jeez, OK: you just knock over a bank or something?\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("\n[TELLER]: Whoa, jeez, OK: you just knock over a bank or something?\n", TimeUnit.MILLISECONDS, 50);
             gameServices.deposit(funds, this.player);
             console.printWithDelays("[TELLER]: Good luck, fancy pants!\n", TimeUnit.MILLISECONDS, 50);
         } else if (funds <= 20.0){
@@ -141,7 +141,7 @@ public class TellerMenu implements Menu {
             console.printWithDelays("\n[TELLER]: Here you go! Good luck at the tables.\n", TimeUnit.MILLISECONDS, 50);
         }
 
-        console.getInput("\n\n\n(Press Enter to continue)\n");
+        console.getInput("\n\n(Press Enter to continue)\n");
     }
 
     public Double cashOut () {
