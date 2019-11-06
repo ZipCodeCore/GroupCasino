@@ -108,14 +108,10 @@ public class BlackJack implements GamblingGame {
     public void startGame() {
         promptUserForWagerAmount();
         initializeblackJackHands();
-        checkHandForAces(gamblingPlayerHand);
-        checkHandForAces(computerHand);
-        checkHandValue(gamblingPlayerHand);
-        checkHandValue(computerHand);
         checkScore(checkHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
-
-
+        checkScore(checkHandValue(computerHand), checkHandForAces(computerHand));
     }
+
 
     public void promptUserForWagerAmount() {
         double userWagerAmount = input.getDoubleInput("How much would you like to wager?");
@@ -187,6 +183,7 @@ public class BlackJack implements GamblingGame {
 
 
     public void promptHitOrStay() {
+
         System.out.println(gamblingPlayerHand.displayHand());
         System.out.println(computerHand.displayHand());
 
