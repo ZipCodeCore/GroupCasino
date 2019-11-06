@@ -216,5 +216,4 @@ public class SnakesAndLaddersTest {
         playerPiece.setCurrentPosition(100);
         Assert.assertEquals(expected,actual);
     }
-
 }
