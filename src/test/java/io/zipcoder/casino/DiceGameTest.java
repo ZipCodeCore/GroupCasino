@@ -1,11 +1,15 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.DiceGame;
 import org.junit.Assert;
 import org.junit.Test;
 
 //import static org.junit.Assert.*;
+import io.zipcoder.casino.Utilities.Console;
 
 public class DiceGameTest {
+
+    private Console console = new Console(System.in, System.out);
 
     @Test
     public void testRoll2() {
@@ -28,9 +32,13 @@ public class DiceGameTest {
     @Test
     public void testRoll1() {
 
-            int expected = DiceGame.roll(3);
-            Assert.assertTrue((expected >=3 && expected <=18));
+        int expected = DiceGame.roll(3);
+        Assert.assertTrue((expected >=3 && expected <=18));
+    }
 
-            }
-        }
+    @Test
+    public void ASCIITest() {
+        console.println(DiceGame.DiceToASCII(1,2,3,4,5,6));
+    }
+}
 
