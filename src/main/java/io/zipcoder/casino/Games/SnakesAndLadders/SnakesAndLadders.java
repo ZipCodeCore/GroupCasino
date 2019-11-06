@@ -6,6 +6,8 @@ import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
+import io.zipcoder.casino.utilities.Sound;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
@@ -23,6 +25,10 @@ public class SnakesAndLadders implements Game {
     private CasinoArt art = new CasinoArt();
     private boolean running = true;
     private boolean currentGame = true;
+    private Sound loseSound;
+    private Sound diceSound;
+    private Sound snakeSound;
+    private Sound winSound;
 
     public void runSnakesAndLadders(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
@@ -34,6 +40,10 @@ public class SnakesAndLadders implements Game {
         currentGame = true;
         playerPiece.setCurrentPosition(0);
         aiPiece.setCurrentPosition(0);
+        loseSound = new Sound("wahwah.wav");
+        diceSound = new Sound("dice_roll.wav");
+        snakeSound = new Sound("snake_hiss.wav");
+        winSound = new Sound("win_sound.wav");
     }
 
     public String startNewGame(){
@@ -77,10 +87,12 @@ public class SnakesAndLadders implements Game {
 
 
     public Integer playerDiceRoll(){
+        Console.clearScreen();
         Integer roll = dice.rollDice(1);
         playerPiece.setCurrentPosition(playerPiece.getCurrentPosition() + roll);
         Integer currentPosition = playerPiece.getCurrentPosition();
         console.println(dice.diceArt(roll));
+        diceSound.play();
         console.println("You've rolled a %d. Your current position is now %d.", roll, currentPosition);
         return currentPosition;
     }
@@ -137,7 +149,7 @@ public class SnakesAndLadders implements Game {
             playerPiece.setCurrentPosition(newPosition);
             return newPosition;
         } else if (position < newPosition){
-            console.println("Hooray! You've hit a ladder! You're now at %d.", newPosition);
+            console.println("Hooray! You've hit a Ladder! You're now at %d.", newPosition);
             playerPiece.setCurrentPosition(newPosition);
             return newPosition;
         }
@@ -148,10 +160,12 @@ public class SnakesAndLadders implements Game {
         Integer newPosition = snakesAndLaddersCheckerViaMap(position);
         if (position > newPosition) {
             console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
+            snakeSound.play();
             aiPiece.setCurrentPosition(newPosition);
             return newPosition;
         } else if (position < newPosition){
-            console.println("Hooray! I've hit a ladder! I'm now at %d.", newPosition);
+            console.println("Hooray! I've hit a Ladder! I'm now at %d.", newPosition);
+            winSound.play();
             aiPiece.setCurrentPosition(newPosition);
             return newPosition;
         }
@@ -201,6 +215,7 @@ public class SnakesAndLadders implements Game {
                 LocalDateTime now = LocalDateTime.now();
                 currentPlayer.addHistory("You won at Snakes and Ladders. ** " + dateTimeFormatter.format(now) + "!");
             } else if (winner.equals("Ai")) {
+                loseSound.play();
                 console.println(text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.AIWINS));
                 LocalDateTime now = LocalDateTime.now();
                 currentPlayer.addHistory("You lost at Snakes and Ladders. ** " + dateTimeFormatter.format(now));

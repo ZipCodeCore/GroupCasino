@@ -2,13 +2,19 @@ package io.zipcoder.casino.Games.Blackjack;
 
 import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.Card;
+
+
+
+
 import io.zipcoder.casino.Games.GamblingGame;
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.GamePieces.Deck;
 import io.zipcoder.casino.utilities.Console;
 
+
 public class BlackJack implements Game, GamblingGame {
+
 
     Deck deck = new Deck();
     Console console = new Console(System.in, System.out);
@@ -29,6 +35,7 @@ public class BlackJack implements Game, GamblingGame {
         while(running){
 
         console.println("Welcome to BlackJack! Let's begin!");
+
         deck.shuffle();
         initialHand();
         viewDealerHand();
@@ -36,7 +43,6 @@ public class BlackJack implements Game, GamblingGame {
         console.println("How much would you like to los- I mean bet?" + " Current balance: $" + currentplayer.getBalance());
         placeBet(currentPlayer);
         houseWin();
-
         viewDealerHand();
         viewCurrentHand();
         hitOrStay();
@@ -48,6 +54,7 @@ public class BlackJack implements Game, GamblingGame {
         }
 
     }
+
     @Override
     public void approachTable(Player currentPLayer) {
         Console.clearScreen();
@@ -83,7 +90,7 @@ public class BlackJack implements Game, GamblingGame {
     public void placeBet(Player currentPlayer) {
         Integer playerBet = console.getIntegerInput(":");
         currentPlayer.placeBet(playerBet);
-        pot += playerBet;
+        pot = playerBet;
 
     }
 
@@ -161,12 +168,14 @@ public class BlackJack implements Game, GamblingGame {
 
     }
     public void isWinner(Player currentPlayer){
-        Integer winnings = pot*2;
+        Integer winnings = pot * 2;
     currentPlayer.changeBalance(winnings);
     console.println("You won $"+ winnings);
+
     }
     public void isLoser(){
         console.println("You lost $" + pot);
+
     }
 
     public Integer checkHand(Card[] hand){
@@ -215,7 +224,7 @@ public class BlackJack implements Game, GamblingGame {
                 runGame(currentPlayer);
                 break;
             case 2:
-                running = false;
+                approachTable(currentPlayer);
                 break;
 
     }
@@ -324,9 +333,4 @@ private void houseWin(){
     }
 
 }
-
-
-
-
-
 
