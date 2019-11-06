@@ -10,15 +10,17 @@ import static org.junit.Assert.*;
 public class GoFishTest {
 
     @Before
-    public void setUp(){}
+    public void setUp() {
+    }
 
     @After
-    public void tearDown(){}
+    public void tearDown() {
+    }
 
     @Test
     public void game() {
-      
-        GoFish newgame = new GoFish(new Player("i","0"));
+
+        GoFish newgame = new GoFish(new Player("John", "007"));
 
         newgame.startGame();
 

@@ -8,7 +8,12 @@ public class Player {
     protected double balance;
 
 
-    public Player(String ID, String password) {
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public Player(String ID, String password){
         this.ID = ID;
         this.pwd = password;
         this.balance = 0.0;

@@ -6,7 +6,7 @@ public class Card {
     private Rank rank;
 
 
-    public Card(){
+    public Card() {
 
     }
 
@@ -25,6 +25,8 @@ public class Card {
 
     public String toString() {
 
-        return String.format("%s of %s", rank, suit);
+        return String.format("%s of %s \n", rank, suit).replace(",", "");
     }
+
+
 }
