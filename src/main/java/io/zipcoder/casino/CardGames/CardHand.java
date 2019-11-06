@@ -1,41 +1,79 @@
 package io.zipcoder.casino.CardGames;
 
-import javax.print.DocFlavor;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class CardHand {
 
     ArrayList<Card> userHand = new ArrayList<Card>();
+
 
     public CardHand(ArrayList<Card> dealtCards){
 
         userHand.addAll(dealtCards);
     }
 
+
     public String displayHand(){
         //ollections.sort(userHand); TODO - do this later
        return userHand.toString();
     }
 
-    public boolean evaluateHand(String card){
+    public boolean lookForCard(String wantedCard){
 
-        return userHand.contains(card);
+        for(Card card : userHand) {
+            if (card.toString().contains(wantedCard))
+                return true;
+        }
+
+        return false;
     }
 
-    public void addCardToHand(Card cardToAdd){
+    public ArrayList<Card> removeCardsFromHand(String cardToRemove){
+
+        ArrayList<Card> tradingCards = new ArrayList<Card>();
+
+
+        for(Card card : userHand) {
+            if (card.toString().contains(cardToRemove)) {
+                Card temp = card;
+                userHand.remove(card);
+                tradingCards.add(temp);
+            }
+
+        }
+
+        return tradingCards;
+
+    }
+
+    public void tradeCards(ArrayList cardsToTrade){
+        userHand.addAll(cardsToTrade);
+    }
+
+    public void getCardFromDeck(Card cardToAdd){
 
         userHand.add(cardToAdd);
     }
 
+    public boolean evaluateHand(){
+        int counter = 0;
 
-    public void removeCardFromHand(Card cardToRemove){
+        for(Card checkCard : userHand){
+            counter = 0;
+            for (Card card : userHand){
+                if(checkCard.getRank() == card.getRank()){
+                    counter++;
+                }
+            }
 
-    }
+            if(counter == 2){
+                return true;
+            }
 
-    public void getCardFromDeck(int numberOfCards){
 
+        }
 
+        return false;
     }
 
 
