@@ -19,15 +19,13 @@ public class DeckOfCards extends GameComponent {
     }
 
 
-
     public Boolean addToDeck(Card card) {
         this.deckOfCards.add(card);
         return true;
     }
 
-    public ArrayList<Card> shuffle(DeckOfCards deck) {
+    public void shuffle() {
         Collections.shuffle(deckOfCards);
-        return deckOfCards;
     }
 
 }
