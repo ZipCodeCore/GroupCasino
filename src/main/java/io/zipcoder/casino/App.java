@@ -125,6 +125,7 @@ public class App {
                 Craps newCraps = new Craps(this.newPlayer);
                 addMoney();
                 newCraps.startGame();
+                break;
             case 5:
                 mainMenu();
                 break;

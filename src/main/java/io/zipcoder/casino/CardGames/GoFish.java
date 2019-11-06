@@ -188,8 +188,10 @@ public class GoFish implements Game {
 
     public void displayResults() {
 
+
         newConsole.println(winnings.toString().replace("[", "").replace("]", "")
                                         .replace(", ", ""));
+
     }
 
 
