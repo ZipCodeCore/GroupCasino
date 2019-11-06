@@ -5,10 +5,14 @@ import io.zipcoder.casino.GamePieces.RouletteSpinner;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Roulette implements Game, GamblingGame {
     Casino casino = new Casino();
     Console console = new Console(System.in, System.out);
     Player currentPlayer;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private boolean running = true;
     private boolean currentGame = true;
     private Integer pot;
@@ -16,6 +20,7 @@ public class Roulette implements Game, GamblingGame {
     private Integer placeBetInt;
     private boolean isWinner;
     private Boolean isOddEvenGame;
+    private Integer winnings;
     public void runRoulette(Player currentPlayer){
         this.currentPlayer = currentPlayer;
         approachTable(currentPlayer);
@@ -151,11 +156,17 @@ public class Roulette implements Game, GamblingGame {
         return spinNum.equals(placeBetInt);
     }
 
+    // If we can I would like to find a way to return a higher odds for betting "number" vs. "odd/even"
     @Override
     public void returnWinnings(Player currentPlayer) {
         if (isWinner()) {
-            Integer winnings = pot * 2;
+            winnings = pot * 2;
+            console.println("Congrats maybe you don't suck I'll give you "+ winnings);
+            LocalDateTime now = LocalDateTime.now();
+            String addHistory = String.format("You won $%d.00 at High and Low! ** ", winnings);
+            currentPlayer.addHistory(addHistory + dtf.format(now));
             currentPlayer.changeBalance(winnings);
+
         }
 
     }
