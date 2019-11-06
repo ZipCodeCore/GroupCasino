@@ -18,6 +18,6 @@ public class DeckTest {
     @Test
     public void printDeck(){
         Deck newDeck = new Deck(1);
-        newDeck.print();
+        //newDeck.print();
     }
 }
