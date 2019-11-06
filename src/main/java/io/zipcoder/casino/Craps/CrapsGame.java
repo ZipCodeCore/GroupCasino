@@ -106,9 +106,7 @@ public class CrapsGame extends DiceGame implements Game {
     public Double betChoice(){
         Double wager;
         console.println(String.format("\nCurrent bankroll: $%.2f", this.player.getPlayer().getBalance()));
-
-        wager = console.getCurrency(String.format("\n[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: What's your Bet?\n\n", this.minBet, this.maxBet));
-
+        wager = console.getCurrency(String.format("\n[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: What's your Bet? (Or press ENTER to leave the table)\n\n", this.minBet, this.maxBet));
          if (wager > this.player.getPlayer().getBalance()){
             console.println(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.\n", this.player.getPlayer().getLastName()));
             betChoice();
