@@ -8,10 +8,16 @@ import io.zipcoder.casino.GamePieces.Card;
 
 import io.zipcoder.casino.Games.GamblingGame;
 import io.zipcoder.casino.Games.Game;
+
 import io.zipcoder.casino.Menus.Casino;
+
+
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.GamePieces.Deck;
 import io.zipcoder.casino.utilities.Console;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class BlackJack implements Game, GamblingGame {
@@ -30,10 +36,17 @@ public class BlackJack implements Game, GamblingGame {
     Integer pot = 0;
     Integer handOfPlayer = checkHand(playerHand);
     Integer handOfDealer = checkHand(dealerHand);
+    private DateTimeFormatter dateTimeFormatter = java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    private Player winner = null;
+    private Integer totalEarnings = 0;
+
     public void runBlackJack(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
         approachTable(currentPlayer);
     }
+
+
+
 
 
     @Override
@@ -97,11 +110,18 @@ public class BlackJack implements Game, GamblingGame {
     @Override
     public void placeBet(Player currentPlayer) {
         Integer playerBet = console.getIntegerInput(":");
-        currentPlayer.placeBet(playerBet);
-        pot = playerBet;
+        if (currentPlayer.getBalance() <= 0) {
+            console.printSlow("Git yo broke ass ouuta heeerrre Bruhh!  !  !  !");
+            approachTable(currentPlayer);
+        } else if (currentPlayer.getBalance() < playerBet) {
+            console.printSlow(" Not enough cheddar! Bet a different amount");
+            placeBet(currentPlayer);
+        } else {
+            currentPlayer.placeBet(playerBet);
+            pot = playerBet;
 
+        }
     }
-
     @Override
     public void returnWinnings(Player currentPlayer) {
 
@@ -176,6 +196,7 @@ public class BlackJack implements Game, GamblingGame {
 
     }
     public void isWinner(Player currentPlayer){
+        winner = currentPlayer;
         Integer winnings = pot * 2;
     currentPlayer.changeBalance(winnings);
     console.println("You won $"+ winnings);
@@ -183,6 +204,7 @@ public class BlackJack implements Game, GamblingGame {
     }
     public void isLoser(){
         console.println("You lost $" + pot);
+        winner = dealer;
 
     }
 
@@ -221,10 +243,16 @@ public class BlackJack implements Game, GamblingGame {
 
     @Override
     public void exitGame(Player currentPlayer) {
-
+        if (winner.equals(currentPlayer)) {
+            LocalDateTime now = LocalDateTime.now();
+            currentPlayer.addHistory("You won at BLACKJACK. ** " + dateTimeFormatter.format(now) + "!");
+        } else if (winner.equals(dealer)) {
+            LocalDateTime now = LocalDateTime.now();
+            currentPlayer.addHistory("You lost at BLACKJACK. ** " + dateTimeFormatter.format(now));
         console.println("Would you like to play again?");
         console.println("(1) - Yes");
-        console.println("(2) - No");
+        console.println("(2) - No");}
+
         Integer playerInput = console.getIntegerInput(":");
         switch (playerInput){
             case 1:

@@ -6,10 +6,13 @@ import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class GoFish implements Game {
     Deck deck = new Deck();
     Console console = new Console(System.in, System.out);
-    Card[] playerHand = new Card[6];
+    ArrayList<Card> playerHand = new ArrayList<>();
     Card[] dealerHand = new Card[6];
     private Player currentPlayer;
     private boolean currentGame = true;

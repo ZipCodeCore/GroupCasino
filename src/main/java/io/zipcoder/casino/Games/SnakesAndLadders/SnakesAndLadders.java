@@ -152,10 +152,12 @@ public class SnakesAndLadders implements Game {
     public Integer playerSnakesAndLadders(Integer position, String playerTurn) {
         Integer newPosition = snakesAndLaddersCheckerViaMap(position);
             if (position > newPosition) {
-                if(playerTurnLadder.equals("p2layer")) {
+                if(playerTurnLadder.equals("player")) {
                     console.println("Uh-oh! You've hit a Snake! You're back at %d", newPosition);
+                    playerPiece.setCurrentPosition(newPosition);
                 } else if (playerTurnLadder.equals("ai")){
                     console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
+                    aiPiece.setCurrentPosition(newPosition);
                 }
                 snakeSound.play();
                 playerPiece.setCurrentPosition(newPosition);
@@ -163,11 +165,12 @@ public class SnakesAndLadders implements Game {
             } else if (position < newPosition) {
                 if(playerTurnLadder.equals("player")) {
                     console.println("Hooray! You've hit a Ladder! You're now at %d.", newPosition);
+                    playerPiece.setCurrentPosition(newPosition);
                 } else if (playerTurnLadder.equals("ai")){
                     console.println("Hooray! I've hit a Ladder! I'm now at %d.", newPosition);
+                    aiPiece.setCurrentPosition(newPosition);
                 }
                 ladderSound.play();
-                playerPiece.setCurrentPosition(newPosition);
                 return newPosition;
             }
         return position;
