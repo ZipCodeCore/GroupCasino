@@ -46,7 +46,7 @@ public class RRGameTest{
             public void roundOfPlay() {
             }
 
-            @Test
+            @org.junit.jupiter.api.Test
             public void selectTargetNum() {
             }
 

@@ -42,7 +42,7 @@ public class GameMenu implements Menu {
     }
 
     @Override
-    public void displayMenu() throws InterruptedException {
+    public void displayMenu() {
 
         try {
             Music.filePath = "src/music/(Menu) All of Me Instrumental.wav";
@@ -73,7 +73,11 @@ public class GameMenu implements Menu {
             console.println(String.format("%d: %s", gameNum, ((GameObject) gameMap.get(gameNum)).getName()));
         }
 
-        handleChoice(console.menuChoice(gameMap.size()));
+        try {
+            handleChoice(console.menuChoice(gameMap.size()));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         displayMenu();
     }
 

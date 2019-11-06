@@ -67,7 +67,7 @@ public class TellerMenu implements Menu {
         console.println("1. Deposit funds");
         console.println("2. Cash out / Go home");
         console.println("3. Back to lobby");
-        console.println(String.format("\nCurrent balance: $%.2f\n", player.getBalance()));
+        console.println(String.format("\nCurrent balance: $%.2f", player.getBalance()));
 
         handleChoice(console.getInteger(3));
     }
@@ -78,6 +78,15 @@ public class TellerMenu implements Menu {
         switch (choice) {
             case 1:
                 depositFunds();
+                try {
+                    tellerMusic.stop();
+                } catch (UnsupportedAudioFileException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 2:
                 cashOut();
@@ -91,11 +100,13 @@ public class TellerMenu implements Menu {
                 } catch (LineUnavailableException e) {
                     e.printStackTrace();
                 }
+
                 console.clearScreen();
                 Casino.displayEnding(this.player);
                 break;
             case 3:
                 // let's nix this, get it to just fall through back into MM
+                MainMenu mainmenu = new MainMenu(this.player);
                 try {
                     tellerMusic.stop();
                 } catch (UnsupportedAudioFileException e) {
@@ -105,7 +116,7 @@ public class TellerMenu implements Menu {
                 } catch (LineUnavailableException e) {
                     e.printStackTrace();
                 }
-                MainMenu mainmenu = new MainMenu(this.player);
+
                 mainmenu.displayMenu();
                 break;
         }
@@ -120,17 +131,17 @@ public class TellerMenu implements Menu {
             gameServices.deposit(funds, this.player);
             console.printWithDelays("[TELLER]: Good luck, fancy pants!\n", TimeUnit.MILLISECONDS, 50);
         } else if (funds <= 20.0){
-            console.printWithDelays("[TELLER]: Wow, are you sure that it's safe walkin' around with all that?\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("[TELLER]: Wow, are you sure it's safe walkin' around with all that?\n", TimeUnit.MILLISECONDS, 50);
             gameServices.deposit(funds, this.player);
-            console.printWithDelays("[TELLER]: Don't spend it all in once place\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("[TELLER]: Don't spend it all in once place! \n(He chuckles and proceeds to help another customer) \n\n", TimeUnit.MILLISECONDS, 50);
         } else {
-            console.printWithDelays(String.format("\nDepositing $%.2f\n",funds));
-            console.printWithDelays(". . .",TimeUnit.SECONDS,1);
+            console.printWithDelays(String.format("\n[TELLER]: Depositing $%.2f\n",funds));
+            console.printWithDelays(". . .", 750);
             gameServices.deposit(funds, this.player);
             console.printWithDelays("\n[TELLER]: Here you go! Good luck at the tables.\n", TimeUnit.MILLISECONDS, 50);
         }
 
-        console.getInput("\nPress Enter to continue\n");
+        console.getInput("\n\n\n(Press Enter to continue)\n");
     }
 
     public Double cashOut () {
