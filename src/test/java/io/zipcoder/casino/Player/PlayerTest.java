@@ -9,10 +9,10 @@ import static org.junit.Assert.*;
 public class PlayerTest {
 
     @Test
-    public void testSetBalance() {
+    public void testAddAmount() {
         Player newPlayer = new Player("bogus","bogus");
 
-        newPlayer.setBalance(50);
+        newPlayer.addAmount(50);
         double expected = 50.0;
         double actual = newPlayer.balance;
 
