@@ -1,13 +1,14 @@
-package io.zipcoder.casino.Games;
+package io.zipcoder.casino.Games.Craps;
 
 import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.Dice;
-import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Games.GamblingGame;
+import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 
 public class Craps implements Game, GamblingGame {
 

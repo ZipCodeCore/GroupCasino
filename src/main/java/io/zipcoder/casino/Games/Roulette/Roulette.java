@@ -1,9 +1,11 @@
-package io.zipcoder.casino.Games;
+package io.zipcoder.casino.Games.Roulette;
 
-import io.zipcoder.casino.Casino;
+import io.zipcoder.casino.Games.GamblingGame;
+import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.Menus.Casino;
 import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.RouletteSpinner;
-import io.zipcoder.casino.Player;
+import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.time.LocalDateTime;
