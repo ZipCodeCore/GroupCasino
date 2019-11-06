@@ -17,7 +17,6 @@ public class DeckOfCards extends GameComponent {
                 stack.push(card);
             }
         }
-
     }
 
 }
