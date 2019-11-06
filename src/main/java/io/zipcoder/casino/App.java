@@ -85,7 +85,7 @@ public class App {
                 break;
 
             default:
-                this.menu.print("Error! Please enter another option!");
+                this.menu.print("Error! Please enter another option!\n\n");
                 pause(1000);
                 mainMenu();
 
@@ -103,6 +103,9 @@ public class App {
     }  // select game
 
     private void selectGameToPlayActions(Integer gameSelected){
+        pause(1000);
+        this.menu.clearScreen();
+        this.menu.printGameName(gameSelected);
         pause(1000);
         switch (gameSelected){
             case 1:
@@ -161,7 +164,7 @@ public class App {
     private void addMoney (){
         double amount;
         amount = this.menu.getDoubleInput("How much money would you like to add to your account?");
-        this.newPlayer.setBalance(amount);
+        this.newPlayer.addAmount(amount);
     }
 
 } // class
