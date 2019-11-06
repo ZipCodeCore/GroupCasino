@@ -6,6 +6,15 @@ public class Player {
 
     protected String ID;
     protected String pwd;
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
     protected double balance;
 
 
