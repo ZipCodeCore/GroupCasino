@@ -3,6 +3,7 @@ package io.zipcoder.casino.utilities;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -58,6 +59,23 @@ public final class Console {
         return getLongInput(prompt, args).intValue();
     }
 
+    public void printFast(String val) {
+        int count = 0;
+        for (char c : val.toCharArray()) {
+            output.print(c);
+            count++;
+            if ((count % 5) == 0) {
+                delay(5);
+            }
+        }
+    }
+
+    public void printSlow(String val) {
+        for (char c : val.toCharArray()) {
+            output.print(c);
+            delay(15);
+        }
+    }
 
     public void newln() {
         print("\n");
@@ -77,7 +95,7 @@ public final class Console {
     }
 
     public static void clearScreen() {
-        for(int i = 0; i <= 1000; i++)
+        for(int i = 0; i <= 100; i++)
         System.out.print("\n");
     }
 }

@@ -20,6 +20,18 @@ public class Casino {
     }
 
     public void displayCasinoMenu(){
+        Console.clearScreen();
+        console.println("  /$$$$$$                      /$$                           /$$                 /$$       /$$                \n" +
+                " /$$__  $$                    |__/                          | $$                | $$      | $$                \n" +
+                "| $$  \\__/  /$$$$$$   /$$$$$$$ /$$ /$$$$$$$   /$$$$$$       | $$        /$$$$$$ | $$$$$$$ | $$$$$$$  /$$   /$$\n" +
+                "| $$       |____  $$ /$$_____/| $$| $$__  $$ /$$__  $$      | $$       /$$__  $$| $$__  $$| $$__  $$| $$  | $$\n" +
+                "| $$        /$$$$$$$|  $$$$$$ | $$| $$  \\ $$| $$  \\ $$      | $$      | $$  \\ $$| $$  \\ $$| $$  \\ $$| $$  | $$\n" +
+                "| $$    $$ /$$__  $$ \\____  $$| $$| $$  | $$| $$  | $$      | $$      | $$  | $$| $$  | $$| $$  | $$| $$  | $$\n" +
+                "|  $$$$$$/|  $$$$$$$ /$$$$$$$/| $$| $$  | $$|  $$$$$$/      | $$$$$$$$|  $$$$$$/| $$$$$$$/| $$$$$$$/|  $$$$$$$\n" +
+                " \\______/  \\_______/|_______/ |__/|__/  |__/ \\______/       |________/ \\______/ |_______/ |_______/  \\____  $$\n" +
+                "                                                                                                     /$$  | $$\n" +
+                "                                                                                                    |  $$$$$$/\n" +
+                "                                                                                                     \\______/ ");
         console.println(String.format("Welcome to The Notorious B.I.G. 3 Casino, %s!",currentPlayer.getName()));
         console.println("What would you like to do?");
         console.println("(1) - Display Game Menu");
@@ -34,7 +46,7 @@ public class Casino {
     }
 
     public void exitCasino(){
-        console.print("Thank you for visiting Big 3!");
+        console.print("Thank you for visiting The Notorious B.I.G. 3!");
 
     }
 
