@@ -55,11 +55,10 @@ public class Craps implements Game, GamblingGame {
         console.printSlow("As you approach the Craps table you hear yelling and shouting");
         console.dotDotDot();
         console.newln();
-        console.println("Would you like to play?");
+        console.printSlow("Would you like to play?\n");
         console.delay(500);
-        console.println("(1) Yes");
-        console.delay(100);
-        console.println("(2) No");
+        console.printSlow("(1) Yes\n");
+        console.printSlow("(2) No\n");
 
         String input = console.getStringInput(":");
 
@@ -68,12 +67,15 @@ public class Craps implements Game, GamblingGame {
                 runGame(currentPLayer);
                 break;
             case "2":
-                console.print("That's too bad");
+                console.printSlow("That's too bad");
                 console.dotDotDot();
                 console.newln();
                 break;
             default:
-                console.println("Invalid Input");
+                console.print("Invalid Input");
+                console.dotDotDot();
+                console.newln();
+                console.delay(2000);
                 approachTable(currentPLayer);
                 break;
         }
@@ -101,19 +103,18 @@ public class Craps implements Game, GamblingGame {
 
         console.delay(500);
         Integer roll1 = dice.rollDice(1);
-        console.println(dice.diceArt(roll1));
-        console.delay(500);
+        console.printFast(dice.diceArt(roll1) + "\n");
         Integer roll2 = dice.rollDice(1);
-        console.println(dice.diceArt(roll2));
+        console.printFast(dice.diceArt(roll2) + "\n");
 
         Integer rollVal = roll1 + roll2;
         return rollVal;
     }
 
     private boolean comeOutRoll(Player currentPlayer) {
-        console.println("\nHit Return to Throw the Come-Out Roll");
+        console.printSlow("\nHit Return to Throw the Come-Out Roll\n");
         Integer roll = roll();
-        console.println("You Rolled " + roll + "!");
+        console.printSlow("You Rolled " + roll + "!\n");
 
         if (roll.equals(2) || roll.equals(3) || roll.equals(12)) {
             console.print("Craps");
@@ -123,31 +124,31 @@ public class Craps implements Game, GamblingGame {
             return false;
         } else if (roll.equals(7) || roll.equals(11)) {
             console.dotDotDot();
-            console.println("Natural Roll! Pass Line Wins!");
+            console.printSlow("Natural Roll! Pass Line Wins!\n");
             currentPlayer.addHistory("You won $" + playerBet + " playing Craps ** " + timeFormatter.format(LocalDateTime.now()));
             returnWinnings(currentPlayer);
             return false;
         } else {
             console.dotDotDot();
-            console.println("The point is now " + roll + "!");
+            console.printSlow("The point is now " + roll + "!\n");
             puckVal = roll;
             return true;
         }
     }
 
     private boolean passRoll(Player currentPlayer) {
-        console.println("\nHit Return to Roll the Dice");
+        console.printSlow("\nHit Return to Roll the Dice\n");
         Integer roll = roll();
-        console.println("You Rolled a " + roll + "!");
+        console.printSlow("You Rolled a " + roll + "!\n");
 
         if (roll.equals(puckVal)) {
             console.dotDotDot();
-            console.println("You Hit the Point Value!");
+            console.printSlow("You Hit the Point Value!\n");
             currentPlayer.addHistory("You won $" + playerBet + " playing Craps ** " + timeFormatter.format(LocalDateTime.now()));
             returnWinnings(currentPlayer);
             return false;
         } else if (roll.equals(7)) {
-            console.print("Seven-Out! The Pass Line Losses");
+            console.printSlow("Seven-Out! The Pass Line Losses");
             console.dotDotDot();
             console.newln();
             currentPlayer.addHistory("You lost $" + playerBet + " playing Craps ** " + timeFormatter.format(LocalDateTime.now()));
@@ -158,7 +159,8 @@ public class Craps implements Game, GamblingGame {
     }
 
     private boolean playAgain() {
-        console.println("Play Again?");
+        console.printSlow("Play Again?\n");
+        console.delay(400);
         console.println("(1) Yes");
         console.println("(2) No");
         String input = console.getStringInput(":");
@@ -179,7 +181,7 @@ public class Craps implements Game, GamblingGame {
 
         boolean correctVal = false;
         while (!correctVal) {
-            console.println("How much would you like to bet?\t Balance $" + currentPlayer.getBalance());
+            console.printSlow("How much would you like to bet?\t Balance $" + currentPlayer.getBalance() + "\n");
             Integer betAmount = console.getIntegerInput("$");
 
             if (currentPlayer.getBalance() >= betAmount && betAmount >= 0) {
@@ -187,7 +189,7 @@ public class Craps implements Game, GamblingGame {
                 playerBet = betAmount;
                 correctVal = true;
             } else {
-                console.print("You don't have that much money");
+                console.printSlow("You don't have that much money");
                 console.dotDotDot();
                 console.delay(1000);
                 correctVal = false;
@@ -197,9 +199,9 @@ public class Craps implements Game, GamblingGame {
 
     @Override
     public void returnWinnings(Player currentPlayer) {
-        console.println("You won $" + playerBet);
+        console.printSlow("You won $" + playerBet + "\n");
         currentPlayer.changeBalance(playerBet * 2);
-        console.println("Your balance is now $" + currentPlayer.getBalance());
+        console.printSlow("Your balance is now $" + currentPlayer.getBalance() + "\n");
         playerBet = 0;
         console.delay(1000);
     }
