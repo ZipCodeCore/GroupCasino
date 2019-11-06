@@ -158,10 +158,6 @@ public class Roulette implements Game, GamblingGame {
     }
 
 
-    /**
-     * This method checks to see if the player's bet wins compared to the winning number.
-     * @return a true false value if the player won or not.
-     */
     public boolean isWinner(){
         if(isOddEvenGame) {
             return spinNum % 2 == placeBetInt;
