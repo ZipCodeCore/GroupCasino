@@ -31,6 +31,8 @@ public class CrapsGame extends DiceGame implements Game {
     private Console console = new Console(System.in, System.out);
     private GameServices gameServices = new GameServices();
     Music crapsMusic = null;
+    private Integer die1;
+    private Integer die2;
 
 
     //Craps Game Constructor
@@ -78,7 +80,10 @@ public class CrapsGame extends DiceGame implements Game {
     //runs a new game of craps
     public void roundOfPlay() throws InterruptedException {
         Double betSize = betChoice();
+
         userRollsDiceSetPoint();
+        displayPointRollDie1ASCII(die1);
+        displayPointRollDie2ASCII(die2);
         if (winOnFirst(setThePointRoll) == true) {
             winningMessageFirstRoll();
             calculateWinnings(betSize, setThePointRoll, numRolls);
@@ -204,8 +209,9 @@ public class CrapsGame extends DiceGame implements Game {
 
     public void userRollsDiceSetPoint() {
         console.getInput("\nPress Enter to roll the dice\n");
-        tossPointRoll();
-
+        die1 = rollFirstDie();
+        die2 = rollSecondDie();
+        tossPointRoll(die1, die2);
     }
 
     public void userRollsDiceCurrentPoint() {
@@ -214,10 +220,28 @@ public class CrapsGame extends DiceGame implements Game {
 
     }
 
-    public Integer tossPointRoll() {
-        setThePointRoll = DiceGame.roll(2);
+    public Integer rollFirstDie (){
+        return DiceGame.roll();
+    }
+
+    public Integer rollSecondDie () {
+        return DiceGame.roll();
+    }
+
+    public Integer tossPointRoll(Integer die1, Integer die2) {
+        setThePointRoll = die1+die2;
         return setThePointRoll;
     }
+
+    public String displayPointRollDie1ASCII(Integer die1){
+        return DiceGame.diceToASCII(die1);
+    }
+
+    public String displayPointRollDie2ASCII(Integer die2){
+        return DiceGame.diceToASCII(die2);
+
+    }
+
 
     public void displayPointRoll(Integer setThePointRoll) {
         console.println(String.format("\n(( You have rolled a %d for your set the point roll. ))\n", setThePointRoll));
