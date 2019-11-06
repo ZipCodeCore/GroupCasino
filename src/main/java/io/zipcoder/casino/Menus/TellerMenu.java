@@ -65,7 +65,7 @@ public class TellerMenu implements Menu {
 
         // temporary
         console.println("1. Deposit funds");
-        console.println("2. Cash out");
+        console.println("2. Cash out / Go home");
         console.println("3. Back to lobby");
         console.println(String.format("\nCurrent balance: $%.2f\n", player.getBalance()));
 

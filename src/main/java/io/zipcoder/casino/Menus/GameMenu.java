@@ -70,7 +70,7 @@ public class GameMenu implements Menu {
                 "                                 ~,:,~\n");
         // temporary
         for (int gameNum : gameMap.keySet()) {
-            console.printWithDelays(String.format("%d: %s\n", gameNum, ((GameObject) gameMap.get(gameNum)).getName()));
+            console.println(String.format("%d: %s", gameNum, ((GameObject) gameMap.get(gameNum)).getName()));
         }
 
         handleChoice(console.menuChoice(gameMap.size()));
