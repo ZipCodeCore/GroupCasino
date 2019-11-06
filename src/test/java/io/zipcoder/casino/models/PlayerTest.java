@@ -1,11 +1,11 @@
-package io.zipcoder.casino.PlayerTest;
+package io.zipcoder.casino.models;
 
 import org.junit.Test;
 
 public class PlayerTest {
 
     @Test
-    public void nullaryConstructorTest()_{
+    public void nullaryConstructorTest() {
 
     }
 
