@@ -112,7 +112,7 @@ public class App {
                 newBlackJack.startGame();
                 break;
             case 4:
-                Craps newCraps = new Craps();
+                Craps newCraps = new Craps(this.newPlayer);
                 newCraps.startGame();
             case 5:
                 mainMenu();
