@@ -1,9 +1,11 @@
 package io.zipcoder.casino.CardGames;
 
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import io.zipcoder.casino.Interfaces.GamblingGame;
 import io.zipcoder.casino.Player.GamblingPlayer;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
+import org.w3c.dom.ls.LSOutput;
 
 import java.sql.SQLOutput;
 
@@ -54,17 +56,18 @@ public class BlackJack implements GamblingGame {
 
 
     public void promptUserForWagerAmount() {
-        double userWageAmount = input.getDoubleInput("How much would you like to wager?");
-        gamblingPlayer.placeWage(userWageAmount);
-        if(gamblingPlayer.)
+        double userWagerAmount = input.getDoubleInput("How much would you like to wager?");
+        gamblingPlayer.placeWage(userWagerAmount);
+        while(!placeWager)   {
+            userWagerAmount = input.getDoubleInput("Wager exceeds your balance. Please wage a smaller amount.");
+        }
     }
 
     public Integer checkHandValue (CardHand hand){
         Integer handValue = 0;
         for(int i = 0; i < hand.userHand.size(); i++){
             handValue = handValue+ translateBlackJackValueFromRank(hand.userHand.get(i));
-
-        }
+        }   return handValue;
     }
 
 
