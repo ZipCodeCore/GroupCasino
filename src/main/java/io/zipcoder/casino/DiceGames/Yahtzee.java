@@ -4,7 +4,9 @@ import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
+
 public class Yahtzee implements Game {
+
 
     //------------------------------------------------------------------------------------------------------------------
     // Fields-----------------------------------------------------------------------------------------------------------
@@ -16,6 +18,7 @@ public class Yahtzee implements Game {
     private String[] availableOptions = {" ","1s", "2s", "3s", "4s", "5s", "6s", "3 of a kind", "4 of a kind",
                                          "Small Straight", "Large Straight", "Full House", "Yahtzee", "Chance"};
     private boolean continuePlay;
+
 
     //------------------------------------------------------------------------------------------------------------------
     // Constructor------------------------------------------------------------------------------------------------------
@@ -131,7 +134,7 @@ public class Yahtzee implements Game {
             for(int i = 0; i < myDice.length; i++){
                 console.print(this.getDiceArt(myDice[i],i + 1));
             }
-            keepthis = console.getStringInput("\n\nType the corresponding number of the dice and press enter to " +
+            keepthis = console.getStringInput("\nType the corresponding number of the dice and press enter to "+
                                                       "switch it between keeping and re-rolling.\n" +
                                                       "Type 'continue' when finished\n");
             if(keepthis.equals("")){ keepthis = " "; }
@@ -336,8 +339,8 @@ public class Yahtzee implements Game {
     }
 
 
-
-
+    //------------------------------------------------------------------------------------------------------------------
+    // Method for getting ASCII dice art--------------------------------------------------------------------------------
 
     public String getDiceArt(Dice dice, int index){
 
@@ -394,11 +397,11 @@ public class Yahtzee implements Game {
         }
         return String.format(
                         "     ###############\n"+
-                        "     #  %s       %s  #\n"+
+                       "     #  %s       %s  #\n"+
                         "     #             #\n"+
-                 index + ".   #  %s   %s   %s  #     "+ keepOrReRoll + "\n"+
+               index + ".   #  %s   %s   %s  #     "+ keepOrReRoll + "\n"+
                         "     #             #\n"+
-                        "     #  %s       %s  #\n"+
+                       "     #  %s       %s  #\n"+
                         "     ###############\n",
                             d1,d2,d3,d4,d5,d6,d7);
     }
