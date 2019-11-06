@@ -10,7 +10,7 @@ public class GoFishNPC extends GoFishPlayer{
     private Player opponent;
     private ArrayList<GoFishRound>hands;
 
-    public GoFishNPC (Player opponent){
+    public GoFishNPC (Player opponent) {
         super(opponent);
 
     }

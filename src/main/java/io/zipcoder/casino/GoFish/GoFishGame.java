@@ -11,6 +11,9 @@ import io.zipcoder.casino.Utilities.Music;
 import sun.management.snmp.jvmmib.JVM_MANAGEMENT_MIBOidTable;
 
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class GoFishGame extends CardGame implements Game {
 
@@ -25,11 +28,10 @@ public class GoFishGame extends CardGame implements Game {
     private CardSet opponentsCards;
     private CardSet playerSuites;
     private CardSet opponentSuites;
-    private int numDecks;
     Music goFishMusic = null;
 
 
-    public GoFishGame(Player player, CardSet shoe, CardSet playerCards, CardSet opponentCards) {
+    public GoFishGame(Player player) {
         this.player = new GoFishPlayer(player);
         this.opponent = new GoFishNPC(new Player("Baity", "McSwitch", 55, 0));
         //this.numDecks = 1;
@@ -38,50 +40,38 @@ public class GoFishGame extends CardGame implements Game {
         this.shoe = new CardSet(1);
     }
 
-    public static void main(String[] args) { // for testing
+ /*   public static void main(String[] args) { // for testing
         Player player = new Player("Lem", "Jukes", 23, 300.00);
         CardSet shoe = new CardSet(1);
         CardSet playersCards = new CardSet(0);
         CardSet opponentCards = new CardSet(0);
-        GoFishGame goFishGame = new GoFishGame(player, shoe, playersCards, opponentCards);
+        GoFishGame goFishGame = new GoFishGame(player);
         goFishGame.startPlay();
     }
-
-
+*/
     //populates player deals hands
     public void startPlay() {
         new GoFishMenu(this).displayMenu();
-        checkShoe();
         initialDeal();
     }
-
     public void initialDeal() {
-        CardSet playerCards = new CardSet(0);
-        CardSet opponentCards = new CardSet(0);
         for (int i = 0; i < 7; i++) {
-            playerCards.addCard(this.shoe.removeFirstCard());
-            opponentCards.addCard(this.shoe.removeFirstCard());
+            this.playersCards.addCard(this.shoe.removeFirstCard());
+            this.opponentsCards.addCard(this.shoe.removeFirstCard());
         }
         prompt(player);
-        // GoFishRound goFishRound = new GoFishRound(this.player, this.opponent, this.shoe, playerCards)
-
     }
 
     public String prompt(GoFishPlayer player) {
         displayStatus();
-
         String cardChoice = console.getCardRankInput("");
-
         ArrayList<Card> stolenCards = opponentsCards.removeRank(cardChoice);
 
         if (stolenCards.size() > 0) {
             String cardCheck = cardChoice;
             System.out.println("YOU HAVE SUCCESSFULLY TAKEN " + stolenCards.size() + stolenCards.get(0) + " FROM THE OPPONENT");
-
             playersCards.addCards(stolenCards);
-
             scanForSuites(cardCheck);
-
             prompt(player);
 
         } else {
@@ -93,21 +83,6 @@ public class GoFishGame extends CardGame implements Game {
 
     public void roundOfPlay() {
     }
-
-    public void checkShoe() {
-        if (this.shoe == null || this.shoe.size() < this.numDecks * 26) {
-            this.shoe = getNewShoe();
-        }
-    }
-
-
-
-    public CardSet getNewShoe() {
-        CardSet newShoe = new CardSet(this.numDecks);
-        newShoe.shuffle();
-        return newShoe;
-    }
-
 
     public String checkForWin() {
         if (playerSuites.size() >= 7) {
@@ -121,7 +96,6 @@ public class GoFishGame extends CardGame implements Game {
     //Option to quit game or play another round
     public void endChoice() {
     }
-
     public String getName() {
         return name;
     }
@@ -131,16 +105,12 @@ public class GoFishGame extends CardGame implements Game {
     public GoFishNPC getOpponent() {
         return opponent;
     }
-
-
-
     public void displayStatus() {
         playersCards.sort();
         playerSuites.sort();
         displaySuite();
         displayPlayerHands();
     }
-
     public void scanForSuites(String selectCard) {
         ArrayList<Card>suiteChecker = playersCards.removeRank(selectCard);
         if (suiteChecker.size() == 4) {
@@ -159,6 +129,35 @@ public class GoFishGame extends CardGame implements Game {
     public void displayPlayerHands(){
         console.println("************************* PLAYER'S HAND *************************\n" + playerSuites.toASCII() + "\n" + "*****************************************************************");
     }
+
+    public String opponentTurn() {
+        console.clearScreen();
+        console.println("**** IT'S YOUR OPPONENTS TURN! ****"+ "\n" +"\n" +this.opponent.getPlayer()+" IS MAKING THEIR SELECTION..."+"\n "+"\n "+"\n");
+        String npcChoice = npcPickACard();
+
+    }
+
+
+    public String npcPickACard(){
+        Random rng = new Random();
+        ArrayList<Card> cardPicker = new ArrayList<>();
+        Set<Card>cardFilter = new TreeSet<>();
+        for (Card i : opponentsCards.getCards())
+            cardFilter.add(i);
+        cardPicker.addAll(cardFilter);
+        String pickedCard= cardPicker.get(rng.nextInt(cardPicker.size())).toString();
+        return pickedCard;
+    }
+/*    public void checkShoe() {
+        if (this.shoe == null || this.shoe.size() < this.numDecks * 26) {
+            this.shoe = getNewShoe();
+        }
+    }
+    public CardSet getNewShoe() {
+        CardSet newShoe = new CardSet(this.numDecks);
+        newShoe.shuffle();
+        return newShoe;
+    }*/
 }
 
 
