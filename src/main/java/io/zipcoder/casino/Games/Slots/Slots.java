@@ -1,14 +1,58 @@
 package io.zipcoder.casino.Games.Slots;
 
+import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.GamePieces.SlotMachine;
 import io.zipcoder.casino.Games.GamblingGame;
 import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.Menus.Casino;
 import io.zipcoder.casino.PlayerCreation.Player;
+import io.zipcoder.casino.utilities.Console;
+
+import java.time.format.DateTimeFormatter;
 
 public class Slots implements Game, GamblingGame {
 
+    Console console = new Console(System.in, System.out);
+    Casino casino = new Casino();
+    private Integer[][] slots;
+    SlotMachine slotMachine = new SlotMachine();
+    Player currentPlayer;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    private CasinoArt casinoArt = new CasinoArt();
+    private Boolean running = true;
+    private Boolean currentGame  = true;
+    private Integer pot;
+    private Integer placeBet;
+    private Boolean isWinner;
+    private Integer winnings;
+
+
     @Override
     public void approachTable(Player currentPLayer) {
+        Console.clearScreen();
+        console.println(casinoArt.getCasinoArt("slots"));
+        console.println("You approach the Slot Machine. What would you like to do?");
+        console.println("(1) - Play the game");
+        console.println("(2) - Return to the game menu");
+        Integer playerInput = console.getIntegerInput(":");
+        while (running) {
+            switch (playerInput) {
+                case 1:
+                    runGame(currentPlayer);
+                    running = false;
+                    break;
+                case 2:
+                    casino.goToGameMenu();
+                    running = false;
+                    break;
+            }
+        }
 
+    }
+
+    public void runSlots(Player currentPlayer){
+        this.currentPlayer = currentPlayer;
+        approachTable(currentPlayer);
     }
 
     public void runGame(Player currentPlayer){
@@ -23,8 +67,35 @@ public class Slots implements Game, GamblingGame {
 
     }
     public void placeBet(Player currentPlayer){
-
+        console.println("How much would you like to bet?");
+        pot = console.getIntegerInput(":");
     }
+
+    public Boolean isWinner(){
+        return null;
+    }
+
+    public Boolean checkHorizontal(){
+        for(int i = 0; i <= 2; i++) {
+            if (slots[i][0].equals(slots[i][1]) && slots[i][1].equals(slots[i][2]))
+            return true;
+        } return false;
+    }
+
+    public Boolean checkVertical(){
+        for(int i = 0; i <= 2; i++) {
+            if (slots[0][i].equals(slots[1][i]) && slots[1][i].equals(slots[2][i]))
+                return true;
+        } return false;
+    }
+
+    public Boolean checkDiagonal(){
+       if((slots[0][0].equals(slots[1][1]) && slots[1][1].equals(slots[2][2])) || (slots[2][0].equals(slots[1][1]) && slots[1][1].equals(slots[0][2]))) {
+           return true;
+       }return false;
+    }
+
     public void returnWinnings(Player currentPlayer){
+
     }
 }
