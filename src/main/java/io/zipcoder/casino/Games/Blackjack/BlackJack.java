@@ -2,25 +2,19 @@ package io.zipcoder.casino.Games.Blackjack;
 
 import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.Card;
-<<<<<<< HEAD:src/main/java/io/zipcoder/casino/Games/BlackJack.java
-
-import io.zipcoder.casino.Player;
-import io.zipcoder.casino.GamePieces.Deck;
-import io.zipcoder.casino.utilities.Console;
 
 
 
 
-public class BlackJack implements Game, GamblingGame{
-=======
 import io.zipcoder.casino.Games.GamblingGame;
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.GamePieces.Deck;
 import io.zipcoder.casino.utilities.Console;
 
+
 public class BlackJack implements Game, GamblingGame {
->>>>>>> 637d28dba8873ad101906c5a0ac270cda9a1c94f:src/main/java/io/zipcoder/casino/Games/Blackjack/BlackJack.java
+
 
     Deck deck = new Deck();
     Console console = new Console(System.in, System.out);
