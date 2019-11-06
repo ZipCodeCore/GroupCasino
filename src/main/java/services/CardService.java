@@ -1,9 +1,9 @@
 package services;
 
-import models.gamecomponents.DeckOfCards;
 import models.gamecomponents.Card;
+import models.gamecomponents.DeckOfCards;
 
-import java.util.Stack;
+import java.util.Collections;
 
 public class CardService {
 
@@ -11,18 +11,19 @@ public class CardService {
 
 
     public DeckOfCards getDeckOfCards() {
-        return deckOfCards;
+        return deckOfCards.;
     }
 
-    public void setDeckOfCards(Stack<Card> deckOfCards) {
+    public void setDeckOfCards(DeckOfCards deckOfCards) {
         this.deckOfCards = deckOfCards;
     }
 
-    public DeckOfCards shuffle(DeckOfCards deck) {
-        return Collections.shuffle(deck);
+    public void shuffle(DeckOfCards deck) {
+        Collections.shuffle(deck);
     }
 
     public Card cardOnTop(DeckOfCards deckOfCards) {
         return deckOfCards.pop();    // pop() will not work unless deckOfCards is of collection type Stack
     }
+
 }
