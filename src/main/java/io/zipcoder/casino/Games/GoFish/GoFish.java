@@ -13,7 +13,7 @@ public class GoFish implements Game {
     Deck deck = new Deck();
     Console console = new Console(System.in, System.out);
     ArrayList<Card> playerHand = new ArrayList<>();
-    Card[] dealerHand = new Card[6];
+    ArrayList<Card> dealerHand = new ArrayList<>();
     private Player currentPlayer;
     private boolean currentGame = true;
     boolean running = true;
