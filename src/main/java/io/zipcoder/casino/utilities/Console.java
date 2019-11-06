@@ -124,5 +124,12 @@ public final class Console {
 
         println(gameName);
     }
+
+    public void clearScreen() {
+        for (int i = 0; i < 11; i++) {
+            println("\n");
+        }
+
+    }
 }
 

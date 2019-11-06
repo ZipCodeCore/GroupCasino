@@ -85,7 +85,7 @@ public class App {
                 break;
 
             default:
-                this.menu.print("Error! Please enter another option!");
+                this.menu.print("Error! Please enter another option!\n\n");
                 pause(1000);
                 mainMenu();
 
@@ -104,6 +104,7 @@ public class App {
 
     private void selectGameToPlayActions(Integer gameSelected){
         pause(1000);
+        this.menu.clearScreen();
         this.menu.printGameName(gameSelected);
         pause(1000);
         switch (gameSelected){
