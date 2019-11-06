@@ -12,7 +12,6 @@ import java.sql.SQLOutput;
 //import javax.smartcardio.Card;
 
 
-
 public class BlackJack implements GamblingGame {
     Console input = new Console(System.in, System.out);
     GamblingPlayer gamblingPlayer;
@@ -20,6 +19,7 @@ public class BlackJack implements GamblingGame {
     Deck blackJackDeck;
     CardHand computerHand;
     boolean winGame = false;
+
 
 
     private Player user;
@@ -37,10 +37,24 @@ public class BlackJack implements GamblingGame {
     public void startGame() {
         promptUserForWagerAmount();
         initializeblackJackHands();
+        checkHandForAce(gamblingPlayerHand);
+        checkHandForAce(computerHand);
+        checkHandValue(gamblingPlayerHand);
+        checkHandValue(computerHand);
+
+
 
 
     }
 
+    public void promptUserForWagerAmount() {
+        double userWagerAmount = input.getDoubleInput("How much would you like to wager?");
+        boolean wagerAmountSuccessful = gamblingPlayer.placeWager(userWagerAmount);
+        while (!wagerAmountSuccessful) {
+            userWagerAmount = input.getDoubleInput("Wager exceeds your balance. Please wage a smaller amount.");
+            wagerAmountSuccessful = gamblingPlayer.placeWager(userWagerAmount);
+        }
+    }
 
     public void initializeblackJackHands() {
 
@@ -48,49 +62,42 @@ public class BlackJack implements GamblingGame {
         blackJackDeck.shuffleDeck();
         gamblingPlayerHand = new CardHand(blackJackDeck.dealCards(2));
         computerHand = new CardHand(blackJackDeck.dealCards(2));
-
     }
 
-
-//    String placeWage(double wager){
-
-
-    public void promptUserForWagerAmount() {
-        double userWagerAmount = input.getDoubleInput("How much would you like to wager?");
-
-
-        boolean wagerAmountSuccessful = gamblingPlayer.placeWager(userWagerAmount);
-
-        while(!wagerAmountSuccessful)   {
-            userWagerAmount = input.getDoubleInput("Wager exceeds your balance. Please wage a smaller amount.");
-            wagerAmountSuccessful = gamblingPlayer.placeWager(userWagerAmount);
-        }
-    }
-
-    public Integer checkHandValue (CardHand hand){
+    public Integer checkHandValue(CardHand hand) {
         Integer handValue = 0;
-        for(int i = 0; i < hand.userHand.size(); i++){
-            handValue = handValue+ translateBlackJackValueFromRank(hand.userHand.get(i));
-        }   return handValue;
+        for (int i = 0; i < hand.userHand.size(); i++) {
+            handValue = handValue + translateBlackJackValueFromRank(hand.userHand.get(i));
+        }
+        return handValue;
     }
-
 
     public Integer translateBlackJackValueFromRank(Card card) {
-        Integer blackJackValue = null;
+        Integer blackJacHandValue = null;
         if (card.getRank() == Rank.JACK || card.getRank() == Rank.QUEEN || card.getRank() == Rank.KING) {
-            blackJackValue = 10;
+            blackJacHandValue = 10;
         } else if (card.getRank() == Rank.ACE) {
-            blackJackValue = 11;
+            blackJacHandValue = 11;
         } else {
-            blackJackValue = Integer.valueOf(card.getRank().toString());
+            blackJacHandValue = Integer.valueOf(card.getRank().toString());
         }
-        return blackJackValue;
+        return blackJacHandValue;
+    }
+
+    public Integer checkScore(Integer blackJackHandValue)    {
+        if(blackJackHandValue > 21 && checkHandForAce())    {
+            if
+
+        }
 
     }
 
-    public void calculateBlackJackHand(Integer blackJackValue)  {
-
-
+    public boolean checkHandForAce(CardHand hand) {
+        for (int i = 0; i < hand.userHand.size(); i++) {
+            if(card.getRank() == Rank.ACE)  {
+                return true;
+            }
+        }   return false;
     }
 
 
