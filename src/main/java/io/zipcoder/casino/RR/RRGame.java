@@ -69,17 +69,13 @@ public class RRGame extends DiceGame implements Game {
             gameServices.wager(player.getBalance(),player);
             console.println("You Lost!!!");
 
-            //player.setBalance(0);
 
-            //startPlay();
         }
         else {
             gameServices.payOut(this.player.getBalance(), this.player);
-
             console.println(String.format("\n\nYou Won!!! Your Balance Is Now $%.2f\n",player.getBalance()));
             endChoice();
     }
-
 
     }
     public Integer userRollsDice() {
