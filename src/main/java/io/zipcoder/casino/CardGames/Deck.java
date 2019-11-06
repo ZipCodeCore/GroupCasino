@@ -20,20 +20,13 @@ public class Deck {
         }
     }
 
+
     public Stack shuffleDeck(){
         Collections.shuffle(deckOfCards);
 
         return deckOfCards;
     }
 
-
-    public void print(){
-
-        System.out.println(shuffleDeck().toString());
-        System.out.println(deckOfCards.size());
-        System.out.println(drawCard());
-        System.out.println(drawCard());
-    }
 
     public ArrayList<Card> dealCards(int numberOfCards){
 

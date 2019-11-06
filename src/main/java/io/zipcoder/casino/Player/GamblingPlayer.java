@@ -3,17 +3,17 @@ package io.zipcoder.casino.Player;
 public class GamblingPlayer implements io.zipcoder.casino.Interfaces.GamblingPlayer {
 
     Player gambler;
-    Double pot;
+    Double pot = 0.0;
 
     public GamblingPlayer(Player user){
         this.gambler = user;
     }
 
-    public Boolean placeWage(double wageAmount) {
-        if(gambler.balance < wageAmount) {return false;}
-        else {gambler.balance -= wageAmount;
-            this.pot = wageAmount;
-        return true;}
+    public Boolean placeWager(double wagerAmount) {
+        if(gambler.balance < wagerAmount) {return false;}
+        else {gambler.balance -= wagerAmount;
+            this.pot += wagerAmount;
+       return true;}
     }
 
     public void getWinnings(){
