@@ -16,9 +16,10 @@ public class SnakesAndLadders implements Game {
     private Console console = new Console(System.in, System.out);
     private Dice dice = new Dice();
     private CasinoArt casinoArt = new CasinoArt();
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
     private SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
+    private SnakesAndLaddersLanguage language = new SnakesAndLaddersLanguage();
     private Player currentPlayer;
     private boolean running = true;
     private boolean currentGame = true;
@@ -55,7 +56,7 @@ public class SnakesAndLadders implements Game {
     }
 
     public String playerTurn(Integer playerPosition){
-        console.getStringInput("Press Enter to roll the dice.");
+        console.getStringInput(language.getSnakesAndLaddersLanguage("diceRoll"));
         playerPosition = playerDiceRoll();
         playerSnakesAndLadders(playerPosition);
         if(playerPosition >= 100){
@@ -66,7 +67,6 @@ public class SnakesAndLadders implements Game {
     }
 
     public String aiTurn(Integer aiPosition){
-        console.getStringInput("Now it's my turn! Press enter.");
         aiPosition = aiDiceRoll();
         aiSnakesAndLadders(aiPosition);
         if (aiPosition >= 100){
@@ -162,17 +162,7 @@ public class SnakesAndLadders implements Game {
 
 
     public void showRules(){
-        console.println("Snakes and Ladders finds its origins in Ancient India, where it\n" +
-                "was first created under the name Moksha Patam.\n" +
-                "It was used to teach children values, rewarding proper behavior with\n" +
-                "a boost in point value, via climbing a ladder, or punishing a player\n" +
-                "in point value for bad behavior, via sliding down the back of a snake.\n\n" +
-                "Commercially known in the West as Chutes and Ladders, the game has been published by Milton Bradley\n" +
-                "since the 1940's, and players compete by rolling dice and\n" +
-                "and racing to the value of 100 points, the final spot on the board.\n" +
-                "But beware! Certain spots on the board will send you down the backs of the Snakes!\n" +
-                "Likewise, certain spots on the board will push you closer to your goal.\n" +
-                "Roll the dice and see who gets there first!\n\n");
+        console.println();
     }
 
 
@@ -180,13 +170,9 @@ public class SnakesAndLadders implements Game {
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
         console.println(casinoArt.getCasinoArt( "snakesAndLadders"));
-        console.println("You approach the Snakes and Ladders table. What would you like to do?");
+        console.println(language.getSnakesAndLaddersLanguage("approach table"));
         while(running) {
-        console.println("(1) - Play the game");
-        console.println("(2) - Read the rules");
-        console.println("(3) - Return to the game menu");
         Integer playerInput = console.getIntegerInput(":");
-
             switch (playerInput) {
                 case 1:
                     runGame(currentPlayer);
@@ -211,13 +197,13 @@ public class SnakesAndLadders implements Game {
             console.println("In this house, the player always goes first! Step on up!");
             String winner = startNewGame();
             if (winner.equals("Player")) {
-                console.println("Congratulations! You won!");
+                console.println(language.getSnakesAndLaddersLanguage("playerWins"));
                 LocalDateTime now = LocalDateTime.now();
-                currentPlayer.addHistory("You won at Snakes and Ladders. ** " + dtf.format(now) + "!");
+                currentPlayer.addHistory("You won at Snakes and Ladders. ** " + dateTimeFormatter.format(now) + "!");
             } else if (winner.equals("Ai")) {
-                console.println("Oh, Too bad! I won! Better lucky next time!");
+                console.println(language.getSnakesAndLaddersLanguage("aiWins"));
                 LocalDateTime now = LocalDateTime.now();
-                currentPlayer.addHistory("You lost at Snakes and Ladders. ** " + dtf.format(now));
+                currentPlayer.addHistory("You lost at Snakes and Ladders. ** " + dateTimeFormatter.format(now));
             }
             exitGame(currentPlayer);
         }
@@ -226,9 +212,7 @@ public class SnakesAndLadders implements Game {
 
     @Override
     public void exitGame(Player currentPlayer) {
-        console.println("Would you like to play again?");
-        console.println("(1) - Yes");
-        console.println("(2) - No");
+        console.println(language.getSnakesAndLaddersLanguage("exitMenu"));
         Integer playerInput = console.getIntegerInput(":");
         switch (playerInput){
             case 1:
