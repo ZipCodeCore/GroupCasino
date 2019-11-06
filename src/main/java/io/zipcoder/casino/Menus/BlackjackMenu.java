@@ -38,12 +38,12 @@ public class BlackjackMenu implements Menu {
                 "| |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |\n" +
                 "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" +
                 " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n");
-        console.println("Choose table stakes:");
+        console.println("Choose table stakes:\n");
         console.println("1. $5 min / $25 max");
         console.println("2. $20 min / $100 max");
         console.println("3. $50 min / $250 max");
         console.println("4. Set custom stakes ($5 - $500)");
-        console.println("5. Stand up and go back to game list");
+        console.println("(Press Enter to stand up / Go back to Game Menu)");
         handleChoice(console.menuChoice(5));
     }
 

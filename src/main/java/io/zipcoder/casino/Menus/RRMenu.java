@@ -54,21 +54,21 @@ public class RRMenu implements Menu {
                 "██║  ██║╚██████╔╝███████║███████║██║██║  ██║██║ ╚████║    ██║  ██║╚██████╔╝╚██████╔╝███████╗███████╗   ██║      ██║   ███████╗\n" +
                 "╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝   ╚═╝      ╚═╝   ╚══════╝\n" +
                 "                                                                                                                              \n");
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(1);
         console.printWithDelays("Welcome To Russian Roulette!\n\n");
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(1);
         console.printWithDelays("- First the House will roll a die\n");
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(1);
         console.printWithDelays("- Your bet will be your ENTIRE balance\n");
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(1);
         console.printWithDelays("- Next, you will roll a die:\n");
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(1);
         console.printWithDelays("- If your roll DOES NOT match the House's roll, your balance is DOUBLED!\n");
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(1);
         console.printWithDelays("- If your roll matches the house......You lose all your balance.\n\n");
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(1);
         console.printWithDelays("Are you willing to risk it all to win it all?\n\n");
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(2);
 
         int choice = console.getInteger("(Press 1 to play or 2 to exit):\n\n");
         handleChoice(choice);
