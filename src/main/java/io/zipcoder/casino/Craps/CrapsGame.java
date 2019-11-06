@@ -6,7 +6,11 @@ import io.zipcoder.casino.Menus.CrapsMenu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.utilities.Console;
+import io.zipcoder.casino.Utility.Music;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class CrapsGame extends DiceGame implements Game {
@@ -27,7 +31,7 @@ public class CrapsGame extends DiceGame implements Game {
     private Integer counter=1;
     private Console console = new Console(System.in, System.out);
     private GameServices gameServices = new GameServices();
-
+    Music crapsMusic = null;
 
 
     //Craps Game Constructor
@@ -44,15 +48,26 @@ public class CrapsGame extends DiceGame implements Game {
     @Override
     //creates dice and runs a roundOfPlay
     public void startPlay() throws InterruptedException {
+        try {
+            Music.filePath = "src/music/(Craps) Amor maior - Higher Love.wav";
+            crapsMusic = new Music();
+            crapsMusic.play();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
         new CrapsMenu(this).displayMenu();
-        console.print(" \n::::::::  :::::::::      :::     :::::::::   ::::::::  \n" +
-                ":+:    :+: :+:    :+:   :+: :+:   :+:    :+: :+:    :+: \n" +
-                "+:+        +:+    +:+  +:+   +:+  +:+    +:+ +:+        \n" +
-                "+#+        +#++:++#:  +#++:++#++: +#++:++#+  +#++:++#++ \n" +
-                "+#+        +#+    +#+ +#+     +#+ +#+               +#+ \n" +
-                "#+#    #+# #+#    #+# #+#     #+# #+#        #+#    #+# \n" +
-                " ########  ###    ### ###     ### ###         ########  \n\n\n");
+
         roundOfPlay();
+        try {
+            crapsMusic.stop();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
         endChoice();
     }
 

@@ -23,7 +23,13 @@ public class CrapsMenu implements Menu {
     public void displayMenu() {
         console.clearScreen();
 
-        console.printWithDelays("Craaaaaps");
+        console.print(" \n::::::::  :::::::::      :::     :::::::::   ::::::::  \n" +
+                ":+:    :+: :+:    :+:   :+: :+:   :+:    :+: :+:    :+: \n" +
+                "+:+        +:+    +:+  +:+   +:+  +:+    +:+ +:+        \n" +
+                "+#+        +#++:++#:  +#++:++#++: +#++:++#+  +#++:++#++ \n" +
+                "+#+        +#+    +#+ +#+     +#+ +#+               +#+ \n" +
+                "#+#    #+# #+#    #+# #+#     #+# #+#        #+#    #+# \n" +
+                " ########  ###    ### ###     ### ###         ########  \n\n\n");
     }
 
     @Override

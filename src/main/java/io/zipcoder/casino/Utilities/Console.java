@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public final class Console {
     private final Scanner input;
     private final PrintStream output;
-    static final int DEFAULT_CASINO_DELAY = 10;
+    static final int DEFAULT_CASINO_DELAY = 20;
 
     public Console(InputStream in, PrintStream out) {
         this.input = new Scanner(in);
