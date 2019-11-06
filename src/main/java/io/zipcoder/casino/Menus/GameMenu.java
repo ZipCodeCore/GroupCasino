@@ -8,6 +8,7 @@ import io.zipcoder.casino.Games.Roulette.Roulette;
 import io.zipcoder.casino.Games.SnakesAndLadders.SnakesAndLadders;
 import io.zipcoder.casino.Games.HighAndLow.HighAndLow;
 import io.zipcoder.casino.PlayerCreation.Player;
+import io.zipcoder.casino.Games.Slots.Slots;
 import io.zipcoder.casino.utilities.Console;
 
 public class GameMenu {
@@ -35,7 +36,7 @@ public class GameMenu {
         console.println("(3) - Craps");
         console.println("(4) - Snakes & Ladders");
         console.println("(5) - Roulette");
-        console.println("(6) - Slots");
+        console.println("(6) - SlotMachine");
         console.println("(7) - High or Low");
         console.println("(8) - Return to Casino");
     }
@@ -71,11 +72,11 @@ public class GameMenu {
 
                 return "You would be playing Roulette now.";
             case 6:
-                console.print("You would be playing Slots now.");
-                /*Slots slots = new Slots();
-                slots.launchSlots();
-                 */
-                return "You would be playing Slots now";
+                console.print("You would be playing SlotMachine now.");
+                Slots slots = new Slots();
+                slots.runSlots(currentPlayer);
+
+                return "You would be playing SlotMachine now";
             case 7:
                 HighAndLow highAndLow = new HighAndLow();
                 highAndLow.runHighOrLow(currentPlayer);
