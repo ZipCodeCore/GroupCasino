@@ -9,7 +9,8 @@ public class PlayerMenuTest {
     public void runPlayerMenutest() {
 //        Console console = new Console(System.in,System.out);
 //        PlayerMenu playerMenu = new PlayerMenu();
-//        playerMenu.runPlayerMenu();
+//        playerMenu.runPlayerMenu(player);
+
 
 
 
