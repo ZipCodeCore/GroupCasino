@@ -21,19 +21,12 @@ public class PlayerMenu {
 
     public void runPlayerMenu( ){
         while (running) {
-            displayPlayerMenu();
+            Console.clearScreen();
+            console.println(art.getCasinoArt(CasinoArt.Art.PLAYERMENU));
+            Console.displayPlayerMenu();
             Integer playerInput = getPlayerInput();
             playerMenuLogic(playerInput);
         }
-    }
-
-    private void displayPlayerMenu(){
-        Console.clearScreen();
-        console.println(art.getCasinoArt(CasinoArt.Art.PLAYERMENU));
-        console.println("Welcome stranger! Have I seen you before?");
-        console.println("(1) - Yes, My name is...");
-        console.println("(2) - No it is my first time!");
-        console.println("(3) - Never mind, forgot my wallet T^T");
     }
 
     private Integer getPlayerInput(){
