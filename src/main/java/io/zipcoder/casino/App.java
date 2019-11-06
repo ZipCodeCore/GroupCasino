@@ -104,6 +104,8 @@ public class App {
 
     private void selectGameToPlayActions(Integer gameSelected){
         pause(1000);
+        this.menu.printGameName(gameSelected);
+        pause(1000);
         switch (gameSelected){
             case 1:
                 GoFish newGoFish = new GoFish(this.newPlayer);
