@@ -27,6 +27,8 @@ public class SnakesAndLadders implements Game {
     private boolean currentGame = true;
     private Sound loseSound;
     private Sound diceSound;
+    private Sound snakeSound;
+    private Sound winSound;
 
     public void runSnakesAndLadders(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
@@ -40,6 +42,8 @@ public class SnakesAndLadders implements Game {
         aiPiece.setCurrentPosition(0);
         loseSound = new Sound("wahwah.wav");
         diceSound = new Sound("dice_roll.wav");
+        snakeSound = new Sound("snake_hiss.wav");
+        winSound = new Sound("win_sound.wav");
     }
 
     public String startNewGame(){
@@ -145,7 +149,7 @@ public class SnakesAndLadders implements Game {
             playerPiece.setCurrentPosition(newPosition);
             return newPosition;
         } else if (position < newPosition){
-            console.println("Hooray! You've hit a ladder! You're now at %d.", newPosition);
+            console.println("Hooray! You've hit a Ladder! You're now at %d.", newPosition);
             playerPiece.setCurrentPosition(newPosition);
             return newPosition;
         }
@@ -156,10 +160,12 @@ public class SnakesAndLadders implements Game {
         Integer newPosition = snakesAndLaddersCheckerViaMap(position);
         if (position > newPosition) {
             console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
+            snakeSound.play();
             aiPiece.setCurrentPosition(newPosition);
             return newPosition;
         } else if (position < newPosition){
-            console.println("Hooray! I've hit a ladder! I'm now at %d.", newPosition);
+            console.println("Hooray! I've hit a Ladder! I'm now at %d.", newPosition);
+            winSound.play();
             aiPiece.setCurrentPosition(newPosition);
             return newPosition;
         }
