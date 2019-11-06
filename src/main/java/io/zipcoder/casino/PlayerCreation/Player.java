@@ -47,6 +47,7 @@ public class Player {
         Integer historyCounter = 0;
         for(String history : gameHistory){
             sb.append(gameHistory.get(0));
+            sb.append("\n");
         }
         return sb.toString();
     }

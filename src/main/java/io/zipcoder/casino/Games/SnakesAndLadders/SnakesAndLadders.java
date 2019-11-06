@@ -20,6 +20,8 @@ public class SnakesAndLadders implements Game {
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
     private SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
+    private String playerTurnLadder = "";
+    private String playerTurnDice = "";
     private String playerTurn = "";
     private Player currentPlayer;
     private SnakesAndLaddersLanguage text = new SnakesAndLaddersLanguage();
@@ -30,6 +32,7 @@ public class SnakesAndLadders implements Game {
     private Sound diceSound;
     private Sound snakeSound;
     private Sound winSound;
+    private Sound ladderSound;
 
     public void runSnakesAndLadders(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
@@ -45,6 +48,7 @@ public class SnakesAndLadders implements Game {
         diceSound = new Sound("dice_roll.wav");
         snakeSound = new Sound("snake_hiss.wav");
         winSound = new Sound("win_sound.wav");
+        ladderSound = new Sound("ladder.wav");
     }
 
     public String startNewGame() {
@@ -69,8 +73,8 @@ public class SnakesAndLadders implements Game {
     public String playerTurn(Integer playerPosition) {
         console.getStringInput(text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.DICEROLL));
         playerPosition = playerDiceRoll();
-        playerTurn = "player";
-        playerSnakesAndLadders(playerPosition, playerTurn);
+        playerTurnLadder = "player";
+        playerSnakesAndLadders(playerPosition, playerTurnLadder);
         if (playerPosition >= 100) {
             return "Player";
         }
@@ -80,8 +84,8 @@ public class SnakesAndLadders implements Game {
 
     public String aiTurn(Integer aiPosition) {
         aiPosition = aiDiceRoll();
-        playerTurn = "ai";
-        playerSnakesAndLadders(aiPosition, playerTurn);
+        playerTurnLadder = "ai";
+        playerSnakesAndLadders(aiPosition, playerTurnLadder);
         if (aiPosition >= 100) {
             return "Ai";
         }
@@ -147,27 +151,30 @@ public class SnakesAndLadders implements Game {
 
     public Integer playerSnakesAndLadders(Integer position, String playerTurn) {
         Integer newPosition = snakesAndLaddersCheckerViaMap(position);
-        if (playerTurn.equals("player")) {
             if (position > newPosition) {
-                console.println("Uh-oh! You've hit a Snake! You're back at %d", newPosition);
-                playerPiece.setCurrentPosition(newPosition);
-                return newPosition;
-            } else if (position < newPosition) {
-                console.println("Hooray! You've hit a Ladder! You're now at %d.", newPosition);
-                playerPiece.setCurrentPosition(newPosition);
-                return newPosition;
-            }
-        }   else if (playerTurn.equals("ai")) {
-            if (position > newPosition) {
-                console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
-                snakeSound.play();
-                aiPiece.setCurrentPosition(newPosition);
-                return newPosition;
-            } else if (position < newPosition) {
-                console.println("Hooray! I've hit a Ladder! I'm now at %d.", newPosition);
-                aiPiece.setCurrentPosition(newPosition);
-                return newPosition;
+                if(playerTurnLadder.equals("player")) {
+                    console.println("Uh-oh! You've hit a Snake! You're back at %d", newPosition);
+                    playerPiece.setCurrentPosition(newPosition);
+                    ladderSound.play();
+                } else if (playerTurnLadder.equals("ai")){
+                    console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
+                    aiPiece.setCurrentPosition(newPosition);
+                    snakeSound.play();
                 }
+                snakeSound.play();
+                playerPiece.setCurrentPosition(newPosition);
+                return newPosition;
+            } else if (position < newPosition) {
+                if(playerTurnLadder.equals("player")) {
+                    console.println("Hooray! You've hit a Ladder! You're now at %d.", newPosition);
+                    playerPiece.setCurrentPosition(newPosition);
+                    ladderSound.play();
+                } else if (playerTurnLadder.equals("ai")){
+                    console.println("Hooray! I've hit a Ladder! I'm now at %d.", newPosition);
+                    aiPiece.setCurrentPosition(newPosition);
+                    snakeSound.play();
+                }
+                return newPosition;
             }
         return position;
         }
