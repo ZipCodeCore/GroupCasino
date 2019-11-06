@@ -2,11 +2,14 @@ package io.zipcoder.casino.Blackjack;
 
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardSet;
+import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.Utilities.Console;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BlackjackHand {
 
@@ -15,6 +18,8 @@ public class BlackjackHand {
     private int value;
     private BlackjackPlayer player;
     private Console console = new Console(System.in, System.out);
+    private GameServices gameServices = new GameServices();
+    private Logger logger = Logger.getLogger(BlackjackHand.class.getName());
 
     public BlackjackHand(double bet, BlackjackPlayer player, Card card1, Card card2) {
         this.bet = bet;
@@ -103,6 +108,7 @@ public class BlackjackHand {
     public void splitHand() {
         Card card = this.cards.removeFirstCard();
         this.player.addHand(new BlackjackHand(this.bet, this.player, card, null));
+        gameServices.wager(this.bet, this.player.getPlayer());
     }
 
     public int getValue() {
@@ -129,7 +135,10 @@ public class BlackjackHand {
         for (Card card: cards.getCards()) {
             values.add(BlackjackGame.cardMap.get(card.getRank()));
         }
-        Collections.sort(values,Collections.reverseOrder());
+//        logger.log(Level.INFO, "==================");
+//        logger.log(Level.INFO, values.toString());
+        Collections.sort(values);
+//        logger.log(Level.INFO, values.toString());
         return values;
     }
 
@@ -140,6 +149,5 @@ public class BlackjackHand {
         }
         return sum;
     }
-
 
 }

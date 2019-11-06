@@ -16,19 +16,12 @@ import java.util.concurrent.TimeUnit;
 public final class Console {
     private final Scanner input;
     private final PrintStream output;
+    static final int DEFAULT_DELAY = 10;
 
     public Console(InputStream in, PrintStream out) {
         this.input = new Scanner(in);
         this.output = out;
     }
-
-//    public void print(String val, Object... args) {
-//        output.format(val, args);
-//    }
-//
-//    public void println(String val, Object... vals) {
-//        print(val + "\n", vals);
-//    }
 
     public String getStringInput(String prompt, Object... args) {
         println(prompt, args);
@@ -282,12 +275,39 @@ public final class Console {
     public void printWithDelays(String data, TimeUnit unit, long delay)
             throws InterruptedException {
         for (char ch : data.toCharArray()) {
-            System.out.print(ch);
+            print(Character.toString(ch));
             unit.sleep(delay);
+        }
+    }
+
+    //Makes a type writer effect on screen
+    public void printWithDelays(String data, long delay)
+            throws InterruptedException {
+        for (char ch : data.toCharArray()) {
+            print(Character.toString(ch));
+            TimeUnit.MILLISECONDS.sleep(delay);
+        }
+    }
+
+    //Makes a type writer effect on screen
+    public void printWithDelays(String data)
+            throws InterruptedException {
+        for (char ch : data.toCharArray()) {
+            print(Character.toString(ch));
+            TimeUnit.MILLISECONDS.sleep(Console.DEFAULT_DELAY);
+        }
+    }
+
+    public void sleep(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
         }
     }
 
     public void getInput(String s, TimeUnit milliseconds, int i) {
     }
+
+
 }
 

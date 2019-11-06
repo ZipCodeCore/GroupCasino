@@ -216,4 +216,20 @@ public class CardSetTest {
         Console console = new Console(System.in, System.out);
         console.println(cards.toASCIISuite());
     }
+
+    @Test
+    public void toASCIIBlankTest() {
+        CardSet cards = new CardSet(0);
+        cards.addCard(new Card("A","H"));
+        cards.addCard(new Card("K","D"));
+        cards.addCard(new Card("Q","S"));
+        cards.addCard(new Card("J","C"));
+        cards.addCard(new Card("10","H"));
+        cards.addCard(new Card("9","D"));
+        cards.addCard(new Card("8","S"));
+        cards.addCard(new Card("7","C"));
+
+        Console console = new Console(System.in, System.out);
+        console.println(cards.toASCIIBlank());
+    }
 }
