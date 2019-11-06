@@ -8,10 +8,12 @@ import services.Console;
 import services.PlayerRepo;
 
 abstract class CardGame {
+
     DeckOfCards deckOfCards;
     Dealer dealer;
     Player player;
     PlayerRepo playerRepo;
+
     // made a new object called console cause Console class had getIntegerInput which was static
     Console console = new Console(System.in, System.out);
 
