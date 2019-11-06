@@ -28,7 +28,6 @@ public class SnakesAndLaddersLanguage {
         this.snakesAndLaddersLanguage.put("diceRoll", "Press Enter to roll the dice.");
         this.snakesAndLaddersLanguage.put("playerWins", "Congratulations! You won!");
         this.snakesAndLaddersLanguage.put("aiWins", "Oh, Too bad! I won! Better lucky next time!");
-        this.snakesAndLaddersLanguage.put("startNewGame", )
 
 
     }

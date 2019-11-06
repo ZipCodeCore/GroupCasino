@@ -162,7 +162,7 @@ public class SnakesAndLadders implements Game {
 
 
     public void showRules(){
-        console.println();
+        console.println(language.getSnakesAndLaddersLanguage("rules"));
     }
 
 
