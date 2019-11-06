@@ -7,7 +7,6 @@ import io.zipcoder.casino.utilities.Console;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 
 public class Craps implements Game, GamblingGame {
 
