@@ -3,6 +3,7 @@ package io.zipcoder.casino.utilities;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -57,7 +58,6 @@ public final class Console {
     public Integer getIntegerInput(String prompt, Object... args) {
         return getLongInput(prompt, args).intValue();
     }
-
 
     public void newln() {
         print("\n");
