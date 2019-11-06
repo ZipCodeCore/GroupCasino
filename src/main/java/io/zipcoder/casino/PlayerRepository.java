@@ -1,5 +1,7 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.PlayerCreation.Player;
+
 import java.util.HashMap;
 
 public class PlayerRepository {

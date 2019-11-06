@@ -1,5 +1,6 @@
 package io.zipcoder.casino.Games;
 
+import io.zipcoder.casino.Games.HighAndLow.HighAndLow;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,10 +1,7 @@
 package io.zipcoder.casino;
 
-import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class PlayerMenuTest {
 
