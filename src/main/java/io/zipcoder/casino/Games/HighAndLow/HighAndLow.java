@@ -95,6 +95,7 @@ public class HighAndLow implements Game, GamblingGame {
     public void runGame(Player currentPlayer) {
         while(running) {
             totalBetValue = 0;
+            Integer highOrLowBet = 0;
             console.println("Welcome to High and Low, %s!\n", currentPlayer.getName());
             placeBet(currentPlayer);
             Integer firstRoll = firstRoll();
@@ -105,7 +106,12 @@ public class HighAndLow implements Game, GamblingGame {
             } else {
                 console.println(language.getHighAndLowLanguage("didNotRoll"));
             }
-            Integer highOrLowBet = highOrLowBet();
+            if(didYouBet) {
+                highOrLowBet = highOrLowBet();
+            } else {
+                console.println(language.getHighAndLowLanguage("didNotBet2"));
+                highOrLowBet = highOrLowBet();
+            }
             Integer secondRoll = secondRoll();
 
             winOrLose(firstRoll, secondRoll, highOrLowBet);

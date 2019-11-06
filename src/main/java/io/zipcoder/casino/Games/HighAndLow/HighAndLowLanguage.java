@@ -28,6 +28,7 @@ public class HighAndLowLanguage {
                 "But we'll be nice and still let you guess.");
         this.highAndLowLanguage.put("highOrLow", "Do you want to bet High or Low?\n(1) - High\n(2) - Low");
         this.highAndLowLanguage.put("lose", "Sorry, you've lost. Try again soon!");
+        this.highAndLowLanguage.put("didNotBet2", "No bets? Okay, all fun and games here.\nWe'll still let you pick.");
 
     }
 
