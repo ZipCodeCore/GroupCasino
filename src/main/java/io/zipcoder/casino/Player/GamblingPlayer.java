@@ -24,4 +24,6 @@ public class GamblingPlayer implements io.zipcoder.casino.Interfaces.GamblingPla
     public void getWinnings() {
         gambler.balance += pot * 2;
     }
+
+    public Double getBalance(){return gambler.balance;}
 }
