@@ -117,6 +117,28 @@ public class CardSet {
         return output;
     }
 
+    public String toASCIIBlank() {
+        int numCards = this.size();
+        String[] emptyArray = new String[numCards+1];
+        Arrays.setAll(emptyArray,(index) -> "");
+
+        String output = String.join("\u250C-------\u2510 ", emptyArray);
+        output += "\n";
+        output += String.join("|       | ", emptyArray);
+        output += "\n";
+        output += String.join("|       | ", emptyArray);
+        output += "\n";
+        output += String.join("|       | ", emptyArray);
+        output += "\n";
+        output += String.join("|       | ", emptyArray);
+        output += "\n";
+        output += String.join("|       | ", emptyArray);
+        output += "\n";
+        output += String.join("\u2514-------\u2518 ", emptyArray);
+        output += "\n";
+        return output;
+    }
+
     public String toASCIISuite() {
         int numCards = this.size();
         String[] emptyArray = new String[numCards+1];

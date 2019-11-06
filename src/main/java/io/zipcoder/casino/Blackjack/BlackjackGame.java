@@ -293,6 +293,7 @@ public class BlackjackGame extends CardGame implements Game {
             gameServices.payOut(2 * handToEvaluate.getBet(), this.player.getPlayer());
             return 2 * handToEvaluate.getBet();
         } else if (playerValue == dealerValue) {
+            gameServices.payOut(handToEvaluate.getBet(), this.player.getPlayer());
             return handToEvaluate.getBet();
         } else {
             return 0.0;

@@ -77,7 +77,6 @@ public class TellerMenu implements Menu {
         switch (choice) {
             case 1:
                 depositFunds();
-                displayMenu();
                 break;
             case 2:
                 cashOut();
