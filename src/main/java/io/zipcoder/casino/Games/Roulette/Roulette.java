@@ -32,6 +32,7 @@ public class Roulette implements Game, GamblingGame {
 
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
+
         console.println(art.getCasinoArt(CasinoArt.Art.ROULETTE));
         console.println("You approach the Roulette. What would you like to do?");
         console.println("(1) - Play the game");
@@ -151,10 +152,6 @@ public class Roulette implements Game, GamblingGame {
     }
 
 
-    /**
-     * This method checks to see if the player's bet wins compared to the winning number.
-     * @return a true false value if the player won or not.
-     */
     public boolean isWinner(){
         if(isOddEvenGame) {
             return spinNum % 2 == placeBetInt;
@@ -169,7 +166,7 @@ public class Roulette implements Game, GamblingGame {
             winnings = pot * 2;
             console.println("Congrats maybe you don't suck I'll give you "+ winnings);
             LocalDateTime now = LocalDateTime.now();
-            String addHistory = String.format("You won $%d.00 at High and Low! ** ", winnings);
+            String addHistory = String.format("You won $%d.00 at Roulette! ** ", winnings);
             currentPlayer.addHistory(addHistory + dtf.format(now));
             currentPlayer.changeBalance(winnings);
 
