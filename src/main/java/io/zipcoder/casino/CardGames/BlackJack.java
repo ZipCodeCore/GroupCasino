@@ -95,11 +95,21 @@ public class BlackJack implements GamblingGame {
         this.card = card;
     }
 
-    public void startGame() {
-        promptUserForWagerAmount();
+    public void playBlackJack() {
         initializeBlackJackHands();
         checkScore(checkHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
         checkScore(checkHandValue(computerHand), checkHandForAces(computerHand));
+
+        do {
+            displayHandsAndCurrentScore();
+            promptHitOrStay();
+            hitOrStayAction(gamblingPlayerHand, promptHitOrStay());
+            checkScore(checkHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
+
+        }
+        while (checkScore(checkHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand)) < 21 || promptHitOrStay() == 0);
+
+
     }
 
 
@@ -120,28 +130,30 @@ public class BlackJack implements GamblingGame {
         computerHand = new CardHand(blackJackDeck.dealCards(2));
     }
 
+
+    //takes arrayList of cards from hand and separates them by card so translateBlackJackValueFromRank can assign a value to each card. Then calculates value of hand without considering
     public Integer checkHandValue(CardHand hand) {
         Integer handValue = 0;
         for (int i = 0; i < hand.userHand.size(); i++) {
             handValue = handValue + translateBlackJackValueFromRank(hand.userHand.get(i));
         }
-
         return handValue;
     }
-
+    //takes cards passed from checkHandValue and sets a value based on card rank. Aces are defaulted to 11 points.
     public Integer translateBlackJackValueFromRank(Card card) {
-        Integer blackJacHandValue = null;
+        Integer blackJackHandValueofAceIs11Points = null;
         if (card.getRank() == Rank.JACK || card.getRank() == Rank.QUEEN || card.getRank() == Rank.KING) {
-            blackJacHandValue = 10;
+            blackJackHandValueofAceIs11Points = 10;
         } else if (card.getRank() == Rank.ACE) {
-            blackJacHandValue = 11;
+            blackJackHandValueofAceIs11Points = 11;
         } else {
-            blackJacHandValue = Integer.valueOf(card.getRank().toString());
+            blackJackHandValueofAceIs11Points = Integer.valueOf(card.getRank().toString());
         }
-        return blackJacHandValue;
+        return blackJackHandValueofAceIs11Points;
     }
 
 
+        //counts the number of Aces in cardHand.
     public Integer checkHandForAces(CardHand hand) {
         Integer aceCounter = 0;
         for (int i = 0; i < hand.userHand.size(); i++) {
@@ -152,6 +164,7 @@ public class BlackJack implements GamblingGame {
         return aceCounter;
     }
 
+        //evaluates score of blackjack hand and determines whether or not the value of each Ace should remain at 11 points or be reassigned to 1 point. Returns
     public Integer checkScore(Integer blackJackHandValue, Integer numberOfAces) {
         if (numberOfAces == 1 && blackJackHandValue > 21) {
             blackJackHandValue = blackJackHandValue - 10;
@@ -171,25 +184,27 @@ public class BlackJack implements GamblingGame {
         return blackJackHandValue;
     }
 
+    public void displayHandsAndCurrentScore() {
+        input.print(gamblingPlayerHand.toString() + "Your score is " + checkScore(checkHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand)),
+                computerHand.toString() + "Dealer score is " + checkScore(checkHandValue(computerHand), checkHandForAces(computerHand)));
+    }
 
-    public void promptHitOrStay() {
-        System.out.println(gamblingPlayerHand.displayHand());
-        System.out.println(computerHand.displayHand());
-        Integer hitOrStayUserInput = input.getIntegerInput("Press 1 to hit or 2 to stay");
-        if(hitOrStayUserInput == 1) {
+
+
+    public Integer promptHitOrStay() {
+        Integer hitOrStayUserInput = input.getIntegerInput("Press 1 to hit or 2 to stay.");
+        while (hitOrStayUserInput != 1 || hitOrStayUserInput != 0) {
+            hitOrStayUserInput = input.getIntegerInput("Invalid key, press 1 to hit or 2 to stay.");
+        }
+        return hitOrStayUserInput;
+    }
+
+    public void hitOrStayAction(CardHand hand, Integer hitOrStayUserInput) {
+        if (hitOrStayUserInput == 1) {
+            hand.userHand.add(blackJackDeck.drawCard());
+        } else {
 
         }
-
-    }
-
-
-
-    public void dealerHitOrStay(Integer hitOrStayUserInput) {
-
-
-    }
-
-    public void hit(Player deck, Player player) {
 
     }
 
