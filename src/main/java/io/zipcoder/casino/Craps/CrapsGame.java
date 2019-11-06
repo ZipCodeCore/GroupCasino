@@ -53,7 +53,7 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     @Override
-    //creates dice and runs a roundOfPlay
+    //creates and runs a roundOfPlay
     public void startPlay() throws InterruptedException {
         try {
             Music.filePath = "src/music/(Craps) Amor maior - Higher Love.wav";
@@ -66,15 +66,7 @@ public class CrapsGame extends DiceGame implements Game {
         new CrapsMenu(this).displayMenu();
 
         roundOfPlay();
-        try {
-            crapsMusic.stop();
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        }
+
         endChoice();
     }
 
@@ -82,19 +74,16 @@ public class CrapsGame extends DiceGame implements Game {
     //runs a new game of craps
     public void roundOfPlay() throws InterruptedException {
         Double betSize = betChoice();
-
         userRollsDiceSetPoint();
         displayPointRoll(setThePointRoll);
         if (winOnFirst(setThePointRoll) == true) {
-            //displayPointRoll(setThePointRoll);
+
             winningMessageFirstRoll();
             calculateWinnings(betSize, setThePointRoll, numRolls);
         } else if (loseOnFirst(setThePointRoll) == true) {
-            //displayPointRoll(setThePointRoll);
             losingMessageFirstRoll();
         }
         else {
-            //displayPointRoll(setThePointRoll);
             for (int i = 0; i < 3; i++) {
                 numRolls = i + 1;
                 userRollsDiceCurrentPoint();
@@ -117,7 +106,8 @@ public class CrapsGame extends DiceGame implements Game {
     public Double betChoice(){
         Double wager;
         console.println(String.format("\nCurrent bankroll: $%.2f", this.player.getPlayer().getBalance()));
-        wager = console.getCurrency(String.format("\n[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: Bet size (press Enter to stand up): \n\n", this.minBet, this.maxBet));
+
+        wager = console.getCurrency(String.format("\n[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: What's your Bet?\n\n", this.minBet, this.maxBet));
 
          if (wager > this.player.getPlayer().getBalance()){
             console.println(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.\n", this.player.getPlayer().getLastName()));
@@ -164,6 +154,15 @@ public class CrapsGame extends DiceGame implements Game {
     public void endChoice() throws InterruptedException {
         String endChoiceInput = console.getInput("\n[CROUPIER]: You have finished this game of Craps.\n\nWould you like to play again? (Y/N)\n");
         if (endChoiceInput.toUpperCase().equals("N")) {
+            try {
+                crapsMusic.stop();
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            }
             console.println("\n[CROUPIER]: Have a good rest of your day.\n");
             //also, return to the main menu
         } else if (endChoiceInput.toUpperCase().equals("Y")) {

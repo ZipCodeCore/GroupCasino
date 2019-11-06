@@ -48,7 +48,7 @@ public class MainMenu implements Menu {
                 "      | \\_/ \\_/ \\_/ C|||C|||C||| |-| |-| |-| |\n" +
                 "      | _|_ _|_ _|_  ||| ||| ||| |_| |_| |_| |\n" +
                 "      '===================================== ,sSSSs\n" +
-                "                 MILL'S WATERING HOLE       SSSS \"(\n" +
+                "               THE MILL'S WATERING HOLE     SSSS \"(\n" +
                 "           .:.                              SSS@ =/  \\~/\n" +
                 "          C|||'                             SSSS_(_  _Y_\n" +
                 "        ___|||______________________________SS/  ) ) /.-\n" +
