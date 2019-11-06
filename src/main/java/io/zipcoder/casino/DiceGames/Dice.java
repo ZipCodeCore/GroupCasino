@@ -45,7 +45,7 @@ public class Dice {
     // toString---------------------------------------------------------------------------------------------------------
 
     public String toString(){
-        return String.format("Value: %d  : Keeping: %b", value, kept);
+        return String.format(this.value + ", ");
     }
 
     public static ArrayList<Integer> playerDice = new ArrayList<Integer>(5);
