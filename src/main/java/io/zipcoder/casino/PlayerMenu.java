@@ -71,7 +71,8 @@ public class PlayerMenu {
                 if (player != null) {
                     casino.runCasinoMenu(player);
                 } else {
-                    console.println("I don't know you!");
+                    console.println("I don't know you!\n\n");
+                    console.getStringInput("Press Enter to return to menu");
                 }
 
                 break;
