@@ -10,8 +10,8 @@ import org.junit.Test;
 
 public class DiceRollTest {
 
-    Yahtzee roller;
-    Player user;
+    private Yahtzee roller;
+    private Player user;
 
     @Before
     public void doThisFirst(){
