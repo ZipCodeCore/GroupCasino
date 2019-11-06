@@ -5,7 +5,7 @@ import models.hands.KlondikeHand;
 
 public class KlondikeDealer extends Dealer {
     Dealer klondikeDealer;
-    KlondikeHand hand = new KlondikeHand();
+  //  KlondikeHand hand = new KlondikeHand();
 
     public KlondikeDealer(String firstName, String lastName, double balance) {
         super(firstName, lastName, balance);

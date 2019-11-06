@@ -5,8 +5,10 @@ import models.gamecomponents.Dice;
 import models.hands.KlondikeHand;
 
 public class KlondikePlayer extends Player implements GamblingPlayer {
-    Player klondikePlayer;
-    KlondikeHand hand = new KlondikeHand();
+     Player klondikePlayer;
+     Dice dice=new Dice();
+     int valueOfDice;
+     KlondikeHand hand = new KlondikeHand(dice, valueOfDice);
 
     public KlondikePlayer(Player player) {
         this.klondikePlayer = player;

@@ -1,5 +1,6 @@
 package models.people.players;
 
+
 public class Player {
     Double balance = 0.00;
     String name;
