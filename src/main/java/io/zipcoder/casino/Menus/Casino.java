@@ -7,7 +7,7 @@ import io.zipcoder.casino.utilities.Console;
 public class Casino {
     private Player currentPlayer;
     Console console = new Console(System.in, System.out);
-    private CasinoArt casinoArt = new CasinoArt();
+    CasinoArt art = new CasinoArt();
     boolean running = true;
 
     public void runCasinoMenu(Player currentPlayer){
@@ -21,7 +21,7 @@ public class Casino {
 
     public void displayCasinoMenu(){
         Console.clearScreen();
-        console.println(casinoArt.getCasinoArt("casinoLobby"));
+        console.println(art.getCasinoArt(CasinoArt.Art.CASINOLOBBY));
         console.println(String.format("Welcome to The Notorious B.I.G. 3 Casino, %s!",currentPlayer.getName()));
         console.println("What would you like to do?");
         console.println("(1) - Display Game Menu");
@@ -52,13 +52,16 @@ public class Casino {
                 gameMenu.runGameMenu(currentPlayer);
                 break;
             case 2:
-                console.println(String.format("Your current balance is $%d.00.\n", currentPlayer.getBalance()));
+                console.println(String.format("Your current balance is $%d.00.\n\n", currentPlayer.getBalance()));
+                console.getStringInput("Press Enter to return to menu");
                 break;
             case 3:
                 if(currentPlayer.getHistory().isEmpty()){
-                    console.println("Sorry! You do not yet have a gaming history. Play some games to get one!\n");
+                    console.println("Sorry! You do not yet have a gaming history. Play some games to get one!\n\n");
+                    console.getStringInput("Press Enter to return to menu");
                 } else {
                     console.println(currentPlayer.printHistory());
+                    console.getStringInput("Press Enter to return to menu");
                 }
                 break;
             case 4:

@@ -8,3 +8,4 @@ public interface GamblingGame {
     void returnWinnings(Player currentPlayer);
 
 }
+

@@ -98,5 +98,10 @@ public final class Console {
         for(int i = 0; i <= 100; i++)
         System.out.print("\n");
     }
+
+
+    public static void printSnakesAndLaddersRules(){
+        System.out.println();
+    }
 }
 
