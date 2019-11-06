@@ -4,13 +4,12 @@ import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 public class GoFish implements Game {
 
-    Console input = new Console(System.in, System.out);
+    Console newConsole = new Console(System.in, System.out);
+    Random random = new Random();
 
     private Player user;
     private Deck goFishDeck;
@@ -22,7 +21,7 @@ public class GoFish implements Game {
         this.user = player;
 
         //initialize deck and shuffle
-        goFishDeck = new Deck(1);
+        this.goFishDeck = new Deck(1);
         goFishDeck.shuffleDeck();
 
         //initialize players' hand and deal cards
@@ -32,122 +31,134 @@ public class GoFish implements Game {
 
     }
 
+
     public void startGame() {
 
-        System.out.println("\n\nLoading Go Fish....\n\n");
-
+        newConsole.println("\n\nLoading Go Fish.... \n\n");
 
         do {
 
-            System.out.println("Your turn \n\n");
-
+            newConsole.println("%s's turn \n\n", this.user.getID());
             playerTurn();
-            winGame = evaluateHand(playerHand);
+            //evaluateHand(playerHand);
 
 
-            System.out.println("Computer's Turn");
+            newConsole.println("Computer's Turn \n\n");
             computerTurn();
+            //evaluateHand(computerHand);
+
+        } while (!winGame);
 
 
-        } while (winGame == false);
-
+        promptLeaveGame();
     }
 
 
     public void playerTurn() {
 
-        System.out.println(playerHand.displayHand());
+        newConsole.println(playerHand.displayHand());
 
-        String userInput = input.getStringInput("Which value would you like to ask for? ");
-        userInput.toUpperCase();
+        String cardWanted = newConsole.getStringInput("Which value would you like to ask for? ").toUpperCase();
 
-        if (haveCard(computerHand, userInput) == true) {
+        //If Player asked for a card that is in hand
+        if (haveCard(playerHand, cardWanted)) {
 
-            System.out.println("The computer has this card");
-            tradeCards(computerHand, userInput, playerHand);
+            if (haveCard(computerHand, cardWanted)) {
+                newConsole.println("\nThe computer has this card\n");
+                newConsole.println("New Card(s) >> " + tradeCards(computerHand, cardWanted, playerHand).toString()
+                        .replace("[", "").replace("]", ""));
+
+            } else {
+                newConsole.println("\nGo Fish!!!\n");
+                newConsole.println("New Card >> " + goFishForCard(playerHand).toString());
+            }
+
+            System.out.println(playerHand.displayHand());
 
 
-        } else {
-            System.out.println("Go Fish!");
 
-            goFishForCard(playerHand);
+        }else{
+            newConsole.println("\n\nYou don't have this card. Try it again.\n\n");
+            playerTurn();
         }
 
-        System.out.println(playerHand.displayHand());
-
+        newConsole.getStringInput("\nPress Enter to continue\n");
     }
 
     public void computerTurn() {
 
-        System.out.println(computerHand.displayHand());
-
         String newCard = getCompCard().toString();
-        System.out.println("Computer asked for " + newCard);
+        newConsole.println("\nComputer asked for " + newCard);
 
-        if (haveCard(playerHand, newCard) == true) {
+        newConsole.getStringInput("\nPress Enter to continue\n" );
 
-            System.out.println("You have this card, the computer will take it");
+        if (haveCard(playerHand, newCard)) {
             tradeCards(playerHand, newCard, computerHand);
-
+            newConsole.println("\nYou have this card, the computer will take it\n");
 
         } else {
-            System.out.println("Go Fish!");
-
+            newConsole.println("\nGo Fish!!!!\n");
             goFishForCard(computerHand);
         }
 
-        System.out.println(computerHand.displayHand());
-
+        newConsole.getStringInput("\nPress Enter to continue\n" );
 
     }
 
 
     //Tools for Game
-    public void tradeCards(CardHand tradingHand, String cardToRemove, CardHand receivingHand) {
-
-        ArrayList<Card> tradingCards = new ArrayList<Card>();
-
-
-        for (Card card : tradingHand.userHand) {
-            if (card.toString().contains(cardToRemove)) {
-                Card temp = card;
-                tradingHand.userHand.remove(card);
-                tradingCards.add(temp);
-            }
-
-        }
-
-        receivingHand.userHand.addAll(tradingCards);
-
-    }
 
     public boolean haveCard(CardHand opponent, String wantedCard) {
 
-        for (Card card : opponent.userHand) {
-            if (card.toString().contains(wantedCard))
+        for (Card card : opponent.userHand)
+            if (card.getRank().toString().equals(wantedCard))
                 return true;
-        }
 
         return false;
     }
 
-    public void goFishForCard(CardHand hand) {
+    public ArrayList tradeCards(CardHand givingHand, String wantedCard, CardHand receivingHand){
 
-        hand.userHand.add(goFishDeck.drawCard());
+        ArrayList<Card> tradingCards = new ArrayList<>();
+
+        for (Card card : givingHand.userHand) {
+            if (card.getRank().toString().equals(wantedCard))
+                tradingCards.add(card);
+        }
+
+        givingHand.userHand.removeAll(tradingCards);
+        receivingHand.userHand.addAll(tradingCards);
+
+        return tradingCards;
+
+    }
+
+    public Card goFishForCard(CardHand hand) {
+
+        Card newCard = goFishDeck.drawCard();
+        hand.userHand.add(newCard);
+
+        return newCard;
     }
 
     public boolean evaluateHand(CardHand hand) {
-        int counter = 0;
+
+        ArrayList<Card> winnings;
+        int counter;
 
         for (Card checkCard : hand.userHand) {
+            winnings = new ArrayList<>();
             counter = 0;
+
             for (Card card : hand.userHand) {
                 if (checkCard.getRank() == card.getRank()) {
+                    winnings.add(card);
                     counter++;
                 }
             }
 
-            if (counter == 2) {
+            if (counter == 4) {
+                hand.userHand.removeAll(winnings);
                 return true;
             }
 
@@ -156,6 +167,7 @@ public class GoFish implements Game {
 
         return false;
     }
+
 
     public void promptLeaveGame() {
 
@@ -166,11 +178,10 @@ public class GoFish implements Game {
 
 
     //Computer Play
-
     public Rank getCompCard() {
 
-        Random rand = new Random();
-        Card newcard = computerHand.userHand.get(rand.nextInt(computerHand.userHand.size()));
-        return newcard.getRank();
+        Card newCard = computerHand.userHand.get(random.nextInt(computerHand.userHand.size()));
+        return newCard.getRank();
     }
+
 }
