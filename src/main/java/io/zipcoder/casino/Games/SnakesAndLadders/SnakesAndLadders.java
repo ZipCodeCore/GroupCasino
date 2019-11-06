@@ -170,9 +170,9 @@ public class SnakesAndLadders implements Game {
     public void approachTable(Player currentPlayer) {
         Console.clearScreen();
         console.println(casinoArt.getCasinoArt( "snakesAndLadders"));
-        console.println(language.getSnakesAndLaddersLanguage("approachTable"));
         while(running) {
-        Integer playerInput = console.getIntegerInput(":");
+            console.println(language.getSnakesAndLaddersLanguage("approachTable"));
+            Integer playerInput = console.getIntegerInput(":");
             switch (playerInput) {
                 case 1:
                     runGame(currentPlayer);
