@@ -5,6 +5,7 @@ import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class GoFish implements Game {
@@ -55,7 +56,7 @@ public class GoFish implements Game {
 
     public void playerTurn() {
 
-        System.out.println(displayHand(playerHand));
+        System.out.println(playerHand.displayHand());
 
         String userInput = input.getStringInput("Which value would you like to ask for? ");
         userInput.toUpperCase();
@@ -72,13 +73,13 @@ public class GoFish implements Game {
             goFishForCard(playerHand);
         }
 
-        System.out.println(displayHand(playerHand));
+        System.out.println(playerHand.displayHand());
 
     }
 
     public void computerTurn() {
 
-        System.out.println(displayHand(computerHand));
+        System.out.println(computerHand.displayHand());
 
         String newCard = getCompCard().toString();
         System.out.println("Computer asked for " + newCard);
@@ -95,7 +96,7 @@ public class GoFish implements Game {
             goFishForCard(computerHand);
         }
 
-        System.out.println(displayHand(computerHand));
+        System.out.println(computerHand.displayHand());
 
 
     }
@@ -133,11 +134,6 @@ public class GoFish implements Game {
     public void goFishForCard(CardHand hand) {
 
         hand.userHand.add(goFishDeck.drawCard());
-    }
-
-    public String displayHand(CardHand hand) {
-
-        return hand.userHand.toString();
     }
 
     public boolean evaluateHand(CardHand hand) {

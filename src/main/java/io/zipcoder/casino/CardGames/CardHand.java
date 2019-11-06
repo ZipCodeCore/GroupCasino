@@ -12,6 +12,11 @@ public class CardHand {
         userHand.addAll(dealtCards);
     }
 
+    public String displayHand() {
+
+        return userHand.toString();
+    }
+
 
 
 }
