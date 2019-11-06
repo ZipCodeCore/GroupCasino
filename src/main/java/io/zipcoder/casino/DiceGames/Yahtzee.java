@@ -130,7 +130,7 @@ public class Yahtzee implements Game {
         String keepthis = "";
         while(!keepthis.toLowerCase().equals("roll")) {
             for (int i = 0; i < this.myDice.length; i++) {
-                console.print((i + 1) + ". " + this.myDice[i].getValue() + " : " + this.myDice[i].isKept() + "\n");
+                console.print((i + 1) + ". " + this.myDice[i].toString() + "\n");
             }
             keepthis = console.getStringInput("Type the corresponding number of the dice and press enter to " +
                                                       "switch it between keeping and re-rolling.\n" +
@@ -160,7 +160,7 @@ public class Yahtzee implements Game {
         while(!goodChoice){
             try{
                 for(Dice s: this.myDice){
-                    console.print(s.toString());
+                    console.print(s.getValue() + ", ");
                 }
                 choice = console.getIntegerInput("\n\nWhich one do you want to choose? ");
                 if(choice == 0){}
