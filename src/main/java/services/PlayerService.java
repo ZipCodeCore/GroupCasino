@@ -4,7 +4,7 @@ import models.hands.Hand;
 import models.people.players.Player;
 
 
-public static class PlayerService {
+public class PlayerService {
     static Player player1 = new Player();
     static Double balance;
 
