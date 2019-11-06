@@ -65,12 +65,12 @@ public class Yahtzee implements Game {
         String exitOrNo = console.getStringInput("Would you like to play again?\n1. Play again\n2. Exit");
         boolean c = false;
         while (!c) {
-            switch (exitOrNo.toLowerCase()) {
-                case "1": case "play": case "play again":
+            switch (exitOrNo.charAt(0)) {
+                case '1': case 'p': case 'P':
                     this.continuePlay = true;
                     c = true;
                     break;
-                case "2": case "exit":
+                case '2': case 'e': case 'E':
                     this.continuePlay = false;
                     c = true;
                     break;
@@ -90,14 +90,13 @@ public class Yahtzee implements Game {
         console.println("First roll results:\n");
         roll5Dice();
         chooseToKeep();
-        console.getStringInput("Press enter to make your first roll.");
+        console.getStringInput("Press enter to make your second roll.");
         console.println("First roll results:\n");
         roll5Dice();
         chooseToKeep();
         console.getStringInput("Press enter to make your final roll.");
         console.println("Final roll results:\n");
         roll5Dice();
-        console.getStringInput("Press enter to continue.");
     }
 
     public void resetDice(){
@@ -124,14 +123,14 @@ public class Yahtzee implements Game {
                                                       "switch it between keeping and re-rolling.\n" +
                                                       "Type 'continue' when finished\n");
 
-            switch (keepthis){
-                case "1": this.myDice[0].keptOrRolled();   break;
-                case "2": this.myDice[1].keptOrRolled();   break;
-                case "3": this.myDice[2].keptOrRolled();   break;
-                case "4": this.myDice[3].keptOrRolled();   break;
-                case "5": this.myDice[4].keptOrRolled();   break;
-                case "continue": keepthis = "roll";        break;
-                default:                                   break;
+            switch (keepthis.charAt(0)){
+                case '1': this.myDice[0].keptOrRolled();    break;
+                case '2': this.myDice[1].keptOrRolled();    break;
+                case '3': this.myDice[2].keptOrRolled();    break;
+                case '4': this.myDice[3].keptOrRolled();    break;
+                case '5': this.myDice[4].keptOrRolled();    break;
+                case 'c': keepthis = "roll";                break;
+                default:                                    break;
             }
         }
     }
