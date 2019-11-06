@@ -1,5 +1,7 @@
 package io.zipcoder.casino.Player;
 
+
+//Class Starts
 public class GamblingPlayer implements io.zipcoder.casino.Interfaces.GamblingPlayer {
 
     private Player gambler;
@@ -10,7 +12,6 @@ public class GamblingPlayer implements io.zipcoder.casino.Interfaces.GamblingPla
     }
 
     public Boolean placeWager(double wagerAmount) {
-
         if(gambler.balance < wagerAmount) {return false;}
         else {gambler.balance -= wagerAmount;
             this.pot += wagerAmount;

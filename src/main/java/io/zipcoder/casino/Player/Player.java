@@ -1,14 +1,11 @@
 package io.zipcoder.casino.Player;
 
-import io.zipcoder.casino.CardGames.CardHand;
-
+//Class Starts
 public class Player {
 
     protected String ID;
     protected String pwd;
     protected double balance;
-
-
 
 
     public Player(String ID, String password){
