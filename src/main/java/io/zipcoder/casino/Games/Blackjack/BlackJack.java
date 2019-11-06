@@ -224,7 +224,7 @@ public class BlackJack implements Game, GamblingGame {
                 runGame(currentPlayer);
                 break;
             case 2:
-                running = false;
+                approachTable(currentPlayer);
                 break;
 
     }
