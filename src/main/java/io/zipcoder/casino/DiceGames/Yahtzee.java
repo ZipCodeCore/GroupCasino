@@ -136,7 +136,6 @@ public class Yahtzee implements Game {
         }
     }
 
-
     // Following methods are for evaluating the dice at the end of three rolls------------------------------------------
 
     public int checkForEvaluation(){
