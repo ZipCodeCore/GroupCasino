@@ -220,6 +220,7 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     public void displayCurrentRoll(Integer currentRoll) {
+        console.println(DiceGame.diceToASCII(currentRoll));
         console.println(String.format("\n(( You have rolled a %d for this roll. ))\n", currentRoll));
     }
 
