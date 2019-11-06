@@ -43,7 +43,6 @@ public class BlackJack implements Game, GamblingGame {
         console.println("How much would you like to los- I mean bet?" + " Current balance: " + currentplayer.getBalance());
         placeBet(currentPlayer);
         houseWin();
-
         viewDealerHand();
         viewCurrentHand();
         hitOrStay();
