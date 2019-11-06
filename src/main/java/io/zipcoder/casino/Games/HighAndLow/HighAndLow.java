@@ -1,14 +1,16 @@
-package io.zipcoder.casino.Games;
+package io.zipcoder.casino.Games.HighAndLow;
 
 import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.Dice;
-import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Games.GamblingGame;
+import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 
-public class HighAndLow implements Game, GamblingGame{
+public class HighAndLow implements Game, GamblingGame {
     private Console console = new Console(System.in, System.out);
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private Dice dice = new Dice();

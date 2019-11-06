@@ -1,12 +1,14 @@
-package io.zipcoder.casino.Games;
+package io.zipcoder.casino.Games.Blackjack;
 
 import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.Card;
-import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Games.GamblingGame;
+import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.GamePieces.Deck;
 import io.zipcoder.casino.utilities.Console;
 
-public class BlackJack implements Game, GamblingGame{
+public class BlackJack implements Game, GamblingGame {
 
     Deck deck = new Deck();
     Console console = new Console(System.in, System.out);

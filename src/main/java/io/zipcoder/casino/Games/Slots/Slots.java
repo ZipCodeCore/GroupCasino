@@ -1,6 +1,8 @@
-package io.zipcoder.casino.Games;
+package io.zipcoder.casino.Games.Slots;
 
-import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Games.GamblingGame;
+import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.PlayerCreation.Player;
 
 public class Slots implements Game, GamblingGame {
 
