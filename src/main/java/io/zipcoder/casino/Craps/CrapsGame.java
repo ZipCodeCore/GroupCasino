@@ -99,6 +99,10 @@ public class CrapsGame extends DiceGame implements Game {
              gameServices.wager(wager, this.player.getPlayer());
             return wager;
         }
+        else if (wager == null) {
+            //return to main menu
+
+        }
         return wager;
     }
 
