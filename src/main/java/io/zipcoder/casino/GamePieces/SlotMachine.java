@@ -19,12 +19,12 @@ public class SlotMachine {
     }
 
 
-    public void createMachine() {
+    public Integer[][] createMachine() {
         for (int i = 0; i < slotMachine.length; i++){
             for(int j = 0; j < slotMachine.length; j++){
                 slotMachine[i][j] = randNum();
             }
-        }
+        } return slotMachine;
     }
 
     public void printSlots(){

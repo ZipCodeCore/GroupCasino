@@ -8,6 +8,7 @@ import io.zipcoder.casino.Menus.Casino;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Slots implements Game, GamblingGame {
@@ -56,6 +57,16 @@ public class Slots implements Game, GamblingGame {
     }
 
     public void runGame(Player currentPlayer){
+        while (running){
+            placeBet(currentPlayer);
+            pullLever();
+            if(isWinner){
+                returnWinnings(currentPlayer);
+            } else {
+                youLose(currentPlayer);
+            }
+            exitGame(currentPlayer);
+        }
         //prompting player to place bet
        //pull lever to generate random multidimensional array(s)
         //checking for matches along horizontals && diagonals && verticals
@@ -65,14 +76,24 @@ public class Slots implements Game, GamblingGame {
 
     public void exitGame(Player currentPlayer){
 
+        console.println("Exit Game");
+
     }
     public void placeBet(Player currentPlayer){
         console.println("How much would you like to bet?");
         pot = console.getIntegerInput(":");
     }
 
+    public void pullLever(){
+        Integer[][] slots = new Integer[2][2];
+        slots = slotMachine.createMachine();
+        console.println(slots.toString());
+    }
+
     public Boolean isWinner(){
-        return null;
+        if(checkDiagonal() || checkHorizontal() || checkVertical()){
+            return true;
+        } return false;
     }
 
     public Boolean checkHorizontal(){
@@ -96,6 +117,20 @@ public class Slots implements Game, GamblingGame {
     }
 
     public void returnWinnings(Player currentPlayer){
+        if(isWinner){
+            winnings = pot * 2;
+            console.println("Congrats KWEEN! You won: "+ winnings);
+            LocalDateTime now = LocalDateTime.now();
+            String addHistory = String.format("You won $%d.00 at Slots! ** ", winnings);
+            currentPlayer.addHistory(addHistory + dtf.format(now));
+            currentPlayer.changeBalance(winnings);
+        }
 
+
+    }
+
+    public boolean youLose(Player currentPlayer) {
+        console.println("Better luck next time!");
+        return true;
     }
 }
