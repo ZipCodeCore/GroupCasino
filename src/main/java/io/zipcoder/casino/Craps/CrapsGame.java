@@ -24,9 +24,8 @@ public class CrapsGame extends DiceGame implements Game {
     private CrapsPlayer player;
     private Integer setThePointRoll;    //saves your first roll to try to match with later rolls
     private Integer currentRoll;        //any roll after the first
-    String r;
-    Integer numRolls = 0;
-    Integer counter=1;
+    private Integer numRolls = 0;
+    private Integer counter=1;
     private Console console = new Console(System.in, System.out);
     private GameServices gameServices = new GameServices();
 
@@ -133,7 +132,6 @@ public class CrapsGame extends DiceGame implements Game {
         String endChoiceInput = console.getInput("You have finished this game of Craps.\nWould you like to play again? (Y/N)\n");
         if (endChoiceInput.toUpperCase().equals("N")) {
             console.println("Have a good rest of your day.");
-            //also, return to the main menu
         } else if (endChoiceInput.toUpperCase().equals("Y")) {
             console.println("That's great!!!");
             startPlay();
@@ -223,6 +221,7 @@ public class CrapsGame extends DiceGame implements Game {
 
     public void winOnSubsequentMessage () {
         console.println(String.format("Hooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, counter));
+        counter = 0;
     }
 
     public void loseOnSubsequentMessage () {
