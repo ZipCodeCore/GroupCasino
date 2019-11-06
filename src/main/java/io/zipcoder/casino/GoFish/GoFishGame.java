@@ -6,6 +6,7 @@ import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Menus.GoFishMenu;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Utilities.Console;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class GoFishGame extends CardGame implements Game {
     ArrayList <Card> playerSuites;
     ArrayList <Card> npcSuites;
     private int numDecks;
-
+    private Console console;
 
 
     public GoFishGame(Player player) {
@@ -40,6 +41,14 @@ public class GoFishGame extends CardGame implements Game {
     //populates player deals hands
     public void startPlay(){
         new GoFishMenu(this).displayMenu();
+        console.println("   >===>                         >=>                      \n" +
+                " >>    >=>                     >>     >>          >=>      \n" +
+                ">=>            >=>           >=>> >>       >===>  >=>      \n" +
+                ">=>          >=>  >=>          >=>   >=>  >=>     >=>>=>   \n" +
+                ">=>   >===> >=>    >=>         >=>   >=>   >==>   >=>  >=> \n" +
+                " >=>    >>   >=>  >=>          >=>   >=>     >=>  >>   >=> \n" +
+                "  >====>       >=>             >=>   >=>  >=>>=>  >=>  >=> \n" +
+                "                                                          \n");
         checkShoe();
         initialDeal();
     }

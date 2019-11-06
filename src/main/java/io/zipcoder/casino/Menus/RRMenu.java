@@ -6,6 +6,8 @@ import io.zipcoder.casino.RR.RRGame;
 import io.zipcoder.casino.Utilities.Music;
 import io.zipcoder.casino.Utilities.Console;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class RRMenu implements Menu {
     private boolean play;
@@ -32,7 +34,7 @@ public class RRMenu implements Menu {
 
 
     @Override
-    public void displayMenu() {
+    public void displayMenu() throws InterruptedException {
         //Starts playing music!
         try {
             Music.filePath = "src/music/(Roulette) Kirby Star Allies Music.wav";
@@ -44,12 +46,26 @@ public class RRMenu implements Menu {
         }
         console.clearScreen();
 
-        console.println("Welcome To Russian Roulette! ");
-        console.println("First The House Will Roll A Die ");
-        console.println("Your Bet Will Be Your Entire Balance ");
-        console.println("Next You Will Roll A Die ");
-        console.println("If Your Roll Does Not Match The House's Roll, Your Balance Is Doubled ");
-        console.println("If Your Roll Matches The House, You Lose All Your Balance ");
+        console.println("██████╗ ██╗   ██╗███████╗███████╗██╗ █████╗ ███╗   ██╗    ██████╗  ██████╗ ██╗   ██╗██╗     ███████╗████████╗████████╗███████╗\n" +
+                "██╔══██╗██║   ██║██╔════╝██╔════╝██║██╔══██╗████╗  ██║    ██╔══██╗██╔═══██╗██║   ██║██║     ██╔════╝╚══██╔══╝╚══██╔══╝██╔════╝\n" +
+                "██████╔╝██║   ██║███████╗███████╗██║███████║██╔██╗ ██║    ██████╔╝██║   ██║██║   ██║██║     █████╗     ██║      ██║   █████╗  \n" +
+                "██╔══██╗██║   ██║╚════██║╚════██║██║██╔══██║██║╚██╗██║    ██╔══██╗██║   ██║██║   ██║██║     ██╔══╝     ██║      ██║   ██╔══╝  \n" +
+                "██║  ██║╚██████╔╝███████║███████║██║██║  ██║██║ ╚████║    ██║  ██║╚██████╔╝╚██████╔╝███████╗███████╗   ██║      ██║   ███████╗\n" +
+                "╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝   ╚═╝      ╚═╝   ╚══════╝\n" +
+                "                                                                                                                              \n");
+        console.printWithDelays("Welcome To Russian Roulette!\n\n",TimeUnit.MILLISECONDS,30);
+        TimeUnit.MILLISECONDS.sleep(500);
+        console.printWithDelays("- First the House will roll a die\n", TimeUnit.MILLISECONDS,30);
+        TimeUnit.MILLISECONDS.sleep(500);
+        console.printWithDelays("- Your bet will be your ENTIRE balance\n", TimeUnit.MILLISECONDS,30);
+        TimeUnit.MILLISECONDS.sleep(500);
+        console.printWithDelays("- Next, you will roll a die:\n", TimeUnit.MILLISECONDS,30);
+        TimeUnit.MILLISECONDS.sleep(500);
+        console.printWithDelays("- If your roll DOES NOT Match the House's roll, your balance is doubled!\n", TimeUnit.MILLISECONDS,30);
+        TimeUnit.MILLISECONDS.sleep(500);
+        console.printWithDelays("- If your roll matches the house......You lose all your balance.\n\nAre you willing to risk it all to win it all?\n\n", TimeUnit.MILLISECONDS,60);
+        TimeUnit.MILLISECONDS.sleep(1000);
+
         int choice = console.getInteger("Press 1 to play or 2 to exit.\n");
         handleChoice(choice);
     }

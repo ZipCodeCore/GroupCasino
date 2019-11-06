@@ -96,8 +96,6 @@ public class TellerMenu implements Menu {
                 break;
             case 3:
                 // let's nix this, get it to just fall through back into MM
-//                MainMenu mainmenu = new MainMenu(this.player);
-//                mainmenu.displayMenu();
                 try {
                     tellerMusic.stop();
                 } catch (UnsupportedAudioFileException e) {
@@ -107,6 +105,8 @@ public class TellerMenu implements Menu {
                 } catch (LineUnavailableException e) {
                     e.printStackTrace();
                 }
+                MainMenu mainmenu = new MainMenu(this.player);
+                mainmenu.displayMenu();
                 break;
         }
     }

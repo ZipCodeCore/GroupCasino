@@ -8,7 +8,7 @@ import io.zipcoder.casino.Utilities.Console;
 import io.zipcoder.casino.Interfaces.Game;
 
 public class RRGame extends DiceGame implements Game {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Player rrPlayer = new Player("Grace","Bunde",23,500);
         RRGame rrGame = new RRGame(rrPlayer);
         rrGame.startPlay();
@@ -29,9 +29,10 @@ public class RRGame extends DiceGame implements Game {
     }
 
     @Override
-    public void startPlay() {
+    public void startPlay() throws InterruptedException {
         // store menu
         RRMenu rrMenu = new RRMenu(this);
+
            rrMenu.displayMenu();}
 
     @Override

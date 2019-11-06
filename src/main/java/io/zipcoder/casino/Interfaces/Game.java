@@ -4,8 +4,8 @@ public interface Game {
 
     void startPlay() throws InterruptedException;
 
-    void endChoice();
+    void endChoice() throws InterruptedException;
 
-    void roundOfPlay();
+    void roundOfPlay() throws InterruptedException;
 
 }

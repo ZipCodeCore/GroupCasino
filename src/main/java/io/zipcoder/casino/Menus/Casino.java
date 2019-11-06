@@ -173,19 +173,19 @@ public class Casino {
                         "|  \\/ A|/  \\ |_x_) |------'   \n" +
                         "`-----+'\\  / | Y  A|             -GAYLE FORMAN \n" +
                         "      |  \\/ A|-----' \n" +
-                        "       `------'  ");
+                        "       `------'  " + "\n" + "\n");
                 Music.filePath = "src/music/(Craps) Amor maior - Higher Love.wav";
                 neutral = new Music();
                 neutral.play();
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(2);
                 neutral.stop();
-                console.printWithDelays("You left without winning or losing money, but hey at least you had fun!\n", TimeUnit.MILLISECONDS, 50);
+                console.printWithDelays("You left without winning or losing money, but hey at least you had fun!\n\n\n", TimeUnit.MILLISECONDS, 50);
                 TimeUnit.SECONDS.sleep(3);
             } catch (Exception ex) {
                 System.out.println("Error with playing sound.");
                 ex.printStackTrace();
             }
-            System.exit(0);
         }
+        System.exit(0);
     }
 }
