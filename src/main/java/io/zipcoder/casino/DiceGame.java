@@ -29,7 +29,7 @@ public abstract class DiceGame extends GameObject {
         return roll(numberOfDiceBeingRolled, 6);
     }
 
-    public static String DiceToASCII(int... dice) {
+    public static String diceToASCII(int... dice) {
         int numDice = dice.length;
         String[] emptyArray = new String[numDice+1];
         Arrays.setAll(emptyArray,(index) -> "");
