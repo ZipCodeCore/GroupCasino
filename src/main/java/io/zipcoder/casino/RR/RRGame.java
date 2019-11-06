@@ -69,11 +69,6 @@ public class RRGame extends DiceGame implements Game {
             gameServices.wager(player.getBalance(),player);
             console.println("You Lost!!!");
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> f14c35b702239b1e47c1f69feb6849f85144c85a
             //player.setBalance(0);
 
             //startPlay();
@@ -81,14 +76,10 @@ public class RRGame extends DiceGame implements Game {
         else {
             gameServices.payOut(this.player.getBalance(), this.player);
 
-<<<<<<< HEAD
             console.println(String.format("\n\nYou Won!!! Your Balance Is Now $%.2f\n",player.getBalance()));
+            endChoice();
     }
-=======
-            console.println(String.format("You Won!!! Your Balance Is Now $%.2f",player.getBalance()));
-        }
->>>>>>> f14c35b702239b1e47c1f69feb6849f85144c85a
-        endChoice();
+
 
     }
     public Integer userRollsDice() {
