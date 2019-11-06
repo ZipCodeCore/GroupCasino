@@ -37,8 +37,12 @@ public class CrapsGame extends DiceGame implements Game {
         this.player = new CrapsPlayer(incomingPlayer);
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return this.player.getPlayer().getFirstName();
+    }
+
+    public String getLastName() {
+        return this.player.getPlayer().getLastName();
     }
 
     @Override
@@ -187,12 +191,13 @@ public class CrapsGame extends DiceGame implements Game {
     public void userRollsDiceSetPoint() {
         console.getInput("\nPress Enter to roll the dice\n");
         tossPointRoll();
-        counter++;
+
     }
 
     public void userRollsDiceCurrentPoint() {
         console.getInput(String.format("-------------------------------------------------\nSet the Point Roll: %d\nPress Enter to roll the dice\n", setThePointRoll));
         tossCurrentRoll();
+        counter++;
     }
 
     public Integer tossPointRoll() {
