@@ -36,6 +36,7 @@ public class BlackJack implements GamblingGame {
         promptUserForWagerAmount();
         initializeblackJackHands();
 
+
     }
 
 
@@ -46,21 +47,28 @@ public class BlackJack implements GamblingGame {
         gamblingPlayerHand = new CardHand(blackJackDeck.dealCards(2));
         computerHand = new CardHand(blackJackDeck.dealCards(2));
 
-
-
     }
 
 
 //    String placeWage(double wager){
 
 
-    void promptUserForWagerAmount() {
+    public void promptUserForWagerAmount() {
         double userWageAmount = input.getDoubleInput("How much would you like to wager?");
         gamblingPlayer.placeWage(userWageAmount);
+        if(gamblingPlayer.)
+    }
+
+    public Integer checkHandValue (CardHand hand){
+        Integer handValue = 0;
+        for(int i = 0; i < hand.userHand.size(); i++){
+            handValue = handValue+ translateBlackJackValueFromRank(hand.userHand.get(i));
+
+        }
     }
 
 
-    public Integer blackJackValueFromRank(Card card) {
+    public Integer translateBlackJackValueFromRank(Card card) {
         Integer blackJackValue = null;
         if (card.getRank() == Rank.JACK || card.getRank() == Rank.QUEEN || card.getRank() == Rank.KING) {
             blackJackValue = 10;
@@ -68,7 +76,14 @@ public class BlackJack implements GamblingGame {
             blackJackValue = 11;
         } else {
             blackJackValue = Integer.valueOf(card.getRank().toString());
-        }   return blackJackValue;
+        }
+        return blackJackValue;
+
+    }
+
+    public void calculateBlackJackHand(Integer blackJackValue)  {
+
+
     }
 
 
