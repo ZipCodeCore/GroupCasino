@@ -43,16 +43,6 @@ public class Casino {
         return playerInput;
     }
 
-    public String printHistory(){
-        StringBuilder sb = new StringBuilder();
-        Integer historyCounter = 0;
-        for(String result : currentPlayer.getHistory()){
-            sb.append(currentPlayer.getHistory().get(historyCounter)).append("\n");
-            historyCounter++;
-        }
-        return sb.toString();
-    }
-
     public void casinoMenuLogic(Integer playerInput){
         switch (playerInput){
             case 1:
@@ -66,7 +56,7 @@ public class Casino {
                 if(currentPlayer.getHistory().isEmpty()){
                     console.println("Sorry! You do not yet have a gaming history. Play some games to get one!\n");
                 } else {
-                    console.println(printHistory());
+                    console.println(currentPlayer.printHistory());
                 }
                 break;
             case 4:
