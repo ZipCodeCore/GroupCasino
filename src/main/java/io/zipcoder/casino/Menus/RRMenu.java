@@ -1,5 +1,6 @@
 package io.zipcoder.casino.Menus;
 
+import io.zipcoder.casino.DiceGame;
 import io.zipcoder.casino.Interfaces.Menu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.RR.RRGame;
@@ -71,8 +72,13 @@ public class RRMenu implements Menu {
         console.printWithDelays("- If your roll matches the house......You lose all your balance.\n\n");
         TimeUnit.SECONDS.sleep(1);
         console.printWithDelays("Are you willing to risk it all to win it all?\n\n");
+<<<<<<< HEAD
         TimeUnit.SECONDS.sleep(2);
 
+=======
+        TimeUnit.SECONDS.sleep(3);
+        console.println(DiceGame.diceToASCII());
+>>>>>>> f14c35b702239b1e47c1f69feb6849f85144c85a
         int choice = console.getInteger("(Press 1 to play or 2 to exit):\n\n");
         handleChoice(choice);
 
