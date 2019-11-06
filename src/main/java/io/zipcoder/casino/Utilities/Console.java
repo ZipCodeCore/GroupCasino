@@ -290,6 +290,16 @@ public final class Console {
     }
 
     //Makes a type writer effect on screen
+    public void printWithDelays(String data, long delay, int pauseAfter)
+            throws InterruptedException {
+        for (char ch : data.toCharArray()) {
+            print(Character.toString(ch));
+            TimeUnit.MILLISECONDS.sleep(delay);
+        }
+        sleep(pauseAfter);
+    }
+
+    //Makes a type writer effect on screen
     public void printWithDelays(String data)
             throws InterruptedException {
         for (char ch : data.toCharArray()) {
