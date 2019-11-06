@@ -23,11 +23,11 @@ public class CrapsGame extends DiceGame implements Game {
     private CrapsPlayer player;
     private Integer setThePointRoll;    //saves your first roll to try to match with later rolls
     private Integer currentRoll;        //any roll after the first
-    String r;
-    Integer numRolls = 0;
-    Integer counter=1;
+    private Integer numRolls = 0;
+    private Integer counter=1;
     private Console console = new Console(System.in, System.out);
     private GameServices gameServices = new GameServices();
+
 
 
     //Craps Game Constructor
@@ -101,8 +101,12 @@ public class CrapsGame extends DiceGame implements Game {
             betChoice();
         }
         else if (wager != null) {
-             //this.player.getPlayer().setBalance(this.balance - wager);
+             gameServices.wager(wager, this.player.getPlayer());
             return wager;
+        }
+        else if (wager == null) {
+            //return to main menu
+
         }
         return wager;
     }
@@ -223,7 +227,8 @@ public class CrapsGame extends DiceGame implements Game {
 
 
     public void winOnSubsequentMessage () throws InterruptedException {
-        console.printWithDelays(String.format("Hooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, counter), TimeUnit.MILLISECONDS,50);
+        console.printWithDelays(String.format("Hooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, counter),50);
+        counter = 0;
     }
 
     public void loseOnSubsequentMessage () {
