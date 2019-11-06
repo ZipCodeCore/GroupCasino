@@ -86,7 +86,7 @@ public final class Console {
         this.output.printf(output, args);
     }
 
-    public void printWithDelays(String output, Object... args) {
+    public void println(String output, Object... args) {
         print(output + "\n", args);
     }
 
@@ -318,8 +318,5 @@ public final class Console {
     public void getInput(String s, TimeUnit milliseconds, int i) {
     }
 
-
-    public void println(String s) {
-    }
 }
 
