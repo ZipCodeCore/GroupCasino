@@ -15,16 +15,18 @@ public class GameRepo {
     public static final int NUM_ADULT_GAMES = 3;
     public static final int NUM_KID_GAMES = 1;
     private HashMap<Integer, GameObject> gamesMap;
+    private Player player;
 
     public GameRepo(Player player) {
         int counter = 1;
         this.gamesMap = new HashMap<Integer, GameObject>();
         this.gamesMap.put(counter,new GoFishGame(player));
+        this.player = player;
         counter++;
-        if (player.getAge() >= 21) {
+        if (this.player.getAge() >= 21) {
             this.gamesMap.put(counter,new BlackjackGame(0.0, 0.0, player));
             counter++;
-            this.gamesMap.put(counter,new CrapsGame(0.0, 0.0, player));
+            this.gamesMap.put(counter,new CrapsGame(10.0, 500.0, player));
             counter++;
             this.gamesMap.put(counter,new RRGame(player));
             counter++;

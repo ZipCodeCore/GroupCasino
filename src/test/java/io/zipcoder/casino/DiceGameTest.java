@@ -37,7 +37,7 @@ public class DiceGameTest {
 
     @Test
     public void ASCIITest() {
-        console.println(DiceGame.DiceToASCII(1,2,3,4,5,6));
+        console.println(DiceGame.diceToASCII(1,2,3,4,5,6));
     }
 }
 
