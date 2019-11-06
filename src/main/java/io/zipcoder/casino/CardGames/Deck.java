@@ -8,9 +8,9 @@ public class Deck {
 
     private Stack<Card> deckOfCards = new Stack<Card>();
 
-    public Deck(int numberOfDecks){
+    public Deck(int numberOfDecks) {
 
-        for(int index = 0; index < numberOfDecks; index++) {
+        for (int index = 0; index < numberOfDecks; index++) {
 
             for (Suit suit : Suit.values()) {
                 for (Rank rank : Rank.values()) {
@@ -20,27 +20,31 @@ public class Deck {
         }
     }
 
+    public Integer getSize() {
+        return deckOfCards.size();
+    }
 
-    public Stack shuffleDeck(){
+
+    public Stack shuffleDeck() {
         Collections.shuffle(deckOfCards);
 
         return deckOfCards;
     }
 
 
-    public ArrayList<Card> dealCards(int numberOfCards){
+    public ArrayList<Card> dealCards(int numberOfCards) {
 
         ArrayList<Card> dealingCards = new ArrayList<Card>();
 
-        for(int index = 0; index < numberOfCards; index++){
+        for (int index = 0; index < numberOfCards; index++) {
             dealingCards.add(deckOfCards.pop());
         }
         return dealingCards;
     }
 
 
-    public Card drawCard(){
-        if (!deckOfCards.isEmpty()){
+    public Card drawCard() {
+        if (!deckOfCards.isEmpty()) {
             Card drawnCard = deckOfCards.pop();
             return drawnCard;
 
