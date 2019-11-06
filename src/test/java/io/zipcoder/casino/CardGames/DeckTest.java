@@ -16,8 +16,34 @@ public class DeckTest {
     public void tearDown(){}
 
     @Test
-    public void printDeck(){
+    public void getSize(){
         Deck newDeck = new Deck(1);
-        //newDeck.print();
+        Integer expected = 52;
+
+        assertEquals(expected, newDeck.getSize());
     }
+
+    @Test
+    public void getSize2(){
+        Deck newDeck = new Deck(4);
+        Integer expected = 208;
+
+        assertEquals(expected, newDeck.getSize());
+    }
+
+    @Test
+    public void shuffleDeck(){
+        Deck newDeck = new Deck(1);
+
+        System.out.println(newDeck.shuffleDeck().toString());
+
+    }
+
+
+
+
+
+
+
+
 }
