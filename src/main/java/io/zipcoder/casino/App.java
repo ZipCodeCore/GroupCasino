@@ -163,7 +163,7 @@ public class App {
     private void addMoney (){
         double amount;
         amount = this.menu.getDoubleInput("How much money would you like to add to your account?");
-        this.newPlayer.setBalance(amount);
+        this.newPlayer.addAmount(amount);
     }
 
 } // class
