@@ -23,6 +23,7 @@ public class PlayerMenu {
     }
 
     private void displayPlayerMenu(){
+        Console.clearScreen();
         console.println("  _______ _            _   _       _             _                   ____   _____   _____     ____     _____          _             \n" +
                 " |__   __| |          | \\ | |     | |           (_)                 |  _ \\ |_   _| / ____|   |___ \\   / ____|        (_)            \n" +
                 "    | |  | |__   ___  |  \\| | ___ | |_ ___  _ __ _  ___  _   _ ___  | |_) |  | |  | |  __      __) | | |     __ _ ___ _ _ __   ___  \n" +
