@@ -418,9 +418,9 @@ public class Yahtzee implements Game {
             options += String.format("%-25s",(i) + ".  " + availableOptions[i]);
             options += String.format((i + 6) + ".  " + availableOptions[i+6]);
         }
-        options += String.format("%25s13.  %s\n","",availableOptions[13]);
+        options += String.format("%25s13.  %s","",availableOptions[13]);
 
-        String currentPoints = "Current score: " + this.points;
+        String currentPoints = "Current score: " + this.points + "\n";
 
         return diceArt + numAndKeepArt + options + currentPoints;
     }
