@@ -45,16 +45,10 @@ public class TellerMenu implements Menu {
         }
         console.println("          .-------.\n" +
                 "       oO{-JACKPOT-}Oo\n" +
-                "       .=============.   __\n" +
-                "       |[\uD83D\uDD14] [\uD83D\uDCB0] [\uD83E\uDD5D]| (  )\n" +
-                "       |[\uD83C\uDF52] [\uD83C\uDF52] [\uD83C\uDF52]|  ||\n" +
-                "       |[\uD83E\uDD5D] [\uD83D\uDD14] [\uD83D\uDCB0]|  ||\n" +
-                "       |             |___||\n" +
-                "       | xxx ::::::: |----'\n" +
                 "       .=============.  __\n" +
-                "       |[\uD83E\uDD5D] [\uD83E\uDD5D] [\uD83D\uDD14]|(  )\n" +
-                "       |[\uD83C\uDF52] [\uD83C\uDF52] [\uD83C\uDF52]| ||\n" +
-                "       |[\uD83D\uDCB0] [\uD83D\uDD14] [\uD83D\uDCB0]| ||\n" +
+                "       |[\uD83E\uDD5D] [\uD83E\uDD5D] [\uD83D\uDD14]| (  )\n" +
+                "       |[\uD83C\uDF52] [\uD83C\uDF52] [\uD83C\uDF52]|  ||\n" +
+                "       |[\uD83D\uDCB0] [\uD83D\uDD14] [\uD83D\uDCB0]|  ||\n" +
                 "       |             |__||\n" +
                 "       | xxx ::::::: |---'\n" +
                 "       | ooo ::::::: |\n" +
