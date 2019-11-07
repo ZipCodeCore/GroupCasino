@@ -72,7 +72,7 @@ public class GameMenu {
 
                 return "You would be playing Roulette now.";
             case 6:
-                console.print("You would be playing SlotMachine now.");
+                console.print("You would be playing Slots now.");
                 Slots slots = new Slots();
                 slots.runSlots(currentPlayer);
 
