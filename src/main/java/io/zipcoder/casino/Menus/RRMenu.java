@@ -11,7 +11,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import io.zipcoder.casino.Utility.Music;
+
 
 
 public class RRMenu implements Menu {
@@ -20,17 +20,10 @@ public class RRMenu implements Menu {
     private String name = "Russian Roulette Dice Menu";
     private RRGame rrGame;
     private Player player;
-    Music rouletteMusic = null;
+
 
     public RRMenu(RRGame rrGame) {
-        try {
-            io.zipcoder.casino.Utility.Music.filePath = "src/music/(Roulette) Kirby Star Allies Music.wav";
-            rouletteMusic = new io.zipcoder.casino.Utility.Music();
-            rouletteMusic.play();
-        } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace();
-        }
+
         this.console = new Console(System.in, System.out);
         this.rrGame = rrGame;
     }
@@ -80,20 +73,12 @@ public class RRMenu implements Menu {
                 play = true;
                 console.clearScreen();
                 rrGame.roundOfPlay();
-                try {
-                    rouletteMusic.stop();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
              break;
 
             case 2:
                 play = false;
-                try {
-                    rouletteMusic.stop();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
         }
 
     }
