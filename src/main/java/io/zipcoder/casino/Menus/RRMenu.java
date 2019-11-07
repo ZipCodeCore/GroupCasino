@@ -75,7 +75,6 @@ public class RRMenu implements Menu {
         TimeUnit.SECONDS.sleep(2);
 
         console.println(DiceGame.diceToASCII());
-
         int choice = console.getInteger("(Press 1 to play or 2 to exit):\n\n");
         handleChoice(choice);
 
@@ -86,6 +85,7 @@ public class RRMenu implements Menu {
         switch (choice) {
             case 1:
                 play = true;
+                console.clearScreen();
                 rrGame.roundOfPlay();
                 try {
                     rouletteMusic.stop();
