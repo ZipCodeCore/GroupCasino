@@ -1,7 +1,7 @@
 package io.zipcoder.casino.Menus;
 
 
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.Games.Blackjack.BlackJack;
 import io.zipcoder.casino.Games.Craps.Craps;
 import io.zipcoder.casino.Games.Roulette.Roulette;

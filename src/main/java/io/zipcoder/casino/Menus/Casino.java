@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Menus;
 
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
 
