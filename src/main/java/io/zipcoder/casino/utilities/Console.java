@@ -126,7 +126,7 @@ public final class Console {
     }
 
     public void clearScreen() {
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 100; i++) {
             println("\n");
         }
 
