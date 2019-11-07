@@ -53,19 +53,21 @@ public class Craps implements GamblingGame {
         }
         while (continuePlay == true);
 
+        crapsPlayer.resetPot();
         promptLeaveGame();
 
     }
 
 
 
-    public void crapsRoll() {
+    public String crapsRoll() {
         console.getStringInput("Press enter to roll.");
         for (Dice s : this.crapsDice) {
             s.rollDice();
         }
         sum = crapsDice[0].getValue() + crapsDice[1].getValue();
-        console.println("You rolled a " + sum);
+
+        return "You rolled a " + sum;
     }
 
 
