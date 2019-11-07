@@ -112,7 +112,7 @@ public final class Console {
         System.out.println("(3) - Craps");
         System.out.println("(4) - Snakes & Ladders");
         System.out.println("(5) - Roulette");
-        System.out.println("(6) - SlotMachine");
+        System.out.println("(6) - Slots");
         System.out.println("(7) - High or Low");
         System.out.println("(8) - Return to Casino");
     }

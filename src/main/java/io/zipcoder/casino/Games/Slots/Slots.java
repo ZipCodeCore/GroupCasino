@@ -135,17 +135,18 @@ public class Slots implements Game, GamblingGame {
     public void returnWinnings(Player currentPlayer){
             winnings = pot * 50;
             console.println("Congrats KWEEN! You won: $"+ winnings);
+            currentPlayer.changeBalance(winnings);
+            console.println("Your current balance is: $" + currentPlayer.getBalance());
             LocalDateTime now = LocalDateTime.now();
             String addHistory = String.format("You won $%d.00 at Slots! ** ", winnings);
             currentPlayer.addHistory(addHistory + dtf.format(now));
-            currentPlayer.changeBalance(winnings);
     }
 
     public boolean youLose(Player currentPlayer) {
         console.println("Better luck next time!");
         winnings = pot * -1;
         currentPlayer.changeBalance(winnings);
-        console.println("Your current balance is: " + currentPlayer.getBalance());
+        console.println("Your current balance is: $" + currentPlayer.getBalance());
         LocalDateTime now = LocalDateTime.now();
         String addHistory = String.format("You lost $%d.00 at Slots! ** ", winnings);
         currentPlayer.addHistory(addHistory + dtf.format(now));
