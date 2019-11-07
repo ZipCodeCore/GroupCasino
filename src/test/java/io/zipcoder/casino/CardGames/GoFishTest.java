@@ -69,6 +69,21 @@ public class GoFishTest {
 
     @Test
     public void goFishForCard() {
+        boolean result = false;
+        Player testPlayer = new Player("V","G");
+        GoFish testGame = new GoFish(testPlayer);
+
+        Card firstCard = new Card(Suit.CLUBS,Rank.KING);
+        Card testCard;
+        ArrayList<Card> giveHand = new ArrayList<>();
+        giveHand.add(firstCard);
+        CardHand handOne = new CardHand(giveHand);
+
+        testCard = testGame.goFishForCard(handOne);
+        giveHand.add(testCard);
+        result = giveHand.size()>1;
+
+        Assert.assertTrue(result);
     }
 
     @Test
