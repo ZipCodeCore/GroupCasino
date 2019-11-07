@@ -73,13 +73,6 @@ public class HighAndLowTest {
     }
 
     @Test
-    public void resetGameTest(){
-        HighAndLow highAndLow = new HighAndLow();
-        Boolean didYouBet = highAndLow.resetGame();
-        Assert.assertTrue(didYouBet);
-    }
-
-    @Test
     public void winOrLose1(){
         HighAndLow highAndLow = new HighAndLow();
         Integer firstRoll = 7;
