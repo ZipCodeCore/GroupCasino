@@ -6,9 +6,9 @@ import io.zipcoder.casino.utilities.Console;
 
 public class Casino {
     private Player currentPlayer;
-    Console console = new Console(System.in, System.out);
-    CasinoArt art = new CasinoArt();
-    boolean running = true;
+    private Console console = new Console(System.in, System.out);
+    private CasinoArt art = new CasinoArt();
+    private boolean running = true;
 
     public void runCasinoMenu(Player currentPlayer){
         this.currentPlayer = currentPlayer;
