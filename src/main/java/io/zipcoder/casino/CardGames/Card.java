@@ -27,6 +27,6 @@ public class Card {
 
     public String toString() {
 
-        return String.format("%s of %s \n\n", rank, suit);
+        return String.format("%s of %s \n\n", rank, suit.toString().toLowerCase());
     }
 }
