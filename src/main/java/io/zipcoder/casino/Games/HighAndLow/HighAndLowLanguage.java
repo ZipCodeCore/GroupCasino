@@ -28,7 +28,7 @@ public class HighAndLowLanguage {
                 "Likewise, if you believe the sum of the second roll will be lower, bet low.\n");
         this.highAndLowHashMap.put(Language.NOTENOUGHMONEY, "The pit boss glares are you, seemingly knowing you don't have enough money\n" +
                 "to pay even the buy-in cost.\nHe shakes his head, branding his red stick in hand with a menacing grasp.\n" +
-                "Perhaps it's best if you accept your losses and go home for the day.\nTomorrow is a new day... maybe.\n\n");
+                "Perhaps it's best if you accept your losses and drag your sorry self home.\nTomorrow is a new day... maybe.\n\n");
 
 
         this.highAndLowHashMap.put(Language.APPROACHTABLEMENU, "(1) - Play the game\n(2) - Read the rules\n(3) - Return to the game menu");
