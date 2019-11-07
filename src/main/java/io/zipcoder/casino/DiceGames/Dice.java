@@ -45,8 +45,22 @@ public class Dice {
     // toString---------------------------------------------------------------------------------------------------------
 
     public String toString(){
-        return String.format(this.value + ", ");
+        if(this.isKept()){
+        return String.format(this.value + " : " + "Keep");
+        }
+        else{
+            return String.format(this.value + " : " + "Re-roll");
+        }
     }
+    public String toString2(){
+        if(this.isKept()){
+            return "Keep";
+        }
+        else{
+            return "Re-roll";
+        }
+    }
+
 
     public static ArrayList<Integer> playerDice = new ArrayList<Integer>(5);
 

@@ -1,6 +1,8 @@
 package io.zipcoder.casino.CardGames;
 
 import java.util.HashMap;
+import java.util.Collections;
+
 
 public class Card {
 
@@ -27,7 +29,7 @@ public class Card {
 
     public String toString() {
 
-        return String.format("%s of %s \n", rank, suit).replace(",", "");
+        return String.format("%s of %s \n\n", rank, suit);
     }
 
     public HashMap<Rank, Integer> blackJackCardRank = new HashMap() {{
@@ -46,10 +48,6 @@ public class Card {
         put(Rank.QUEEN, 10);
         put(Rank.KING, 10);
     }};
-
-
-
-
 
 
 }

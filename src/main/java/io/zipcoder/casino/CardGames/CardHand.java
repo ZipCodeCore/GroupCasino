@@ -1,6 +1,7 @@
 package io.zipcoder.casino.CardGames;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class CardHand {
@@ -15,9 +16,10 @@ public class CardHand {
 
     public String displayHand() {
 
-        return userHand.toString();
+        userHand.sort(Comparator.comparing(Card::getRank));
+
+        return userHand.toString().replace(",", "")
+                .replace("[", " ").replace("]", "");
     }
-
-
 
 }
