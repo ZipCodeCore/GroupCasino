@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Menus;
 
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
 
@@ -23,8 +23,8 @@ public class Casino {
     }
 
     public void goToGameMenu(){
-        GameMenu gameMenu = new GameMenu();
-        gameMenu.runGameMenu(currentPlayer);
+        //GameMenu gameMenu = new GameMenu();
+        //gameMenu.runGameMenu(currentPlayer);
     }
 
     public void exitCasino(){

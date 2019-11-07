@@ -1,9 +1,10 @@
 package io.zipcoder.casino.Menus;
 
 
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.Games.Blackjack.BlackJack;
 import io.zipcoder.casino.Games.Craps.Craps;
+import io.zipcoder.casino.Games.GoFish.GoFish;
 import io.zipcoder.casino.Games.Roulette.Roulette;
 import io.zipcoder.casino.Games.SnakesAndLadders.SnakesAndLadders;
 import io.zipcoder.casino.Games.HighAndLow.HighAndLow;
@@ -37,10 +38,9 @@ public class GameMenu {
     public String gameMenuLogic(Integer playerInput){
         switch (playerInput) {
             case 1:
-                console.print("You would be playing Go Fish now.");
-                /*GoFish goFish = new GoFish();
-                goFish.launchGoFish();*/
-                return "You would be playing Go Fish now.";
+                GoFish goFish = new GoFish();
+                goFish.approachTable(currentPlayer);
+                break;
             case 2:
 
                 BlackJack blackjack = new BlackJack();

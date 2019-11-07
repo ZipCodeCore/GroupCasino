@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Games.Blackjack;
 
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.GamePieces.Card;
 
 
@@ -56,23 +56,31 @@ public class BlackJack implements Game, GamblingGame {
 
         while(running = true){
 
-        console.println("Welcome to BlackJack! Let's begin!");
+            console.println("Welcome to BlackJack! Let's begin!");
 
-        deck.shuffle();
-        initialHand();
-        viewDealerHand();
-        viewCurrentHand();
-        console.println("How much would you like to los- I mean bet?" + " Current balance: $" + currentplayer.getBalance());
-        placeBet(currentPlayer);
-        houseWin();
-        viewDealerHand();
-        viewCurrentHand();
-        hitOrStay();
-        checkHand(playerHand);
-        checkHand(dealerHand);
-        dealerMove();
-        checksWinner();
-        exitGame(currentPlayer);
+            deck.shuffle();
+            initialHand();
+
+            viewDealerHand();
+            viewCurrentHand();
+
+            console.println("How much would you like to los- I mean bet?" + " Current balance: $" + currentplayer.getBalance());
+            placeBet(currentPlayer);
+
+            houseWin();
+
+            viewDealerHand();
+            viewCurrentHand();
+
+            hitOrStay();
+
+            checkHand(playerHand);
+            checkHand(dealerHand);
+
+            dealerMove();
+            checksWinner();
+
+            exitGame(currentPlayer);
         }
 
     }
@@ -80,14 +88,14 @@ public class BlackJack implements Game, GamblingGame {
     @Override
     public void approachTable(Player currentPLayer) {
         while(alsoRunning) {
-        Console.clearScreen();
-        this.currentPlayer = currentPLayer;
-        console.println(art.getCasinoArt(CasinoArt.Art.BLACKJACK));
-        console.println("You approach the BlackJack table. What would you like to do?");
-        console.println("(1) - Play the game");
-        console.println("(2) - Read the rules");
-        console.println("(3) - Return to the game menu");
-        Integer playerInput = console.getIntegerInput(":");
+            Console.clearScreen();
+            this.currentPlayer = currentPLayer;
+            console.println(art.getCasinoArt(CasinoArt.Art.BLACKJACK));
+            console.println("You approach the BlackJack table. What would you like to do?");
+            console.println("(1) - Play the game");
+            console.println("(2) - Read the rules");
+            console.println("(3) - Return to the game menu");
+            Integer playerInput = console.getIntegerInput(":");
 
             switch (playerInput) {
                 case 1:
@@ -100,12 +108,12 @@ public class BlackJack implements Game, GamblingGame {
 
                     break;
                 case 3:
-                   //casino.goToGameMenu();
+
                     alsoRunning = false;
+
                     break;
             }
         }
-
     }
 
 
@@ -126,7 +134,7 @@ public class BlackJack implements Game, GamblingGame {
         }
     }
     @Override
-    public void returnWinnings(Player currentPlayer) {
+    public void returnWinnings(Player currentPlayer, Integer results) {
 
     }
     public void viewCurrentHand(){
@@ -252,25 +260,30 @@ public class BlackJack implements Game, GamblingGame {
         } else if (winner.equals(dealer)) {
             LocalDateTime now = LocalDateTime.now();
             currentPlayer.addHistory("You lost at BLACKJACK. ** " + dateTimeFormatter.format(now));
+        }
+
         console.println("Would you like to play again?");
         console.println("(1) - Yes");
         console.println("(2) - No");
-        }
+
 
         Integer playerInput = console.getIntegerInput(":");
-        switch (playerInput){
+        switch (playerInput) {
             case 1:
                // Card[] playerHand = playerHand[6];
                 runGame(currentPlayer);
 
                 break;
             case 2:
+                //approachTable(currentPlayer);
+                alsoRunning = false;
                 running = false;
 
                 break;
 
+        }
     }
-    }
+
     public void dealerMove(){
         Integer value = checkHand(dealerHand);
         Integer counter = 2;
@@ -281,17 +294,18 @@ public class BlackJack implements Game, GamblingGame {
                 //dealer cheat method
             } else if (value >= 18 && value <= 21 && dealerHand[5] != null) {
                 console.println("Dealer Chose to stay");
-
+                break;
             } else if (value <= 21 && dealerHand[5] != null) {
                 console.println("Unlucky... \nThe Dealer wins with Special Five");
                 isLoser();
-                exitGame(currentPlayer);
+                break;
             } else if (value <= 15) {
                 dealerHand[counter] = deck.draw();
                 counter++;
+                break;
             } else if (value > 21) {
                 console.println("Dealer Bust...");
-
+                break;
             }
         }
 
@@ -315,7 +329,7 @@ private void houseWin(){
             console.println("The house wins!");
 
             isLoser();
-            exitGame(currentPlayer);
+
         }else if(checkForBlackjack(playerHand)){
             handOfPlayer = checkHand(playerHand);
             handOfDealer = checkHand(dealerHand);
@@ -324,7 +338,7 @@ private void houseWin(){
             console.println("Congratulations you got BLACKJACK!");
 
             isWinner(currentPlayer);
-            exitGame(currentPlayer);
+
         }else if (checkForBlackjack(dealerHand)){
             Integer handOfPlayer = checkHand(playerHand);
             Integer handOfDealer = checkHand(dealerHand);
@@ -333,7 +347,7 @@ private void houseWin(){
             console.println("The Dealer wins!");
 
             isLoser();
-            exitGame(currentPlayer);
+
         }
 }
     private void checksWinner() {
@@ -346,7 +360,6 @@ private void houseWin(){
             console.println("Congratulations you Won!");
 
             isWinner(currentPlayer);
-            exitGame(currentPlayer);
         }else if (checkHand(playerHand) < checkHand(dealerHand) && checkHand(dealerHand) <= 21){
 
             console.println("Your Hand was " + handOfPlayer);
@@ -354,7 +367,6 @@ private void houseWin(){
             console.println("Hope you like ramen noodles....");
 
             isLoser();
-            exitGame(currentPlayer);
         }else if (checkHand(playerHand) < checkHand(dealerHand) && checkHand(dealerHand) > 21){
 
             console.println("Your Hand was " + handOfPlayer);
@@ -362,7 +374,6 @@ private void houseWin(){
             console.println("Congratulations you Won! Dealer Busted Out!");
 
             isWinner(currentPlayer);
-            exitGame(currentPlayer);
         }else {
 
             console.println("Your Hand was " + handOfPlayer);
@@ -370,7 +381,6 @@ private void houseWin(){
             console.println("Busted Out! Hope you like ramen noodles....");
 
             isLoser();
-            exitGame(currentPlayer);
         }
     }
 
