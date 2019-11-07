@@ -1,21 +1,17 @@
 package io.zipcoder.casino.Games.GoFish;
 
-import io.zipcoder.casino.CasinoArt;
 import io.zipcoder.casino.GamePieces.Card;
 import io.zipcoder.casino.GamePieces.CardValue;
 import io.zipcoder.casino.GamePieces.Deck;
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
-
 import java.util.ArrayList;
 import java.util.Random;
 
 public class GoFish implements Game {
 
     Console console = new Console(System.in, System.out);
-    CasinoArt art = new CasinoArt();
-
     private Player currentPlayer;
     boolean running = true;
 
