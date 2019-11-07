@@ -10,15 +10,15 @@ public class GameObject implements Game {
         return this.name;
     }
 
-    public void startPlay() throws InterruptedException {
+    public void startPlay() {
 
     }
 
-    public void roundOfPlay() throws InterruptedException {
+    public void roundOfPlay() {
 
     }
 
-    public void endChoice() throws InterruptedException {
+    public void endChoice() {
 
     }
 

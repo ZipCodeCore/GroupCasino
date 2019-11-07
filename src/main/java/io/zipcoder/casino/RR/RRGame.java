@@ -39,7 +39,8 @@ public class RRGame extends DiceGame implements Game {
     }
 
     @Override
-    public void startPlay() throws InterruptedException {
+
+    public void startPlay(){
         try {
             io.zipcoder.casino.Utility.Music.filePath = "src/music/(Roulette) Kirby Star Allies Music.wav";
             rouletteMusic = new io.zipcoder.casino.Utility.Music();
@@ -48,6 +49,7 @@ public class RRGame extends DiceGame implements Game {
             System.out.println("Error with playing sound.");
             ex.printStackTrace();
         }
+
         // store menu
         RRMenu rrMenu = new RRMenu(this);
         rrMenu.displayMenu();
