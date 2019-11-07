@@ -45,7 +45,7 @@ public class RRGame extends DiceGame implements Game {
 
         if (endChoiceInput.toUpperCase().equals("N")) {
             console.printWithDelays("\n[DEALER]: Have a good rest of your day.\n");
-            console.sleep(1500);
+            console.sleep(1200);
 
             //also, return to the main menu
         } else if (endChoiceInput.toUpperCase().equals("Y")) {
@@ -71,7 +71,7 @@ public class RRGame extends DiceGame implements Game {
         if (userDieNum.equals(computerRoll)) {
             gameServices.wager(player.getBalance(),player);
             console.println("You Lost!!!");
-            console.sleep(3000);
+            console.sleep(2000);
             console.clearScreen();
             console.printWithDelays("[DEALER]: Don't you know how Russian Roulette works?",100);
             console.sleep(1000);
@@ -90,7 +90,7 @@ public class RRGame extends DiceGame implements Game {
                     "      Bang!                     .'/       |\n" +
                     "                               .:/        |\n" +
                     "                               :/_________|", 2);
-            console.sleep(2000);
+            console.sleep(1000);
             console.clearScreen();
             console.printWithDelays("   ,ggggggg,             ,gggggggggggggg                  \n" +
                     " ,dP\"\"\"\"\"\"Y8b ,dPYb,    dP\"\"\"\"\"\"88\"\"\"\"\"\"                  \n" +
