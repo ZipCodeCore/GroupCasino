@@ -67,10 +67,9 @@ public class HighAndLow implements Game, GamblingGame {
         return language.getHighAndLowLanguage(HighAndLowLanguage.Language.RULES);
     }
 
-    public boolean resetGame(){
+    public void resetGame(){
         didYouBet = true;
         totalBetValue = 0;
-        return didYouBet;
     }
 
     @Override
@@ -142,7 +141,8 @@ public class HighAndLow implements Game, GamblingGame {
     public void addHistory(Boolean result, Integer totalBetValue){
         LocalDateTime now = LocalDateTime.now();
         if(result){
-            String addHistory = String.format("You won $%d.00 at High and Low! ** ", totalBetValue * 2);
+            totalBetValue *= 2;
+            String addHistory = String.format("You won $%d.00 at High and Low! ** ", totalBetValue);
             currentPlayer.addHistory(addHistory + dateTimeReformatter.format(now));
             returnWinnings(currentPlayer, totalBetValue);
         } else {
@@ -161,7 +161,7 @@ public class HighAndLow implements Game, GamblingGame {
 
     @Override
     public void returnWinnings(Player currentPlayer, Integer totalBetValue) {
-        currentPlayer.changeBalance(totalBetValue * 2);
+        currentPlayer.changeBalance(totalBetValue);
     }
 
     @Override
@@ -185,6 +185,7 @@ public class HighAndLow implements Game, GamblingGame {
                 notEnoughMoney();
                 break;
             }
+            resetGame();
             console.println("Welcome to High and Low, %s!\n", currentPlayer.getName());
             console.printSlow(language.getHighAndLowLanguage(HighAndLowLanguage.Language.BUYIN));
             //
@@ -204,7 +205,6 @@ public class HighAndLow implements Game, GamblingGame {
                 placeBet(currentPlayer);
             }else {
                 noBet(totalBetValue);
-                resetGame();
                 exitGame(currentPlayer);
                 break;
             }
@@ -219,9 +219,9 @@ public class HighAndLow implements Game, GamblingGame {
 
             playWinOrLoseSound(firstRoll, secondRoll, highOrLowBet);
             Boolean result = winOrLose(firstRoll, secondRoll, highOrLowBet);
-            addHistory(result, totalBetValue * 2);
+            addHistory(result, totalBetValue);
 
-            resetGame();
+
             exitGame(currentPlayer);
         }
     }
