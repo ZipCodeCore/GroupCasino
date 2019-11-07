@@ -143,4 +143,23 @@ public class EvaluationTest {
         int expected2 = 20;
         Assert.assertEquals(expected2,actual2);
     }
+
+    @Test
+    public void checkForEvaluationTest(){
+        Integer[] thisIsMyDice = {1,5,3,5,5};
+        int actual = detect.checkForEvaluation(3, thisIsMyDice);
+        Assert.assertEquals(3,actual);
+        actual = detect.checkForEvaluation(5, thisIsMyDice);
+        Assert.assertEquals(15,actual);
+    }
+
+    @Test
+    public void checkForEvaluationTest2(){
+        Integer[] thisIsMyDice = {5,5,5,5,5};
+        int actual = detect.checkForEvaluation(12, thisIsMyDice);
+        Assert.assertEquals(50,actual);
+        actual = detect.checkForEvaluation(9, thisIsMyDice);
+        Assert.assertEquals(0,actual);
+    }
+
 }
