@@ -2,8 +2,12 @@ package io.zipcoder.casino.Craps;
 
 import io.zipcoder.casino.DiceGame;
 import io.zipcoder.casino.Interfaces.Game;
+import io.zipcoder.casino.Menus.Casino;
 import io.zipcoder.casino.Menus.CrapsMenu;
+import io.zipcoder.casino.Menus.GameMenu;
+import io.zipcoder.casino.Menus.MainMenu;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Services.GameRepo;
 import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Utility.Music;
@@ -34,6 +38,7 @@ public class CrapsGame extends DiceGame implements Game {
     private Integer die2Point;
     private Integer die1Current;
     private Integer die2Current;
+    GameRepo gameRepo;
 
 
     //Craps Game Constructor
@@ -46,7 +51,7 @@ public class CrapsGame extends DiceGame implements Game {
 
     @Override
     //creates and runs a roundOfPlay
-    public void startPlay() {
+    public void startPlay() throws InterruptedException {
         try {
             Music.filePath = "src/music/(Craps) Amor maior - Higher Love.wav";
             crapsMusic = new Music();
@@ -64,7 +69,7 @@ public class CrapsGame extends DiceGame implements Game {
 
     @Override
     //runs a new game of craps
-    public void roundOfPlay()  {
+    public void roundOfPlay() throws InterruptedException {
         Double betSize = betChoice();
         userRollsDiceSetPoint();
         console.println(displayPointRoll());
@@ -95,7 +100,7 @@ public class CrapsGame extends DiceGame implements Game {
         }
     }
 
-    public Double betChoice(){
+    public Double betChoice() throws InterruptedException {
         Double wager;
         console.println(String.format("\nCurrent bankroll: $%.2f", this.player.getPlayer().getBalance()));
         wager = console.getCurrency(String.format("\n[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: What's your Bet? (Or press ENTER to leave the table)\n\n", this.minBet, this.maxBet));
@@ -111,8 +116,9 @@ public class CrapsGame extends DiceGame implements Game {
              gameServices.wager(wager, this.player.getPlayer());
             return wager;
         }
-        else if (wager == null) {
-            //return to main menu
+        else if (wager == null); {
+           //Somehow return to the main menu from here.
+
 
         }
         return wager;
@@ -141,7 +147,7 @@ public class CrapsGame extends DiceGame implements Game {
 
     @Override
     //implements menu whether you want to quit or go again
-    public void endChoice() {
+    public void endChoice() throws InterruptedException {
         String endChoiceInput = console.getInput("\n[CROUPIER]: You have finished this game of Craps.\n\nWould you like to play again? (Y/N)\n");
         if (endChoiceInput.toUpperCase().equals("N")) {
             try {
@@ -154,7 +160,7 @@ public class CrapsGame extends DiceGame implements Game {
                 e.printStackTrace();
             }
             console.println("\n[CROUPIER]: Have a good rest of your day.\n");
-            //also, return to the main menu
+            //Return to games menu from here
         } else if (endChoiceInput.toUpperCase().equals("Y")) {
             console.println("\n[CROUPIER]: That's great!!!\n");
             startPlay();
