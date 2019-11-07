@@ -42,7 +42,6 @@ public class Slots implements Game, GamblingGame {
                     running = false;
                     break;
                 case 2:
-
                     running = false;
                     break;
             }
