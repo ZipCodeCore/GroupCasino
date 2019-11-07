@@ -29,7 +29,21 @@ public class Card {
 
     public String toString() {
 
-        return String.format("%s of %s \n\n", rank, suit.toString().toLowerCase());
+        String suitCard = "";
+
+        //return String.format("%s of %s \n\n", rank, suit.toString().toLowerCase());
+
+        if(suit.toString() == "HEARTS")
+            suitCard = "♡";
+        else if(suit.toString() == "SPADES")
+            suitCard = "♠";
+        else if(suit.toString() == "CLUBS")
+            suitCard = "♣";
+        else
+            suitCard = "♢";
+
+
+       return String.format("%s %s \n", rank, suitCard);
     }
 
 //    public HashMap<Rank, Integer> blackJackCardRank = new HashMap() {{
