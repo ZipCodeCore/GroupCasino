@@ -254,7 +254,7 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
 
-    public void winOnSubsequentMessage () throws InterruptedException {
+    public void winOnSubsequentMessage () {
         console.printWithDelays(String.format("Hooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, numRolls),50);
     }
 

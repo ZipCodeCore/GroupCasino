@@ -178,6 +178,7 @@ public class RRGame extends DiceGame implements Game {
         else {
             gameServices.payOut(this.player.getBalance(), this.player);
             console.println(String.format("\n\nYou Won!!! Your Balance Is Now $%.2f\n",player.getBalance()));
+            console.sleep(1000);
             endChoice();
     }
 
