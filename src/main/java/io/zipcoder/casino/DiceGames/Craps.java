@@ -47,8 +47,8 @@ public class Craps implements GamblingGame {
         createDice();
 
         do {
-            crapsRoll();
-            console.print(evaluateRoll());
+            console.println(crapsRoll());
+            console.println(evaluateRoll());
             turn++;
         }
         while (continuePlay == true);
