@@ -13,12 +13,14 @@ public class GameServices implements GamblingGame {
             return false;
         } else {
             player.setBalance(balance - amount);
+            player.setWinnings(player.getBalance() - player.getInitialBalance());
             return true;
         }
     }
 
     public void payOut(double amount, Player player) {
         player.setBalance(player.getBalance() + amount);
+        player.setWinnings(player.getBalance() - player.getInitialBalance());
     }
 
     public void deposit(double amount, Player player) {

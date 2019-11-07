@@ -99,9 +99,6 @@ public class Casino {
         Music losingHorn = null;
         Music tadaMusic = null;
         Music neutral = null;
-        //There's a "happy" and "sad" ending that's pertinent on if you won or lost money, even if it's just a $1!
-        //Play again option that restarts the game?
-
 
         if (player.getWinnings() < 0) {
             //Sad ending:
@@ -117,10 +114,10 @@ public class Casino {
                 Music.filePath = "src/music/(Sad ending) The Price is Right Losing Horn.wav";
                 tadaMusic = new Music();
                 tadaMusic.play();
-                TimeUnit.SECONDS.sleep(5);
+                console.sleep(3000);
                 tadaMusic.stop();
-                console.printWithDelays(String.format("\nDisgruntled and with your spirits broken, you hobble home with $%.2f less in your pocket.\nGuess tonight just wasn't the night.\n", player.getWinnings()), TimeUnit.MILLISECONDS, 50);
-                TimeUnit.SECONDS.sleep(3);
+                console.printWithDelays(String.format("\nDisgruntled and with your spirits broken, you hobble home with $%.2f less in your pocket.\nGuess tonight just wasn't the night.\n", Math.abs(player.getWinnings())), TimeUnit.MILLISECONDS, 50);
+                console.sleep(3000);
             } catch (Exception ex) {
                 System.out.println("Error with playing sound.");
                 ex.printStackTrace();
@@ -159,7 +156,7 @@ public class Casino {
                 losingHorn.play();
                 TimeUnit.SECONDS.sleep(2);
                 losingHorn.stop();
-                console.printWithDelays(("\nScore! You ended up bagging (insert their initial balance - current balance).\n" +
+                console.printWithDelays((String.format("\nScore! You ended up bagging $%.2f.\n", player.getWinnings()) +
                         "You head home with some pep in your step and even treat yourself to a scrumptious meal.\n"), TimeUnit.MILLISECONDS, 50);
                 TimeUnit.SECONDS.sleep(3);
             } catch (Exception ex) {
