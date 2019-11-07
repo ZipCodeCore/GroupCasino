@@ -48,6 +48,15 @@ public class GameServicesTest {
     }
 
     @Test
+    public void depositTest() {
+        player.setBalance(0.0);
+        Assert.assertEquals(0.00, gameServices.withdraw(player), .01);
+        gameServices.deposit(100.0, player);
+        Assert.assertEquals(100.00, player.getBalance(), .01);
+
+    }
+
+    @Test
     public void payOut() {
         gameServices.payOut(100.00, player);
         Assert.assertEquals(300.00, player.getBalance(), .01);
