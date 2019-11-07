@@ -4,15 +4,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CasinoTest {
-
-
+public class GameMenuTest {
 
     @Test
-    public void testRunCasinoMenu() {
+    public void runGameMenu() {
     }
 
     @Test
-    public void testCasinoMenuLogic() {
+    public void gameMenuLogic() {
     }
 }
