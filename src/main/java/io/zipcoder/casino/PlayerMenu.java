@@ -52,7 +52,7 @@ public class PlayerMenu {
 
 
 
-    public String playerMenuLogic(Integer playerInput){
+    public void playerMenuLogic(Integer playerInput){
         Casino casino = new Casino();
         Player player = null;
 
@@ -80,12 +80,11 @@ public class PlayerMenu {
             case 3:
                 console.println("thank you come again!");
                 running = false;
-                return "thank you come again!";
+                break;
             default:
                 console.print("Invalid Input");
-                return "Invalid Input";
+                break;
         }
-        return "success!";
     }
 
 }
