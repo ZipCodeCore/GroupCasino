@@ -16,6 +16,7 @@ public class Yahtzee implements Game {
     private static Console console = new Console(System.in, System.out);
     private Dice[] myDice;
     private int points;
+
     private String[] availableOptions = {" ","1s", "2s", "3s", "4s", "5s", "6s", "3 of a kind", "4 of a kind",
                                          "Small Straight", "Large Straight", "Full House", "Yahtzee", "Chance"};
     private boolean continuePlay;
@@ -72,7 +73,7 @@ public class Yahtzee implements Game {
         return dice;
     }
 
-    private void updateScore(int pointsAdded) {
+    public void updateScore(int pointsAdded) {
         console.println("points added: " + pointsAdded);
         this.points += pointsAdded;
         console.println("Your current score is: " + this.points);
@@ -116,6 +117,7 @@ public class Yahtzee implements Game {
         for(int i = 0; i < this.availableOptions.length; i++ ){
             this.availableOptions[i] = availableOptionsReset[i];
         }
+        resetDice();
 
     }
 
@@ -310,6 +312,7 @@ public class Yahtzee implements Game {
     //------------------------------------------------------------------------------------------------------------------
     // getters and setters----------------------------------------------------------------------------------------------
 
+
     public Player getUser() {
         return user;
     }
@@ -326,13 +329,17 @@ public class Yahtzee implements Game {
         return diceValues;
     }
 
+    public String[] getAvailableOptions() {
+        return availableOptions;
+    }
+
     public int getPoints() {
         return points;
     }
 
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method for getting ASCII screen art--------------------------------------------------------------------------------
+    // Method for getting ASCII screen art------------------------------------------------------------------------------
 
     public String printScreen(){
 
