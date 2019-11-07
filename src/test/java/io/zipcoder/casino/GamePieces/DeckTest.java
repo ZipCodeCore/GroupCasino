@@ -19,9 +19,9 @@ public class DeckTest {
     @Test
     public void cardsLeft2() {
         Deck deck = new Deck();
-        Integer expected = 52;
+        Integer expected = 51;
         deck.draw();
-        Integer actual = deck.cardsLeft() - 1;
+        Integer actual = deck.cardsLeft();
 
         Assert.assertEquals(expected,actual);
     }
@@ -33,9 +33,9 @@ public class DeckTest {
     @Test
     public void draw() {
         Deck deck = new Deck();
-        Integer expected = 52;
+        Integer expected = 51;
         deck.draw();
-        Integer actual = deck.cardsLeft() - 1;
+        Integer actual = deck.cardsLeft();
 
         Assert.assertEquals(expected,actual);
         }
