@@ -3,7 +3,7 @@ package io.zipcoder.casino.DiceGamesTests.YahtzeeTests;
 import io.zipcoder.casino.DiceGames.Dice;
 import io.zipcoder.casino.DiceGames.Yahtzee;
 import io.zipcoder.casino.Player.Player;
-import org.junit.After;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,6 @@ public class DiceRollTest {
     @Test
     public void diceRollTest(){
         roller.roll5Dice();
-        roller.getMyDice();
         Integer[] diceValues = roller.getDiceValues();
 
         for(Integer s: diceValues){
@@ -44,7 +43,7 @@ public class DiceRollTest {
     }
 
     @Test
-    public void resetTest(){
+    public void resetDiceTest(){
         roller.roll5Dice();
         Dice[] dice = roller.getMyDice();
 
@@ -58,10 +57,5 @@ public class DiceRollTest {
         for(int i = 0; i < roller.getMyDice().length; i++){
             Assert.assertFalse(dice[i].isKept());
         }
-    }
-
-    @After
-    public void doThisLast(){
-        
     }
 }
