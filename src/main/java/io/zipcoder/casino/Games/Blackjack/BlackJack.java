@@ -54,8 +54,8 @@ public class BlackJack implements Game, GamblingGame {
     @Override
     public void runGame(Player currentplayer) {
 
-        while(running = true){
-
+        while (running = true) {
+            winner = null;
             console.println("Welcome to BlackJack! Let's begin!");
 
             deck.shuffle();
@@ -69,20 +69,28 @@ public class BlackJack implements Game, GamblingGame {
 
             houseWin();
 
-            viewDealerHand();
-            viewCurrentHand();
+            if (winner == null) {
 
-            hitOrStay();
+                viewDealerHand();
+                viewCurrentHand();
 
-            checkHand(playerHand);
-            checkHand(dealerHand);
+                hitOrStay();
 
-            dealerMove();
-            checksWinner();
+                checkHand(playerHand);
+                checkHand(dealerHand);
 
-            exitGame(currentPlayer);
+                dealerMove();
+                checksWinner();
+
+
+                exitGame(currentPlayer);
+
+
+            } else {
+                exitGame(currentPlayer);
+            }
+
         }
-
     }
 
     @Override
@@ -145,15 +153,19 @@ public class BlackJack implements Game, GamblingGame {
         console.println("Dealer hand is " + String.valueOf(dealerHand[0].getCardValue().getValue()));
     }
     public void hitOrStay(){
+
+        handOfPlayer = checkHand(playerHand);
+        String playerInput = null;
         if(!notBusted(checkHand(playerHand))){
-            checksWinner();
+            console.println("Would you like to 'hit' or 'stay'?");
+             playerInput = console.getStringInput(":");
+
         }
-        console.println("Would you like to 'hit' or 'stay'?");
-        String playerInput = console.getStringInput(":");
-        if (playerInput.equals("hit")){
+
+        else if (playerInput.equals("hit")){
             handOfPlayer = checkHand(playerHand);
             if(!notBusted(checkHand(playerHand))){
-                checksWinner();
+
             }
 
             hit();
@@ -176,7 +188,13 @@ public class BlackJack implements Game, GamblingGame {
                 playerHand[2] = deck.draw();
                 handOfPlayer = checkHand(playerHand);
                 console.println("This is your hand " + handOfPlayer);
-                hitOrStay();
+                if(notBusted(checkHand(playerHand))){
+                    hitOrStay();
+
+                }
+
+
+
             }else if(playerHand[2] != null && playerHand[3] == null){
                 handOfPlayer = checkHand(playerHand);
                 playerHand[3] = deck.draw();
@@ -204,6 +222,7 @@ public class BlackJack implements Game, GamblingGame {
     public void stay(){
         console.println("You chose to stay");
         viewCurrentHand();
+        dealerMove();
 
     }
     public void isWinner(Player currentPlayer){
@@ -288,30 +307,30 @@ public class BlackJack implements Game, GamblingGame {
         Integer value = checkHand(dealerHand);
         Integer counter = 2;
 
-        while (value < 18) {
+
 
             if (value == 16 || value == 17) {
                 //dealer cheat method
             } else if (value >= 18 && value <= 21 && dealerHand[5] != null) {
                 console.println("Dealer Chose to stay");
-                break;
+
             } else if (value <= 21 && dealerHand[5] != null) {
                 console.println("Unlucky... \nThe Dealer wins with Special Five");
                 isLoser();
-                break;
+
             } else if (value <= 15) {
                 dealerHand[counter] = deck.draw();
                 counter++;
-                break;
+
             } else if (value > 21) {
                 console.println("Dealer Bust...");
-                break;
+
             }
         }
 
 
 
-    }
+
     private Boolean checkForBlackjack(Card[] hand){
         if (checkHand(hand) == 21){
             return true;
