@@ -113,7 +113,7 @@ public class GoFishGameTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+/*    @Test
     public void winCheckTest1() {
         for (int i = 0; i < 6; i++ ) {
             playerSuites.addCard(new Card("A", "H"));
@@ -162,8 +162,8 @@ public class GoFishGameTest {
         }
         GoFishPlayer expected = goFishPlayer;
         GoFishPlayer actual = goFishGame.checkForWin(goFishPlayer, goFishNPC, playerSuites, opponentSuites);
-        Assert.assertEquals(expected, actual);
-    }
+        Assert.assertEquals(expected, actual);*/
+
 
     @Test
     public void npcPickACardTest(){

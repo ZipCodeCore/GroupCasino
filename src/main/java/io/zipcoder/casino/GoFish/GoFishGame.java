@@ -11,6 +11,7 @@ import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Logger;
 
 
 public class GoFishGame extends CardGame implements Game {
@@ -48,14 +49,7 @@ public class GoFishGame extends CardGame implements Game {
     //populates player deals hands
     public void startPlay() {
         new GoFishMenu(this).displayMenu();
-        console.println("\n   >===>                         >=>                      \n" +
-                " >>    >=>                     >>     >>          >=>      \n" +
-                ">=>            >=>           >=>> >>       >===>  >=>      \n" +
-                ">=>          >=>  >=>          >=>   >=>  >=>     >=>>=>   \n" +
-                ">=>   >===> >=>    >=>         >=>   >=>   >==>   >=>  >=> \n" +
-                " >=>    >>   >=>  >=>          >=>   >=>     >=>  >>   >=> \n" +
-                "  >====>       >=>             >=>   >=>  >=>>=>  >=>  >=> \n" +
-                "                                                          \n");
+        goTitleScreen();
         initialDeal();
         turn(this.player, this.opponent, this.playersCards, this.opponentsCards, this.playerSuites, this.opponentSuites);
     }
@@ -65,6 +59,7 @@ public class GoFishGame extends CardGame implements Game {
         for (int i = 0; i < 7; i++) {
             this.playersCards.addCard(this.shoe.removeFirstCard());
             this.opponentsCards.addCard(this.shoe.removeFirstCard());
+
         }
     }
 
@@ -103,10 +98,10 @@ public class GoFishGame extends CardGame implements Game {
 
     public void turn(GoFishPlayer playerUp, GoFishPlayer nextPlayer, CardSet playerUpCards, CardSet nextPlayerCards, CardSet playerUpSuites, CardSet nextPlayerSuites) {
         // TODO: check for win, cause it to drop through the end of the method
-        GoFishPlayer winStatus = checkForWin(playerUp, nextPlayer, playerUpCards, nextPlayerCards);
-        //announceWinner(winStatus);
+        System.out.println(playerUpSuites.size() + "     " + nextPlayerSuites.size());
+        GoFishPlayer winStatus = checkForWin(playerUp, nextPlayer, playerUpSuites, nextPlayerSuites);
+        announceWinner(winStatus);
         emptyHandDraw(playerUpCards);
-
         console.clearScreen();
         displayStatus();
         String cardChoice = playerUp.chooseCard(playerUpCards);
@@ -134,29 +129,47 @@ public class GoFishGame extends CardGame implements Game {
             }
         }
     }
+
     public GoFishPlayer checkForWin(GoFishPlayer playerUp, GoFishPlayer nextPlayer, CardSet playerUpSuites, CardSet nextPlayerSuites) {
 
         if (playerUpSuites.size() >= 7) {
             return playerUp;
         } else if (nextPlayerSuites.size() >= 7) {
+            console.printWithDelays(nextPlayer.getPlayer().getFirstName() + " IS THE WINNER!!!!!!!!! \n");
             return nextPlayer;
         } else {
             return null;
         }
     }
+
+
+/*    public Boolean checkForWin(GoFishPlayer playerUp, GoFishPlayer nextPlayer, CardSet playerUpSuites, CardSet nextPlayerSuites) {
+
+        if (playerUpSuites.size() >= 7) {
+            console.printWithDelays(playerUp.getPlayer().getFirstName() + " IS THE WINNER!!!!!!!!! \n");
+            return true;
+        } else if (nextPlayerSuites.size() >= 7) {
+            console.printWithDelays(nextPlayer.getPlayer().getFirstName() + " IS THE WINNER!!!!!!!!! \n");
+            return true;
+        } else {
+            return false;
+        }
+    }*/
     public void announceWinner(GoFishPlayer winner) {
-        if (winner != null) {
+        if (null != winner) {
             console.printWithDelays(winner.getPlayer().getFirstName() + " IS THE WINNER!!!!!!!!! \n");
+            endChoice();
+        } else {
         }
     }
     @Override
     public void endChoice() {
         //implements menu whether you want to quit or go again
 
-        String endChoiceInput = console.getInput(("\n[DEALER]: You have finished this Russian Roulette Game.\n[DEALER]: Would you like to play again? (Y/N)\n"));
+        String endChoiceInput = console.getInput(("\n[DEALER]: You have finished this Go Fish Game.\n[DEALER]: Would you like to play again? (Y/N)\n"));
 
         if (endChoiceInput.toUpperCase().equals("N")) {
-            console.printWithDelays("\n[DEALER]: Have a good rest of your day.\n");
+            console.printWithDelays("\n[DEALER]: Enjoy the rest of your stay!!\n");
             console.sleep(1500);
 
             //also, return to the main menu
