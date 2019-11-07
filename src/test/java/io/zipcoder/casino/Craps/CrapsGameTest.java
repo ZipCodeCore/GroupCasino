@@ -1,14 +1,13 @@
 package io.zipcoder.casino.Craps;
 
+import io.zipcoder.casino.DiceGame;
 import io.zipcoder.casino.Menus.CrapsMenu;
 import io.zipcoder.casino.Player;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-public class CrapsGameTest {
+public class CrapsGameTest  {
 
     private CrapsMenu crapsMenu;
     private CrapsGame crapsGame;
@@ -225,6 +224,88 @@ public class CrapsGameTest {
         Assert.assertEquals(150.00, player.getBalance(), 0.001);
     }
 
+    @Test
+    public void tossPointRollTest() {
+        Integer expected = 8;
+        Integer actual = crapsGame.tossPointRoll(5,  3);
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void winningMessageFirstRollTest() {
+    String expected = "\n(( You rolled a null on the first roll! ))\n\nCongratulations!!\n\nYou are a winner!!!\n-------------------------------------------------\n\n";
+    String actual = crapsGame.winningMessageFirstRoll();
+    Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void losingMessageFirstRoll() {
+        String expected = "\n(( You rolled a null and have lost on the first roll! ))\n\nThis is unfortunate.....\n\n:(\n-------------------------------------------------\n\n";
+        String actual = crapsGame.losingMessageFirstRoll();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void losingMessageOutOfRolls() {
+
+        String expected = "(( You are out of rolls. ))\nYou seem to have lost.\nThis is unfortunate.....\n:(\n-------------------------------------------------\n\n";
+        String actual = crapsGame.losingMessageOutOfRolls();
+        Assert.assertEquals(expected, actual);
+
+
+    }
+
+    @Test
+    public void tossCurrentRoll() {
+        Integer expected = 12;
+        Integer actual = crapsGame.tossPointRoll(7,  5);
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void winOnSubsequentMessage() {
+        String expected = "Hooray! You rolled a null, and you have won!!  It took you 0 rolls to win.";
+        String actual = crapsGame.winOnSubsequentMessage();
+        Assert.assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void loseOnSubsequentMessage() {
+        String expected = "It appears that the odds were not in your favor today. Better luck next time.....\n-------------------------------------------------\n\n";
+        String actual = crapsGame.loseOnSubsequentMessage();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void displayCurrentRoll() {
+        crapsGame.setDie1Current(3);
+        Integer die1Current= crapsGame.getDie1Current();
+        crapsGame.setDie2Current(5);
+        Integer die2Current= crapsGame.getDie2Current();
+        String expected = (DiceGame.diceToASCII(die1Current, die2Current) + String.format(("\n(( You have rolled a 8 for this roll. ))\n")));
+    String actual = crapsGame.displayCurrentRoll(8);
+    Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void tossCurrentRoll2() {
+        Integer expected = 12;
+        Integer actual = crapsGame.tossCurrentRoll(7,  5);
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void displayPointRoll() {
+        crapsGame.setDie1Point(4);
+        Integer die1Point= crapsGame.getDie1Point();
+        crapsGame.setDie2Point(6);
+        Integer die2Point= crapsGame.getDie2Point();
+        String expected = "\n-------------------------------------------------" + "SET THE POINT ROLL:\n" + DiceGame.diceToASCII(die1Point, die2Point) + "\n-------------------------------------------------";
+        String actual = crapsGame.displayPointRoll();
+                Assert.assertEquals(expected, actual);
+    }
 
 
     //WRITE TEST OF ROUND OF PLAY FOR HOW DIFFERENT TYPES OF LOSSES EFFECT YOUR BALANCE
