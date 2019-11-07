@@ -133,10 +133,7 @@ public class GoFishGame extends CardGame implements Game {
                 }
             }
         }
-
-
     }
-
     public GoFishPlayer checkForWin(GoFishPlayer playerUp, GoFishPlayer nextPlayer, CardSet playerUpSuites, CardSet nextPlayerSuites) {
 
         if (playerUpSuites.size() >= 7) {
@@ -147,26 +144,40 @@ public class GoFishGame extends CardGame implements Game {
             return null;
         }
     }
-
     public void announceWinner(GoFishPlayer winner) {
         if (winner != null) {
             console.printWithDelays(winner.getPlayer().getFirstName() + " IS THE WINNER!!!!!!!!! \n");
         }
     }
-
-
-    //Option to quit game or play another round
+    @Override
     public void endChoice() {
-    }
+        //implements menu whether you want to quit or go again
 
+        String endChoiceInput = console.getInput(("\n[DEALER]: You have finished this Russian Roulette Game.\n[DEALER]: Would you like to play again? (Y/N)\n"));
+
+        if (endChoiceInput.toUpperCase().equals("N")) {
+            console.printWithDelays("\n[DEALER]: Have a good rest of your day.\n");
+            console.sleep(1500);
+
+            //also, return to the main menu
+        } else if (endChoiceInput.toUpperCase().equals("Y")) {
+
+            console.clearScreen();
+
+            startPlay();
+
+        } else {
+            console.println("(That's not a valid selection. Please choose again.)");
+            endChoice();
+        }
+
+    }
     public String getName() {
         return name;
     }
-
     public GoFishPlayer getPlayer() {
         return player;
     }
-
     public GoFishNPC getOpponent() {
         return opponent;
     }
@@ -195,29 +206,29 @@ public class GoFishGame extends CardGame implements Game {
         goTitleScreen();
         playersCards.sort();
         playerSuites.sort();
-        displayOpponentHands();
-        displayOpponentSuite();
-        displayPlayerSuite();
-        displayPlayerHands();
+        console.println(displayOpponentHands());
+        console.println(displayOpponentSuites());
+        console.println(displayPlayerSuites());
+        console.println(displayPlayerHands());
     }
 
-    public void displayPlayerSuite() {
-        console.println("************************* PLAYER'S SUITES *************************\n" + playerSuites.toASCIISuite() + "\n");
+    public String displayPlayerSuites() {
+        return "************************* PLAYER'S SUITES *************************\n" + playerSuites.toASCIISuite() + "\n";
     }
 
-    public void displayPlayerHands() {
-        console.println("************************** PLAYER'S HAND **************************\n" + playersCards.toASCII() + "\n");
+    public String displayPlayerHands() {
+        return "************************** PLAYER'S HAND **************************\n" + playersCards.toASCII() + "\n";
     }
 
-    public void displayOpponentHands() {
-        console.println("************************* OPPONENT'S HAND *************************\n" + opponentsCards.toASCIIBlank() + "\n");
+    public String displayOpponentHands() {
+        return "************************* OPPONENT'S HAND *************************\n" + opponentsCards.toASCIIBlank() + "\n";
     }
 
-    public void displayOpponentSuite() {
-        console.println("************************ OPPONENT'S SUITES ************************\n" + opponentSuites.toASCIISuite() + "\n");
+    public String displayOpponentSuites() {
+        return "************************ OPPONENT'S SUITES ************************\n" + opponentSuites.toASCIISuite() + "\n";
     }
 
-    public void goTitleScreen() {
+    public String goTitleScreen() {
         console.println("\n   >===>                         >=>                      \n" +
                 " >>    >=>                     >>     >>          >=>      \n" +
                 ">=>            >=>           >=>> >>       >===>  >=>      \n" +
@@ -226,5 +237,6 @@ public class GoFishGame extends CardGame implements Game {
                 " >=>    >>   >=>  >=>          >=>   >=>     >=>  >>   >=> \n" +
                 "  >====>       >=>             >=>   >=>  >=>>=>  >=>  >=> \n" +
                 "                                                          \n");
+        return "GO FISH!";
     }
 }
