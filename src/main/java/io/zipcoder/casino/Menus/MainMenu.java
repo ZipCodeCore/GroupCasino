@@ -31,14 +31,14 @@ public class MainMenu implements Menu {
         choiceMap.put(++count, new NullMenu(this.player));
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Player player = new Player("Herb", "Tarlek", 45, 0.00);
         MainMenu mainMenu = new MainMenu(player);
         mainMenu.displayMenu();
     }
 
     @Override
-    public void displayMenu() throws InterruptedException {
+    public void displayMenu() {
         console.clearScreen();
         console.println("      .======================================.\n" +
                 "      | ___ ___ ___               _   _   _  |\n" +
@@ -83,7 +83,7 @@ public class MainMenu implements Menu {
     }
 
     @Override
-    public void handleChoice(int choice) throws InterruptedException {
+    public void handleChoice(int choice)  {
         try {
             mainMusic.stop();
         } catch (Exception e) {

@@ -31,7 +31,7 @@ public class RRGame extends DiceGame implements Game {
     }
 
     @Override
-    public void startPlay() throws InterruptedException {
+    public void startPlay() {
         // store menu
         RRMenu rrMenu = new RRMenu(this);
         rrMenu.displayMenu();

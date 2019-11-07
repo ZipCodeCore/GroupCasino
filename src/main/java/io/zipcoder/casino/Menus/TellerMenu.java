@@ -31,7 +31,7 @@ public class TellerMenu implements Menu {
     }
 
     @Override
-    public void displayMenu() throws InterruptedException {
+    public void displayMenu() {
         console.clearScreen();
 
         //plays music!
@@ -73,7 +73,7 @@ public class TellerMenu implements Menu {
     }
 
     @Override
-    public void handleChoice(int choice) throws InterruptedException {
+    public void handleChoice(int choice) {
 
         switch (choice) {
             case 1:
@@ -110,7 +110,7 @@ public class TellerMenu implements Menu {
         }
     }
 
-    public void depositFunds() throws InterruptedException {
+    public void depositFunds() {
         double funds = console.getCurrency("\n[TELLER]: How much are you depositing?\n");
         if (funds == 0.0) {
             console.printWithDelays("\n[TELLER]: Quit wastin' my time, buddy\n",50);

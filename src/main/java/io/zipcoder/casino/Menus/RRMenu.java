@@ -46,7 +46,7 @@ public class RRMenu implements Menu {
 
 
     @Override
-    public void displayMenu() throws InterruptedException {
+    public void displayMenu() {
 
         console.clearScreen();
 
@@ -58,21 +58,14 @@ public class RRMenu implements Menu {
                 "██║  ██║╚██████╔╝███████║███████║██║██║  ██║██║ ╚████║    ██║  ██║╚██████╔╝╚██████╔╝███████╗███████╗   ██║      ██║   ███████╗\n" +
                 "╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝   ╚═╝      ╚═╝   ╚══════╝\n" +
                 "                                                                                                                              \n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("Welcome To Russian Roulette!\n\n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("- First the House will roll a die\n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("- Your bet will be your ENTIRE balance\n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("- Next, you will roll a die:\n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("- If your roll DOES NOT match the House's roll, your balance is DOUBLED!\n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("- If your roll matches the house......You lose all your balance.\n\n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("Are you willing to risk it all to win it all?\n\n");
-        TimeUnit.SECONDS.sleep(2);
+        console.sleep(1000);
+        console.printWithDelays("Welcome To Russian Roulette!\n\n", 20, 1000);
+        console.printWithDelays("- First the House will roll a die\n", 20, 1000);
+        console.printWithDelays("- Your bet will be your ENTIRE balance\n", 20, 1000);
+        console.printWithDelays("- Next, you will roll a die:\n", 20, 1000);
+        console.printWithDelays("- If your roll DOES NOT match the House's roll, your balance is DOUBLED!\n", 20, 1000);
+        console.printWithDelays("- If your roll matches the house......You lose all your balance.\n\n", 20, 1000);
+        console.printWithDelays("Are you willing to risk it all to win it all?\n\n", 20, 2000);
 
         console.println(DiceGame.diceToASCII());
         int choice = console.getInteger("(Press 1 to play or 2 to exit):\n\n");
@@ -89,11 +82,7 @@ public class RRMenu implements Menu {
                 rrGame.roundOfPlay();
                 try {
                     rouletteMusic.stop();
-                } catch (UnsupportedAudioFileException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (LineUnavailableException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
              break;
@@ -102,11 +91,7 @@ public class RRMenu implements Menu {
                 play = false;
                 try {
                     rouletteMusic.stop();
-                } catch (UnsupportedAudioFileException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (LineUnavailableException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
         }
