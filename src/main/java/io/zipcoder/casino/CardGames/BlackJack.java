@@ -5,7 +5,7 @@ import io.zipcoder.casino.Player.GamblingPlayer;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
-
+import java.util.HashMap;
 
 
 public class BlackJack implements GamblingGame {
@@ -21,74 +21,24 @@ public class BlackJack implements GamblingGame {
     private int wageBucket;
     private Card card;
 
+    public Integer playerRefactoredHandValue;
+    public Integer dealerRefactoredHandValue;
+
+    public boolean playerHasBlackJack;
+    public boolean dealerHasBlackJack;
+    public boolean playerAndDealerHaveBlackJack;
+    public boolean playerBust;
+    public boolean dealerBust;
+    public boolean playerWin;
+    public boolean dealerWin;
+    public boolean playerDealerPush;
+
 
     public BlackJack(Player user) {
         this.gamblingPlayer = new GamblingPlayer(user);
     }
 
-    public GamblingPlayer getGamblingPlayer() {
-        return gamblingPlayer;
-    }
 
-    public void setGamblingPlayer(GamblingPlayer gamblingPlayer) {
-        this.gamblingPlayer = gamblingPlayer;
-    }
-
-    public CardHand getGamblingPlayerHand() {
-        return gamblingPlayerHand;
-    }
-
-    public void setGamblingPlayerHand(CardHand gamblingPlayerHand) {
-        this.gamblingPlayerHand = gamblingPlayerHand;
-    }
-
-    public Deck getBlackJackDeck() {
-        return blackJackDeck;
-    }
-
-    public void setBlackJackDeck(Deck blackJackDeck) {
-        this.blackJackDeck = blackJackDeck;
-    }
-
-    public CardHand getComputerHand() {
-        return computerHand;
-    }
-
-    public void setComputerHand(CardHand computerHand) {
-        this.computerHand = computerHand;
-    }
-
-    public boolean isWinGame() {
-        return winGame;
-    }
-
-    public void setWinGame(boolean winGame) {
-        this.winGame = winGame;
-    }
-
-    public Player getUser() {
-        return user;
-    }
-
-    public void setUser(Player user) {
-        this.user = user;
-    }
-
-    public int getWageBucket() {
-        return wageBucket;
-    }
-
-    public void setWageBucket(int wageBucket) {
-        this.wageBucket = wageBucket;
-    }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
-    }
     public void startGame() {
         playBlackJack();
     }
@@ -97,6 +47,11 @@ public class BlackJack implements GamblingGame {
         initializeBlackJackHands();
         checkInitialHandValue(gamblingPlayerHand);
         checkHandForAces(gamblingPlayerHand);
+
+//        playerHasBlackJack = (playerRefactoredHandValue == 21);
+//        dealerHasBlackJack = (dealerRefactoredHandValue == 21);
+//        playerAndDealerHaveBlackJack = (playerHasBlackJack && dealerHasBlackJack);
+
         refactorAndCalculateHandValue(checkInitialHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
         checkInitialHandValue(computerHand);
         checkHandForAces(computerHand);
@@ -123,20 +78,21 @@ public class BlackJack implements GamblingGame {
     }
 
 
-
     //takes arrayList of cards from hand and separates them by card and totals point based on default Ace value of 11.
     public Integer checkInitialHandValue(CardHand hand) {
         Integer handValueForDefaultAce11 = 0;
-        for (int i = 0; i < hand.userHand.size(); i++) {
-            handValueForDefaultAce11 += card.blackJackCardRank.get(i);
+
+        for( Card card : hand.userHand) {
+            Rank rank = card.getRank();
+            handValueForDefaultAce11 += (Integer) blackJackCardRank.get(rank);
         }
         return handValueForDefaultAce11;
     }
 
-        //counts the number of Aces in cardHand.
+    //counts the number of Aces in cardHand.
     public Integer checkHandForAces(CardHand hand) {
         Integer aceCounter = 0;
-        for (int i = 0; i < hand.userHand.size(); i++) {
+        for (Card card : hand.userHand){
             if (card.getRank() == Rank.ACE) {
                 aceCounter++;
             }
@@ -145,7 +101,7 @@ public class BlackJack implements GamblingGame {
     }
 
 
-        //evaluates score of blackjack hand and determines whether or not the value of each Ace should remain at 11 points or be reassigned to 1 point. Returns new hand value.
+    //evaluates score of blackjack hand and determines whether or not the value of each Ace should remain at 11 points or be reassigned to 1 point. Returns new hand value.
     public Integer refactorAndCalculateHandValue(Integer handValueForDefaultAce11, Integer numberOfAces) {
         Integer refactoredHandValue = handValueForDefaultAce11;     //default set to no changes.
         if (numberOfAces == 1 && handValueForDefaultAce11 > 21) {
@@ -166,20 +122,17 @@ public class BlackJack implements GamblingGame {
         return refactoredHandValue;
     }
 
-    public Integer playerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
-    public Integer dealerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(computerHand), checkHandForAces(computerHand));
-
-    public boolean playerHasBlackJack = playerRefactoredHandValue == 21;
-    public boolean dealerHasBlackJack = dealerRefactoredHandValue == 21;
-    public boolean playerAndDealerHaveBlackJack = playerHasBlackJack && dealerHasBlackJack;
-    public boolean playerBust = playerRefactoredHandValue > 21;
-    public boolean dealerBust = dealerRefactoredHandValue > 21;
-    public boolean playerWin = !playerBust && playerRefactoredHandValue > dealerRefactoredHandValue;
-    public boolean dealerWin = !dealerBust && dealerRefactoredHandValue > playerRefactoredHandValue;
-    public boolean playerDealerPush = playerBust && dealerBust || playerRefactoredHandValue == dealerRefactoredHandValue;
-
-
-
+//    public Integer playerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
+//    public Integer dealerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(computerHand), checkHandForAces(computerHand));
+//
+//    public boolean playerHasBlackJack = playerRefactoredHandValue == 21;
+//    public boolean dealerHasBlackJack = dealerRefactoredHandValue == 21;
+//    public boolean playerAndDealerHaveBlackJack = playerHasBlackJack && dealerHasBlackJack;
+//    public boolean playerBust = playerRefactoredHandValue > 21;
+//    public boolean dealerBust = dealerRefactoredHandValue > 21;
+//    public boolean playerWin = !playerBust && playerRefactoredHandValue > dealerRefactoredHandValue;
+//    public boolean dealerWin = !dealerBust && dealerRefactoredHandValue > playerRefactoredHandValue;
+//    public boolean playerDealerPush = playerBust && dealerBust || playerRefactoredHandValue == dealerRefactoredHandValue;
 
 
 //    public void displayPostInitialFlopWinner() {
@@ -189,16 +142,14 @@ public class BlackJack implements GamblingGame {
 //    }
 
 
-
-
     public Integer displayScore() {
         if (playerAndDealerHaveBlackJack) {
             return displayPlayerNDealerPushWithBlackJack();
-        }   else if (playerHasBlackJack && !dealerHasBlackJack) {
+        } else if (playerHasBlackJack && !dealerHasBlackJack) {
             return displayPlayerWinsWithBlackJack(" You got BlackJack!\n", "Your hand: ", "Press 1 to play again or 2 to quit.\n");
-        }   else if(dealerHasBlackJack && !playerHasBlackJack) {
+        } else if (dealerHasBlackJack && !playerHasBlackJack) {
             return dealerWinsWithBlackJack(" Dealer got BlackJack!\n", "Your hand: ", "Press 1 to play again or 2 to quit.\n");
-        }   else    {
+        } else {
             return displayPlayerNDealerPush("Push!\n", "Your hand: ");
         }
 
@@ -222,7 +173,6 @@ public class BlackJack implements GamblingGame {
     private Integer displayPlayerNDealerPushWithBlackJack() {
         return displayPlayerNDealerPush(" You and Dealer both got BlackJack!\n", "Your hand:  ");
     }
-
 
 
     public Integer promptHitOrStay() {
@@ -257,8 +207,25 @@ public class BlackJack implements GamblingGame {
     public void promptLeaveGame() {
     }
 
+    private HashMap blackJackCardRank = new HashMap() {{
 
-    }
+        put(Rank.TWO, 2);
+        put(Rank.THREE, 3);
+        put(Rank.FOUR, 4);
+        put(Rank.FIVE, 5);
+        put(Rank.SIX, 6);
+        put(Rank.SEVEN, 7);
+        put(Rank.EIGHT, 8);
+        put(Rank.NINE, 9);
+        put(Rank.TEN, 10);
+        put(Rank.ACE, 11);
+        put(Rank.JACK, 10);
+        put(Rank.QUEEN, 10);
+        put(Rank.KING, 10);
+    }};
+
+
+}
 
 
 
