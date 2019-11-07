@@ -8,6 +8,7 @@ import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.utilities.Console;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class GoFish implements Game {
@@ -36,7 +37,7 @@ public class GoFish implements Game {
     @Override
     public void approachTable(Player currentPLayer) {
         Console.clearScreen();
-        console.printFast(casinoArt.getCasinoArt(CasinoArt.Art.GOFISH));
+        //console.printFast(casinoArt.getCasinoArt(CasinoArt.Art.GOFISH));
         console.printSlow("You see someone playing go fish against themselves");
         console.dotDotDot();
         console.newln();
@@ -73,22 +74,53 @@ public class GoFish implements Game {
         dealHands();
 
         while (running) {
-
+            console.print("Your current hand is ");
             displayHand(playerHand);
 
-            checkCard(playerGuess(), true);
-            checkCard(aiGuess(), false);
+            while (playerHand.size() > 0 && checkCard(playerGuess(), playerHand, aiHand)) {
+                checkBook(playerHand, true);
+                console.printSlow("You guessed right!\n");
+                console.print("Your current hand is ");
+                displayHand(playerHand);
+            }
 
-            if (deck.cardsLeft().equals(0)) {
+            if (!deck.cardsLeft().equals(0) || playerHand.size() != 0 || aiHand.size() != 0) {
+                console.printSlow("Wrong guess! Go Fish!\n");
+                console.printSlow("You draw a " + fish(playerHand).getCardValue().toString() + "!\n");
+                checkBook(playerHand, true);
+
+                console.printSlow("Your hand is now ");
+                displayHand(playerHand);
+                console.printSlow("Hit enter to continue\n");
+                console.print("--------------------------------------------------------------");
+                console.println(" You have " + playerPairs + " books");
+                console.getStringInput("");
+
+
+                while (aiHand.size() > 0 && checkCard(aiGuess(), aiHand, playerHand)) {
+                    console.printSlow("Your opponent guessed right!\n");
+                }
+            }
+
+
+            if (deck.cardsLeft().equals(0) || playerHand.size() == 0 || aiHand.size() == 0) {
                 running = false;
+            } else {
+                console.printSlow("Your opponent guessed wrong. They Go Fish!\n");
+                fish(aiHand);
+                checkBook(aiHand, false);
+                console.printSlow("Hit enter to continue\n");
+                console.print("--------------------------------------------------------------");
+                console.println(" Your opponent has " + playerPairs + " books");
+                console.getStringInput("");
             }
         }
 
-        checkWinner();
+        checkWinner(currentPlayer);
     }
 
     public void displayHand(ArrayList<Card> hand) {
-        console.print("Your current hand is ");
+        Collections.sort(hand);
         for (Card c : hand) {
             console.print(c.getCardValue().toString() + " ");
         }
@@ -100,6 +132,24 @@ public class GoFish implements Game {
             playerHand.add(deck.draw());
             aiHand.add(deck.draw());
         }
+
+        checkBook(aiHand, false);
+        checkBook(playerHand, true);
+    }
+
+    public ArrayList<Card> removeCards(ArrayList<Card> hand, CardValue card) {
+        ArrayList<Card> toRemove = new ArrayList<>();
+        for (Card c : hand) {
+            if (c.getCardValue().equals(card)) {
+                toRemove.add(c);
+            }
+        }
+
+        for (Card c : toRemove) {
+            hand.remove(c);
+        }
+
+        return toRemove;
     }
 
     public boolean hasCard(ArrayList<Card> hand, CardValue card) {
@@ -111,47 +161,57 @@ public class GoFish implements Game {
         return false;
     }
 
-    public Card removeCard(ArrayList<Card> hand, CardValue card) {
-        Card toRemove = null;
-        for (Card c : hand) {
-            if (c.getCardValue().equals(card)) {
-                toRemove = c;
+    public void checkBook(ArrayList<Card> cards, boolean isPlayer) {
+        for (int i = 2; i < 15; i++) {
+            CardValue cardVal = CardValue.fromInt(i);
+            int first = -1;
+            int second = -1;
+            int third = -1;
+            int fourth = -1;
+
+            for(int j = 0; j < cards.size(); j++) {
+                if (cards.get(j).getCardValue().equals(cardVal)) {
+                    if(first == -1) {
+                        first = j;
+                    } else if (second == -1){
+                        second = j;
+                    } else if (third == -1) {
+                        third = j;
+                    } else {
+                        fourth = j;
+                    }
+                }
+            }
+
+            if (first != -1 && second != -1 && third != -1 && fourth != -1) {
+                cards.remove(fourth);
+                cards.remove(third);
+                cards.remove(second);
+                cards.remove(first);
+                if(isPlayer) {
+                    console.printSlow("You have a book of " + cardVal + "s!\n");
+                    playerPairs++;
+                } else {
+                    console.printSlow("Your opponent has a book of " + cardVal + "s!\n");
+                    aiPairs++;
+                }
             }
         }
-        if(toRemove != null) {
-            hand.remove(toRemove);
-        }
-        return toRemove;
     }
 
-    public void checkCard(CardValue card, boolean isPlayerGuess) {
-        ArrayList<Card> hand;
-        if(isPlayerGuess) hand = aiHand;
-        else hand = playerHand;
-
-        if(hasCard(hand, card)) {
-            removeCard(playerHand, card);
-            removeCard(aiHand, card);
-
-            if(isPlayerGuess) {
-                console.print("Good guess, you got a pair!\n");
-            } else {
-                console.print("Your opponent guessed your card!\n");
-            }
-
+    public boolean checkCard(CardValue card, ArrayList<Card> destHand, ArrayList<Card> askHand) {
+        if(hasCard(askHand, card)) {
+            destHand.addAll(removeCards(askHand, card));
+        return true;
         } else {
-            console.println("Go fish!");
-            fish(isPlayerGuess);
+            return false;
         }
     }
 
-    public void fish(boolean isPlayer) {
+    public Card fish(ArrayList<Card> hand) {
         Card drawnCard = deck.draw();
-        if (isPlayer) {
-            playerHand.add(drawnCard);
-        } else {
-            aiHand.add(drawnCard);
-        }
+        hand.add(drawnCard);
+        return drawnCard;
     }
 
     public CardValue aiGuess() {
@@ -187,8 +247,6 @@ public class GoFish implements Game {
                     if (numInput > 1 && numInput < 11) {
                         theCard = CardValue.fromInt(numInput);
                         if(!hasCard(playerHand, theCard)) {
-                            console.print(numInput + " ");
-                            console.print(theCard.getValue() + " ");
                             console.printSlow("That card is not in your hand!\n");
                             validInput = false;
                         }
@@ -205,13 +263,35 @@ public class GoFish implements Game {
         return theCard;
     }
 
-    public void checkWinner() {
+    public void checkWinner(Player currentPLayer) {
         if (playerPairs > aiPairs) {
-            console.printSlow("You won! with " + playerPairs + " pairs");
+            console.printSlow("You won! with " + playerPairs + " pairs\n");
         } else if (playerPairs < aiPairs){
-            console.printSlow("You lost!");
+            console.printSlow("You lost!\n");
         } else {
-            console.printSlow("It's a tie!");
+            console.printSlow("It's a tie!\n");
+        }
+
+        console.printSlow("Would you like to play again?\n");
+        console.printSlow("(1) yes\n");
+        console.printSlow("(2) no\n");
+
+        String input = console.getStringInput(":");
+        switch (input) {
+            case "1":
+                runGame(currentPLayer);
+                break;
+            case "2":
+                console.printSlow("Good Idea");
+                console.newln();
+                break;
+            default:
+                console.print("Invalid Input");
+                console.dotDotDot();
+                console.newln();
+                console.delay(2000);
+                approachTable(currentPLayer);
+                break;
         }
     }
 
