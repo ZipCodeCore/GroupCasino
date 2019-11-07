@@ -23,8 +23,8 @@ public class Casino {
     }
 
     public void goToGameMenu(){
-        GameMenu gameMenu = new GameMenu();
-        gameMenu.runGameMenu(currentPlayer);
+        //GameMenu gameMenu = new GameMenu();
+        //gameMenu.runGameMenu(currentPlayer);
     }
 
     public void exitCasino(){
