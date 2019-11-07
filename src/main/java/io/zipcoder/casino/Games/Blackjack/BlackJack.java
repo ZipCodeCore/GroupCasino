@@ -131,7 +131,7 @@ public class BlackJack implements Game, GamblingGame {
         }
     }
     @Override
-    public void returnWinnings(Player currentPlayer) {
+    public void returnWinnings(Player currentPlayer, Integer results) {
 
     }
     public void viewCurrentHand(){

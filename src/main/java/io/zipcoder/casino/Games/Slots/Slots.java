@@ -89,6 +89,11 @@ public class Slots implements Game, GamblingGame {
         pot = console.getIntegerInput(":");
     }
 
+    @Override
+    public void returnWinnings(Player currentPlayer, Integer bet) {
+
+    }
+
     public void pullLever(){
         slots = new Integer[3][3];
         slots = slotMachine.createMachine();

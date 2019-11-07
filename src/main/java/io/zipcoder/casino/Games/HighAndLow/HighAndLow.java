@@ -54,7 +54,7 @@ public class HighAndLow implements Game, GamblingGame {
                     running = false;
                     break;
                 case 2:
-                    showRules();
+                    console.println(showRules());
                     break;
                 case 3:
                     running = false;
@@ -66,13 +66,14 @@ public class HighAndLow implements Game, GamblingGame {
         }
     }
 
-    public void showRules(){
-        console.println(language.getHighAndLowLanguage(HighAndLowLanguage.Language.RULES));
+    public String showRules(){
+        return language.getHighAndLowLanguage(HighAndLowLanguage.Language.RULES);
     }
 
-    public void resetGame(){
+    public boolean resetGame(){
         didYouBet = true;
         totalBetValue = 0;
+        return didYouBet;
     }
 
     @Override
@@ -89,6 +90,7 @@ public class HighAndLow implements Game, GamblingGame {
             console.dotDotDot();
             console.newln();
             currentPlayer.placeBet(10);
+            diceSound.play();
             Integer firstRoll = firstRoll();
 
             console.println(language.getHighAndLowLanguage(HighAndLowLanguage.Language.PLACESECONDBET));
@@ -101,16 +103,19 @@ public class HighAndLow implements Game, GamblingGame {
             console.dotDotDot();
             console.newln();
 
+            diceSound.play();
             Integer secondRoll = secondRoll();
 
-
-            winOrLose(firstRoll, secondRoll, highOrLowBet);
+            playWinOrLoseSound(firstRoll, secondRoll, highOrLowBet);
+            boolean result = winOrLose(firstRoll, secondRoll, highOrLowBet);
+            if(result){
+                returnWinnings(currentPlayer, totalBetValue);
+            }
         exitGame(currentPlayer);
         }
     }
 
     public Integer firstRoll(){
-        diceSound.play();
         Integer roll = dice.rollDice(1);
         console.println(dice.diceArt(roll));
         Integer roll2 = dice.rollDice(1);
@@ -144,7 +149,6 @@ public class HighAndLow implements Game, GamblingGame {
     }
 
     public Integer secondRoll(){
-        diceSound.play();
         Integer roll = dice.rollDice(1);
         console.println(dice.diceArt(roll));
         Integer roll2 = dice.rollDice(1);
@@ -162,20 +166,27 @@ public class HighAndLow implements Game, GamblingGame {
         exitGame(currentPlayer);
     }
 
-    public void winOrLose(Integer firstRoll, Integer secondRoll, String highOrLowBet){
+    public void playWinOrLoseSound(Integer firstRoll, Integer secondRoll, String highOrLowBet){
         if((firstRoll > secondRoll && highOrLowBet.equals("low")) || (firstRoll < secondRoll && highOrLowBet.equals("high"))){
             winSound.play();
+        } else {
+            loseSound.play();
+        }
+    }
+
+    public boolean winOrLose(Integer firstRoll, Integer secondRoll, String highOrLowBet){
+        if((firstRoll > secondRoll && highOrLowBet.equals("low")) || (firstRoll < secondRoll && highOrLowBet.equals("high"))){
             console.println("Congratulations! You've won $%d.00!", totalBetValue);
             LocalDateTime now = LocalDateTime.now();
             String addHistory = String.format("You won $%d.00 at High and Low! ** ", totalBetValue);
             currentPlayer.addHistory(addHistory + dtf.format(now));
-            returnWinnings(currentPlayer);
+            return true;
         } else {
-            loseSound.play();
             console.println((language.getHighAndLowLanguage(HighAndLowLanguage.Language.LOSE)));
             LocalDateTime now = LocalDateTime.now();
             String addHistory = String.format("You lost $%d.00 at High and Low. ** ", totalBetValue);
             currentPlayer.addHistory(addHistory + dtf.format(now));
+            return false;
         }
     }
 
@@ -192,10 +203,10 @@ public class HighAndLow implements Game, GamblingGame {
     }
 
     @Override
-    public void returnWinnings(Player currentPlayer) {
+    public void returnWinnings(Player currentPlayer, Integer totalBetValue) {
         currentPlayer.changeBalance(totalBetValue);
-
     }
+
     @Override
     public void exitGame(Player currentPlayer) {
     console.println(language.getHighAndLowLanguage(HighAndLowLanguage.Language.PLAYAGAIN));
