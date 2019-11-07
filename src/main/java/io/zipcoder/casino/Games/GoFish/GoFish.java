@@ -37,8 +37,8 @@ public class GoFish implements Game {
     @Override
     public void approachTable(Player currentPLayer) {
         Console.clearScreen();
-        //console.printFast(casinoArt.getCasinoArt(CasinoArt.Art.GOFISH));
-        console.printSlow("You see someone playing go fish against themselves");
+        console.printFast(casinoArt.getCasinoArt(CasinoArt.Art.GOFISH));
+        console.printSlow("\n\nYou see someone playing go fish against themselves");
         console.dotDotDot();
         console.newln();
         console.printSlow("Would you like to play?\n");
@@ -78,10 +78,12 @@ public class GoFish implements Game {
             displayHand(playerHand);
 
             while (playerHand.size() > 0 && checkCard(playerGuess(), playerHand, aiHand)) {
-                checkBook(playerHand, true);
                 console.printSlow("You guessed right!\n");
-                console.print("Your current hand is ");
-                displayHand(playerHand);
+                checkBook(playerHand, true);
+                if(playerHand.size() > 0) {
+                    console.print("Your current hand is ");
+                    displayHand(playerHand);
+                }
             }
 
             if (!deck.cardsLeft().equals(0) || playerHand.size() != 0 || aiHand.size() != 0) {
@@ -265,7 +267,7 @@ public class GoFish implements Game {
 
     public void checkWinner(Player currentPLayer) {
         if (playerPairs > aiPairs) {
-            console.printSlow("You won! with " + playerPairs + " pairs\n");
+            console.printSlow("You won! with " + playerPairs + " books\n");
         } else if (playerPairs < aiPairs){
             console.printSlow("You lost!\n");
         } else {

@@ -126,7 +126,6 @@ public class HighAndLow implements Game, GamblingGame {
 
     public boolean winOrLose(Integer firstRoll, Integer secondRoll, String highOrLowBet){
         if((firstRoll > secondRoll && highOrLowBet.equals("low")) || (firstRoll < secondRoll && highOrLowBet.equals("high"))){
-            returnWinnings(currentPlayer, totalBetValue * 2);
             console.println("Congratulations! You've won $%d.00!", totalBetValue);
             return true;
         } else {
@@ -220,6 +219,9 @@ public class HighAndLow implements Game, GamblingGame {
 
             playWinOrLoseSound(firstRoll, secondRoll, highOrLowBet);
             Boolean result = winOrLose(firstRoll, secondRoll, highOrLowBet);
+            if(result){
+                returnWinnings(currentPlayer, totalBetValue * 2);
+            }
             addHistory(result, totalBetValue);
 
             console.println("Your current balance is $%d.00", currentPlayer.getBalance());
