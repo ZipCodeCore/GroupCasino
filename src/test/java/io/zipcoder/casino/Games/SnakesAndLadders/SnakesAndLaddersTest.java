@@ -92,7 +92,7 @@ public class SnakesAndLaddersTest {
         Assert.assertEquals(expected,actual);
     }
 
-    @Test
+    /*@Test
     public void snakesAndLaddersTest2(){
         SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
         SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
@@ -110,7 +110,7 @@ public class SnakesAndLaddersTest {
         Integer expected = 14;
         Integer actual = snakesAndLadders.snakesAndLaddersCheck(position, true);
         Assert.assertEquals(expected,actual);
-    }
+    }*/
 
 
     @Test

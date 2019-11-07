@@ -48,7 +48,6 @@ public class Slots implements Game, GamblingGame {
                     break;
             }
         }
-
     }
 
     public void runSlots(Player currentPlayer){

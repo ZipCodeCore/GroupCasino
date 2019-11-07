@@ -5,6 +5,7 @@ import io.zipcoder.casino.GamePieces.CardValue;
 import io.zipcoder.casino.GamePieces.Deck;
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.PlayerCreation.Player;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.utilities.Console;
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,6 +13,7 @@ import java.util.Random;
 public class GoFish implements Game {
 
     Console console = new Console(System.in, System.out);
+    CasinoArt casinoArt = new CasinoArt();
     private Player currentPlayer;
     boolean running = true;
 
@@ -35,7 +37,7 @@ public class GoFish implements Game {
     @Override
     public void approachTable(Player currentPLayer) {
         Console.clearScreen();
-        //console.printFast(art.getCasinoArt(CasinoArt.Art.BLACKJACK));
+        console.printFast(casinoArt.getCasinoArt(CasinoArt.Art.GOFISH));
         console.printSlow("You see someone playing go fish against themselves");
         console.dotDotDot();
         console.newln();
