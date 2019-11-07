@@ -61,7 +61,7 @@ public class Roulette implements Game, GamblingGame {
             playersPick(currentPlayer);
             winningNumber();
             if(isWinner()){
-                returnWinnings(currentPlayer, winnings);
+                returnWinnings(currentPlayer, totalReturns);
             }else {
                 youLose(currentPlayer);
             }
