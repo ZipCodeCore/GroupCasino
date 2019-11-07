@@ -1,9 +1,8 @@
 package io.zipcoder.casino;
 
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.Menus.Casino;
 import io.zipcoder.casino.PlayerCreation.Player;
-import io.zipcoder.casino.PlayerRepository;
 import io.zipcoder.casino.utilities.Console;
 
 public class PlayerMenu {
@@ -21,19 +20,12 @@ public class PlayerMenu {
 
     public void runPlayerMenu( ){
         while (running) {
-            displayPlayerMenu();
+            Console.clearScreen();
+            console.println(art.getCasinoArt(CasinoArt.Art.PLAYERMENU));
+            Console.displayPlayerMenu();
             Integer playerInput = getPlayerInput();
             playerMenuLogic(playerInput);
         }
-    }
-
-    private void displayPlayerMenu(){
-        Console.clearScreen();
-        console.println(art.getCasinoArt(CasinoArt.Art.PLAYERMENU));
-        console.println("Welcome stranger! Have I seen you before?");
-        console.println("(1) - Yes, My name is...");
-        console.println("(2) - No it is my first time!");
-        console.println("(3) - Never mind, forgot my wallet T^T");
     }
 
     private Integer getPlayerInput(){
@@ -71,7 +63,8 @@ public class PlayerMenu {
                 if (player != null) {
                     casino.runCasinoMenu(player);
                 } else {
-                    console.println("I don't know you!");
+                    console.println("I don't know you!\n\n");
+                    console.getStringInput("Press Enter to return to menu");
                 }
 
                 break;

@@ -3,7 +3,7 @@ package io.zipcoder.casino.Games.Roulette;
 import io.zipcoder.casino.Games.GamblingGame;
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.Menus.Casino;
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.GamePieces.RouletteSpinner;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
@@ -61,7 +61,7 @@ public class Roulette implements Game, GamblingGame {
             playersPick(currentPlayer);
             winningNumber();
             if(isWinner()){
-                returnWinnings(currentPlayer);
+                returnWinnings(currentPlayer, winnings);
             }else {
                 youLose(currentPlayer);
             }
@@ -164,7 +164,7 @@ public class Roulette implements Game, GamblingGame {
 
     // If we can I would like to find a way to return a higher odds for betting "number" vs. "odd/even"
     @Override
-    public void returnWinnings(Player currentPlayer) {
+    public void returnWinnings(Player currentPlayer, Integer winnings) {
         if (isWinner()) {
             totalReturns = pot * multiplier;
             console.println("Congrats maybe you don't suck I'll give you $"+ totalReturns);

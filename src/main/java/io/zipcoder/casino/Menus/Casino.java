@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Menus;
 
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
 
@@ -13,26 +13,18 @@ public class Casino {
     public void runCasinoMenu(Player currentPlayer){
         this.currentPlayer = currentPlayer;
         while(running) {
-            displayCasinoMenu();
+            Console.clearScreen();
+            console.println(art.getCasinoArt(CasinoArt.Art.CASINOLOBBY));
+            System.out.println(String.format("Welcome to The Notorious B.I.G. 3 Casino, %s!", currentPlayer.getName()));
+            Console.displayCasinoMenu();
             Integer playerInput = getPlayerInput();
             casinoMenuLogic(playerInput);
         }
     }
 
-    public void displayCasinoMenu(){
-        Console.clearScreen();
-        console.println(art.getCasinoArt(CasinoArt.Art.CASINOLOBBY));
-        console.println(String.format("Welcome to The Notorious B.I.G. 3 Casino, %s!",currentPlayer.getName()));
-        console.println("What would you like to do?");
-        console.println("(1) - Display Game Menu");
-        console.println("(2) - Check your Balance");
-        console.println("(3) - See your History");
-        console.println("(4) - Return to Player Menu");
-    }
-
     public void goToGameMenu(){
-        GameMenu gameMenu = new GameMenu();
-        gameMenu.runGameMenu(currentPlayer);
+        //GameMenu gameMenu = new GameMenu();
+        //gameMenu.runGameMenu(currentPlayer);
     }
 
     public void exitCasino(){

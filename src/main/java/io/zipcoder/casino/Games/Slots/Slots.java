@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Games.Slots;
 
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.GamePieces.SlotMachine;
 import io.zipcoder.casino.Games.GamblingGame;
 import io.zipcoder.casino.Games.Game;
@@ -47,7 +47,6 @@ public class Slots implements Game, GamblingGame {
                     break;
             }
         }
-
     }
 
     public void runSlots(Player currentPlayer){
@@ -87,6 +86,11 @@ public class Slots implements Game, GamblingGame {
     public void placeBet(Player currentPlayer){
         console.println("How much would you like to bet?");
         pot = console.getIntegerInput(":");
+    }
+
+    @Override
+    public void returnWinnings(Player currentPlayer, Integer bet) {
+
     }
 
     public void pullLever(){

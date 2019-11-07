@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Games.Craps;
 
-import io.zipcoder.casino.CasinoArt;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.Games.GamblingGame;
 import io.zipcoder.casino.Games.Game;
@@ -119,7 +119,7 @@ public class Craps implements Game, GamblingGame {
             console.dotDotDot();
             console.printSlow("Natural Roll! Pass Line Wins!\n");
             currentPlayer.addHistory("You won $" + playerBet + " playing Craps ** " + timeFormatter.format(LocalDateTime.now()));
-            returnWinnings(currentPlayer);
+            returnWinnings(currentPlayer, playerBet);
             moneySound.play();
             return false;
         } else {
@@ -139,7 +139,7 @@ public class Craps implements Game, GamblingGame {
             console.dotDotDot();
             console.printSlow("You Hit the Point Value!\n");
             currentPlayer.addHistory("You won $" + playerBet + " playing Craps ** " + timeFormatter.format(LocalDateTime.now()));
-            returnWinnings(currentPlayer);
+            returnWinnings(currentPlayer, playerBet);
             moneySound.play();
             return false;
         } else if (roll.equals(7)) {
@@ -195,7 +195,7 @@ public class Craps implements Game, GamblingGame {
     }
 
     @Override
-    public void returnWinnings(Player currentPlayer) {
+    public void returnWinnings(Player currentPlayer, Integer playerBet) {
         console.printSlow("You won $" + playerBet + "\n");
         currentPlayer.changeBalance(playerBet * 2);
         console.printSlow("Your balance is now $" + currentPlayer.getBalance() + "\n");
