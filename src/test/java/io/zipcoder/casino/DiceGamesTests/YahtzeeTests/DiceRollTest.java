@@ -22,11 +22,11 @@ public class DiceRollTest {
     @Test
     public void diceRollTest(){
         roller.roll5Dice();
-        Integer[] diceValues = roller.getDiceValues();
+        Dice[] diceValues = roller.getMyDice();
 
-        for(Integer s: diceValues){
-            Assert.assertTrue(s < 7);
-            Assert.assertTrue(s > 0);
+        for(int i = 0; i < diceValues.length; i++){
+            Assert.assertTrue(diceValues[i].getValue() < 7);
+            Assert.assertTrue(diceValues[i].getValue() > 0);
         }
     }
 

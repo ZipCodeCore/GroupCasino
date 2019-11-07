@@ -50,7 +50,7 @@ public class Yahtzee implements Game {
                 chooseToKeep();
                 console.println("Final roll results:");
                 roll5Dice();
-                int pointsAdded = checkForEvaluation(chooseEvaluation(), getDiceValues());
+                int pointsAdded = checkForEvaluation(chooseEvaluation(),getMyDice2());
                 updateScore(pointsAdded);
             }
             displayResults();
@@ -193,7 +193,7 @@ public class Yahtzee implements Game {
         return choice;
     }
 
-    public int checkForEvaluation(int choice,Integer[] diceValues){
+    public int checkForEvaluation(int choice, Integer[] diceValues){
 
         switch (choice){
             case 1: return checkForFaces(diceValues, 1);
@@ -310,20 +310,20 @@ public class Yahtzee implements Game {
     //------------------------------------------------------------------------------------------------------------------
     // getters and setters----------------------------------------------------------------------------------------------
 
-    public Integer[] getDiceValues(){
-        Integer[] values = new Integer[5];
-        for(int i = 0; i < this.myDice.length; i++){
-            values[i] = this.myDice[i].getValue();
-        }
-        return values;
-    }
-
     public Player getUser() {
         return user;
     }
 
     public Dice[] getMyDice() {
         return myDice;
+    }
+
+    public Integer[] getMyDice2(){
+        Integer[] diceValues = new Integer[5];
+        for(int i = 0; i < this.myDice.length; i++){
+            diceValues[i] = this.myDice[i].getValue();
+        }
+        return diceValues;
     }
 
     public int getPoints() {
