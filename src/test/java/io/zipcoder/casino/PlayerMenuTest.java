@@ -17,13 +17,17 @@ public class PlayerMenuTest {
     }
 
     @Test
-    public void getPlayerInput() {
+    public void playerMenuLogic() {
     }
 
     @Test
-    public void playerMenuLogic() {
+    public void runPlayerMenu() {
     }
+
     @Test
+    public void testPlayerMenuLogic() {
+    }
+    /*@Test
     public void PlayerMenuLogicTest1() {
         PlayerMenu playerMenu = new PlayerMenu();
         String expected = "should be taking you to create a player menu";
@@ -48,5 +52,5 @@ public class PlayerMenuTest {
         String actual = playerMenu.playerMenuLogic(3);
 
         Assert.assertEquals(expected, actual);
-    }
+    }*/
 }
