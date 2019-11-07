@@ -66,7 +66,6 @@ public class PlayerMenu {
                     console.println("I don't know you!\n\n");
                     console.getStringInput("Press Enter to return to menu");
                 }
-
                 break;
             case 2:
 
@@ -86,8 +85,7 @@ public class PlayerMenu {
                 console.print("Invalid Input");
                 return "Invalid Input";
         }
-
-        return "Success";
+        return "success!";
     }
 
 }

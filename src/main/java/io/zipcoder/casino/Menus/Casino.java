@@ -17,24 +17,9 @@ public class Casino {
             console.println(art.getCasinoArt(CasinoArt.Art.CASINOLOBBY));
             System.out.println(String.format("Welcome to The Notorious B.I.G. 3 Casino, %s!", currentPlayer.getName()));
             Console.displayCasinoMenu();
-            Integer playerInput = getPlayerInput();
+            Integer playerInput = console.getIntegerInput(":");
             casinoMenuLogic(playerInput);
         }
-    }
-
-    public void goToGameMenu(){
-        //GameMenu gameMenu = new GameMenu();
-        //gameMenu.runGameMenu(currentPlayer);
-    }
-
-    public void exitCasino(){
-        console.print("Thank you for visiting The Notorious B.I.G. 3!");
-
-    }
-
-    public Integer getPlayerInput(){
-        Integer playerInput = console.getIntegerInput(":");
-        return playerInput;
     }
 
     public void casinoMenuLogic(Integer playerInput){
@@ -57,6 +42,7 @@ public class Casino {
                 }
                 break;
             case 4:
+                console.println("Thank you for visiting The Notorious B.I.G. 3!");
                 running = false;
                 break;
         }
