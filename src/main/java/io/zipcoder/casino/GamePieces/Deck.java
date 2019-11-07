@@ -22,7 +22,9 @@ public class Deck {
         }
     }
 
-
+    public Integer cardsLeft() {
+        return deck.size();
+    }
 
     public void shuffle(){
         Collections.shuffle(deck);

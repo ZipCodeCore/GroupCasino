@@ -23,8 +23,23 @@ public enum CardValue {
     private CardValue (int value){
         this.value = value;
     }
+
     public int getValue() {
         return value;
+    }
+
+    public String toString() {
+        if (value == 14) {
+            return "ace";
+        } else if (value == 13) {
+            return "king";
+        } else if (value == 12) {
+            return "queen";
+        } else if (value == 11) {
+            return "jack";
+        } else {
+            return value + "";
+        }
     }
 
     private static final Map<Integer, CardValue> intToTypeMap = new HashMap<Integer, CardValue>();

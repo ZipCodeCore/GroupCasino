@@ -12,7 +12,6 @@ import java.util.Random;
 public class GoFish implements Game {
 
     Console console = new Console(System.in, System.out);
-    private Player currentPlayer;
     boolean running = true;
 
     private Deck deck;
@@ -67,35 +66,29 @@ public class GoFish implements Game {
     @Override
     public void runGame(Player currentPlayer) {
 
+        deck = new Deck();
         deck.shuffle();
-
         dealHands();
 
         while (running) {
 
             displayHand(playerHand);
-            displayHand(aiHand);
 
             checkCard(playerGuess(), true);
             checkCard(aiGuess(), false);
 
+            if (deck.cardsLeft().equals(0)) {
+                running = false;
+            }
         }
+
+        checkWinner();
     }
 
     public void displayHand(ArrayList<Card> hand) {
         console.print("Your current hand is ");
         for (Card c : hand) {
-            if (c.getCardValue().equals(CardValue.JACK)) {
-                console.print("Jack ");
-            } else if (c.getCardValue().equals(CardValue.QUEEN)) {
-                console.print("Queen ");
-            } else if (c.getCardValue().equals(CardValue.KING)) {
-                console.print("King ");
-            } else if (c.getCardValue().equals(CardValue.ACE)) {
-                console.print("Ace ");
-            } else {
-                console.print(c.getCardValue().getValue() + " ");
-            }
+            console.print(c.getCardValue().toString() + " ");
         }
         console.newln();
     }
@@ -139,9 +132,9 @@ public class GoFish implements Game {
             removeCard(aiHand, card);
 
             if(isPlayerGuess) {
-                console.print("Good guess, you got a pair!");
+                console.print("Good guess, you got a pair!\n");
             } else {
-                console.print("Your opponent guessed your card!");
+                console.print("Your opponent guessed your card!\n");
             }
 
         } else {
@@ -162,8 +155,11 @@ public class GoFish implements Game {
     public CardValue aiGuess() {
         Random random = new Random();
         Integer guessVal = random.nextInt(aiHand.size());
+        CardValue guess = aiHand.get(guessVal).getCardValue();
 
-        return aiHand.get(guessVal).getCardValue();
+        console.printSlow("Your opponent guesses " + guess + "\n");
+
+        return guess;
     }
 
     public CardValue playerGuess() {
@@ -205,6 +201,16 @@ public class GoFish implements Game {
             }
         }
         return theCard;
+    }
+
+    public void checkWinner() {
+        if (playerPairs > aiPairs) {
+            console.printSlow("You won! with " + playerPairs + " pairs");
+        } else if (playerPairs < aiPairs){
+            console.printSlow("You lost!");
+        } else {
+            console.printSlow("It's a tie!");
+        }
     }
 
     @Override
