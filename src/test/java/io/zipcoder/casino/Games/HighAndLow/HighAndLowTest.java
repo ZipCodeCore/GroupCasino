@@ -1,10 +1,11 @@
 package io.zipcoder.casino.Games.HighAndLow;
 
-import io.zipcoder.casino.Games.HighAndLow.HighAndLow;
-import io.zipcoder.casino.Games.SnakesAndLadders.SnakesAndLadders;
+
 import io.zipcoder.casino.PlayerCreation.Player;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.time.LocalDateTime;
 
 public class HighAndLowTest {
 
@@ -18,15 +19,15 @@ public class HighAndLowTest {
     @Test
     public void secondRollTest(){
         HighAndLow highAndLow = new HighAndLow();
-        Integer actual = highAndLow.firstRoll();
+        Integer actual = highAndLow.secondRoll();
         Assert.assertTrue(actual >= 2 || actual <= 12);
     }
 
-    /*@Test
+    @Test
     public void enoughBalanceTest1(){
         HighAndLow highAndLow = new HighAndLow();
         Player currentPlayer = new Player(null,0);
-        Assert.assertFalse(highAndLow.enoughBalance());
+        Assert.assertFalse(highAndLow.enoughBalance(currentPlayer.getBalance()));
         }
 
 
@@ -34,8 +35,8 @@ public class HighAndLowTest {
     public void enoughBalanceTest2(){
         HighAndLow highAndLow = new HighAndLow();
         Player currentPlayer = new Player(null,Integer.MAX_VALUE);
-        Assert.assertTrue(highAndLow.enoughBalance());
-    }*/
+        Assert.assertTrue(highAndLow.enoughBalance(currentPlayer.getBalance()));
+    }
 
     @Test
     public void returnWinnings1(){
@@ -72,9 +73,92 @@ public class HighAndLowTest {
     }
 
     @Test
-    public void resetGameTest(){
+    public void winOrLose1(){
         HighAndLow highAndLow = new HighAndLow();
-        Boolean didYouBet = highAndLow.resetGame();
-        Assert.assertTrue(didYouBet);
+        Integer firstRoll = 7;
+        Integer secondRoll = 9;
+        String bet = "high";
+        Boolean actual = highAndLow.winOrLose(firstRoll,secondRoll,bet);
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void winOrLose2(){
+        HighAndLow highAndLow = new HighAndLow();
+        Integer firstRoll = 9;
+        Integer secondRoll = 7;
+        String bet = "high";
+        Boolean actual = highAndLow.winOrLose(firstRoll,secondRoll,bet);
+        Assert.assertFalse(actual);
+    }
+
+    @Test
+    public void winOrLose3(){
+        HighAndLow highAndLow = new HighAndLow();
+        Integer firstRoll = 7;
+        Integer secondRoll = 9;
+        String bet = "low";
+        Boolean actual = highAndLow.winOrLose(firstRoll,secondRoll,bet);
+        Assert.assertFalse(actual);
+    }
+
+    @Test
+    public void winOrLose4(){
+        HighAndLow highAndLow = new HighAndLow();
+        Integer firstRoll = 9;
+        Integer secondRoll = 7;
+        String bet = "low";
+        Boolean actual = highAndLow.winOrLose(firstRoll,secondRoll,bet);
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void highOrLowTest1(){
+        HighAndLow highAndLow = new HighAndLow();
+        Integer playerInput = 1;
+        String actual = "high";
+        String expected = highAndLow.highOrLowBet(playerInput);
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void highOrLowTest2(){
+        HighAndLow highAndLow = new HighAndLow();
+        Integer playerInput = 2;
+        String actual = "low";
+        String expected = highAndLow.highOrLowBet(playerInput);
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void secondBetTest1(){
+        HighAndLow highAndLow = new HighAndLow();
+        Integer playerInput = 1;
+        Assert.assertTrue(highAndLow.secondBet(playerInput));
+    }
+
+    @Test
+    public void secondBetTest2(){
+        HighAndLow highAndLow = new HighAndLow();
+        Integer playerInput = 2;
+        Assert.assertFalse(highAndLow.secondBet(playerInput));
+    }
+    @Test
+    public void placeBetTest(){
+        HighAndLow highAndLow = new HighAndLow();
+        Player currentPlayer = new Player(null,500);
+        Integer expected = 490;
+        highAndLow.placeBet(currentPlayer);
+        Integer actual = currentPlayer.getBalance();
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
+    public void placeBetTes2(){
+        HighAndLow highAndLow = new HighAndLow();
+        Player currentPlayer = new Player(null,450);
+        Integer expected = 440;
+        highAndLow.placeBet(currentPlayer);
+        Integer actual = currentPlayer.getBalance();
+        Assert.assertEquals(expected,actual);
     }
 }

@@ -19,11 +19,12 @@ public class Roulette implements Game, GamblingGame {
     private boolean running = true;
     private boolean currentGame = true;
     private Integer pot;
+    private Integer multiplier;
     private Integer spinNum;
     private Integer placeBetInt;
     private boolean isWinner;
     private Boolean isOddEvenGame;
-    private Integer winnings;
+    private Integer totalReturns;
     private CasinoArt art = new CasinoArt();
     public void runRoulette(Player currentPlayer){
         this.currentPlayer = currentPlayer;
@@ -38,14 +39,19 @@ public class Roulette implements Game, GamblingGame {
         console.println("(1) - Play the game");
         console.println("(2) - Return to the game menu");
         Integer playerInput = console.getIntegerInput(":");
+        while (playerInput < 1 || playerInput >2) {
+            console.println("Please pick option 1 or 2 dumbass");
+            playerInput = console.getIntegerInput(":");
+        }
         while (running) {
+
             switch (playerInput) {
                 case 1:
                     runGame(currentPlayer);
                     running = false;
                     break;
                 case 2:
-                    casino.goToGameMenu();
+
                     running = false;
                     break;
             }
@@ -60,7 +66,7 @@ public class Roulette implements Game, GamblingGame {
             playersPick(currentPlayer);
             winningNumber();
             if(isWinner()){
-                returnWinnings(currentPlayer, winnings);
+                returnWinnings(currentPlayer, totalReturns);
             }else {
                 youLose(currentPlayer);
             }
@@ -80,12 +86,16 @@ public class Roulette implements Game, GamblingGame {
         console.println("(1) - Yes");
         console.println("(2) - No");
         Integer playerInput = console.getIntegerInput(":");
+        while (playerInput < 1 || playerInput >2){
+            console.println("Please pick option 1 or 2 dumbass");
+            playerInput = console.getIntegerInput(":");
+        }
         switch (playerInput) {
             case 1:
                 runGame(currentPlayer);
                 break;
             case 2:
-                casino.goToGameMenu();
+//                casino.goToGameMenu();
                 running = false;
                 break;
         }
@@ -103,6 +113,10 @@ public class Roulette implements Game, GamblingGame {
         console.println(("(1) - Would you like to pick a number?"));
         console.println("(2) - Pick Odd or Even");
         Integer playerInput = console.getIntegerInput(":");
+        while (playerInput < 1 || playerInput > 2 ){
+            console.println("Please pick option 1 or 2 dumbass");
+            playerInput = console.getIntegerInput(":");
+        }
         switch (playerInput) {
             case 1:
                 playerBetInt(playerInput);
@@ -110,6 +124,7 @@ public class Roulette implements Game, GamblingGame {
             case 2:
                 playerBetOddEven(playerInput);
                 break;
+
 
         }
 
@@ -124,6 +139,7 @@ public class Roulette implements Game, GamblingGame {
             playerBet = console.getIntegerInput(":");
         }
         placeBetInt = playerBet;
+        multiplier = 6;
         return playerBet;
     }
 
@@ -143,6 +159,7 @@ public class Roulette implements Game, GamblingGame {
 
 
         }
+        multiplier = 2;
     }
 
     public Integer winningNumber (){
@@ -163,21 +180,49 @@ public class Roulette implements Game, GamblingGame {
     @Override
     public void returnWinnings(Player currentPlayer, Integer winnings) {
         if (isWinner()) {
-            winnings = pot * 2;
-            console.println("Congrats maybe you don't suck I'll give you "+ winnings);
+            totalReturns = pot * multiplier;
+            console.println("Congrats maybe you don't suck I'll give you $"+ totalReturns);
+            //Need to change "totalReturns in line 172 to reflect player balance
+            currentPlayer.changeBalance(totalReturns);
+            console.println("Your new balance is : $" + currentPlayer.getBalance());
             LocalDateTime now = LocalDateTime.now();
-            String addHistory = String.format("You won $%d.00 at Roulette! ** ", winnings);
+            String addHistory = String.format("You won $%d.00 at Roulette! ** ", totalReturns);
             currentPlayer.addHistory(addHistory + dtf.format(now));
-            currentPlayer.changeBalance(winnings);
 
         }
 
     }
 
     public boolean youLose(Player currentPlayer) {
-        console.println("You suck");
+        totalReturns = -pot;
+        console.println("You suck and you should feel bad. You lost: $" + totalReturns);
+        currentPlayer.changeBalance(totalReturns);
+        console.println("Your new balance is : $" + currentPlayer.getBalance());
+        LocalDateTime now = LocalDateTime.now();
+        String addHistory = String.format("You lost $%d.00 at Roulette! ** ", totalReturns);
+        currentPlayer.addHistory(addHistory + dtf.format(now));
         return true;
     }
+
+    public void setPot(Integer pot) {
+        this.pot = pot;
+    }
+
+    public void setMultiplier(Integer multiplier) {
+        this.multiplier = multiplier;
+    }
+
+    public void setSpinNum(Integer spinNum) {
+        this.spinNum = spinNum;
+    }
+
+    public void setPlaceBetInt(Integer placeBetInt) {
+        this.placeBetInt = placeBetInt;
+    }
+    public void setOddEvenGame(Boolean oddEvenGame) {
+        isOddEvenGame = oddEvenGame;
+    }
+
 }
 
 

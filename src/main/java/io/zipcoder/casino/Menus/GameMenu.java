@@ -14,7 +14,6 @@ import io.zipcoder.casino.utilities.Console;
 
 public class GameMenu {
     private Console console = new Console(System.in, System.out);
-    private Integer playerInput;
     private Player currentPlayer;
     private CasinoArt art = new CasinoArt();
     private boolean running = true;
@@ -25,14 +24,9 @@ public class GameMenu {
             Console.clearScreen();
             console.println(art.getCasinoArt(CasinoArt.Art.GAMEMENU));
             Console.displayGameMenu();
-            Integer playerInput = getPlayerInput();
+            Integer playerInput = console.getIntegerInput(":");
             gameMenuLogic(playerInput);
         }
-    }
-
-    public Integer getPlayerInput(){
-        this.playerInput = console.getIntegerInput(":");
-        return playerInput;
     }
 
     public String gameMenuLogic(Integer playerInput){
@@ -59,9 +53,10 @@ public class GameMenu {
                 roulette.runRoulette(currentPlayer);
                 return "You would be playing Roulette now.";
             case 6:
+
                 Slots slots = new Slots();
                 slots.runSlots(currentPlayer);
-                return "You would be playing SlotMachine now";
+                return "You would be playing Slots now";
             case 7:
                 HighAndLow highAndLow = new HighAndLow();
                 highAndLow.runHighOrLow(currentPlayer);
@@ -69,7 +64,6 @@ public class GameMenu {
             case 8:
                 running = false;
                 break;
-// shouldn't we be calling casino menu here?
         }
         return null;
     }
