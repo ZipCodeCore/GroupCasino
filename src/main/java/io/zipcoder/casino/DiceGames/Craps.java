@@ -42,13 +42,13 @@ public class Craps implements GamblingGame {
 
         turn = 0;
         continuePlay = true;
-        console.println("Welcome to Craps!");
+        console.println(checkForChips());
         promptUserForWagerAmount();
         createDice();
 
         do {
-            crapsRoll();
-            console.print(evaluateRoll());
+            console.println(crapsRoll());
+            console.println(evaluateRoll());
             turn++;
         }
         while (continuePlay == true);
@@ -58,16 +58,24 @@ public class Craps implements GamblingGame {
 
     }
 
+    public String checkForChips(){
+        if (crapsPlayer.getBalance() < 10){return "You need at least $10.00 to play";}
+        else {return "Welcome to Craps!";}
+    }
+
 
 
     public String crapsRoll() {
+
         console.getStringInput("Press enter to roll.");
-        for (Dice s : this.crapsDice) {
-            s.rollDice();
-        }
+
+        for (Dice s : this.crapsDice) { s.rollDice(); }
         sum = crapsDice[0].getValue() + crapsDice[1].getValue();
 
-        return "You rolled a " + sum;
+        String roll = "You rolled a " + sum;
+        String target ="        Target Roll: " + targetScore;
+
+        return (turn == 0) ? roll : roll + target;
     }
 
 
@@ -136,6 +144,5 @@ public class Craps implements GamblingGame {
 
     }
 
-    public void distributeWinnings() { }
 
 }
