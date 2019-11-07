@@ -40,6 +40,7 @@ public class MainMenu implements Menu {
     @Override
     public void displayMenu() {
         console.clearScreen();
+
         console.println("      .======================================.\n" +
                 "      | ___ ___ ___               _   _   _  |\n" +
                 "      | \\_/ \\_/ \\_/ C|||C|||C||| |-| |-| |-| |\n" +
