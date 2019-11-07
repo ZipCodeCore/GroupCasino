@@ -42,7 +42,7 @@ public class Craps implements GamblingGame {
 
         turn = 0;
         continuePlay = true;
-        console.println("Welcome to Craps!");
+        console.println(checkForChips());
         promptUserForWagerAmount();
         createDice();
 
@@ -56,6 +56,11 @@ public class Craps implements GamblingGame {
         crapsPlayer.resetPot();
         promptLeaveGame();
 
+    }
+
+    public String checkForChips(){
+        if (crapsPlayer.getBalance() < 10){return "You need at least $10.00 to play";}
+        else {return "Welcome to Craps!";}
     }
 
 
@@ -139,6 +144,5 @@ public class Craps implements GamblingGame {
 
     }
 
-    public void distributeWinnings() { }
 
 }

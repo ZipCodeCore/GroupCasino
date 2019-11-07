@@ -13,6 +13,7 @@ public class GamblingPlayer implements io.zipcoder.casino.Interfaces.GamblingPla
 
     public Boolean placeWager(double wagerAmount) {
         if (gambler.balance < wagerAmount) { return false; }
+        else if ( wagerAmount < 0 ) { return false;}
         else {
             gambler.balance -= wagerAmount;
             this.pot += wagerAmount;
