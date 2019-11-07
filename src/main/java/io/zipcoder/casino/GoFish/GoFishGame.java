@@ -69,7 +69,7 @@ public class GoFishGame extends CardGame implements Game {
     }
 
     public CardSet integrateStolenCards(ArrayList<Card> stolenCards, CardSet hand) {
-        System.out.println("SUCCESSFULLY TOOK " + stolenCards.size() + stolenCards.get(0) + " CARDS");
+        System.out.println("SUCCESSFULLY TOOK " + stolenCards.size() + " " + stolenCards.get(0).getRank() + "'S");
         hand.addCards(stolenCards);
         return hand;
     }
@@ -107,7 +107,6 @@ public class GoFishGame extends CardGame implements Game {
         //announceWinner(winStatus);
         emptyHandDraw(playerUpCards);
 
-
         console.clearScreen();
         displayStatus();
         String cardChoice = playerUp.chooseCard(playerUpCards);
@@ -140,9 +139,9 @@ public class GoFishGame extends CardGame implements Game {
 
     public GoFishPlayer checkForWin(GoFishPlayer playerUp, GoFishPlayer nextPlayer, CardSet playerUpSuites, CardSet nextPlayerSuites) {
 
-        if (playerUpSuites.size() == 7) {
+        if (playerUpSuites.size() >= 7) {
             return playerUp;
-        } else if (nextPlayerSuites.size() == 7) {
+        } else if (nextPlayerSuites.size() >= 7) {
             return nextPlayer;
         } else {
             return null;
@@ -170,6 +169,26 @@ public class GoFishGame extends CardGame implements Game {
 
     public GoFishNPC getOpponent() {
         return opponent;
+    }
+
+    public CardSet getShoe() {
+        return shoe;
+    }
+
+    public CardSet getPlayersCards() {
+        return playersCards;
+    }
+
+    public CardSet getOpponentsCards() {
+        return opponentsCards;
+    }
+
+    public CardSet getPlayerSuites() {
+        return playerSuites;
+    }
+
+    public CardSet getOpponentSuites() {
+        return opponentSuites;
     }
 
     public void displayStatus() {
