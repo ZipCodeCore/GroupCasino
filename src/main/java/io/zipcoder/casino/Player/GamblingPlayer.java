@@ -11,23 +11,21 @@ public class GamblingPlayer implements io.zipcoder.casino.Interfaces.GamblingPla
         this.gambler = user;
     }
 
-    public Double getPot() {
-        return pot;
-    }
-
     public Boolean placeWager(double wagerAmount) {
-        if (gambler.balance < wagerAmount) {
-            return false;
-        } else {
+        if (gambler.balance < wagerAmount) { return false; }
+        else {
             gambler.balance -= wagerAmount;
             this.pot += wagerAmount;
             return true;
         }
     }
 
-    public void getWinnings() {
-        gambler.balance += pot * 2;
-    }
+    public void getWinnings() { gambler.balance += pot * 2; }
+
+    public String getPot() { return "Congratulations, your payout is $" + pot * 2; }
+
+    public void resetPot() { pot = 0.0;}
 
     public Double getBalance(){return gambler.balance;}
+
 }
