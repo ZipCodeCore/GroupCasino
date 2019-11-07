@@ -35,6 +35,10 @@ public class Slots implements Game, GamblingGame {
         console.println("(1) - Play the game");
         console.println("(2) - Return to the game menu");
         Integer playerInput = console.getIntegerInput(":");
+        while (playerInput < 1 || playerInput >2) {
+            console.println("Please pick option 1 or 2 dumbass");
+            playerInput = console.getIntegerInput(":");
+        }
         while (running) {
             switch (playerInput) {
                 case 1:
@@ -72,6 +76,11 @@ public class Slots implements Game, GamblingGame {
         console.println("(1) - Yes");
         console.println("(2) - No");
         Integer playerInput = console.getIntegerInput(":");
+        while (playerInput < 1 || playerInput >2) {
+            console.println("Please pick option 1 or 2 dumbass");
+            playerInput = console.getIntegerInput(":");
+        }
+
         switch (playerInput) {
             case 1:
                 runGame(currentPlayer);
