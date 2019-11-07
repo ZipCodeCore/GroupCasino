@@ -55,6 +55,7 @@ public class BlackJack implements Game, GamblingGame {
     public void runGame(Player currentplayer) {
 
         while(running = true){
+            winner = null;
 
             console.println("Welcome to BlackJack! Let's begin!");
 
@@ -68,6 +69,7 @@ public class BlackJack implements Game, GamblingGame {
             placeBet(currentPlayer);
 
             houseWin();
+            if (winner == null){
 
             viewDealerHand();
             viewCurrentHand();
@@ -81,6 +83,9 @@ public class BlackJack implements Game, GamblingGame {
             checksWinner();
 
             exitGame(currentPlayer);
+            } else {
+                exitGame(currentPlayer);
+            }
         }
 
     }
@@ -276,7 +281,7 @@ public class BlackJack implements Game, GamblingGame {
                 break;
             case 2:
                 //approachTable(currentPlayer);
-                alsoRunning = false;
+
                 running = false;
 
                 break;
@@ -288,26 +293,26 @@ public class BlackJack implements Game, GamblingGame {
         Integer value = checkHand(dealerHand);
         Integer counter = 2;
 
-        while (value < 18) {
+
 
             if (value == 16 || value == 17) {
                 //dealer cheat method
             } else if (value >= 18 && value <= 21 && dealerHand[5] != null) {
                 console.println("Dealer Chose to stay");
-                break;
+
             } else if (value <= 21 && dealerHand[5] != null) {
                 console.println("Unlucky... \nThe Dealer wins with Special Five");
                 isLoser();
-                break;
+
             } else if (value <= 15) {
                 dealerHand[counter] = deck.draw();
                 counter++;
-                break;
+
             } else if (value > 21) {
                 console.println("Dealer Bust...");
-                break;
+
             }
-        }
+
 
 
 
