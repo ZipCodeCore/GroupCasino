@@ -29,6 +29,8 @@ public class GoFishGame extends CardGame implements Game {
     private CardSet opponentSuites;
     private Music goFishMusic = null;
     private String actingPlayer;
+    Card cardChoice;
+
 
     public GoFishGame(Player player) {
         this.player = new GoFishPlayer(player);
@@ -108,6 +110,7 @@ public class GoFishGame extends CardGame implements Game {
             console.clearScreen();
             displayStatus();
             cardChoice = playerUp.chooseCard(playerUpCards);
+            actingPlayer = playerUp.getPlayer().getFirstName();
         }
         if (cardChoice != "N") {
             ArrayList<Card> stolenCards = nextPlayerCards.removeRank(cardChoice);
@@ -222,8 +225,8 @@ public class GoFishGame extends CardGame implements Game {
         console.println(displayPlayerSuites());
         console.println(displayPlayerHands());
     }
-    public String displayPreviousTurn(GoFishPlayer playerUp, GoFishPlayer nextPlayer){
-        return "*******************************************************************\n"+ nextPlayer.getPlayer().getFirstName()+ " Asked for ";
+    public String displayPreviousTurn(){
+        return "*******************************************************************\n"+ actingPlayer + " Asked for " + cardChoice.toString() +".  Received " ;
     }
     public String displayPlayerSuites() {
         return "************************* PLAYER'S SUITES *************************\n" + playerSuites.toASCIISuite() + "\n";
