@@ -59,9 +59,10 @@ public class GameMenu {
                 roulette.runRoulette(currentPlayer);
                 return "You would be playing Roulette now.";
             case 6:
+
                 Slots slots = new Slots();
                 slots.runSlots(currentPlayer);
-                return "You would be playing SlotMachine now";
+                return "You would be playing Slots now";
             case 7:
                 HighAndLow highAndLow = new HighAndLow();
                 highAndLow.runHighOrLow(currentPlayer);

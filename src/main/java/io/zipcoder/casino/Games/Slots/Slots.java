@@ -24,7 +24,6 @@ public class Slots implements Game, GamblingGame {
     private Boolean currentGame  = true;
     private Integer pot;
     private Integer placeBet;
-    private Boolean isWinner;
     private Integer winnings;
 
 
@@ -78,7 +77,7 @@ public class Slots implements Game, GamblingGame {
                 runGame(currentPlayer);
                 break;
             case 2:
-                casino.goToGameMenu();
+                //casino.goToGameMenu();
                 running = false;
                 break;
         }
@@ -134,20 +133,23 @@ public class Slots implements Game, GamblingGame {
     }
 
     public void returnWinnings(Player currentPlayer){
-        if(isWinner){
-            winnings = pot * 2;
-            console.println("Congrats KWEEN! You won: "+ winnings);
+            winnings = pot * 50;
+            console.println("Congrats KWEEN! You won: $"+ winnings);
             LocalDateTime now = LocalDateTime.now();
             String addHistory = String.format("You won $%d.00 at Slots! ** ", winnings);
             currentPlayer.addHistory(addHistory + dtf.format(now));
             currentPlayer.changeBalance(winnings);
-        }
-
-
     }
 
     public boolean youLose(Player currentPlayer) {
         console.println("Better luck next time!");
+        winnings = pot * -1;
+        currentPlayer.changeBalance(winnings);
+        console.println("Your current balance is: " + currentPlayer.getBalance());
+        LocalDateTime now = LocalDateTime.now();
+        String addHistory = String.format("You lost $%d.00 at Slots! ** ", winnings);
+        currentPlayer.addHistory(addHistory + dtf.format(now));
+
         return true;
     }
 }
