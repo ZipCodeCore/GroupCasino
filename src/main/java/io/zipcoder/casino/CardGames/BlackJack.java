@@ -50,18 +50,17 @@ public class BlackJack implements GamblingGame {
     }
 
     public void playBlackJack() {
+        promptUserForWagerAmount();
         initializeBlackJackHands();
         checkInitialHandValue(gamblingPlayerHand);
         checkHandForAces(gamblingPlayerHand);
 
-//        playerHasBlackJack = (playerRefactoredHandValue == 21);
-//        dealerHasBlackJack = (dealerRefactoredHandValue == 21);
-//        playerAndDealerHaveBlackJack = (playerHasBlackJack && dealerHasBlackJack);
-
-        refactorAndCalculateHandValue(checkInitialHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
+        playerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
         checkInitialHandValue(computerHand);
         checkHandForAces(computerHand);
-        refactorAndCalculateHandValue(checkInitialHandValue(computerHand), checkHandForAces(computerHand));
+        dealerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(computerHand), checkHandForAces(computerHand));
+
+        input.println(gamblingPlayerHand.displayHand());
 
     }
 
@@ -128,25 +127,6 @@ public class BlackJack implements GamblingGame {
         }
         return refactoredHandValue;
     }
-
-//    public Integer playerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
-//    public Integer dealerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(computerHand), checkHandForAces(computerHand));
-//
-//    public boolean playerHasBlackJack = playerRefactoredHandValue == 21;
-//    public boolean dealerHasBlackJack = dealerRefactoredHandValue == 21;
-//    public boolean playerAndDealerHaveBlackJack = playerHasBlackJack && dealerHasBlackJack;
-//    public boolean playerBust = playerRefactoredHandValue > 21;
-//    public boolean dealerBust = dealerRefactoredHandValue > 21;
-//    public boolean playerWin = !playerBust && playerRefactoredHandValue > dealerRefactoredHandValue;
-//    public boolean dealerWin = !dealerBust && dealerRefactoredHandValue > playerRefactoredHandValue;
-//    public boolean playerDealerPush = playerBust && dealerBust || playerRefactoredHandValue == dealerRefactoredHandValue;
-
-
-//    public void displayPostInitialFlopWinner() {
-//        if(playerHasBlackJack && !dealerHasBlackJack)   {
-//            input.getIntegerInput();
-//
-//    }
 
 
     public Integer displayScore() {
@@ -231,6 +211,21 @@ public class BlackJack implements GamblingGame {
     }};
 
 
+//    public boolean playerHasBlackJack = playerRefactoredHandValue == 21;
+//    public boolean dealerHasBlackJack = dealerRefactoredHandValue == 21;
+//    public boolean playerAndDealerHaveBlackJack = playerHasBlackJack && dealerHasBlackJack;
+//    public boolean playerBust = playerRefactoredHandValue > 21;
+//    public boolean dealerBust = dealerRefactoredHandValue > 21;
+//    public boolean playerWin = !playerBust && playerRefactoredHandValue > dealerRefactoredHandValue;
+//    public boolean dealerWin = !dealerBust && dealerRefactoredHandValue > playerRefactoredHandValue;
+//    public boolean playerDealerPush = playerBust && dealerBust || playerRefactoredHandValue == dealerRefactoredHandValue;
+
+
+//    public void displayPostInitialFlopWinner() {
+//        if(playerHasBlackJack && !dealerHasBlackJack)   {
+//            input.getIntegerInput();
+//
+//    }
 }
 
 
