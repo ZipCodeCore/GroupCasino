@@ -81,6 +81,10 @@ public class Roulette implements Game, GamblingGame {
         console.println("(1) - Yes");
         console.println("(2) - No");
         Integer playerInput = console.getIntegerInput(":");
+        while (playerInput < 1 || playerInput >2){
+            console.println("Please pick option 1 or 2 dumbass");
+            playerInput = console.getIntegerInput(":");
+        }
         switch (playerInput) {
             case 1:
                 runGame(currentPlayer);
@@ -104,6 +108,10 @@ public class Roulette implements Game, GamblingGame {
         console.println(("(1) - Would you like to pick a number?"));
         console.println("(2) - Pick Odd or Even");
         Integer playerInput = console.getIntegerInput(":");
+        while (playerInput < 1 || playerInput > 2 ){
+            console.println("Please pick option 1 or 2 dumbass");
+            playerInput = console.getIntegerInput(":");
+        }
         switch (playerInput) {
             case 1:
                 playerBetInt(playerInput);
@@ -111,6 +119,7 @@ public class Roulette implements Game, GamblingGame {
             case 2:
                 playerBetOddEven(playerInput);
                 break;
+
 
         }
 
@@ -180,7 +189,7 @@ public class Roulette implements Game, GamblingGame {
     }
 
     public boolean youLose(Player currentPlayer) {
-        totalReturns = pot;
+        totalReturns = -pot;
         console.println("You suck and you should feel bad. You lost: $" + totalReturns);
         currentPlayer.changeBalance(totalReturns);
         console.println("Your new balance is : $" + currentPlayer.getBalance());

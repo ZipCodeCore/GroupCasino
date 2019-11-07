@@ -52,9 +52,6 @@ public class SnakesAndLadders implements Game {
                 case 3:
                     running = false;
                     break;
-                default:
-                    console.println("Please enter a proper value");
-                    break;
             }
         }
     }
