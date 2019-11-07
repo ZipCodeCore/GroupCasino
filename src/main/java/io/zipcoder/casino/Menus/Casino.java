@@ -5,10 +5,8 @@ import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Utility.Music;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Casino {
 
@@ -48,26 +46,33 @@ public class Casino {
         Thread inputThread = new Thread(new Runnable() {
             @Override
             public void run() {
-
-                Scanner scan = new Scanner(System.in);
-                String input = "";
-                while (true) {
-
-                    input = scan.nextLine();
-                    if (!input.equals("")) {
-                        return;
-                    }
-                }
+                console.getInput("");
+                return;
             }
         });
 
         inputThread.start();
 
-        console.printWithDelays("\nYou had a really long day at work and decide to take the edge off by visiting the local casino.\n",20,1200);
-        console.printWithDelays("\"Maybe if I win some big bucks I'll get out of this boring job of mine,\" you think to yourself. \n",20,1200);
-        console.printWithDelays("The same thought always crosses your mind when passing by the big neon sign embroidered with flashing poker chips.\n",20,1200);
-        console.printWithDelays("But tonight is a little different... \n" + "\n" + "\n",20,1200);
-        console.printWithDelays("Tonight you're feeling lucky. \uD83C\uDF40" + "\n" + "\n" + "\n" + "\n",20,1200);
+        String[] lines = new String[] {
+                "\nYou had a really long day at work and decide to take the edge off by visiting the local casino.\n",
+                "\"Maybe if I win some big bucks I'll get out of this boring job of mine,\" you think to yourself. \n",
+                "The same thought always crosses your mind when passing by the big neon sign embroidered with flashing poker chips.\n",
+                "But tonight is a little different... \n\n\n",
+                "Tonight you're feeling lucky. \uD83C\uDF40\n\n\n\n",
+        };
+
+        for (String line : lines) {
+            for (char letter : line.toCharArray()){
+                if (inputThread.isAlive()) {
+                    console.print(Character.toString(letter));
+                    console.sleep(20);
+                }
+            }
+            if (inputThread.isAlive()) {
+                console.sleep(1200);
+            }
+        }
+
         console.printWithDelays("------------------------------------------------------------------------------------------------------------------------------\n",5);
         console.printWithDelays("       ,----,.                                                                                                              \n" +
                 "     ,'   ,' |                                                                                          ,--.     ,----..    \n" +
