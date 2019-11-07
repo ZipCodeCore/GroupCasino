@@ -1,8 +1,10 @@
 package io.zipcoder.casino.CardGames;
 
+import java.util.HashMap;
+
 public enum Rank {
 
-    ACE,
+
     TWO,
     THREE,
     FOUR,
@@ -12,8 +14,13 @@ public enum Rank {
     EIGHT,
     NINE,
     TEN,
+    ACE,
     JACK,
     QUEEN,
     KING;
+
+
+
+
 
 }
