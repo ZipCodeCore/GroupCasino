@@ -90,7 +90,13 @@ public class BlackJack implements GamblingGame {
         this.card = card;
     }
     public void startGame() {
+        input.println(checkForChips());
         playBlackJack();
+    }
+
+    public String checkForChips(){
+        if (gamblingPlayer.getBalance() < 10){return "You need at least $10.00 to play";}
+        else {return "Welcome to BlackJack!";}
     }
 
     public void playBlackJack() {
@@ -106,6 +112,7 @@ public class BlackJack implements GamblingGame {
 
 
     public void promptUserForWagerAmount() {
+
         double userWagerAmount = input.getDoubleInput("How much would you like to wager?");
         boolean wagerAmountSuccessful = gamblingPlayer.placeWager(userWagerAmount);
         while (!wagerAmountSuccessful) {
@@ -245,8 +252,7 @@ public class BlackJack implements GamblingGame {
     public void stay() {
     }
 
-    public void distributeWinnings() {
-    }
+
 
     public void checkCardValue(Card firstCard, Card secondCard) {
     }
