@@ -45,7 +45,7 @@ public class CardTest {
         card.setSuit(expected);
 
 
-        Assert.assertEquals(expected,card.getCardValue());
+        Assert.assertEquals(expected,card.getSuit());
     }
 
     @Test
@@ -59,5 +59,11 @@ public class CardTest {
 
     @Test
     public void setCardValue() {
+        Card card = new Card(null,null);
+        CardValue expected = CardValue.TWO;
+        card.setCardValue(expected);
+
+
+        Assert.assertEquals(expected,card.getCardValue());
     }
 }
