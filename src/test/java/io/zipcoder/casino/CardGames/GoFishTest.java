@@ -1,17 +1,15 @@
 package io.zipcoder.casino.CardGames;
 
 import io.zipcoder.casino.Player.Player;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
+import java.util.logging.Logger;
 
 public class GoFishTest {
 
+    private static final Logger LOGGER = Logger.getLogger(GoFishTest.class.getName());
 
     @Test
     public void game() {
@@ -119,5 +117,10 @@ public class GoFishTest {
 
     @Test
     public void getCompCard() {
+        Player testPlayer = new Player("V","B");
+        GoFish testGame = new GoFish(testPlayer);
+
+        Rank testCard = testGame.getCompCard();
+        LOGGER.info("Card drawn: " + testCard.toString());
     }
 }
