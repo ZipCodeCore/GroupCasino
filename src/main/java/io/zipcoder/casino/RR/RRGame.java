@@ -6,12 +6,17 @@ import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Interfaces.Game;
+import io.zipcoder.casino.Utility.Music;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 
 public class RRGame extends DiceGame implements Game {
     public static void main(String[] args) throws InterruptedException {
         Player rrPlayer = new Player("Grace","Bunde",23,500);
         RRGame rrGame = new RRGame(rrPlayer);
+
         rrGame.startPlay();
     }
 
@@ -20,6 +25,9 @@ public class RRGame extends DiceGame implements Game {
     private Integer userDieNum = 0;
     private GameServices gameServices = new GameServices();
     private Player player;
+    Music rouletteMusic = null;
+    Music bang = null;
+    Music elFin = null;
 
 
     public RRGame(Player player) {
@@ -32,6 +40,14 @@ public class RRGame extends DiceGame implements Game {
 
     @Override
     public void startPlay() throws InterruptedException {
+        try {
+            io.zipcoder.casino.Utility.Music.filePath = "src/music/(Roulette) Kirby Star Allies Music.wav";
+            rouletteMusic = new io.zipcoder.casino.Utility.Music();
+            rouletteMusic.play();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
         // store menu
         RRMenu rrMenu = new RRMenu(this);
         rrMenu.displayMenu();
@@ -44,6 +60,15 @@ public class RRGame extends DiceGame implements Game {
         String endChoiceInput = console.getInput(("\n[DEALER]: You have finished this Russian Roulette Game.\n[DEALER]: Would you like to play again? (Y/N)\n"));
 
         if (endChoiceInput.toUpperCase().equals("N")) {
+            try {
+                rouletteMusic.stop();
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            }
             console.printWithDelays("\n[DEALER]: Have a good rest of your day.\n");
             console.sleep(1200);
 
@@ -51,7 +76,6 @@ public class RRGame extends DiceGame implements Game {
         } else if (endChoiceInput.toUpperCase().equals("Y")) {
 
             console.clearScreen();
-
             roundOfPlay();
 
         } else {
@@ -69,12 +93,21 @@ public class RRGame extends DiceGame implements Game {
 
         console.println(String.format("\n** You rolled %d **\n\n------------------------------------------------------", userDieNum));
         if (userDieNum.equals(computerRoll)) {
+            try {
+                rouletteMusic.stop();
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            }
             gameServices.wager(player.getBalance(),player);
-            console.println("You Lost!!!");
+            console.println("\nYou Lost!!!");
             console.sleep(2000);
             console.clearScreen();
-            console.printWithDelays("[DEALER]: Don't you know how Russian Roulette works?",100);
-            console.sleep(1000);
+            console.printWithDelays("[DEALER]: Don't you know how Russian Roulette works?\n\n",80);
+            console.sleep(1500);
 
             console.printWithDelays("                                  \n\n\n" +
                     "   )                               /=>\n" +
@@ -90,8 +123,35 @@ public class RRGame extends DiceGame implements Game {
                     "      Bang!                     .'/       |\n" +
                     "                               .:/        |\n" +
                     "                               :/_________|", 2);
+            try {
+                io.zipcoder.casino.Utility.Music.filePath = "src/music/(bang) sound effect.wav";
+                bang = new io.zipcoder.casino.Utility.Music();
+                bang.play();
+            } catch (Exception ex) {
+                System.out.println("Error with playing sound.");
+                ex.printStackTrace();
+            }
             console.sleep(1000);
+            try {
+                bang.stop();
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            }
+            console.sleep(1000);
+
             console.clearScreen();
+            try {
+                io.zipcoder.casino.Utility.Music.filePath = "src/music/(el fin) Super Mario Bros. - Game Over Sound Effect.wav";
+                elFin = new io.zipcoder.casino.Utility.Music();
+                elFin.play();
+            } catch (Exception ex) {
+                System.out.println("Error with playing sound.");
+                ex.printStackTrace();
+            }
             console.printWithDelays("   ,ggggggg,             ,gggggggggggggg                  \n" +
                     " ,dP\"\"\"\"\"\"Y8b ,dPYb,    dP\"\"\"\"\"\"88\"\"\"\"\"\"                  \n" +
                     " d8'    a  Y8 IP'`Yb    Yb,_    88                        \n" +
@@ -101,8 +161,17 @@ public class RRGame extends DiceGame implements Game {
                     "d8\"           I8dP              88      88   ,8\" \"8P\" \"8, \n" +
                     "Y8,           I8P         gg,   88      88   I8   8I   8I \n" +
                     "`Yba,,_____, ,d8b,_        \"Yb,,8P    _,88,_,dP   8I   Yb,\n" +
-                    "  `\"Y8888888 8P'\"Y88         \"Y8P'    8P\"\"Y88P'   8I   `Y8\n\n\n\n",2);
-            console.sleep(2000);
+                    "  `\"Y8888888 8P'\"Y88         \"Y8P'    8P\"\"Y88P'   8I   `Y8\n\n\n\n",3);
+            console.sleep(3000);
+            try {
+                elFin.stop();
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            }
             System.exit(0);
 
         }
