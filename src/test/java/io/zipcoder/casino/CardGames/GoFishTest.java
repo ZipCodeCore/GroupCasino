@@ -88,6 +88,33 @@ public class GoFishTest {
 
     @Test
     public void checkIfWinner() {
+        boolean result = false;
+        Player testPlayer = new Player("V","B");
+        GoFish testWinner = new GoFish(testPlayer);
+        Card cardOne = new Card(Suit.HEARTS,Rank.KING);
+        Card cardTwo = new Card(Suit.CLUBS,Rank.KING);
+        Card cardThree = new Card(Suit.DIAMONDS,Rank.KING);
+        Card cardFour = new Card(Suit.SPADES,Rank.KING);
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(cardOne);
+        cards.add(cardTwo);
+        cards.add(cardThree);
+        cards.add(cardFour);
+        CardHand testHand = new CardHand(cards);
+
+        result = testWinner.checkIfWinner(testHand);
+        Assert.assertTrue(result);
+
+        // ************
+
+        cards.remove(0);
+
+        cardOne  = new Card(Suit.HEARTS, Rank.FIVE);
+        cards.add(cardOne);
+        testHand = new CardHand(cards);
+        result = testWinner.checkIfWinner(testHand);
+
+        Assert.assertFalse(result);
     }
 
     @Test
