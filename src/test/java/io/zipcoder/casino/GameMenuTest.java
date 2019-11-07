@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class GameMenuTest {
 
-    @Test
+    /*@Test
     public void gameMenuLogicTest1() {
         GameMenu gameMenu = new GameMenu();
         String expected = "You would be playing Blackjack now.";
@@ -31,5 +31,5 @@ public class GameMenuTest {
         String actual = gameMenu.gameMenuLogic(1);
 
         Assert.assertEquals(expected, actual);
-    }
+    }*/
 }
