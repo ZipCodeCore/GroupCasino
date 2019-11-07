@@ -193,8 +193,6 @@ public class GoFishGameTest {
     }
     @Test
     public void scanForSuitesTest(){
-        playersCards = new CardSet(0);
-        opponentCards = new CardSet(0);
         playersCards.addCard(new Card("A","C"));
         playersCards.addCard(new Card("A","H"));
         playersCards.addCard(new Card("A","D"));
@@ -204,7 +202,7 @@ public class GoFishGameTest {
         playersCards.addCard(new Card("5","H"));
 
         int testHand = playersCards.size();
-        //goFishGame.scanForSuites();
+        goFishGame.scanForSuites(playersCards, playerSuites, "A");
         int postScanHand = playersCards.size();
         System.out.println(playersCards.getCards().get(0).toString());
         Assert.assertEquals(testHand-4,postScanHand);
