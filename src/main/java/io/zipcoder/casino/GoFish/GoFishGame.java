@@ -109,7 +109,7 @@ public class GoFishGame extends CardGame implements Game {
             displayStatus();
             cardChoice = playerUp.chooseCard(playerUpCards);
         }
-        if (cardChoice != "N") {
+        if (!cardChoice.equals("N") && winStatus == null) {
             ArrayList<Card> stolenCards = nextPlayerCards.removeRank(cardChoice);
 
             if (stolenCards.size() > 0) { // successfully took from opponent

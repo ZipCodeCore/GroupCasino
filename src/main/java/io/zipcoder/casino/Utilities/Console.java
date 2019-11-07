@@ -35,13 +35,13 @@ public final class Console {
 
     public String getCardRankInput(String prompt) {
         print(prompt);
-        String input = getInput("Choose a card to take (2-10,J,Q,K,A): ").toUpperCase();
+        String input = getInput("Choose a card to take (2-10,J,Q,K,A), or N to quit: ").toUpperCase();
         while (true) {
             if (cardCheck(input) || input.equals("N")) break;
             else {
-                printWithDelays("Invalid card rank");
+                printWithDelays("Invalid card rank\n");
                 print(prompt);
-                input = getInput("Choose a card: ");
+                input = getCardRankInput("");
             }
 
         }
