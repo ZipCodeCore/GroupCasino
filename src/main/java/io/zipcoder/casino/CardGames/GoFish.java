@@ -52,13 +52,12 @@ public class GoFish implements Game {
             playerTurn();
 
             winGame = checkIfWinner(playerHand);
+
             if (winGame){
                 newConsole.println("\n" + player.getID() + " is the winner with : \n");
                 displayResults();
                 break;
             }
-
-
 
             newConsole.println("Computer's Turn \n\n");
             computerTurn();
@@ -246,9 +245,8 @@ public class GoFish implements Game {
 
     public void displayResults() {
 
-
         newConsole.println(winnings.toString().replace("[", "").replace("]", "")
-                .replace(", ", ""));
+                                        .replace(", ", ""));
 
     }
 
