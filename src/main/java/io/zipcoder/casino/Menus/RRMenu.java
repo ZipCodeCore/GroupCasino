@@ -11,7 +11,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import io.zipcoder.casino.Utility.Music;
+
 
 
 public class RRMenu implements Menu {
@@ -20,17 +20,10 @@ public class RRMenu implements Menu {
     private String name = "Russian Roulette Dice Menu";
     private RRGame rrGame;
     private Player player;
-    Music rouletteMusic = null;
+
 
     public RRMenu(RRGame rrGame) {
-        try {
-            io.zipcoder.casino.Utility.Music.filePath = "src/music/(Roulette) Kirby Star Allies Music.wav";
-            rouletteMusic = new io.zipcoder.casino.Utility.Music();
-            rouletteMusic.play();
-        } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace();
-        }
+
         this.console = new Console(System.in, System.out);
         this.rrGame = rrGame;
     }
@@ -46,7 +39,7 @@ public class RRMenu implements Menu {
 
 
     @Override
-    public void displayMenu() throws InterruptedException {
+    public void displayMenu() {
 
         console.clearScreen();
 
@@ -58,21 +51,14 @@ public class RRMenu implements Menu {
                 "██║  ██║╚██████╔╝███████║███████║██║██║  ██║██║ ╚████║    ██║  ██║╚██████╔╝╚██████╔╝███████╗███████╗   ██║      ██║   ███████╗\n" +
                 "╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝   ╚═╝      ╚═╝   ╚══════╝\n" +
                 "                                                                                                                              \n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("Welcome To Russian Roulette!\n\n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("- First the House will roll a die\n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("- Your bet will be your ENTIRE balance\n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("- Next, you will roll a die:\n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("- If your roll DOES NOT match the House's roll, your balance is DOUBLED!\n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("- If your roll matches the house......You lose all your balance.\n\n");
-        TimeUnit.SECONDS.sleep(1);
-        console.printWithDelays("Are you willing to risk it all to win it all?\n\n");
-        TimeUnit.SECONDS.sleep(2);
+        console.sleep(1000);
+        console.printWithDelays("Welcome To Russian Roulette!\n\n", 20, 1000);
+        console.printWithDelays("- First the House will roll a die\n", 20, 1000);
+        console.printWithDelays("- Your bet will be your ENTIRE balance\n", 20, 1000);
+        console.printWithDelays("- Next, you will roll a die:\n", 20, 1000);
+        console.printWithDelays("- If your roll DOES NOT match the House's roll, your balance is DOUBLED!\n", 20, 1000);
+        console.printWithDelays("- If your roll matches the house......You lose all your balance.\n\n", 20, 1000);
+        console.printWithDelays("Are you willing to risk it all to win it all?\n\n", 20, 2000);
 
         console.println(DiceGame.diceToASCII());
         int choice = console.getInteger("(Press 1 to play or 2 to exit):\n\n");
@@ -87,28 +73,12 @@ public class RRMenu implements Menu {
                 play = true;
                 console.clearScreen();
                 rrGame.roundOfPlay();
-                try {
-                    rouletteMusic.stop();
-                } catch (UnsupportedAudioFileException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (LineUnavailableException e) {
-                    e.printStackTrace();
-                }
+
              break;
 
             case 2:
                 play = false;
-                try {
-                    rouletteMusic.stop();
-                } catch (UnsupportedAudioFileException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (LineUnavailableException e) {
-                    e.printStackTrace();
-                }
+
         }
 
     }

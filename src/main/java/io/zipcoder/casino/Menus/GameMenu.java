@@ -49,7 +49,7 @@ public class GameMenu implements Menu {
             mainMusic = new Music();
             mainMusic.play();
         } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
+            System.out.println("Error playing sound.");
             ex.printStackTrace();
         }
         console.clearScreen();
@@ -73,23 +73,16 @@ public class GameMenu implements Menu {
             console.println(String.format("%d: %s", gameNum, ((GameObject) gameMap.get(gameNum)).getName()));
         }
 
-        try {
-            handleChoice(console.menuChoice(gameMap.size()));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        handleChoice(console.menuChoice(gameMap.size()));
+
         displayMenu();
     }
 
     @Override
-    public void handleChoice(int choice) throws InterruptedException {
+    public void handleChoice(int choice) {
         try {
             mainMusic.stop();
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (LineUnavailableException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         gameMap.get(choice).startPlay();

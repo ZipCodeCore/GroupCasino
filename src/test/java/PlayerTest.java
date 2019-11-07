@@ -85,6 +85,18 @@ public class PlayerTest {
     }
 
     @Test
+    public void getWinnings() {
+        // Given
+        Player testPlayer = new Player("John", "Doe", 52, 327.0);
+        testPlayer.setWinnings(650.0);
+        Double expected = 650.0;
+
+        // Then
+        Double actual = testPlayer.getWinnings();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void setFirstName() {
         // Given
         Player testPlayer = new Player("John", "Doe", 52, 327.0);
@@ -139,10 +151,5 @@ public class PlayerTest {
         Double actual = testPlayer.getBalance();
         Assert.assertEquals(expected, actual);
     }
-
-    @Test
-    public void deposit() {
-    }
-
 
 }

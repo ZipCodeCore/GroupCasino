@@ -285,6 +285,7 @@ public class CrapsGame extends DiceGame implements Game {
 
     public Integer getDie2Point() {
         return die2Point;
+
     }
 
     public void setDie2Point(Integer die2Point) {

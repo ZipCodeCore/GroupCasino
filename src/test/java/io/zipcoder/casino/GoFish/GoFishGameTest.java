@@ -107,13 +107,13 @@ public class GoFishGameTest {
         int actual = playersCards.size();
         int expected = 0;
         Assert.assertEquals(expected, actual);
-        goFishGame.drawCard(playersCards);
+        goFishGame.emptyHandDraw(playersCards);
         actual = playersCards.size();
         expected = 1;
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+/*    @Test
     public void winCheckTest1() {
         for (int i = 0; i < 6; i++ ) {
             playerSuites.addCard(new Card("A", "H"));
@@ -162,8 +162,8 @@ public class GoFishGameTest {
         }
         GoFishPlayer expected = goFishPlayer;
         GoFishPlayer actual = goFishGame.checkForWin(goFishPlayer, goFishNPC, playerSuites, opponentSuites);
-        Assert.assertEquals(expected, actual);
-    }
+        Assert.assertEquals(expected, actual);*/
+
 
     @Test
     public void npcPickACardTest(){
@@ -193,8 +193,6 @@ public class GoFishGameTest {
     }
     @Test
     public void scanForSuitesTest(){
-        playersCards = new CardSet(0);
-        opponentCards = new CardSet(0);
         playersCards.addCard(new Card("A","C"));
         playersCards.addCard(new Card("A","H"));
         playersCards.addCard(new Card("A","D"));
@@ -204,15 +202,66 @@ public class GoFishGameTest {
         playersCards.addCard(new Card("5","H"));
 
         int testHand = playersCards.size();
-        //goFishGame.scanForSuites();
+        goFishGame.scanForSuites(playersCards, playerSuites, "A");
         int postScanHand = playersCards.size();
         System.out.println(playersCards.getCards().get(0).toString());
         Assert.assertEquals(testHand-4,postScanHand);
 
-
-
-
-
     }
 
+    @Test
+    public void showPlayerSuitesTest() {
+        playerSuites.addCard(new Card("A", "H"));
+        CardSet set = new CardSet(0);
+        set.addCard(new Card("A", "H"));
+
+        String expected = "************************* PLAYER'S SUITES *************************\n" + set.toASCIISuite() + "\n";
+        String actual = goFishGame.displayPlayerSuites();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void showOpponentSuitesTest() {
+        opponentSuites.addCard(new Card("J", "D"));
+        CardSet set = new CardSet(0);
+        set.addCard(new Card("J", "D"));
+
+        String expected = "************************ OPPONENT'S SUITES ************************\n" + set.toASCIISuite() + "\n";
+        String actual = goFishGame.displayOpponentSuites();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void showPlayerHandTest() {
+        playersCards.addCard(new Card("A", "H"));
+        playersCards.addCard(new Card("9", "S"));
+        playersCards.addCard(new Card("2", "C"));
+        CardSet set = new CardSet(0);
+        set.addCard(new Card("A", "H"));
+        set.addCard(new Card("9", "S"));
+        set.addCard(new Card("2", "C"));
+
+        String expected = "************************** PLAYER'S HAND **************************\n" + set.toASCII() + "\n";
+        String actual = goFishGame.displayPlayerHands();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void showOpponentHandTest() {
+        opponentCards.addCard(new Card("A", "H"));
+        opponentCards.addCard(new Card("9", "S"));
+        opponentCards.addCard(new Card("2", "C"));
+        CardSet set = new CardSet(0);
+        set.addCard(new Card("A", "H"));
+        set.addCard(new Card("9", "S"));
+        set.addCard(new Card("2", "C"));
+
+        String expected = "************************* OPPONENT'S HAND *************************\n" + set.toASCIIBlank() + "\n";
+        String actual = goFishGame.displayOpponentHands();
+
+        Assert.assertEquals(expected, actual);
+    }
 }

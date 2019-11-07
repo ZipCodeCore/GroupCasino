@@ -46,7 +46,6 @@ public class Music
     {
         //start the clip
         clip.start();
-
         status = "play";
     }
 
