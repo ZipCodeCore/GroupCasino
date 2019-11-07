@@ -96,7 +96,7 @@ public class BlackJack implements GamblingGame {
     }
 
     public String checkForChips(){
-        if (gamblingPlayer.getBalance() < 10){return "You need at least $10.00 to play";}
+        if (gamblingPlayer.getBalance() < 10){return "You need at least $10.00 to play\n";}
         else {return "Welcome to BlackJack!";}
     }
 

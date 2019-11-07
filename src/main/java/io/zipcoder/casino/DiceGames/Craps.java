@@ -60,7 +60,7 @@ public class Craps implements GamblingGame {
     }
 
     public String checkForChips(){
-        if (crapsPlayer.getBalance() < 10){return "You need at least $10.00 to play";}
+        if (crapsPlayer.getBalance() < 10){return "You need at least $10.00 to play\n";}
         else {return "Welcome to Craps!";}
     }
 
@@ -73,8 +73,8 @@ public class Craps implements GamblingGame {
         for (Dice s : this.crapsDice) { s.rollDice(); }
         sum = crapsDice[0].getValue() + crapsDice[1].getValue();
 
-        String roll = "You rolled a " + sum;
-        String target ="        Target Roll: " + targetScore;
+        String roll = "You rolled a " + sum + "\n";
+        String target ="      |  Target Roll: " + targetScore;
 
         return (turn == 0) ? roll : roll + target;
     }
@@ -88,16 +88,16 @@ public class Craps implements GamblingGame {
 
             if (sum == 7 || sum == 11) {
                 crapsPlayer.getWinnings();
-                msg = "Winner Winner, Chicken Dinner!\n" + crapsPlayer.getPot();
+                msg = "Winner Winner, Chicken Dinner!\n" + crapsPlayer.getPot() + "\n";
                 //console.println("Winner Winner, Chicken Dinner! " );
                 continuePlay = false;
             } else if (sum == 2 || sum == 3 || sum == 12) {
-                msg = "You've Crapped out!!";
+                msg = "You've Crapped out!!" + "\n";
                 //console.println("You've Crapped out!!");
                 continuePlay = false;
             } else {
                 targetScore = sum;
-                msg = "Your Target Score is " + targetScore;
+                msg = "Your Target Score is " + targetScore + "\n";
                 //console.println( "Your Target Score is " + targetScore);
             }
 
@@ -109,7 +109,7 @@ public class Craps implements GamblingGame {
                 continuePlay = false;
             } else if (sum == targetScore) {
                 crapsPlayer.getWinnings();
-                msg = "Winner Winner, Chicken Dinner!\n" + crapsPlayer.getPot();
+                msg = "Winner Winner, Chicken Dinner!\n" + crapsPlayer.getPot() + "\n";
                 //console.println("Winner Winner, Chicken Dinner! " );
                 //console.println("Congratulations, your payout is $" + crapsPlayer.getPot());
                 continuePlay = false;
@@ -135,7 +135,7 @@ public class Craps implements GamblingGame {
 
     public void promptLeaveGame() {
 
-        int userInput = console.getIntegerInput("Your balance is " + crapsPlayer.getBalance() + "\nDo you want to play again? \n" +
+        int userInput = console.getIntegerInput("Your balance is " + crapsPlayer.getBalance() + "\n\nDo you want to play again? \n" +
                 "1. Yes\n" + "2. No");
 
         if (userInput == 1) {
