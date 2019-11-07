@@ -47,4 +47,14 @@ public class PlayerRepositoryTest {
 
         Assert.assertTrue(repository.addPlayer(cyan));
     }
+
+    @Test
+    public void constructorTest(){
+        PlayerRepository repository = new PlayerRepository();
+        Player cyan = new Player("Cyan", null);
+        repository.addPlayer(cyan);
+
+
+        Assert.assertFalse(repository.addPlayer(cyan));
+    }
 }
