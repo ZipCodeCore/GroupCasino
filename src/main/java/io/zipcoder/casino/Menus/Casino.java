@@ -8,6 +8,7 @@ import io.zipcoder.casino.Utility.Music;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Casino {
 
@@ -44,6 +45,24 @@ public class Casino {
 
 
     public static void prologue() {
+        Thread inputThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                Scanner scan = new Scanner(System.in);
+                String input = "";
+                while (true) {
+
+                    input = scan.nextLine();
+                    if (!input.equals("")) {
+                        return;
+                    }
+                }
+            }
+        });
+
+        inputThread.start();
+
         console.printWithDelays("\nYou had a really long day at work and decide to take the edge off by visiting the local casino.\n",20,1200);
         console.printWithDelays("\"Maybe if I win some big bucks I'll get out of this boring job of mine,\" you think to yourself. \n",20,1200);
         console.printWithDelays("The same thought always crosses your mind when passing by the big neon sign embroidered with flashing poker chips.\n",20,1200);
