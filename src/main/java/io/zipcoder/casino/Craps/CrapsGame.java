@@ -20,7 +20,6 @@ public class CrapsGame extends DiceGame implements Game {
         CrapsGame crapsGame = new CrapsGame(10.00,50.00,player);
         crapsGame.startPlay();
     }
-
     private String name = "Craps";
     private double minBet;
     private double maxBet;
@@ -261,6 +260,10 @@ public class CrapsGame extends DiceGame implements Game {
 
     public void loseOnSubsequentMessage () {
         console.println(String.format("It appears that the odds were not in your favor today. Better luck next time.....\n-------------------------------------------------\n\n"));
+    }
+
+    public String getName() {
+        return name;
     }
 }
 
