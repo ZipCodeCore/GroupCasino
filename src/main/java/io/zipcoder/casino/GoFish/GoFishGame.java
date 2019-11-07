@@ -11,8 +11,7 @@ import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
+
 
 public class GoFishGame extends CardGame implements Game {
 
@@ -42,12 +41,10 @@ public class GoFishGame extends CardGame implements Game {
 
     public static void main(String[] args) { // for testing
         Player player = new Player("Lem", "Jukes", 23, 300.00);
-        CardSet shoe = new CardSet(1);
-        CardSet playersCards = new CardSet(0);
-        CardSet opponentCards = new CardSet(0);
         GoFishGame goFishGame = new GoFishGame(player);
         goFishGame.startPlay();
     }
+
     //populates player deals hands
     public void startPlay() {
         new GoFishMenu(this).displayMenu();
@@ -64,29 +61,35 @@ public class GoFishGame extends CardGame implements Game {
     }
 
     public void initialDeal() {
+        shoe.shuffle();
         for (int i = 0; i < 7; i++) {
             this.playersCards.addCard(this.shoe.removeFirstCard());
             this.opponentsCards.addCard(this.shoe.removeFirstCard());
         }
     }
 
-
-    public CardSet integrateStolenCards (ArrayList<Card> stolenCards, CardSet hand) {
-        System.out.println("SUCCESSFULLY TOOK " + stolenCards.size() + stolenCards.get(0) + " CARDS");
+    public CardSet integrateStolenCards(ArrayList<Card> stolenCards, CardSet hand) {
+        System.out.println("SUCCESSFULLY TOOK " + stolenCards.size() + " " + stolenCards.get(0).getRank() + "'S");
         hand.addCards(stolenCards);
         return hand;
     }
 
     public Card drawCard(CardSet hand) {
         console.println("OoOoOoO  GO FISH!  OoOoOoO");
-        Card fishedCard = this.shoe.removeFirstCard();
+        Card fishedCard = shoe.removeFirstCard();
         hand.addCard(fishedCard);
         hand.sort();
         return fishedCard;
     }
 
+    public void emptyHandDraw(CardSet hand) {
+        if (hand.size() <= 0) {
+            hand.addCard(shoe.removeFirstCard());
+        }
+    }
+
     public boolean scanForSuites(CardSet hand, CardSet currentPlayerSuites, String rankToCheck) {
-        ArrayList<Card>suiteChecker = hand.removeRank(rankToCheck);
+        ArrayList<Card> suiteChecker = hand.removeRank(rankToCheck);
         if (suiteChecker.size() == 4) {
             console.println("NEW SUITE: " + suiteChecker.get(0));
             currentPlayerSuites.addCard(suiteChecker.get(0));
@@ -100,6 +103,11 @@ public class GoFishGame extends CardGame implements Game {
 
     public void turn(GoFishPlayer playerUp, GoFishPlayer nextPlayer, CardSet playerUpCards, CardSet nextPlayerCards, CardSet playerUpSuites, CardSet nextPlayerSuites) {
         // TODO: check for win, cause it to drop through the end of the method
+        GoFishPlayer winStatus = checkForWin(playerUp, nextPlayer, playerUpCards, nextPlayerCards);
+        //announceWinner(winStatus);
+        emptyHandDraw(playerUpCards);
+
+        console.clearScreen();
         displayStatus();
         String cardChoice = playerUp.chooseCard(playerUpCards);
         ArrayList<Card> stolenCards = nextPlayerCards.removeRank(cardChoice);
@@ -115,8 +123,8 @@ public class GoFishGame extends CardGame implements Game {
                 //scan and get another turn
                 scanForSuites(playerUpCards, playerUpSuites, cardChoice);
                 turn(playerUp, nextPlayer, playerUpCards, nextPlayerCards, playerUpSuites, nextPlayerSuites);
-            } else { // did not draw requested card
-                if (scanForSuites(playerUpCards, playerUpSuites, cardChoice)) { // ...got a suite from it, though
+            } else { // did not draw
+                if (scanForSuites(playerUpCards, playerUpSuites, fishedCard.getRank())) { // ...got a suite from it, though
                     // go again
                     turn(playerUp, nextPlayer, playerUpCards, nextPlayerCards, playerUpSuites, nextPlayerSuites);
                 } else { // everything failed
@@ -129,152 +137,94 @@ public class GoFishGame extends CardGame implements Game {
 
     }
 
-//    public String playerTurn(GoFishPlayer player) {
-//        displayStatus();
-//        String cardChoice = console.getCardRankInput("");
-//        ArrayList<Card> stolenCards = opponentsCards.removeRank(cardChoice);
-//
-//        if (stolenCards.size() > 0) {
-//            String cardCheck = cardChoice;
-//            System.out.println("YOU HAVE SUCCESSFULLY TAKEN " + stolenCards.size() + stolenCards.get(0) + " FROM THE OPPONENT");
-//            playersCards.addCards(stolenCards);
-//            scanForPlayerSuites(cardCheck);
-//            playerTurn(player);
-//
-//        } else {
-//            console.println("OoOoOoO  GO FISH!  OoOoOoO");
-//            Card fishedCard = this.shoe.removeFirstCard();
-//            playersCards.addCard(fishedCard);
-//            if (fishedCard.toString().equals(cardChoice)){
-//            scanForPlayerSuites(fishedCard.toString());
-//            playerTurn(player);
-//            } else {
-//                int suiteSuccess = playerSuites.size();
-//                scanForPlayerSuites(fishedCard.toString());
-//                if (suiteSuccess < playerSuites.size()){
-//                    playerTurn(player);
-//                } else {
-//                    opponentTurn();
-//                }
-//            }
-//        }
-//
-//        return null;
-//    }
-//    public void opponentTurn() {
-//
-//        console.clearScreen();
-//        displayStatus();
-//        console.println("**** IT'S YOUR OPPONENTS TURN! ****"+ "\n" +"\n" +this.opponent.getPlayer()+" IS MAKING THEIR SELECTION..."+"\n "+"\n "+"\n");
-//        String npcChoice = npcPickACard();
-//        ArrayList<Card> npcStolenCards = playersCards.removeRank(npcChoice);
-//        if (npcStolenCards.size()>0){
-//            String npcCardCheck = npcChoice;
-//            System.out.println("YOU HAVE SUCCESSFULLY TAKEN " + npcStolenCards.size() + npcStolenCards.get(0) + " FROM THE OPPONENT");
-//            opponentsCards.addCards(npcStolenCards);
-//            scanForPlayerSuites(npcCardCheck);
-//            opponentTurn();
-//
-//        } else {
-//            console.println("OoOoOoO  GO FISH!  OoOoOoO");
-//            Card npcFishedCard = this.shoe.removeFirstCard();
-//            opponentsCards.addCard(npcFishedCard);
-//            if (npcFishedCard.toString().equals(npcChoice)){
-//                scanForPlayerSuites(npcFishedCard.toString());
-//                opponentTurn();
-//            } else {
-//                int npcSuiteSuccess = opponentSuites.size();
-//                scanForPlayerSuites(npcFishedCard.toString());
-//                if (npcSuiteSuccess < opponentSuites.size()){
-//                    opponentTurn();
-//                } else {
-//                    playerTurn(player);
-//                }
-//            }
-//        }
-//
-//
-//
-//
-//    }
+    public GoFishPlayer checkForWin(GoFishPlayer playerUp, GoFishPlayer nextPlayer, CardSet playerUpSuites, CardSet nextPlayerSuites) {
 
-//    public String npcPickACard() {
-//        Random rng = new Random();
-//        ArrayList<Card> cardPicker = new ArrayList<>();
-//        Set<Card> cardFilter = new TreeSet<>();
-//        for (Card i : opponentsCards.getCards())
-//            cardFilter.add(i);
-//        cardPicker.addAll(cardFilter);
-//        String pickedCard = cardPicker.get(rng.nextInt(cardPicker.size())).getRank();
-//        return pickedCard;
-//    }
-
-    public void roundOfPlay() {
+        if (playerUpSuites.size() >= 7) {
+            return playerUp;
+        } else if (nextPlayerSuites.size() >= 7) {
+            return nextPlayer;
+        } else {
+            return null;
+        }
     }
 
-//    public String checkForPlayerWin() {
-//        if (playerSuites.size() >= 7) {
-//            console.println("YOU WIN!");
-//        }
-//        return playerTurn(player);
-//    }
-//    public String checkForOpponentWin() {
-//        if (opponentSuites.size() >= 7) {
-//            console.println("YOU LOOOOOOOOOOOSE!");
-//        }
-//        return playerTurn(player);
-//    }
+    public void announceWinner(GoFishPlayer winner) {
+        if (winner != null) {
+            console.printWithDelays(winner.getPlayer().getFirstName() + " IS THE WINNER!!!!!!!!! \n");
+        }
+    }
 
 
     //Option to quit game or play another round
     public void endChoice() {
     }
+
     public String getName() {
         return name;
     }
+
     public GoFishPlayer getPlayer() {
         return player;
     }
+
     public GoFishNPC getOpponent() {
         return opponent;
     }
+
+    public CardSet getShoe() {
+        return shoe;
+    }
+
+    public CardSet getPlayersCards() {
+        return playersCards;
+    }
+
+    public CardSet getOpponentsCards() {
+        return opponentsCards;
+    }
+
+    public CardSet getPlayerSuites() {
+        return playerSuites;
+    }
+
+    public CardSet getOpponentSuites() {
+        return opponentSuites;
+    }
+
     public void displayStatus() {
+        goTitleScreen();
         playersCards.sort();
         playerSuites.sort();
-        displaySuite();
+        displayOpponentHands();
+        displayOpponentSuite();
+        displayPlayerSuite();
         displayPlayerHands();
     }
-//    public void scanForPlayerSuites(String selectCard) {
-//        ArrayList<Card>suiteChecker = playersCards.removeRank(selectCard);
-//        if (suiteChecker.size() == 4) {
-//            console.println("YOU SUCCESSFULLY MADE A SUITE OF " + suiteChecker.get(0));
-//            playerSuites.addCard(suiteChecker.get(0));
-//            ;
-//        } else {
-//            playersCards.addCards(suiteChecker);
-//        }
-//        playersCards.sort();
-//    }
 
-    public void displaySuite() {
-        console.println("************************ PLAYER'S SUITES ************************\n" + playerSuites.toASCIISuite() + "\n" + "*****************************************************************");
-    }
-    public void displayPlayerHands(){
-        console.println("************************* PLAYER'S HAND *************************\n" + playersCards.toASCII() + "\n" + "*****************************************************************");
+    public void displayPlayerSuite() {
+        console.println("************************* PLAYER'S SUITES *************************\n" + playerSuites.toASCIISuite() + "\n");
     }
 
-
+    public void displayPlayerHands() {
+        console.println("************************** PLAYER'S HAND **************************\n" + playersCards.toASCII() + "\n");
     }
-/*    public void checkShoe() {
-        if (this.shoe == null || this.shoe.size() < this.numDecks * 26) {
-            this.shoe = getNewShoe();
-        }
+
+    public void displayOpponentHands() {
+        console.println("************************* OPPONENT'S HAND *************************\n" + opponentsCards.toASCIIBlank() + "\n");
     }
-    public CardSet getNewShoe() {
-        CardSet newShoe = new CardSet(this.numDecks);
-        newShoe.shuffle();
-        return newShoe;
-    }*/
 
+    public void displayOpponentSuite() {
+        console.println("************************ OPPONENT'S SUITES ************************\n" + opponentSuites.toASCIISuite() + "\n");
+    }
 
-
+    public void goTitleScreen() {
+        console.println("\n   >===>                         >=>                      \n" +
+                " >>    >=>                     >>     >>          >=>      \n" +
+                ">=>            >=>           >=>> >>       >===>  >=>      \n" +
+                ">=>          >=>  >=>          >=>   >=>  >=>     >=>>=>   \n" +
+                ">=>   >===> >=>    >=>         >=>   >=>   >==>   >=>  >=> \n" +
+                " >=>    >>   >=>  >=>          >=>   >=>     >=>  >>   >=> \n" +
+                "  >====>       >=>             >=>   >=>  >=>>=>  >=>  >=> \n" +
+                "                                                          \n");
+    }
+}

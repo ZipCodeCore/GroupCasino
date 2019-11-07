@@ -20,7 +20,6 @@ public class CrapsGame extends DiceGame implements Game {
         CrapsGame crapsGame = new CrapsGame(10.00,50.00,player);
         crapsGame.startPlay();
     }
-
     private String name = "Craps";
     private double minBet;
     private double maxBet;
@@ -59,15 +58,7 @@ public class CrapsGame extends DiceGame implements Game {
         new CrapsMenu(this).displayMenu();
 
         roundOfPlay();
-        try {
-            crapsMusic.stop();
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        }
+
         endChoice();
     }
 
@@ -153,6 +144,15 @@ public class CrapsGame extends DiceGame implements Game {
     public void endChoice() {
         String endChoiceInput = console.getInput("\n[CROUPIER]: You have finished this game of Craps.\n\nWould you like to play again? (Y/N)\n");
         if (endChoiceInput.toUpperCase().equals("N")) {
+            try {
+                crapsMusic.stop();
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            }
             console.println("\n[CROUPIER]: Have a good rest of your day.\n");
             //also, return to the main menu
         } else if (endChoiceInput.toUpperCase().equals("Y")) {
@@ -283,6 +283,10 @@ public class CrapsGame extends DiceGame implements Game {
 
     public void setDie2Point(Integer die2Point) {
         this.die2Point = die2Point;
+    }
+
+    public String getName() {
+        return name;
     }
 }
 

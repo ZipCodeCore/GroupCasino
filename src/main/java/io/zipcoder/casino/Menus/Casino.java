@@ -2,6 +2,7 @@ package io.zipcoder.casino.Menus;
 
 
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Utility.Music;
 
@@ -90,6 +91,9 @@ public class Casino {
         return new Player(firstName, lastName, age, 0.0);
     }
 
+    public static void rouletteEnding(){
+
+    }
 
     public static void displayEnding(Player player)  {
         Music losingHorn = null;
@@ -155,8 +159,8 @@ public class Casino {
                 losingHorn.play();
                 TimeUnit.SECONDS.sleep(2);
                 losingHorn.stop();
-                console.printWithDelays("\nScore! You ended up bagging (insert their initial balance - current balance).\n" +
-                        "You head home with some pep in your step and even treat yourself to a scrumptious meal.\n", TimeUnit.MILLISECONDS, 50);
+                console.printWithDelays(("\nScore! You ended up bagging (insert their initial balance - current balance).\n" +
+                        "You head home with some pep in your step and even treat yourself to a scrumptious meal.\n"), TimeUnit.MILLISECONDS, 50);
                 TimeUnit.SECONDS.sleep(3);
             } catch (Exception ex) {
                 System.out.println("Error with playing sound.");
