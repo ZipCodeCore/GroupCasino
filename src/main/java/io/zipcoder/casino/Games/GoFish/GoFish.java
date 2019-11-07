@@ -111,7 +111,7 @@ public class GoFish implements Game {
                 checkBook(aiHand, false);
                 console.printSlow("Hit enter to continue\n");
                 console.print("--------------------------------------------------------------");
-                console.println(" Your opponent has " + playerPairs + " books");
+                console.println(" Your opponent has " + aiPairs + " books");
                 console.getStringInput("");
             }
         }
