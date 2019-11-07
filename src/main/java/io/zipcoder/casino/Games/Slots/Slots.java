@@ -153,4 +153,24 @@ public class Slots implements Game, GamblingGame {
 
         return true;
     }
+
+    public void setRunning(Boolean running) {
+        this.running = running;
+    }
+
+    public void setCurrentGame(Boolean currentGame) {
+        this.currentGame = currentGame;
+    }
+
+    public void setPot(Integer pot) {
+        this.pot = pot;
+    }
+
+    public void setPlaceBet(Integer placeBet) {
+        this.placeBet = placeBet;
+    }
+
+    public void setWinnings(Integer winnings) {
+        this.winnings = winnings;
+    }
 }
