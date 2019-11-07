@@ -39,15 +39,18 @@ public class Roulette implements Game, GamblingGame {
         console.println("(1) - Play the game");
         console.println("(2) - Return to the game menu");
         Integer playerInput = console.getIntegerInput(":");
+        while (playerInput < 1 || playerInput >2) {
+            console.println("Please pick option 1 or 2 dumbass");
+            playerInput = console.getIntegerInput(":");
+        }
         while (running) {
+
             switch (playerInput) {
                 case 1:
                     runGame(currentPlayer);
                     running = false;
                     break;
                 case 2:
-
-
 
                     running = false;
                     break;
@@ -200,6 +203,26 @@ public class Roulette implements Game, GamblingGame {
         currentPlayer.addHistory(addHistory + dtf.format(now));
         return true;
     }
+
+    public void setPot(Integer pot) {
+        this.pot = pot;
+    }
+
+    public void setMultiplier(Integer multiplier) {
+        this.multiplier = multiplier;
+    }
+
+    public void setSpinNum(Integer spinNum) {
+        this.spinNum = spinNum;
+    }
+
+    public void setPlaceBetInt(Integer placeBetInt) {
+        this.placeBetInt = placeBetInt;
+    }
+    public void setOddEvenGame(Boolean oddEvenGame) {
+        isOddEvenGame = oddEvenGame;
+    }
+
 }
 
 
