@@ -41,6 +41,8 @@ public class BlackJack implements Game, GamblingGame {
     private Integer totalEarnings = 0;
 
     public void runBlackJack(Player currentPlayer) {
+        alsoRunning = true;
+        running = true;
         this.currentPlayer = currentPlayer;
         approachTable(currentPlayer);
     }
@@ -51,7 +53,8 @@ public class BlackJack implements Game, GamblingGame {
 
     @Override
     public void runGame(Player currentplayer) {
-        while(alsoRunning){
+
+        while(running = true){
 
             console.println("Welcome to BlackJack! Let's begin!");
 
@@ -105,13 +108,12 @@ public class BlackJack implements Game, GamblingGame {
 
                     break;
                 case 3:
-                    //casino.goToGameMenu();
+
                     alsoRunning = false;
 
                     break;
             }
         }
-
     }
 
 
@@ -132,7 +134,7 @@ public class BlackJack implements Game, GamblingGame {
         }
     }
     @Override
-    public void returnWinnings(Player currentPlayer) {
+    public void returnWinnings(Player currentPlayer, Integer results) {
 
     }
     public void viewCurrentHand(){
@@ -264,17 +266,19 @@ public class BlackJack implements Game, GamblingGame {
         console.println("(1) - Yes");
         console.println("(2) - No");
 
+
         Integer playerInput = console.getIntegerInput(":");
         switch (playerInput) {
             case 1:
                // Card[] playerHand = playerHand[6];
                 runGame(currentPlayer);
-                alsoRunning = false;
+
                 break;
             case 2:
                 //approachTable(currentPlayer);
                 alsoRunning = false;
                 running = false;
+
                 break;
 
         }

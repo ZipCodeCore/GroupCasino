@@ -47,17 +47,20 @@ public class SnakesAndLadders implements Game {
                     running = false;
                     break;
                 case 2:
-                    showRules();
+                    console.println(showRules());
                     break;
                 case 3:
                     running = false;
+                    break;
+                default:
+                    console.println("Please enter a proper value");
                     break;
             }
         }
     }
 
-    public void showRules () {
-        console.println(text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.RULES));
+    public String showRules () {
+        return text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.RULES);
     }
 
     @Override
@@ -196,7 +199,6 @@ public class SnakesAndLadders implements Game {
                     aiPiece.setCurrentPosition(newPosition);
                 }
                 snakeSound.play();
-                playerPiece.setCurrentPosition(newPosition);
                 return newPosition;
             } else if (position < newPosition) {
                 if(isPlayer) {

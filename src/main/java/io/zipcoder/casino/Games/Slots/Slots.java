@@ -48,7 +48,6 @@ public class Slots implements Game, GamblingGame {
                     break;
             }
         }
-
     }
 
     public void runSlots(Player currentPlayer){
@@ -88,6 +87,11 @@ public class Slots implements Game, GamblingGame {
     public void placeBet(Player currentPlayer){
         console.println("How much would you like to bet?");
         pot = console.getIntegerInput(":");
+    }
+
+    @Override
+    public void returnWinnings(Player currentPlayer, Integer bet) {
+
     }
 
     public void pullLever(){
