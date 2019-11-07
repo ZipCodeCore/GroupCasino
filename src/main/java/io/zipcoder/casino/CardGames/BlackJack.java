@@ -91,6 +91,7 @@ public class BlackJack implements GamblingGame {
     }
     public void startGame() {
         input.println(checkForChips());
+        if (gamblingPlayer.getBalance() < 10) { return; }
         playBlackJack();
     }
 
