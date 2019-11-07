@@ -206,27 +206,28 @@ public class GoFishGame extends CardGame implements Game {
         goTitleScreen();
         playersCards.sort();
         playerSuites.sort();
-        displayOpponentHands();
-        displayOpponentSuite();
-        displayPlayerSuite();
-        displayPlayerHands();
+        console.println(displayOpponentHands());
+        console.println(displayOpponentSuites());
+        console.println(displayPlayerSuites());
+        console.println(displayPlayerHands());
     }
-    public int displayPlayerSuite() {
-        console.println("************************* PLAYER'S SUITES *************************\n" + playerSuites.toASCIISuite() + "\n");
-        return playerSuites.size();
+
+    public String displayPlayerSuites() {
+        return "************************* PLAYER'S SUITES *************************\n" + playerSuites.toASCIISuite() + "\n";
     }
-    public int displayPlayerHands() {
-        console.println("************************** PLAYER'S HAND **************************\n" + playersCards.toASCII() + "\n");
-        return playersCards.size();
+
+    public String displayPlayerHands() {
+        return "************************** PLAYER'S HAND **************************\n" + playersCards.toASCII() + "\n";
     }
-    public int displayOpponentHands() {
-        console.println("************************* OPPONENT'S HAND *************************\n" + opponentsCards.toASCIIBlank() + "\n");
-        return opponentsCards.size();
+
+    public String displayOpponentHands() {
+        return "************************* OPPONENT'S HAND *************************\n" + opponentsCards.toASCIIBlank() + "\n";
     }
-    public int displayOpponentSuite() {
-        console.println("************************ OPPONENT'S SUITES ************************\n" + opponentSuites.toASCIISuite() + "\n");
-        return opponentSuites.size();
+
+    public String displayOpponentSuites() {
+        return "************************ OPPONENT'S SUITES ************************\n" + opponentSuites.toASCIISuite() + "\n";
     }
+
     public String goTitleScreen() {
         console.println("\n   >===>                         >=>                      \n" +
                 " >>    >=>                     >>     >>          >=>      \n" +
