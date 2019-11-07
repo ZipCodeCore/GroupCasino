@@ -6,6 +6,8 @@ import io.zipcoder.casino.Games.GamblingGame;
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.Console;
+import io.zipcoder.casino.utilities.Sound;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
@@ -20,8 +22,19 @@ public class HighAndLow implements Game, GamblingGame {
     private CasinoArt art = new CasinoArt();
     private boolean running = true;
     private boolean didYouBet = true;
+    private Sound spendSound;
+    private Sound moneySound;
+    private Sound loseSound;
+    private Sound diceSound;
+    private Sound winSound;
+
 
     public void runHighOrLow(Player currentPlayer) {
+        spendSound = new Sound("spend_money.wav");
+        moneySound = new Sound("win_money.wav");
+        loseSound = new Sound("wahwah.wav");
+        diceSound = new Sound("dice_roll.wav");
+        winSound = new Sound("win_Sound.wav");
         this.currentPlayer = currentPlayer;
         approachTable(currentPlayer);
     }
@@ -57,27 +70,45 @@ public class HighAndLow implements Game, GamblingGame {
     @Override
     public void runGame(Player currentPlayer) {
         while(running) {
+            if(currentPlayer.getBalance() < 10) {
+                console.printSlow(language.getHighAndLowLanguage(HighAndLowLanguage.Language.NOTENOUGHMONEY));
+                console.println("Press Enter to return to the game menu... and hopefully the parking lot\n");
+                console.newln();
+                console.dotDotDot();
+                console.getStringInput("Loser");
+                break;
+            }
+            didYouBet = true;
             totalBetValue = 0;
-            Integer highOrLowBet = 0;
             console.println("Welcome to High and Low, %s!\n", currentPlayer.getName());
-            console.println(language.getHighAndLowLanguage(HighAndLowLanguage.Language.BUYIN));
+            console.printSlow(language.getHighAndLowLanguage(HighAndLowLanguage.Language.BUYIN));
+            spendSound.play();
+            console.dotDotDot();
+            console.newln();
             currentPlayer.placeBet(10);
             Integer firstRoll = firstRoll();
 
             console.println(language.getHighAndLowLanguage(HighAndLowLanguage.Language.PLACESECONDBET));
             placeBet(currentPlayer);
-            highOrLowBet();
-            secondRoll();
+            if(!didYouBet){
+                console.println("Backing out? No problem!");
+                exitGame(currentPlayer);
+                break;
+            }
+            Integer highOrLowBet = highOrLowBet();
+            console.dotDotDot();
+            console.newln();
 
             Integer secondRoll = secondRoll();
 
 
-            winOrLose(firstRoll, secondRoll, highOrLowBet, didYouBet);
+            winOrLose(firstRoll, secondRoll, highOrLowBet);
             exitGame(currentPlayer);
         }
     }
 
     public Integer firstRoll(){
+        diceSound.play();
         Integer roll = dice.rollDice(1);
         console.println(dice.diceArt(roll));
         Integer roll2 = dice.rollDice(1);
@@ -92,6 +123,7 @@ public class HighAndLow implements Game, GamblingGame {
 
         Integer playerInput = console.getIntegerInput(":");
         if(playerInput == 1){
+            spendSound.play();
             currentPlayer.placeBet(10);
             totalBetValue += 10;
             didYouBet = true;
@@ -108,6 +140,7 @@ public class HighAndLow implements Game, GamblingGame {
     }
 
     public Integer secondRoll(){
+        diceSound.play();
         Integer roll = dice.rollDice(1);
         console.println(dice.diceArt(roll));
         Integer roll2 = dice.rollDice(1);
@@ -117,10 +150,11 @@ public class HighAndLow implements Game, GamblingGame {
         return sumOfRolls;
     }
 
-    public void winOrLose(Integer firstRoll, Integer secondRoll, Integer highOrLowBet, boolean didYouBet){
+    public void winOrLose(Integer firstRoll, Integer secondRoll, Integer highOrLowBet){
         if((firstRoll > secondRoll && highOrLowBet == 2) || (firstRoll < secondRoll && highOrLowBet == 1)){
             returnWinnings(currentPlayer);
         } else {
+            loseSound.play();
             console.println((language.getHighAndLowLanguage(HighAndLowLanguage.Language.LOSE)));
             LocalDateTime now = LocalDateTime.now();
             String addHistory = String.format("You lost $%d.00 at High and Low. ** ", totalBetValue);
@@ -131,6 +165,7 @@ public class HighAndLow implements Game, GamblingGame {
     @Override
     public void returnWinnings(Player currentPlayer) {
         console.println("Congratulations! You've won $%d.00!", totalBetValue);
+        winSound.play();
         LocalDateTime now = LocalDateTime.now();
         String addHistory = String.format("You won $%d.00 at High and Low! ** ", totalBetValue);
         currentPlayer.addHistory(addHistory + dtf.format(now));
@@ -150,8 +185,4 @@ public class HighAndLow implements Game, GamblingGame {
                 break;
         }
     }
-
-
-
-
 }
