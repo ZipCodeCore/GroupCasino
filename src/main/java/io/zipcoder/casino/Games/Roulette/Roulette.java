@@ -46,7 +46,7 @@ public class Roulette implements Game, GamblingGame {
                     running = false;
                     break;
                 case 2:
-                    casino.goToGameMenu();
+
                     running = false;
                     break;
             }
