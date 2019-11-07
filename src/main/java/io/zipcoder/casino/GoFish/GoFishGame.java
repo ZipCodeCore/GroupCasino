@@ -28,6 +28,7 @@ public class GoFishGame extends CardGame implements Game {
     private CardSet playerSuites;
     private CardSet opponentSuites;
     private Music goFishMusic = null;
+    private String actingPlayer;
 
     public GoFishGame(Player player) {
         this.player = new GoFishPlayer(player);
@@ -99,38 +100,41 @@ public class GoFishGame extends CardGame implements Game {
 
     public void turn(GoFishPlayer playerUp, GoFishPlayer nextPlayer, CardSet playerUpCards, CardSet nextPlayerCards, CardSet playerUpSuites, CardSet nextPlayerSuites) {
         // TODO: check for win, cause it to drop through the end of the method
-        System.out.println(playerUpSuites.size() + "     " + nextPlayerSuites.size());
         GoFishPlayer winStatus = checkForWin(playerUp, nextPlayer, playerUpSuites, nextPlayerSuites);
         announceWinner(winStatus);
-        emptyHandDraw(playerUpCards);
-        console.clearScreen();
-        displayStatus();
-        String cardChoice = playerUp.chooseCard(playerUpCards);
-        ArrayList<Card> stolenCards = nextPlayerCards.removeRank(cardChoice);
+        String cardChoice = "";
+        if (winStatus == null) {
+            emptyHandDraw(playerUpCards);
+            console.clearScreen();
+            displayStatus();
+            cardChoice = playerUp.chooseCard(playerUpCards);
+        }
+        if (cardChoice != "N") {
+            ArrayList<Card> stolenCards = nextPlayerCards.removeRank(cardChoice);
 
-        if (stolenCards.size() > 0) { // successfully took from opponent
-            integrateStolenCards(stolenCards, playerUpCards);
-            // scan and get another turn
-            scanForSuites(playerUpCards, playerUpSuites, cardChoice);
-            turn(playerUp, nextPlayer, playerUpCards, nextPlayerCards, playerUpSuites, nextPlayerSuites);
-        } else { // didn't guess correctly
-            Card fishedCard = drawCard(playerUpCards);
-            if (fishedCard.getRank().equals(cardChoice)) { // drew a helpful card
-                //scan and get another turn
+            if (stolenCards.size() > 0) { // successfully took from opponent
+                integrateStolenCards(stolenCards, playerUpCards);
+                // scan and get another turn
                 scanForSuites(playerUpCards, playerUpSuites, cardChoice);
                 turn(playerUp, nextPlayer, playerUpCards, nextPlayerCards, playerUpSuites, nextPlayerSuites);
-            } else { // did not draw
-                if (scanForSuites(playerUpCards, playerUpSuites, fishedCard.getRank())) { // ...got a suite from it, though
-                    // go again
+            } else { // didn't guess correctly
+                Card fishedCard = drawCard(playerUpCards);
+                if (fishedCard.getRank().equals(cardChoice)) { // drew a helpful card
+                    //scan and get another turn
+                    scanForSuites(playerUpCards, playerUpSuites, cardChoice);
                     turn(playerUp, nextPlayer, playerUpCards, nextPlayerCards, playerUpSuites, nextPlayerSuites);
-                } else { // everything failed
-                    // opponent's turn
-                    turn(nextPlayer, playerUp, nextPlayerCards, playerUpCards, nextPlayerSuites, playerUpSuites);
+                } else { // did not draw
+                    if (scanForSuites(playerUpCards, playerUpSuites, fishedCard.getRank())) { // ...got a suite from it, though
+                        // go again
+                        turn(playerUp, nextPlayer, playerUpCards, nextPlayerCards, playerUpSuites, nextPlayerSuites);
+                    } else { // everything failed
+                        // opponent's turn
+                        turn(nextPlayer, playerUp, nextPlayerCards, playerUpCards, nextPlayerSuites, playerUpSuites);
+                    }
                 }
             }
         }
     }
-
     public GoFishPlayer checkForWin(GoFishPlayer playerUp, GoFishPlayer nextPlayer, CardSet playerUpSuites, CardSet nextPlayerSuites) {
 
         if (playerUpSuites.size() >= 7) {
@@ -142,20 +146,6 @@ public class GoFishGame extends CardGame implements Game {
             return null;
         }
     }
-
-
-/*    public Boolean checkForWin(GoFishPlayer playerUp, GoFishPlayer nextPlayer, CardSet playerUpSuites, CardSet nextPlayerSuites) {
-
-        if (playerUpSuites.size() >= 7) {
-            console.printWithDelays(playerUp.getPlayer().getFirstName() + " IS THE WINNER!!!!!!!!! \n");
-            return true;
-        } else if (nextPlayerSuites.size() >= 7) {
-            console.printWithDelays(nextPlayer.getPlayer().getFirstName() + " IS THE WINNER!!!!!!!!! \n");
-            return true;
-        } else {
-            return false;
-        }
-    }*/
     public void announceWinner(GoFishPlayer winner) {
         if (null != winner) {
             console.printWithDelays(winner.getPlayer().getFirstName() + " IS THE WINNER!!!!!!!!! \n");
@@ -173,6 +163,7 @@ public class GoFishGame extends CardGame implements Game {
             console.printWithDelays("\n[DEALER]: Enjoy the rest of your stay!!\n");
             console.sleep(1500);
 
+
             //also, return to the main menu
         } else if (endChoiceInput.toUpperCase().equals("Y")) {
 
@@ -184,7 +175,13 @@ public class GoFishGame extends CardGame implements Game {
             console.println("(That's not a valid selection. Please choose again.)");
             endChoice();
         }
-
+    }
+    public void resetGame() {
+        this.playersCards = new CardSet(0);
+        this.opponentsCards = new CardSet(0);
+        this.playerSuites = new CardSet(0);
+        this.opponentSuites = new CardSet(0);
+        this.shoe = new CardSet(1);
     }
     public String getName() {
         return name;
@@ -225,7 +222,9 @@ public class GoFishGame extends CardGame implements Game {
         console.println(displayPlayerSuites());
         console.println(displayPlayerHands());
     }
-
+    public String displayPreviousTurn(GoFishPlayer playerUp, GoFishPlayer nextPlayer){
+        return "*******************************************************************\n"+ nextPlayer.getPlayer().getFirstName()+ " Asked for ";
+    }
     public String displayPlayerSuites() {
         return "************************* PLAYER'S SUITES *************************\n" + playerSuites.toASCIISuite() + "\n";
     }
@@ -241,13 +240,7 @@ public class GoFishGame extends CardGame implements Game {
     public String displayOpponentSuites() {
         return "************************ OPPONENT'S SUITES ************************\n" + opponentSuites.toASCIISuite() + "\n";
     }
-    public void resetGame() {
-        this.playersCards = new CardSet(0);
-        this.opponentsCards = new CardSet(0);
-        this.playerSuites = new CardSet(0);
-        this.opponentSuites = new CardSet(0);
-        this.shoe = new CardSet(1);
-    }
+
 
     public String goTitleScreen() {
         console.println("\n   >===>                         >=>                      \n" +

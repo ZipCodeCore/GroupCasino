@@ -6,9 +6,9 @@ import java.io.IOException;
 
 public interface Menu {
 
-    void displayMenu() throws InterruptedException;
+    void displayMenu();
 
-    void handleChoice(int choice) throws InterruptedException;
+    void handleChoice(int choice);
 
     String getName ();
 

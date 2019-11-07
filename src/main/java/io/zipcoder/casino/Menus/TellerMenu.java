@@ -31,7 +31,7 @@ public class TellerMenu implements Menu {
     }
 
     @Override
-    public void displayMenu() throws InterruptedException {
+    public void displayMenu() {
         console.clearScreen();
 
         //plays music!
@@ -73,18 +73,14 @@ public class TellerMenu implements Menu {
     }
 
     @Override
-    public void handleChoice(int choice) throws InterruptedException {
+    public void handleChoice(int choice) {
 
         switch (choice) {
             case 1:
                 depositFunds();
                 try {
                     tellerMusic.stop();
-                } catch (UnsupportedAudioFileException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (LineUnavailableException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
@@ -93,11 +89,7 @@ public class TellerMenu implements Menu {
 
                 try {
                     tellerMusic.stop();
-                } catch (UnsupportedAudioFileException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (LineUnavailableException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -109,11 +101,7 @@ public class TellerMenu implements Menu {
                 MainMenu mainmenu = new MainMenu(this.player);
                 try {
                     tellerMusic.stop();
-                } catch (UnsupportedAudioFileException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (LineUnavailableException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -122,23 +110,23 @@ public class TellerMenu implements Menu {
         }
     }
 
-    public void depositFunds() throws InterruptedException {
+    public void depositFunds() {
         double funds = console.getCurrency("\n[TELLER]: How much are you depositing?\n");
         if (funds == 0.0) {
-            console.printWithDelays("\n[TELLER]: Quit wastin' my time, buddy\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("\n[TELLER]: Quit wastin' my time, buddy\n",50);
         } else if (funds > 10000.0) {
-            console.printWithDelays("\n[TELLER]: Whoa, jeez, OK: you just knock over a bank or something?\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("\n[TELLER]: Whoa, jeez, OK: you just knock over a bank or something?\n",50);
             gameServices.deposit(funds, this.player);
-            console.printWithDelays("\n[TELLER]: Good luck, fancy pants!\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("\n[TELLER]: Good luck, fancy pants!\n",50);
         } else if (funds <= 20.0){
-            console.printWithDelays("\n[TELLER]: Wow, are you sure it's safe walkin' around with all that?\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("\n[TELLER]: Wow, are you sure it's safe walkin' around with all that?\n",50);
             gameServices.deposit(funds, this.player);
-            console.printWithDelays("[TELLER]: Don't spend it all in once place! \n(He chuckles and proceeds to help another customer) \n\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("[TELLER]: Don't spend it all in once place! \n(He chuckles and proceeds to help another customer) \n\n",50);
         } else {
             console.printWithDelays(String.format("\n[TELLER]: Depositing $%.2f\n",funds));
             console.printWithDelays(". . .", 750);
             gameServices.deposit(funds, this.player);
-            console.printWithDelays("\n[TELLER]: Here you go! Good luck at the tables.\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("\n[TELLER]: Here you go! Good luck at the tables.\n",50);
         }
 
         console.getInput("\n\n( Press Enter to continue )\n");

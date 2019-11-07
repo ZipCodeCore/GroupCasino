@@ -2,13 +2,10 @@ package io.zipcoder.casino.Menus;
 
 
 import io.zipcoder.casino.Player;
-import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Utility.Music;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Casino {
@@ -29,7 +26,6 @@ public class Casino {
             ex.printStackTrace();
         }
 
-        // write your tests before you start fucking with this
         Casino.prologue();
         Player player = Casino.newPlayerDialogue();
 
@@ -38,11 +34,7 @@ public class Casino {
         //stops the sound effects
         try {
             introMusic.stop();
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (LineUnavailableException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -51,16 +43,36 @@ public class Casino {
 
 
     public static void prologue() {
-        console.printWithDelays("\nYou had a really long day at work and decide to take the edge off by visiting the local casino.\n");
-        console.sleep(1200);
-        console.printWithDelays("\"Maybe if I win some big bucks I'll get out of this boring job of mine,\" you think to yourself. \n");
-        console.sleep(1200);
-        console.printWithDelays("The same thought always crosses your mind when passing by the big neon sign embroidered with flashing poker chips.\n");
-        console.sleep(1200);
-        console.printWithDelays("But tonight is a little different... \n" + "\n" + "\n");
-        console.sleep(1200);
-        console.printWithDelays("Tonight you're feeling lucky. \uD83C\uDF40" + "\n" + "\n" + "\n" + "\n");
-        console.sleep(1200);
+        Thread inputThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                console.getInput("");
+                return;
+            }
+        });
+
+        inputThread.start();
+
+        String[] lines = new String[] {
+                "\nYou had a really long day at work and decide to take the edge off by visiting the local casino.\n",
+                "\"Maybe if I win some big bucks I'll get out of this boring job of mine,\" you think to yourself. \n",
+                "The same thought always crosses your mind when passing by the big neon sign embroidered with flashing poker chips.\n",
+                "But tonight is a little different... \n\n\n",
+                "Tonight you're feeling lucky. \uD83C\uDF40\n\n\n\n",
+        };
+
+        for (String line : lines) {
+            for (char letter : line.toCharArray()){
+                if (inputThread.isAlive()) {
+                    console.print(Character.toString(letter));
+                    console.sleep(20);
+                }
+            }
+            if (inputThread.isAlive()) {
+                console.sleep(1200);
+            }
+        }
+
         console.printWithDelays("------------------------------------------------------------------------------------------------------------------------------\n",5);
         console.printWithDelays("       ,----,.                                                                                                              \n" +
                 "     ,'   ,' |                                                                                          ,--.     ,----..    \n" +
@@ -99,9 +111,6 @@ public class Casino {
         Music losingHorn = null;
         Music tadaMusic = null;
         Music neutral = null;
-        //There's a "happy" and "sad" ending that's pertinent on if you won or lost money, even if it's just a $1!
-        //Play again option that restarts the game?
-
 
         if (player.getWinnings() < 0) {
             //Sad ending:
@@ -117,14 +126,12 @@ public class Casino {
                 Music.filePath = "src/music/(Sad ending) The Price is Right Losing Horn.wav";
                 tadaMusic = new Music();
                 tadaMusic.play();
-                TimeUnit.SECONDS.sleep(5);
+                console.sleep(3000);
                 tadaMusic.stop();
-                console.printWithDelays(String.format("\nDisgruntled and with your spirits broken, you hobble home with $%.2f less in your pocket.\nGuess tonight just wasn't the night.\n", player.getWinnings()), TimeUnit.MILLISECONDS, 50);
-                TimeUnit.SECONDS.sleep(3);
+                console.printWithDelays(String.format("\nDisgruntled and with your spirits broken, you hobble home with $%.2f less in your pocket.\nGuess tonight just wasn't the night.\n", Math.abs(player.getWinnings())),20,1200);
             } catch (Exception ex) {
                 System.out.println("Error with playing sound.");
                 ex.printStackTrace();
-
             }
 
 
@@ -157,11 +164,10 @@ public class Casino {
                 Music.filePath = "src/music/(Happy ending) Windows 3.1 - Tada.wav";
                 losingHorn = new Music();
                 losingHorn.play();
-                TimeUnit.SECONDS.sleep(2);
+                console.sleep(1500);
                 losingHorn.stop();
-                console.printWithDelays(("\nScore! You ended up bagging (insert their initial balance - current balance).\n" +
-                        "You head home with some pep in your step and even treat yourself to a scrumptious meal.\n"), TimeUnit.MILLISECONDS, 50);
-                TimeUnit.SECONDS.sleep(3);
+                console.printWithDelays((String.format("\nScore! You ended up bagging $%.2f.\n", player.getWinnings()) +
+                        "You head home with some pep in your step and even treat yourself to a scrumptious meal.\n"),20,1500);
             } catch (Exception ex) {
                 System.out.println("Error with playing sound.");
                 ex.printStackTrace();
@@ -183,10 +189,9 @@ public class Casino {
                 Music.filePath = "src/music/(Happy ending) Windows 3.1 - Tada.wav";
                 neutral = new Music();
                 neutral.play();
-                TimeUnit.SECONDS.sleep(2);
+                console.sleep(2000);
                 neutral.stop();
-                console.printWithDelays("You left without winning or losing money, but hey at least you had fun!\n\n\n", TimeUnit.MILLISECONDS, 50);
-                TimeUnit.SECONDS.sleep(3);
+                console.printWithDelays("You left without winning or losing money, but hey at least you had fun!\n\n\n", 50, 3000);
             } catch (Exception ex) {
                 System.out.println("Error with playing sound.");
                 ex.printStackTrace();

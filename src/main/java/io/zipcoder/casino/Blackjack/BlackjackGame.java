@@ -115,11 +115,7 @@ public class BlackjackGame extends CardGame implements Game {
         //stops the music!
         try {
             blackJackMusic.stop();
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (LineUnavailableException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

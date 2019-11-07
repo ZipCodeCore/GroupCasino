@@ -37,7 +37,7 @@ public final class Console {
         print(prompt);
         String input = getInput("Choose a card to take (2-10,J,Q,K,A): ").toUpperCase();
         while (true) {
-            if (cardCheck(input)) break;
+            if (cardCheck(input) || input.equals("N")) break;
             else {
                 printWithDelays("Invalid card rank");
                 print(prompt);
