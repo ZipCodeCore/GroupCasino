@@ -118,6 +118,7 @@ public class SnakesAndLadders implements Game {
             Console.clearScreen();
             playerPosition = diceRoll(true);
             snakesAndLaddersCheck(playerPosition, true);
+            playSound(playerPosition);
             if (playerPosition >= 100) {
                 return "Player";
             }
@@ -125,6 +126,7 @@ public class SnakesAndLadders implements Game {
         } else {
             playerPosition = diceRoll(false);
             snakesAndLaddersCheck(playerPosition, false);
+            playSound(playerPosition);
             if (playerPosition >= 100) {
                 return "Ai";
             }
@@ -185,6 +187,15 @@ public class SnakesAndLadders implements Game {
         return newPosition;
     }
 
+    public void playSound(Integer position){
+        Integer newPosition = snakesAndLaddersCheckerViaMap(position);
+        if (position > newPosition) {
+            snakeSound.play();
+        } else if (position < newPosition){
+            ladderSound.play();
+        }
+    }
+
     public Integer snakesAndLaddersCheck(Integer position, boolean isPlayer) {
         Integer newPosition = snakesAndLaddersCheckerViaMap(position);
             if (position > newPosition) {
@@ -195,7 +206,6 @@ public class SnakesAndLadders implements Game {
                     console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
                     aiPiece.setCurrentPosition(newPosition);
                 }
-                snakeSound.play();
                 return newPosition;
             } else if (position < newPosition) {
                 if(isPlayer) {
@@ -205,7 +215,6 @@ public class SnakesAndLadders implements Game {
                     console.println("Hooray! I've hit a Ladder! I'm now at %d.", newPosition);
                     aiPiece.setCurrentPosition(newPosition);
                 }
-                ladderSound.play();
                 return newPosition;
             }
         return position;
