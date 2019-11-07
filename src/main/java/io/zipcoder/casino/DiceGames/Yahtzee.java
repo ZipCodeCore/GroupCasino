@@ -322,24 +322,12 @@ public class Yahtzee implements Game {
         return user;
     }
 
-    public void setUser(Player user) {
-        this.user = user;
-    }
-
     public Dice[] getMyDice() {
         return myDice;
     }
 
-    public void setMyDice(Dice[] myDice) {
-        this.myDice = myDice;
-    }
-
     public int getPoints() {
         return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
     }
 
 
@@ -416,13 +404,12 @@ public class Yahtzee implements Game {
         String options = "";
         for(int i = 1; i < availableOptions.length - 7; i++) {
             options += String.format("%-25s",(i) + ".  " + availableOptions[i]);
-            options += String.format((i + 6) + ".  " + availableOptions[i+6]);
+            options += String.format((i + 6) + ".  " + availableOptions[i+6]+ "\n");
         }
-        options += String.format("%25s13.  %s","",availableOptions[13]);
+        options += String.format("%25s13.  %s","",availableOptions[13] + "\n");
 
         String currentPoints = "Current score: " + this.points + "\n";
 
         return diceArt + numAndKeepArt + options + currentPoints;
     }
-
 }
