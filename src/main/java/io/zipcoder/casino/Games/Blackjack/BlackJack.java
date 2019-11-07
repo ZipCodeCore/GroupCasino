@@ -23,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 public class BlackJack implements Game, GamblingGame {
 
     Casino casino = new Casino();
-    Deck deck = new Deck();
+    Deck deck = null;
     Console console = new Console(System.in, System.out);
     Card[] playerHand = new Card[6];
     Card[] dealerHand = new Card[6];
@@ -56,6 +56,7 @@ public class BlackJack implements Game, GamblingGame {
 
 
         while (running == true) {
+            deck = new Deck();
             winner = null;
 
             console.println("Welcome to BlackJack! Let's begin!");
@@ -68,7 +69,7 @@ public class BlackJack implements Game, GamblingGame {
 
             console.println("How much would you like to los- I mean bet?" + " Current balance: $" + currentplayer.getBalance());
             placeBet(currentPlayer);
-
+        if (running == true){
             houseWin();
 
 
@@ -90,6 +91,7 @@ public class BlackJack implements Game, GamblingGame {
             }
 
             }
+        }
 
         }
 
@@ -132,9 +134,12 @@ public class BlackJack implements Game, GamblingGame {
         Integer playerBet = console.getIntegerInput(":");
         if (currentPlayer.getBalance() <= 0) {
             console.printSlow("Git yo broke ass ouuta heeerrre Bruhh!  !  !  !");
-            approachTable(currentPlayer);
+            console.delay(3500);
+            alsoRunning = false;
+            running = false;
         } else if (currentPlayer.getBalance() < playerBet) {
             console.printSlow(" Not enough cheddar! Bet a different amount");
+            console.delay(3500);
             placeBet(currentPlayer);
         } else {
             currentPlayer.placeBet(playerBet);
@@ -210,6 +215,7 @@ public class BlackJack implements Game, GamblingGame {
                 handOfPlayer = checkHand(playerHand);
                 console.println("This is your hand " + handOfPlayer);
                 playerHand[4] = deck.draw();
+                handOfPlayer = checkHand(playerHand);
                 hitOrStay();
             }else if (playerHand[4] != null && checkHand(playerHand) < 21){
                 specialFive();
