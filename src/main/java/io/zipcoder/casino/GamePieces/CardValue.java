@@ -1,5 +1,8 @@
 package io.zipcoder.casino.GamePieces;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum CardValue {
 
     TWO(2),
@@ -11,17 +14,26 @@ public enum CardValue {
     EIGHT(8),
     NINE(9),
     TEN(10),
-    JACK(10),
-    QUEEN(10),
-    KING(10),
-    ACE(11);
+    JACK(11),
+    QUEEN(12),
+    KING(13),
+    ACE(14);
 
     private final int value;
     private CardValue (int value){
         this.value = value;
     }
-
     public int getValue() {
         return value;
+    }
+
+    private static final Map<Integer, CardValue> intToTypeMap = new HashMap<Integer, CardValue>();
+    static {
+        for (CardValue type : CardValue.values()) {
+            intToTypeMap.put(type.value, type);
+        }
+    }
+    public static CardValue fromInt(int i) {
+        return intToTypeMap.get(i);
     }
 }
