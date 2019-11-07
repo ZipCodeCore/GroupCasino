@@ -47,8 +47,8 @@ public class TellerMenu implements Menu {
                 "       oO{-JACKPOT-}Oo\n" +
                 "       .=============.  __\n" +
                 "       |[\uD83E\uDD5D] [\uD83E\uDD5D] [\uD83D\uDD14]| (  )\n" +
-                "       |[\uD83C\uDF52] [\uD83C\uDF52] [\uD83C\uDF52]|  ||\n" +
-                "       |[\uD83D\uDCB0] [\uD83D\uDD14] [\uD83D\uDCB0]|  ||\n" +
+                "       |[\uD83C\uDF52] [\uD83C\uDF52] [\uD83C\uDF52]| ||\n" +
+                "       |[\uD83D\uDCB0] [\uD83D\uDD14] [\uD83D\uDCB0]| ||\n" +
                 "       |             |__||\n" +
                 "       | xxx ::::::: |---'\n" +
                 "       | ooo ::::::: |\n" +
@@ -129,9 +129,9 @@ public class TellerMenu implements Menu {
         } else if (funds > 10000.0) {
             console.printWithDelays("\n[TELLER]: Whoa, jeez, OK: you just knock over a bank or something?\n", TimeUnit.MILLISECONDS, 50);
             gameServices.deposit(funds, this.player);
-            console.printWithDelays("[TELLER]: Good luck, fancy pants!\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("\n[TELLER]: Good luck, fancy pants!\n", TimeUnit.MILLISECONDS, 50);
         } else if (funds <= 20.0){
-            console.printWithDelays("[TELLER]: Wow, are you sure it's safe walkin' around with all that?\n", TimeUnit.MILLISECONDS, 50);
+            console.printWithDelays("\n[TELLER]: Wow, are you sure it's safe walkin' around with all that?\n", TimeUnit.MILLISECONDS, 50);
             gameServices.deposit(funds, this.player);
             console.printWithDelays("[TELLER]: Don't spend it all in once place! \n(He chuckles and proceeds to help another customer) \n\n", TimeUnit.MILLISECONDS, 50);
         } else {
@@ -141,7 +141,7 @@ public class TellerMenu implements Menu {
             console.printWithDelays("\n[TELLER]: Here you go! Good luck at the tables.\n", TimeUnit.MILLISECONDS, 50);
         }
 
-        console.getInput("\n\n(Press Enter to continue)\n");
+        console.getInput("\n\n( Press Enter to continue )\n");
     }
 
     public Double cashOut () {
