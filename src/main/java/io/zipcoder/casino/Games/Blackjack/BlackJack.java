@@ -306,10 +306,10 @@ public class BlackJack implements Game, GamblingGame {
     public void exitGame(Player currentPlayer) {
         if (winner.equals(currentPlayer)) {
             LocalDateTime now = LocalDateTime.now();
-            currentPlayer.addHistory("You won at BLACKJACK. ** " + dateTimeFormatter.format(now) + "!");
+            currentPlayer.addHistory("You won $" + pot + " at BLACKJACK. ** " + dateTimeFormatter.format(now) +  "!");
         } else if (winner.equals(dealer)) {
             LocalDateTime now = LocalDateTime.now();
-            currentPlayer.addHistory("You lost at BLACKJACK. ** " + dateTimeFormatter.format(now));
+            currentPlayer.addHistory("You lost $" + pot + " at BLACKJACK. ** " + dateTimeFormatter.format(now));
         }
 
         console.println("Would you like to play again?");
