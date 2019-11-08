@@ -34,7 +34,7 @@ public class CardHandTest {
 
         CardHand testCardHand = new CardHand(dealtCards);
         String actual = testCardHand.displayHand();
-        String expected = "[KING of DIAMONDS \n, QUEEN of DIAMONDS \n]";
+        String expected = " QUEEN ♢ \n KING ♢ \n";
 
         Assert.assertEquals(expected,actual);
     }
