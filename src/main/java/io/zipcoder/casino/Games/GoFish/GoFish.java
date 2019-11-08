@@ -100,8 +100,10 @@ public class GoFish implements Game {
                 console.printSlow("You draw a " + fish(playerHand).getCardValue().toString() + "!\n");
                 checkBook(playerHand, true);
 
-                console.printSlow("Your hand is now ");
-                displayHand(playerHand);
+                if(playerHand.size() > 0) {
+                    console.printSlow("Your hand is now ");
+                    displayHand(playerHand);
+                }
                 console.printSlow("Hit enter to continue\n");
                 console.print("--------------------------------------------------------------");
                 console.println(" You have " + playerHand.size() + " cards and " + playerPairs + " books");
