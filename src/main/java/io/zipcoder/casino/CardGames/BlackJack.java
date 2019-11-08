@@ -58,16 +58,17 @@ public class BlackJack implements GamblingGame {
         while (continuePlay) {
             promptUserForWagerAmount();
             initializeBlackJackHands();
+
             checkInitialHandValue(gamblingPlayerHand);
             checkHandForAces(gamblingPlayerHand);
-
             playerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
+
             checkInitialHandValue(computerHand);
             checkHandForAces(computerHand);
             dealerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(computerHand), checkHandForAces(computerHand));
 
             input.println(gamblingPlayerHand.displayHand());
-            hitOrStayAction(gamblingPlayerHand, promptHitOrStay());
+            promptHitOrStay();
             evaluateHands();
         }
     }
@@ -139,31 +140,33 @@ public class BlackJack implements GamblingGame {
     public Integer promptHitOrStay() {
         Integer hitOrStayUserInput = input.getIntegerInput("Press 1 to hit or 2 to stay.");
 
-        switch (hitOrStayUserInput) {
-            case 1:
-                hitOrStayAction(gamblingPlayerHand,hitOrStayUserInput);
-                break;
-            case 2:
-                stay();
-                break;
-
-            default:
-                hitOrStayUserInput = input.getIntegerInput("Invalid key, press 1 to hit or 2 to stay.");
-                break;
+        while(hitOrStayUserInput != 1 || hitOrStayUserInput != 2) {
+            switch (hitOrStayUserInput) {
+                case 1:
+                    hit();
+                    hitOrStayUserInput = 1;
+                    break;
+                case 2:
+                    stay();
+                    hitOrStayUserInput = 2;
+                    break;
+                default:
+                    hitOrStayUserInput = input.getIntegerInput("Invalid key, press 1 to hit or 2 to stay.");
+                    break;
+            }
         }
-
         return hitOrStayUserInput;
     }
 
-    public void hitOrStayAction(CardHand hand, Integer hitOrStayUserInput) {
-        if (hitOrStayUserInput == 1) {
-            hand.userHand.add(blackJackDeck.drawCard());
-            hit();
-        } else {
-            stay();
-        }
-
-    }
+//    public void hitOrStayAction(CardHand hand, Integer hitOrStayUserInput) {
+//        if (hitOrStayUserInput == 1) {
+//            hand.userHand.add(blackJackDeck.drawCard());
+//            hit();
+//        } else {
+//            stay();
+//        }
+//
+//    }
 
     public void stay() {
         evaluateHands();
@@ -173,10 +176,11 @@ public class BlackJack implements GamblingGame {
     }
 
     public void hit() {
-        checkInitialHandValue(gamblingPlayerHand);
-        checkHandForAces(gamblingPlayerHand);
-        playerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
-        input.println(gamblingPlayerHand.displayHand());
+        this.gamblingPlayerHand.userHand.add(blackJackDeck.drawCard());
+        checkInitialHandValue(this.gamblingPlayerHand);
+        checkHandForAces(this.gamblingPlayerHand);
+        playerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(this.gamblingPlayerHand), checkHandForAces(this.gamblingPlayerHand));
+        input.println(this.gamblingPlayerHand.displayHand());
         evaluateHands();
     }
 
