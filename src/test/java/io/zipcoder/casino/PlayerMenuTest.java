@@ -8,6 +8,10 @@ public class PlayerMenuTest {
 
 
     @Test
+    public void createPlayerTest(){
+
+    }
+    @Test
     public void runPlayerMenu() {
     }
 
