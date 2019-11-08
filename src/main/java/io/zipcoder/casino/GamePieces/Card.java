@@ -1,6 +1,6 @@
 package io.zipcoder.casino.GamePieces;
 
-public class Card {
+public class Card implements Comparable<Card> {
     private Suit suit;
     private CardValue cardValue;
 
@@ -24,5 +24,10 @@ public class Card {
     public void setCardValue(CardValue cardValue) {
         this.cardValue = cardValue;
 
+    }
+
+    @Override
+    public int compareTo(Card o) {
+        return Integer.compare(this.cardValue.getValue(), o.cardValue.getValue());
     }
 }

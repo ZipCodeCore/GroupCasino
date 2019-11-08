@@ -1,12 +1,12 @@
 package io.zipcoder.casino.Menus;
 
 
+import io.zipcoder.casino.Games.SnakesAndLadders.SnakesAndLadders;
 import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.Games.Blackjack.BlackJack;
 import io.zipcoder.casino.Games.Craps.Craps;
 import io.zipcoder.casino.Games.GoFish.GoFish;
 import io.zipcoder.casino.Games.Roulette.Roulette;
-import io.zipcoder.casino.Games.SnakesAndLadders.SnakesAndLadders;
 import io.zipcoder.casino.Games.HighAndLow.HighAndLow;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.Games.Slots.Slots;
@@ -14,7 +14,6 @@ import io.zipcoder.casino.utilities.Console;
 
 public class GameMenu {
     private Console console = new Console(System.in, System.out);
-    private Integer playerInput;
     private Player currentPlayer;
     private CasinoArt art = new CasinoArt();
     private boolean running = true;
@@ -25,14 +24,9 @@ public class GameMenu {
             Console.clearScreen();
             console.println(art.getCasinoArt(CasinoArt.Art.GAMEMENU));
             Console.displayGameMenu();
-            Integer playerInput = getPlayerInput();
+            Integer playerInput = console.getIntegerInput(":");
             gameMenuLogic(playerInput);
         }
-    }
-
-    public Integer getPlayerInput(){
-        this.playerInput = console.getIntegerInput(":");
-        return playerInput;
     }
 
     public String gameMenuLogic(Integer playerInput){
@@ -70,7 +64,6 @@ public class GameMenu {
             case 8:
                 running = false;
                 break;
-// shouldn't we be calling casino menu here?
         }
         return null;
     }
