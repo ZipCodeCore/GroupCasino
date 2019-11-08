@@ -5,9 +5,13 @@ import io.zipcoder.casino.PlayerCreation.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class HighAndLowTest {
+    DateTimeFormatter dateTimeReformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
     @Test
     public void firstRollTest(){
@@ -175,5 +179,43 @@ public class HighAndLowTest {
         String expected = String.format("You lost $%d.00 at High and Low. ** ", totalBetValue);
         String actual = highAndLow.noBet(1000);
         Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void addHistoryTest1(){
+        LocalDateTime now = LocalDateTime.now();
+        Player currentPlayer = new Player(null,null);
+        Boolean winner = true;
+        Integer totalBetValue = 1000;
+        HighAndLow highAndLow = new HighAndLow();
+        String expected = String.format("You won $%d.00 at High and Low! ** ", totalBetValue);
+        expected += dateTimeReformatter.format(now) + "\n";
+        highAndLow.addHistory(winner, totalBetValue, currentPlayer);
+        String actual = currentPlayer.printHistory();
+
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void addHistoryTest2(){
+        LocalDateTime now = LocalDateTime.now();
+        Player currentPlayer = new Player(null,null);
+        Boolean winner = false;
+        Integer totalBetValue = 1000;
+        HighAndLow highAndLow = new HighAndLow();
+        String expected = String.format("You lost $%d.00 at High and Low. ** ", totalBetValue);
+        expected += dateTimeReformatter.format(now) + "\n";
+        highAndLow.addHistory(winner, totalBetValue, currentPlayer);
+        String actual = currentPlayer.printHistory();
+
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void notEnoughmoneyTest(){
+        HighAndLow highAndLow = new HighAndLow();
+        String expected = "Loser";
+        String actual = highAndLow.notEnoughMoney();
+        Assert.assertEquals(actual,expected);
     }
 }

@@ -7,12 +7,16 @@ import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.PlayerCreation.Player;
 import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.utilities.Console;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 public class GoFish implements Game {
 
+    private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private Console console = new Console(System.in, System.out);
     private CasinoArt casinoArt = new CasinoArt();
     private boolean running = true;
@@ -82,7 +86,7 @@ public class GoFish implements Game {
             console.print("Your current hand is ");
             displayHand(playerHand);
 
-            while (aiHand.size() > 0 && playerHand.size() > 0 && deck.cardsLeft() > 0 &&  checkCard(playerGuess(), playerHand, aiHand)) {
+            while (aiHand.size() > 0 && playerHand.size() > 0 && deck.cardsLeft() > 0 &&  checkCard(playerGuess(playerHand), playerHand, aiHand)) {
                 console.printSlow("You guessed right!\n");
                 checkBook(playerHand, true);
                 if(playerHand.size() > 0) {
@@ -96,8 +100,10 @@ public class GoFish implements Game {
                 console.printSlow("You draw a " + fish(playerHand).getCardValue().toString() + "!\n");
                 checkBook(playerHand, true);
 
-                console.printSlow("Your hand is now ");
-                displayHand(playerHand);
+                if(playerHand.size() > 0) {
+                    console.printSlow("Your hand is now ");
+                    displayHand(playerHand);
+                }
                 console.printSlow("Hit enter to continue\n");
                 console.print("--------------------------------------------------------------");
                 console.println(" You have " + playerHand.size() + " cards and " + playerPairs + " books");
@@ -231,7 +237,7 @@ public class GoFish implements Game {
         return guess;
     }
 
-    public CardValue playerGuess() {
+    public CardValue playerGuess(ArrayList<Card> playerHand) {
         CardValue theCard = CardValue.TWO;
         boolean validInput = false;
 
@@ -270,12 +276,15 @@ public class GoFish implements Game {
         return theCard;
     }
 
-    public void checkWinner(Player currentPLayer) {
+    public void checkWinner(Player currentPlayer) {
         if (playerPairs > aiPairs) {
             console.printSlow("You won! with " + playerPairs + " books\n");
+            currentPlayer.addHistory("You won playing Go Fish ** " + timeFormatter.format(LocalDateTime.now()));
         } else if (playerPairs < aiPairs){
             console.printSlow("You lost!\n");
+            currentPlayer.addHistory("You lost playing Go Fish ** " + timeFormatter.format(LocalDateTime.now()));
         } else {
+            currentPlayer.addHistory("You got a tie playing Go Fish ** " + timeFormatter.format(LocalDateTime.now()));
             console.printSlow("It's a tie!\n");
         }
 
@@ -286,7 +295,7 @@ public class GoFish implements Game {
         String input = console.getStringInput(":");
         switch (input) {
             case "1":
-                runGame(currentPLayer);
+                runGame(currentPlayer);
                 break;
             case "2":
                 console.printSlow("Good Idea");
@@ -297,7 +306,7 @@ public class GoFish implements Game {
                 console.dotDotDot();
                 console.newln();
                 console.delay(2000);
-                approachTable(currentPLayer);
+                approachTable(currentPlayer);
                 break;
         }
     }

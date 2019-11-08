@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -127,5 +129,38 @@ public class GoFishTest {
         goFish.fish(destHand);
 
         Assert.assertEquals(6, destHand.size());
+    }
+
+    @Test
+    public void aiGuessTest() {
+
+        goFish.dealHands();
+        assertTrue(goFish.aiGuess() != null);
+
+    }
+
+    @Test
+    public void playerGuessTest() {
+        String input = "2\nace\nking\nqueen\ndada\n19\n10\njack\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        goFish = new GoFish();
+
+        ArrayList<Card> hand = new ArrayList<>();
+        hand.add(new Card(CardValue.ACE, Suit.CLUBS));
+        hand.add(new Card(CardValue.JACK, Suit.CLUBS));
+        hand.add(new Card(CardValue.NINE, Suit.CLUBS));
+        hand.add(new Card(CardValue.FIVE, Suit.CLUBS));
+        hand.add(new Card(CardValue.TWO, Suit.CLUBS));
+        hand.add(new Card(CardValue.QUEEN, Suit.CLUBS));
+        hand.add(new Card(CardValue.KING, Suit.CLUBS));
+        hand.add(new Card(CardValue.TWO, Suit.CLUBS));
+
+        Assert.assertTrue(goFish.playerGuess(hand).equals(CardValue.TWO));
+        Assert.assertTrue(goFish.playerGuess(hand).equals(CardValue.ACE));
+        Assert.assertTrue(goFish.playerGuess(hand).equals(CardValue.KING));
+        Assert.assertTrue(goFish.playerGuess(hand).equals(CardValue.QUEEN));
+        Assert.assertTrue(goFish.playerGuess(hand).equals(CardValue.JACK));
     }
 }

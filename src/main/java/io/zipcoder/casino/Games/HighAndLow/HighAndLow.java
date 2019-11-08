@@ -137,7 +137,7 @@ public class HighAndLow implements Game, GamblingGame {
         return currentBalance >= 10;
     }
 
-    public void addHistory(Boolean result, Integer totalBetValue){
+    public void addHistory(Boolean result, Integer totalBetValue, Player currentPlayer){
         LocalDateTime now = LocalDateTime.now();
         if(result){
             String addHistory = String.format("You won $%d.00 at High and Low! ** ", totalBetValue);
@@ -148,12 +148,12 @@ public class HighAndLow implements Game, GamblingGame {
         }
     }
 
-    public void notEnoughMoney() {
+    public String notEnoughMoney() {
         console.printSlow(language.getHighAndLowLanguage(HighAndLowLanguage.Language.NOTENOUGHMONEY));
         console.println("Press Enter to return to the game menu... and hopefully the parking lot\n");
         console.newln();
         console.dotDotDot();
-        console.getStringInput("Loser");
+        return "Loser";
     }
 
     @Override
@@ -179,7 +179,8 @@ public class HighAndLow implements Game, GamblingGame {
     public void runGame(Player currentPlayer) {
         while(running) {
             if(!enoughBalance(currentPlayer.getBalance())){
-                notEnoughMoney();
+                String brokePunk = notEnoughMoney();
+                console.getStringInput(brokePunk);
                 break;
             }
             resetGame();
@@ -223,7 +224,7 @@ public class HighAndLow implements Game, GamblingGame {
             if(result){
                 returnWinnings(currentPlayer, totalBetValue * 2);
             }
-            addHistory(result, totalBetValue);
+            addHistory(result, totalBetValue, currentPlayer);
 
             console.println("Your current balance is $%d.00", currentPlayer.getBalance());
             exitGame(currentPlayer);
