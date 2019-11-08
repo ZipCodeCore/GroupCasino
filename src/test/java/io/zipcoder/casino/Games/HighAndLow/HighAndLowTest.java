@@ -208,4 +208,12 @@ public class HighAndLowTest {
 
         Assert.assertEquals(expected,actual);
     }
+
+    @Test
+    public void notEnoughmoneyTest(){
+        HighAndLow highAndLow = new HighAndLow();
+        String expected = "Loser";
+        String actual = highAndLow.notEnoughMoney();
+        Assert.assertEquals(actual,expected);
+    }
 }
