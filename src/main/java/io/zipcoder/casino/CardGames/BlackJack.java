@@ -43,7 +43,10 @@ public class BlackJack implements GamblingGame {
 
     public void startGame() {
         input.println(checkForChips());
-        playBlackJack();
+        while (continuePlay) {
+            playBlackJack();
+            if(!continuePlay){return;}
+        }
     }
 
     public String checkForChips() {
@@ -55,7 +58,7 @@ public class BlackJack implements GamblingGame {
     }
 
     public void playBlackJack() {
-        while (continuePlay) {
+
             promptUserForWagerAmount();
             initializeBlackJackHands();
 
@@ -70,7 +73,8 @@ public class BlackJack implements GamblingGame {
             input.println(gamblingPlayerHand.displayHand());
             promptHitOrStay();
             evaluateHands();
-        }
+            if(!continuePlay){return;}
+
     }
 
 
@@ -140,7 +144,7 @@ public class BlackJack implements GamblingGame {
     public Integer promptHitOrStay() {
         Integer hitOrStayUserInput = input.getIntegerInput("Press 1 to hit or 2 to stay.");
 
-        while(hitOrStayUserInput != 1 || hitOrStayUserInput != 2) {
+        while(hitOrStayUserInput != 2 && hitOrStayUserInput != 1) {
             switch (hitOrStayUserInput) {
                 case 1:
                     hit();
@@ -171,7 +175,6 @@ public class BlackJack implements GamblingGame {
     public void stay() {
         evaluateHands();
         input.println(String.valueOf(playerRefactoredHandValue));
-        if (displayScore() == 1) startGame();
         // check against the dealer
     }
 
@@ -191,12 +194,13 @@ public class BlackJack implements GamblingGame {
         playerAndDealerHaveBlackJack = (playerHasBlackJack && dealerHasBlackJack);
 
         if (playerRefactoredHandValue > 21 || dealerRefactoredHandValue > 21) {
-            if (displayScore() == 2) promptLeaveGame();
-        }
 
+        }
         if (dealerRefactoredHandValue > playerRefactoredHandValue){
 
         }
+        if (displayScore() == 2) promptLeaveGame();
+
     }
 
 
@@ -204,7 +208,7 @@ public class BlackJack implements GamblingGame {
     }
 
     public void promptLeaveGame() {
-        continuePlay = false;
+        this.continuePlay = false;
     }
 
     public Integer displayScore() {
