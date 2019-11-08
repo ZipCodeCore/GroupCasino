@@ -209,12 +209,14 @@ public class BlackJack implements Game, GamblingGame {
                 } else if (playerHand[2] != null && playerHand[3] == null) {
                     handOfPlayer = checkHand(playerHand);
                     playerHand[3] = deck.draw();
+                    handOfPlayer = checkHand(playerHand);
                     console.println("This is your hand " + handOfPlayer);
                     hitOrStay();
                 } else if (playerHand[3] != null && playerHand[4] == null) {
                     handOfPlayer = checkHand(playerHand);
                     console.println("This is your hand " + handOfPlayer);
                     playerHand[4] = deck.draw();
+                    handOfPlayer = checkHand(playerHand);
                     hitOrStay();
                 } else if (playerHand[4] != null && checkHand(playerHand) < 21) {
                     specialFive();

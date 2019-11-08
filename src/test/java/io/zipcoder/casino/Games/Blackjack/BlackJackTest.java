@@ -1,25 +1,25 @@
 package io.zipcoder.casino.Games.Blackjack;
 
+import io.zipcoder.casino.GamePieces.Card;
+import io.zipcoder.casino.PlayerCreation.Player;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class BlackJackTest {
 
-    @Test
-    public void runBlackJack() {
-    }
 
-    @Test
-    public void approachTable() {
-    }
-
-    @Test
-    public void runGame() {
-    }
 
     @Test
     public void initialHand() {
+        BlackJack blackJack = new BlackJack();
+        Card dealerHand [] = new Card[6];
+        blackJack.initialHand();
+        assertTrue(dealerHand[0]!=null);
+
+
+
+
     }
     @Test
     public void viewCurrentHand() {
