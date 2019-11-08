@@ -44,7 +44,7 @@ public class CrapsTest {
     }
 
     @Test
-    public void evaluateRoll() {
+    public void evaluateRollTest() {
         String expected = "Your Target Score is " + 0 + "\n";
         String actual = testGame.evaluateRoll();
         Assert.assertEquals(expected, actual);
@@ -52,4 +52,10 @@ public class CrapsTest {
     }
 
 
+    @Test
+    public void promptLeaveGameTest() {
+        //Tester must enter 2
+        testGame.promptLeaveGame();
+
+    }
 }
