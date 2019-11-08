@@ -34,6 +34,7 @@ public class CrapsGame extends DiceGame implements Game {
     private Integer die2Point;
     private Integer die1Current;
     private Integer die2Current;
+    private Double winnings = 0d;
 
 
     //Craps Game Constructor
@@ -69,9 +70,9 @@ public class CrapsGame extends DiceGame implements Game {
         userRollsDiceSetPoint();
         console.println(displayPointRoll());
         if (winOnFirst(setThePointRoll) == true) {
-
+            winnings = calculateWinnings(betSize, setThePointRoll, numRolls);
             console.println(winningMessageFirstRoll());
-            calculateWinnings(betSize, setThePointRoll, numRolls);
+
         } else if (loseOnFirst(setThePointRoll) == true) {
             console.println(losingMessageFirstRoll());
         }
@@ -81,8 +82,8 @@ public class CrapsGame extends DiceGame implements Game {
                 userRollsDiceCurrentPoint();
                 console.println(displayCurrentRoll(currentRoll));
                 if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
-                    console.printWithDelays(winOnSubsequentMessage(), 50);
                     calculateWinnings(betSize, setThePointRoll, numRolls);
+                    console.printWithDelays(winOnSubsequentMessage(), 50);
                     break;
                 } else if (loseOnSubsequent(currentRoll) == true) {
                     console.println(loseOnSubsequentMessage());
@@ -112,8 +113,7 @@ public class CrapsGame extends DiceGame implements Game {
             return wager;
         }
         else if (wager == null) {
-            //return to main menu
-
+            return null;
         }
         return wager;
     }
@@ -227,7 +227,7 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     public String winningMessageFirstRoll() {
-        return String.format("\n(( You rolled a %d on the first roll! ))\n\nCongratulations!!\n\nYou are a winner!!!\n-------------------------------------------------\n\n", setThePointRoll);
+        return String.format("\n(( You rolled a %d on the first roll! ))\n\nCongratulations!!\n\nYou won $%.2f!!!\n-------------------------------------------------\n\n", setThePointRoll, winnings-50.00);
     }
 
     public String losingMessageFirstRoll() {
@@ -242,11 +242,12 @@ public class CrapsGame extends DiceGame implements Game {
     public Integer tossCurrentRoll(Integer die1Current, Integer die2Current) {
         currentRoll = die1Current + die2Current;
         return currentRoll;
+
     }
 
 
     public String winOnSubsequentMessage (){
-        return (String.format("Hooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, numRolls));
+        return (String.format("Hooray! You rolled a %d, and you have won $%.2f!!  It took you %d rolls to win.", currentRoll, winnings-50, numRolls));
     }
 
     public String loseOnSubsequentMessage () {
