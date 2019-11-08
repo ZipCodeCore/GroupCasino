@@ -234,7 +234,7 @@ public class CrapsGameTest  {
 
     @Test
     public void winningMessageFirstRollTest() {
-    String expected = "\n(( You rolled a null on the first roll! ))\n\nCongratulations!!\n\nYou won $-50.00!!!\n-------------------------------------------------\n\n";
+    String expected = "\n(( You rolled a null on the first roll! ))\n\nCongratulations!!\n\nYou won $0.00!!!\n-------------------------------------------------\n\n";
     String actual = crapsGame.winningMessageFirstRoll();
     Assert.assertEquals(expected, actual);
 
@@ -266,7 +266,7 @@ public class CrapsGameTest  {
 
     @Test
     public void winOnSubsequentMessage() {
-        String expected = "Hooray! You rolled a null, and you have won $-50.00!!  It took you 0 rolls to win.";
+        String expected = "Hooray! You rolled a null, and you have won $0.00!!  It took you 0 rolls to win.";
         String actual = crapsGame.winOnSubsequentMessage();
         Assert.assertEquals(expected, actual);
     }
