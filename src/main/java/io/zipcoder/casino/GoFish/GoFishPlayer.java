@@ -33,7 +33,7 @@ public class GoFishPlayer {
         String input = "";
         while (true) {
             input = console.getCardRankInput("");
-            if (ranks.contains(input)) {
+            if (ranks.contains(input) || input.equals("N")) {
                 return input;
             }
         }
