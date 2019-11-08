@@ -5,6 +5,9 @@ import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
 import org.junit.Test;
 import org.junit.Assert;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 public class SnakesAndLaddersTest {
 
     @Test
@@ -83,7 +86,7 @@ public class SnakesAndLaddersTest {
 
 
     @Test
-    public void snakesAndLaddersTest1(){
+    public void snakesAndLaddersCheckTest1(){
         SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
         Integer position = 7;
         Integer expected = 7;
@@ -92,7 +95,7 @@ public class SnakesAndLaddersTest {
     }
 
     @Test
-    public void snakesAndLaddersTest2(){
+    public void snakesAndLaddersCheckTest2(){
         SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
         Integer position = 16;
         Integer expected = 6;
@@ -101,11 +104,20 @@ public class SnakesAndLaddersTest {
     }
 
     @Test
-    public void snakesAndLaddersTest3(){
+    public void snakesAndLaddersCheckTest3(){
         SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
         Integer position = 4;
         Integer expected = 14;
         Integer actual = snakesAndLadders.snakesAndLaddersCheck(position, true);
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void snakesAndLaddersCheckTest4(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        Integer position = 4;
+        Integer expected = 14;
+        Integer actual = snakesAndLadders.snakesAndLaddersCheck(position, false);
         Assert.assertEquals(expected,actual);
     }
 
@@ -136,6 +148,13 @@ public class SnakesAndLaddersTest {
         SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
         String expected = "no winner yet";
         String actual = snakesAndLadders.testIfWon(77, true);
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
+    public void testIfWonTest4(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        String expected = "Ai";
+        String actual = snakesAndLadders.testIfWon(100, false);
         Assert.assertEquals(expected,actual);
     }
 
