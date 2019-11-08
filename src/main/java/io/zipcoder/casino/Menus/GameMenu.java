@@ -65,7 +65,7 @@ public class GameMenu implements Menu {
                 "                             ~, *  : *  ,~\n" +
                 "                               ~,  :  ,~\n" +
                 "                                 ~,:,~\n");
-        // temporary
+
         for (int gameNum : gameMap.keySet()) {
             console.println(String.format("%d: %s", gameNum, ((GameObject) gameMap.get(gameNum)).getName()));
         }
