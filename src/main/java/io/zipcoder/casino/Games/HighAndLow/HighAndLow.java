@@ -137,7 +137,7 @@ public class HighAndLow implements Game, GamblingGame {
         return currentBalance >= 10;
     }
 
-    public void addHistory(Boolean result, Integer totalBetValue){
+    public void addHistory(Boolean result, Integer totalBetValue, Player currentPlayer){
         LocalDateTime now = LocalDateTime.now();
         if(result){
             String addHistory = String.format("You won $%d.00 at High and Low! ** ", totalBetValue);
@@ -223,7 +223,7 @@ public class HighAndLow implements Game, GamblingGame {
             if(result){
                 returnWinnings(currentPlayer, totalBetValue * 2);
             }
-            addHistory(result, totalBetValue);
+            addHistory(result, totalBetValue, currentPlayer);
 
             console.println("Your current balance is $%d.00", currentPlayer.getBalance());
             exitGame(currentPlayer);
