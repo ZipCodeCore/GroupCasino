@@ -11,14 +11,6 @@ public class GoFishTest {
 
     private static final Logger LOGGER = Logger.getLogger(GoFishTest.class.getName());
 
-    @Test
-    public void game() {
-
-        GoFish newgame = new GoFish(new Player("John", "007"));
-
-        newgame.startGame();
-
-    }
 
     @Test
     public void haveCard() {
@@ -70,7 +62,7 @@ public class GoFishTest {
         boolean result = false;
         Player testPlayer = new Player("V","G");
         GoFish testGame = new GoFish(testPlayer);
-
+        testGame.initializeGame();
         Card firstCard = new Card(Suit.CLUBS,Rank.KING);
         Card testCard;
         ArrayList<Card> giveHand = new ArrayList<>();
@@ -119,7 +111,7 @@ public class GoFishTest {
     public void getCompCard() {
         Player testPlayer = new Player("V","B");
         GoFish testGame = new GoFish(testPlayer);
-
+        testGame.initializeGame();
         Rank testCard = testGame.getCompCard();
         LOGGER.info("Card drawn: " + testCard.toString());
     }
