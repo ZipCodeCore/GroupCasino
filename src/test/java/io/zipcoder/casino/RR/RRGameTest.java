@@ -122,4 +122,40 @@ public class RRGameTest{
         String actual = testGame.getName();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void printElFin() {
+        String expected = "   ,ggggggg,             ,gggggggggggggg                  \n" +
+                " ,dP\"\"\"\"\"\"Y8b ,dPYb,    dP\"\"\"\"\"\"88\"\"\"\"\"\"                  \n" +
+                " d8'    a  Y8 IP'`Yb    Yb,_    88                        \n" +
+                " 88     \"Y8P' I8  8I     `\"\"    88      gg                \n" +
+                " `8baaaa      I8  8'         ggg88gggg  \"\"                \n" +
+                ",d8P\"\"\"\"      I8 dP             88   8  gg    ,ggg,,ggg,  \n" +
+                "d8\"           I8dP              88      88   ,8\" \"8P\" \"8, \n" +
+                "Y8,           I8P         gg,   88      88   I8   8I   8I \n" +
+                "`Yba,,_____, ,d8b,_        \"Yb,,8P    _,88,_,dP   8I   Yb,\n" +
+                "  `\"Y8888888 8P'\"Y88         \"Y8P'    8P\"\"Y88P'   8I   `Y8\n\n\n\n";
+        String actual = testGame.printElFin();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void printPistol() {
+        String expected = "                                  \n\n\n" +
+                "   )                               /=>\n" +
+                "  (  +____________________/\\/\\___ / /|\n" +
+                "   .''._____________'._____      / /|/\\\n" +
+                "  : () :              :\\ ----\\|    \\ )\n" +
+                "   '..'______________.'0|----|      \\\n" +
+                "                    0_0/____/        \\\n" +
+                "                        |----    /----\\\n" +
+                "                       || -\\\\ --|      \\\n" +
+                "                       ||   || ||\\      \\\n" +
+                "                        \\\\____// '|      \\\n" +
+                "      Bang!                     .'/       |\n" +
+                "                               .:/        |\n" +
+                "                               :/_________|";
+                String actual = testGame.printPistol();
+        Assert.assertEquals(expected, actual);
+    }
 }

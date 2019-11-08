@@ -18,7 +18,7 @@ public class RRGame extends DiceGame implements Game {
 
 
     public static void main(String[] args) throws InterruptedException {
-        Player rrPlayer = new Player("Grace","Bunde",23,500);
+        Player rrPlayer = new Player("Grace", "Bunde", 23, 500);
         RRGame rrGame = new RRGame(rrPlayer);
 
         rrGame.startPlay();
@@ -59,9 +59,8 @@ public class RRGame extends DiceGame implements Game {
     }
 
 
-
     @Override
-    public void startPlay(){
+    public void startPlay() {
 
         try {
             io.zipcoder.casino.Utility.Music.filePath = "src/music/(Roulette) Kirby Star Allies Music.wav";
@@ -102,6 +101,7 @@ public class RRGame extends DiceGame implements Game {
         }
 
     }
+
     @Override
     public void roundOfPlay() {
         console.println(displayUserBalance());
@@ -113,27 +113,14 @@ public class RRGame extends DiceGame implements Game {
 
             rouletteMusic.stop();
 
-            gameServices.wager(player.getBalance(),player);
+            gameServices.wager(player.getBalance(), player);
             console.println("\nYou Lost!!!");
             console.sleep(2000);
             console.clearScreen();
-            console.printWithDelays("[DEALER]: Don't you know how Russian Roulette works?\n\n",80);
+            console.printWithDelays("[DEALER]: Don't you know how Russian Roulette works?\n\n", 80);
             console.sleep(1500);
 
-            console.printWithDelays("                                  \n\n\n" +
-                    "   )                               /=>\n" +
-                    "  (  +____________________/\\/\\___ / /|\n" +
-                    "   .''._____________'._____      / /|/\\\n" +
-                    "  : () :              :\\ ----\\|    \\ )\n" +
-                    "   '..'______________.'0|----|      \\\n" +
-                    "                    0_0/____/        \\\n" +
-                    "                        |----    /----\\\n" +
-                    "                       || -\\\\ --|      \\\n" +
-                    "                       ||   || ||\\      \\\n" +
-                    "                        \\\\____// '|      \\\n" +
-                    "      Bang!                     .'/       |\n" +
-                    "                               .:/        |\n" +
-                    "                               :/_________|", 2);
+            console.printWithDelays(printPistol(), 2);
             try {
                 io.zipcoder.casino.Utility.Music.filePath = "src/music/(bang) sound effect.wav";
                 bang = new io.zipcoder.casino.Utility.Music();
@@ -157,61 +144,92 @@ public class RRGame extends DiceGame implements Game {
                 System.out.println("Error with playing sound.");
                 ex.printStackTrace();
             }
-            console.printWithDelays("   ,ggggggg,             ,gggggggggggggg                  \n" +
-                    " ,dP\"\"\"\"\"\"Y8b ,dPYb,    dP\"\"\"\"\"\"88\"\"\"\"\"\"                  \n" +
-                    " d8'    a  Y8 IP'`Yb    Yb,_    88                        \n" +
-                    " 88     \"Y8P' I8  8I     `\"\"    88      gg                \n" +
-                    " `8baaaa      I8  8'         ggg88gggg  \"\"                \n" +
-                    ",d8P\"\"\"\"      I8 dP             88   8  gg    ,ggg,,ggg,  \n" +
-                    "d8\"           I8dP              88      88   ,8\" \"8P\" \"8, \n" +
-                    "Y8,           I8P         gg,   88      88   I8   8I   8I \n" +
-                    "`Yba,,_____, ,d8b,_        \"Yb,,8P    _,88,_,dP   8I   Yb,\n" +
-                    "  `\"Y8888888 8P'\"Y88         \"Y8P'    8P\"\"Y88P'   8I   `Y8\n\n\n\n",3);
+            console.printWithDelays(printElFin(), 3);
             console.sleep(3000);
 
             elFin.stop();
 
             System.exit(0);
 
-        }
-        else {
+        } else {
             gameServices.payOut(this.player.getBalance(), this.player);
             console.println(displayWinnerBalance());
             console.sleep(1000);
             endChoice();
 
 
-    }
+        }
 
     }
+
     public Integer userRollsDice() {
         console.getInput("\n(Press Enter to roll the die): \n");
-        userDieNum=roll();
+        userDieNum = roll();
         return userDieNum;
     }
 
 
-    public Integer computerRoll () {
+    public Integer computerRoll() {
         computersRoll = roll();
         return computersRoll;
     }
 
-        public String houseRollDisplay (Integer computersRoll){
-        return String.format("------------------------------------------------------\n\n** The House rolled %d **\n" + DiceGame.diceToASCII(computersRoll), computersRoll );
-}
+    public String houseRollDisplay(Integer computersRoll) {
+        return String.format("------------------------------------------------------\n\n** The House rolled %d **\n" + DiceGame.diceToASCII(computersRoll), computersRoll);
+    }
 
-    public String userRollDisplay (Integer userDieNum) {
+    public String userRollDisplay(Integer userDieNum) {
         return (String.format("------------------------------------------------------\n** You rolled %d **\n\n" + DiceGame.diceToASCII(userDieNum), userDieNum));
     }
 
-    public String displayUserBalance () {
+    public String displayUserBalance() {
         return String.format("Your Current Balance Is %.2f", player.getBalance());
     }
 
 
-        public String displayWinnerBalance () {
-            return String.format("\n\nYou Won!!! Your Balance Is Now $%.2f\n",player.getBalance());
-        }
+    public String displayWinnerBalance() {
+        return String.format("\n\nYou Won!!! Your Balance Is Now $%.2f\n", player.getBalance());
     }
+
+    public String printElFin() {
+        String elFinMessage = "   ,ggggggg,             ,gggggggggggggg                  \n" +
+                " ,dP\"\"\"\"\"\"Y8b ,dPYb,    dP\"\"\"\"\"\"88\"\"\"\"\"\"                  \n" +
+                " d8'    a  Y8 IP'`Yb    Yb,_    88                        \n" +
+                " 88     \"Y8P' I8  8I     `\"\"    88      gg                \n" +
+                " `8baaaa      I8  8'         ggg88gggg  \"\"                \n" +
+                ",d8P\"\"\"\"      I8 dP             88   8  gg    ,ggg,,ggg,  \n" +
+                "d8\"           I8dP              88      88   ,8\" \"8P\" \"8, \n" +
+                "Y8,           I8P         gg,   88      88   I8   8I   8I \n" +
+                "`Yba,,_____, ,d8b,_        \"Yb,,8P    _,88,_,dP   8I   Yb,\n" +
+                "  `\"Y8888888 8P'\"Y88         \"Y8P'    8P\"\"Y88P'   8I   `Y8\n\n\n\n";
+        return elFinMessage;
+    }
+
+    public String printPistol() {
+        String pistol = "                                  \n\n\n" +
+                "   )                               /=>\n" +
+                "  (  +____________________/\\/\\___ / /|\n" +
+                "   .''._____________'._____      / /|/\\\n" +
+                "  : () :              :\\ ----\\|    \\ )\n" +
+                "   '..'______________.'0|----|      \\\n" +
+                "                    0_0/____/        \\\n" +
+                "                        |----    /----\\\n" +
+                "                       || -\\\\ --|      \\\n" +
+                "                       ||   || ||\\      \\\n" +
+                "                        \\\\____// '|      \\\n" +
+                "      Bang!                     .'/       |\n" +
+                "                               .:/        |\n" +
+                "                               :/_________|";
+        return pistol;
+    }
+
+    public String printLosingMessage() {
+        String losingMessage = "\nYou Lost!!!";
+        console.sleep(2000);
+
+        console.clearScreen();
+        console.printWithDelays("[DEALER]: Don't you know how Russian Roulette works?\n\n", 80);
+    }
+}
 
 
