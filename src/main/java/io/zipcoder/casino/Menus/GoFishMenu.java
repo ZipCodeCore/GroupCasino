@@ -25,14 +25,14 @@ public class GoFishMenu implements Menu {
     @Override
     public void displayMenu() {
         //Starts playing music!
-        try {
-            Music.filePath = "src/music/(Go Fish) Underwater Theme GuitarMarimba Cover - Super Mario Bros. 1.wav";
-            fishMusic = new Music();
-            fishMusic.play();
-        } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace();
-        }
+//        try {
+//            Music.filePath = "src/music/(Go Fish) Underwater Theme GuitarMarimba Cover - Super Mario Bros. 1.wav";
+//            fishMusic = new Music();
+//            fishMusic.play();
+//        } catch (Exception ex) {
+//            System.out.println("Error with playing sound.");
+//            ex.printStackTrace();
+//        }
         console.clearScreen();
 
 

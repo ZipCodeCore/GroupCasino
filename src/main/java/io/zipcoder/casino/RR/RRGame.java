@@ -84,15 +84,8 @@ public class RRGame extends DiceGame implements Game {
         String endChoiceInput = console.getInput(("\n[DEALER]: You have finished this Russian Roulette Game.\n[DEALER]: Would you like to play again? (Y/N)\n"));
 
         if (endChoiceInput.toUpperCase().equals("N")) {
-            try {
-                rouletteMusic.stop();
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            }
+            rouletteMusic.stop();
+
             console.printWithDelays("\n[DEALER]: Have a good rest of your day.\n");
             console.sleep(1200);
 
@@ -116,15 +109,9 @@ public class RRGame extends DiceGame implements Game {
         userRollsDice();
         console.println(userRollDisplay(userDieNum));
         if (userDieNum.equals(computersRoll)) {
-            try {
-                rouletteMusic.stop();
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            }
+
+            rouletteMusic.stop();
+
             gameServices.wager(player.getBalance(),player);
             console.println("\nYou Lost!!!");
             console.sleep(2000);
@@ -155,15 +142,9 @@ public class RRGame extends DiceGame implements Game {
                 ex.printStackTrace();
             }
             console.sleep(1000);
-            try {
-                bang.stop();
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            }
+
+            bang.stop();
+
             console.sleep(1000);
 
             console.clearScreen();
@@ -186,15 +167,9 @@ public class RRGame extends DiceGame implements Game {
                     "`Yba,,_____, ,d8b,_        \"Yb,,8P    _,88,_,dP   8I   Yb,\n" +
                     "  `\"Y8888888 8P'\"Y88         \"Y8P'    8P\"\"Y88P'   8I   `Y8\n\n\n\n",3);
             console.sleep(3000);
-            try {
-                elFin.stop();
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            }
+
+            elFin.stop();
+
             System.exit(0);
 
         }

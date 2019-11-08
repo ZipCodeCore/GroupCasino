@@ -151,15 +151,9 @@ public class CrapsGame extends DiceGame implements Game {
     public void endChoice()  {
         String endChoiceInput = console.getInput("\n[CROUPIER]: You have finished this game of Craps.\n\nWould you like to play again? (Y/N)\n");
         if (endChoiceInput.toUpperCase().equals("N")) {
-            try {
-                crapsMusic.stop();
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            }
+
+            crapsMusic.stop();
+
             console.println("\n[CROUPIER]: Have a good rest of your day.\n");
             //Return to games menu from here
         } else if (endChoiceInput.toUpperCase().equals("Y")) {

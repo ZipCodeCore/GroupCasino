@@ -5,6 +5,9 @@ import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Utility.Music;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -44,9 +47,21 @@ public class Casino {
 
     public static void prologue() {
         Thread inputThread = new Thread(new Runnable() {
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            long startTime = System.currentTimeMillis();
+
             @Override
             public void run() {
-                console.getInput("");
+                while (true) {
+                    try {
+                        if (((System.currentTimeMillis() - startTime) < 5000 && in.ready())) {
+                            in.read();
+                            break;
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 return;
             }
         });
@@ -94,7 +109,7 @@ public class Casino {
 
 
     public static Player newPlayerDialogue() {
-        console.sleep(1200);
+
         console.printWithDelays("\n" + "\n((You walk up to the entrance and get greeted by a tall, stocky man with a handlebar mustache))\n");
 
         String firstName = console.getInput("\n[TELLER]: What's your first name?\n");

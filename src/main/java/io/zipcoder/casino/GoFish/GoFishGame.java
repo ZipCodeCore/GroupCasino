@@ -27,7 +27,7 @@ public class GoFishGame extends CardGame implements Game {
     private CardSet opponentsCards;
     private CardSet playerSuites;
     private CardSet opponentSuites;
-    private Music goFishMusic = null;
+    private Music fishMusic = null;
     private String actingPlayer;
     ArrayList<Card> stolenCards;
 
@@ -56,6 +56,14 @@ public class GoFishGame extends CardGame implements Game {
     //populates player deals hands
     public void startPlay() {
         resetGame();
+        try {
+            Music.filePath = "src/music/(Go Fish) Underwater Theme GuitarMarimba Cover - Super Mario Bros. 1.wav";
+            fishMusic = new Music();
+            fishMusic.play();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
         new GoFishMenu(this).displayMenu();
         goTitleScreen();
         initialDeal();
@@ -140,6 +148,8 @@ public class GoFishGame extends CardGame implements Game {
                     }
                 }
             }
+        } else {
+            fishMusic.stop();
         }
     }
     public GoFishPlayer checkForWin(GoFishPlayer playerUp, GoFishPlayer nextPlayer, CardSet playerUpSuites, CardSet nextPlayerSuites) {
@@ -170,6 +180,8 @@ public class GoFishGame extends CardGame implements Game {
             console.printWithDelays("\n[DEALER]: Enjoy the rest of your stay!!\n");
             console.sleep(1500);
 
+
+            fishMusic.stop();
 
             //also, return to the main menu
         } else if (endChoiceInput.toUpperCase().equals("Y")) {

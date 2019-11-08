@@ -51,8 +51,7 @@ public class Music
 
 
     // Method to stop the audio
-    public void stop() throws UnsupportedAudioFileException,
-            IOException, LineUnavailableException
+    public void stop()
     {
         currentFrame = 0L;
         clip.stop();
