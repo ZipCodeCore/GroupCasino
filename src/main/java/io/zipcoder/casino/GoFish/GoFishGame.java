@@ -40,7 +40,6 @@ public class GoFishGame extends CardGame implements Game {
         this.playerSuites = new CardSet(0);
         this.opponentSuites = new CardSet(0);
         this.shoe = new CardSet(1);
-
     }
 
     public static void main(String[] args) { // for testing
@@ -48,10 +47,11 @@ public class GoFishGame extends CardGame implements Game {
         GoFishGame goFishGame = new GoFishGame(player);
         goFishGame.startPlay();
     }
-    public void setupGame(){
 
+    public void setupGame(){
         startPlay();
     }
+
     //populates player deals hands
     public void startPlay() {
         resetGame();
@@ -74,7 +74,6 @@ public class GoFishGame extends CardGame implements Game {
         for (int i = 0; i < 7; i++) {
             this.playersCards.addCard(this.shoe.removeFirstCard());
             this.opponentsCards.addCard(this.shoe.removeFirstCard());
-
         }
     }
 
@@ -112,7 +111,7 @@ public class GoFishGame extends CardGame implements Game {
     }
 
     public void turn(GoFishPlayer playerUp, GoFishPlayer nextPlayer, CardSet playerUpCards, CardSet nextPlayerCards, CardSet playerUpSuites, CardSet nextPlayerSuites) {
-        // TODO: check for win, cause it to drop through the end of the method
+
         GoFishPlayer winStatus = checkForWin(playerUp, nextPlayer, playerUpSuites, nextPlayerSuites);
         announceWinner(winStatus);
         String cardChoice = "";
@@ -165,11 +164,11 @@ public class GoFishGame extends CardGame implements Game {
             return null;
         }
     }
+
     public void announceWinner(GoFishPlayer winner) {
         if (null != winner) {
             console.printWithDelays(winner.getPlayer().getFirstName() + " IS THE WINNER!!!!!!!!! \n");
             endChoice();
-        } else {
         }
     }
     @Override
@@ -182,14 +181,11 @@ public class GoFishGame extends CardGame implements Game {
             console.printWithDelays("\n[DEALER]: Enjoy the rest of your stay!!\n");
             console.sleep(1500);
 
-
             fishMusic.stop();
 
             //also, return to the main menu
         } else if (endChoiceInput.toUpperCase().equals("Y")) {
-
             console.clearScreen();
-
             startPlay();
 
         } else {
@@ -197,6 +193,7 @@ public class GoFishGame extends CardGame implements Game {
             endChoice();
         }
     }
+
     public void resetGame() {
         this.playersCards = new CardSet(0);
         this.opponentsCards = new CardSet(0);
@@ -204,15 +201,19 @@ public class GoFishGame extends CardGame implements Game {
         this.opponentSuites = new CardSet(0);
         this.shoe = new CardSet(1);
     }
+
     public String getName() {
         return name;
     }
+
     public GoFishPlayer getPlayer() {
         return player;
     }
+
     public GoFishNPC getOpponent() {
         return opponent;
     }
+
     public String createMessage(GoFishPlayer playerUp, ArrayList stolenCards, String cardChoice, Card fishedCard) {
         String msg = "";
         if (fishedCard != null) {
@@ -226,7 +227,8 @@ public class GoFishGame extends CardGame implements Game {
         }
 
         return msg;
-        }
+    }
+
     public CardSet getPlayersCards() {
         return playersCards;
     }
@@ -253,12 +255,14 @@ public class GoFishGame extends CardGame implements Game {
         console.println(displayPlayerSuites());
         console.println(displayPlayerHands());
     }
+
     public String displayPreviousTurn(){
         if (actingPlayer != null){
         return "*******************************************************************\n"+ actingPlayer + " Asked for " +  ""  + ".  Received " + stolenCards.size();
     }
         return "GO FISH!";
     }
+
     public String displayPlayerSuites() {
         return "************************* PLAYER'S SUITES *************************\n" + playerSuites.toASCIISuite() + "\n";
     }
@@ -274,7 +278,6 @@ public class GoFishGame extends CardGame implements Game {
     public String displayOpponentSuites() {
         return "************************ OPPONENT'S SUITES ************************\n" + opponentSuites.toASCIISuite() + "\n";
     }
-
 
     public String goTitleScreen() {
         console.println("\n   >===>                         >=>                      \n" +

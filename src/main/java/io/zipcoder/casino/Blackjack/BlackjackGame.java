@@ -35,7 +35,7 @@ public class BlackjackGame extends CardGame implements Game {
     private ArrayList<BlackjackHand> hands;
     private CardSet shoe;
     private int numDecks;
-    Music blackJackMusic = null;
+    private Music blackJackMusic = null;
 
 
     public BlackjackGame(double minBet, double maxBet, Player incomingPlayer) {
