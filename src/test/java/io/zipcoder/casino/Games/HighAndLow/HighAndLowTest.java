@@ -161,4 +161,19 @@ public class HighAndLowTest {
         Integer actual = currentPlayer.getBalance();
         Assert.assertEquals(expected,actual);
     }
+
+    @Test
+    public void resetGameTest(){
+        HighAndLow highAndLow = new HighAndLow();
+        Assert.assertTrue(highAndLow.resetGame());
+    }
+
+    @Test
+    public void noBetTest(){
+        HighAndLow highAndLow = new HighAndLow();
+        Integer totalBetValue = 1000;
+        String expected = String.format("You lost $%d.00 at High and Low. ** ", totalBetValue);
+        String actual = highAndLow.noBet(1000);
+        Assert.assertEquals(expected,actual);
+    }
 }

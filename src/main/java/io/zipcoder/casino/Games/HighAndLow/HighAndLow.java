@@ -67,9 +67,10 @@ public class HighAndLow implements Game, GamblingGame {
         return language.getHighAndLowLanguage(HighAndLowLanguage.Language.RULES);
     }
 
-    public void resetGame(){
+    public Boolean resetGame(){
         didYouBet = true;
         totalBetValue = 0;
+        return didYouBet;
     }
 
     @Override
@@ -109,11 +110,9 @@ public class HighAndLow implements Game, GamblingGame {
         return sumOfRolls;
     }
 
-    public void noBet(Integer totalBetValue){
+    public String noBet(Integer totalBetValue){
         console.println("Backing out? No problem! You've lost $%d.00", totalBetValue);
-        LocalDateTime now = LocalDateTime.now();
-        String addHistory = String.format("You lost $%d.00 at High and Low. ** ", totalBetValue);
-        currentPlayer.addHistory(addHistory + dateTimeReformatter.format(now));
+        return String.format("You lost $%d.00 at High and Low. ** ", totalBetValue);
     }
 
     public void playWinOrLoseSound(Integer firstRoll, Integer secondRoll, String highOrLowBet){
@@ -204,7 +203,9 @@ public class HighAndLow implements Game, GamblingGame {
                 spendSound.play();
                 placeBet(currentPlayer);
             }else {
-                noBet(totalBetValue);
+                String noBetHistory = noBet(totalBetValue);
+                LocalDateTime now = LocalDateTime.now();
+                currentPlayer.addHistory(noBetHistory + dateTimeReformatter.format(now));
                 exitGame(currentPlayer);
                 break;
             }

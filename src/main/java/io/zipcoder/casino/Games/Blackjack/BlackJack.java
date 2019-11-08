@@ -113,6 +113,7 @@ public class BlackJack implements Game, GamblingGame {
 
             switch (playerInput) {
                 case 1:
+                    running = true;
                     runGame(currentPlayer);
 
                     break;
@@ -242,6 +243,7 @@ public class BlackJack implements Game, GamblingGame {
 
 
                     }
+
 
 
                 }
