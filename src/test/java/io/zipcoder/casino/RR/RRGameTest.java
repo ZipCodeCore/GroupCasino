@@ -84,7 +84,7 @@ public class RRGameTest{
     public void houseDisplayRollTest () {
         testGame.setComputersRoll(5);
         Integer computersRoll = testGame.getComputersRoll();
-        String expected = DiceGame.diceToASCII(computersRoll) + "------------------------------------------------------\n\n** The House rolled 5 **\n";
+        String expected = "------------------------------------------------------\n\n** The House rolled 5 **\n" + DiceGame.diceToASCII(computersRoll);
         String actual = testGame.houseRollDisplay(computersRoll);
         Assert.assertEquals(expected , actual);
     }
@@ -93,7 +93,7 @@ public class RRGameTest{
     public void userRollDisplay() {
         testGame.setUserDieNum(6);
         Integer userDieNum = testGame.getUserDieNum();
-        String expected = (DiceGame.diceToASCII(userDieNum) + "\n** You rolled 6 **\n\n------------------------------------------------------");
+        String expected = "------------------------------------------------------\n** You rolled 6 **\n\n" + DiceGame.diceToASCII(userDieNum);
         String actual = testGame.userRollDisplay(userDieNum);
         Assert.assertEquals(expected, actual);
     }
