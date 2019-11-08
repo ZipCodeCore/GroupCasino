@@ -169,6 +169,23 @@ public final class Console {
         return Double.valueOf(input);
     }
 
+    public Double getCurrencyOrEnter(String prompt) {
+        print(prompt);
+        String input = getInput("$");
+        while (true) {
+            if (currencyCheck(input)) {
+                break;
+            } else if (input.equals("")) {
+                return null;
+            } else {
+                printWithDelays("Enter a valid number");
+                print(prompt);
+                input = getInput("$");
+            }
+        }
+        return Double.valueOf(input);
+    }
+
     public Double getCurrency(String prompt, double min, double max) {
         print(prompt);
         String input = getInput("$");

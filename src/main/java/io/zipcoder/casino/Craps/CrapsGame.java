@@ -2,20 +2,11 @@ package io.zipcoder.casino.Craps;
 
 import io.zipcoder.casino.DiceGame;
 import io.zipcoder.casino.Interfaces.Game;
-import io.zipcoder.casino.Menus.Casino;
 import io.zipcoder.casino.Menus.CrapsMenu;
-import io.zipcoder.casino.Menus.GameMenu;
-import io.zipcoder.casino.Menus.MainMenu;
 import io.zipcoder.casino.Player;
-import io.zipcoder.casino.Services.GameRepo;
 import io.zipcoder.casino.Services.GameServices;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Utility.Music;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 public class CrapsGame extends DiceGame implements Game {
 
@@ -33,7 +24,7 @@ public class CrapsGame extends DiceGame implements Game {
     private Integer numRolls = 0;
     private Console console = new Console(System.in, System.out);
     private GameServices gameServices = new GameServices();
-    Music crapsMusic = null;
+    private Music crapsMusic = null;
     private Integer die1Point;
     private Integer die2Point;
     private Integer die1Current;
@@ -66,61 +57,61 @@ public class CrapsGame extends DiceGame implements Game {
         new CrapsMenu(this).displayMenu();
 
         roundOfPlay();
-
-        endChoice();
+        crapsMusic.stop();
     }
 
     @Override
     //runs a new game of craps
     public void roundOfPlay() {
         Double betSize = betChoice();
-        userRollsDiceSetPoint();
-        console.println(displayPointRoll());
-        if (winOnFirst(setThePointRoll) == true) {
-            winnings = calculateWinnings(betSize, setThePointRoll, numRolls);
-            console.println(winningMessageFirstRoll());
+        if (betSize > 0) {
+            userRollsDiceSetPoint();
+            console.println(displayPointRoll());
+            if (winOnFirst(setThePointRoll) == true) {
+                winnings = calculateWinnings(betSize, setThePointRoll, numRolls);
+                console.println(winningMessageFirstRoll());
 
-        } else if (loseOnFirst(setThePointRoll) == true) {
-            console.println(losingMessageFirstRoll());
-        }
-        else {
-            for (int i = 0; i < 3; i++) {
-                numRolls = i + 1;
-                userRollsDiceCurrentPoint();
-                console.println(displayCurrentRoll(currentRoll));
-                if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
-                    winnings = calculateWinnings(betSize, setThePointRoll, numRolls);
-                    console.printWithDelays(winOnSubsequentMessage(), 50);
-                    break;
-                } else if (loseOnSubsequent(currentRoll) == true) {
-                    console.println(loseOnSubsequentMessage());
-                    break;
-                }
-                if (i == 2) {
-                    console.println(losingMessageOutOfRolls());
+            } else if (loseOnFirst(setThePointRoll) == true) {
+                console.println(losingMessageFirstRoll());
+            } else {
+                for (int i = 0; i < 3; i++) {
+                    numRolls = i + 1;
+                    userRollsDiceCurrentPoint();
+                    console.println(displayCurrentRoll(currentRoll));
+                    if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
+                        winnings = calculateWinnings(betSize, setThePointRoll, numRolls);
+                        console.printWithDelays(winOnSubsequentMessage(), 50);
+                        break;
+                    } else if (loseOnSubsequent(currentRoll) == true) {
+                        console.println(loseOnSubsequentMessage());
+                        break;
+                    }
+                    if (i == 2) {
+                        console.println(losingMessageOutOfRolls());
+                    }
                 }
             }
+            endChoice();
         }
     }
 
 
     public Double betChoice()  {
         console.println(String.format("\nCurrent bankroll: $%.2f", this.player.getPlayer().getBalance()));
-        wager = console.getCurrency(String.format("\n[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: What's your Bet? (Or press ENTER to leave the table)\n\n", this.minBet, this.maxBet));
-         if (wager > this.player.getPlayer().getBalance()){
-            console.println(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.\n", this.player.getPlayer().getLastName()));
-            betChoice();
-        }
-        else if (wager < this.minBet || wager > this.maxBet) {
-            console.println(String.format("\n[CROUPIER]: You're not playing within the table limits, %s.\n", this.player.getPlayer().getLastName()));
-            betChoice();
-        }
-        else if (wager != null) {
-             gameServices.wager(wager, this.player.getPlayer());
-            return wager;
-        }
-        else if (wager == null); {
-           //Somehow return to the main menu from here.
+        wager = console.getCurrency(String.format("\n[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: What's your Bet? (0 to leave the table)\n\n", this.minBet, this.maxBet));
+        if (wager > 0) {
+            // betting more than player has
+            if (wager > this.player.getPlayer().getBalance()) {
+                console.println(String.format("\n[CROUPIER]: Your mouth is writing checks that your wallet can't cash, %s.\n", this.player.getPlayer().getLastName()));
+                betChoice();
+            } // betting outside table limits
+            else if (wager < this.minBet || wager > this.maxBet) {
+                console.println(String.format("\n[CROUPIER]: You're not playing within the table limits, %s.\n", this.player.getPlayer().getLastName()));
+                betChoice();
+            } // wager ok
+            else {
+                gameServices.wager(wager, this.player.getPlayer());
+            }
         }
         return wager;
     }

@@ -75,6 +75,7 @@ public class RRGame extends DiceGame implements Game {
         // store menu
         RRMenu rrMenu = new RRMenu(this);
         rrMenu.displayMenu();
+        rouletteMusic.stop();
     }
 
     @Override
@@ -184,7 +185,7 @@ public class RRGame extends DiceGame implements Game {
 
     }
     public Integer userRollsDice() {
-        console.getInput("\n(Press Enter to roll the dice): \n");
+        console.getInput("\n(Press Enter to roll the die): \n");
         userDieNum=roll();
         return userDieNum;
     }
