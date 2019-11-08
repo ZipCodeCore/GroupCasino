@@ -30,6 +30,8 @@ public class GoFishGame extends CardGame implements Game {
     private Music fishMusic = null;
     private String actingPlayer;
     ArrayList<Card> stolenCards;
+    private String message;
+    Card fishedCard;
 
 
 
@@ -117,6 +119,7 @@ public class GoFishGame extends CardGame implements Game {
         GoFishPlayer winStatus = checkForWin(playerUp, nextPlayer, playerUpSuites, nextPlayerSuites);
         announceWinner(winStatus);
         String cardChoice = "";
+        fishedCard = null;
         if (winStatus == null) {
             emptyHandDraw(playerUpCards);
             console.clearScreen();
@@ -131,9 +134,11 @@ public class GoFishGame extends CardGame implements Game {
                 integrateStolenCards(stolenCards, playerUpCards);
                 // scan and get another turn
                 scanForSuites(playerUpCards, playerUpSuites, cardChoice);
+                message = createMessage(playerUp, stolenCards, cardChoice, fishedCard);
                 turn(playerUp, nextPlayer, playerUpCards, nextPlayerCards, playerUpSuites, nextPlayerSuites);
             } else { // didn't guess correctly
-                Card fishedCard = drawCard(playerUpCards);
+                fishedCard = drawCard(playerUpCards);
+                message = createMessage(playerUp, stolenCards, cardChoice, fishedCard);
                 if (fishedCard.getRank().equals(cardChoice)) { // drew a helpful card
                     //scan and get another turn
                     scanForSuites(playerUpCards, playerUpSuites, cardChoice);
@@ -212,18 +217,18 @@ public class GoFishGame extends CardGame implements Game {
         return opponent;
     }
     public String createMessage(GoFishPlayer playerUp, ArrayList stolenCards, String cardChoice, Card fishedCard) {
+        String msg = "";
         if (fishedCard != null) {
-            return "*******************************************************************\n" + playerUp.getPlayer().getFirstName() + " Asked for " + cardChoice;
-        } else {
-            return "*******************************************************************\n" + playerUp.getPlayer().getFirstName() + " Asked for " + cardChoice + ".  Received " + stolenCards.size();
+            if (playerUp instanceof GoFishNPC) {
+                msg = "*******************************************************************\n" + playerUp.getPlayer().getFirstName() + " Asked for " + cardChoice + ".  Drew a card.";
+            } else {
+                msg = "*******************************************************************\n" + playerUp.getPlayer().getFirstName() + " Asked for " + cardChoice + ".  Drew " + fishedCard.toString();
+            }
         }
-    }
+            msg = "*******************************************************************\n" + playerUp.getPlayer().getFirstName() + " Asked for " + cardChoice + ".  Received " + stolenCards.size();
 
-
-    public CardSet getShoe() {
-        return shoe;
-    }
-
+        return msg;
+        }
     public CardSet getPlayersCards() {
         return playersCards;
     }
@@ -246,7 +251,7 @@ public class GoFishGame extends CardGame implements Game {
         playerSuites.sort();
         console.println(displayOpponentHands());
         console.println(displayOpponentSuites());
-        console.println(displayPreviousTurn());
+        console.println(message);
         console.println(displayPlayerSuites());
         console.println(displayPlayerHands());
     }
