@@ -38,7 +38,10 @@ public class CrapsGame extends DiceGame implements Game {
     private Integer die2Point;
     private Integer die1Current;
     private Integer die2Current;
-    GameRepo gameRepo;
+    private Double winnings = 0D;
+    private Double wager = 0D;
+
+
 
 
     //Craps Game Constructor
@@ -74,9 +77,9 @@ public class CrapsGame extends DiceGame implements Game {
         userRollsDiceSetPoint();
         console.println(displayPointRoll());
         if (winOnFirst(setThePointRoll) == true) {
-
+            winnings = calculateWinnings(betSize, setThePointRoll, numRolls);
             console.println(winningMessageFirstRoll());
-            calculateWinnings(betSize, setThePointRoll, numRolls);
+
         } else if (loseOnFirst(setThePointRoll) == true) {
             console.println(losingMessageFirstRoll());
         }
@@ -86,8 +89,8 @@ public class CrapsGame extends DiceGame implements Game {
                 userRollsDiceCurrentPoint();
                 console.println(displayCurrentRoll(currentRoll));
                 if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
+                    winnings = calculateWinnings(betSize, setThePointRoll, numRolls);
                     console.printWithDelays(winOnSubsequentMessage(), 50);
-                    calculateWinnings(betSize, setThePointRoll, numRolls);
                     break;
                 } else if (loseOnSubsequent(currentRoll) == true) {
                     console.println(loseOnSubsequentMessage());
@@ -100,8 +103,8 @@ public class CrapsGame extends DiceGame implements Game {
         }
     }
 
+
     public Double betChoice()  {
-        Double wager;
         console.println(String.format("\nCurrent bankroll: $%.2f", this.player.getPlayer().getBalance()));
         wager = console.getCurrency(String.format("\n[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: What's your Bet? (Or press ENTER to leave the table)\n\n", this.minBet, this.maxBet));
          if (wager > this.player.getPlayer().getBalance()){
@@ -118,8 +121,6 @@ public class CrapsGame extends DiceGame implements Game {
         }
         else if (wager == null); {
            //Somehow return to the main menu from here.
-
-
         }
         return wager;
     }
@@ -233,7 +234,7 @@ public class CrapsGame extends DiceGame implements Game {
     }
 
     public String winningMessageFirstRoll() {
-        return String.format("\n(( You rolled a %d on the first roll! ))\n\nCongratulations!!\n\nYou are a winner!!!\n-------------------------------------------------\n\n", setThePointRoll);
+        return String.format("\n(( You rolled a %d on the first roll! ))\n\nCongratulations!!\n\nYou won $%.2f!!!\n-------------------------------------------------\n\n", setThePointRoll, winnings-wager);
     }
 
     public String losingMessageFirstRoll() {
@@ -248,11 +249,12 @@ public class CrapsGame extends DiceGame implements Game {
     public Integer tossCurrentRoll(Integer die1Current, Integer die2Current) {
         currentRoll = die1Current + die2Current;
         return currentRoll;
+
     }
 
 
     public String winOnSubsequentMessage (){
-        return (String.format("Hooray! You rolled a %d, and you have won!!  It took you %d rolls to win.", currentRoll, numRolls));
+        return (String.format("Hooray! You rolled a %d, and you have won $%.2f!!  It took you %d rolls to win.", currentRoll, winnings-wager, numRolls));
     }
 
     public String loseOnSubsequentMessage () {

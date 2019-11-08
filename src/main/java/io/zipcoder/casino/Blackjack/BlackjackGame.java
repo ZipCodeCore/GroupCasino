@@ -110,7 +110,9 @@ public class BlackjackGame extends CardGame implements Game {
         }
 
         new BlackjackMenu(this).displayMenu();
-        roundStart();
+        if (this.minBet != 0.0) {
+            roundStart();
+        }
 
         //stops the music!
         try {
