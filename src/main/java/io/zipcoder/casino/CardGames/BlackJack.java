@@ -5,7 +5,7 @@ import io.zipcoder.casino.Player.GamblingPlayer;
 import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
-
+import java.util.HashMap;
 
 
 public class BlackJack implements GamblingGame {
@@ -21,93 +21,55 @@ public class BlackJack implements GamblingGame {
     private int wageBucket;
     private Card card;
 
+    public Integer playerRefactoredHandValue;
+    public Integer dealerRefactoredHandValue;
+
+    public boolean playerHasBlackJack;
+    public boolean dealerHasBlackJack;
+    public boolean playerAndDealerHaveBlackJack;
+    public boolean playerBust;
+    public boolean dealerBust;
+    public boolean playerWin;
+    public boolean dealerWin;
+    public boolean playerDealerPush;
+    private boolean continuePlay;
+
 
     public BlackJack(Player user) {
+        this.continuePlay = true;
         this.gamblingPlayer = new GamblingPlayer(user);
     }
 
-    public GamblingPlayer getGamblingPlayer() {
-        return gamblingPlayer;
-    }
 
-    public void setGamblingPlayer(GamblingPlayer gamblingPlayer) {
-        this.gamblingPlayer = gamblingPlayer;
-    }
-
-    public CardHand getGamblingPlayerHand() {
-        return gamblingPlayerHand;
-    }
-
-    public void setGamblingPlayerHand(CardHand gamblingPlayerHand) {
-        this.gamblingPlayerHand = gamblingPlayerHand;
-    }
-
-    public Deck getBlackJackDeck() {
-        return blackJackDeck;
-    }
-
-    public void setBlackJackDeck(Deck blackJackDeck) {
-        this.blackJackDeck = blackJackDeck;
-    }
-
-    public CardHand getComputerHand() {
-        return computerHand;
-    }
-
-    public void setComputerHand(CardHand computerHand) {
-        this.computerHand = computerHand;
-    }
-
-    public boolean isWinGame() {
-        return winGame;
-    }
-
-    public void setWinGame(boolean winGame) {
-        this.winGame = winGame;
-    }
-
-    public Player getUser() {
-        return user;
-    }
-
-    public void setUser(Player user) {
-        this.user = user;
-    }
-
-    public int getWageBucket() {
-        return wageBucket;
-    }
-
-    public void setWageBucket(int wageBucket) {
-        this.wageBucket = wageBucket;
-    }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
-    }
     public void startGame() {
         input.println(checkForChips());
         playBlackJack();
     }
 
-    public String checkForChips(){
-        if (gamblingPlayer.getBalance() < 10){return "You need at least $10.00 to play";}
-        else {return "Welcome to BlackJack!";}
+    public String checkForChips() {
+        if (gamblingPlayer.getBalance() < 10) {
+            return "You need at least $10.00 to play";
+        } else {
+            return "Welcome to BlackJack!";
+        }
     }
 
     public void playBlackJack() {
-        initializeBlackJackHands();
-        checkInitialHandValue(gamblingPlayerHand);
-        checkHandForAces(gamblingPlayerHand);
-        refactorAndCalculateHandValue(checkInitialHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
-        checkInitialHandValue(computerHand);
-        checkHandForAces(computerHand);
-        refactorAndCalculateHandValue(checkInitialHandValue(computerHand), checkHandForAces(computerHand));
+        while (continuePlay) {
+            promptUserForWagerAmount();
+            initializeBlackJackHands();
+            checkInitialHandValue(gamblingPlayerHand);
+            checkHandForAces(gamblingPlayerHand);
 
+            playerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
+            checkInitialHandValue(computerHand);
+            checkHandForAces(computerHand);
+            dealerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(computerHand), checkHandForAces(computerHand));
+
+            input.println(gamblingPlayerHand.displayHand());
+            hitOrStayAction(gamblingPlayerHand, promptHitOrStay());
+            evaluateHands();
+        }
     }
 
 
@@ -130,20 +92,21 @@ public class BlackJack implements GamblingGame {
     }
 
 
-
     //takes arrayList of cards from hand and separates them by card and totals point based on default Ace value of 11.
     public Integer checkInitialHandValue(CardHand hand) {
         Integer handValueForDefaultAce11 = 0;
-        for (int i = 0; i < hand.userHand.size(); i++) {
-            handValueForDefaultAce11 += card.blackJackCardRank.get(i);
+
+        for (Card card : hand.userHand) {
+            Rank rank = card.getRank();
+            handValueForDefaultAce11 += (Integer) blackJackCardRank.get(rank);
         }
         return handValueForDefaultAce11;
     }
 
-        //counts the number of Aces in cardHand.
+    //counts the number of Aces in cardHand.
     public Integer checkHandForAces(CardHand hand) {
         Integer aceCounter = 0;
-        for (int i = 0; i < hand.userHand.size(); i++) {
+        for (Card card : hand.userHand) {
             if (card.getRank() == Rank.ACE) {
                 aceCounter++;
             }
@@ -152,7 +115,7 @@ public class BlackJack implements GamblingGame {
     }
 
 
-        //evaluates score of blackjack hand and determines whether or not the value of each Ace should remain at 11 points or be reassigned to 1 point. Returns new hand value.
+    //evaluates score of blackjack hand and determines whether or not the value of each Ace should remain at 11 points or be reassigned to 1 point. Returns new hand value.
     public Integer refactorAndCalculateHandValue(Integer handValueForDefaultAce11, Integer numberOfAces) {
         Integer refactoredHandValue = handValueForDefaultAce11;     //default set to no changes.
         if (numberOfAces == 1 && handValueForDefaultAce11 > 21) {
@@ -173,48 +136,92 @@ public class BlackJack implements GamblingGame {
         return refactoredHandValue;
     }
 
-    public Integer playerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
-    public Integer dealerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(computerHand), checkHandForAces(computerHand));
+    public Integer promptHitOrStay() {
+        Integer hitOrStayUserInput = input.getIntegerInput("Press 1 to hit or 2 to stay.");
 
-    public boolean playerHasBlackJack = playerRefactoredHandValue == 21;
-    public boolean dealerHasBlackJack = dealerRefactoredHandValue == 21;
-    public boolean playerAndDealerHaveBlackJack = playerHasBlackJack && dealerHasBlackJack;
-    public boolean playerBust = playerRefactoredHandValue > 21;
-    public boolean dealerBust = dealerRefactoredHandValue > 21;
-    public boolean playerWin = !playerBust && playerRefactoredHandValue > dealerRefactoredHandValue;
-    public boolean dealerWin = !dealerBust && dealerRefactoredHandValue > playerRefactoredHandValue;
-    public boolean playerDealerPush = playerBust && dealerBust || playerRefactoredHandValue == dealerRefactoredHandValue;
+        switch (hitOrStayUserInput) {
+            case 1:
+                hitOrStayAction(gamblingPlayerHand,hitOrStayUserInput);
+                break;
+            case 2:
+                stay();
+                break;
+
+            default:
+                hitOrStayUserInput = input.getIntegerInput("Invalid key, press 1 to hit or 2 to stay.");
+                break;
+        }
+
+        return hitOrStayUserInput;
+    }
+
+    public void hitOrStayAction(CardHand hand, Integer hitOrStayUserInput) {
+        if (hitOrStayUserInput == 1) {
+            hand.userHand.add(blackJackDeck.drawCard());
+            hit();
+        } else {
+            stay();
+        }
+
+    }
+
+    public void stay() {
+        evaluateHands();
+        input.println(String.valueOf(playerRefactoredHandValue));
+        if (displayScore() == 1) startGame();
+        // check against the dealer
+    }
+
+    public void hit() {
+        checkInitialHandValue(gamblingPlayerHand);
+        checkHandForAces(gamblingPlayerHand);
+        playerRefactoredHandValue = refactorAndCalculateHandValue(checkInitialHandValue(gamblingPlayerHand), checkHandForAces(gamblingPlayerHand));
+        input.println(gamblingPlayerHand.displayHand());
+        evaluateHands();
+    }
+
+    public void evaluateHands() {
+        // TODO if both are over 21 or both under 21 but stay
+        playerHasBlackJack = (playerRefactoredHandValue == 21);
+        dealerHasBlackJack = (dealerRefactoredHandValue == 21);
+        playerAndDealerHaveBlackJack = (playerHasBlackJack && dealerHasBlackJack);
+
+        if (playerRefactoredHandValue > 21 || dealerRefactoredHandValue > 21) {
+            if (displayScore() == 2) promptLeaveGame();
+        }
+
+        if (dealerRefactoredHandValue > playerRefactoredHandValue){
+
+        }
+    }
 
 
+    public void getWinner(CardHand dealer, CardHand player) {
+    }
 
-
-
-//    public void displayPostInitialFlopWinner() {
-//        if(playerHasBlackJack && !dealerHasBlackJack)   {
-//            input.getIntegerInput();
-//
-//    }
-
-
-
+    public void promptLeaveGame() {
+        continuePlay = false;
+    }
 
     public Integer displayScore() {
         if (playerAndDealerHaveBlackJack) {
             return displayPlayerNDealerPushWithBlackJack();
-        }   else if (playerHasBlackJack && !dealerHasBlackJack) {
-            return displayPlayerWinsWithBlackJack(" You got BlackJack!\n", "Your hand: ", "Press 1 to play again or 2 to quit.\n");
-        }   else if(dealerHasBlackJack && !playerHasBlackJack) {
-            return dealerWinsWithBlackJack(" Dealer got BlackJack!\n", "Your hand: ", "Press 1 to play again or 2 to quit.\n");
-        }   else    {
-            return displayPlayerNDealerPush("Push!\n", "Your hand: ");
+        } else if (playerHasBlackJack && !dealerHasBlackJack) {
+            return displayPlayerWinsWithBlackJack(" You got BlackJack!\n", "Your hand: \n", "Press 1 to play again or 2 to quit.\n");
+        } else if (dealerHasBlackJack && !playerHasBlackJack) {
+            return dealerWinsWithBlackJack(" Dealer got BlackJack!\n", "Your hand: \n", "Press 1 to play again or 2 to quit.\n");
+        } else if (playerRefactoredHandValue == dealerRefactoredHandValue){
+            return displayPlayerNDealerPush("Push!\n", "Your hand: \n");
+        } else {
+            return displayPlayerNDealerPush("Push!\n", "Your hand: \n"); // TODO if both are over 21 or both under 21 but stay
         }
 
     }
 
     private Integer displayPlayerWinsWithBlackJack(String s, String s2, String s3) {
         return input.getIntegerInput(s +
-                s2 + gamblingPlayerHand.toString() + "\n" +
-                "Dealer hand: " + computerHand.toString() + "\n" +
+                s2 + gamblingPlayerHand.displayHand() + "\n" +
+                "Dealer hand: \n" + computerHand.displayHand() + "\n" +
                 s3);
     }
 
@@ -227,44 +234,38 @@ public class BlackJack implements GamblingGame {
     }
 
     private Integer displayPlayerNDealerPushWithBlackJack() {
-        return displayPlayerNDealerPush(" You and Dealer both got BlackJack!\n", "Your hand:  ");
+        return displayPlayerNDealerPush(" You and Dealer both got BlackJack!\n", "Your hand:  \n");
     }
 
+    private HashMap blackJackCardRank = new HashMap() {{
 
-
-    public Integer promptHitOrStay() {
-        Integer hitOrStayUserInput = input.getIntegerInput("Press 1 to hit or 2 to stay.");
-        while (hitOrStayUserInput != 1 || hitOrStayUserInput != 0) {
-            hitOrStayUserInput = input.getIntegerInput("Invalid key, press 1 to hit or 2 to stay.");
-        }
-        return hitOrStayUserInput;
-    }
-
-    public void hitOrStayAction(CardHand hand, Integer hitOrStayUserInput) {
-        if (hitOrStayUserInput == 1) {
-            hand.userHand.add(blackJackDeck.drawCard());
-        } else {
-
-        }
-
-    }
-
-    public void stay() {
-    }
+        put(Rank.TWO, 2);
+        put(Rank.THREE, 3);
+        put(Rank.FOUR, 4);
+        put(Rank.FIVE, 5);
+        put(Rank.SIX, 6);
+        put(Rank.SEVEN, 7);
+        put(Rank.EIGHT, 8);
+        put(Rank.NINE, 9);
+        put(Rank.TEN, 10);
+        put(Rank.ACE, 11);
+        put(Rank.JACK, 10);
+        put(Rank.QUEEN, 10);
+        put(Rank.KING, 10);
+    }};
 
 
 
-    public void checkCardValue(Card firstCard, Card secondCard) {
-    }
-
-    public void getWinner(CardHand dealer, CardHand player) {
-    }
-
-    public void promptLeaveGame() {
-    }
+//    public boolean playerBust = playerRefactoredHandValue > 21;
+//    public boolean dealerBust = dealerRefactoredHandValue > 21;
+//    public boolean playerWin = !playerBust && playerRefactoredHandValue > dealerRefactoredHandValue;
+//    public boolean dealerWin = !dealerBust && dealerRefactoredHandValue > playerRefactoredHandValue;
+//    public boolean playerDealerPush = playerBust && dealerBust || playerRefactoredHandValue == dealerRefactoredHandValue;
 
 
-    }
-
-
-
+//    public void displayPostInitialFlopWinner() {
+//        if(playerHasBlackJack && !dealerHasBlackJack)   {
+//            input.getIntegerInput();
+//
+//    }
+}
