@@ -76,10 +76,10 @@ public class SnakesAndLadders implements Game {
                 Integer playerRoll = diceRoll();
                 diceSound.play();
                 playerPosition = diceResults(playerRoll, true);
-                playerPosition = snakesAndLaddersCheckerViaMap(playerPosition);
-                playerPosition = snakesAndLaddersCheck(playerPosition, true);
+
+                Integer finalPlayerPosition = snakesAndLaddersCheck(playerPosition, true);
                 playSound(playerPosition);
-                winner = testIfWon(playerPosition, true);
+                winner = testIfWon(finalPlayerPosition, true);
                 if (winner.equals("Player")) {
                     break;
                 }
