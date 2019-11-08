@@ -221,11 +221,11 @@ public class RRGame extends DiceGame implements Game {
     }
 
         public String houseRollDisplay (Integer computersRoll){
-        return String.format(DiceGame.diceToASCII(computersRoll) + "------------------------------------------------------\n\n** The House rolled %d **\n", computersRoll);
+        return String.format("------------------------------------------------------\n\n** The House rolled %d **\n" + DiceGame.diceToASCII(computersRoll), computersRoll );
 }
 
     public String userRollDisplay (Integer userDieNum) {
-        return (String.format(DiceGame.diceToASCII(userDieNum) + "\n** You rolled %d **\n\n------------------------------------------------------", userDieNum));
+        return (String.format("------------------------------------------------------\n** You rolled %d **\n\n" + DiceGame.diceToASCII(userDieNum), userDieNum));
     }
 
     public String displayUserBalance () {
