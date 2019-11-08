@@ -32,16 +32,7 @@ public class CrapsTest {
 
     }
 
-    @Test
-    public void crapsRoll_Turn_0_roll__Test() {
-        //Commented out sum assignment and user input from method to perform test
-        int sum = 0;
 
-        String expected = "You rolled a " + sum + "\n";
-        String actual = testGame.crapsRoll();
-        Assert.assertEquals(expected, actual);
-
-    }
 
     @Test
     public void evaluateRollTest() {
@@ -52,10 +43,5 @@ public class CrapsTest {
     }
 
 
-    @Test
-    public void promptLeaveGameTest() {
-        //Tester must enter 2
-        testGame.promptLeaveGame();
 
-    }
 }
