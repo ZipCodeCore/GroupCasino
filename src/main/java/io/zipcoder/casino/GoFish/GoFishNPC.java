@@ -6,8 +6,6 @@ import io.zipcoder.casino.Player;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class GoFishNPC extends GoFishPlayer{
 

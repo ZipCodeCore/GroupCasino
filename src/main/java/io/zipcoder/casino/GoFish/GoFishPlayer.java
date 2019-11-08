@@ -26,8 +26,17 @@ public class GoFishPlayer {
     }
 
     public String chooseCard(CardSet hand) {
-
-        return console.getCardRankInput("");
+        ArrayList<String> ranks = new ArrayList<String>();
+        for (Card card : hand.getCards()) {
+            ranks.add(card.getRank());
+        }
+        String input = "";
+        while (true) {
+            input = console.getCardRankInput("");
+            if (ranks.contains(input)) {
+                return input;
+            }
+        }
     }
 
 

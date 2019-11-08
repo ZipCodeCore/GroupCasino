@@ -10,9 +10,6 @@ import io.zipcoder.casino.Utility.Music;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.logging.Logger;
-
 
 public class GoFishGame extends CardGame implements Game {
 
@@ -29,9 +26,9 @@ public class GoFishGame extends CardGame implements Game {
     private CardSet opponentSuites;
     private Music fishMusic = null;
     private String actingPlayer;
-    ArrayList<Card> stolenCards;
-    private String message;
-    Card fishedCard;
+    private ArrayList<Card> stolenCards;
+    private String message = "";
+    private Card fishedCard;
 
 
 
@@ -224,8 +221,9 @@ public class GoFishGame extends CardGame implements Game {
             } else {
                 msg = "*******************************************************************\n" + playerUp.getPlayer().getFirstName() + " Asked for " + cardChoice + ".  Drew " + fishedCard.toString();
             }
-        }
+        } else {
             msg = "*******************************************************************\n" + playerUp.getPlayer().getFirstName() + " Asked for " + cardChoice + ".  Received " + stolenCards.size();
+        }
 
         return msg;
         }
