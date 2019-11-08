@@ -37,6 +37,11 @@ public class BlackJack implements Game, GamblingGame {
     Integer handOfPlayer = checkHand(playerHand);
     Integer handOfDealer = checkHand(dealerHand);
     private DateTimeFormatter dateTimeFormatter = java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+
+    public Player getWinner() {
+        return winner;
+    }
+
     private Player winner = null;
     private Integer totalEarnings = 0;
 
@@ -108,6 +113,7 @@ public class BlackJack implements Game, GamblingGame {
 
             switch (playerInput) {
                 case 1:
+                    running = true;
                     runGame(currentPlayer);
 
                     break;
@@ -237,6 +243,7 @@ public class BlackJack implements Game, GamblingGame {
 
 
                     }
+
 
 
                 }
