@@ -13,7 +13,7 @@ public class Craps implements GamblingGame {
     private GamblingPlayer crapsPlayer;
     private Console console;
     private boolean continuePlay;
-    private Integer turn;
+    private Integer turn = 0;
     private Integer targetScore;
     private int sum;
 
@@ -68,10 +68,10 @@ public class Craps implements GamblingGame {
 
     public String crapsRoll() {
 
-        console.getStringInput("Press enter to roll.");
+        //console.getStringInput("Press enter to roll.");
 
         for (Dice s : this.crapsDice) { s.rollDice(); }
-        sum = crapsDice[0].getValue() + crapsDice[1].getValue();
+        //sum = crapsDice[0].getValue() + crapsDice[1].getValue();
 
         String roll = "You rolled a " + sum + "\n";
         String target ="      |  Target Roll: " + targetScore;
@@ -89,29 +89,23 @@ public class Craps implements GamblingGame {
             if (sum == 7 || sum == 11) {
                 crapsPlayer.getWinnings();
                 msg = "Winner Winner, Chicken Dinner!\n" + crapsPlayer.getPot() + "\n";
-                //console.println("Winner Winner, Chicken Dinner! " );
                 continuePlay = false;
             } else if (sum == 2 || sum == 3 || sum == 12) {
                 msg = "You've Crapped out!!" + "\n";
-                //console.println("You've Crapped out!!");
                 continuePlay = false;
             } else {
                 targetScore = sum;
                 msg = "Your Target Score is " + targetScore + "\n";
-                //console.println( "Your Target Score is " + targetScore);
             }
 
         } else {
 
             if (sum == 7) {
                 msg = "You've Crapped out!!";
-                //console.println("You've Crapped out!!");
                 continuePlay = false;
             } else if (sum == targetScore) {
                 crapsPlayer.getWinnings();
                 msg = "Winner Winner, Chicken Dinner!\n" + crapsPlayer.getPot() + "\n";
-                //console.println("Winner Winner, Chicken Dinner! " );
-                //console.println("Congratulations, your payout is $" + crapsPlayer.getPot());
                 continuePlay = false;
             }
         }
