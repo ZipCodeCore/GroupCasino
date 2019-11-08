@@ -42,7 +42,7 @@ public class Craps implements GamblingGame {
 
         turn = 0;
         continuePlay = true;
-        console.println(checkForChips());
+
         if (crapsPlayer.getBalance() < 10) { return; }
         promptUserForWagerAmount();
         createDice();
