@@ -2,15 +2,10 @@ package io.zipcoder.casino.Menus;
 
 import io.zipcoder.casino.DiceGame;
 import io.zipcoder.casino.Interfaces.Menu;
-import io.zipcoder.casino.Player;
 import io.zipcoder.casino.RR.RRGame;
 
 import io.zipcoder.casino.utilities.Console;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 
 
@@ -19,7 +14,6 @@ public class RRMenu implements Menu {
     private Console console;
     private String name = "Russian Roulette Dice Menu";
     private RRGame rrGame;
-    private Player player;
 
 
     public RRMenu(RRGame rrGame) {

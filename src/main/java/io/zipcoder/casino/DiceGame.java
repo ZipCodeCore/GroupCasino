@@ -5,9 +5,6 @@ import java.util.Random;
 
 public abstract class DiceGame extends GameObject {
 
-    private Random randomNum;
-
-
 
     //Rolls any number of dice with any number of sides
     public static int roll (int numberOfDiceBeingRolled, int numOfSides)

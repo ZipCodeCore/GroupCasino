@@ -5,11 +5,7 @@ import io.zipcoder.casino.CardSet;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
-
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class GoFishPlayer {
 

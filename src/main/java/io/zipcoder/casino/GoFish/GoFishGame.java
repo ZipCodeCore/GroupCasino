@@ -63,7 +63,7 @@ public class GoFishGame extends CardGame implements Game {
             System.out.println("Error with playing sound.");
             ex.printStackTrace();
         }
-        new GoFishMenu(this).displayMenu();
+        new GoFishMenu().displayMenu();
         goTitleScreen();
         initialDeal();
         turn(this.player, this.opponent, this.playersCards, this.opponentsCards, this.playerSuites, this.opponentSuites);

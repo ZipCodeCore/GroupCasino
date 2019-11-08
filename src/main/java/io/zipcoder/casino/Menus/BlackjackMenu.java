@@ -9,8 +9,6 @@ public class BlackjackMenu implements Menu {
     private Console console;
     private String name = "Blackjack Menu";
     private BlackjackGame blackjackGame;
-    BlackjackMenu mainmenu;
-
 
     public BlackjackMenu(BlackjackGame blackjackGame) {
         this.console = new Console (System.in, System.out);

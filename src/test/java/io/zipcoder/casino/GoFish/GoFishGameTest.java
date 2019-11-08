@@ -29,7 +29,7 @@ public class GoFishGameTest {
     public void before() {
         player = new Player("Bamboo", "Rod", 25, 15);
         goFishGame = new GoFishGame(player);
-        goFishMenu = new GoFishMenu(goFishGame);
+        goFishMenu = new GoFishMenu();
         goFishPlayer = goFishGame.getPlayer();
         opponent = goFishGame.getOpponent();
         shoe = new CardSet(1);
@@ -260,5 +260,10 @@ public class GoFishGameTest {
         String actual = goFishGame.displayOpponentHands();
 
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void titleTest() {
+        goFishGame.goTitleScreen();
     }
 }
