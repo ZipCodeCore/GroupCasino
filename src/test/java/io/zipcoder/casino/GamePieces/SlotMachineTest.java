@@ -14,7 +14,9 @@ public class SlotMachineTest {
 
     @Test
     public void createMachine() {
-        SlotMachine slotMachine = new SlotMachine();
+
+        Integer[][] slot = new Integer[3][3];
+        SlotMachine slotMachine = new SlotMachine(slot);
 
         Integer[][] machine = slotMachine.createMachine();
         for (int i = 0; i < machine.length; i++) {
