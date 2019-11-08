@@ -22,7 +22,7 @@ public class App {
     public void App (){
 
         this.menu = new Console(System.in,System.out);
-        this.menu.print("Welcome to Casino 5! \n\n");
+        this.menu.printWelcome();
         consolePrintDelay(1000);
         mainMenu();  // log in ...
 
