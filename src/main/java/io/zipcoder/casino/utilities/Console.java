@@ -74,6 +74,22 @@ public final class Console {
                 "5.) Go to Main Menu");
     }
 
+    public void printWelcome(){
+        String temp = "                                                                                         \n" +
+                "  ,ad8888ba,                          88                                8888888888   88  \n" +
+                " d8\"'    `\"8b                         \"\"                                88           88  \n" +
+                "d8'                                                                     88  ____     88  \n" +
+                "88             ,adPPYYba,  ,adPPYba,  88  8b,dPPYba,    ,adPPYba,       88a8PPPP8b,  88  \n" +
+                "88             \"\"     `Y8  I8[    \"\"  88  88P'   `\"8a  a8\"     \"8a      PP\"     `8b  88  \n" +
+                "Y8,            ,adPPPPP88   `\"Y8ba,   88  88       88  8b       d8               d8  \"\"  \n" +
+                " Y8a.    .a8P  88,    ,88  aa    ]8I  88  88       88  \"8a,   ,a8\"      Y8a     a8P  aa  \n" +
+                "  `\"Y8888Y\"'   `\"8bbdP\"Y8  `\"YbbdP\"'  88  88       88   `\"YbbdP\"'        \"Y88888P\"   88  \n" +
+                "                                                                                         \n" +
+                "                                                                                         ";
+
+        println(temp);
+    }
+
     public void printGameName(Integer game) {
         String gameName = "";
 
