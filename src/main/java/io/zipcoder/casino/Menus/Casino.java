@@ -153,7 +153,7 @@ public class Casino {
                         "   ||(100)==================| FEDERAL RESERVE NOTE |================(100)||\n" +
                         "   ||\\\\$//        ~         '------========--------'                \\\\$//||\n" +
                         "   ||<< /        /$\\              // ____ \\\\                         \\ >>||\n" +
-                        "   ||>>|  12    //L\\\\            // ///..) \\\\         L38036133B   12 |<<||\n" +
+                        "   ||>>|  12    //L\\\\            // ///..) \\\\         L38036134B   12 |<<||\n" +
                         "   ||<<|        \\\\ //           || <||  >\\  ||                        |>>||\n" +
                         "   ||>>|         \\$/            ||  $$ --/  ||        One Hundred     |<<||\n" +
                         "||====================================================================||>||\n" +
@@ -176,7 +176,7 @@ public class Casino {
                 losingHorn.play();
                 console.sleep(1500);
                 losingHorn.stop();
-                console.printWithDelays((String.format("\nScore! You ended up bagging $%.2f.\n", player.getWinnings()) +
+                console.printWithDelays((String.format("\nScore! You ended up bagging $%.2f in profit.\n", player.getWinnings()) +
                         "You head home with some pep in your step and even treat yourself to a scrumptious meal.\n"),20,1500);
             } catch (Exception ex) {
                 System.out.println("Error with playing sound.");
