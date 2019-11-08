@@ -42,7 +42,7 @@ public class Craps implements GamblingGame {
 
         turn = 0;
         continuePlay = true;
-
+        console.println(checkForChips());
         if (crapsPlayer.getBalance() < 10) { return; }
         promptUserForWagerAmount();
         createDice();
@@ -68,12 +68,12 @@ public class Craps implements GamblingGame {
 
     public String crapsRoll() {
 
-        //console.getStringInput("Press enter to roll.");
+        console.getStringInput("Press enter to roll.");
 
         for (Dice s : this.crapsDice) { s.rollDice(); }
-        //sum = crapsDice[0].getValue() + crapsDice[1].getValue();
+        sum = crapsDice[0].getValue() + crapsDice[1].getValue();
 
-        String roll = "You rolled a " + sum + "\n";
+        String roll = "You rolled a " + sum;
         String target ="      |  Target Roll: " + targetScore;
 
         return (turn == 0) ? roll : roll + target;
