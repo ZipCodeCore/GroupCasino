@@ -34,7 +34,7 @@ public class CrapsGame extends DiceGame implements Game {
     private Integer die2Point;
     private Integer die1Current;
     private Integer die2Current;
-    private Double winnings = 0d;
+    private Double winnings = 0D;
 
 
     //Craps Game Constructor
@@ -82,7 +82,7 @@ public class CrapsGame extends DiceGame implements Game {
                 userRollsDiceCurrentPoint();
                 console.println(displayCurrentRoll(currentRoll));
                 if (winOnSubsequent(currentRoll, setThePointRoll) == true) {
-                    calculateWinnings(betSize, setThePointRoll, numRolls);
+                    winnings = calculateWinnings(betSize, setThePointRoll, numRolls);
                     console.printWithDelays(winOnSubsequentMessage(), 50);
                     break;
                 } else if (loseOnSubsequent(currentRoll) == true) {
