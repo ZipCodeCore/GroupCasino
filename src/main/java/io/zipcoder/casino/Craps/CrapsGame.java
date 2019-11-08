@@ -51,7 +51,7 @@ public class CrapsGame extends DiceGame implements Game {
 
     @Override
     //creates and runs a roundOfPlay
-    public void startPlay() throws InterruptedException {
+    public void startPlay() {
         try {
             Music.filePath = "src/music/(Craps) Amor maior - Higher Love.wav";
             crapsMusic = new Music();
@@ -69,7 +69,7 @@ public class CrapsGame extends DiceGame implements Game {
 
     @Override
     //runs a new game of craps
-    public void roundOfPlay() throws InterruptedException {
+    public void roundOfPlay() {
         Double betSize = betChoice();
         userRollsDiceSetPoint();
         console.println(displayPointRoll());
@@ -100,7 +100,7 @@ public class CrapsGame extends DiceGame implements Game {
         }
     }
 
-    public Double betChoice() throws InterruptedException {
+    public Double betChoice()  {
         Double wager;
         console.println(String.format("\nCurrent bankroll: $%.2f", this.player.getPlayer().getBalance()));
         wager = console.getCurrency(String.format("\n[CROUPIER]: The limits here are %.2f and %.2f\n[CROUPIER]: What's your Bet? (Or press ENTER to leave the table)\n\n", this.minBet, this.maxBet));
@@ -147,7 +147,7 @@ public class CrapsGame extends DiceGame implements Game {
 
     @Override
     //implements menu whether you want to quit or go again
-    public void endChoice() throws InterruptedException {
+    public void endChoice()  {
         String endChoiceInput = console.getInput("\n[CROUPIER]: You have finished this game of Craps.\n\nWould you like to play again? (Y/N)\n");
         if (endChoiceInput.toUpperCase().equals("N")) {
             try {

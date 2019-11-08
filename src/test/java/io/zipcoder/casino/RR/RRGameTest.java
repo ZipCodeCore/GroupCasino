@@ -4,6 +4,7 @@ package io.zipcoder.casino.RR;
 import io.zipcoder.casino.DiceGame;
 import io.zipcoder.casino.Player;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class RRGameTest{
@@ -11,21 +12,35 @@ public class RRGameTest{
 //import static org.junit.Assert.*;
 
 
-    @Test
-    public void roll() {}
+    private RRGame testGame;
+    private Player dave;
+    private Player testPlayer;
+    private Integer computersRoll;
+    private Integer userDieNum;
+    private RRGame  testGame2;
+
+    @Before
+    public void setUp () {
+            dave = new Player("David", "Trombello", 37, 500);
+            testGame = new RRGame(dave);
+            testPlayer = new Player("Grace", "Bunde", 23, 500.00);
+            testGame2 = new RRGame(testPlayer);
+        }
 
     @Test
-    public void testRoll2() {
-        int expected = DiceGame.roll(2, 8);
-        Assert.assertTrue((expected >=1 && expected <=16));
-            }
-      @Test
-      public void player(){
-      }
+    public void computerRollTest() {
+        for (int i = 0; i < 1000; i++) {
+            Integer expected = testGame.computerRoll();
+            Assert.assertTrue((expected >= 1 && expected <= 6));
+
+        }
+    }
+
+
     @Test
     public void getFirstName() {
         // Given
-        Player testPlayer = new Player("Grace", "Bunde", 23, 500.00);
+
         String expected = "Grace";
 
         // Then
@@ -36,18 +51,18 @@ public class RRGameTest{
     @Test
     public void getLastName() {
         // Given
-        Player testPlayer = new Player("Grace", "Bunde", 23, 500.00);
-        String expected = "Bunde";
+
+        String expected = "Trombello";
 
         // Then
-        String actual = testPlayer.getLastName();
+        String actual = dave.getLastName();
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void getAge() {
         // Given
-        Player testPlayer = new Player("Grace", "Bunde", 23, 500.00);
+
         Integer expected = 23;
 
         // Then
@@ -57,45 +72,54 @@ public class RRGameTest{
     @Test
     public void getBalance() {
         // Given
-        Player testPlayer = new Player("Grace", "Bunde", 23, 500.00);
+        dave.setBalance(500.00);
         Double expected = 500.00;
 
         // Then
-        Double actual = testPlayer.getBalance();
+        Double actual = dave.getBalance();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void houseDisplayRollTest () {
+        testGame.setComputersRoll(5);
+        Integer computersRoll = testGame.getComputersRoll();
+        String expected = DiceGame.diceToASCII(computersRoll) + "------------------------------------------------------\n\n** The House rolled 5 **\n";
+        String actual = testGame.houseRollDisplay(computersRoll);
+        Assert.assertEquals(expected , actual);
+    }
+
+    @Test
+    public void userRollDisplay() {
+        testGame.setUserDieNum(6);
+        Integer userDieNum = testGame.getUserDieNum();
+        String expected = (DiceGame.diceToASCII(userDieNum) + "\n** You rolled 6 **\n\n------------------------------------------------------");
+        String actual = testGame.userRollDisplay(userDieNum);
         Assert.assertEquals(expected, actual);
     }
 
 
     @Test
-              public void getWager() {
-            }
+    public void displayUserBalance() {
+        dave.setBalance(535.00);
+        String expected = "Your Current Balance Is 535.00";
+        String actual = testGame.displayUserBalance();
+        Assert.assertEquals(expected, actual);
+    }
 
-             @Test
-             public void payOut() {
-             }
-
-             @Test
-             public void startPlay() {
-            }
-
-            @Test
-             public void endChoice() {
-             }
-
-            @Test
-            public void roundOfPlay() {
+    @Test
+    public void displayWinnerBalance() {
+        testPlayer.setBalance(825);
+        String expected = "\n\nYou Won!!! Your Balance Is Now $825.00\n";
+        String actual = testGame2.displayWinnerBalance();
+        Assert.assertEquals(expected, actual);
+    }
 
 
-
-                }
-
-
-            @org.junit.jupiter.api.Test
-            public void selectTargetNum() {
-            }
-
-            @Test
-            public void evaluateResult() {
-            }
-
+    @Test
+    public void getName() {
+        String expected = "Russian Dice Roulette";
+        String actual = testGame.getName();
+        Assert.assertEquals(expected, actual);
+    }
 }

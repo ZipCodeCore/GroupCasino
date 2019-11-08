@@ -26,6 +26,7 @@ public class RRMenu implements Menu {
 
         this.console = new Console(System.in, System.out);
         this.rrGame = rrGame;
+
     }
 
     public boolean isPlay() {
@@ -60,7 +61,8 @@ public class RRMenu implements Menu {
         console.printWithDelays("- If your roll matches the house......You lose all your balance.\n\n", 20, 1000);
         console.printWithDelays("Are you willing to risk it all to win it all?\n\n", 20, 2000);
 
-        console.println(DiceGame.diceToASCII());
+        console.println(DiceGame.diceToASCII(3, 5, 2));
+        console.println(rrGame.displayUserBalance());
         int choice = console.getInteger("(Press 1 to play or 2 to exit):\n\n");
         handleChoice(choice);
 

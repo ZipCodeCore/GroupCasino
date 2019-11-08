@@ -8,11 +8,15 @@ import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Utility.Music;
 
+import javax.print.DocFlavor;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.util.Objects;
 
 public class RRGame extends DiceGame implements Game {
+
+
     public static void main(String[] args) throws InterruptedException {
         Player rrPlayer = new Player("Grace","Bunde",23,500);
         RRGame rrGame = new RRGame(rrPlayer);
@@ -28,7 +32,23 @@ public class RRGame extends DiceGame implements Game {
     Music rouletteMusic = null;
     Music bang = null;
     Music elFin = null;
+    private Integer computersRoll;
 
+    public Integer getUserDieNum() {
+        return userDieNum;
+    }
+
+    public void setUserDieNum(Integer userDieNum) {
+        this.userDieNum = userDieNum;
+    }
+
+    public Integer getComputersRoll() {
+        return computersRoll;
+    }
+
+    public void setComputersRoll(Integer computersRoll) {
+        this.computersRoll = computersRoll;
+    }
 
     public RRGame(Player player) {
         this.player = player;
@@ -37,6 +57,8 @@ public class RRGame extends DiceGame implements Game {
     public String getName() {
         return name;
     }
+
+
 
     @Override
     public void startPlay(){
@@ -88,13 +110,12 @@ public class RRGame extends DiceGame implements Game {
     }
     @Override
     public void roundOfPlay() {
-        Integer computerRoll=roll();
-        console.println(String.format("------------------------------------------------------\n\n** The House rolled %d **\n", computerRoll));
+        console.println(displayUserBalance());
+        computerRoll();
+        console.println(houseRollDisplay(computersRoll));
         userRollsDice();
-        //console.println("Your Current Balance Is %d", this.player.getBalance());
-
-        console.println(String.format("\n** You rolled %d **\n\n------------------------------------------------------", userDieNum));
-        if (userDieNum.equals(computerRoll)) {
+        console.println(userRollDisplay(userDieNum));
+        if (userDieNum.equals(computersRoll)) {
             try {
                 rouletteMusic.stop();
             } catch (UnsupportedAudioFileException e) {
@@ -179,9 +200,11 @@ public class RRGame extends DiceGame implements Game {
         }
         else {
             gameServices.payOut(this.player.getBalance(), this.player);
-            console.println(String.format("\n\nYou Won!!! Your Balance Is Now $%.2f\n",player.getBalance()));
+            console.println(displayWinnerBalance());
             console.sleep(1000);
             endChoice();
+
+
     }
 
     }
@@ -191,13 +214,28 @@ public class RRGame extends DiceGame implements Game {
         return userDieNum;
     }
 
-    public int selectTargetNum () {
-        return 0;
+
+    public Integer computerRoll () {
+        computersRoll = roll();
+        return computersRoll;
     }
 
-    public boolean evaluateResult (int target, int roll) {
-        return false;
-    }
-
-
+        public String houseRollDisplay (Integer computersRoll){
+        return String.format(DiceGame.diceToASCII(computersRoll) + "------------------------------------------------------\n\n** The House rolled %d **\n", computersRoll);
 }
+
+    public String userRollDisplay (Integer userDieNum) {
+        return (String.format(DiceGame.diceToASCII(userDieNum) + "\n** You rolled %d **\n\n------------------------------------------------------", userDieNum));
+    }
+
+    public String displayUserBalance () {
+        return String.format("Your Current Balance Is %.2f", player.getBalance());
+    }
+
+
+        public String displayWinnerBalance () {
+            return String.format("\n\nYou Won!!! Your Balance Is Now $%.2f\n",player.getBalance());
+        }
+    }
+
+

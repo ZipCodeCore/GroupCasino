@@ -252,8 +252,6 @@ public class CrapsGameTest  {
         String expected = "(( You are out of rolls. ))\nYou seem to have lost.\nThis is unfortunate.....\n:(\n-------------------------------------------------\n\n";
         String actual = crapsGame.losingMessageOutOfRolls();
         Assert.assertEquals(expected, actual);
-
-
     }
 
     @Test
