@@ -113,7 +113,7 @@ public class GoFishGameTest {
         Assert.assertEquals(expected, actual);
     }
 
-/*    @Test
+   @Test
     public void winCheckTest1() {
         for (int i = 0; i < 6; i++ ) {
             playerSuites.addCard(new Card("A", "H"));
@@ -134,8 +134,8 @@ public class GoFishGameTest {
         for (int i = 0; i < 8; i++ ) {
             opponentSuites.addCard(new Card("A", "H"));
         }
-        GoFishPlayer expected = goFishNPC;
-        GoFishPlayer actual = goFishGame.checkForWin(goFishPlayer, goFishNPC, playerSuites, opponentSuites);
+        GoFishPlayer expected = opponent;
+        GoFishPlayer actual = goFishGame.checkForWin(goFishPlayer, opponent, playerSuites, opponentSuites);
         Assert.assertEquals(expected, actual);
     }
 
@@ -154,43 +154,40 @@ public class GoFishGameTest {
 
     @Test
     public void winCheckTest4() {
-        for (int i = 0; i < 8; i++ ) {
+        for (int i = 0; i < 8; i++) {
             playerSuites.addCard(new Card("A", "H"));
         }
-        for (int i = 0; i < 4; i++ ) {
+        for (int i = 0; i < 4; i++) {
             opponentSuites.addCard(new Card("A", "H"));
         }
         GoFishPlayer expected = goFishPlayer;
         GoFishPlayer actual = goFishGame.checkForWin(goFishPlayer, goFishNPC, playerSuites, opponentSuites);
-        Assert.assertEquals(expected, actual);*/
-
-
-    @Test
-    public void npcPickACardTest(){
-        playersCards = new CardSet(0);
-        opponentCards = new CardSet(0);
-        opponentCards.addCard(new Card("A","S"));
-        opponentCards.addCard(new Card("A","H"));
-        opponentCards.addCard(new Card("A","D"));
-        opponentCards.addCard(new Card("K","C"));
-        opponentCards.addCard(new Card("2","H"));
-        opponentCards.addCard(new Card("K","D"));
-        opponentCards.addCard(new Card("5","C"));
-
-       /* ArrayList<Card> testHand = opponentCards.getCards();
-        String testCard = goFishGame.npcPickACard();
-        for (int i = 0; i < opponentCards.size(); i++) {
-            if (opponentCards.getCards(). == testCard) {
-
-            }
-        }
-*/
+        Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void displaySuiteTest(){
 
-    }
+//    @Test
+//    public void npcPickACardTest(){
+//        playersCards = new CardSet(0);
+//        opponentCards = new CardSet(0);
+//        opponentCards.addCard(new Card("A","S"));
+//        opponentCards.addCard(new Card("A","H"));
+//        opponentCards.addCard(new Card("A","D"));
+//        opponentCards.addCard(new Card("K","C"));
+//        opponentCards.addCard(new Card("2","H"));
+//        opponentCards.addCard(new Card("K","D"));
+//        opponentCards.addCard(new Card("5","C"));
+//
+//        ArrayList<Card> testHand = opponentCards.getCards();
+//        String testCard = goFishGame.getOpponent().chooseCard();
+//        for (int i = 0; i < opponentCards.size(); i++) {
+//            if (opponentCards.getCards(). == testCard) {
+//
+//            }
+//        }
+//
+//    }
+
     @Test
     public void scanForSuitesTest(){
         playersCards.addCard(new Card("A","C"));
