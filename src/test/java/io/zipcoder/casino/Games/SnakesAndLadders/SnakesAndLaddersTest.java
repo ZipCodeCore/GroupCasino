@@ -2,9 +2,11 @@ package io.zipcoder.casino.Games.SnakesAndLadders;
 
 import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
-import io.zipcoder.casino.Games.SnakesAndLadders.SnakesAndLadders;
 import org.junit.Test;
 import org.junit.Assert;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 public class SnakesAndLaddersTest {
 
@@ -84,7 +86,7 @@ public class SnakesAndLaddersTest {
 
 
     @Test
-    public void snakesAndLaddersTest1(){
+    public void snakesAndLaddersCheckTest1(){
         SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
         Integer position = 7;
         Integer expected = 7;
@@ -93,7 +95,7 @@ public class SnakesAndLaddersTest {
     }
 
     @Test
-    public void snakesAndLaddersTest2(){
+    public void snakesAndLaddersCheckTest2(){
         SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
         Integer position = 16;
         Integer expected = 6;
@@ -102,7 +104,7 @@ public class SnakesAndLaddersTest {
     }
 
     @Test
-    public void snakesAndLaddersTest3(){
+    public void snakesAndLaddersCheckTest3(){
         SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
         Integer position = 4;
         Integer expected = 14;
@@ -110,94 +112,69 @@ public class SnakesAndLaddersTest {
         Assert.assertEquals(expected,actual);
     }
 
+    @Test
+    public void snakesAndLaddersCheckTest4(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        Integer position = 4;
+        Integer expected = 14;
+        Integer actual = snakesAndLadders.snakesAndLaddersCheck(position, false);
+        Assert.assertEquals(expected,actual);
+    }
+
 
     @Test
     public void diceRollTest1(){
-        SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
-        Integer roll = 5;
-        playerPiece.setCurrentPosition(10);
-        Integer expected = 15;
-        playerPiece.setCurrentPosition(playerPiece.getCurrentPosition() + roll);
-
-        Integer actual = playerPiece.getCurrentPosition();
-        Assert.assertEquals(expected,actual);
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        Integer actual = snakesAndLadders.diceRoll();
+        Assert.assertTrue(actual <= 6 && actual >= 1);
     }
 
     @Test
-    public void diceRollTest2(){
-        SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
-        Integer roll = 2;
-        playerPiece.setCurrentPosition(67);
-        Integer expected = 69;
-        playerPiece.setCurrentPosition(playerPiece.getCurrentPosition() + roll);
-
-        Integer actual = playerPiece.getCurrentPosition();
-        Assert.assertEquals(expected,actual);
-    }
-
-    @Test
-    public void diceRollTest3(){
-        SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
-        Integer roll = 4;
-        aiPiece.setCurrentPosition(44);
-        Integer expected = 48;
-        aiPiece.setCurrentPosition(aiPiece.getCurrentPosition() + roll);
-
-        Integer actual = aiPiece.getCurrentPosition();
-        Assert.assertEquals(expected,actual);
-    }
-
-    @Test
-    public void turnTest1(){
-        SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
-        String actual = "";
-        Dice dice = new Dice();
-        aiPiece.setCurrentPosition(99);
-        Integer roll = dice.rollDice(1);
-        Integer actualPosition = aiPiece.getCurrentPosition() + roll;
-        if (actualPosition >= 100) {
-            actual = "Ai";
-        }
-
-        String expected = "Ai";
-
-        Assert.assertEquals(expected,actual);
-    }
-
-    @Test
-    public void turnTest2(){
-        SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
-        String actual = "";
-        Dice dice = new Dice();
-        playerPiece.setCurrentPosition(99);
-        Integer roll = dice.rollDice(1);
-        Integer actualPosition = playerPiece.getCurrentPosition() + roll;
-        if (actualPosition >= 100) {
-            actual = "Player";
-        }
-
+    public void testIfWonTest1(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
         String expected = "Player";
-
+        String actual = snakesAndLadders.testIfWon(100, true);
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
+    public void testIfWonTest2(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        String expected = "no winner yet";
+        String actual = snakesAndLadders.testIfWon(77, false);
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
+    public void testIfWonTest3(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        String expected = "no winner yet";
+        String actual = snakesAndLadders.testIfWon(77, true);
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
+    public void testIfWonTest4(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        String expected = "Ai";
+        String actual = snakesAndLadders.testIfWon(100, false);
         Assert.assertEquals(expected,actual);
     }
 
     @Test
-    public void turnTest3(){
-        SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
-        Dice dice = new Dice();
-        String actual = "";
-        Integer roll = dice.rollDice(1);
-        Integer playerPosition = playerPiece.getCurrentPosition() + roll;
-        String expected = "no winner yet";
-        if (playerPosition >= 100) {
-            actual = "Player";
-        }
-        if (playerPosition >= 100) {
-            actual = "Ai";
-        }
-        actual = "no winner yet";
+    public void diceResults1(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        SnakesLaddersPiece piece = new SnakesLaddersPiece();
+        Integer roll = 6;
+        Integer expected = roll + piece.getCurrentPosition();
+        Integer actual = snakesAndLadders.diceResults(roll,true);
+        Assert.assertEquals(expected,actual);
+    }
 
-        playerPiece.setCurrentPosition(100);
+    @Test
+    public void diceResults2(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        SnakesLaddersPiece piece = new SnakesLaddersPiece();
+        Integer roll = 6;
+        Integer expected = roll + piece.getCurrentPosition();
+        Integer actual = snakesAndLadders.diceResults(roll,false);
         Assert.assertEquals(expected,actual);
     }
 }
