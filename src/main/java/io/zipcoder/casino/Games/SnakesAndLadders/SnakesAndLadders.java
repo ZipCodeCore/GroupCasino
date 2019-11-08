@@ -1,16 +1,16 @@
 package io.zipcoder.casino.Games.SnakesAndLadders;
 
-import io.zipcoder.casino.utilities.CasinoArt;
-import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
 import io.zipcoder.casino.GamePieces.Dice;
+import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
 import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.Games.SnakesAndLadders.SnakesAndLaddersLanguage;
 import io.zipcoder.casino.PlayerCreation.Player;
+import io.zipcoder.casino.utilities.CasinoArt;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.utilities.Sound;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 
@@ -35,7 +35,7 @@ public class SnakesAndLadders implements Game {
     }
 
     @Override
-    public void approachTable (Player currentPlayer){
+    public void approachTable(Player currentPlayer) {
         Console.clearScreen();
         console.println(art.getCasinoArt(CasinoArt.Art.SNAKESANDLADDERS));
         while (running) {
@@ -56,17 +56,45 @@ public class SnakesAndLadders implements Game {
         }
     }
 
-    public String showRules () {
+    public String showRules() {
         return text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.RULES);
     }
 
     @Override
-    public void runGame (Player currentPlayer){
+    public void runGame(Player currentPlayer) {
         setUpGame();
+        String winner = "";
         while (running) {
             console.println("Welcome to Snakes and Ladders, %s!", currentPlayer.getName());
             console.println("In this house, the player always goes first! Step on up!");
-            String winner = startNewGame();
+            Integer playerPosition = playerPiece.getCurrentPosition();
+            Integer aiPosition = aiPiece.getCurrentPosition();
+            while (running) {
+                //player turn//
+                //console.getStringInput(text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.DICEROLL));
+                Console.clearScreen();
+                Integer playerRoll = diceRoll();
+                diceSound.play();
+                playerPosition = diceResults(playerRoll, true);
+                playerPosition = snakesAndLaddersCheckerViaMap(playerPosition);
+                playerPosition = snakesAndLaddersCheck(playerPosition, true);
+                playSound(playerPosition);
+                winner = testIfWon(playerPosition, true);
+                if (winner.equals("Player")) {
+                    break;
+                }
+
+                //ai turn//
+                Integer aiRoll = diceRoll();
+                diceSound.play();
+                aiPosition = diceResults(aiRoll, false);
+                Integer finalAiPosition = snakesAndLaddersCheck(aiPosition, false);
+                playSound(finalAiPosition);
+                winner = testIfWon(finalAiPosition, false);
+                if (winner.equals("Ai")) {
+                    break;
+                }
+            }
             if (winner.equals("Player")) {
                 winSound.play();
                 console.println(text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.PLAYERWINS));
@@ -94,52 +122,15 @@ public class SnakesAndLadders implements Game {
         ladderSound = new Sound("ladder.wav");
     }
 
-    public String startNewGame() {
-        Integer playerPosition = playerPiece.getCurrentPosition();
-        Integer aiPosition = aiPiece.getCurrentPosition();
-        while (currentGame) {
-            String playerWinner = turn(playerPosition, true);
-            if (playerWinner.equals("Player")) {
-                currentGame = false;
-                return playerWinner;
-            }
-            String aiWinner = turn(aiPosition, false);
-            if (aiWinner.equals("Ai")) {
-                currentGame = false;
-                return aiWinner;
-            }
-        }
-        return null;
-    }
-
-    public String turn(Integer playerPosition, boolean isPlayer) {
-        if(isPlayer) {
-            console.getStringInput(text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.DICEROLL));
-            Console.clearScreen();
-            playerPosition = diceRoll(true);
-            snakesAndLaddersCheck(playerPosition, true);
-            playSound(playerPosition);
-            if (playerPosition >= 100) {
-                return "Player";
-            }
-            return "no winner yet";
-        } else {
-            playerPosition = diceRoll(false);
-            snakesAndLaddersCheck(playerPosition, false);
-            playSound(playerPosition);
-            if (playerPosition >= 100) {
-                return "Ai";
-            }
-            return "no winner yet";
-        }
-    }
-
-    public Integer diceRoll(boolean isPlayer) {
-        Integer currentPosition = 0;
+    public Integer diceRoll() {
         Integer roll = dice.rollDice(1);
         console.println(dice.diceArt(roll));
-        diceSound.play();
-        if(isPlayer) {
+        return roll;
+    }
+
+    public Integer diceResults(Integer roll, Boolean isPlayer){
+        Integer currentPosition;
+        if (isPlayer) {
             playerPiece.setCurrentPosition(playerPiece.getCurrentPosition() + roll);
             currentPosition = playerPiece.getCurrentPosition();
             console.println("You've rolled a %d. Your current position is now %d.", roll, currentPosition);
@@ -187,50 +178,61 @@ public class SnakesAndLadders implements Game {
         return newPosition;
     }
 
-    public void playSound(Integer position){
+    public void playSound(Integer position) {
         Integer newPosition = snakesAndLaddersCheckerViaMap(position);
         if (position > newPosition) {
             snakeSound.play();
-        } else if (position < newPosition){
+        } else if (position < newPosition) {
             ladderSound.play();
         }
     }
 
     public Integer snakesAndLaddersCheck(Integer position, boolean isPlayer) {
         Integer newPosition = snakesAndLaddersCheckerViaMap(position);
-            if (position > newPosition) {
-                if(isPlayer){
-                    console.println("Uh-oh! You've hit a Snake! You're back at %d", newPosition);
-                    playerPiece.setCurrentPosition(newPosition);
-                } else {
-                    console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
-                    aiPiece.setCurrentPosition(newPosition);
-                }
-                return newPosition;
-            } else if (position < newPosition) {
-                if(isPlayer) {
-                    console.println("Hooray! You've hit a Ladder! You're now at %d.", newPosition);
-                    playerPiece.setCurrentPosition(newPosition);
-                } else {
-                    console.println("Hooray! I've hit a Ladder! I'm now at %d.", newPosition);
-                    aiPiece.setCurrentPosition(newPosition);
-                }
-                return newPosition;
+        if (position > newPosition) {
+            if (isPlayer) {
+                console.println("Uh-oh! You've hit a Snake! You're back at %d", newPosition);
+                playerPiece.setCurrentPosition(newPosition);
+            } else {
+                console.println("Uh-oh! I've hit a Snake! I'm back at %d", newPosition);
+                aiPiece.setCurrentPosition(newPosition);
             }
-        return position;
+            return newPosition;
+        } else if (position < newPosition) {
+            if (isPlayer) {
+                console.println("Hooray! You've hit a Ladder! You're now at %d.", newPosition);
+                playerPiece.setCurrentPosition(newPosition);
+            } else {
+                console.println("Hooray! I've hit a Ladder! I'm now at %d.", newPosition);
+                aiPiece.setCurrentPosition(newPosition);
+            }
+            return newPosition;
         }
+        return position;
+    }
 
-        @Override
-        public void exitGame (Player currentPlayer){
-            console.println(text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.EXITMENU));
-            Integer playerInput = console.getIntegerInput(":");
-            switch (playerInput) {
-                case 1:
-                    runGame(currentPlayer);
-                    break;
-                case 2:
-                    running = false;
-                    break;
-            }
+    public String testIfWon(Integer playerPosition, Boolean isPlayer){
+        if (playerPosition >= 100 && isPlayer) {
+            return "Player";
+        } else if(playerPosition >= 100 & !isPlayer){
+            return "Ai";
+        }
+        return "no winner yet";
+    }
+
+    @Override
+    public void exitGame(Player currentPlayer) {
+        console.println(text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.EXITMENU));
+        Integer playerInput = console.getIntegerInput(":");
+        switch (playerInput) {
+            case 1:
+                runGame(currentPlayer);
+                break;
+            case 2:
+                running = false;
+                break;
         }
     }
+
+}
+

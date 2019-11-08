@@ -2,7 +2,6 @@ package io.zipcoder.casino.Games.SnakesAndLadders;
 
 import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
-import io.zipcoder.casino.Games.SnakesAndLadders.SnakesAndLadders;
 import org.junit.Test;
 import org.junit.Assert;
 
