@@ -29,7 +29,8 @@ public class GoFishGame extends CardGame implements Game {
     private CardSet opponentSuites;
     private Music goFishMusic = null;
     private String actingPlayer;
-    Card cardChoice;
+    ArrayList<Card> stolenCards;
+
 
 
     public GoFishGame(Player player) {
@@ -48,7 +49,10 @@ public class GoFishGame extends CardGame implements Game {
         GoFishGame goFishGame = new GoFishGame(player);
         goFishGame.startPlay();
     }
+    public void setupGame(){
 
+        startPlay();
+    }
     //populates player deals hands
     public void startPlay() {
         resetGame();
@@ -113,7 +117,7 @@ public class GoFishGame extends CardGame implements Game {
             actingPlayer = playerUp.getPlayer().getFirstName();
         }
         if (!cardChoice.equals("N") && winStatus == null) {
-            ArrayList<Card> stolenCards = nextPlayerCards.removeRank(cardChoice);
+            stolenCards = nextPlayerCards.removeRank(cardChoice);
 
             if (stolenCards.size() > 0) { // successfully took from opponent
                 integrateStolenCards(stolenCards, playerUpCards);
@@ -195,6 +199,14 @@ public class GoFishGame extends CardGame implements Game {
     public GoFishNPC getOpponent() {
         return opponent;
     }
+    public String createMessage(GoFishPlayer playerUp, ArrayList stolenCards, String cardChoice, Card fishedCard) {
+        if (fishedCard != null) {
+            return "*******************************************************************\n" + playerUp.getPlayer().getFirstName() + " Asked for " + cardChoice;
+        } else {
+            return "*******************************************************************\n" + playerUp.getPlayer().getFirstName() + " Asked for " + cardChoice + ".  Received " + stolenCards.size();
+        }
+    }
+
 
     public CardSet getShoe() {
         return shoe;
@@ -222,11 +234,15 @@ public class GoFishGame extends CardGame implements Game {
         playerSuites.sort();
         console.println(displayOpponentHands());
         console.println(displayOpponentSuites());
+        console.println(displayPreviousTurn());
         console.println(displayPlayerSuites());
         console.println(displayPlayerHands());
     }
     public String displayPreviousTurn(){
-        return "*******************************************************************\n"+ actingPlayer + " Asked for " + cardChoice.toString() +".  Received " ;
+        if (actingPlayer != null){
+        return "*******************************************************************\n"+ actingPlayer + " Asked for " +  ""  + ".  Received " + stolenCards.size();
+    }
+        return "GO FISH!";
     }
     public String displayPlayerSuites() {
         return "************************* PLAYER'S SUITES *************************\n" + playerSuites.toASCIISuite() + "\n";
