@@ -70,13 +70,14 @@ public class SnakesAndLadders implements Game {
             Integer playerPosition = playerPiece.getCurrentPosition();
             Integer aiPosition = aiPiece.getCurrentPosition();
             while (running) {
+
+
                 //player turn//
                 console.getStringInput(text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.DICEROLL));
                 Console.clearScreen();
                 Integer playerRoll = diceRoll();
                 diceSound.play();
                 playerPosition = diceResults(playerRoll, true);
-
                 Integer finalPlayerPosition = snakesAndLaddersCheck(playerPosition, true);
                 playSound(playerPosition);
                 winner = testIfWon(finalPlayerPosition, true);
@@ -89,7 +90,7 @@ public class SnakesAndLadders implements Game {
                 diceSound.play();
                 aiPosition = diceResults(aiRoll, false);
                 Integer finalAiPosition = snakesAndLaddersCheck(aiPosition, false);
-                playSound(finalAiPosition);
+                playSound(aiPosition);
                 winner = testIfWon(finalAiPosition, false);
                 if (winner.equals("Ai")) {
                     break;
