@@ -77,11 +77,9 @@ public class GameMenu implements Menu {
 
     @Override
     public void handleChoice(int choice) {
-        try {
-            mainMusic.stop();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        mainMusic.stop();
+
         gameMap.get(choice).startPlay();
     }
 
