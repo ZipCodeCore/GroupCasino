@@ -108,12 +108,12 @@ public class RRGame extends DiceGame implements Game {
             rouletteMusic.stop();
 
             gameServices.wager(player.getBalance(), player);
-            console.println("\nYou Lost!!!");
+            console.println(printLosingMessage());
             console.sleep(2000);
             console.clearScreen();
-            console.printWithDelays("[DEALER]: Don't you know how Russian Roulette works?\n\n", 80);
-            console.sleep(1500);
 
+            console.sleep(1500);
+            console.printWithDelays(printDealersLosingMessage(), 80);
             console.printWithDelays(printPistol(), 2);
             try {
                 io.zipcoder.casino.Utility.Music.filePath = "src/music/(bang) sound effect.wav";
@@ -219,10 +219,12 @@ public class RRGame extends DiceGame implements Game {
 
     public String printLosingMessage() {
         String losingMessage = "\nYou Lost!!!";
-        console.sleep(2000);
+        return losingMessage;
+    }
 
-        console.clearScreen();
-        console.printWithDelays("[DEALER]: Don't you know how Russian Roulette works?\n\n", 80);
+    public String printDealersLosingMessage () {
+       String dealersLosingMesage = "[DEALER]: Don't you know how Russian Roulette works?\n\n";
+       return dealersLosingMesage;
     }
 }
 

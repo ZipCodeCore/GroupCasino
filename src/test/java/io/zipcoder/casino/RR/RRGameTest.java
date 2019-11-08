@@ -158,4 +158,18 @@ public class RRGameTest{
                 String actual = testGame.printPistol();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void printLosingMessage() {
+        String expected = "\nYou Lost!!!";
+        String actual = testGame.printLosingMessage();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void printDealersLosingMessage() {
+        String expected = "[DEALER]: Don't you know how Russian Roulette works?\n\n";
+        String actual = testGame.printDealersLosingMessage();
+        Assert.assertEquals(expected,actual);
+    }
 }
