@@ -16,7 +16,7 @@ public class Slots implements Game, GamblingGame {
     Console console = new Console(System.in, System.out);
     Casino casino = new Casino();
     private Integer[][] slots;
-    SlotMachine slotMachine = new SlotMachine();
+    SlotMachine slotMachine = new SlotMachine(slots = new Integer[3][3]);
     Player currentPlayer;
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private CasinoArt art = new CasinoArt();
@@ -60,8 +60,8 @@ public class Slots implements Game, GamblingGame {
     public void runGame(Player currentPlayer){
         while (running){
             placeBet(currentPlayer);
-            pullLever();
-            if(isWinner()){
+            Integer[][] slotResult = pullLever();
+            if(isWinner(slotResult)){
                 returnWinnings(currentPlayer);
             } else {
                 youLose(currentPlayer);
@@ -101,8 +101,8 @@ public class Slots implements Game, GamblingGame {
 
     }
 
-    public void pullLever(){
-        slots = new Integer[3][3];
+    public Integer[][] pullLever(){
+
         slots = slotMachine.createMachine();
         for(int i = 0; i < slots.length; i++){
             for(int j = 0; j <slots.length; j++){
@@ -112,30 +112,31 @@ public class Slots implements Game, GamblingGame {
             }
             console.newln();
         }
+        return slots;
     }
 
-    public Boolean isWinner(){
-        if(checkDiagonal() || checkHorizontal() || checkVertical()){
+    public Boolean isWinner(Integer[][] results){
+        if(checkDiagonal(results) || checkHorizontal(results) || checkVertical(results)){
             return true;
         } return false;
     }
 
-    public Boolean checkHorizontal(){
+    public Boolean checkHorizontal(Integer[][] results){
         for(int i = 0; i <= 2; i++) {
-            if (slots[i][0].equals(slots[i][1]) && slots[i][1].equals(slots[i][2]))
+            if (results[i][0].equals(results[i][1]) && results[i][1].equals(results[i][2]))
             return true;
         } return false;
     }
 
-    public Boolean checkVertical(){
+    public Boolean checkVertical(Integer[][] results){
         for(int i = 0; i <= 2; i++) {
-            if (slots[0][i].equals(slots[1][i]) && slots[1][i].equals(slots[2][i]))
+            if (results[0][i].equals(results[1][i]) && results[1][i].equals(results[2][i]))
                 return true;
         } return false;
     }
 
-    public Boolean checkDiagonal(){
-       if((slots[0][0].equals(slots[1][1]) && slots[1][1].equals(slots[2][2])) || (slots[2][0].equals(slots[1][1]) && slots[1][1].equals(slots[0][2]))) {
+    public Boolean checkDiagonal(Integer[][] results){
+       if((results[0][0].equals(results[1][1]) && results[1][1].equals(results[2][2])) || (results[2][0].equals(results[1][1]) && slots[1][1].equals(slots[0][2]))) {
            return true;
        }return false;
     }
@@ -160,5 +161,25 @@ public class Slots implements Game, GamblingGame {
         currentPlayer.addHistory(addHistory + dtf.format(now));
 
         return true;
+    }
+
+    public void setRunning(Boolean running) {
+        this.running = running;
+    }
+
+    public void setCurrentGame(Boolean currentGame) {
+        this.currentGame = currentGame;
+    }
+
+    public void setPot(Integer pot) {
+        this.pot = pot;
+    }
+
+    public void setPlaceBet(Integer placeBet) {
+        this.placeBet = placeBet;
+    }
+
+    public void setWinnings(Integer winnings) {
+        this.winnings = winnings;
     }
 }

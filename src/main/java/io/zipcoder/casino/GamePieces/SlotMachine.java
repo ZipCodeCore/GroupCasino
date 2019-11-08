@@ -12,6 +12,10 @@ public class SlotMachine {
 
     Integer[][] slotMachine = new Integer[3][3];
 
+    public SlotMachine(Integer[][] slot){
+        this.slotMachine = slot;
+    }
+
     public static Integer randNum(){
         Random random = new Random();
         Integer randInt = random.nextInt(10);

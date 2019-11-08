@@ -74,21 +74,23 @@ public class Craps implements Game, GamblingGame {
 
     @Override
     public void runGame(Player currentPlayer) {
-
         running = true;
         while (running) {
 
             placeBet(currentPlayer);
 
             if(comeOutRoll(currentPlayer)) {
-                while (passRoll(currentPlayer));
+                boolean passRoll = true;
+                while (passRoll) {
+                    passRoll = passRoll(currentPlayer);
+                }
             }
 
             running = playAgain();
         }
     }
 
-    private Integer roll() {
+    public Integer roll() {
         console.getStringInput("");
         console.dotDotDot(); console.newln();
 
@@ -99,8 +101,7 @@ public class Craps implements Game, GamblingGame {
         Integer roll2 = dice.rollDice(1);
         console.printFast(dice.diceArt(roll2) + "\n");
 
-        Integer rollVal = roll1 + roll2;
-        return rollVal;
+        return roll1 + roll2;
     }
 
     private boolean comeOutRoll(Player currentPlayer) {
@@ -154,7 +155,7 @@ public class Craps implements Game, GamblingGame {
         }
     }
 
-    private boolean playAgain() {
+    public boolean playAgain() {
         console.printSlow("Play Again?\n");
         console.delay(400);
         console.println("(1) Yes");
@@ -199,7 +200,6 @@ public class Craps implements Game, GamblingGame {
         console.printSlow("You won $" + playerBet + "\n");
         currentPlayer.changeBalance(playerBet * 2);
         console.printSlow("Your balance is now $" + currentPlayer.getBalance() + "\n");
-        playerBet = 0;
         console.delay(1000);
     }
 
