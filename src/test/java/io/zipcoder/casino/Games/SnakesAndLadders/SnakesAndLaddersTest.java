@@ -92,10 +92,9 @@ public class SnakesAndLaddersTest {
         Assert.assertEquals(expected,actual);
     }
 
-    /*@Test
+    @Test
     public void snakesAndLaddersTest2(){
         SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
-        SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
         Integer position = 16;
         Integer expected = 6;
         Integer actual = snakesAndLadders.snakesAndLaddersCheck(position, false);
@@ -105,12 +104,11 @@ public class SnakesAndLaddersTest {
     @Test
     public void snakesAndLaddersTest3(){
         SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
-        SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
         Integer position = 4;
         Integer expected = 14;
         Integer actual = snakesAndLadders.snakesAndLaddersCheck(position, true);
         Assert.assertEquals(expected,actual);
-    }*/
+    }
 
 
     @Test

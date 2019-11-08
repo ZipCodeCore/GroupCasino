@@ -23,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 public class BlackJack implements Game, GamblingGame {
 
     Casino casino = new Casino();
-    Deck deck = new Deck();
+    Deck deck = null;
     Console console = new Console(System.in, System.out);
     Card[] playerHand = new Card[6];
     Card[] dealerHand = new Card[6];
@@ -37,6 +37,11 @@ public class BlackJack implements Game, GamblingGame {
     Integer handOfPlayer = checkHand(playerHand);
     Integer handOfDealer = checkHand(dealerHand);
     private DateTimeFormatter dateTimeFormatter = java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+
+    public Player getWinner() {
+        return winner;
+    }
+
     private Player winner = null;
     private Integer totalEarnings = 0;
 
@@ -54,6 +59,7 @@ public class BlackJack implements Game, GamblingGame {
 
 
         while (running == true) {
+            deck = new Deck();
             winner = null;
 
             console.println("Welcome to BlackJack! Let's begin!");
@@ -66,7 +72,7 @@ public class BlackJack implements Game, GamblingGame {
 
             console.println("How much would you like to los- I mean bet?" + " Current balance: $" + currentplayer.getBalance());
             placeBet(currentPlayer);
-
+        if (running == true){
             houseWin();
 
 
@@ -86,10 +92,11 @@ public class BlackJack implements Game, GamblingGame {
             } else {
                 exitGame(currentPlayer);
             }
-
         }
-
+        }
     }
+
+
 
 
     @Override
@@ -129,9 +136,12 @@ public class BlackJack implements Game, GamblingGame {
         Integer playerBet = console.getIntegerInput(":");
         if (currentPlayer.getBalance() <= 0) {
             console.printSlow("Git yo broke ass ouuta heeerrre Bruhh!  !  !  !");
-            approachTable(currentPlayer);
+            console.delay(3500);
+            alsoRunning = false;
+            running = false;
         } else if (currentPlayer.getBalance() < playerBet) {
             console.printSlow(" Not enough cheddar! Bet a different amount");
+            console.delay(3500);
             placeBet(currentPlayer);
         } else {
             currentPlayer.placeBet(playerBet);
@@ -145,13 +155,23 @@ public class BlackJack implements Game, GamblingGame {
 
     }
 
+    public int blackJackCardValue(Card c) {
+        int card = c.getCardValue().getValue();
+        if(card > 10 && card < 14) {
+            card = 10;
+        } else if(card == 14) {
+            card = 11;
+        }
+        return card;
+    }
+
     public void viewCurrentHand() {
-        console.println("Your hand is " + String.valueOf(playerHand[0].getCardValue().getValue()) + " " + String.valueOf(playerHand[1].getCardValue().getValue()));
+        console.println("Your hand is " + String.valueOf(blackJackCardValue(playerHand[0])) + " " + String.valueOf(blackJackCardValue(playerHand[1])));
     }
 
     public void viewDealerHand() {
 
-        console.println("Dealer hand is " + String.valueOf(dealerHand[0].getCardValue().getValue()));
+        console.println("Dealer hand is " + String.valueOf(blackJackCardValue(dealerHand[0])));
     }
 
     public void hitOrStay() {
@@ -202,29 +222,34 @@ public class BlackJack implements Game, GamblingGame {
                         console.println("This is your hand " + handOfPlayer);
                         hitOrStay();
 
+            }else if(playerHand[2] != null && playerHand[3] == null){
+                handOfPlayer = checkHand(playerHand);
+                playerHand[3] = deck.draw();
+                handOfPlayer = checkHand(playerHand);
+                if(notBusted(checkHand(playerHand))){
+                console.println("This is your hand " + handOfPlayer);
+                hitOrStay();
+                }
+            }else if (playerHand[3] != null && playerHand[4] == null){
+                handOfPlayer = checkHand(playerHand);
+                console.println("This is your hand " + handOfPlayer);
+                playerHand[4] = deck.draw();
+                handOfPlayer = checkHand(playerHand);
+                hitOrStay();
+            }else if (playerHand[4] != null && checkHand(playerHand) < 21){
+                specialFive();
+            }
+
 
                     }
 
 
-                } else if (playerHand[2] != null && playerHand[3] == null) {
-                    handOfPlayer = checkHand(playerHand);
-                    playerHand[3] = deck.draw();
-                    handOfPlayer = checkHand(playerHand);
-                    console.println("This is your hand " + handOfPlayer);
-                    hitOrStay();
-                } else if (playerHand[3] != null && playerHand[4] == null) {
-                    handOfPlayer = checkHand(playerHand);
-                    console.println("This is your hand " + handOfPlayer);
-                    playerHand[4] = deck.draw();
-                    handOfPlayer = checkHand(playerHand);
-                    hitOrStay();
-                } else if (playerHand[4] != null && checkHand(playerHand) < 21) {
-                    specialFive();
+
                 }
             }
         }
-    }
-        public Boolean notBusted (Integer handValue){
+
+        public Boolean notBusted(Integer handValue){
             if (handValue > 21) {
                 return false;
             }
@@ -232,31 +257,30 @@ public class BlackJack implements Game, GamblingGame {
 
 
         }
-        public void stay () {
+        public void stay() {
             console.println("You chose to stay");
             viewCurrentHand();
 
 
         }
-        public void isWinner (Player currentPlayer){
+        public void isWinner(Player currentPlayer){
             winner = currentPlayer;
             Integer winnings = pot * 2;
             currentPlayer.changeBalance(winnings);
             console.println("You won $" + winnings);
 
         }
-        public void isLoser () {
+        public void isLoser() {
             console.println("You lost $" + pot);
             winner = dealer;
 
         }
 
-        public Integer checkHand (Card[]hand){
+        public Integer checkHand(Card[]hand){
             int handValue = 0;
             for (Integer i = 0; i < hand.length; i++) {
                 if (hand[i] != null) {
-                    Card currentCard = hand[i];
-                    handValue += currentCard.getCardValue().getValue();
+                    handValue += blackJackCardValue(hand[i]);
                 }
             }
             if (notBusted(handValue)) {
@@ -266,7 +290,7 @@ public class BlackJack implements Game, GamblingGame {
             return handValue;
 
         }
-        public void initialHand () {
+        public void initialHand() {
             dealerHand[0] = deck.draw();
             dealerHand[1] = deck.draw();
             playerHand[0] = deck.draw();
@@ -280,7 +304,7 @@ public class BlackJack implements Game, GamblingGame {
             }
 
         }
-        public void specialFive () {
+        public void specialFive() {
             isWinner(currentPlayer);
         }
 
@@ -316,7 +340,7 @@ public class BlackJack implements Game, GamblingGame {
             }
         }
 
-        public void dealerMove () {
+        public void dealerMove() {
             Integer value = checkHand(dealerHand);
             Integer counter = 2;
 
@@ -339,15 +363,6 @@ public class BlackJack implements Game, GamblingGame {
                 console.println("Dealer Bust...");
 
 
-            } else if (value <= 15) {
-                dealerHand[counter] = deck.draw();
-                counter++;
-                value = checkHand(dealerHand);
-                if (value <= 15) {
-                    dealerHand[counter] = deck.draw();
-                }
-            } else if (value > 21) {
-                console.println("Dealer Bust...");
 
             }
         }
@@ -397,7 +412,7 @@ public class BlackJack implements Game, GamblingGame {
 
             }
         }
-        private void checksWinner () {
+        private void checksWinner() {
             Integer handOfPlayer = checkHand(playerHand);
             Integer handOfDealer = checkHand(dealerHand);
             if (checkHand(playerHand) > checkHand(dealerHand) && checkHand(playerHand) <= 21) {
