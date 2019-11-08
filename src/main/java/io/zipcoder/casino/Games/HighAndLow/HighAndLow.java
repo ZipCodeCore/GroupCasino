@@ -148,12 +148,12 @@ public class HighAndLow implements Game, GamblingGame {
         }
     }
 
-    public void notEnoughMoney() {
+    public String notEnoughMoney() {
         console.printSlow(language.getHighAndLowLanguage(HighAndLowLanguage.Language.NOTENOUGHMONEY));
         console.println("Press Enter to return to the game menu... and hopefully the parking lot\n");
         console.newln();
         console.dotDotDot();
-        console.getStringInput("Loser");
+        return "Loser";
     }
 
     @Override
@@ -179,7 +179,8 @@ public class HighAndLow implements Game, GamblingGame {
     public void runGame(Player currentPlayer) {
         while(running) {
             if(!enoughBalance(currentPlayer.getBalance())){
-                notEnoughMoney();
+                String brokePunk = notEnoughMoney();
+                console.getStringInput(brokePunk);
                 break;
             }
             resetGame();

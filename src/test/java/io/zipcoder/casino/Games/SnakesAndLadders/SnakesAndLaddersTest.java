@@ -1,12 +1,8 @@
 package io.zipcoder.casino.Games.SnakesAndLadders;
 
-import io.zipcoder.casino.GamePieces.Dice;
 import io.zipcoder.casino.GamePieces.SnakesLaddersPiece;
 import org.junit.Test;
 import org.junit.Assert;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
 public class SnakesAndLaddersTest {
 
@@ -69,23 +65,6 @@ public class SnakesAndLaddersTest {
     }
 
     @Test
-    public void setUpTest(){
-        SnakesLaddersPiece playerPiece = new SnakesLaddersPiece();
-        SnakesLaddersPiece aiPiece = new SnakesLaddersPiece();
-        boolean running = true;
-        boolean currentGame = true;
-        Integer playerActual = playerPiece.getCurrentPosition();
-        Integer aiActual = aiPiece.getCurrentPosition();
-        Integer playerExpected = 0;
-        Integer aiExpected = 0;
-        Assert.assertEquals(playerExpected,playerActual);
-        Assert.assertEquals(aiExpected,aiActual);
-        Assert.assertTrue(running);
-        Assert.assertTrue(currentGame);
-    }
-
-
-    @Test
     public void snakesAndLaddersCheckTest1(){
         SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
         Integer position = 7;
@@ -118,6 +97,15 @@ public class SnakesAndLaddersTest {
         Integer position = 4;
         Integer expected = 14;
         Integer actual = snakesAndLadders.snakesAndLaddersCheck(position, false);
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void snakesAndLaddersCheckTest5(){
+        SnakesAndLadders snakesAndLadders = new SnakesAndLadders();
+        Integer position = 16;
+        Integer expected = 6;
+        Integer actual = snakesAndLadders.snakesAndLaddersCheck(position, true);
         Assert.assertEquals(expected,actual);
     }
 

@@ -5,6 +5,8 @@ import io.zipcoder.casino.PlayerCreation.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -207,5 +209,13 @@ public class HighAndLowTest {
         String actual = currentPlayer.printHistory();
 
         Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void notEnoughmoneyTest(){
+        HighAndLow highAndLow = new HighAndLow();
+        String expected = "Loser";
+        String actual = highAndLow.notEnoughMoney();
+        Assert.assertEquals(actual,expected);
     }
 }
