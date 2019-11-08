@@ -22,14 +22,13 @@ import java.time.format.DateTimeFormatter;
 
 public class BlackJack implements Game, GamblingGame {
 
-    Casino casino = new Casino();
+
     Deck deck = null;
     Console console = new Console(System.in, System.out);
     Card[] playerHand = new Card[6];
     Card[] dealerHand = new Card[6];
     private Player currentPlayer;
     Player dealer = new Player("Dealer", 100000);
-    private boolean currentGame = true;
     private CasinoArt art = new CasinoArt();
     boolean running = true;
     boolean alsoRunning = true;
@@ -219,11 +218,11 @@ public class BlackJack implements Game, GamblingGame {
                     playerHand[2] = deck.draw();
                     handOfPlayer = checkHand(playerHand);
 
-                    if (notBusted(checkHand(playerHand))) {
+                   if (notBusted(checkHand(playerHand))) {
                         console.println("This is your hand " + handOfPlayer);
-                        hitOrStay();
+                       hitOrStay();
 
-            }else if(playerHand[2] != null && playerHand[3] == null){
+            } else if(playerHand[2] != null && playerHand[3] == null){
                 handOfPlayer = checkHand(playerHand);
                 playerHand[3] = deck.draw();
                 handOfPlayer = checkHand(playerHand);
