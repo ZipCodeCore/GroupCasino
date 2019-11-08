@@ -38,12 +38,12 @@ public class GoFish implements Game {
     public void approachTable(Player currentPLayer) {
         Console.clearScreen();
         console.printFast(casinoArt.getCasinoArt(CasinoArt.Art.GOFISH));
-        console.printFast("\n\nThe smell of smoke, booze, and sweat lifts from the air, replaced by the sweet aroma of sugar.\n" +
+        console.printSlow("\n\nThe stench of smoke, booze, and sweat lifts from the air, replaced by the sweet aroma of sugar.\n" +
                 "Little people crowd around a table that barely reaches your knee caps. And yet, they are playing\n" +
                 "cards, not unlike those seen in Poker.\n\n" +
                 "\"What game is this?\" you ask the most mature of these little folk.\n" +
-                "\"Go Fish,\" he replies, twisting his glasses and twirling his milk in a martini glass.\n\n" +
-                        "Then, it suddenly dawns upon you. You are no longer in the casino, but rather... in the kids room\n\n");
+                "\"Go Fish,\" he replies, twisting his glasses and swirling his milk in a martini glass.\n\n" +
+                "Then, it suddenly dawns upon you. You are no longer in the casino, but rather... in the kids room.\n\nAnd the game is Go Fish.\n\n");
         console.dotDotDot();
         console.newln();
         console.printSlow("Would you like to play?\n");
