@@ -7,9 +7,6 @@ import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Services.GameRepo;
 import io.zipcoder.casino.utilities.Console;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
 import java.util.HashMap;
 
 public class GameMenu implements Menu {
@@ -68,7 +65,7 @@ public class GameMenu implements Menu {
                 "                             ~, *  : *  ,~\n" +
                 "                               ~,  :  ,~\n" +
                 "                                 ~,:,~\n");
-        // temporary
+
         for (int gameNum : gameMap.keySet()) {
             console.println(String.format("%d: %s", gameNum, ((GameObject) gameMap.get(gameNum)).getName()));
         }
@@ -80,11 +77,9 @@ public class GameMenu implements Menu {
 
     @Override
     public void handleChoice(int choice) {
-        try {
-            mainMusic.stop();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        mainMusic.stop();
+
         gameMap.get(choice).startPlay();
     }
 

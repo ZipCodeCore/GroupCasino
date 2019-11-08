@@ -67,8 +67,5 @@ public class Player implements GamblingPlayer {
         this.balance = balance;
     }
 
-    public void deposit(double amount) {
-
-    }
 
 }

@@ -149,7 +149,8 @@ public class CrapsGame extends DiceGame implements Game {
             //Return to games menu from here
         } else if (endChoiceInput.toUpperCase().equals("Y")) {
             console.println("\n[CROUPIER]: That's great!!!\n");
-            startPlay();
+
+            roundOfPlay();
         } else {
             console.println("\n[CROUPIER]: That's not a valid selection. Please choose again.");
             endChoice();

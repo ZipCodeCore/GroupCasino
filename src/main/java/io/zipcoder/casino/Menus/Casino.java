@@ -8,15 +8,13 @@ import io.zipcoder.casino.Utility.Music;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class Casino {
 
     private static Console console = new Console(System.in, System.out);
 
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         //Starts playing music!
         Music introMusic = null;
@@ -118,9 +116,6 @@ public class Casino {
         return new Player(firstName, lastName, age, 0.0);
     }
 
-    public static void rouletteEnding(){
-
-    }
 
     public static void displayEnding(Player player)  {
         Music losingHorn = null;
