@@ -63,6 +63,7 @@ public class GoFishTest {
         Player testPlayer = new Player("V","G");
         GoFish testGame = new GoFish(testPlayer);
         testGame.initializeGame();
+
         Card firstCard = new Card(Suit.CLUBS,Rank.KING);
         Card testCard;
         ArrayList<Card> giveHand = new ArrayList<>();
@@ -112,6 +113,7 @@ public class GoFishTest {
         Player testPlayer = new Player("V","B");
         GoFish testGame = new GoFish(testPlayer);
         testGame.initializeGame();
+
         Rank testCard = testGame.getCompCard();
         LOGGER.info("Card drawn: " + testCard.toString());
     }
