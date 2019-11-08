@@ -77,7 +77,7 @@ public class GoFish implements Game {
             console.print("Your current hand is ");
             displayHand(playerHand);
 
-            while (playerHand.size() > 0 && checkCard(playerGuess(), playerHand, aiHand)) {
+            while (aiHand.size() > 0 && playerHand.size() > 0 && deck.cardsLeft() > 0 &&  checkCard(playerGuess(), playerHand, aiHand)) {
                 console.printSlow("You guessed right!\n");
                 checkBook(playerHand, true);
                 if(playerHand.size() > 0) {
@@ -86,7 +86,7 @@ public class GoFish implements Game {
                 }
             }
 
-            if (!deck.cardsLeft().equals(0) || playerHand.size() != 0 || aiHand.size() != 0) {
+            if (!deck.cardsLeft().equals(0) && playerHand.size() != 0 && aiHand.size() != 0) {
                 console.printSlow("Wrong guess! Go Fish!\n");
                 console.printSlow("You draw a " + fish(playerHand).getCardValue().toString() + "!\n");
                 checkBook(playerHand, true);
@@ -99,7 +99,7 @@ public class GoFish implements Game {
                 console.getStringInput("");
 
 
-                while (aiHand.size() > 0 && checkCard(aiGuess(), aiHand, playerHand)) {
+                while (aiHand.size() > 0 && playerHand.size() > 0 && deck.cardsLeft() > 0 && checkCard(aiGuess(), aiHand, playerHand)) {
                     console.printSlow("Your opponent guessed right!\n");
                 }
             }
