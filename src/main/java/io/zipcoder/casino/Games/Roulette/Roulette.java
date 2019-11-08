@@ -26,6 +26,7 @@ public class Roulette implements Game, GamblingGame {
     private Boolean isOddEvenGame;
     private Integer totalReturns;
     private CasinoArt art = new CasinoArt();
+
     public void runRoulette(Player currentPlayer){
         this.currentPlayer = currentPlayer;
         approachTable(currentPlayer);
@@ -167,7 +168,6 @@ public class Roulette implements Game, GamblingGame {
         return spinNum;
     }
 
-
     public boolean isWinner(){
         if(isOddEvenGame) {
             return spinNum % 2 == placeBetInt;
@@ -214,6 +214,9 @@ public class Roulette implements Game, GamblingGame {
     public void setSpinNum(Integer spinNum) {
         this.spinNum = spinNum;
     }
+    public void setTotalReturns(Integer totalReturns){
+        this.totalReturns = totalReturns;
+    }
 
     public void setPlaceBetInt(Integer placeBetInt) {
         this.placeBetInt = placeBetInt;
@@ -221,7 +224,9 @@ public class Roulette implements Game, GamblingGame {
     public void setOddEvenGame(Boolean oddEvenGame) {
         isOddEvenGame = oddEvenGame;
     }
-
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
 }
 
 
