@@ -105,7 +105,7 @@ public class BlackjackGame extends CardGame implements Game {
             blackJackMusic = new Music();
             blackJackMusic.play();
         } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
+            System.out.println("Error playing sound.");
             ex.printStackTrace();
         }
 
@@ -114,12 +114,8 @@ public class BlackjackGame extends CardGame implements Game {
             roundStart();
         }
 
-        //stops the music!
-        try {
-            blackJackMusic.stop();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        blackJackMusic.stop();
+
     }
 
     public void roundStart() {

@@ -70,10 +70,11 @@ public class BlackjackMenu implements Menu {
             case 5:
 
         }
-
-        double minBet = this.blackjackGame.getMinBet();
-        double maxBet = this.blackjackGame.getMaxBet();
-        console.println(String.format("Minimum bet is %.2f; maximum bet is %.2f", minBet, maxBet));
+        if (this.blackjackGame.getMinBet() != 0.0) {
+            double minBet = this.blackjackGame.getMinBet();
+            double maxBet = this.blackjackGame.getMaxBet();
+            console.println(String.format("Minimum bet is %.2f; maximum bet is %.2f", minBet, maxBet));
+        }
 
     }
 
