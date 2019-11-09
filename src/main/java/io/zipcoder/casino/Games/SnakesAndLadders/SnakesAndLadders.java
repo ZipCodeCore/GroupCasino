@@ -96,6 +96,7 @@ public class SnakesAndLadders implements Game {
                     break;
                 }
             }
+            //after the game
             if (winner.equals("Player")) {
                 winSound.play();
                 console.println(text.getSnakeLanguage(SnakesAndLaddersLanguage.Language.PLAYERWINS));
