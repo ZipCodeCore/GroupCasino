@@ -29,7 +29,7 @@ public class GameServices implements GamblingGame {
     }
 
     public Double withdraw(Player player) {
-        double withdrawal = player.getBalance();
+         double withdrawal = player.getBalance();
         if (wager(player.getBalance(), player)) {
             return withdrawal;
         } else {
