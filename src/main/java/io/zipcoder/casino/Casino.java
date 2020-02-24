@@ -1,8 +1,17 @@
 package io.zipcoder.casino;
 
 
-public class Casino {
+import io.zipcoder.casino.utilities.Console;
+
+public class
+        Casino {
+
     public static void main(String[] args) {
         // write your tests before you start fucking with this
+
+        App newCasino = new App();
+        newCasino.App();
+
     }
+
 }
