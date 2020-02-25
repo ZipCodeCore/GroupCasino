@@ -10,5 +10,5 @@ public interface GamblingGame {
     public Integer subtractLoses();
 
     public Boolean checkPlayerBalances();
-    
+
 }
