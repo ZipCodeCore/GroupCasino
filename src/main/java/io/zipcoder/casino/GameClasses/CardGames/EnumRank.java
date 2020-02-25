@@ -16,10 +16,7 @@ public enum EnumRank {
     ace(14);
 
     private Integer rank;
-    private EnumRank(int value){
+    private EnumRank(int value) {
         this.rank = value;
-    }
-    public Integer getEnumRank(){
-        return rank;
     }
 }
