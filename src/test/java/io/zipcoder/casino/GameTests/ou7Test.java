@@ -8,16 +8,16 @@ import org.junit.Test;
 public class ou7Test {
 
 //    @Test
-//    //given
-//    public void newPlayerTest(Membership player){
-//        new OU7Player() newPlayer = player;
+//    public evaluateGuessToRollTest(){}
 //
+//    @Test
+//    public guess(){}
 //
-//    //when
-//        Membership newMembership = new Membership(String name, Integer idNumber, Integer balance, Integer age);
-//        OU7Player OU7Player(newMembership);
-//
-//    //result
-//        Assert.assertEquals(expected,actual);
+//    @Test
+//    public(){}
 
-}
+
+
+    }
+
+
