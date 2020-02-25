@@ -9,7 +9,14 @@ public abstract class Player {
     Membership player;
 
     public Integer win(Integer amount){
+        Integer amountWon =0;
 
-        return null;
+        return amountWon;
+    }
+
+    public Integer lose(Integer amount){
+        Integer amountLost = 0;
+
+        return amountLost;
     }
 }
