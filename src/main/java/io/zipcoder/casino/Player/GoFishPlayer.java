@@ -1,4 +1,10 @@
 package io.zipcoder.casino.Player;
 
-public class GoFishPlayer {
+import io.zipcoder.casino.CasinoClasses.Membership;
+
+public class GoFishPlayer extends CardPlayer {
+
+    public GoFishPlayer(Membership playerAccount){
+
+    }
 }

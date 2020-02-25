@@ -1,4 +1,11 @@
 package io.zipcoder.casino.Player;
 
-public class BlackJackPlayer {
+import io.zipcoder.casino.CasinoClasses.Membership;
+
+public class BlackJackPlayer extends CardPlayer implements GamblerAttributes{
+
+    public BlackJackPlayer(Membership playerAccount){
+
+
+    }
 }

@@ -1,9 +1,15 @@
 package io.zipcoder.casino.Player;
 
+import io.zipcoder.casino.CasinoClasses.Membership;
+
 public abstract class Player {
     String playerName = "";
-    Double chips = 0.0;
-    Double cash = 0.0;
-    boolean isAdult = true;
+    Integer balance = 0;
+    Integer age;
+    Membership player;
 
+    public Integer win(Integer amount){
+
+        return null;
+    }
 }
