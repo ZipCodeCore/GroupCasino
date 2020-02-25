@@ -17,4 +17,10 @@ public class CrapsPlayer extends Player implements GamblerAttributes{
         this.playerAccount = playerAccount;
     }
 
+    public Integer placeBet(){
+        Integer betPlaced = 0;
+
+        return betPlaced;
+    }
+
 }
