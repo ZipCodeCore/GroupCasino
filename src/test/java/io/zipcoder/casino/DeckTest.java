@@ -59,7 +59,9 @@ public class DeckTest {
     public void testShuffleDeck() {
         Deck deck = new Deck();
         deck.createDeck();
-        //deck.shuffleDeck();
+        deck.stackToArray();
+        deck.shuffle();
+        deck.arrayListToStack();
         deck.printDeck();
     }
 
@@ -74,4 +76,16 @@ public class DeckTest {
 
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testPrintShuffledStack() {
+        Deck deck = new Deck();
+        deck.createDeck();
+        deck.stackToArray();
+        deck.shuffle();
+        deck.arrayListToStack();
+
+        LOGGER.info("\n" + deck.peekStack());
+    }
+
 }

@@ -1,5 +1,6 @@
 package io.zipcoder.casino.card;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Stack;
 
 public class Deck {
@@ -44,6 +45,7 @@ public class Deck {
 
     public void printDeck() {
         System.out.println(deck);
+        System.out.println(deckToShuffle);
     }
 
     public void stackToArray() {
@@ -54,15 +56,17 @@ public class Deck {
         return deckToShuffle;
     }
 
-    public void shuffleDeck() {
-        Card tempToSwapTo;
-        for (int i = 0; i < 52; i++) {
-            int random = (int)(Math.random() * 52);
-            for (int j = 0; j <= random; j++) {
-                tempToSwapTo = deck.get(j);
-
-            }
-        }
+    public void shuffle() {
+        Collections.shuffle(deckToShuffle);
     }
+
+    public void arrayListToStack() {
+        deck.addAll(deckToShuffle);
+    }
+
+    public Card peekStack() {
+        return deck.peek();
+    }
+
 }
 
