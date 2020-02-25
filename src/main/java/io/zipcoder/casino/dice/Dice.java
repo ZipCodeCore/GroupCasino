@@ -1,29 +1,25 @@
 package io.zipcoder.casino.dice;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Dice {
-    public int numberOfDice;
-    private int sizes;
-    private Random random;
 
+    public int numberOfDice;
 
     public Dice(int numberOfDice, int sizes, long random) {
         this.numberOfDice = numberOfDice;
-        this.sizes = sizes;
-        this.random = new Random(random);
     }
 
     public Dice(int numberOfDice, int sizes) {
         this.numberOfDice = numberOfDice;
-        this.sizes = sizes;
-        this.random = new Random();
     }
 
     public int tossAndSum() {
         int sum = 0;
+        ThreadLocalRandom random = ThreadLocalRandom.current();
         for (int i = 0; i < numberOfDice; i++) {
-            sum += random.nextInt(sizes) + 1;
+            sum += random.nextInt(6) + 1;
         }
         return sum;
     }
