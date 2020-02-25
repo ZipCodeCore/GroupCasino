@@ -1,9 +1,7 @@
-package io.zipcoder.casino.Game;
+package io.zipcoder.casino.game;
 
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.utilities.Console;
-
-import java.util.Scanner;
 
 public class GoFish {
     Deck deck;
