@@ -4,20 +4,16 @@ import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.logging.Logger;
+
+import java.util.Stack;
 
 public class DeckTest {
+    /*@Test
+    public void testDeck(){
 
-    private static final Logger LOGGER = Logger.getLogger(DeckTest.class.getName());
-    @Test
-    public void newDeckTest(){
-        ArrayList<Card> deck = Deck.newDeck();
-        Collections.sort(deck);
+        Stack<Card> deck = new Stack<>();
 
-        for(Card card : deck){
-            System.out.println(card);
-        }
-    }
+
+    }*/
+
 }
