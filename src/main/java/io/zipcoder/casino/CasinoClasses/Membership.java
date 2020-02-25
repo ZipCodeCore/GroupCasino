@@ -13,4 +13,18 @@ public class Membership {
         this.age = age;
 
     }
+    public Integer getBalance(){
+
+        return this.balance;
+    }
+    public String getName(){
+
+        return this.name;
+    }
+    public Integer getAge(){
+        return this.age;
+    }
+    public Integer getIdNumber(){
+        return this.idNumber;
+    }
 }
