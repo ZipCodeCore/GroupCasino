@@ -1,4 +1,25 @@
 package io.zipcoder.casino.GameClasses.CardGames;
 
 public enum EnumRank {
+    two(2),
+    three(3),
+    four(4),
+    five(5),
+    six(6),
+    seven(7),
+    eight(8),
+    nine(9),
+    ten(10),
+    jack(11),
+    queen(12),
+    king(13),
+    ace(14);
+
+    private Integer rank;
+    private EnumRank(int value){
+        this.rank = value;
+    }
+    public Integer getEnumRank(){
+        return rank;
+    }
 }
