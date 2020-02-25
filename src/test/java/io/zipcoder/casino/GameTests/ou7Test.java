@@ -8,13 +8,18 @@ import org.junit.Test;
 public class ou7Test {
 
 //    @Test
-//    public evaluateGuessToRollTest(){}
+//    public void evaluateGuessToRollTest(){
+//
+//    }
 //
 //    @Test
-//    public guess(){}
+//    public void guessTest(){
 //
-//    @Test
-//    public(){}
+//
+//        Assert.assertEquals(expected,actual);
+//    }
+
+
 
 
 

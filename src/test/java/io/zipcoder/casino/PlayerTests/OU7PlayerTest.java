@@ -6,12 +6,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class OU7PlayerTest {
-//
-//      @Test
+
+//    @Test
 //    //given
-//    public void newPlayerTest(Membership player) {
+//    public void newOU7PlayerTest(Membership player) {
 //        Membership newMembership = new Membership("Fred Rogers", 123, 10000, 40);
-//        OU7Player newPlayer = OU7Player(newMembership);
+//        OU7Player newPlayer = new OU7Player(newMembership);
 //
 //
 //        //when
@@ -21,4 +21,5 @@ public class OU7PlayerTest {
 //        //result
 //        Assert.assertEquals(expected, actual);
 //
+//    }
 }
