@@ -17,6 +17,3 @@ public class GoFishPlayer extends CardPlayer {
             this.playerAccount = playerAccount;
         }
 }
-
-
-
