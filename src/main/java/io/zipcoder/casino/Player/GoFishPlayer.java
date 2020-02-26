@@ -16,6 +16,7 @@ public class GoFishPlayer extends CardPlayer {
             this.age = playerAccount.getAge();
             this.playerAccount = playerAccount;
         }
+
 }
 
 
