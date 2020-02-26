@@ -22,4 +22,3 @@ public class BlackJackPlayer extends CardPlayer implements GamblerAttributes{
         return betPlaced;
     }
 }
-
