@@ -5,5 +5,5 @@ public interface GamblerAttributes {
     Integer winnings = null;
     Integer losses = null;
 
-    public Integer placeBet();
+    public Integer placeBet(Integer bet);
 }

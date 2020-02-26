@@ -3,7 +3,7 @@ package io.zipcoder.casino.Player;
 import io.zipcoder.casino.CasinoClasses.Membership;
 
 public class CardPlayer extends Player{
-
+Hand hand = new Hand();
 
     public CardPlayer(){
         String playerName = "";
@@ -12,9 +12,9 @@ public class CardPlayer extends Player{
         Membership playerAccount;
     }
 
-    public Hand checkHand(Player player1, Player player2){
-        Hand winningHand = null;
+    public Hand checkHand( Player playerName,Hand hand){
 
-        return winningHand;
+
+        return null;
     }
 }

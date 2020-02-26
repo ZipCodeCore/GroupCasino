@@ -9,6 +9,7 @@ public class Casino{
     String casinoName = "";
     HashMap<String, Double> Players;
 
+
     public Casino (String CasinoName){
         this.casinoName = CasinoName;
     }
@@ -184,3 +185,4 @@ public class Casino{
         }
     }
 }
+
