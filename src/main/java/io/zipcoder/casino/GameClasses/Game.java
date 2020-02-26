@@ -13,4 +13,6 @@ public interface Game {
     public Boolean playAgain();
 
     public Player playerBuilder();
+
+    public Boolean isTurn();
 }

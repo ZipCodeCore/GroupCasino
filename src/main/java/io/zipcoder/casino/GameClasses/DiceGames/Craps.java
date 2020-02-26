@@ -41,5 +41,9 @@ public class Craps implements GamblingGame, Game {
     public Player playerBuilder() {
         return null;
     }
+
+    public Boolean isTurn() {
+        return null;
+    }
 }
 
