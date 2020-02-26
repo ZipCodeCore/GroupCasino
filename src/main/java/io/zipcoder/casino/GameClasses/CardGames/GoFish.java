@@ -28,3 +28,4 @@ public class GoFish implements Game {
     public Boolean isTurn() {
         return null;
     }
+}
