@@ -13,11 +13,14 @@ public class Casino{
         this.casinoName = CasinoName;
     }
 
+    // ******************************************************************************************** Welcome **********
+
     public void welcomeMessage(){
         System.out.println(    "Hello  Welcome to casino    " + casinoName + "\n");
         System.out.println(    "Hope you enjoy your stay at " + casinoName + "\n");
     }
 
+    // ******************************************************************************************** Getting String iput from User **********
     public String getUserInput(){
 
         Scanner readInput = new Scanner(System.in);
@@ -25,6 +28,7 @@ public class Casino{
         return userInput;
     }
 
+    // ******************************************************************************************** Getting AGE from User **********
     public boolean getMemberStatus() {
         boolean answer = false;
         System.out.println("Are you an existing member or new ?         : ");
@@ -51,6 +55,8 @@ public class Casino{
         }
         return answer;
     }
+
+    // ******************************************************************************************** Getting A Number from User --- (Try catch - ensure a number is provided )**********
     public Integer getNumber(){
         Integer numberInput = 0;
         boolean validNumber = false;
@@ -70,6 +76,7 @@ public class Casino{
 
         return numberInput;
     }
+    // ******************************************************************************************** Getting Account # from User - Must be 4 digits **********
     public Integer collectAccountNumber(String userName){
         System.out.print("Thank you " + userName + "\n" +
                 "Now provide a valid 4 digit Account number  : ");
@@ -94,6 +101,7 @@ public class Casino{
         }
         return userPin;
     }
+    // ******************************************************************************************** Getting Initial balance from User - $50 minimum & $10,000 Max **********
     public Integer collectStartingBalance(String userName, Integer accountNumber){
         Integer userBalance = getNumber();
 
@@ -117,12 +125,16 @@ public class Casino{
         }
         return userBalance;
     }
+
+    // ******************************************************************************************** Getting Name from User **********
     public String collectName(){
         System.out.println("\n" + "No problem we will set up an account for you! " + "\n");  //System.out.int("Please        Enter  ' Y ' or ' N '         : ");
         System.out.print("First Provide us with your name             : ");
         String userName = getUserInput();
         return userName;
     }
+
+    // ******************************************************************************************** Getting AGE from User **********
     public Integer collectAge(String userName, Integer accountNumber, Integer userBalance){
                        //"First Provide us with your name             : "
         System.out.print("Last Item needed is age :  Please Provide   : ");
@@ -150,6 +162,7 @@ public class Casino{
         return age;
     }
 
+    // ******************************************************************************************** Method to collect all account data from User ( Calls other methods )**********
     public Membership createrMembership(){
 
         String userName = collectName();
@@ -161,6 +174,7 @@ public class Casino{
         return newMember;
     }
 
+    // ******************************************************************************************** Temporary main for running Casino Methods *******************************************
     public static void main(String[] args) {
         Casino vegas = new Casino("King Jimmy");
         vegas.welcomeMessage();
