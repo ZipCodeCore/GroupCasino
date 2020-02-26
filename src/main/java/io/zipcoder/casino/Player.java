@@ -2,10 +2,10 @@ package io.zipcoder.casino;
 
 public abstract class Player
 {
-    public String name;
-    public Integer gamblingWallet;
+    private String name;
+    private Wallet gamblingWallet;
 
-    public Player(String name, Integer gamblingWallet)
+    public Player(String name, Wallet gamblingWallet)
     {
         this.name = name;
         this.gamblingWallet = gamblingWallet;
