@@ -118,6 +118,7 @@ public class CardTest
         Integer expectedFirstCompare = 1;
         Integer expectedSecondCompare = -1;
         Integer expectedThirdCompare = 1;
+        
         // WHEN
 
         Integer actualFirstCompare = testAce.compareTo(testJack);
@@ -128,6 +129,6 @@ public class CardTest
 
         assertEquals(expectedFirstCompare, actualFirstCompare);
         assertEquals(expectedSecondCompare, actualSecondCompare);
-        assertEquals(expectedFirstCompare, actualThirdCompare);
+        assertEquals(expectedThirdCompare, actualThirdCompare);
     }
 }
