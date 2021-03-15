@@ -1,0 +1,170 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class playerClass {
+private playerName;
+private final playerID;
+private wallet;
+private chipBalance;
+
+get/setter name;
+get ID;
+get chipBalance;
+get wallet;
+addToWallet;
+
+wageMoney;
+cashOut;
+getMoreChips;
+}
+
+interface Game {
+playGame;
+checkWinner;
+}
+
+interface gamblingGame {
+addToPot;
+winPot;
+}
+
+interface gamblingPlayer {
+wageMoney;
+cashOut;
+getMoreChips;
+}
+
+abstract class cardGame {
+private stack deckOfCards;
+private stack discardPile;
+private ArrayList<Cards> playerHand;
+private ArrayList<Cards> dealerHand;
+
+playGame;
+makeDeck;
+shuffleDeck;
+dealCards;
+discardPile;
+}
+
+abstract class diceGame {
+private int totalNumOfDice;
+ArrayList<Integers> playerDiceHand;
+
+playGame;
+checkWinner;
+addToPot;
+winPot;
+rollDice;
+}
+
+class chipMoneyExchange {
+chipsToMoney;
+moneyToChips;
+}
+
+class goFish {
+ArrayList<Cards> playerHand;
+ArrayList<Cards> dealerHand;
+int numOfPlayerMatches;
+int numOfDealerMatches;
+
+doYouHaveCard;
+removeCardFromHand;
+addToPlayerMatches;
+addToDealerMatches;
+checkWinner;
+}
+
+class blackJack {
+ArrayList<Cards> playerHand;
+ArrayList<Cards> playerSplitHand;
+ArrayList<Cards> dealerHand;
+ArrayList<Cards> dealerSplitHand;
+int playerTotal;
+int dealerTotal;
+int sizeOfPot;
+
+addToPot;
+winPot;
+checkWinner;
+splitHand;
+hitMe;
+(boolean)didIBust;
+}
+
+class craps {
+String stateOfGame(passOrNot);
+int currentRound;
+}
+
+class extraDiceGame {
+ArrayList<Integer> dealerDiceHand;
+int playerCount;
+int dealerCount;
+
+countMatches;
+checkWinner;
+holdDice(int... index);
+}
+
+class userWarehouse {
+HashSet<UserID, player> currentPlayers;
+
+addPlayer;
+removePlayer;
+howManyPlayers;
+}
+
+class creatorOfAllThings {
+createUser;
+createCard;
+createDice;
+}
+
+class cardMaker {
+private String nameOfCard;
+private String suitOfCard;
+private int valueOfCard;
+}
+
+class Display {
+enterCasinoScreen;
+chipMoneyExchangeScreen;
+chooseGameScreen;
+goFish(all the screens);
+blackJack(all the screens);
+craps(all the screens);
+extraDiceGame(all the screens);
+}
+
+
+class mainCasino {
+runCasino;
+}
+
+diceGame <|--- craps
+diceGame <|--- extraDiceGame
+
+cardGame <|--- goFish
+cardGame <|--- blackJack
+
+Game <|--- gamblingGame
+Game <|--- goFish
+
+gamblingGame <|--- blackJack
+gamblingGame <|--- diceGame
+
+gamblingPlayer <|-- playerClass
+
+Game <|-- cardGame
+
+
+
+'Alice -> Bob: Authentication Request
+'Bob --> Alice: Authentication Response
+'
+'Alice -> Bob: Another authentication Request
+'Alice <-- Bob: another authentication Response
+
+@enduml
