@@ -1,7 +1,7 @@
-package io.zipcoder.casino.utilities;
+package io.zipcoder.casino;
 
 public interface GamblingGame {
 
     void addToPot();
-    void winPot();
+    int getPot();
 }

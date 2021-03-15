@@ -1,4 +1,4 @@
-package io.zipcoder.casino.utilities;
+package io.zipcoder.casino;
 
 import java.util.ArrayList;
 
@@ -7,15 +7,13 @@ public abstract class DiceGame implements GamblingGame {
     ArrayList<Integer> playerDiceHand;
     int pot = 0;
     
-    public void addToPot(int numOfChips) {
-        pot += numOfChips;
-    }
+    public void addToPot() {}
 
     public void clearPot() {
         pot = 0;
     }
 
-    public int winsPot() {
+    public int getPot() {
         return pot;
     }
 
