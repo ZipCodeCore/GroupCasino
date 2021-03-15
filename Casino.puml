@@ -126,9 +126,6 @@ class CardFactory {
 createCard;
 }
 
-class DiceFactory {
-createDice;
-}
 
 class CardMaker {
 private String nameOfCard;
@@ -144,6 +141,10 @@ goFish(all the screens);
 blackJack(all the screens);
 craps(all the screens);
 extraDiceGame(all the screens);
+}
+
+class cardWarehouse {
+ArrayList<Cards> deckOfCards;
 }
 
 
