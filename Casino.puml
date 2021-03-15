@@ -1,16 +1,16 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-class playerClass {
-private playerName;
-private final playerID;
-private wallet;
-private chipBalance;
+class PlayerClass {
+private String playerName;
+private final int playerID;
+private int wallet;
+private int chipBalance;
 
 get/setter name;
 get ID;
-get chipBalance;
-get wallet;
+get/set chipBalance;
+get/set wallet;
 addToWallet;
 
 wageMoney;
@@ -23,31 +23,32 @@ playGame;
 checkWinner;
 }
 
-interface gamblingGame {
+interface GamblingGame {
 addToPot;
 winPot;
 }
 
-interface gamblingPlayer {
+interface GamblingPlayer {
 wageMoney;
 cashOut;
 getMoreChips;
 }
 
-abstract class cardGame {
-private stack deckOfCards;
-private stack discardPile;
+abstract class CardGame {
+private ArrayList<Cards> deck;
+private ArrayList<Cards> discardPile;
 private ArrayList<Cards> playerHand;
 private ArrayList<Cards> dealerHand;
 
 playGame;
+checkWinner;
 makeDeck;
 shuffleDeck;
 dealCards;
 discardPile;
 }
 
-abstract class diceGame {
+abstract class DiceGame {
 private int totalNumOfDice;
 ArrayList<Integers> playerDiceHand;
 
@@ -58,12 +59,12 @@ winPot;
 rollDice;
 }
 
-class chipMoneyExchange {
+class ChipMoneyExchange {
 chipsToMoney;
 moneyToChips;
 }
 
-class goFish {
+class GoFish {
 ArrayList<Cards> playerHand;
 ArrayList<Cards> dealerHand;
 int numOfPlayerMatches;
@@ -76,7 +77,7 @@ addToDealerMatches;
 checkWinner;
 }
 
-class blackJack {
+class BlackJack {
 ArrayList<Cards> playerHand;
 ArrayList<Cards> playerSplitHand;
 ArrayList<Cards> dealerHand;
@@ -93,12 +94,12 @@ hitMe;
 (boolean)didIBust;
 }
 
-class craps {
+class Craps {
 String stateOfGame(passOrNot);
 int currentRound;
 }
 
-class extraDiceGame {
+class ExtraDiceGame {
 ArrayList<Integer> dealerDiceHand;
 int playerCount;
 int dealerCount;
@@ -108,7 +109,7 @@ checkWinner;
 holdDice(int... index);
 }
 
-class userWarehouse {
+class PlayerWarehouse {
 HashSet<UserID, player> currentPlayers;
 
 addPlayer;
@@ -116,13 +117,19 @@ removePlayer;
 howManyPlayers;
 }
 
-class creatorOfAllThings {
-createUser;
+class PlayerFactory {
+createPlayer;
+}
+
+class CardFactory {
 createCard;
+}
+
+class DiceFactory {
 createDice;
 }
 
-class cardMaker {
+class CardMaker {
 private String nameOfCard;
 private String suitOfCard;
 private int valueOfCard;
@@ -139,25 +146,25 @@ extraDiceGame(all the screens);
 }
 
 
-class mainCasino {
+class MainCasino {
 runCasino;
 }
 
-diceGame <|--- craps
-diceGame <|--- extraDiceGame
+DiceGame <|--- Craps
+DiceGame <|--- ExtraDiceGame
 
-cardGame <|--- goFish
-cardGame <|--- blackJack
+CardGame <|--- GoFish
+CardGame <|--- BlackJack
 
-Game <|--- gamblingGame
-Game <|--- goFish
+Game <|--- GamblingGame
 
-gamblingGame <|--- blackJack
-gamblingGame <|--- diceGame
 
-gamblingPlayer <|-- playerClass
+GamblingGame <|--- BlackJack
+GamblingGame <|--- DiceGame
 
-Game <|-- cardGame
+GamblingPlayer <|-- PlayerClass
+
+Game <|-- CardGame
 
 
 
