@@ -27,11 +27,19 @@ public class MostOfAKindGame extends DiceGame {
 
     public boolean checkWinner() {
         boolean doIWin = false;
-        if (getDealerCount() > getPlayerCount()) {
-            return doIWin;
-        } else if (getPlayerCount() > getDealerCount()) {
+        if (getPlayerCount() > getDealerCount()) {
             doIWin = true;
+        } else if (getDealerCount() > getPlayerCount()) {
+            doIWin = false;
         }
         return doIWin;
+    }
+
+    public void addToPlayerCount(int numOfSameNum) {
+        playerCount += numOfSameNum;
+    }
+
+    public void addToDealerCount(int numOfSameNum) {
+        dealerCount += numOfSameNum;
     }
 }

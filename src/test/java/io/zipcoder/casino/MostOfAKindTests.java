@@ -60,15 +60,45 @@ public class MostOfAKindTests {
     }
 
     @Test
-    public void checkWinner() {
+    public void addToPlayerCount() {
         //Given
         MostOfAKindGame yahtzee = new MostOfAKindGame();
-        boolean expected = false;
+        yahtzee.addToPlayerCount(3);
+        int expected = 3;
+
+        //When
+        int actual = yahtzee.getPlayerCount();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkWinnerDealer() {
+        //Given
+        MostOfAKindGame yahtzee = new MostOfAKindGame();
+        yahtzee.addToPlayerCount(3);
+        yahtzee.addToDealerCount(4);
 
         //When
         boolean actual = yahtzee.checkWinner();
 
         //Then
-        Assert.assertEquals(expected, actual);
+        Assert.assertFalse(actual);
     }
+
+    @Test
+    public void checkWinnerPlayer() {
+        //Given
+        MostOfAKindGame yahtzee = new MostOfAKindGame();
+        yahtzee.addToPlayerCount(4);
+        yahtzee.addToDealerCount(2);
+
+        //When
+        boolean actual = yahtzee.checkWinner();
+
+        //Then
+        Assert.assertTrue(actual);
+    }
+
 }
