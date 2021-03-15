@@ -51,6 +51,7 @@ discardPile;
 abstract class DiceGame {
 private int totalNumOfDice;
 ArrayList<Integers> playerDiceHand;
+int sizeOfPot;
 
 playGame;
 checkWinner;
