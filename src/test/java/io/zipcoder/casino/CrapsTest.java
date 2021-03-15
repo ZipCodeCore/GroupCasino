@@ -3,7 +3,7 @@ package io.zipcoder.casino;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DiceGameTests {
+public class CrapsTest {
 
     @Test
     public void getPot() {
@@ -57,5 +57,18 @@ public class DiceGameTests {
 
         //Then
         Assert.assertTrue(result > 0 && result < 7);
+    }
+
+    @Test
+    public void checkWinner() {
+        //Given
+        MostOfAKindGame yahtzee = new MostOfAKindGame();
+        boolean expected = false;
+
+        //When
+        boolean actual = yahtzee.checkWinner();
+
+        //Then
+        Assert.assertEquals(expected, actual);
     }
 }
