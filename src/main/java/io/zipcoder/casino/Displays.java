@@ -19,12 +19,12 @@ public class Displays {
     }
 
     public void welcomeScreen() {
-        println("                             ");
-        println("        $$  $$               ");
+        println("                              ");
+        println("        $$  $$                ");
         println("     $$$$$$$$$$$$$            ");
         println("    $$$$$$$$$$$$$$$           ");
-        println("   $$$   $$  $$ $$$$         ");
-        println("   $$$   $$  $$  $$$         ");
+        println("   $$$   $$  $$ $$$$          ");
+        println("   $$$   $$  $$  $$$          ");
         println("   $$$   $$  $$               ");
         println("    $$$$ $$  $$               ");
         println("     $$$$$$$$$$$$$            ");
@@ -41,6 +41,7 @@ public class Displays {
         println("------------------------------");
         println("     Enter Casino: 00         ");
         println("     Leave Casino: 99         ");
+        println("                              ");
     }
 
     public void invalidEntryWelcomeScreen() {
@@ -49,6 +50,7 @@ public class Displays {
         println("------------------------------");
         println("     Enter Casino: 00         ");
         println("     Leave Casino: 99         ");
+        println("                              ");
     }
 
     public void goodbyeCasinoScreen() {
@@ -70,5 +72,32 @@ public class Displays {
         println("    Poker Dice Room: 5        ");
         println("                              ");
         println(" *Don't need chips to play    ");
+        println("                              ");
+    }
+
+    public void casinoLobbyInvalidScreen() {
+            println("                              ");
+            println("     Invalid input            ");
+            println("                              ");
+            println("------------------------------");
+            println("    Teller Window:   1        ");
+            println("   *GoFish Room:     2        ");
+            println("    BlackJack Room:  3        ");
+            println("    Craps Room:      4        ");
+            println("    Poker Dice Room: 5        ");
+            println("                              ");
+            println(" *Don't need chips to play    ");
+            println("                              ");
+    }
+
+    public void tellerWindowScreen() {
+        println("                           /&&&&&&&&/,,,,,,(&@&@@@@@@                           ");
+        println("                       &&&&,,,,,,,,,,,,,,,,,,,,,,,,,,&@@@@                      ");
+        println("                   &&@&,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,&@@&.                  ");
+        println("                &@&*,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,/@@@                ");
+        println("              &@&,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,@@&,             ");
+        println("            @@&,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,&@@            ");
+        println("           &@,,,,,,,,,,,,,,,,@@@&,,,,,,,,,,,,,,&@@&,,,,,,,,,,,,,,,,@@@          ");
+        println("         %&&,,,,,,,,,,,,,,,,@@@@@@,,,,,,,,,,,,@@@@@@,,,,,,,,,,,,,,,,@@@         \n");
     }
 }
