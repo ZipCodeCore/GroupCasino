@@ -8,7 +8,7 @@ public class GoFishTest {
 
     @Test
     public void constructorGameTest(){
-        GoFish friendlyGame = new GoFish();
+       // GoFish friendlyGame = new GoFish();
     }
 
 
