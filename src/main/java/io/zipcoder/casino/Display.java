@@ -175,6 +175,4 @@ public class Display {
             "How much money would you like to bet?"
         );
     }
-
-
 }
