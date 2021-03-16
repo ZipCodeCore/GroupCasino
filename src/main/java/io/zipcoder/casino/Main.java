@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String args[]) {
         Display d = new Display();
-        d.printWelcomeBackMessage();
+        d.printWelcomeMessage();
         d.testConsole();
     }
 }
