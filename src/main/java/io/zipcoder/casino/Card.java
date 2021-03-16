@@ -14,15 +14,15 @@ public class Card {
         cardValue=value;
     }
 
-    private String getCardName(){
+    public String getCardName(){
         return cardName;
     }
 
-    private Integer getValue(){
+    public Integer getValue(){
         return cardValue;
     }
 
-    private String getCardSuit(){
+    public String getCardSuit(){
         return cardSuit;
     }
 }
