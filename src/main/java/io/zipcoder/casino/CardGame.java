@@ -1,15 +1,17 @@
 package io.zipcoder.casino;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 abstract class CardGame implements Game {
     private List<Card> deck=new ArrayList<Card>();
     private List<Card>discardPile=new ArrayList<Card>();
-    private List<Card> playerHand=new ArrayList<Card>();
-    private List<Card> dealerHand=new ArrayList<Card>();
+
+    public List<Card> playerHand=new ArrayList<Card>();
+    public List<Card> dealerHand=new ArrayList<Card>();
+
+
     private Card AceOfSpades=new Card("A", "Spades", 11);
     private Card TwoOfSpades=new Card("2", "Spades", 2);
     private Card ThreeOfSpades=new Card("3", "Spades", 3);
@@ -68,13 +70,16 @@ abstract class CardGame implements Game {
 
 
 
-
-
+    //empties all hands, decks, and discard piles. Used to make new game state.
+    public void clearTable(){
+        deck.clear();
+        playerHand.clear();
+        dealerHand.clear();
+        discardPile.clear();
+    }
 
     //method to set deck to new deck.
-    //clears out deck then fills with all 52 cards.
     public void makeDeck(){
-        if (deck!=null){deck.clear();}
         deck.add(AceOfSpades);
         deck.add(TwoOfSpades);
         deck.add(ThreeOfSpades);
@@ -148,8 +153,32 @@ abstract class CardGame implements Game {
             deck.remove(0);
         }else System.out.println("Pick player one or two, please.");
 
-    };
+    }
 
-    //temporary, I don't actually know what this is for as of yet.
-    //public void discardPileReshuffle(){};
+    public void discardCards(int cardIndex, int whichPlayer){
+        if(whichPlayer==1){
+            discardPile.add(playerHand.get(cardIndex));
+            playerHand.remove(cardIndex);
+        }else if(whichPlayer==2){
+            discardPile.add(dealerHand.get(cardIndex));
+            dealerHand.remove(cardIndex);
+        }else System.out.println("Pick player one or two, please.");
+    }
+
+    public void discardHand(int whichPlayer){
+        if(whichPlayer==1){
+            discardPile.addAll(playerHand);
+            playerHand.clear();
+        }else if(whichPlayer==2){
+            discardPile.addAll(dealerHand);
+            dealerHand.clear();
+        }else System.out.println("Pick player one or two, please.");
+    }
+
+    //Lets you reshuffle the discard into the deck.
+    public void discardPileReshuffle(){
+        deck.addAll(discardPile);
+        discardPile.clear();
+        shuffleDeck();
+    };
 }
