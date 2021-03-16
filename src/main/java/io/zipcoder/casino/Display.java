@@ -20,4 +20,8 @@ public class Display {
         this.setCurrentDisplay(currentDisplay);
         this.printCurrentDisplay();
     }
+
+    public String helloMessage() {
+        return "hello";
+    }
 }

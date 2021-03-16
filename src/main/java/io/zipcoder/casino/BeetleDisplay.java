@@ -31,6 +31,8 @@ public class BeetleDisplay extends Display{
         currentDisplaySP("Your opponents beetle is complete.");
     }
 
+    public void bothBeetlesComplete(){currentDisplaySP("You both drew beetles. The game is a tie.");}
+
     public void repeatedRollResult() {
         currentDisplaySP("You already rolled that number.");
     }
