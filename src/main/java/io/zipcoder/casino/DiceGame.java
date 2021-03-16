@@ -2,7 +2,8 @@ package io.zipcoder.casino;
 
 import java.util.Random;
 
-abstract class DiceGame {
+abstract class DiceGame implements GamblingGame {
+
 
     public Integer diceRollSum(int i) {
         Random random = new Random();
