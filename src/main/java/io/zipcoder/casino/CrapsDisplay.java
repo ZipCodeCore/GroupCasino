@@ -7,7 +7,7 @@ public class CrapsDisplay extends Display {
     }
 
     public void rulesMenu2(){
-
+        currentDisplaySP("There are a number of extra bets you can make, called propositions.\nOne-roll propositions are a bet that the next roll will land on a specific number, with variable payouts.\n6 or 8- 9 to 1 payout. 4 or 10- 7 to 1. 2 or 12- 30 to 1. 3 or 11- 15 to 1. Craps- 7 to 1. 7- 4 to 1.\nField bets are the final one-roll bet. Rolling 3, 4, 9, 10, or 11 pays 1 to 1. Rolling 2 or 12 pays 2 to 1.\nPlace bets can be performed once the point is known. You're betting that a specific different point option will be rolled- this has 1 to 1 payout.\nThat's every bet in Craps! Have fun!");
     }
 
     public void optionsMenu(){
@@ -15,7 +15,7 @@ public class CrapsDisplay extends Display {
     }
 
     public void shooterScores(){
-        currentDisplaySP("The shooter rolled got the point!");
+        currentDisplaySP("The shooter got the point!");
     }
 
     public void shooterSevenedOut(){
