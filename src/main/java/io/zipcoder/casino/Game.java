@@ -4,5 +4,5 @@ public interface Game {
     public void playGame();
 
 
-    public boolean checkWinner();
+    public Boolean checkWinner();
 }
