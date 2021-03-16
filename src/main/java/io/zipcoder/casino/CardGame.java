@@ -8,6 +8,7 @@ abstract class CardGame implements Game {
     private List<Card> deck=new ArrayList<Card>();
     private List<Card>discardPile=new ArrayList<Card>();
 
+    //public so inherited classes can modify these values.
     public List<Card> playerHand=new ArrayList<Card>();
     public List<Card> dealerHand=new ArrayList<Card>();
 
@@ -138,7 +139,7 @@ abstract class CardGame implements Game {
 
     };
 
-    //shuffles a chosen arraylist.
+    //shuffles the deck. That's it. Needed since the deck is private.
     public void shuffleDeck(){
         Collections.shuffle(deck);
     };
@@ -155,6 +156,7 @@ abstract class CardGame implements Game {
 
     }
 
+    //Lets player or dealer discard into discard pile
     public void discardCards(int cardIndex, int whichPlayer){
         if(whichPlayer==1){
             discardPile.add(playerHand.get(cardIndex));
@@ -165,6 +167,7 @@ abstract class CardGame implements Game {
         }else System.out.println("Pick player one or two, please.");
     }
 
+    //Lets player or dealer discard whole hand into discard pile
     public void discardHand(int whichPlayer){
         if(whichPlayer==1){
             discardPile.addAll(playerHand);
