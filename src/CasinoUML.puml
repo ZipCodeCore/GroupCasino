@@ -1,0 +1,143 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+object main{
+
+}
+
+object console{
+getUserInputs
+}
+
+class Games{
+        wager
+            walkAway
+            win
+            lose
+            collectMoney
+            loseMoney
+            }
+
+
+Games <-- cardsGames
+Games <-- diceGames
+object cardsGames{
+    shuffle
+}
+deck . cardsGames
+object card{
+suite, value
+}
+deck <-- card
+object deck {
+    suites: heart, spade, clover, diamond
+    Ace,2,3,4,5,6,7,8,9,10,jack,queen,king
+    }
+object blackjackPlayer{
+hitHand
+splitHand
+doubleDown
+bet
+surrender
+
+}
+object goFishPlayer{
+pickCard
+
+}
+object crapsPlayer{
+
+}
+object yahtzeePlayer{
+
+}
+
+player <-- blackjackPlayer
+player <-- goFishPlayer
+player <-- crapsPlayer
+player <-- yahtzeePlayer
+
+cardsGames <-- blackjack
+object blackjackHand
+blackjack <-- blackjackHand
+object goFishHand
+goFish <-- goFishHand
+object blackjack{
+hit
+stand
+double down
+split
+surrender
+insurance
+
+}
+
+object goFish{
+getScore
+drawCard
+pickAgain
+discardPair
+shoutGoFish
+}
+cardsGames <-- goFish
+object diceGames{
+rollDice
+}
+object craps{
+
+playAgain/rollDice
+
+}
+diceGames <-- craps
+
+
+
+
+object Yahtzee
+diceGames <-- Yahtzee
+object dice{
+6 sided 1-6
+numOfDice
+}
+diceGames <. dice
+
+
+object person{
+account#
+name
+age
+}
+
+object player{
+set name
+get membership
+get age
+get balance
+set player
+}
+person <-- player
+
+
+object dealer{
+dealCards
+collectMoney
+giveWinning
+}
+person <-- dealer
+object security{
+kick people
+under 18 out
+}
+person <-- security
+
+
+object membership{
+Account#
+setAccount
+getBalance
+deposit
+withdraw
+}
+player <. membership
+
+@enduml
