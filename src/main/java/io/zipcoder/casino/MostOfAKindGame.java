@@ -3,9 +3,12 @@ package io.zipcoder.casino;
 import io.zipcoder.casino.DiceGame;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class MostOfAKindGame extends DiceGame {
-    ArrayList<Integer> dealerHand;
+    ArrayList<Integer> dealerHand = new ArrayList<Integer>();
+    int playerNumToMatch;
+    int dealerNumToMatch;
     int dealerCount;
     int playerCount;
 
@@ -42,4 +45,29 @@ public class MostOfAKindGame extends DiceGame {
     public void addToDealerCount(int numOfSameNum) {
         dealerCount += numOfSameNum;
     }
+
+    public void makeDealerHand(int numOfDice) {
+        int i = 0;
+        while (i < numOfDice) {
+            dealerHand.add(rollDice());
+            i++;
+        }
+    }
+
+    public void makePlayerHand(int numOfDice) {
+        int i = 0;
+        while (i < numOfDice) {
+            playerDiceHand.add(rollDice());
+            i++;
+        }
+    }
+
+    public Collection<Integer> getDealerHand() {
+        return this.dealerHand;
+    }
+
+    public Collection<Integer> getPlayerHand() {
+        return this.playerDiceHand;
+    }
+
 }

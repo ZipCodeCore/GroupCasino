@@ -101,4 +101,30 @@ public class MostOfAKindTests {
         Assert.assertTrue(actual);
     }
 
+    @Test
+    public void makeDealerHand() {
+        //Given
+        MostOfAKindGame yahtzee = new MostOfAKindGame();
+
+        //When
+        yahtzee.makeDealerHand(5);
+        int actual = yahtzee.getDealerHand().size();
+
+        //Then
+        Assert.assertEquals(5, actual);
+    }
+
+    @Test
+    public void makePlayerHand() {
+        //Given
+        MostOfAKindGame yahtzee = new MostOfAKindGame();
+
+        //When
+        yahtzee.makePlayerHand(5);
+        int actual = yahtzee.getPlayerHand().size();
+
+        //Then
+        Assert.assertEquals(5, actual);
+    }
+
 }

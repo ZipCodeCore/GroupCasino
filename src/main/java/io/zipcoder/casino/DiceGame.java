@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class DiceGame implements GamblingGame {
     private int totalNumOfDice;
-    ArrayList<Integer> playerDiceHand;
+    ArrayList<Integer> playerDiceHand = new ArrayList<Integer>();
     int pot = 0;
     
     public void addToPot() {}
