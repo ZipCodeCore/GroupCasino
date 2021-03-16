@@ -10,11 +10,12 @@ import java.util.Scanner;
 public class Display {
 
     String currentDisplay;
-    private Console c;
 
     private Scanner s;
     private InputStream in;
     private PrintStream out;
+
+    private Console c;
 
     public Display(){
 
@@ -152,7 +153,13 @@ public class Display {
 
     public void printRequestUserId() {
         this.setPrintCurrentDisplay(
-            "Please enter your desired username:"
+            "Please enter username:"
+        );
+    }
+
+    public void printRequestPassword() {
+        this.setPrintCurrentDisplay(
+            "Please enter your password:"
         );
     }
 

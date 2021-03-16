@@ -10,9 +10,4 @@ public class DisplayTest {
         disp.printWelcomeMessage();
     }
 
-    @Test
-    public void testTest() {
-        Display disp = new Display();
-        disp.testConsole();
-    }
 }
