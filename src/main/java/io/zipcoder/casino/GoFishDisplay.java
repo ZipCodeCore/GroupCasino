@@ -26,11 +26,11 @@ public class GoFishDisplay extends Display{
         currentDisplaySP("Who will you ask?");
     }
 
-    public void cardYouWillAskFor(){}
+    public void cardYouWillAskFor(){currentDisplaySP("What card will you ask for?");}
 
-    public void opponentAskedFor(){}
+    public void opponentAskedFor(){currentDisplaySP("You opponent asked for a" /*random card that is not in opponents hand*/);}
 
-    public void createdAPair() {}
+    public void createdAPair() {currentDisplaySP("Your opponent has a " + /*card you asked for*/ + ". A pair of " + /*card you asked for */+ "'s have been added to your score.");}
 
 
 
