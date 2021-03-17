@@ -38,8 +38,8 @@ public class CrapsScreens extends Displays {
         println("                           ");
     }
 
-    //ROUND ONE
-    public void passOrNotPassScreen(int roundOfGame) {
+    //ROUND ONE PREP
+    public void passOrNotPassRoundOneScreen(int roundOfGame) {
         println("                           ");
         println("       ROUND: %s           ", roundOfGame);
         println("                           ");
@@ -50,7 +50,7 @@ public class CrapsScreens extends Displays {
         println("                           ");
     }
 
-    public void betAmountScreen(int roundOfGame) {
+    public void betAmountRoundOneScreen(int roundOfGame) {
         println("                           ");
         println("       ROUND: %s           ", roundOfGame);
         println("                           ");
@@ -59,6 +59,52 @@ public class CrapsScreens extends Displays {
         println("                           ");
     }
 
+    public void rollTheDice() {
+        println("                           ");
+        println("   Enter 1 to roll dice    ");
+        println("                           ");
+    }
+
+
+    //ROUND TWO SCREENS
+    public void passOrNotPassRoundTwoScreen(int roundOfGame, int pot, int sumOfDice, String betStatus, int pointer) {
+        println("                           ");
+        println("       ROUND: %s           ", roundOfGame);
+        println("                           ");
+        println("    Bet Status: %s         ", betStatus);
+        println("                           ");
+        println("   Chips in pot: %s        ", pot);
+        println("                           ");
+        println("      Pointer: %s          ", pointer);
+        println("                           ");
+        println("     Your roll: %s         ", sumOfDice);
+        println("                           ");
+        println("  How are you betting?     ");
+        println("  --------------------     ");
+        println("     1: Pass               ");
+        println("     2: Not Pass           ");
+        println("                           ");
+    }
+
+    public void betAmountRoundTwoScreen(int roundOfGame, String betStatus, int pot, int pointer, int sumOfDice) {
+        println("                           ");
+        println("       ROUND: %s           ", roundOfGame);
+        println("                           ");
+        println("    Bet Status: %s         ", betStatus);
+        println("                           ");
+        println("   Chips in pot: %s        ", pot);
+        println("                           ");
+        println("      Pointer: %s          ", pointer);
+        println("                           ");
+        println("     Your roll: %s         ", sumOfDice);
+        println("                           ");
+        println(" How much are you betting? ");
+        println(" ------------------------- ");
+        println("                           ");
+    }
+
+
+    //OUTCOME OPTIONS
     public void winRollScreen(int roundOfGame, int pot, int sumOfDice, String betStatus) {
         println("                           ");
         println("       ROUND: %s           ", roundOfGame);
@@ -87,6 +133,25 @@ public class CrapsScreens extends Displays {
         println("                           ");
     }
 
+    public void rollAgainScreen(int roundOfGame, int pot, int sumOfDice, String betStatus, int pointer) {
+        println("                           ");
+        println("       ROUND: %s           ", roundOfGame);
+        println("                           ");
+        println("     Bet Status: %s        ", betStatus);
+        println("                           ");
+        println("    Chips in Pot: %s       ", pot);
+        println("                           ");
+        println("    You rolled a %s        ", sumOfDice);
+        println("                           ");
+        println("      Pointer: %s          ", pointer);
+        println("    ---------------        ");
+        println("      Roll again!          ");
+        println("        Enter 1            ");
+        println("                           ");
+    }
+
+
+    //ENDING SCREENS
     public void playAgainScreen() {
         println("                           ");
         println("     Play Again?           ");

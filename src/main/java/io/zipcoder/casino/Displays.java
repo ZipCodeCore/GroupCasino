@@ -18,4 +18,13 @@ public class Displays {
         print(output + "\n", args);
     }
 
+    public void notEnoughMoneyScreen() {
+        println("                           ");
+        println("You don't have enough chips");
+        println("                           ");
+        println(" 00: Return and try again  ");
+        println("                           ");
+
+    }
+
 }
