@@ -108,7 +108,7 @@ public class Display {
     public void printLowFundsWarning(double accountBalance){
         this.setPrintCurrentDisplay(
             "WARNING: YOUR FUNDS ARE GETTING LOW!\n"+
-            "Please consider making a deposit.\n"+
+            "Please consider making a deposit.\n"
         );
         this.printAccountBalance(accountBalance);
 
