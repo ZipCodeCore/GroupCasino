@@ -5,8 +5,6 @@ import io.zipcoder.casino.utilities.Console;
 
 public class CrapsEngine {
     Console console = new Console(System.in, System.out);
-    //boolean gameOn = true;
-    //PlayerWarehouse pWare = new PlayerWarehouse();
     CrapsScreens cScreens = new CrapsScreens();
     Player player = new Player("gerg", 500);
     Craps craps = new Craps(player);

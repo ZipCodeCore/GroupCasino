@@ -7,11 +7,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MostOfAKindTests {
+    Player gerg = PlayerFactory.createPlayer("gerg", 500);
+    MostOfAKindGame yahtzee = new MostOfAKindGame(gerg);
 
     @Test
     public void getPot() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         int expected = 0;
 
         //When
@@ -24,7 +25,6 @@ public class MostOfAKindTests {
     @Test
     public void addToPot() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         int expected = 5;
 
         //When
@@ -38,7 +38,6 @@ public class MostOfAKindTests {
     @Test
     public void clearPot() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         int expected = 0;
         yahtzee.addToPot(7);
         yahtzee.clearPot();
@@ -53,7 +52,6 @@ public class MostOfAKindTests {
     @Test
     public void rollDice() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
 
         //When
         int result = yahtzee.rollDice();
@@ -65,7 +63,6 @@ public class MostOfAKindTests {
     @Test
     public void addToPlayerCount() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         yahtzee.addToPlayerCount(3);
         int expected = 3;
 
@@ -79,7 +76,6 @@ public class MostOfAKindTests {
     @Test
     public void checkWinnerDealer() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         yahtzee.addToPlayerCount(3);
         yahtzee.addToDealerCount(4);
 
@@ -93,7 +89,6 @@ public class MostOfAKindTests {
     @Test
     public void checkWinnerPlayer() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         yahtzee.addToPlayerCount(4);
         yahtzee.addToDealerCount(2);
 
@@ -107,7 +102,6 @@ public class MostOfAKindTests {
     @Test
     public void makeDealerHand() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
 
         //When
         yahtzee.makeDealerHand(5);
@@ -120,7 +114,6 @@ public class MostOfAKindTests {
     @Test
     public void makePlayerHand() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
 
         //When
         yahtzee.makePlayerHand(5);
@@ -133,7 +126,6 @@ public class MostOfAKindTests {
     @Test
     public void playerSecondRoll() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         yahtzee.playerDiceHand.add(5);
         yahtzee.playerDiceHand.add(4);
         yahtzee.playerDiceHand.add(3);
@@ -151,7 +143,6 @@ public class MostOfAKindTests {
 
     @Test
     public void dealerSecondRoll() {
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         yahtzee.dealerHand.add(2);
         yahtzee.dealerHand.add(2);
         yahtzee.dealerHand.add(1);
@@ -170,7 +161,6 @@ public class MostOfAKindTests {
     @Test
     public void playerSecondRollIrrational() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         yahtzee.playerDiceHand.add(5);
         yahtzee.playerDiceHand.add(4);
         yahtzee.playerDiceHand.add(3);
@@ -189,7 +179,6 @@ public class MostOfAKindTests {
     @Test
     public void dealerSecondRollIrrational() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         yahtzee.dealerHand.add(2);
         yahtzee.dealerHand.add(2);
         yahtzee.dealerHand.add(1);
@@ -208,7 +197,6 @@ public class MostOfAKindTests {
     @Test
     public void setGetPlayerMatchingNum() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         yahtzee.setPlayerMatchingNum(5);
         int expected = 5;
 
@@ -222,7 +210,6 @@ public class MostOfAKindTests {
     @Test
     public void setGetDealerMatchingNum() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         yahtzee.setDealerMatchingNum(2);
         int expected = 2;
 
@@ -236,7 +223,6 @@ public class MostOfAKindTests {
     @Test
     public void getPlayerNumOfMatches() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         yahtzee.playerDiceHand.add(5);
         yahtzee.playerDiceHand.add(5);
         yahtzee.playerDiceHand.add(5);
@@ -255,7 +241,6 @@ public class MostOfAKindTests {
     @Test
     public void getDealerNumOfMatches() {
         //Given
-        MostOfAKindGame yahtzee = new MostOfAKindGame();
         yahtzee.dealerHand.add(2);
         yahtzee.dealerHand.add(2);
         yahtzee.dealerHand.add(2);

@@ -12,6 +12,11 @@ public class MostOfAKindGame extends DiceGame {
     int dealerMatchingNum;
     int dealerCount;
     int playerCount;
+    Player currentPlayer;
+
+    public MostOfAKindGame(Player player) {
+        this.currentPlayer = player;
+    }
 
     public void addToPot(int numOfChips) {
         pot += numOfChips;
@@ -69,7 +74,7 @@ public class MostOfAKindGame extends DiceGame {
     }
 
     public ArrayList<Integer> getPlayerHand() {
-        return this.playerDiceHand;
+        return playerDiceHand;
     }
 
     public void exchangePlayerDice(int numToKeep) {
@@ -133,5 +138,9 @@ public class MostOfAKindGame extends DiceGame {
                 dealerCount++;
             }
         }
+    }
+
+    public void anteUp() {
+        currentPlayer.bet(2);
     }
 }

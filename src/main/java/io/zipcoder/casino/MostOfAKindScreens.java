@@ -10,7 +10,7 @@ public class MostOfAKindScreens extends Displays{
         println("  -------------------------  ");
         println("   Would you like to play?   ");
         println("                             ");
-        println("         Y or N              ");
+        println("       1: Yes   2: No        ");
         println("                             ");
     }
 
@@ -20,7 +20,7 @@ public class MostOfAKindScreens extends Displays{
         println("  -------------------------  ");
         println("   Would you like to play?   ");
         println("                             ");
-        println("         Y or N              ");
+        println("      1: Yes   2: No         ");
         println("                             ");
     }
 
@@ -112,5 +112,11 @@ public class MostOfAKindScreens extends Displays{
     }
 
 
-
+    public void needMoreChipsScreen() {
+        println("                           ");
+        println("    You need more chips    ");
+        println("                           ");
+        println("    0: Go back to lobby    ");
+        println("                           ");
+    }
 }
