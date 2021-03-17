@@ -256,4 +256,25 @@ public class MostOfAKindTests {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void dealerAI() {
+        //Given
+        ArrayList<Integer> dealerHand = new ArrayList<>();
+        dealerHand.add(5);
+        dealerHand.add(2);
+        dealerHand.add(5);
+        dealerHand.add(1);
+        dealerHand.add(5);
+
+        //When
+        yahtzee.dealerAINumbersToKeep(dealerHand);
+        int expectedCount = 3;
+        int expectedMatch = 5;
+        int actualCount = yahtzee.getDealerCount();
+        int actualMatch = yahtzee.getDealerMatchingNum();
+
+        //Then
+        Assert.assertEquals(expectedCount, actualCount);
+        Assert.assertEquals(expectedMatch, actualMatch);
+    }
 }

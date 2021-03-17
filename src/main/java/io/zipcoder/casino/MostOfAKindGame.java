@@ -39,7 +39,7 @@ public class MostOfAKindGame extends DiceGame {
         } else if (getDealerCount() == getPlayerCount()) {
             if (playerMatchingNum > dealerMatchingNum) {
                 doIWin = true;
-            } else {
+            } else if (dealerMatchingNum > playerMatchingNum) {
                 //catches when dealerMatchingNum bigger
                 doIWin = false;
             }
@@ -143,6 +143,34 @@ public class MostOfAKindGame extends DiceGame {
         }
     }
 
+    public void dealerAINumbersToKeep(ArrayList<Integer> dealerHand) {
+        int matchOne;
+        int counterOne = 1;
+        int matchTwo = 0;
+        int counterTwo = 1;
+
+        for (int i = 0; i < dealerHand.size()-1; i++) {
+            matchOne = dealerHand.get(i);
+            for (int j = i+1; j < dealerHand.size(); j++) {
+                if (dealerHand.get(j) == dealerHand.get(i)) {
+                    counterOne++;
+                }
+            }
+            if (counterOne > counterTwo) {
+                matchTwo = matchOne;
+                counterTwo = counterOne;
+            } else if (counterOne == counterTwo) {
+                if (matchOne > matchTwo) {
+                    matchTwo = matchOne;
+                    counterTwo = counterOne;
+                }
+            }
+            counterOne = 1;
+        }
+        dealerMatchingNum = matchTwo;
+        dealerCount = counterTwo;
+    }
+
     public void anteUp() {
         currentPlayer.bet(5);
         pot += 5;
@@ -155,5 +183,9 @@ public class MostOfAKindGame extends DiceGame {
 
     public void clearPlayerHand() {
         playerDiceHand.clear();
+    }
+
+    public void clearDealerHand() {
+        dealerHand.clear();
     }
 }

@@ -42,6 +42,8 @@ public class MostOfAKindEngine {
     //Takes 5 chips, makes dealer and player hands
     private void anteUpScreen() {
         moak.clearPot();
+        moak.clearPlayerHand();
+        moak.clearDealerHand();
         mScreens.anteUpScreen();
         while (true) {
             Integer input = console.getIntegerInput("");
@@ -105,10 +107,13 @@ public class MostOfAKindEngine {
             Integer input = console.getIntegerInput("");
             if (moak.getPlayerHand().contains(input)) {
                 moak.exchangePlayerDice(input);
+                moak.dealerAINumbersToKeep(moak.getDealerHand());
+                moak.exchangeDealerDice(moak.dealerMatchingNum);
                 secondRollScreen(moak.getPot(), moak.getPlayerHand());
             } else if (input == 0) {
                 moak.clearPlayerHand();
                 moak.makePlayerHand(5);
+                moak.dealerAINumbersToKeep(moak.getDealerHand());
                 secondRollScreen(moak.getPot(), moak.getPlayerHand());
             } else {
                 System.out.println("Invalid Entry");
