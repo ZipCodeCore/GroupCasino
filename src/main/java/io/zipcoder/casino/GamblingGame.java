@@ -2,6 +2,7 @@ package io.zipcoder.casino;
 
 public interface GamblingGame {
 
+
     public String startGame();
 
     public String acceptBetFrom();
@@ -11,5 +12,6 @@ public interface GamblingGame {
     public String calculateLoss();
 
     public String endGame();
+
 
 }
