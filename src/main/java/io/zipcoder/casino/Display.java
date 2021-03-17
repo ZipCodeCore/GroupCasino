@@ -1,5 +1,7 @@
 package io.zipcoder.casino;
 
+import java.util.Scanner;
+
 public class Display {
 
     String currentDisplay;
@@ -24,4 +26,6 @@ public class Display {
     public String helloMessage() {
         return "hello";
     }
+
+
 }
