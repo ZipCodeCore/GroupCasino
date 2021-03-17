@@ -1,10 +1,10 @@
 package io.zipcoder.casino;
-
 import io.zipcoder.casino.utilities.Console;
 
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class Display {
@@ -175,4 +175,6 @@ public class Display {
             "How much money would you like to bet?"
         );
     }
+
+
 }
