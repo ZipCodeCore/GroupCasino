@@ -204,6 +204,17 @@ public class CrapsScreens extends Displays {
         println("                           ");
         println("     Good Luck!            ");
         println("                           ");
+        println("   0: Return to lobby       ");
+    }
+
+    public void getMoreChips() {
+        println("                           ");
+        println("   Insufficient Chips      ");
+        println("                           ");
+        println("   Please go get more      ");
+        println("                           ");
+        println("   0: Return to lobby       ");
+        println("   1: Enter different bet  ");
     }
 }
 

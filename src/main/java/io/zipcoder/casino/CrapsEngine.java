@@ -64,11 +64,25 @@ public class CrapsEngine {
         cScreens.betAmountRoundOneScreen(craps.getGameRound());
         while (true) {
             Integer input = console.getIntegerInput("");
-            if (input < player.getChipBalance() && input >= 0) {
+            if (input <= player.getChipBalance() && input >= 0) {
                 craps.addToPot(input);
                 rollTheDice();
             } else {
-                System.out.println("Insufficient Chips");
+                getMoreChips();
+            }
+        }
+    }
+
+    private void getMoreChips() {
+        cScreens.getMoreChips();
+        while (true) {
+            Integer input = console.getIntegerInput("");
+            if (input == 0) {
+                casinoLobby();
+            } else if (input == 1) {
+                betAmountRoundOneScreen();
+            } else {
+                System.out.println("Invalid Entry");
             }
         }
     }
@@ -112,6 +126,18 @@ public class CrapsEngine {
                 craps.setGameRound(1);
                 passOrNotPassRoundOneScreen(craps.getGameRound());
             } else if (input.equals(2)) {
+                goodLuckScreen();
+            } else {
+                System.out.println("Invalid Entry");
+            }
+        }
+    }
+
+    private void goodLuckScreen() {
+        cScreens.leaveCrapsScreen();
+        while (true) {
+            Integer input = console.getIntegerInput("");
+            if (input == 0) {
                 casinoLobby();
             } else {
                 System.out.println("Invalid Entry");
@@ -121,13 +147,14 @@ public class CrapsEngine {
 
     private void winRollScreen() {
         cScreens.winRollScreen(craps.getGameRound(), craps.getPot(), craps.getCurrentSum(), craps.getBetStatus());
+        craps.playerWinsPot(craps.getPot());
         while (true) {
             Integer input = console.getIntegerInput("");
             if (input.equals(1)) {
                 craps.setGameRound(1);
                 passOrNotPassRoundOneScreen(craps.getGameRound());
             } else if (input.equals(2)) {
-                casinoLobby();
+                goodLuckScreen();
             } else {
                 System.out.println("Invalid Entry");
             }
@@ -154,7 +181,7 @@ public class CrapsEngine {
         cScreens.rollAgainBetScreen(craps.getGameRound(), craps.getPot(), craps.getCurrentSum(), craps.getBetStatus(), craps.getPointer());
         while (true) {
             Integer input = console.getIntegerInput("");
-            if (input < player.getChipBalance() && input >=0) {
+            if (input <= player.getChipBalance() && input >=0) {
                 craps.addToPot(input);
                 rollTheDiceOnward();
             } else {
@@ -165,7 +192,7 @@ public class CrapsEngine {
 
     private void rollTheDiceOnward() {
         craps.setGameRound(2);
-        cScreens.rollAgainOnward(craps.getGameRound(),craps.getBetStatus(), craps.getPot(), craps.getCurrentSum());
+        cScreens.rollAgainOnward(craps.getGameRound(),craps.getBetStatus(), craps.getPot(), craps.getPointer());
         while (true) {
             Integer input = console.getIntegerInput("");
             if (input == 1) {
