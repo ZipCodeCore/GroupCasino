@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+/*package io.zipcoder.casino;
 
 public class Dealer extends Player {
 
@@ -6,4 +6,4 @@ public class Dealer extends Player {
         super("The Dealer");
     }
 
-}
+}*/
