@@ -116,7 +116,7 @@ public class GoFish extends CardGame {
             if (gotAnyKings(dealer, input)) {
                 takeCards(oswald, dealer, input);
                 takeAnotherTurn=true;
-                System.out.println("You caught a "+showCard(oswald, oswald.size()-1)+"! You get another turn!");
+                System.out.println("You caught a fish! You get another turn!");
                 if(completeSet(oswald, input)){
                     playerScore++;
                     System.out.println("Congrats, you closed a book!");
@@ -151,15 +151,15 @@ public class GoFish extends CardGame {
 
             if (gotAnyKings(oswald, input)) {
                 takeCards(dealer,oswald,input);
-                System.out.println("Dealer caught a"+showCard(dealer, dealer.size()-1)+"! They get another turn!");
+                System.out.println("Dealer caught a fish! They get another turn!");
                 takeAnotherTurn=true;
                 if(completeSet(dealer, input)){
                     dealerScore++;
                     System.out.println("Dealer closes a book!");
                 }
             } else {
-                System.out.println("Dealer draws!");
                 dealCards(dealer);
+                System.out.println("You didn't! Dealer draws a "+showCard(dealer, dealer.size()-1)+"!");
                 if(completeSet(dealer, dealer.get(dealer.size()-1).getCardName())){
                     dealerScore++;
                     System.out.println("Dealer closes a book!");
