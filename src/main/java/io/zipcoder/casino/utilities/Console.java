@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * You are advised against modifying this class.
  */
-public final class Console {
+    public final class Console {
     private final Scanner input;
     private final PrintStream output;
 
@@ -57,5 +57,30 @@ public final class Console {
     public Integer getIntegerInput(String prompt, Object... args) {
         return getLongInput(prompt, args).intValue();
     }
-}
+
+    public String getInput(String prompt) {
+        print(prompt);
+
+        String input = this.input.nextLine(); //get input from user
+
+        return input;
+    }
+
+    public Integer getInteger(String prompt) {
+        String input = getInput(prompt);
+        while (true) {
+            if (integerCheck(input)) break;
+            else {
+                println("Enter a number.");
+                input = getInput(prompt);
+            }
+        }
+        return Integer.valueOf(input);
+    }
+    Boolean integerCheck(String input) {
+        return input.matches("^\\d+$");
+    }
+
+    }
+
 

@@ -1,11 +1,13 @@
 package io.zipcoder.casino.Games;
 
+import io.zipcoder.casino.Player;
+
 public interface GamblingGame {
 
-    public void placebet();
+    public boolean wager(double amount, Player player);
 
-    public void payOut();
+    public void payOut(double amount, Player player);
 
-    public void collectMoney();
+    //public void collectMoney();
 
 }
