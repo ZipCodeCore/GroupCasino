@@ -77,9 +77,18 @@ import java.util.Scanner;
         }
         return Integer.valueOf(input);
     }
+
     Boolean integerCheck(String input) {
         return input.matches("^\\d+$");
     }
+
+    public void clearScreen() {
+        for (int i = 0; i <50; i++) {
+            println(" ");
+        }
+    }
+
+
 
     }
 
