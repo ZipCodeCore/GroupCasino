@@ -43,6 +43,8 @@ public class CrapsEngine {
     }
 
     private void passOrNotPassRoundOneScreen(int gameRound) {
+        craps.setGameRound(1);
+        craps.clearPot();
         cScreens.passOrNotPassRoundOneScreen(craps.getGameRound());
         while (true) {
             Integer input = console.getIntegerInput("");
@@ -62,7 +64,7 @@ public class CrapsEngine {
         cScreens.betAmountRoundOneScreen(craps.getGameRound());
         while (true) {
             Integer input = console.getIntegerInput("");
-            if (input < player.getChipBalance()) {
+            if (input < player.getChipBalance() && input >= 0) {
                 craps.addToPot(input);
                 rollTheDice();
             } else {
@@ -77,33 +79,117 @@ public class CrapsEngine {
             Integer input = console.getIntegerInput("");
             if (input == 1) {
                 craps.sumOfDice();
-                if (craps.betStatus.equals("Pass") && craps.currentSum == 7 || craps.currentSum == 11) {
-                    winRollScreen();
-                } else if (craps.betStatus.equals("Not Pass") && craps.currentSum == 2 || craps.currentSum == 3 || craps.currentSum == 12) {
-                    winRollScreen();
-                } else if (craps.betStatus.equals("Pass") && craps.currentSum == 2 || craps.currentSum == 3 || craps.currentSum == 12) {
-                    loseRollScreen();
-                } else if (craps.betStatus.equals("Not Pass") && craps.currentSum == 7 || craps.currentSum == 11) {
-                    loseRollScreen();
-                } else {
-                    craps.setPointer(craps.currentSum);
-                    rollAgainScreen();
+                if (craps.getBetStatus().equalsIgnoreCase("Pass")) {
+                    if (craps.getCurrentSum() == 7 || craps.getCurrentSum() == 11) {
+                        winRollScreen();
+                    } else if (craps.getCurrentSum() == 2 || craps.getCurrentSum() == 3 || craps.getCurrentSum() == 12) {
+                        loseRollScreen();
+                    } else {
+                        craps.setPointer(craps.getCurrentSum());
+                        rollAgainScreen();
+                    }
+                } else if (craps.getBetStatus().equalsIgnoreCase("Not Pass")) {
+                    if (craps.getCurrentSum() == 2 || craps.getCurrentSum() == 3 || craps.getCurrentSum() == 12) {
+                        winRollScreen();
+                    } else if (craps.getCurrentSum() == 7 || craps.getCurrentSum() == 11) {
+                        loseRollScreen();
+                    } else {
+                        craps.setPointer(craps.getCurrentSum());
+                        rollAgainScreen();
+                    }
                 }
+            } else {
+                System.out.println("Invalid Entry");
             }
         }
     }
 
     private void loseRollScreen() {
-        cScreens.loseRollScreen(craps.getGameRound(), craps.getPot(), craps.currentSum, craps.getBetStatus());
-    }
-
-    private void rollAgainScreen() {
-        cScreens.rollAgainScreen(craps.getGameRound(), craps.getPot(), craps.currentSum, craps.getBetStatus(), craps.getPointer());
+        cScreens.loseRollScreen(craps.getGameRound(), craps.getPot(), craps.getCurrentSum(), craps.getBetStatus());
+        while (true) {
+            Integer input = console.getIntegerInput("");
+            if (input.equals(1)) {
+                craps.setGameRound(1);
+                passOrNotPassRoundOneScreen(craps.getGameRound());
+            } else if (input.equals(2)) {
+                casinoLobby();
+            } else {
+                System.out.println("Invalid Entry");
+            }
+        }
     }
 
     private void winRollScreen() {
-        cScreens.winRollScreen(craps.getGameRound(), craps.getPot(), craps.currentSum, craps.getBetStatus());
+        cScreens.winRollScreen(craps.getGameRound(), craps.getPot(), craps.getCurrentSum(), craps.getBetStatus());
+        while (true) {
+            Integer input = console.getIntegerInput("");
+            if (input.equals(1)) {
+                craps.setGameRound(1);
+                passOrNotPassRoundOneScreen(craps.getGameRound());
+            } else if (input.equals(2)) {
+                casinoLobby();
+            } else {
+                System.out.println("Invalid Entry");
+            }
+        }
     }
 
+    private void rollAgainScreen() {
+        cScreens.passOrNotPassRoundTwoScreen(craps.getGameRound(), craps.getPot(), craps.getCurrentSum(), craps.getBetStatus(), craps.getPointer());
+        while (true) {
+            Integer input = console.getIntegerInput("");
+            if (input.equals(1)) {
+                craps.setBetStatus("Pass");
+                rollAgainBetScreen();
+            } else if (input.equals(2)) {
+                craps.setBetStatus("Not Pass");
+                rollAgainBetScreen();
+            } else {
+                System.out.println("Please enter 1 or 2");
+            }
+        }
+    }
 
+    private void rollAgainBetScreen() {
+        cScreens.rollAgainBetScreen(craps.getGameRound(), craps.getPot(), craps.getCurrentSum(), craps.getBetStatus(), craps.getPointer());
+        while (true) {
+            Integer input = console.getIntegerInput("");
+            if (input < player.getChipBalance() && input >=0) {
+                craps.addToPot(input);
+                rollTheDiceOnward();
+            } else {
+                System.out.println("Insufficient Chips");
+            }
+        }
+    }
+
+    private void rollTheDiceOnward() {
+        craps.setGameRound(2);
+        cScreens.rollAgainOnward(craps.getGameRound(),craps.getBetStatus(), craps.getPot(), craps.getCurrentSum());
+        while (true) {
+            Integer input = console.getIntegerInput("");
+            if (input == 1) {
+                craps.sumOfDice();
+                if (craps.getBetStatus().equalsIgnoreCase("Pass")) {
+                    if (craps.getCurrentSum() == craps.getPointer()) {
+                        winRollScreen();
+                    } else if (craps.getCurrentSum() == 7) {
+                        loseRollScreen();
+                    } else {
+                        rollAgainBetScreen();
+                    }
+                } else if (craps.getBetStatus().equalsIgnoreCase("Not Pass")) {
+                    if (craps.getCurrentSum() == 7) {
+                        winRollScreen();
+                    } else if (craps.getCurrentSum() == craps.getPointer()) {
+                        loseRollScreen();
+                    } else {
+                        rollAgainBetScreen();
+                    }
+                }
+            } else {
+                System.out.println("Invalid Entry");
+            }
+        }
+    }
 }

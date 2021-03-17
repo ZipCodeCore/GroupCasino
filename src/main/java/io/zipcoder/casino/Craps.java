@@ -120,4 +120,8 @@ public class Craps extends DiceGame {
     public String getBetStatus() {
         return betStatus.toString();
     }
+
+    public int getCurrentSum() {
+        return currentSum;
+    }
 }
