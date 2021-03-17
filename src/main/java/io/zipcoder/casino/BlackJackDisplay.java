@@ -3,7 +3,7 @@ package io.zipcoder.casino;
 public class BlackJackDisplay extends Display {
 
     public void rules() {
-        currentDisplaySP();
+        setPrintCurrentDisplay("");
 
     }
 

@@ -3,10 +3,10 @@ package io.zipcoder.casino;
 public class Main {
 
     public static void main(String args[]) {
-        Display d = new Display();
-        BeetleDisplay bd = new BeetleDisplay();
-        d.printWelcomeMessage();
-        bd.getBeetleComplete();
+        Player x = new Player("Hazel", 100.0);
+        Craps craps = new Craps(x);
+        craps.crapsEngine();
+
 
     }
 }
