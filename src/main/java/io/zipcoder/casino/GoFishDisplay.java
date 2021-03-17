@@ -4,7 +4,7 @@ public class GoFishDisplay extends Display{
 
     public void goFishRules(){
         setPrintCurrentDisplay("Two players will be dealt 5 cards each.\nThe object of the game is to have the most pairs when the deck is empty." +
-                "\nA player creates pairs by asking the other player if they have a specific card in their hand." +
+                "\nA player creates pairs by asking the other player if they have a specific card rank in their hand." +
                 "\nYou must be holding the card the card you request." +
                 "\n");
     }
@@ -32,6 +32,6 @@ public class GoFishDisplay extends Display{
 
     public void createdAPair() {setPrintCurrentDisplay("Your opponent has a " +  ". A pair of " +  "'s have been added to your score.");}
 
-
+    public void printNotInYourHand() {setPrintCurrentDisplay("Ooops! That rank isn't in your hand. Ask for one that is!");}
 
 }
