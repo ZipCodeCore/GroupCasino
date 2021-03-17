@@ -18,10 +18,6 @@ public class MostOfAKindGame extends DiceGame {
         this.currentPlayer = player;
     }
 
-    public void addToPot(int numOfChips) {
-        pot += numOfChips;
-    }
-
     public int getPot() {
         return pot;
     }
@@ -40,6 +36,13 @@ public class MostOfAKindGame extends DiceGame {
             doIWin = true;
         } else if (getDealerCount() > getPlayerCount()) {
             doIWin = false;
+        } else if (getDealerCount() == getPlayerCount()) {
+            if (playerMatchingNum > dealerMatchingNum) {
+                doIWin = true;
+            } else {
+                //catches when dealerMatchingNum bigger
+                doIWin = false;
+            }
         }
         return doIWin;
     }
@@ -141,6 +144,16 @@ public class MostOfAKindGame extends DiceGame {
     }
 
     public void anteUp() {
-        currentPlayer.bet(2);
+        currentPlayer.bet(5);
+        pot += 5;
+    }
+
+    public void addToPot(int numOfChips) {
+        pot += numOfChips;
+        currentPlayer.wageMoney(numOfChips);
+    }
+
+    public void clearPlayerHand() {
+        playerDiceHand.clear();
     }
 }
