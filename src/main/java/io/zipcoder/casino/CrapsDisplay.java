@@ -26,12 +26,20 @@ public class CrapsDisplay extends Display {
         setPrintCurrentDisplay("You can make more bets!");
     }
 
+    public void printWinnings(Double winnings){
+        setPrintCurrentDisplay("You made $" + winnings + "!");
+    }
+
+    public void printLosings(Double bet){
+        setPrintCurrentDisplay("There goes $" + bet + ".");
+    }
+
     public void printShooterScores(){
         setPrintCurrentDisplay("The shooter got the point!");
     }
 
     public void printShooterSevenedOut(){
-        setPrintCurrentDisplay("The shooter sevened out...");
+        setPrintCurrentDisplay("The shooter sevened out... The round is over.");
     }
 
     public void printPush(){
