@@ -38,10 +38,6 @@ public class CrapsDisplay extends Display {
         setPrintCurrentDisplay("Your bet is a push.");
     }
 
-    public void printOneRolLBetLoss(){
-        setPrintCurrentDisplay("Your one-roll proposition failed...");
-    }
-
     public void printOneRollBetWin(){
         setPrintCurrentDisplay("You won your one-roll proposition!");
     }
@@ -54,8 +50,8 @@ public class CrapsDisplay extends Display {
         setPrintCurrentDisplay("It's craps!");
     }
 
-    public void printShooterRolled(){
-        setPrintCurrentDisplay("The shooter rolled a " + 5);
+    public void printShooterRolled(Integer x){
+        setPrintCurrentDisplay("The shooter rolled a " + x);
     }
 
     public void printSetTypeOfBet(){

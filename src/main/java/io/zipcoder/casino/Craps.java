@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class Craps{
+public class Craps extends DiceGame{
 
     private Console c;
     private Scanner s;
@@ -24,6 +24,7 @@ public class Craps{
     private Boolean[] bets;
     private Double[] betAmounts;
     private Double lastBet;
+    private Integer point;
 
     public Craps(Player player){
         this.in = System.in;
@@ -86,6 +87,7 @@ public class Craps{
         Boolean noPointSet = true;
         Boolean firstRoll = true;
         Boolean decisionUnmade = true;
+        Boolean notSevenedOut = true;
 
         while(noPointSet){
             while(decisionUnmade) {
@@ -148,9 +150,24 @@ public class Craps{
                                 break;
                         }
                 }
-                cd.youCanBetAgain();
+                if(decisionUnmade) {
+                    cd.youCanBetAgain();
+                }
             }
 
+            decisionUnmade = true;
+            if(firstRoll){
+                cd.printComeOutRoll();
+                firstRoll = false;
+            }
+            Integer x = diceRollSum(2);
+            cd.printShooterRolled(x);
+            checkBetsPrePoint(x);
+            oneRollReset();
+            if(x == 4 || x == 5 || x == 6 || x == 8 || x == 9 || x == 10){
+                point = x;
+                noPointSet = false;
+            }
         }
 
 
@@ -184,6 +201,188 @@ public class Craps{
         lastBet = player.makeBet(middleMan);
         betAmounts[x] = lastBet;
         bets[x] = true;
+    }
+
+    public void oneRollReset(){
+        bets[4] = false;
+        betAmounts[4] = 0.0;
+        for(int i = 11; i < 21; i++){
+            bets[i] = false;
+            betAmounts[i] = 0.0;
+        }
+    }
+
+    public void checkBetsPrePoint(Integer x){
+        if(x == 2 && bets[19]){
+            player.setWallet(betAmounts[19] * 60);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+        }
+        if(x == 2 && bets[12]){
+            player.setWallet(betAmounts[12] * 14);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+        }
+        if(x == 2 && bets[1]){ //pass
+            player.setWallet(betAmounts[1] * 2);
+            cd.printCraps();
+        }
+        if(x == 3 && bets[17]){
+            player.setWallet(betAmounts[17] * 30);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+        }
+        if(x == 3 && bets[12]){
+            player.setWallet(betAmounts[12] * 14);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+        }
+        if(x == 3 && bets[1]){ //pass
+            player.setWallet(betAmounts[1] * 2);
+            cd.printCraps();
+        }
+        if(x == 4 && bets[15]){
+            player.setWallet(betAmounts[15] * 14);
+            cd.printOneRollBetWin();
+        }
+        if(x == 6 && bets[13]){
+            player.setWallet(betAmounts[13] * 18);
+            cd.printOneRollBetWin();
+        }
+        if(x == 7 && bets[11]){
+            player.setWallet(betAmounts[11] * 8);
+            cd.printNatural();
+            cd.printOneRollBetWin();
+        }
+        if(x == 7 && bets[0]){ //pass
+            player.setWallet(betAmounts[0] * 2);
+            cd.printNatural();
+        }
+        if(x == 8 && bets[14]){
+            player.setWallet(betAmounts[14] * 18);
+            cd.printOneRollBetWin();
+        }
+        if(x == 10 && bets[16]){
+            player.setWallet(betAmounts[16] * 14);
+            cd.printOneRollBetWin();
+        }
+        if(x == 11 && bets[18]){
+            player.setWallet(betAmounts[18] * 30);
+            cd.printOneRollBetWin();
+            cd.printNatural();
+        }
+        if(x == 11 && bets[0]){ //pass
+            player.setWallet(betAmounts[0] * 2);
+            cd.printNatural();
+        }
+        if(x == 12 && bets[20]){
+            player.setWallet(betAmounts[20]);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+        }
+        if(x == 12 && bets[12]){
+            player.setWallet(betAmounts[12] * 14);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+        }
+        if(x == 12 && bets[1]){ //pass
+            player.setWallet(betAmounts[1] * 2);
+            cd.printCraps();
+        }
+    }
+
+    public void checkBetsPostPoint(Integer x, Integer point){
+        if(x == 2 && bets[19]){
+            player.setWallet(betAmounts[19] * 60);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+        }
+        if(x == 2 && bets[12]){
+            player.setWallet(betAmounts[12] * 14);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+        }
+        if(x == 3 && bets[17]){
+            player.setWallet(betAmounts[17] * 30);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+        }
+        if(x == 3 && bets[12]){
+            player.setWallet(betAmounts[12] * 14);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+        }
+        if(x == 4 && bets[15]){
+            player.setWallet(betAmounts[15] * 14);
+            cd.printOneRollBetWin();
+        }
+        if(x == 6 && bets[13]){
+            player.setWallet(betAmounts[13] * 18);
+            cd.printOneRollBetWin();
+        }
+        if(x == 7 && bets[11]){
+            player.setWallet(betAmounts[11] * 8);
+            cd.printNatural();
+            cd.printOneRollBetWin();
+        }
+        if(x == 8 && bets[14]){
+            player.setWallet(betAmounts[14] * 18);
+            cd.printOneRollBetWin();
+        }
+        if(x == 10 && bets[16]){
+            player.setWallet(betAmounts[16] * 14);
+            cd.printOneRollBetWin();
+        }
+        if(x == 11 && bets[18]){
+            player.setWallet(betAmounts[18] * 30);
+            cd.printOneRollBetWin();
+            cd.printNatural();
+        }
+        if(x == 12 && bets[20]){
+            player.setWallet(betAmounts[20]);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+        }
+        if(x == 12 && bets[12]){
+            player.setWallet(betAmounts[12] * 14);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+        }
+        if(x == point && bets[2]){
+            player.setWallet(betAmounts[2]);
+            cd.printShooterScores();
+            bets[3] = false;
+            betAmounts[3] = 0.0;
+        }
+        if(x == 7 && bets[3]){
+            player.setWallet(betAmounts[3]);
+            cd.printShooterSevenedOut();
+            bets[2] = false;
+            betAmounts [2] = 0.0;
+        }
+        if(x == 3 && bets[4] || x == 4 && bets[4] || x == 9 && bets[4] || x == 10 && bets[4] || x == 11 && bets[4]){
+            
+        }
+    }
+
+    public String startGame() {
+        return null;
+    }
+
+    public String acceptBetFrom() {
+        return null;
+    }
+
+    public String calculateReward() {
+        return null;
+    }
+
+    public String calculateLoss() {
+        return null;
+    }
+
+    public String endGame() {
+        return null;
     }
 
 }
