@@ -22,10 +22,6 @@ public class CrapsDisplay extends Display {
         setPrintCurrentDisplay("Alright! Let's play Craps!");
     }
 
-    public void youCanBetAgain(){
-        setPrintCurrentDisplay("You can make more bets!");
-    }
-
     public void printShooterScores(){
         setPrintCurrentDisplay("The shooter got the point!");
     }
