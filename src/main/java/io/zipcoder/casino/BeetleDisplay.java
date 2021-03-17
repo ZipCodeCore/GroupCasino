@@ -1,9 +1,5 @@
 package io.zipcoder.casino;
 
-import io.zipcoder.casino.utilities.Console;
-
-import java.util.Arrays;
-
 public class BeetleDisplay extends Display {
 
     String[][] beetle = new String[][]{{"\\","0","/"},
@@ -48,15 +44,20 @@ public class BeetleDisplay extends Display {
         setPrintCurrentDisplay("You both drew beetles. The game is a tie.");
     }
 
+    public void usersRollResults(Integer usersRoll) {
+        setPrintCurrentDisplay("You rolled a " + usersRoll);
+    }
+
+    public void opponentsRollResults(Integer opponentsRoll) {
+        setPrintCurrentDisplay("Your opponent rolled a " + opponentsRoll);
+    }
+
     public void repeatedRollResult() {
         setPrintCurrentDisplay("You already rolled that number.");
     }
 
     //Beetle Body Parts
     public void getBeetleComplete() {
-        //System.out.println(Arrays.deepToString(beetle));
-        /*for (String[] row : beetle) {
-            System.out.println(Arrays.deepToString(row));*/
         for (int i = 0; i < beetle.length; i++) {
             for (int j = 0; j < beetle[i].length; j++) {
                 System.out.print(beetle[i][j] + " ");
@@ -64,7 +65,6 @@ public class BeetleDisplay extends Display {
             System.out.println();
         }
     }
-
     public void getCurrentBeetle() {
 
     }

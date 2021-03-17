@@ -4,9 +4,9 @@ public class Main {
 
     public static void main(String args[]) {
         Display d = new Display();
-        BeetleDisplay bd = new BeetleDisplay();
+        Beetle beetle = new Beetle();
         d.printWelcomeMessage();
-        bd.getBeetleComplete();
+        beetle.gameEngine();
 
     }
 }
