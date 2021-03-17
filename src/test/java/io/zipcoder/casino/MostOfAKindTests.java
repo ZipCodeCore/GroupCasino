@@ -100,6 +100,34 @@ public class MostOfAKindTests {
     }
 
     @Test
+    public void extensiveCheckWinner() {
+        ArrayList<Integer> dealerHand = new ArrayList<>();
+        dealerHand.add(5);
+        dealerHand.add(5);
+        dealerHand.add(5);
+        dealerHand.add(5);
+        dealerHand.add(5);
+
+        ArrayList<Integer> playerHand = new ArrayList<>();
+        playerHand.add(6);
+        playerHand.add(6);
+        playerHand.add(6);
+        playerHand.add(6);
+        playerHand.add(6);
+
+        //When
+        yahtzee.exchangePlayerDice(6);
+        yahtzee.exchangeDealerDice(5);
+        yahtzee.playerNumOfMatches(playerHand);
+        yahtzee.dealerNumOfMatches(dealerHand);
+
+        boolean expected = true;
+        boolean actual = yahtzee.checkWinner();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void makeDealerHand() {
         //Given
 
@@ -269,6 +297,28 @@ public class MostOfAKindTests {
         //When
         yahtzee.dealerAINumbersToKeep(dealerHand);
         int expectedCount = 3;
+        int expectedMatch = 5;
+        int actualCount = yahtzee.getDealerCount();
+        int actualMatch = yahtzee.getDealerMatchingNum();
+
+        //Then
+        Assert.assertEquals(expectedCount, actualCount);
+        Assert.assertEquals(expectedMatch, actualMatch);
+    }
+
+    @Test
+    public void dealerAITwo() {
+        //Given
+        ArrayList<Integer> dealerHand = new ArrayList<>();
+        dealerHand.add(5);
+        dealerHand.add(5);
+        dealerHand.add(5);
+        dealerHand.add(1);
+        dealerHand.add(5);
+
+        //When
+        yahtzee.dealerAINumbersToKeep(dealerHand);
+        int expectedCount = 4;
         int expectedMatch = 5;
         int actualCount = yahtzee.getDealerCount();
         int actualMatch = yahtzee.getDealerMatchingNum();

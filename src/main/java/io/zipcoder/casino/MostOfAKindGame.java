@@ -81,6 +81,7 @@ public class MostOfAKindGame extends DiceGame {
     }
 
     public void exchangePlayerDice(int numToKeep) {
+        playerMatchingNum = numToKeep;
         ArrayList<Integer> newHand = new ArrayList<Integer>();
         int numOfDiceKeeping = 0;
         for (int i = 0; i < getPlayerHand().size(); i++) {
@@ -95,6 +96,7 @@ public class MostOfAKindGame extends DiceGame {
     }
 
     public void exchangeDealerDice(int numToKeep) {
+        dealerMatchingNum = numToKeep;
         ArrayList<Integer> newDealerHand = new ArrayList<Integer>();
         int numOfDiceKeeping = 0;
         for (int i = 0; i < getDealerHand().size(); i++) {
@@ -187,5 +189,9 @@ public class MostOfAKindGame extends DiceGame {
 
     public void clearDealerHand() {
         dealerHand.clear();
+    }
+
+    public void playerWinsPot(int pot) {
+        currentPlayer.winChips(pot * 2);
     }
 }

@@ -154,6 +154,7 @@ public class MostOfAKindEngine {
 
     private void revealHandsPlayerWins(int pot, ArrayList<Integer> playerHand, ArrayList<Integer> dealerHand) {
         mScreens.revealHandsPlayerWins(pot, playerHand, dealerHand);
+        moak.playerWinsPot(moak.getPot());
         while (true) {
             Integer input = console.getIntegerInput("");
             if (input == 1) {
