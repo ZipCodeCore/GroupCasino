@@ -112,8 +112,9 @@ public class Craps{
                         break;
                     case 0:
                         decisionUnmade = false;
+                        break;
                     case 4:
-                        furtherInput = c.getIntegerInput("You can make a one roll bet. Type 2, 3, 4, 6, 8, 10, 11, or 12 to bet on that number, 1 for craps, or 0 to cancel.");
+                        furtherInput = c.getIntegerInput("You can make a one roll bet. Type 2, 3, 4, 6, 7, 8, 10, 11, or 12 to bet on that number, 1 for craps, or 0 to cancel.");
                         switch(furtherInput){
                             case 1:
                                 chooseBetAmountAndMakeBet(12);
@@ -130,6 +131,9 @@ public class Craps{
                             case 6:
                                 chooseBetAmountAndMakeBet(13);
                                 break;
+                            case 7:
+                                chooseBetAmountAndMakeBet(11);
+                                break;
                             case 8:
                                 chooseBetAmountAndMakeBet(14);
                                 break;
@@ -144,6 +148,7 @@ public class Craps{
                                 break;
                         }
                 }
+                cd.youCanBetAgain();
             }
 
         }
