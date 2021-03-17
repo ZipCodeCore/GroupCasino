@@ -4,12 +4,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class CrapsTest {
+    Player gerg = PlayerFactory.createPlayer("gerg", 500);
+    Craps craps = new Craps(gerg);
 
     //SuperClass tests
     @Test
     public void getPot() {
         //Given
-        Craps craps = new Craps();
         int expected = 0;
 
         //When
@@ -22,7 +23,6 @@ public class CrapsTest {
     @Test
     public void addToPot() {
         //Given
-        Craps craps = new Craps();
         int expected = 5;
 
         //When
@@ -36,7 +36,6 @@ public class CrapsTest {
     @Test
     public void clearPot() {
         //Given
-        Craps craps = new Craps();
         int expected = 0;
         craps.addToPot(7);
         craps.clearPot();
@@ -51,7 +50,6 @@ public class CrapsTest {
     @Test
     public void rollDice() {
         //Given
-        Craps craps = new Craps();
 
         //When
         int result = craps.rollDice();
@@ -65,7 +63,6 @@ public class CrapsTest {
     @Test
     public void setGameRound() {
         //Given
-        Craps craps = new Craps();
         int expected = 1;
 
         //When
@@ -79,7 +76,6 @@ public class CrapsTest {
     @Test
     public void setGetPointer() {
         //Given
-        Craps craps = new Craps();
         int expected = 8;
 
         //When
@@ -93,7 +89,6 @@ public class CrapsTest {
     @Test
     public void setGetBetStatus() {
         //Given
-        Craps craps = new Craps();
         String expected = "Pass";
 
         //When
@@ -107,10 +102,11 @@ public class CrapsTest {
     @Test
     public void sumOfDice() {
         //Given
-        Craps craps = new Craps();
 
         //When
-        int actual = craps.sumOfDice();
+        craps.sumOfDice();
+        int actual = craps.currentSum;
+
 
         //Then
         Assert.assertTrue(actual > 1 && actual < 13);
@@ -120,7 +116,6 @@ public class CrapsTest {
     @Test
     public void playerWinsRoundOnePass() {
         //Given
-        Craps craps = new Craps();
         int expected = 1;
         craps.setBetStatus("Pass");
 
@@ -135,7 +130,6 @@ public class CrapsTest {
     @Test
     public void playerLosesRoundOnePass() {
         //Given
-        Craps craps = new Craps();
         int expected = 2;
         craps.setBetStatus("Pass");
 
@@ -150,7 +144,6 @@ public class CrapsTest {
     @Test
     public void playerRollsAgainPass() {
         //Given
-        Craps craps = new Craps();
         int expected = 3;
         craps.setBetStatus("Pass");
 
@@ -166,7 +159,6 @@ public class CrapsTest {
     @Test
     public void playerWinsRoundOneNotPass() {
         //Given
-        Craps craps = new Craps();
         int expected = 1;
         craps.setBetStatus("Not Pass");
 
@@ -181,7 +173,6 @@ public class CrapsTest {
     @Test
     public void playerLosesRoundOneNotPass() {
         //Given
-        Craps craps = new Craps();
         int expected = 2;
         craps.setBetStatus("Not Pass");
 
@@ -196,7 +187,6 @@ public class CrapsTest {
     @Test
     public void playerRollsAgainRoundOneNotPass() {
         //Given
-        Craps craps = new Craps();
         int expected = 3;
         craps.setBetStatus("Not Pass");
 
@@ -212,7 +202,6 @@ public class CrapsTest {
     @Test
     public void playerWinsRoundTwoPass() {
         //Given
-        Craps craps = new Craps();
         int expected = 1;
         craps.setBetStatus("Pass");
         craps.setPointer(10);
@@ -228,7 +217,6 @@ public class CrapsTest {
     @Test
     public void playerLosesRoundTwoPass() {
         //Given
-        Craps craps = new Craps();
         int expected = 2;
         craps.setBetStatus("Pass");
         craps.setPointer(10);
@@ -244,7 +232,6 @@ public class CrapsTest {
     @Test
     public void playerRollsAgainRoundTwoPass() {
         //Given
-        Craps craps = new Craps();
         int expected = 3;
         craps.setBetStatus("Pass");
         craps.setPointer(10);
@@ -261,7 +248,6 @@ public class CrapsTest {
     @Test
     public void playerWinsRoundTwoNotPass() {
         //Given
-        Craps craps = new Craps();
         int expected = 1;
         craps.setBetStatus("Not Pass");
         craps.setPointer(10);
@@ -277,7 +263,6 @@ public class CrapsTest {
     @Test
     public void playerLosesRoundTwoNotPass() {
         //Given
-        Craps craps = new Craps();
         int expected = 2;
         craps.setBetStatus("Not Pass");
         craps.setPointer(10);
@@ -293,7 +278,6 @@ public class CrapsTest {
     @Test
     public void playerRollsAgainRoundTwoNotPass() {
         //Given
-        Craps craps = new Craps();
         int expected = 3;
         craps.setBetStatus("Not Pass");
         craps.setPointer(10);

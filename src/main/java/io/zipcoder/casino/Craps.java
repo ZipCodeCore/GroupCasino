@@ -2,11 +2,17 @@ package io.zipcoder.casino;
 
 public class Craps extends DiceGame {
     int gameRound = 1;
-    String betStatus;
+    StringBuffer betStatus = new StringBuffer("hi");
+    Player currentPlayer;
     Integer[] roundOnePass = new Integer[]{7, 11};
     Integer[] roundOneNotPass = new Integer[]{2, 3, 12};
     Integer[] rollAgain = new Integer[]{4, 5, 6, 8, 9, 10};
     int pointer;
+    int currentSum;
+
+    public Craps(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
 
     public void addToPot(int numOfChips) {
         pot += numOfChips;
@@ -82,12 +88,12 @@ public class Craps extends DiceGame {
         return outcome;
     }
 
-    public int sumOfDice() {
+    public void sumOfDice() {
         int sum = 0;
         for (int i = 0; i < 2; i++) {
             sum += rollDice();
         }
-        return sum;
+        currentSum = sum;
     }
 
     public void setGameRound(int round) {
@@ -106,11 +112,12 @@ public class Craps extends DiceGame {
         return this.pointer;
     }
 
-    public void setBetStatus(String betStatus) {
-        this.betStatus = betStatus;
+    public void setBetStatus(String status) {
+        betStatus.replace(0, betStatus.length(), "");
+        betStatus.append(status);
     }
 
     public String getBetStatus() {
-        return this.betStatus;
+        return betStatus.toString();
     }
 }

@@ -25,7 +25,7 @@ public class CrapsScreens extends Displays {
         println("   XXXXXXXXXXXXXXXXHHHHHHHHHHHHHHHXXXXXXXXXXXXX&                 ");
         println("                           ");
         println("       ARE YOU READY TO PLAY SOME CRAPS?   ");
-        println("                    Y or N            ");
+        println("               1: Yes     2: No              ");
         println("                           ");
     }
 
@@ -34,7 +34,7 @@ public class CrapsScreens extends Displays {
         println("            Invalid Entry      ");
         println("            -------------               ");
         println("   ARE YOU READY TO PLAY SOME CRAPS?   ");
-        println("               Y or N            ");
+        println("          1: Yes     2: No            ");
         println("                           ");
     }
 
@@ -156,7 +156,7 @@ public class CrapsScreens extends Displays {
         println("                           ");
         println("     Play Again?           ");
         println("     -----------           ");
-        println("       Y or N              ");
+        println("    1: Yes   2: No         ");
         println("                           ");
     }
 
