@@ -1,4 +1,4 @@
-package io.zipcoder.casino.utilities;
+package io.zipcoder.casino.CardGames;
 
 public class Card {
     private Suit suit;

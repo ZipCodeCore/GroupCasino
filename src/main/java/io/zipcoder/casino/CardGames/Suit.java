@@ -1,4 +1,4 @@
-package io.zipcoder.casino.utilities;
+package io.zipcoder.casino.CardGames;
 
 public enum Suit {
     HEART, DIAMOND, SPADE, CLUB;
