@@ -76,11 +76,33 @@ public class CrapsEngine {
         while (true) {
             Integer input = console.getIntegerInput("");
             if (input == 1) {
+                craps.sumOfDice();
                 if (craps.betStatus.equals("Pass") && craps.currentSum == 7 || craps.currentSum == 11) {
-
+                    winRollScreen();
+                } else if (craps.betStatus.equals("Not Pass") && craps.currentSum == 2 || craps.currentSum == 3 || craps.currentSum == 12) {
+                    winRollScreen();
+                } else if (craps.betStatus.equals("Pass") && craps.currentSum == 2 || craps.currentSum == 3 || craps.currentSum == 12) {
+                    loseRollScreen();
+                } else if (craps.betStatus.equals("Not Pass") && craps.currentSum == 7 || craps.currentSum == 11) {
+                    loseRollScreen();
+                } else {
+                    craps.setPointer(craps.currentSum);
+                    rollAgainScreen();
                 }
             }
         }
+    }
+
+    private void loseRollScreen() {
+        cScreens.loseRollScreen(craps.getGameRound(), craps.getPot(), craps.currentSum, craps.getBetStatus());
+    }
+
+    private void rollAgainScreen() {
+        cScreens.rollAgainScreen(craps.getGameRound(), craps.getPot(), craps.currentSum, craps.getBetStatus(), craps.getPointer());
+    }
+
+    private void winRollScreen() {
+        cScreens.winRollScreen(craps.getGameRound(), craps.getPot(), craps.currentSum, craps.getBetStatus());
     }
 
 
