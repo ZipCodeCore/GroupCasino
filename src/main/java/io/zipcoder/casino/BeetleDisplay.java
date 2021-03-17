@@ -15,8 +15,7 @@ public class BeetleDisplay extends Display{
         currentDisplaySP("You added a leg to your beetle!");
     }
 
-    public void drewBody() {
-        currentDisplaySP("You drew your beetle's body!");
+    public void drewBody() { currentDisplaySP("You drew your beetle's body!");
     }
 
     public void drewHead() {
