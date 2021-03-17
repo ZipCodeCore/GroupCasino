@@ -12,4 +12,5 @@ public interface GamblingGame {
 
     public String endGame();
 
+
 }
