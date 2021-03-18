@@ -29,7 +29,7 @@ public class GoFish extends CardGame {
         System.out.println("Are you ready to begin? (enter 'yes' or 'y')");
         String input = Displays.getStringInput();
         Boolean stillPlaying;
-        //The actual GAME starts here.
+        //The game setup for if you agre to play starts here
         while(input.equalsIgnoreCase("yes")||input.equalsIgnoreCase("y")){
             newGameState();
         for(int i=0; i<7;i++){
@@ -43,18 +43,19 @@ public class GoFish extends CardGame {
         if(playerScore>0||dealerScore>0){
             System.out.println("We already have some books! Crazy!");}
            stillPlaying=true;
+            //The actual GAME starts here.
             while(stillPlaying==true) {
                 //player takes their turn
                 if(stillPlaying==true){
                     System.out.println("You have "+playerScore+" books.");
                     turnStructure();}
                 //end step for player, checks for winner
-                if(getCardsLeftInDeck()==0||books.size()==12){
+                if(dealer.size()==0||oswald.size()==0||books.size()==12){
                     stillPlaying=false;}
                 if(stillPlaying==true){turnStructureAI();
                     System.out.println("The dealer has "+dealerScore+" books.");}
                 //end step for dealer, checks for winner
-                if(getCardsLeftInDeck()==0||books.size()==12){
+                if(dealer.size()==0||oswald.size()==0||books.size()==12){
                     stillPlaying=false;}
             }
             System.out.println(checkWinner());
@@ -101,6 +102,7 @@ public class GoFish extends CardGame {
         String input="";
         while (takeAnotherTurn) {
             System.out.print(seeHand(oswald));
+            if(books.size()>0){System.out.println(showBooks());}
             System.out.println("Alright, Go fish!");
             takeAnotherTurn=false;
             legalchoice=false;
@@ -202,7 +204,7 @@ public class GoFish extends CardGame {
 
     public void takeCards(List<Card> taker, List<Card> taken, String name) {
         for(int i=0;i<taken.size();i++){
-            if(name.equals(taken.get(i).getCardName())){
+            if(name.equalsIgnoreCase(taken.get(i).getCardName())){
                 taker.add(taken.get(i));
                 taken.remove(i);
                 i=0;
@@ -218,7 +220,7 @@ public class GoFish extends CardGame {
     }
 
     public String showBooks(){
-        String temp="";
+        String temp="Completed books so far: ";
                for(String i:books){
                             temp=temp.concat(i+", ");
                }
