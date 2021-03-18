@@ -3,6 +3,7 @@ package io.zipcoder.casino;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.theories.suppliers.TestedOn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,19 +83,6 @@ public class GoFishTest {
     }
 
     @Test
-    public void testSetupGame() {
-
-    }
-
-    @Test // Move to display class??
-    public void displayPlayersHand() {
-        // Given
-        go.setupGame(5);
-        String hand = go.displayPlayersHand(go.getPlayersHand());
-        System.out.println(hand);
-    }
-
-    @Test
     public void testGetRankOnCard() {
         // Given
         String given = "2 of Diamonds";
@@ -117,6 +105,35 @@ public class GoFishTest {
         Assert.assertEquals(expectedCase3, actualCase3);
     }
 
+    @Test
+    public void testGetValueOnCard() {
+        // Given
+        int expectedRank = 10;
+        int expectedRank2 = 9;
+        String inputRank = "Ace";
+        String inputRank2 = "9";
+
+        // When
+        int actualRank = go.getValueOfCard(inputRank);
+        int actualRank2 = go.getValueOfCard(inputRank2);
+
+        Assert.assertEquals(expectedRank, actualRank);
+        Assert.assertEquals(expectedRank2, actualRank2);
+    }
+
+    @Test
+    public void testDisplayPlayersHand() {
+        // Given
+        ArrayList<String> playersHand = new ArrayList<String>(Arrays.asList("2 of Diamonds", "Queen of Hearts", "3 of Spades", "4 of Clubs", "7 of Hearts"));
+        go.setPlayersHand(playersHand);
+        String expected = "2 of Diamonds\nQueen of Hearts\n3 of Spades\n4 of Clubs\n7 of Hearts\n";
+
+        // When
+        String actual = go.displayPlayersHand(go.getPlayersHand());
+
+        // Then
+        Assert.assertEquals(expected, String.valueOf(actual));
+    }
 
     @Test
     public void TestGetValueOfCard() {
@@ -129,6 +146,53 @@ public class GoFishTest {
         System.out.println(go.getValueOfCard(go.getRankOnCard(given1)));
         System.out.println(go.getValueOfCard(go.getRankOnCard(given2)));
         System.out.println(go.getValueOfCard(go.getRankOnCard(given3)));
+
+    }
+
+    @Test
+    public void testGetRankToAskFor_Human() {
+
+    }
+
+    @Test
+    public void testGetRankToAskFor_Computer() {
+
+    }
+
+    @Test
+    public void testCheckIfRankInPlayersHand() {
+
+    }
+
+    @Test
+    public void testTakeCardFromOtherPlayer() {
+
+    }
+
+    @Test
+    public void testDrawCardFromDeck() {
+        // Given
+        int expectedPlayerHand = 6;
+        int expectedDeckSize = 41;
+        go.setupGame(5);
+
+        // When
+        go.drawCardFromDeck(go.getPlayersHand());
+        int actualPlayerHand = go.getPlayersHand().size();
+        int actualDeckSize = go.getDeck().size();
+
+        // Then
+        Assert.assertEquals(expectedPlayerHand, actualPlayerHand);
+        Assert.assertEquals(expectedDeckSize, actualDeckSize);
+    }
+
+    @Test
+    public void testCheckFullBookInHand() {
+
+    }
+
+    @Test
+    public void testCheckWinner() {
 
     }
 
