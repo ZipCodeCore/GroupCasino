@@ -81,5 +81,40 @@ public class GoFishTest {
         //System.out.println(Arrays.toString(actualPerson2.toArray()));
     }
 
+    @Test
+    public void testSetupGame() {
+
+    }
+
+    @Test // Move to display class??
+    public void displayPlayersHand() {
+        // Given
+        go.setupGame(5);
+        String hand = go.displayPlayersHand(go.getPlayersHand());
+        System.out.println(hand);
+    }
+
+    @Test
+    public void testGetRankOnCard() {
+        // Given
+        String given = "2 of Diamonds";
+        String expected = "2";
+
+        String givenCase2 = "Ace of Hearts";
+        String expectedCase2 = "Ace";
+
+        String givenCase3 = "10 of Clubs";
+        String expectedCase3 = "10";
+
+        // When
+        String actual = go.getRankOnCard(given);
+        String actualCase2 = go.getRankOnCard(givenCase2);
+        String actualCase3 = go.getRankOnCard(givenCase3);
+
+        // Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedCase2, actualCase2);
+        Assert.assertEquals(expectedCase3, actualCase3);
+    }
 
 }

@@ -17,6 +17,8 @@ public class GoFish extends CardGame {
     private InputStream in;
     private PrintStream out;
     GoFishDisplay d;
+    int bookCountPlayer;
+    int bookCountDealer;
     String rankAskedFor;
 
     public GoFish() {
@@ -24,15 +26,18 @@ public class GoFish extends CardGame {
         this.in = System.in;
         this.out = System.out;
         this.c = new Console(in, out);
-        c = new Console(in, out);
 
         d = new GoFishDisplay();
+
+        this.bookCountPlayer = 0;
+        this.bookCountDealer = 0;
     }
 
-    public void beginGame(int numberOfCards) {
-        this.createNewDeck();           // Create new standard 52 card deck
-        this.shuffleCards();            // Shuffle the deck randomly
-        //this.dealCards(numberOfCards);  // Deal numberOfCards to two people
+
+    public void setupGame(int numberOfCards) {
+        this.createNewDeck();
+        this.shuffleCards();
+        this.dealCards(numberOfCards);
     }
 
     // Move to display class??
@@ -40,39 +45,30 @@ public class GoFish extends CardGame {
         String playersHandOutput = "";
         Iterator itr = playersHand.iterator();
         while(itr.hasNext()) {
-            playersHandOutput += itr.next() + "/n";
+            playersHandOutput += itr.next() + "\n";
         }
         return playersHandOutput;
     }
 
-    public String getRankOnCard(String cardRankAndSuit) {
-        return cardRankAndSuit.substring(0, cardRankAndSuit.indexOf(" "));
-    }
-
     public String getRankToAskFor_Human() {
-        d.cardYouWillAskFor();
+        d.printWhatRankYouWillAskFor();
         return c.getStringInput(null, null);
     }
 
-    public String getRankToAskFor_Computer() {
-        return null;
+    public String getRankToAskFor_Computer(ArrayList<String> computersHand) {
+        int pickCard = (int) Math.random() * (computersHand.size() - 1);
+        return this.getRankOnCard(computersHand.get(pickCard));
     }
 
-    public boolean checkRankRequestedIsAllowed(ArrayList<String> currentPlayersHand, String rankAskedFor) {
-        if (playersHand.contains(rankAskedFor)) {
-            return true;
-        } else {
-            d.printNotInYourHand();
-            return false;
+    // Use this to check if rank in requesting player's hand first (can only request a rank already in your hand)
+    // And use to check if rank is in other player's hand
+    public boolean checkIfRankInPlayersHand(ArrayList<String> playersHand, String rankAskedFor) {
+        for (int i = 0; i < playersHand.size(); i++) {
+            if (getRankOnCard(playersHand.get(i)) == rankAskedFor) {
+                return true;
+            }
         }
-    }
-
-    public boolean checkIfRankInOtherPlayersHand(ArrayList<String> otherPlayersHand, String rankAskedFor) {
-        if (otherPlayersHand.contains(rankAskedFor)) {
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 
     public void takeCardFromOtherPlayer(ArrayList<String> playerTakingCard, ArrayList<String> playerGivingCard, String rankAskedFor) {
@@ -84,8 +80,21 @@ public class GoFish extends CardGame {
         }
     }
 
+    public void drawCardFromDeck(ArrayList<String> playerHand) {
+        playerHand.add(this.deck.get(0));
+        this.deck.remove(0);
+    }
+
     public void checkForPairsInCurrentPlayersHand(ArrayList<String> currentPlayer) {
 
+    }
+
+    public void checkWinner(int bookCount) {
+        bookCount += 1;
+    }
+
+    public String getRankOnCard(String cardRankAndSuit) {
+        return cardRankAndSuit.substring(0, cardRankAndSuit.indexOf(" "));
     }
 
 }

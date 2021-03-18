@@ -17,7 +17,7 @@ public class GoFishDisplay extends Display{
         setPrintCurrentDisplay("That card is in their hand.");
     }
 
-    public void cardNotFound(){
+    public void printCardNotFound(){
         setPrintCurrentDisplay("Nope. They are not holding that card.");
     }
 
@@ -26,12 +26,10 @@ public class GoFishDisplay extends Display{
         setPrintCurrentDisplay("Who will you ask?");
     }
 
-    public void cardYouWillAskFor(){setPrintCurrentDisplay("What card will you ask for?");}
+    public void printWhatRankYouWillAskFor(){setPrintCurrentDisplay("What card will you ask for?");}
 
-    public void opponentAskedFor(){setPrintCurrentDisplay("You opponent asked for a");}
+    public void printOponentAskedFor(){setPrintCurrentDisplay("You opponent asked for a");}
 
-    public void createdAPair() {setPrintCurrentDisplay("Your opponent has a " +  ". A pair of " +  "'s have been added to your score.");}
-
-    public void printNotInYourHand() {setPrintCurrentDisplay("Ooops! That rank isn't in your hand. Ask for one that is!");}
+    public void printCreatedAPair() {setPrintCurrentDisplay("Your opponent has a " +  ". A pair of " +  "'s have been added to your score.");}
 
 }
