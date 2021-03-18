@@ -3,8 +3,8 @@ package io.zipcoder.casino;
 public class GoFishDisplay extends Display{
 
     public void goFishRules(){
-        setPrintCurrentDisplay("Two players will be dealt 5 cards each.\nThe object of the game is to have the most pairs when the deck is empty." +
-                "\nA player creates pairs by asking the other player if they have a specific card rank in their hand." +
+        setPrintCurrentDisplay("Two players will be dealt 5 cards each.\nThe object of the game is to have the most books (set of 4 cards of the same rank) when the deck is empty." +
+                "\nA player creates a book by asking the other player if they have a specific card rank in their hand." +
                 "\nYou must be holding the card the card you request." +
                 "\n");
     }

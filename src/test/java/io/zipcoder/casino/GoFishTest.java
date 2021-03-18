@@ -3,7 +3,6 @@ package io.zipcoder.casino;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -149,6 +148,7 @@ public class GoFishTest {
 
     }
 
+    // Not sure how to test this one
     @Test
     public void testGetRankToAskFor_Human() {
 
@@ -156,12 +156,28 @@ public class GoFishTest {
 
     @Test
     public void testGetRankToAskFor_Computer() {
+        // Given
+        go.setDealersHand(new ArrayList<String>(Arrays.asList("Ace of Hearts", "2 of Spades", "6 of Diamonds")));
 
+        // When
+        String actual = go.getRankToAskFor_Computer(go.getDealersHand());
+
+        // Then
+        Assert.assertTrue(actual.equals("Ace") || actual.equals("2") || actual.equals("6"));
     }
 
     @Test
     public void testCheckIfRankInPlayersHand() {
+        // Given
+        go.setPlayersHand(new ArrayList<String>(Arrays.asList("King of Diamonds", "4 of Spades")));
 
+        // When
+        boolean actual = go.checkIfRankInPlayersHand(go.getPlayersHand(), "King");
+        boolean actual2 = go.checkIfRankInPlayersHand(go.getPlayersHand(), "5");
+
+        // Then
+        Assert.assertTrue(actual);
+        Assert.assertFalse(actual2);
     }
 
     @Test
@@ -203,6 +219,11 @@ public class GoFishTest {
 
     @Test
     public void testCheckFullBookInHand() {
+
+    }
+
+    @Test
+    public void testCrateABook() {
 
     }
 

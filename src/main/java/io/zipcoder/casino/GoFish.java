@@ -2,16 +2,10 @@ package io.zipcoder.casino;
 
 import io.zipcoder.casino.utilities.Console;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collections;
 
 public class GoFish extends CardGame {
-
-    // players hand
-    // dealers hand
-    // deck
 
     private Console c;
     private GoFishDisplay d;
@@ -52,7 +46,7 @@ public class GoFish extends CardGame {
 
     public boolean checkIfRankInPlayersHand(ArrayList<String> playersHand, String rankAskedFor) {
         for (int i = 0; i < playersHand.size(); i++) {
-            if (getRankOnCard(playersHand.get(i)) == rankAskedFor) {
+            if (getRankOnCard(playersHand.get(i)).equals(rankAskedFor)) {
                 return true;
             }
         }
@@ -73,8 +67,30 @@ public class GoFish extends CardGame {
         this.deck.remove(0);
     }
 
-    public void checkFullBookInHand(ArrayList<String> currentPlayer) {
+    public String checkFullBookInHand(ArrayList<String> currentPlayer) {
+        Collections.sort(currentPlayer);
+        int count = 0;
+        for (int i = 1; i < currentPlayer.size(); i++) {
+            if (this.getRankOnCard(currentPlayer.get(i - 1)) == this.getRankOnCard(currentPlayer.get(i))) {
+                count += 1;
+                if (count == 4) {
+                    return this.getRankOnCard(currentPlayer.get(i));
+                }
+            } else {
+                count = 0;
+            }
+        }
+        return "no books yet";
+    }
 
+    public void createABook(ArrayList<String> currentPlayer, int currentPlayerBook) {
+        String rankToRemove = checkFullBookInHand(currentPlayer);
+        for(int i = 0; i < currentPlayer.size(); i++) {
+            if (getRankOnCard(currentPlayer.get(i)).equals(rankToRemove)) {
+                currentPlayer.remove(i);
+            }
+        }
+        currentPlayerBook += 1;
     }
 
     public boolean checkGameOver() {
