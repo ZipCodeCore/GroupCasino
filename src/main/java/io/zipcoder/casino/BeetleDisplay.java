@@ -21,23 +21,23 @@ public class BeetleDisplay extends Display {
     }
 
     public void drewLeg() {
-        setPrintCurrentDisplay("You added a leg to your beetle!");
+        setPrintCurrentDisplay("A leg was added to the beetle!");
     }
 
     public void drewBody() {
-        setPrintCurrentDisplay("You drew your beetle's body!");
+        setPrintCurrentDisplay("The beetle's body was drawn!");
     }
 
     public void drewHead() {
-        setPrintCurrentDisplay("You drew your beetle's head!");
+        setPrintCurrentDisplay("This beetle has a head now!");
     }
 
-    public void yourBugIsComplete() {
-        setPrintCurrentDisplay("Your beetle is complete!");
+    public void userBugIsComplete() {
+        setPrintCurrentDisplay("Your beetle is complete!\nYOU WIN!!!!");
     }
 
     public void opponentsBugisComplete() {
-        setPrintCurrentDisplay("Your opponents beetle is complete.");
+        setPrintCurrentDisplay("Your opponents beetle is complete.\nYou lose.");
     }
 
     public void bothBeetlesComplete() {
@@ -65,7 +65,21 @@ public class BeetleDisplay extends Display {
             System.out.println();
         }
     }
-    public void getCurrentBeetle() {
-
+    public void border() {
+        setPrintCurrentDisplay("\n======================\n");
     }
+
+    public void openingBetMessage() {
+        setPrintCurrentDisplay("This game has a table minimum of $1");
+    }
+
+    public void opponentHasPlacedABet(Double betAmount) {
+        setPrintCurrentDisplay("Your opponent has placed a bet of " + betAmount);
+    }
+
+    public void currentPurse(Double purse) {
+        setPrintCurrentDisplay("The purse is currently at " + purse);
+    }
+
+
 }
