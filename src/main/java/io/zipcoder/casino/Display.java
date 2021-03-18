@@ -144,6 +144,14 @@ public class Display {
         );
     }
 
+    public void printAmountOfWinnings(Double winningsAmount) {
+        setPrintCurrentDisplay("You won " + winningsAmount+ "!!!");
+    }
+
+    public void printAmountOfLoss(Double lossAmount) {
+        setPrintCurrentDisplay("You lost " + lossAmount + ".");
+    }
+
     // USER SET-UP MESSAGING
     public void printUserId(String userName){
         this.setPrintCurrentDisplay(

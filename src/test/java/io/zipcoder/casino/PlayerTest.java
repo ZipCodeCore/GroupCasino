@@ -71,4 +71,43 @@ public class PlayerTest {
 
     }
 
+    @Test
+    public void PlayerMakeBetTest3() {
+        Player player6 = new Player("player1", 50.00);
+        player6.makeBet(5.0);
+        Double expected = player6.getCurrentBet();
+
+        //when
+        Double actual = 5.0;
+        //assert
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void PlayerMakeBetTest4() {
+        Player player7 = new Player("player1", 50.00);
+        player7.makeBet(5.0);
+        player7.makeBet(2.0);
+        player7.makeBet(2.0);
+        Double expected = player7.getCurrentBet();
+
+        //when
+        Double actual = 9.0;
+        //assert
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void PlayerMakeBetTest5() {
+        Player player7 = new Player("player1", 50.00);
+        player7.makeBet(5.0);
+        player7.makeBet(2.0);
+        player7.makeBet(2.0);
+        Double expected = player7.getWallet();
+
+        //when
+        Double actual = 41.0;
+        //assert
+        Assert.assertEquals(expected,actual);
+    }
 }
