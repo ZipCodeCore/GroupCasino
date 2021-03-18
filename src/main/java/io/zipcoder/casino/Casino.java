@@ -19,14 +19,15 @@ public class Casino {
     private Boolean atLogin;
     private Player currentPlayer;
 
-    public Casino(String[] args) {
+    public Casino() {
         this.in = System.in;
         this.out = System.out;
         this.c = new Console(in, out);
         this.d = new Display();
+        this.pwh = new PlayerWarehouse();
         this.rand = new Random();
         this.atLogin = true;
-        this.currentPlayer = new Player("Timberdoodle", 2.0);
+        this.currentPlayer = new Player("TIMBERDOODLE72", 2.0);
     }
 
     public void run() {
@@ -56,19 +57,27 @@ public class Casino {
             } else if (input1 == 2) {
 
                 while(true) {
-                    String oldId = c.getStringInput("What's your user ID?");
-                    String oldPass = c.getStringInput("What's your password?");
+                    String oldId;
+                    oldId = c.getStringInput("What's your user ID?");
+                    String oldPass;
+                    oldPass = c.getStringInput("What's your password?");
                     if(pwh.validateLoginCredentials(oldId, oldPass)){
                         currentPlayer = pwh.getPlayer(oldId);
                         break;
                     }else{
-                        d.setPrintCurrentDisplay("Improper login credentials.");
+                        d.setPrintCurrentDisplay("Improper login credentials.\n");
+                        break;
                     }
                 }
 
             } else {
                 d.printErrorMessage();
             }
+
+            if(currentPlayer.getName() != "TIMBERDOODLE72"){
+                break;
+            }
+
         }
     }
 }
