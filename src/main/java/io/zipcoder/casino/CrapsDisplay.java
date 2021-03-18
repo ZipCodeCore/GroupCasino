@@ -58,6 +58,14 @@ public class CrapsDisplay extends Display {
         setPrintCurrentDisplay("The shooter rolled a " + x);
     }
 
+    public void printThatPoint(){
+        setPrintCurrentDisplay("That's the point!");
+    }
+
+    public void printNoPoint(){
+        setPrintCurrentDisplay("No point yet!");
+    }
+
     public void printSetTypeOfBet(){
         setPrintCurrentDisplay("What kind of bet do you want to make? You can also type 1 for help.");
     }

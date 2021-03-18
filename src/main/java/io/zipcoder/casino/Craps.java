@@ -156,6 +156,7 @@ public class Craps extends DiceGame{
                                 cd.printErrorMessage();
                                 continue;
                         }
+                        break;
                     default:
                         cd.printErrorMessage();
                         continue;
@@ -177,6 +178,9 @@ public class Craps extends DiceGame{
             if(x == 4 || x == 5 || x == 6 || x == 8 || x == 9 || x == 10){
                 point = x;
                 noPointSet = false;
+                cd.printThatPoint();
+            } else {
+                cd.printNoPoint();
             }
         }
 
@@ -278,17 +282,20 @@ public class Craps extends DiceGame{
                                     case 12:
                                         chooseBetAmountAndMakeBet(20);
                                         break;
+                                    case 0:
+                                        continue;
                                     default:
                                         cd.printErrorMessage();
                                         continue;
                                 }
                         }
+                        break;
                     default:
                         cd.printErrorMessage();
                         continue;
                 }
             }
-
+            decisionUnmade = true;
             Integer x = diceRollSum(2);
             cd.printShooterRolled(x);
             checkBetsPostPoint(x, point);
@@ -432,9 +439,9 @@ public class Craps extends DiceGame{
             cd.printWinnings(betAmounts[12] * 14);
         }
         if(x == 12 && bets[1]){ //pass
-            player.setWallet(betAmounts[1] * 2);
+            player.setWallet(betAmounts[1]);
             cd.printCraps();
-            cd.printWinnings(betAmounts[1] * 2);
+            cd.printPush();
         }
     }
 
@@ -511,7 +518,6 @@ public class Craps extends DiceGame{
             player.setWallet(betAmounts[2]);
             cd.printShooterScores();
             cd.printWinnings(betAmounts[2]);
-            cd.printPush();
             bets[3] = false;
             betAmounts[3] = 0.0;
         }
