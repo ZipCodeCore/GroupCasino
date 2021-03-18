@@ -125,4 +125,27 @@ public class DisplayMainCasinoScreens extends Displays{
         println("   00: Casino Lobby           ");
         println("                              ");
     }
+
+    public void loginOrCreateNew() {
+        println("                              ");
+        println("     1: Login                 ");
+        println("                              ");
+        println("     2: Create User           ");
+        println("                              ");
+    }
+
+    public void enterUserID() {
+        println("                              ");
+        println("     Enter ID number          ");
+        println("                              ");
+    }
+
+    public void accountMade(int playerId) {
+        println("     Thanks for joining!      ");
+        println("     Your ID number is:       ");
+        println("                              ");
+        println("       %s                     ", playerId);
+        println("                              ");
+        println("      00: Enter Casino        ");
+    }
 }
