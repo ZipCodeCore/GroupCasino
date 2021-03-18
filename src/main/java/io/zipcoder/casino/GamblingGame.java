@@ -4,7 +4,7 @@ public interface GamblingGame {
 
     public String startGame();
 
-    public Double acceptBetFrom();
+    public Double acceptBetFrom(Double betAmount);
 
     public Double calculateReward();
 

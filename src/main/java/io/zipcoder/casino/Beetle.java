@@ -199,6 +199,10 @@ public class Beetle extends DiceGame{
         return null;
     }
 
+    public Double acceptBetFrom(Double betAmount) {
+        return null;
+    }
+
     public Double acceptBetFrom() {
         Double betAmount = 1.00;
         purse += betAmount;

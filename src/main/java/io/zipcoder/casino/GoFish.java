@@ -40,16 +40,6 @@ public class GoFish extends CardGame {
         this.dealCards(numberOfCards);
     }
 
-    // Move to display class??
-    public String displayPlayersHand(ArrayList<String> playersHand) {
-        String playersHandOutput = "";
-        Iterator itr = playersHand.iterator();
-        while(itr.hasNext()) {
-            playersHandOutput += itr.next() + "\n";
-        }
-        return playersHandOutput;
-    }
-
     public String getRankToAskFor_Human() {
         d.printWhatRankYouWillAskFor();
         return c.getStringInput(null, null);
@@ -85,7 +75,7 @@ public class GoFish extends CardGame {
         this.deck.remove(0);
     }
 
-    public void checkForPairsInCurrentPlayersHand(ArrayList<String> currentPlayer) {
+    public void checkFullBookInHand(ArrayList<String> currentPlayer) {
 
     }
 
@@ -93,6 +83,25 @@ public class GoFish extends CardGame {
         bookCount += 1;
     }
 
+    public String startGame() {
+        return null;
+    }
+
+    public Double acceptBetFrom(Double betAmount) {
+        return null;
+    }
+
+    public Double calculateReward() {
+        return null;
+    }
+
+    public Double calculateLoss() {
+        return null;
+    }
+
+    public String endGame() {
+        return null;
+    }
 }
 
 
