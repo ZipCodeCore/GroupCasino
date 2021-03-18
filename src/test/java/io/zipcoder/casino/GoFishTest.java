@@ -166,7 +166,22 @@ public class GoFishTest {
 
     @Test
     public void testTakeCardFromOtherPlayer() {
+        // Given
+        go.setPlayersHand(new ArrayList<String>(Arrays.asList("2 of Clubs")));
+        go.setDealersHand(new ArrayList<String>(Arrays.asList("Ace of Diamonds")));
 
+        // When
+        go.takeCardFromOtherPlayer(go.getPlayersHand(), go.getDealersHand(), "Ace");
+
+        // Then
+        ArrayList<String> expectedPlayer = new ArrayList<String>(Arrays.asList("2 of Clubs", "Ace of Diamonds"));
+        ArrayList<String> expectedDealer = new ArrayList<String>();
+
+        ArrayList<String> actualPlayer = go.getPlayersHand();
+        ArrayList<String> actualDealer = go.getDealersHand();
+
+        Assert.assertEquals(expectedPlayer, actualPlayer);
+        Assert.assertEquals(expectedDealer, actualDealer);
     }
 
     @Test
@@ -192,8 +207,40 @@ public class GoFishTest {
     }
 
     @Test
-    public void testCheckWinner() {
+    public void checkGameOverTrue() {
+        // Given
+        go.setBookCounts(10, 3);
 
+        // When
+        boolean actual = go.checkGameOver();
+
+        // Then
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void checkGameOverFalse() {
+        // Given
+        go.setBookCounts(9, 3);
+
+        // When
+        boolean actual = go.checkGameOver();
+
+        // Then
+        Assert.assertFalse(actual);
+    }
+
+    @Test
+    public void testCheckWinner() {
+        // Given
+        go.setBookCounts(10, 3);
+        String expected = "player";
+
+        // When
+        String actual = go.checkWinner();
+
+        // Then
+        Assert.assertEquals(expected, actual);
     }
 
 }
