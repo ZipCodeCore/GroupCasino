@@ -3,11 +3,13 @@ package io.zipcoder.casino;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
+import java.util.TreeMap;
 
 public abstract class CardGame implements GamblingGame {
     ArrayList<String> playersHand;
     ArrayList<String> dealersHand;
     ArrayList<String> deck;
+    TreeMap<String, Integer> deckMap;
     String[] ranks;
     String[] suits;
 
@@ -19,6 +21,7 @@ public abstract class CardGame implements GamblingGame {
         this.suits = new String[]{"Clubs", "Diamonds", "Hearts", "Spades"};
         this.playersHand = new ArrayList<String>();
         this.dealersHand = new ArrayList<String>();
+        this.deckMap = new TreeMap<String, Integer>();
     }
 
     public ArrayList<String> getDeck() {
@@ -62,6 +65,21 @@ public abstract class CardGame implements GamblingGame {
             this.deck.remove(i);
             i++;
         }
+    }
+
+    public String getRankOnCard(String cardRankAndSuit) {
+        return cardRankAndSuit.substring(0, cardRankAndSuit.indexOf(" "));
+    }
+
+    public int getValueOfCard(String rankOnCard) {
+        int valueOfCard = 0;
+        if (rankOnCard.equals("Ace") || rankOnCard.equals("Jack") || rankOnCard.equals("King") || rankOnCard.equals("Queen")) {
+            valueOfCard = 10;
+        } else {
+            valueOfCard = Integer.parseInt(rankOnCard);
+        }
+
+        return valueOfCard;
     }
     
 }

@@ -117,4 +117,19 @@ public class GoFishTest {
         Assert.assertEquals(expectedCase3, actualCase3);
     }
 
+
+    @Test
+    public void TestGetValueOfCard() {
+        String given = "Ace of Hearts";
+        String given1 = "2 of Clubs";
+        String given2 = "7 of Diamonds";
+        String given3 = "King of Diamonds";
+
+        System.out.println(go.getValueOfCard(go.getRankOnCard(given)));
+        System.out.println(go.getValueOfCard(go.getRankOnCard(given1)));
+        System.out.println(go.getValueOfCard(go.getRankOnCard(given2)));
+        System.out.println(go.getValueOfCard(go.getRankOnCard(given3)));
+
+    }
+
 }

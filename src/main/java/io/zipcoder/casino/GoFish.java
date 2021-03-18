@@ -93,10 +93,6 @@ public class GoFish extends CardGame {
         bookCount += 1;
     }
 
-    public String getRankOnCard(String cardRankAndSuit) {
-        return cardRankAndSuit.substring(0, cardRankAndSuit.indexOf(" "));
-    }
-
 }
 
 
