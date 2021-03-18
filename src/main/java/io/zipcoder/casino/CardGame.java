@@ -1,9 +1,6 @@
 package io.zipcoder.casino;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Stack;
-import java.util.TreeMap;
+import java.util.*;
 
 public abstract class CardGame implements GamblingGame {
     ArrayList<String> playersHand;
@@ -26,6 +23,11 @@ public abstract class CardGame implements GamblingGame {
 
     public ArrayList<String> getDeck() {
         return this.deck;
+    }
+
+    // needed for testing
+    public void setPlayersHand(ArrayList<String> playersHand) {
+        this.playersHand = playersHand;
     }
 
     public ArrayList<String> getPlayersHand() {
@@ -80,6 +82,15 @@ public abstract class CardGame implements GamblingGame {
         }
 
         return valueOfCard;
+    }
+
+    public String displayPlayersHand(ArrayList<String> playersHand) {
+        String playersHandOutput = "";
+        Iterator itr = playersHand.iterator();
+        while(itr.hasNext()) {
+            playersHandOutput += itr.next() + "\n";
+        }
+        return playersHandOutput;
     }
     
 }
