@@ -93,6 +93,25 @@ public class GoFish extends CardGame {
         bookCount += 1;
     }
 
+    public String startGame() {
+        return null;
+    }
+
+    public Double acceptBetFrom(Double betAmount) {
+        return null;
+    }
+
+    public Double calculateReward() {
+        return null;
+    }
+
+    public Double calculateLoss() {
+        return null;
+    }
+
+    public String endGame() {
+        return null;
+    }
 }
 
 

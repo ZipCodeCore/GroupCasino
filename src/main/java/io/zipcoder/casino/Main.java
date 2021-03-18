@@ -6,7 +6,5 @@ public class Main {
         Player x = new Player("Hazel", 500.0);
         Craps craps = new Craps(x);
         craps.crapsEngine();
-
-
     }
 }

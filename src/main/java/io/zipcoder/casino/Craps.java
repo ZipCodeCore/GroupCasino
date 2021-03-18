@@ -514,19 +514,23 @@ public class Craps extends DiceGame{
             cd.printOneRollBetWin();
             cd.printWinnings(betAmounts[12] * 14);
         }
+        if(x == point){
+            bets[3] = false;
+            betAmounts[3] = 0.0;
+        }
+        if(x == 7){
+            bets[2] = false;
+            betAmounts [2] = 0.0;
+        }
         if(x == point && bets[2]){
             player.setWallet(betAmounts[2]);
             cd.printShooterScores();
             cd.printWinnings(betAmounts[2]);
-            bets[3] = false;
-            betAmounts[3] = 0.0;
         }
         if(x == 7 && bets[3]){
             player.setWallet(betAmounts[3] * 2);
             cd.printShooterSevenedOut();
             cd.printWinnings(betAmounts[3] * 2);
-            bets[2] = false;
-            betAmounts [2] = 0.0;
         }
         if(x == 3 && bets[4] || x == 4 && bets[4] || x == 9 && bets[4] || x == 10 && bets[4] || x == 11 && bets[4]){
             player.setWallet(betAmounts[4] * 2);
@@ -566,7 +570,7 @@ public class Craps extends DiceGame{
         return "Alright! Let's play Craps!";
     }
 
-    public Double acceptBetFrom() {
+    public Double acceptBetFrom(Double betAmount) {
         return null;
     }
 
