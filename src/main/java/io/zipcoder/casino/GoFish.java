@@ -23,6 +23,10 @@ public class GoFish extends CardGame {
         this.turn = "player";
     }
 
+    public String getTurn() {
+        return this.turn;
+    }
+
     public void setupGame(int numberOfCards) {
         this.createNewDeck();
         this.shuffleCards();
@@ -36,12 +40,12 @@ public class GoFish extends CardGame {
 
     public String getRankToAskFor_Human() {
         d.printWhatRankYouWillAskFor();
-        return c.getStringInput(null, null);
+        return c.getStringInput("", null);
     }
 
-    public String getRankToAskFor_Computer(ArrayList<String> computersHand) {
-        int pickCard = (int) Math.random() * (computersHand.size() - 1);
-        return this.getRankOnCard(computersHand.get(pickCard));
+    public String getRankToAskFor_Computer() {
+        int pickCard = (int) Math.random() * (this.dealersHand.size() - 1);
+        return this.getRankOnCard(this.dealersHand.get(pickCard));
     }
 
     public boolean checkIfRankInPlayersHand(ArrayList<String> playersHand, String rankAskedFor) {

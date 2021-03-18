@@ -160,7 +160,7 @@ public class GoFishTest {
         go.setDealersHand(new ArrayList<String>(Arrays.asList("Ace of Hearts", "2 of Spades", "6 of Diamonds")));
 
         // When
-        String actual = go.getRankToAskFor_Computer(go.getDealersHand());
+        String actual = go.getRankToAskFor_Computer();
 
         // Then
         Assert.assertTrue(actual.equals("Ace") || actual.equals("2") || actual.equals("6"));

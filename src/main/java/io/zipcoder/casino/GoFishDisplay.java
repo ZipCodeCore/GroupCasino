@@ -9,6 +9,8 @@ public class GoFishDisplay extends Display{
                 "\n");
     }
 
+    public void printYourHand() {setPrintCurrentDisplay("CARDS IN YOUR HAND:");}
+
     public void goFish(){
         setPrintCurrentDisplay("GO FISH!");
     }
