@@ -161,15 +161,19 @@ public class Beetle extends DiceGame{
         return null;
     }
 
-    public String acceptBetFrom() {
+    public Double acceptBetFrom(Double betAmount) {
         return null;
     }
 
-    public String calculateReward() {
+    public Double acceptBetFrom() {
         return null;
     }
 
-    public String calculateLoss() {
+    public Double calculateReward() {
+        return null;
+    }
+
+    public Double calculateLoss() {
         return null;
     }
 
