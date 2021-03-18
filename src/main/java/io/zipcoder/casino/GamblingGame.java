@@ -4,11 +4,11 @@ public interface GamblingGame {
 
     public String startGame();
 
-    public String acceptBetFrom();
+    public Double acceptBetFrom();
 
-    public String calculateReward();
+    public Double calculateReward();
 
-    public String calculateLoss();
+    public Double calculateLoss();
 
     public String endGame();
 

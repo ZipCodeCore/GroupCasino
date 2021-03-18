@@ -19,6 +19,7 @@ public class Craps extends DiceGame{
     private Integer input;
     private Integer innerInput;
     private Integer furtherInput;
+    private Integer yetFurtherInput;
 
     private Boolean[] outcomes;
     private Boolean[] bets;
@@ -104,6 +105,9 @@ public class Craps extends DiceGame{
                                 break;
                             case 2:
                                 break;
+                            default:
+                                cd.printErrorMessage();
+                                continue;
                         }
                         break;
                     case 2:
@@ -148,7 +152,13 @@ public class Craps extends DiceGame{
                             case 12:
                                 chooseBetAmountAndMakeBet(20);
                                 break;
+                            default:
+                                cd.printErrorMessage();
+                                continue;
                         }
+                    default:
+                        cd.printErrorMessage();
+                        continue;
                 }
                 if(decisionUnmade) {
                     cd.youCanBetAgain();
@@ -171,6 +181,126 @@ public class Craps extends DiceGame{
         }
 
 
+
+        while(notSevenedOut){
+            while(decisionUnmade){
+                cd.printSetTypeOfBet();
+                input = c.getIntegerInput("Type 0 for no bet, 2 for 'come,' 3 for 'don't come,' or 4 for a proposition.");
+                switch(input) {
+                    case 1:
+                        cd.printRulesMenu1();
+                        cd.printRulesMenuMid();
+                        innerInput = c.getIntegerInput("Type 1 for yes, 2 for no.");
+                        switch (innerInput) {
+                            case 1:
+                                cd.printRulesMenu2();
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                cd.printErrorMessage();
+                                continue;
+                        }
+                    case 2:
+                        chooseBetAmountAndMakeBet(2);
+                        break;
+                    case 3:
+                        chooseBetAmountAndMakeBet(3);
+                        break;
+                    case 0:
+                        decisionUnmade = false;
+                        break;
+                    case 4:
+                        furtherInput = c.getIntegerInput("Type 1 to bet the field, 2 for a place bet, or 3 for a one-roll bet.");
+                        switch(furtherInput){
+                            case 1:
+                                chooseBetAmountAndMakeBet(4);
+                                break;
+                            case 2:
+                                yetFurtherInput = c.getIntegerInput("Type the number you want to make your place bet on (4, 5, 6, 8, 9, or 10, but not the point.");
+                                if(yetFurtherInput == point){
+                                    cd.printErrorMessage();
+                                    continue;
+                                }
+                                switch(yetFurtherInput){
+                                    case 4:
+                                        chooseBetAmountAndMakeBet(5);
+                                        break;
+                                    case 5:
+                                        chooseBetAmountAndMakeBet(6);
+                                        break;
+                                    case 6:
+                                        chooseBetAmountAndMakeBet(7);
+                                        break;
+                                    case 8:
+                                        chooseBetAmountAndMakeBet(8);
+                                        break;
+                                    case 9:
+                                        chooseBetAmountAndMakeBet(9);
+                                        break;
+                                    case 10:
+                                        chooseBetAmountAndMakeBet(10);
+                                        break;
+                                    default:
+                                        cd.printErrorMessage();
+                                        continue;
+                                }
+                            case 3:
+                                yetFurtherInput = c.getIntegerInput("You can make a one roll bet. Type 2, 3, 4, 6, 7, 8, 10, 11, or 12 to bet on that number, 1 for craps, or 0 to cancel.");
+                                switch(yetFurtherInput) {
+                                    case 1:
+                                        chooseBetAmountAndMakeBet(12);
+                                        break;
+                                    case 2:
+                                        chooseBetAmountAndMakeBet(19);
+                                        break;
+                                    case 3:
+                                        chooseBetAmountAndMakeBet(17);
+                                        break;
+                                    case 4:
+                                        chooseBetAmountAndMakeBet(15);
+                                        break;
+                                    case 6:
+                                        chooseBetAmountAndMakeBet(13);
+                                        break;
+                                    case 7:
+                                        chooseBetAmountAndMakeBet(11);
+                                        break;
+                                    case 8:
+                                        chooseBetAmountAndMakeBet(14);
+                                        break;
+                                    case 10:
+                                        chooseBetAmountAndMakeBet(16);
+                                        break;
+                                    case 11:
+                                        chooseBetAmountAndMakeBet(18);
+                                        break;
+                                    case 12:
+                                        chooseBetAmountAndMakeBet(20);
+                                        break;
+                                    default:
+                                        cd.printErrorMessage();
+                                        continue;
+                                }
+                        }
+                    default:
+                        cd.printErrorMessage();
+                        continue;
+                }
+            }
+
+            Integer x = diceRollSum(2);
+            cd.printShooterRolled(x);
+            checkBetsPostPoint(x, point);
+            oneRollReset();
+            if(x == 7){
+                notSevenedOut = false;
+                d.setPrintCurrentDisplay(endGame());
+            }
+
+        }
+
+
     }
 
     public void initialRulesPrompt(){
@@ -182,11 +312,11 @@ public class Craps extends DiceGame{
                 case 1:
                     cd.printRulesMenu1();
                     cd.printRulesMenu2();
-                    cd.readyToPlay();
+                    d.setPrintCurrentDisplay(startGame());
                     haventAnswered = false;
                     break;
                 case 2:
-                    cd.readyToPlay();
+                    d.setPrintCurrentDisplay(startGame());
                     haventAnswered = false;
                     break;
                 default:
@@ -427,23 +557,23 @@ public class Craps extends DiceGame{
     }
 
     public String startGame() {
+        return "Alright! Let's play Craps!";
+    }
+
+    public Double acceptBetFrom() {
         return null;
     }
 
-    public String acceptBetFrom() {
+    public Double calculateReward() {
         return null;
     }
 
-    public String calculateReward() {
-        return null;
-    }
-
-    public String calculateLoss() {
+    public Double calculateLoss() {
         return null;
     }
 
     public String endGame() {
-        return null;
+        return "That's the end of the round!";
     }
 
 }
