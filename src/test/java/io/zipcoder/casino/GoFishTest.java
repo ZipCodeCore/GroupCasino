@@ -3,7 +3,6 @@ package io.zipcoder.casino;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,9 +56,6 @@ public class GoFishTest {
 
         // Then
         Assert.assertNotEquals(unshuffledDeck, shuffledDeck);
-
-        //System.out.println(Arrays.toString(unshuffledDeck.toArray()));
-        //System.out.println(Arrays.toString(shuffledDeck.toArray()));
     }
 
     @Test
@@ -77,9 +73,6 @@ public class GoFishTest {
         Assert.assertEquals(5, actualPerson1.size());
         Assert.assertEquals(5, actualPerson2.size());
         Assert.assertEquals(42, actualDeck.size());
-
-        //System.out.println(Arrays.toString(actualPerson1.toArray()));
-        //System.out.println(Arrays.toString(actualPerson2.toArray()));
     }
 
     @Test
@@ -149,6 +142,7 @@ public class GoFishTest {
 
     }
 
+    // Not sure how to test this one
     @Test
     public void testGetRankToAskFor_Human() {
 
@@ -156,17 +150,50 @@ public class GoFishTest {
 
     @Test
     public void testGetRankToAskFor_Computer() {
+        // Given
+        go.setDealersHand(new ArrayList<String>(Arrays.asList("Ace of Hearts", "2 of Spades", "6 of Diamonds")));
 
+        // When
+        //String actual = go.getRankToAskFor_Computer();
+
+        // Then
+        //Assert.assertTrue(actual.equals("Ace") || actual.equals("2") || actual.equals("6"));
     }
 
     @Test
     public void testCheckIfRankInPlayersHand() {
+        // Given
+        go.setPlayersHand(new ArrayList<String>(Arrays.asList("King of Diamonds", "4 of Spades")));
 
+        // When
+        go.setRankRequested("King");
+        boolean actual = go.checkIfRankInHand(go.getPlayersHand());
+        go.setRankRequested("4");
+        boolean actual2 = go.checkIfRankInHand(go.getPlayersHand());
+
+        // Then
+        Assert.assertTrue(actual);
+        Assert.assertTrue(actual2);
     }
 
     @Test
     public void testTakeCardFromOtherPlayer() {
+        // Given
+        go.setPlayersHand(new ArrayList<String>(Arrays.asList("2 of Clubs")));
+        go.setDealersHand(new ArrayList<String>(Arrays.asList("Ace of Diamonds")));
 
+        // When
+        go.takeCardFromOtherPlayer(go.getPlayersHand(), go.getDealersHand(), "Ace");
+
+        // Then
+        ArrayList<String> expectedPlayer = new ArrayList<String>(Arrays.asList("2 of Clubs", "Ace of Diamonds"));
+        ArrayList<String> expectedDealer = new ArrayList<String>();
+
+        ArrayList<String> actualPlayer = go.getPlayersHand();
+        ArrayList<String> actualDealer = go.getDealersHand();
+
+        Assert.assertEquals(expectedPlayer, actualPlayer);
+        Assert.assertEquals(expectedDealer, actualDealer);
     }
 
     @Test
@@ -187,13 +214,64 @@ public class GoFishTest {
     }
 
     @Test
-    public void testCheckFullBookInHand() {
+    public void testCheckPairInHand() {
+        // Given
+        go.setPlayersHand(new ArrayList<String>(Arrays.asList("King of Hearts", "King of Diamonds", "Queen of Spades")));
 
+        // When
+        String pair = go.checkPairInHand(go.getPlayersHand());
+
+        // Then
+        Assert.assertEquals("King", pair);
+    }
+
+    @Test
+    public void testRemovePairFromHand() {
+        // Given
+        go.setPlayersHand(new ArrayList<String>(Arrays.asList("King of Hearts", "King of Diamonds", "Queen of Spades")));
+
+        // When
+        int actual = go.removePairFromHand(go.getPlayersHand());
+
+        // Then
+        Assert.assertEquals(1, 1);
+    }
+
+    @Test
+    public void checkGameOverTrue() {
+        // Given
+        go.setBookCounts(10, 3);
+
+        // When
+        boolean actual = go.checkGameOver();
+
+        // Then
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void checkGameOverFalse() {
+        // Given
+        go.setBookCounts(9, 3);
+
+        // When
+        boolean actual = go.checkGameOver();
+
+        // Then
+        Assert.assertFalse(actual);
     }
 
     @Test
     public void testCheckWinner() {
+        // Given
+        go.setBookCounts(10, 3);
+        String expected = "player";
 
+        // When
+        String actual = go.checkWinner();
+
+        // Then
+        Assert.assertEquals(expected, actual);
     }
 
 }

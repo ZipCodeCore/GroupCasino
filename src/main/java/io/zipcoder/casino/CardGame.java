@@ -3,12 +3,13 @@ package io.zipcoder.casino;
 import java.util.*;
 
 public abstract class CardGame implements GamblingGame {
-    ArrayList<String> playersHand;
-    ArrayList<String> dealersHand;
+
     ArrayList<String> deck;
-    TreeMap<String, Integer> deckMap;
     String[] ranks;
     String[] suits;
+
+    ArrayList<String> playersHand;
+    ArrayList<String> dealersHand;
 
     public CardGame() {
 
@@ -16,18 +17,14 @@ public abstract class CardGame implements GamblingGame {
         // Set zeroth element to null to indicate an unused element (only valid ranks from 1-13)
         this.ranks = new String[]{null, "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
         this.suits = new String[]{"Clubs", "Diamonds", "Hearts", "Spades"};
+
         this.playersHand = new ArrayList<String>();
         this.dealersHand = new ArrayList<String>();
-        this.deckMap = new TreeMap<String, Integer>();
     }
 
+    // GETTERS
     public ArrayList<String> getDeck() {
         return this.deck;
-    }
-
-    // needed for testing
-    public void setPlayersHand(ArrayList<String> playersHand) {
-        this.playersHand = playersHand;
     }
 
     public ArrayList<String> getPlayersHand() {
@@ -35,9 +32,19 @@ public abstract class CardGame implements GamblingGame {
     }
 
     public ArrayList<String> getDealersHand() {
-       return this.dealersHand;
+        return this.dealersHand;
     }
 
+    // SETTERS
+    public void setPlayersHand(ArrayList<String> playersHand) {
+        this.playersHand = playersHand;
+    }
+
+    public void setDealersHand(ArrayList<String> dealersHand) {
+        this.dealersHand = dealersHand;
+    }
+
+    // CARD GAME METHODS
     public void createNewDeck() {
         for (int suit = 0; suit <=3; suit++) {
             for (int rank = 1; rank <= 13; rank++) {
@@ -85,6 +92,7 @@ public abstract class CardGame implements GamblingGame {
     }
 
     public String displayPlayersHand(ArrayList<String> playersHand) {
+        Collections.sort(playersHand);
         String playersHandOutput = "";
         Iterator itr = playersHand.iterator();
         while(itr.hasNext()) {

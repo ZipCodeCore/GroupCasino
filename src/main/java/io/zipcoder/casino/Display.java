@@ -72,7 +72,6 @@ public class Display {
         );
     }
 
-
     // MENUS
     public void printLoginMenu() {
         this.setPrintCurrentDisplay(
