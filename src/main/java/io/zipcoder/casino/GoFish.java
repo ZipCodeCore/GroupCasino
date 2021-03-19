@@ -1,5 +1,7 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.utilities.Console;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -12,6 +14,7 @@ public class GoFish extends CardGame {
     private List<String> books=new ArrayList();
     int playerScore=0;
     int dealerScore=0;
+    Console gamecube=new Console(System.in,System.out);
 
 
     public GoFish(Player current){
@@ -27,10 +30,9 @@ public class GoFish extends CardGame {
         System.out.println("Welcome to Go Fish, "+currentplayer.getPlayerName());
         System.out.println("This is a nice, friendly game so don't worry about " +
                 "the chips, okay?");
-        System.out.println("Are you ready to begin? (enter 'yes' or 'y')");
-        String input = Displays.getStringInput();
+        String input = gamecube.getStringInput("Are you ready to begin? (enter 'yes' or 'y')");
         Boolean stillPlaying;
-        //The game setup for if you agre to play starts here
+        //The game setup for if you agree to play starts here
         while(input.equalsIgnoreCase("yes")||input.equalsIgnoreCase("y")){
             newGameState();
         for(int i=0; i<7;i++){
@@ -57,8 +59,7 @@ public class GoFish extends CardGame {
                     stillPlaying=false;}
             }
             System.out.println(checkWinner());
-            System.out.println("Did you want to play again? (enter 'yes' or 'y')");
-            input = Displays.getStringInput();
+            input = gamecube.getStringInput("Did you want to play again? (enter 'yes' or 'y')");
         }
         System.out.println("Okay then, take care and thanks for playing!");
     }
@@ -97,20 +98,19 @@ public class GoFish extends CardGame {
 
 
     public void turnStructure(){
-        Boolean legalchoice=false;
+        Boolean legalchoice;
         Boolean takeAnotherTurn=true;
-        String input="";
+        String input;
         while (takeAnotherTurn&&oswald.size()>0) {
             System.out.print(seeHand(oswald));
             if(books.size()>0){System.out.println(showBooks());
                 System.out.println("You have "+playerScore+" books.");
                 System.out.println("The dealer has "+dealerScore+" books.");}
-            System.out.println("Alright, Go fish!");
             takeAnotherTurn=false;
             legalchoice=false;
             input="";
             while (!legalchoice) {
-                input = Displays.getStringInput();
+                input = gamecube.getStringInput("Alright, go fish!");
                 input=input.toUpperCase();
                 legalchoice = true;
                 if (!gotAnyKings(oswald, input)) {
