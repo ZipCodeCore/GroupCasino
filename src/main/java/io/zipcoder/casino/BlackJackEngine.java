@@ -4,7 +4,6 @@ import io.zipcoder.casino.utilities.Console;
 
 public class BlackJackEngine {
     Player player;
-    Casino casino = new Casino();
 
     public BlackJackEngine(Player player) {
         this.player = player;
@@ -37,7 +36,6 @@ public class BlackJackEngine {
                     break;
                 case 2:
                     System.out.println("Good bye!");
-                    casino.casinoLobbyScreen(player);
                     validInput = false;
                     break;
                 default:
