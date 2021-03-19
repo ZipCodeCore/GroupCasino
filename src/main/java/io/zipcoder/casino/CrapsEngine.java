@@ -5,8 +5,9 @@ import io.zipcoder.casino.utilities.Console;
 
 public class CrapsEngine {
     CrapsScreens cScreens = new CrapsScreens();
-    DisplayMainCasinoScreens casinoScreens = new DisplayMainCasinoScreens();
+//    DisplayMainCasinoScreens casinoScreens = new DisplayMainCasinoScreens();
     Player player;
+    Casino casino = new Casino();
 
 
     public CrapsEngine(Player player) {
@@ -33,7 +34,7 @@ public class CrapsEngine {
             if (input.equals(1)) {
                 passOrNotPassRoundOneScreen(craps.getGameRound(), craps, player, console);
             } else if (input.equals(2)) {
-                casinoLobby(craps, player, console);
+                casinoLobby(player);
             } else {
                 crapsInvalidWelcomeScreen(craps, player, console);
             }
@@ -44,9 +45,9 @@ public class CrapsEngine {
         cScreens.crapsInvalidWelcomeScreen();
     }
 
-    //TEMPORARY
-    public void casinoLobby(Craps craps, Player player, Console console) {
 
+    public void casinoLobby(Player player) {
+        casino.casinoLobbyScreen(player);
     }
 
     public void passOrNotPassRoundOneScreen(int gameRound, Craps craps, Player player, Console console) {
@@ -85,7 +86,7 @@ public class CrapsEngine {
         while (true) {
             Integer input = console.getIntegerInput("");
             if (input == 0) {
-                casinoLobby(craps, player, console);
+                casinoLobby(player);
             } else if (input == 1) {
                 betAmountRoundOneScreen(craps, player, console);
             } else {
@@ -145,7 +146,7 @@ public class CrapsEngine {
         while (true) {
             Integer input = console.getIntegerInput("");
             if (input == 0) {
-                casinoLobby(craps, player, console);
+                casinoLobby(player);
             } else {
                 System.out.println("Invalid Entry");
             }
