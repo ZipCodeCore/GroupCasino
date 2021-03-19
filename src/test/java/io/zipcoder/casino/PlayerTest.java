@@ -110,4 +110,15 @@ public class PlayerTest {
         //assert
         Assert.assertEquals(expected,actual);
     }
+    @Test
+    public void MakeDepositTest() {
+        Player player8 = new Player("player1", 50.00);
+        player8.makeDeposit(50.00);
+
+        Double expected  = 100.00;
+        Double actual = player8.getWallet();
+
+        Assert.assertEquals(expected, actual);
+
+    }
 }
