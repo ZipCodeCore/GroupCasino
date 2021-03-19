@@ -1,6 +1,8 @@
 package io.zipcoder.casino;
 
 
+import io.zipcoder.casino.CardGames.Card;
+import io.zipcoder.casino.CardGames.GoFish;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 

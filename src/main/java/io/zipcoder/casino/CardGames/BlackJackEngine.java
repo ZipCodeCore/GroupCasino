@@ -1,5 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.CardGames;
 
+import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 public class BlackJackEngine {

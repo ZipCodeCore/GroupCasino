@@ -1,5 +1,12 @@
 package io.zipcoder.casino;
-
+import io.zipcoder.casino.CardGames.BlackJackEngine;
+import io.zipcoder.casino.CardGames.GoFish;
+import io.zipcoder.casino.DiceGames.CrapsEngine;
+import io.zipcoder.casino.DiceGames.MostOfAKindEngine;
+import io.zipcoder.casino.Player.Player;
+import io.zipcoder.casino.Player.PlayerFactory;
+import io.zipcoder.casino.Player.PlayerWarehouse;
+import io.zipcoder.casino.Screens.DisplayMainCasinoScreens;
 import io.zipcoder.casino.utilities.Console;
 
 public class Casino {
@@ -129,7 +136,7 @@ public class Casino {
                 getOut = false;
             } else if (input == 2) {
                 cashOutChips(currentPlayer.getChipBalance(), currentPlayer, casinoScreens, console);
-                currentPlayer.setChipBalance(0);
+                currentPlayer.cashOut();
                 getOut = false;
             } else {
                 tellerInvalidMainScreen(casinoScreens);
@@ -158,16 +165,13 @@ public class Casino {
     }
 
     public void tellerMoneyToChipsScreen(Player currentPlayer, DisplayMainCasinoScreens casinoScreens, Console console) {
-        ChipMoneyExchange exchange = new ChipMoneyExchange();
         casinoScreens.tellerMoneyToChipsScreen(currentPlayer.getChipBalance(), currentPlayer.getWallet());
         boolean getOut = true;
         while (getOut) {
             Integer input = console.getIntegerInput("");
             if (input <= currentPlayer.getWallet()) {
-                int chips = exchange.moneyToChips(input);
-                currentPlayer.getMoreChips(chips);
-                currentPlayer.getMoreChips(chips);
-                chipBalanceScreen(currentPlayer.getChipBalance(), currentPlayer, casinoScreens, console);
+                currentPlayer.getMoreChips(input);
+                chipBalanceScreen(currentPlayer.getChipBalance(), casinoScreens, console);
                 getOut = false;
             } else {
                 System.out.println("Not enough cash");
@@ -175,7 +179,7 @@ public class Casino {
         }
     }
 
-    public void chipBalanceScreen(int chips, Player currentPlayer, DisplayMainCasinoScreens casinoScreens, Console console) {
+    public void chipBalanceScreen(int chips, DisplayMainCasinoScreens casinoScreens, Console console) {
         casinoScreens.howManyChipsScreen(chips);
         boolean getOut = true;
         while (getOut) {

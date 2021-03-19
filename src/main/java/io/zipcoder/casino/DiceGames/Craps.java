@@ -1,14 +1,16 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.DiceGames;
+
+import io.zipcoder.casino.Player.Player;
 
 public class Craps extends DiceGame {
-    int gameRound = 1;
-    StringBuffer betStatus = new StringBuffer("hi");
-    Player currentPlayer;
-    Integer[] roundOnePass = new Integer[]{7, 11};
-    Integer[] roundOneNotPass = new Integer[]{2, 3, 12};
-    Integer[] rollAgain = new Integer[]{4, 5, 6, 8, 9, 10};
-    int pointer;
-    int currentSum;
+    public int gameRound = 1;
+    public StringBuffer betStatus = new StringBuffer("hi");
+    public Player currentPlayer;
+    public Integer[] roundOnePass = new Integer[]{7, 11};
+    public Integer[] roundOneNotPass = new Integer[]{2, 3, 12};
+    public Integer[] rollAgain = new Integer[]{4, 5, 6, 8, 9, 10};
+    public int pointer;
+    public int currentSum;
 
     public Craps(Player currentPlayer) {
         this.currentPlayer = currentPlayer;

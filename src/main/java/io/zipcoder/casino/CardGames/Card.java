@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.CardGames;
 
 public class Card {
     //value from ace to king

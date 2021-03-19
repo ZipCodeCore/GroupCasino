@@ -1,9 +1,12 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.CardGames;
+
+import io.zipcoder.casino.GamblingGame;
+import io.zipcoder.casino.Player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlackJack extends CardGame implements GamblingGame{
+public class BlackJack extends CardGame implements GamblingGame {
     Player currentPlayer;
     public List<Card> playerHand = new ArrayList<>();
     public List<Card> dealerHand = new ArrayList<>();

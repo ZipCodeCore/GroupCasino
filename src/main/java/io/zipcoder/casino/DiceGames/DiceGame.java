@@ -1,11 +1,13 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.DiceGames;
+
+import io.zipcoder.casino.GamblingGame;
 
 import java.util.ArrayList;
 
 public abstract class DiceGame implements GamblingGame {
     private int totalNumOfDice;
-    ArrayList<Integer> playerDiceHand = new ArrayList<Integer>();
-    int pot = 0;
+    public ArrayList<Integer> playerDiceHand = new ArrayList<Integer>();
+    public int pot = 0;
     
     public void addToPot() {
     }
