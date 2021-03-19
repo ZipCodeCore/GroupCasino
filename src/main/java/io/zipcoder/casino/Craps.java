@@ -23,7 +23,6 @@ public class Craps extends DiceGame {
         return pot;
     }
 
-
     //1: player wins, 2: dealer wins, 3: move to next round
     public int checkWinnerRoundOne(int sumOfDice) {
         int outcome = 0;
@@ -62,8 +61,6 @@ public class Craps extends DiceGame {
         }
         return outcome;
     }
-
-
 
     //1: player wins, 2: player loses, 3: roll again
     public int checkWinnerRoundTwo(int sumOfDice) {

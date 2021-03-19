@@ -5,8 +5,6 @@ import io.zipcoder.casino.utilities.Console;
 public class CrapsEngine {
     CrapsScreens cScreens = new CrapsScreens();
     Player player;
-    //Casino casino = new Casino();
-
 
     public CrapsEngine(Player player) {
         this.player = player;
@@ -17,7 +15,6 @@ public class CrapsEngine {
         Console console = new Console(System.in, System.out);
         startCrapsGame(craps, player, console);
     }
-
 
     public void startCrapsGame(Craps craps, Player player, Console console) {
         cScreens.crapsWelcomeScreen();
@@ -40,11 +37,6 @@ public class CrapsEngine {
     public void crapsInvalidWelcomeScreen(Craps craps, Player player, Console console) {
         cScreens.crapsInvalidWelcomeScreen();
     }
-
-
-//    public void casinoLobby(Player player) {
-//        casino.casinoLobbyScreen(player);
-//    }
 
     public void passOrNotPassRoundOneScreen(int gameRound, Craps craps, Player player, Console console) {
         craps.setGameRound(1);

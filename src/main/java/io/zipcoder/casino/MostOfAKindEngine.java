@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class MostOfAKindEngine {
     Player player;
-    Casino casino = new Casino();
     MostOfAKindScreens mScreens = new MostOfAKindScreens();
 
     public MostOfAKindEngine(Player player) {
@@ -40,8 +39,6 @@ public class MostOfAKindEngine {
         }
     }
 
-    //PLACEHOLDER
-
     private void welcomeInvalidScreen(MostOfAKindGame moak, Player player, Console console) {
         mScreens.welcomeInvalidMoakScreen();
     }
@@ -72,19 +69,6 @@ public class MostOfAKindEngine {
         }
     }
 
-//    private void needMoreChipsScreen(MostOfAKindGame moak, Player player, Console console) {
-//        mScreens.needMoreChipsScreen();
-//        boolean getOut = true;
-//        while (getOut) {
-//            Integer input = console.getIntegerInput("");
-//            if (input == 0) {
-//                getOut = false;
-//            } else {
-//                System.out.println("Invalid Entry");
-//            }
-//        }
-//    }
-
     private void firstRollScreen(int pot, ArrayList<Integer> playerHand, MostOfAKindGame moak, Player player, Console console) {
         mScreens.firstRollScreen(pot, playerHand);
         boolean getOut = true;
@@ -99,21 +83,6 @@ public class MostOfAKindEngine {
             }
         }
     }
-
-//    private void getMoreChips(MostOfAKindGame moak, Player player, Console console) {
-//        mScreens.getMoreChips();
-//        boolean getOut = true;
-//        while (getOut) {
-//            Integer input = console.getIntegerInput("");
-//            if (input == 0) {
-//                getOut = false;
-//            } else if (input == 1) {
-//                firstRollScreen(moak.getPot(), moak.getPlayerHand(), moak, player, console);
-//            } else {
-//                System.out.println("Invalid Entry");
-//            }
-//        }
-//    }
 
     private void numberToKeepScreen(int pot, ArrayList<Integer> playerHand, MostOfAKindGame moak, Player player, Console console) {
         mScreens.numberToKeepScreen(pot, playerHand);
@@ -195,16 +164,4 @@ public class MostOfAKindEngine {
             }
         }
     }
-
-//    private void goodbyeScreen(MostOfAKindGame moak, Player player, Console console) {
-//        mScreens.goodbyeScreen();
-//        while (getOut) {
-//            Integer input = console.getIntegerInput("");
-//            if (input == 0) {
-//                getOut = false;
-//            } else {
-//                System.out.println("Invalid Entry");
-//            }
-//        }
-//    }
 }

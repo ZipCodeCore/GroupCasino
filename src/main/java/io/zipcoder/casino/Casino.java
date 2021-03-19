@@ -20,6 +20,7 @@ public class Casino {
                 getOut = false;
             } else if (input == 99) {
                 goodbyeCasinoScreen(casinoScreens);
+                System.exit(0);
                 getOut = false;
             } else {
                 invalidEntryWelcomeScreen(casinoScreens);
@@ -149,7 +150,6 @@ public class Casino {
                 tellerWindow(currentPlayer, casinoScreens, console);
                 getOut = false;
             } else if (input == 2) {
-                casinoLobbyScreen(currentPlayer, casinoScreens, console);
                 getOut = false;
             } else {
                 System.out.println("Invalid Entry");
@@ -165,6 +165,7 @@ public class Casino {
             Integer input = console.getIntegerInput("");
             if (input <= currentPlayer.getWallet()) {
                 int chips = exchange.moneyToChips(input);
+                currentPlayer.getMoreChips(chips);
                 currentPlayer.getMoreChips(chips);
                 chipBalanceScreen(currentPlayer.getChipBalance(), currentPlayer, casinoScreens, console);
                 getOut = false;
