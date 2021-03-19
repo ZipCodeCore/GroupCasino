@@ -47,16 +47,13 @@ public class GoFish extends CardGame {
             //The actual GAME starts here.
             while(stillPlaying) {
                 //player takes their turn
-                if(stillPlaying){
-                    System.out.println("You have "+playerScore+" books.");
-                    turnStructure();}
+                if(stillPlaying){ turnStructure();}
                 //end step for player, checks for winner
                 if(dealer.size()==0||oswald.size()==0||books.size()==12){
                     stillPlaying=false;}
-                if(stillPlaying){turnStructureAI();
-                    System.out.println("The dealer has "+dealerScore+" books.");}
+                if(stillPlaying){turnStructureAI();}
                 //end step for dealer, checks for winner
-                if(dealer.size()<1||oswald.size()<1||books.size()==12){
+                if(dealer.size()==0||oswald.size()==0||books.size()==12){
                     stillPlaying=false;}
             }
             System.out.println(checkWinner());
@@ -67,6 +64,8 @@ public class GoFish extends CardGame {
     }
 
     public String checkWinner() {
+        if(oswald.size()==0){System.out.println("The game ends! Your out of cards!");}
+        if(dealer.size()==0){System.out.println("The game ends! The dealer is out of cards!");}
         if(dealerScore>playerScore){return "Dealer wins! Sorry....";}
         else return "You win! Congrats!";
     }
@@ -103,7 +102,9 @@ public class GoFish extends CardGame {
         String input="";
         while (takeAnotherTurn&&oswald.size()>0) {
             System.out.print(seeHand(oswald));
-            if(books.size()>0){System.out.println(showBooks());}
+            if(books.size()>0){System.out.println(showBooks());
+                System.out.println("You have "+playerScore+" books.");
+                System.out.println("The dealer has "+dealerScore+" books.");}
             System.out.println("Alright, Go fish!");
             takeAnotherTurn=false;
             legalchoice=false;
