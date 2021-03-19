@@ -1,7 +1,11 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.DiceGames.Craps;
+import io.zipcoder.casino.Player.Player;
+import io.zipcoder.casino.Player.PlayerFactory;
 import org.junit.Assert;
 import org.junit.Test;
+
 
 public class CrapsTest {
     Player gerg = PlayerFactory.createPlayer("gerg", 500);

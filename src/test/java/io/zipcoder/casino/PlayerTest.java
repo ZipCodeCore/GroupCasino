@@ -1,9 +1,8 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.Player.Player;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class PlayerTest {
     String name = "Gerg";

@@ -1,9 +1,11 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.DiceGames.MostOfAKindGame;
+import io.zipcoder.casino.Player.Player;
+import io.zipcoder.casino.Player.PlayerFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MostOfAKindTests {

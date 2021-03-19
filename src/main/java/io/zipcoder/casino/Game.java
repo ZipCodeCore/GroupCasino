@@ -1,8 +1,6 @@
 package io.zipcoder.casino;
 
 public interface Game {
-    public void playGame();
-
-
-    public String checkWinner();
+    void playGame();
+    String checkWinner();
 }

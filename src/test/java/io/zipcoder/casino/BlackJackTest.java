@@ -1,6 +1,9 @@
 package io.zipcoder.casino;
 
-import org.junit.Assert;
+import io.zipcoder.casino.CardGames.BlackJack;
+import io.zipcoder.casino.CardGames.Card;
+import io.zipcoder.casino.Player.Player;
+import io.zipcoder.casino.Player.PlayerFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

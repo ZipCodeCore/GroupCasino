@@ -1,5 +1,7 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.DiceGames;
 
+import io.zipcoder.casino.Screens.MostOfAKindScreens;
+import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;

@@ -1,6 +1,8 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Player;
 
-public class Player implements GamblingPlayer{
+import io.zipcoder.casino.GamblingPlayer;
+
+public class Player implements GamblingPlayer {
     private String playerName;
     private final int playerID;
     private int wallet;

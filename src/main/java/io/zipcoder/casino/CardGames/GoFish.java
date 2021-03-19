@@ -1,10 +1,10 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.CardGames;
 
+import io.zipcoder.casino.Player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 public class GoFish extends CardGame {

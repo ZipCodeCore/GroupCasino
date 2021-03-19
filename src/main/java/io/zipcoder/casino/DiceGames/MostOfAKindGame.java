@@ -1,14 +1,16 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.DiceGames;
+
+import io.zipcoder.casino.Player.Player;
 
 import java.util.ArrayList;
 
 public class MostOfAKindGame extends DiceGame {
-    ArrayList<Integer> dealerHand = new ArrayList<Integer>();
-    int playerMatchingNum;
-    int dealerMatchingNum;
-    int dealerCount;
-    int playerCount;
-    Player currentPlayer;
+    public ArrayList<Integer> dealerHand = new ArrayList<Integer>();
+    public int playerMatchingNum;
+    public int dealerMatchingNum;
+    public int dealerCount;
+    public int playerCount;
+    public Player currentPlayer;
 
     public MostOfAKindGame(Player player) {
         this.currentPlayer = player;

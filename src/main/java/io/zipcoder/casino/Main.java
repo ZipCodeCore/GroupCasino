@@ -1,5 +1,7 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.Player.PlayerWarehouse;
+
 public class Main {
 
     public static void main (String[] args) {
