@@ -193,5 +193,10 @@ public class Display {
         );
     }
 
+    public String getCurrentDisplay(){
+        System.out.println(currentDisplay);
+        return currentDisplay;
+    }
+
 
 }
