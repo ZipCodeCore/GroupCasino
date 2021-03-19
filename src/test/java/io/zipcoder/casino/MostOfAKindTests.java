@@ -23,6 +23,19 @@ public class MostOfAKindTests {
     }
 
     @Test
+    public void getPotTwo() {
+        //Given
+        yahtzee.addToPot(10);
+        int expected = 10;
+
+        //When
+        int actual = yahtzee.getPot();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void addToPot() {
         //Given
         int expected = 5;

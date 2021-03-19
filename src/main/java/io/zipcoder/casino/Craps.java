@@ -115,7 +115,7 @@ public class Craps extends DiceGame {
 
     public void setBetStatus(String status) {
         betStatus.replace(0, betStatus.length(), "");
-        betStatus.append(status);
+        betStatus.append(status.toUpperCase());
     }
 
     public String getBetStatus() {

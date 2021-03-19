@@ -34,6 +34,20 @@ public class CrapsTest {
     }
 
     @Test
+    public void playerBalanceAfterBet() {
+        //Given
+        gerg.setChipBalance(50);
+        int expected = 40;
+
+        //When
+        craps.addToPot(10);
+        int actual = gerg.getChipBalance();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void clearPot() {
         //Given
         int expected = 0;
@@ -89,10 +103,23 @@ public class CrapsTest {
     @Test
     public void setGetBetStatus() {
         //Given
-        String expected = "Pass";
+        String expected = "PASS";
 
         //When
         craps.setBetStatus("Pass");
+        String actual = craps.getBetStatus();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void betStatusTwo() {
+        //Given
+        String expected = "NOT PASS";
+
+        //When
+        craps.setBetStatus("NoT paSS");
         String actual = craps.getBetStatus();
 
         //Then
@@ -110,6 +137,19 @@ public class CrapsTest {
 
         //Then
         Assert.assertTrue(actual > 1 && actual < 13);
+    }
+
+    @Test
+    public void getCurrentSum() {
+        //Given
+        craps.currentSum = 10;
+        int expected = 10;
+
+        //When
+        int actual = craps.getCurrentSum();
+
+        //Then
+        Assert.assertEquals(expected, actual);
     }
 
     //Round One Pass Outcomes
