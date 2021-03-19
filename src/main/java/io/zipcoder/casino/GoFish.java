@@ -60,10 +60,23 @@ public class GoFish extends CardGame {
         this.dealCards(numberOfCards);
     }
 
+
     public void getRankToAskFor_Human() {
-        d.printWhatRankYouWillAskFor();
-        this.rankRequested = c.getStringInput("", null);
+    // Move to display class??
+    public String displayPlayersHand(ArrayList<String> playersHand) {
+        String playersHandOutput = "";
+        Iterator itr = playersHand.iterator();
+        while(itr.hasNext()) {
+            playersHandOutput += itr.next() + "\n";
+        }
+        return playersHandOutput;
     }
+
+    //public String getRankToAskFor_Human() {
+
+        //d.printWhatRankYouWillAskFor();
+        //this.rankRequested = c.getStringInput("", null);
+    //}
 
     public void getRankToAskFor_Computer() {
        int pickCard = (int) Math.random() * (this.dealersHand.size() - 1);
@@ -109,6 +122,9 @@ public class GoFish extends CardGame {
         return null;
     }
 
+    //public void checkForPairsInCurrentPlayersHand(ArrayList<String> currentPlayer) {
+
+
     public int removePairFromHand(ArrayList<String> currentPlayer) {
         String rankToRemove = checkPairInHand(currentPlayer);
         if (rankToRemove != null) {
@@ -148,6 +164,29 @@ public class GoFish extends CardGame {
             }
     }
 
+    public String startGame() {
+        return null;
+    }
+
+    public Double acceptBetFrom(Double betAmount) {
+        return null;
+    }
+
+    public Double acceptBetFrom() {
+        return null;
+    }
+
+    public Double calculateReward() {
+        return null;
+    }
+
+    public Double calculateLoss() {
+        return null;
+    }
+
+    public String endGame() {
+        return null;
+    }
 }
 
 

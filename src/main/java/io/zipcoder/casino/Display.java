@@ -1,10 +1,10 @@
 package io.zipcoder.casino;
-
 import io.zipcoder.casino.utilities.Console;
 
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class Display {
@@ -87,7 +87,10 @@ public class Display {
             "   1. BlackJack\n" +
             "   2. Craps\n" +
             "   3. Beetle\n" +
-            "   4. GoFish\n"
+            "   4. GoFish\n" +
+            "   5. Check Account Balance\n" +
+            "   6. Make a Deposit\n" +
+            "   7. Exit\n"
         );
     }
 
@@ -120,6 +123,12 @@ public class Display {
         );
     }
 
+    public void printDepositMessage() {
+        this.setPrintCurrentDisplay(
+            "How much are you depositing?"
+        );
+    }
+
     // GENERIC GAME RESULT MESSAGING
     public void printRollResult(Integer[] diceResults) {
         String formattedRollResults = "";
@@ -141,6 +150,14 @@ public class Display {
         this.setPrintCurrentDisplay(
             formattedDealResults
         );
+    }
+
+    public void printAmountOfWinnings(Double winningsAmount) {
+        setPrintCurrentDisplay("You won $" + winningsAmount+ "!!!");
+    }
+
+    public void printAmountOfLoss(Double lossAmount) {
+        setPrintCurrentDisplay("You lost $" + lossAmount + ".");
     }
 
     // USER SET-UP MESSAGING
@@ -174,4 +191,11 @@ public class Display {
             "How much money would you like to bet?"
         );
     }
+
+    public String getCurrentDisplay(){
+        System.out.println(currentDisplay);
+        return currentDisplay;
+    }
+
+
 }
