@@ -11,8 +11,10 @@ public class BeetleDisplay extends Display {
     public BeetleDisplay() {
     }
 
-    public void welcome() {
-        setPrintCurrentDisplay("WELCOME TO BEETLE!\n(1 dollar per player table minimum)\n");
+    public String welcome() {
+        String message ="WELCOME TO BEETLE!\n(1 dollar per player table minimum)\n";
+        setPrintCurrentDisplay(message);
+        return message;
     }
     public void rules() {
         setPrintCurrentDisplay("\nDraw the beetle before your opponent and win big!\nThe rules are simple:\nEach side of the die corresponds to a part of the beetle." +
@@ -23,28 +25,40 @@ public class BeetleDisplay extends Display {
                 "\n1 - head\n2 - body\n3 - left front leg\n4 - right front leg\n5 - left back leg\n6 - right back leg\n\n");
     }
 
-    public void drewLeg() {
-        setPrintCurrentDisplay("A leg was added to the beetle!");
+    public String drewLeg() {
+        String message = "A leg was added to the beetle!";
+        setPrintCurrentDisplay(message);
+        return message;
     }
 
-    public void drewBody() {
-        setPrintCurrentDisplay("The beetle's body was drawn!");
+    public String drewBody() {
+        String message ="The beetle's body was drawn!";
+        setPrintCurrentDisplay(message);
+        return message;
     }
 
-    public void drewHead() {
-        setPrintCurrentDisplay("This beetle has a head now!");
+    public String drewHead() {
+        String message ="This beetle has a head now!";
+        setPrintCurrentDisplay(message);
+        return message;
     }
 
-    public void userBugIsComplete() {
-        setPrintCurrentDisplay("Your beetle is complete!\nYOU WIN!!!!");
+    public String userBugIsComplete() {
+        String message ="Your beetle is complete!\nYOU WIN!!!!";
+        setPrintCurrentDisplay(message);
+        return message;
     }
 
-    public void opponentsBugisComplete() {
-        setPrintCurrentDisplay("Your opponents beetle is complete.\nYou lose.");
+    public String opponentsBugisComplete() {
+        String message ="Your opponents beetle is complete.\nYou lose.";
+        setPrintCurrentDisplay(message);
+        return message;
     }
 
-    public void bothBeetlesComplete() {
-        setPrintCurrentDisplay("You both drew beetles. The game is a tie.");
+    public String bothBeetlesComplete() {
+        String message ="You both drew beetles. The game is a tie.";
+        setPrintCurrentDisplay(message);
+        return message;
     }
 
     public void usersRollResults(Integer usersRoll) {
@@ -55,8 +69,10 @@ public class BeetleDisplay extends Display {
         setPrintCurrentDisplay("Your opponent rolled a " + opponentsRoll);
     }
 
-    public void repeatedRollResult() {
-        setPrintCurrentDisplay("You already rolled that number.");
+    public String repeatedRollResult() {
+        String message ="You already rolled that number.";
+        setPrintCurrentDisplay(message);
+        return message;
     }
 
     //Beetle Body Parts
@@ -68,16 +84,23 @@ public class BeetleDisplay extends Display {
             System.out.println();
         }
     }
-    public void border() {
-        setPrintCurrentDisplay("======================");
+    public String border() {
+        String message ="======================";
+        setPrintCurrentDisplay(message);
+        return message;
     }
 
-    public void borderWithSpace() {
-        setPrintCurrentDisplay("\n======================\n");
+    public String borderWithSpace() {
+        String message ="\n======================\n";
+        setPrintCurrentDisplay(message);
+        return message;
     }
 
-    public void openingBetMessage() {
-        setPrintCurrentDisplay("This game has a table minimum of $1");
+
+    public String openingBetMessage() {
+        String message ="This game has a table minimum of $1";
+        setPrintCurrentDisplay(message);
+        return message;
     }
 
     public void opponentHasPlacedABet(Double betAmount) {
@@ -88,12 +111,16 @@ public class BeetleDisplay extends Display {
         setPrintCurrentDisplay("The purse is currently at $" + purse);
     }
 
-    public void yourBeetle() {
-        setPrintCurrentDisplay("YOUR BEETLE");
+    public String yourBeetle() {
+        String message ="YOUR BEETLE";
+        setPrintCurrentDisplay(message);
+        return message;
     }
 
-    public void opponentsBeetle() {
-        setPrintCurrentDisplay("OPPONENTS BEETLE");
+    public String opponentsBeetle() {
+        String message ="OPPONENTS BEETLE";
+        setPrintCurrentDisplay(message);
+        return message;
     }
 
 }
