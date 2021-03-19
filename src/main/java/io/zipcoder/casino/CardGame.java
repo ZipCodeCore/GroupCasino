@@ -92,6 +92,7 @@ public abstract class CardGame implements GamblingGame {
     }
 
     public String displayPlayersHand(ArrayList<String> playersHand) {
+        Collections.sort(playersHand);
         String playersHandOutput = "";
         Iterator itr = playersHand.iterator();
         while(itr.hasNext()) {
