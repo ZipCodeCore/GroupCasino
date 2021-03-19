@@ -31,6 +31,7 @@ public class Casino {
     }
 
     public void run() {
+        d.printWelcomeMessage();
         while (atLogin) {
 
             d.setPrintCurrentDisplay("Welcome! Are you a new or returning user?");
@@ -77,15 +78,54 @@ public class Casino {
             if(currentPlayer.getName() != "TIMBERDOODLE72"){
                 break;
             }
-
         }
+        gamesMenu();
+    }
+
+    public void gamesMenu() {
+     d.printGamesMenu();
+     Integer gamesListedMenu = c.getIntegerInput(" ");
+     switch (gamesListedMenu) {
+         case 1:
+             System.out.println("Feature Under Construction");
+             break;
+
+         case 2:
+             Craps craps = new Craps(currentPlayer);
+             craps.crapsEngine();
+             break;
+
+         case 3:
+             Beetle beetle = new Beetle(currentPlayer);
+             beetle.gameEngine();
+             break;
+
+         case 4:
+             System.out.println("Feature Under Construction");
+             break;
+
+         case 5:
+             d.printAccountBalance(currentPlayer.getWallet());
+             break;
+         case 6:
+             d.printDepositMessage();
+             Double deposit = c.getDoubleInput("");
+             currentPlayer.makeDeposit(deposit);
+             break;
+         case 7:
+             System.exit(0);
+         default:
+             System.out.println("Please enter a valid input.");
+             break;
+        }
+    if(currentPlayer.getWallet() == 0.00) {
+        d.printZeroFundsWarning();
+    }
+    else if (currentPlayer.getWallet() <= 50.00) {
+        d.printLowFundsWarning(currentPlayer.getWallet());
+    } else {
+        System.out.println("Having fun? KEEP PLAYING!!");
+    }
+    gamesMenu();
     }
 }
-
-
-
-
-
-
-
-

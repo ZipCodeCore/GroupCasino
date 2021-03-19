@@ -6,18 +6,17 @@ import java.awt.geom.Arc2D;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.text.NumberFormat;
+import java.util.*;
 
 public class Beetle extends DiceGame{
+    Player player;
+    Random random = new Random();
     Console console;
     private InputStream in;
     private PrintStream out;
-    Scanner scanner = new Scanner(System.in);
     BeetleDisplay bd = new BeetleDisplay();
-    Player player1 = new Player("Shel", 100.00);
+    NumberFormat nf = NumberFormat.getCurrencyInstance();
 
     private String[][] completeBeetle = new String[][]{{"\\","0","/"},
         {"⎛","|","⎞"},
@@ -39,7 +38,8 @@ public class Beetle extends DiceGame{
     private Set<Integer> opponentsRolls = new HashSet<Integer>();
     private Double purse = 0.00;
 
-    public Beetle() {
+    public Beetle(Player player) {
+        this.player = player;
         this.in = System.in;
         this.out = System.out;
         this.console = new Console(in, out);
@@ -54,58 +54,67 @@ public class Beetle extends DiceGame{
         Boolean opponentHasNotWon = true;
         Boolean playersHaveNotTied = true;
 
-        acceptBetFromUser(1.00);
-        acceptBetFrom();
-        bd.currentPurse(purse);
+        welcomeSequence();
 
+        acceptBetFromUser(1.00);
+        openingBet();
+        bd.currentPurse(purse);
         while (playersHaveNotTied && userHasNotWon && opponentHasNotWon) {
-            //current purse amount
             Double betAmount = (console.getDoubleInput("how much would you like to bet?"));
             acceptBetFromUser(betAmount);
-            if (opponentsRolls.size() >= usersRolls.size()) {
-                Double opponentBet = acceptBetFrom();
-                bd.opponentHasPlacedABet(opponentBet);
+            if (opponentsRolls.size() >= usersRolls.size())
+            {
+                Double opponentBetAmount = opponentBet(betAmount);
+                bd.opponentHasPlacedABet(opponentBetAmount);
             }
 
-            bd.border();
+            bd.borderWithSpace();
             bd.currentPurse(purse);
 
             Integer userRollValue = diceRollSum(1);
             bd.usersRollResults(userRollValue);
             analyzeRoll(usersRolls, usersBeetle, userRollValue);
+            bd.yourBeetle();
             drawPlayerBeetle(usersBeetle);
             bd.border();
 
             Integer opponentsRollValue = diceRollSum(1);
             bd.opponentsRollResults(opponentsRollValue);
             analyzeRoll(opponentsRolls, opponentsBeetle, opponentsRollValue);
+            bd.opponentsBeetle();
             drawPlayerBeetle(opponentsBeetle);
-            bd.border();
+            bd.borderWithSpace();
 
             if (Arrays.deepEquals(completeBeetle, usersBeetle) && Arrays.deepEquals(completeBeetle, opponentsBeetle)) {
                 playersHaveNotTied = false;
                 bd.bothBeetlesComplete();
-                player1.setWallet(player1.getCurrentBet());
+                player.setWallet(player.getCurrentBet());
                 System.out.println("Your bets were returned to your wallet.");
                 break;
             } else if (Arrays.deepEquals(completeBeetle, usersBeetle)) {
                 userHasNotWon = false;
                 bd.userBugIsComplete();
-                player1.setWallet(purse);
-                player1.setCurrentBet(0.00);
+                player.setWallet(purse);
+                player.setCurrentBet(0.00);
                 break;
             } else if (Arrays.deepEquals(completeBeetle, opponentsBeetle)) {
                 opponentHasNotWon = false;
                 bd.opponentsBugisComplete();
-                player1.setWallet(-player1.getCurrentBet());
-                player1.setCurrentBet(0.00);
+                player.setWallet(-player.getCurrentBet());
+                player.setCurrentBet(0.00);
                 break;
             }
         }
-        System.out.println(player1.getWallet());
-
+        bd.printAccountBalance(player.getWallet());
     }
 
+
+
+    public void welcomeSequence() {
+        bd.welcome();
+        drawPlayerBeetle(getCompleteBeetle());
+        bd.rules();
+    }
 
     public void analyzeRoll(Set<Integer> rollSet, String[][] playersBeetle, Integer diceRoll){
         if(!rollSet.contains(diceRoll)) {
@@ -168,10 +177,6 @@ public class Beetle extends DiceGame{
     }
 
 
-    public void opponentBet() {
-
-    }
-
     public Set<Integer> getUsersRolls() {
         return usersRolls;
     }
@@ -192,8 +197,44 @@ public class Beetle extends DiceGame{
         return completeBeetle;
     }
 
+    public void acceptBetFromUser(Double betAmount) {
+        player.makeBet(betAmount);
+        purse += betAmount;
+    }
+
+    public Double openingBet() {
+        purse += 1;
+        return purse;
+    }
+
+    public Double opponentBet(Double userBet) {
+        Double multiplier = random.nextDouble()+0.5;
+        Double betAmount = userBet * Math.round(multiplier*100)/100;
+        return betAmount;
+    }
+
+    public Double calculateReward() {
+        double reward = purse - player.getCurrentBet();
+
+        return reward;
+    }
+
+    public Double calculateLoss() {
+        return player.getCurrentBet();
+    }
+
+    public Double getPurse() {
+        return purse;
+    }
 
 
+
+
+
+
+    public String endGame() {
+        return null;
+    }
 
     public String startGame() {
         return null;
@@ -204,27 +245,6 @@ public class Beetle extends DiceGame{
     }
 
     public Double acceptBetFrom() {
-        Double betAmount = 1.00;
-        purse += betAmount;
-        return betAmount;
-    }
-
-    public void acceptBetFromUser(Double betAmount) {
-        player1.makeBet(betAmount);
-        purse += betAmount;
-    }
-
-    public Double calculateReward() {
-        double reward = purse - player1.getCurrentBet();
-
-        return reward;
-    }
-
-    public Double calculateLoss() {
-        return player1.getCurrentBet();
-    }
-
-    public String endGame() {
         return null;
     }
 }
