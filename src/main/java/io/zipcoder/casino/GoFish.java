@@ -61,7 +61,7 @@ public class GoFish extends CardGame {
     }
 
 
-    public void getRankToAskFor_Human() {
+    /*public void getRankToAskFor_Human() {
     // Move to display class??
     public String displayPlayersHand(ArrayList<String> playersHand) {
         String playersHandOutput = "";
@@ -70,13 +70,13 @@ public class GoFish extends CardGame {
             playersHandOutput += itr.next() + "\n";
         }
         return playersHandOutput;
+    }*/
+
+    public void getRankToAskFor_Human() {
+
+        d.printWhatRankYouWillAskFor();
+        this.rankRequested = c.getStringInput("", null);
     }
-
-    //public String getRankToAskFor_Human() {
-
-        //d.printWhatRankYouWillAskFor();
-        //this.rankRequested = c.getStringInput("", null);
-    //}
 
     public void getRankToAskFor_Computer() {
        int pickCard = (int) Math.random() * (this.dealersHand.size() - 1);

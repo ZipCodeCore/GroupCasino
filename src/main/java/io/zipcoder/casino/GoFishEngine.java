@@ -6,10 +6,10 @@ public class GoFishEngine {
     private GoFishDisplay d;
     private Player p;
 
-    public GoFishEngine(Player currentPlayer) {
+    public GoFishEngine() {
         this.g = new GoFish();
         this.d = new GoFishDisplay();
-        this.p = currentPlayer;
+        //this.p = currentPlayer;
     }
 
     public void startGame() {

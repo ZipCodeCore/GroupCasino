@@ -101,7 +101,8 @@ public class Casino {
              break;
 
          case 4:
-             System.out.println("Feature Under Construction");
+             GoFishEngine gofish = new GoFishEngine();
+             gofish.playGame();
              break;
 
          case 5:
