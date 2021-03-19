@@ -1,10 +1,6 @@
 package io.zipcoder.casino;
 
-import io.zipcoder.casino.DiceGame;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class MostOfAKindGame extends DiceGame {
     ArrayList<Integer> dealerHand = new ArrayList<Integer>();

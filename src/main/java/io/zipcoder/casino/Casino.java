@@ -85,7 +85,6 @@ public class Casino {
 
     public void goodbyeCasinoScreen(DisplayMainCasinoScreens casinoScreens) {
         casinoScreens.goodbyeCasinoScreen();
-        System.exit(0);
     }
 
     public void casinoLobbyScreen(Player currentPlayer, DisplayMainCasinoScreens casinoScreens, Console console) {
@@ -181,7 +180,6 @@ public class Casino {
         while (getOut) {
             Integer input = console.getIntegerInput("");
             if (input == 00) {
-                casinoLobbyScreen(currentPlayer, casinoScreens, console);
                 getOut = false;
             } else {
                 System.out.println("Invalid Entry");
