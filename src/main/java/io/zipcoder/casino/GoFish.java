@@ -168,7 +168,7 @@ public class GoFish extends CardGame {
         return null;
     }
 
-    public Double acceptBetFrom(Double betAmount) {
+    public Double setPurse(Double betAmount) {
         return null;
     }
 
