@@ -9,18 +9,18 @@ public class BeetleDisplayTests {
 
     @Test
     public void welcomeTest() {
-        bd.welcome();
+        bd.welcome(null);
         String actual = "WELCOME TO BEETLE!\n(1 dollar per player table minimum)\n";
-        String expected = bd.welcome();
+        String expected = bd.welcome(null);
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void rulesTest() {
-        bd.welcome();
+        bd.welcome(null);
         String actual = "WELCOME TO BEETLE!\n(1 dollar per player table minimum)\n";
-        String expected = bd.welcome();
+        String expected = bd.welcome(null);
 
         Assert.assertEquals(expected, actual);
     }
@@ -108,18 +108,18 @@ public class BeetleDisplayTests {
 
     @Test
     public void yourBeetle() {
-        bd.yourBeetle();
+        bd.yourBeetleTitleLine();
         String actual = "YOUR BEETLE";
-        String expected = bd.yourBeetle();
+        String expected = bd.yourBeetleTitleLine();
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void opponentsBeetle() {
-        bd.opponentsBeetle();
+        bd.opponentsBeetleTitleLine();
         String actual = "OPPONENTS BEETLE";
-        String expected = bd.opponentsBeetle();
+        String expected = bd.opponentsBeetleTitleLine();
 
         Assert.assertEquals(expected, actual);
     }

@@ -105,6 +105,5 @@ public class GoFishEngine {
             System.out.println(g.getPairCountDealer());
         }
     }
-
 }
 
