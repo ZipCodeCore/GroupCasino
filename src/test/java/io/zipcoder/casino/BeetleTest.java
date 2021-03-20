@@ -42,14 +42,6 @@ public class BeetleTest {
     }
 
     @Test
-    public void gameEngineTest() {
-        Player player1 = new Player("player", 100.00);
-        Beetle beetle = new Beetle(player1);
-
-        beetle.gameEngine();
-    }
-
-    @Test
     public void completeBeetleTest() {
         Player player2 = new Player("player", 100.00);
         Beetle beetle = new Beetle(player2);
@@ -95,9 +87,9 @@ public class BeetleTest {
     public void openingBetTest() {
         Player hubot = new Player("hubot", 100.00);
         Beetle beetle = new Beetle(hubot);
-        beetle.openingBet();
+        beetle.tableMinimumDeposit();
 
-        Double expected = 1.0;
+        Double expected = 2.0;
         Double actual = beetle.getPurse();
 
         Assert.assertEquals(expected,actual);
@@ -119,7 +111,7 @@ public class BeetleTest {
         Player player = new Player("player", 100.00);
         Beetle beetle = new Beetle(player);
 
-        beetle.openingBet();
+        beetle.tableMinimumDeposit();
         beetle.acceptBetFromUser(50.0);
 
         Double actual = beetle.calculateReward();
@@ -133,7 +125,7 @@ public class BeetleTest {
         Player player = new Player("player", 100.00);
         Beetle beetle = new Beetle(player);
 
-        beetle.openingBet();
+        beetle.tableMinimumDeposit();
         beetle.acceptBetFromUser(50.0);
 
         Double actual = beetle.calculateLoss();

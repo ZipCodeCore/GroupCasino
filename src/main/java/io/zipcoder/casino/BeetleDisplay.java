@@ -11,8 +11,8 @@ public class BeetleDisplay extends Display {
     public BeetleDisplay() {
     }
 
-    public String welcome() {
-        String message ="WELCOME TO BEETLE!\n(1 dollar per player table minimum)\n";
+    public String welcome(String playerName) {
+        String message ="WELCOME TO BEETLE, "+ playerName +"!\n(1 dollar per player table minimum)\n";
         setPrintCurrentDisplay(message);
         return message;
     }
@@ -23,24 +23,6 @@ public class BeetleDisplay extends Display {
                 "\nIf both players complete their beetle on the same set of rolls the wagers are returned." +
                 "\n\nWhat to draw for each roll:" +
                 "\n1 - head\n2 - body\n3 - left front leg\n4 - right front leg\n5 - left back leg\n6 - right back leg\n\n");
-    }
-
-    public String drewLeg() {
-        String message = "A leg was added to the beetle!";
-        setPrintCurrentDisplay(message);
-        return message;
-    }
-
-    public String drewBody() {
-        String message ="The beetle's body was drawn!";
-        setPrintCurrentDisplay(message);
-        return message;
-    }
-
-    public String drewHead() {
-        String message ="This beetle has a head now!";
-        setPrintCurrentDisplay(message);
-        return message;
     }
 
     public String userBugIsComplete() {
@@ -75,15 +57,6 @@ public class BeetleDisplay extends Display {
         return message;
     }
 
-    //Beetle Body Parts
-    public void getBeetleComplete() {
-        for (int i = 0; i < beetle.length; i++) {
-            for (int j = 0; j < beetle[i].length; j++) {
-                System.out.print(beetle[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
     public String border() {
         String message ="======================";
         setPrintCurrentDisplay(message);
@@ -96,31 +69,56 @@ public class BeetleDisplay extends Display {
         return message;
     }
 
-
-    public String openingBetMessage() {
-        String message ="This game has a table minimum of $1";
-        setPrintCurrentDisplay(message);
-        return message;
-    }
-
     public void opponentHasPlacedABet(Double betAmount) {
-        setPrintCurrentDisplay("Your opponent has placed a bet of $" + betAmount);
+        setPrintCurrentDisplay("Opponent bet: $" + betAmount);
+    }
+    public void userHasPlacedABet(Double betAmount) {
+        setPrintCurrentDisplay("Your bet: $" + betAmount);
     }
 
     public void currentPurse(Double purse) {
         setPrintCurrentDisplay("The purse is currently at $" + purse);
     }
 
-    public String yourBeetle() {
+    public String yourBeetleTitleLine() {
         String message ="YOUR BEETLE";
         setPrintCurrentDisplay(message);
         return message;
     }
 
-    public String opponentsBeetle() {
+    public String opponentsBeetleTitleLine() {
         String message ="OPPONENTS BEETLE";
         setPrintCurrentDisplay(message);
         return message;
+    }
+
+    public String[][] drawPlayerBeetle(String[][] playersBeetle){
+        for (int i = 0; i < playersBeetle.length; i++) {
+            for (int j = 0; j < playersBeetle[i].length; j++) {
+                System.out.print(playersBeetle[i][j] + " ");
+            }
+            System.out.println();
+        }
+        return playersBeetle;
+    }
+
+    public void gameBoard(Integer userRollValue, String[][] usersBeetle, Integer opponentsRollValue,
+                          String[][] opponentsBeetle, Double purse, Double userBetAmount, Double opponentBet) {
+        System.out.println();
+        border();
+        userHasPlacedABet(userBetAmount);
+        opponentHasPlacedABet(opponentBet);
+        currentPurse(purse);
+        border();
+        yourBeetleTitleLine();
+        usersRollResults(userRollValue);
+        drawPlayerBeetle(usersBeetle);
+        border();
+        opponentsBeetleTitleLine();
+        opponentsRollResults(opponentsRollValue);
+        drawPlayerBeetle(opponentsBeetle);
+        border();
+        System.out.println();
     }
 
 }
