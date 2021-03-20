@@ -102,6 +102,12 @@ public class BeetleDisplay extends Display {
         return playersBeetle;
     }
 
+    public void displayWelcomeSequence(Player player, String[][] beetle) {
+        welcome(player.getName());
+        drawPlayerBeetle(beetle);
+        rules();
+    }
+
     public void gameBoard(Integer userRollValue, String[][] usersBeetle, Integer opponentsRollValue,
                           String[][] opponentsBeetle, Double purse, Double userBetAmount, Double opponentBet) {
         System.out.println();
