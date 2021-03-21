@@ -29,7 +29,10 @@ public class PlayerWarehouse {
     }
 
     public boolean validateLoginCredentials(String userId, String password) {
-        if (userNamePasswordMap.containsKey(userId) && userNamePasswordMap.get(userId) == password) {
+
+
+
+        if (userNamePasswordMap.containsKey(userId) && userNamePasswordMap.get(userId).equals(password)) {
             return true;
         }
     return false;
