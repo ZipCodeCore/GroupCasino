@@ -25,7 +25,7 @@ public class CrapsV2 extends DiceGame {
     private Boolean[] bets;
     private Double[] betAmounts;
     private Double lastBet;
-    private Integer point;
+    private Integer point = 0;
 
     Boolean haventAnswered;
     Boolean noPointSet;
@@ -78,12 +78,42 @@ public class CrapsV2 extends DiceGame {
             while (decisionUnmade) {
                 cd.printSetTypeOfBet();
                 input = c.getIntegerInput("Type 0 for no bet, 2 for 'pass,' 3 for 'don't pass,' or 4 for a proposition.");
-                prePointOuterSwitch(input);
+                outerSwitch(input);
+            }
+            decisionUnmade = true;
+            if(firstRoll){
+                cd.printComeOutRoll();
+                firstRoll = false;
+            }
+            Integer x = diceRollSum(2);
+            cd.printShooterRolled(x);
+            checkBetsPrePoint(x);
+            oneRollReset();
+            if(x == 4 || x == 5 || x == 6 || x == 8 || x == 9 || x == 10){
+                point = x;
+                noPointSet = false;
+                cd.printThatPoint();
+            } else {
+                cd.printNoPoint();
             }
         }
 
-
-
+        while(notSevenedOut) {
+            while (decisionUnmade) {
+                cd.printSetTypeOfBet();
+                input = c.getIntegerInput("Type 0 for no bet, 2 for 'come,' 3 for 'don't come,' or 4 for a proposition.");
+                outerSwitch(input);
+            }
+            decisionUnmade = true;
+            Integer x = diceRollSum(2);
+            cd.printShooterRolled(x);
+            checkBetsPostPoint(x);
+            oneRollReset();
+            if(x == 7){
+                notSevenedOut = false;
+                d.setPrintCurrentDisplay(endGame());
+            }
+        }
     }
 
 
@@ -114,7 +144,7 @@ public class CrapsV2 extends DiceGame {
         }
     }
 
-    public void prePointOuterSwitch(Integer input) {
+    public void outerSwitch(Integer input) {
         switch(input){
             case 1:
                 cd.printRulesMenu1();
@@ -132,8 +162,14 @@ public class CrapsV2 extends DiceGame {
                 decisionUnmade = false;
                 break;
             case 4:
-                furtherInput = c.getIntegerInput("You can make a one roll bet. Type 2, 3, 4, 6, 7, 8, 10, 11, or 12 to bet on that number, 1 for craps, or 0 to cancel.");
-                oneRollPropSwitch(furtherInput);
+                if (noPointSet) {
+                    furtherInput = c.getIntegerInput("You can make a one roll bet. Type 2, 3, 4, 6, 7, 8, 10, 11, or 12 to bet on that number, 1 for craps, or 0 to cancel.");
+                    oneRollPropSwitch(furtherInput);
+                }
+                else{
+                    furtherInput = c.getIntegerInput("Type 1 to bet the field, 2 for a place bet, or 3 for a one-roll bet.");
+                    postPointPropSwitch(furtherInput);
+                }
                 break;
             default:
                 cd.printErrorMessage();
@@ -192,7 +228,206 @@ public class CrapsV2 extends DiceGame {
         }
     }
 
+    public void postPointPropSwitch(Integer x){
+        switch(furtherInput) {
+            case 1:
+                acceptBetFrom(4.0);
+                break;
+            case 2:
+                yetFurtherInput = c.getIntegerInput("Type the number you want to make your place bet on (4, 5, 6, 8, 9, or 10, but not the point.");
+                if (yetFurtherInput == point) {
+                    cd.printErrorMessage();
+                }
+                switch (yetFurtherInput) {
+                    case 4:
+                        acceptBetFrom(5.0);
+                        break;
+                    case 5:
+                        acceptBetFrom(6.0);
+                        break;
+                    case 6:
+                        acceptBetFrom(7.0);
+                        break;
+                    case 8:
+                        acceptBetFrom(8.0);
+                        break;
+                    case 9:
+                        acceptBetFrom(9.0);
+                        break;
+                    case 10:
+                        acceptBetFrom(10.0);
+                        break;
+                    default:
+                        cd.printErrorMessage();
+                }
+            case 3:
+                yetFurtherInput = c.getIntegerInput("You can make a one roll bet. Type 2, 3, 4, 6, 7, 8, 10, 11, or 12 to bet on that number, 1 for craps, or 0 to cancel.");
+                oneRollPropSwitch(yetFurtherInput);
+        }
+    }
 
+    public void checkBetsPrePoint(Integer x){
+        checkBetsConst(x);
+        if(x == 2 && bets[1]){ //pass
+            player.makeBet(betAmounts[1] * 2);
+            cd.printCraps();
+            cd.printWinnings(betAmounts[1] * 2);
+        }
+        if(x == 3 && bets[1]){ //pass
+            player.makeBet(betAmounts[1] * 2);
+            cd.printCraps();
+            cd.printWinnings(betAmounts[1] * 2);
+        }
+        if(x == 7 && bets[0]){ //pass
+            player.makeBet(betAmounts[0] * 2);
+            cd.printNatural();
+            cd.printWinnings(betAmounts[0] * 2);
+        }
+        if(x == 11 && bets[0]){ //pass
+            player.makeBet(betAmounts[0] * 2);
+            cd.printNatural();
+            cd.printWinnings(betAmounts[0] * 2);
+        }
+        if(x == 12 && bets[1]){ //pass
+            player.makeBet(betAmounts[1]);
+            cd.printCraps();
+            cd.printPush();
+        }
+    }
+
+    public void checkBetsPostPoint(Integer x){
+        checkBetsConst(x);
+        if(x == point){
+            bets[3] = false;
+            betAmounts[3] = 0.0;
+        }
+        if(x == 7){
+            bets[2] = false;
+            betAmounts [2] = 0.0;
+        }
+        if(x == point && bets[2]){
+            player.makeBet(betAmounts[2]);
+            cd.printShooterScores();
+            cd.printWinnings(betAmounts[2]);
+        }
+        if(x == 7 && bets[3]){
+            player.makeBet(betAmounts[3] * 2);
+            cd.printShooterSevenedOut();
+            cd.printWinnings(betAmounts[3] * 2);
+        }
+        if(x == 3 && bets[4] || x == 4 && bets[4] || x == 9 && bets[4] || x == 10 && bets[4] || x == 11 && bets[4]){
+            player.makeBet(betAmounts[4] * 2);
+            cd.printWinnings(betAmounts[4] * 2);
+        }
+        if(x == 2 && bets[4] || x == 12 && bets[4]){
+            player.makeBet(betAmounts[4] * 4);
+            cd.printWinnings(betAmounts[4] * 4);
+        }
+        if(x == 4 && bets[5]){
+            player.makeBet(betAmounts[5] * 2);
+            cd.printWinnings(betAmounts[5] * 2);
+        }
+        if(x == 5 && bets[6]){
+            player.makeBet(betAmounts[6] * 2);
+            cd.printWinnings(betAmounts[6] * 2);
+        }
+        if(x == 6 && bets[7]){
+            player.makeBet(betAmounts[7] * 2);
+            cd.printWinnings(betAmounts[7] * 2);
+        }
+        if(x == 8 && bets[8]){
+            player.makeBet(betAmounts[8] * 2);
+            cd.printWinnings(betAmounts[8] * 2);
+        }
+        if(x == 9 && bets[9]){
+            player.makeBet(betAmounts[9] * 2);
+            cd.printWinnings(betAmounts[9] * 2);
+        }
+        if(x == 10 && bets[10]){
+            player.makeBet(betAmounts[10] * 2);
+            cd.printWinnings(betAmounts[10] * 2);
+        }
+    }
+
+    public void checkBetsConst(Integer x){
+        if(x == 2 && bets[19]){
+            player.makeBet(betAmounts[19] * 60);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+            cd.printWinnings(betAmounts[19] * 60);
+        }
+        if(x == 2 && bets[12]){
+            player.makeBet(betAmounts[12] * 14);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+            cd.printWinnings(betAmounts[12] * 14);
+        }
+        if(x == 3 && bets[17]){
+            player.makeBet(betAmounts[17] * 30);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+            cd.printWinnings(betAmounts[17] * 30);
+        }
+        if(x == 3 && bets[12]){
+            player.makeBet(betAmounts[12] * 14);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+            cd.printWinnings(betAmounts[12] * 14);
+        }
+        if(x == 4 && bets[15]){
+            player.makeBet(betAmounts[15] * 14);
+            cd.printOneRollBetWin();
+            cd.printWinnings(betAmounts[15] * 14);
+        }
+        if(x == 6 && bets[13]){
+            player.makeBet(betAmounts[13] * 18);
+            cd.printOneRollBetWin();
+            cd.printWinnings(betAmounts[13] * 18);
+        }
+        if(x == 7 && bets[11]){
+            player.makeBet(betAmounts[11] * 8);
+            cd.printNatural();
+            cd.printOneRollBetWin();
+            cd.printWinnings(betAmounts[11] * 8);
+        }
+        if(x == 8 && bets[14]){
+            player.makeBet(betAmounts[14] * 18);
+            cd.printOneRollBetWin();
+            cd.printWinnings(betAmounts[14] * 18);
+        }
+        if(x == 10 && bets[16]){
+            player.makeBet(betAmounts[16] * 14);
+            cd.printOneRollBetWin();
+            cd.printWinnings(betAmounts[16] * 14);
+        }
+        if(x == 11 && bets[18]){
+            player.makeBet(betAmounts[18] * 30);
+            cd.printOneRollBetWin();
+            cd.printNatural();
+            cd.printWinnings(betAmounts[18] * 30);
+        }
+        if(x == 12 && bets[20]){
+            player.makeBet(betAmounts[20] * 60);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+            cd.printWinnings(betAmounts[20] * 60);
+        }
+        if(x == 12 && bets[12]){
+            player.makeBet(betAmounts[12] * 14);
+            cd.printCraps();
+            cd.printOneRollBetWin();
+            cd.printWinnings(betAmounts[12] * 14);
+        }
+    }
+
+    public void oneRollReset(){
+        bets[4] = false;
+        betAmounts[4] = 0.0;
+        for(int i = 11; i < 21; i++){
+            bets[i] = false;
+            betAmounts[i] = 0.0;
+        }
+    }
 
     public String startGame() {
         return "Alright! Let's play Craps!";
