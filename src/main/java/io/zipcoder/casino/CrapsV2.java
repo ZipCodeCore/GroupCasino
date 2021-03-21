@@ -16,22 +16,22 @@ public class CrapsV2 extends DiceGame {
     private Player player;
     private CrapsDisplay cd;
 
-    private Integer input;
-    private Integer innerInput;
-    private Integer furtherInput;
-    private Integer yetFurtherInput;
+    private Integer input = 0;
+    private Integer innerInput = 0;
+    private Integer furtherInput = 0;
+    private Integer yetFurtherInput = 0;
 
     private Boolean[] outcomes;
     private Boolean[] bets;
     private Double[] betAmounts;
-    private Double lastBet;
+    private Double lastBet = 0.0;
     private Integer point = 0;
 
-    Boolean haventAnswered;
-    Boolean noPointSet;
-    Boolean firstRoll;
-    Boolean decisionUnmade;
-    Boolean notSevenedOut;
+    Boolean haventAnswered = true;
+    Boolean noPointSet = true;
+    Boolean firstRoll = true;
+    Boolean decisionUnmade = true;
+    Boolean notSevenedOut = true;
 
     public CrapsV2(Player player) {
         this.in = System.in;
@@ -41,20 +41,9 @@ public class CrapsV2 extends DiceGame {
         this.player = player;
         this.cd = new CrapsDisplay();
 
-        this.input = 0;
-        this.innerInput = 0;
-        this.furtherInput = 0;
-
         this.outcomes = new Boolean[21];
         this.bets = new Boolean[21];
         this.betAmounts = new Double[21];
-        this.lastBet = 0.0;
-
-        haventAnswered = true;
-        noPointSet = true;
-        firstRoll = true;
-        decisionUnmade = true;
-        notSevenedOut = true;
 
         for (int i = 0; i < 21; i++) {
             outcomes[i] = false;
@@ -68,7 +57,6 @@ public class CrapsV2 extends DiceGame {
             betAmounts[i] = 0.0;
         }
     }
-
 
     public void crapsEngine() {
 
@@ -116,8 +104,6 @@ public class CrapsV2 extends DiceGame {
         }
     }
 
-
-
     public void initialRulesPrompt(){
         cd.initalRulesAsk();
         while(haventAnswered){
@@ -125,7 +111,6 @@ public class CrapsV2 extends DiceGame {
             initialRulesPromptSwitch(input);
         }
     }
-
 
     public void initialRulesPromptSwitch(Integer input) {
         switch (input) {
@@ -456,10 +441,3 @@ public class CrapsV2 extends DiceGame {
     }
 
 }
-
-
-
-
-
-
-
