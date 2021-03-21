@@ -134,7 +134,7 @@ public class GoFish extends CardGame {
     }
 
     public boolean checkGameOver() {
-        if (this.pairCountDealer + this.pairCountPlayer == 13) {
+        if (this.pairCountDealer + this.pairCountPlayer == 26) {
             return true;
         }
         return false;

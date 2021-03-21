@@ -5,8 +5,8 @@ public class GoFishDisplay extends Display{
     public void printGoFishRules(){
         setPrintCurrentDisplay("GO FISH RULES:\n"+
                 "Two players will be dealt 5 cards each to begin.\n"+
-                "The object of the game is to have the most books (set of 4 cards of the same rank).\n"+
-                "A player creates a book by asking the other player if they have cards of a specific rank in their hand.\n" +
+                "The object of the game is to have the most pairs.\n"+
+                "A player creates a pair by asking the other player if they have cards of a specific rank in their hand.\n" +
                 "If the other player is holding cards of the requested rank, they must hand them over.\n"+
                 "You can only request card ranks that you already have in your hand.\n" +
                 "Game play continues until the deck is empty.\n");

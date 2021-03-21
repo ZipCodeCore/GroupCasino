@@ -92,6 +92,7 @@ public class GoFishEngine {
             d.printPairsHuman();
             System.out.println(g.getPairCountPlayer());
             this.printPlayersHand();
+            this.checkForPairsHuman();
         }
     }
 
