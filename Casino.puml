@@ -1,0 +1,179 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class PlayerClass {
+private String playerName;
+private final int playerID;
+private int wallet;
+private int chipBalance;
+
+get/setter name;
+get ID;
+get/set chipBalance;
+get/set wallet;
+addToWallet;
+
+wageMoney;
+cashOut;
+getMoreChips;
+}
+
+interface Game {
+playGame;
+checkWinner;
+}
+
+interface GamblingGame {
+addToPot;
+winPot;
+}
+
+interface GamblingPlayer {
+wageMoney;
+cashOut;
+getMoreChips;
+}
+
+abstract class CardGame {
+private ArrayList<Cards> deck;
+private ArrayList<Cards> discardPile;
+private ArrayList<Cards> playerHand;
+private ArrayList<Cards> dealerHand;
+
+playGame;
+checkWinner;
+makeDeck;
+shuffleDeck;
+dealCards;
+discardPile;
+}
+
+abstract class DiceGame {
+private int totalNumOfDice;
+ArrayList<Integers> playerDiceHand;
+int sizeOfPot;
+
+playGame;
+checkWinner;
+addToPot;
+winPot;
+rollDice;
+}
+
+class ChipMoneyExchange {
+chipsToMoney;
+moneyToChips;
+}
+
+class GoFish {
+ArrayList<Cards> playerHand;
+ArrayList<Cards> dealerHand;
+int numOfPlayerMatches;
+int numOfDealerMatches;
+
+doYouHaveCard;
+removeCardFromHand;
+addToPlayerMatches;
+addToDealerMatches;
+checkWinner;
+}
+
+class BlackJack {
+ArrayList<Cards> playerHand;
+ArrayList<Cards> playerSplitHand;
+ArrayList<Cards> dealerHand;
+ArrayList<Cards> dealerSplitHand;
+int playerTotal;
+int dealerTotal;
+int sizeOfPot;
+
+addToPot;
+winPot;
+checkWinner;
+splitHand;
+hitMe;
+(boolean)didIBust;
+}
+
+class Craps {
+String stateOfGame(passOrNot);
+int currentRound;
+}
+
+class ExtraDiceGame {
+ArrayList<Integer> dealerDiceHand;
+int playerCount;
+int dealerCount;
+
+countMatches;
+checkWinner;
+holdDice(int... index);
+}
+
+class PlayerWarehouse {
+HashSet<UserID, player> currentPlayers;
+
+addPlayer;
+removePlayer;
+howManyPlayers;
+}
+
+class PlayerFactory {
+createPlayer;
+}
+
+class CardFactory {
+createCard;
+}
+
+
+class CardMaker {
+private String nameOfCard;
+private String suitOfCard;
+private int valueOfCard;
+}
+
+class Display {
+enterCasinoScreen;
+chipMoneyExchangeScreen;
+chooseGameScreen;
+goFish(all the screens);
+blackJack(all the screens);
+craps(all the screens);
+extraDiceGame(all the screens);
+}
+
+class cardWarehouse {
+ArrayList<Cards> deckOfCards;
+}
+
+
+class MainCasino {
+runCasino;
+}
+
+DiceGame <|--- Craps
+DiceGame <|--- ExtraDiceGame
+
+CardGame <|--- GoFish
+CardGame <|--- BlackJack
+
+Game <|--- GamblingGame
+
+
+GamblingGame <|--- BlackJack
+GamblingGame <|--- DiceGame
+
+GamblingPlayer <|-- PlayerClass
+
+Game <|-- CardGame
+
+
+
+'Alice -> Bob: Authentication Request
+'Bob --> Alice: Authentication Response
+'
+'Alice -> Bob: Another authentication Request
+'Alice <-- Bob: another authentication Response
+
+@enduml
