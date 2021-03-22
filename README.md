@@ -15,7 +15,7 @@
     * `Player` objects should be created upon input from a user.
   * `Game` interface
     * Contract which ensures that a class enforces some aspect of _playing_.
-  * `GamblingGame` interface
+  * `io.zipcoder.casino.GamblingGame` interface
     * Contract which ensures that a game enforces some aspect of _waging money_.
   * `GamblingPlayer` interface
     * Contract which ensures that a player has some ability to _wage money_.
