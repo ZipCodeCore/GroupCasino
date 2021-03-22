@@ -2,7 +2,7 @@ package io.zipcoder.casino;
 
 import java.util.*;
 
-public abstract class CardGame implements GamblingGame {
+public abstract class CardGame implements Game {
 
     ArrayList<String> deck;
     String[] ranks;
@@ -44,7 +44,9 @@ public abstract class CardGame implements GamblingGame {
         this.dealersHand = dealersHand;
     }
 
-    // CARD GAME METHODS
+    public void setDeck(ArrayList<String> deck) {this.deck = deck;}
+
+    // GAME SET-UP METHODS
     public void createNewDeck() {
         for (int suit = 0; suit <=3; suit++) {
             for (int rank = 1; rank <= 13; rank++) {
@@ -76,6 +78,7 @@ public abstract class CardGame implements GamblingGame {
         }
     }
 
+    // GET CARD INFO METHODS
     public String getRankOnCard(String cardRankAndSuit) {
         return cardRankAndSuit.substring(0, cardRankAndSuit.indexOf(" "));
     }

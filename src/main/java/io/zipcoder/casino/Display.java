@@ -67,10 +67,10 @@ public class Display {
         );
     }
 
-    public void printWelcomeBackMessage(String name, int getAccountBalance) {
+    public void printWelcomeMessage(String name, double getAccountBalance) {
         this.setPrintCurrentDisplay(
-            "Welcome back " + name + "!\n"+
-            "Your current account balance is " + getAccountBalance + "."
+            "Welcome " + name + "!\n"+
+            "Your current account balance is $" + getAccountBalance + "."
         );
     }
 
