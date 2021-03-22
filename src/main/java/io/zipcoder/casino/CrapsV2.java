@@ -418,6 +418,10 @@ public class CrapsV2 extends DiceGame {
         return "Alright! Let's play Craps!";
     }
 
+    public Double setPurse(Double betAmount) {
+        return null;
+    }
+
     public Double acceptBetFrom(Double betAmount) {
         Double middleMan;
         middleMan = c.getDoubleInput("How much money are you going to bet?");
