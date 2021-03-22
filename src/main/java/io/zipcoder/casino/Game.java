@@ -8,7 +8,6 @@ public interface Game {
     Integer numberOfPlayers = 0;
     Boolean GameState = false;
 
-    public void checkForWinner();
+    public String checkForWinner();
 
-    public void setPlayer();
 }

@@ -2,7 +2,7 @@ package io.zipcoder.casino;
 
 import java.util.*;
 
-public abstract class CardGame /*implements Game*/ {
+public abstract class CardGame implements Game {
 
     ArrayList<String> deck;
     String[] ranks;
@@ -43,6 +43,8 @@ public abstract class CardGame /*implements Game*/ {
     public void setDealersHand(ArrayList<String> dealersHand) {
         this.dealersHand = dealersHand;
     }
+
+    public void setDeck(ArrayList<String> deck) {this.deck = deck;}
 
     // GAME SET-UP METHODS
     public void createNewDeck() {

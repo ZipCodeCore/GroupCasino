@@ -69,7 +69,7 @@ public class GoFish extends CardGame {
     }
 
     public String getRankToAskFor_Computer () {
-        int pickCard = (int) Math.random() * (this.dealersHand.size() - 1);
+        int pickCard = (int) Math.floor(Math.random() * (this.dealersHand.size()));
         this.rankRequested = this.getRankOnCard(this.dealersHand.get(pickCard));
         return this.rankRequested;
     }
@@ -153,25 +153,26 @@ public class GoFish extends CardGame {
 
     public String removePairFromHand (ArrayList < String > currentPlayer) {
         String rankToRemove = checkPairInHand(currentPlayer);
+        String allRanksRemoved = "";
         while (rankToRemove != null) {
-            if (rankToRemove != null) {
-                int i = 0, count = 0;
-                while (i < currentPlayer.size()) {
-                    if (getRankOnCard(currentPlayer.get(i)).equals(rankToRemove) && count < 3) {
-                        currentPlayer.remove(i);
-                        count++;
-                    } else {
-                        i++;
-                    }
+            int i = 0, count = 0;
+            while (i < currentPlayer.size()) {
+                if (getRankOnCard(currentPlayer.get(i)).equals(rankToRemove) && count < 3) {
+                    currentPlayer.remove(i);
+                    count++;
+                } else {
+                    i++;
                 }
-                this.incrementPairCount(rankToRemove);
-                rankToRemove = checkPairInHand(currentPlayer);
             }
+            this.incrementPairCount(rankToRemove);
+            allRanksRemoved += rankToRemove;
+            rankToRemove = checkPairInHand(currentPlayer);
+
         }
-        return rankToRemove;
+        return allRanksRemoved;
     }
 
-    // this method is ugly :( need to clean up
+    // this method is super duper ugly :( need to clean up
     public void incrementPairCount(String rankRemoved){
         if (this.turn.equals("Computer")) {
             this.pairCountComputer++;
@@ -206,17 +207,22 @@ public class GoFish extends CardGame {
         return false;
     }
 
-    public void checkForWinner () {
+    public String checkForWinner () {
+        String winner = "";
         d.printGameOver();
         System.out.println("Final No. Pairs Computer: " + this.pairCountComputer);
         System.out.println("Final No. Pairs Player: " + this.pairCountHuman);
         if (this.pairCountComputer > this.pairCountHuman) {
             d.printComputerWinner();
+            winner = "Computer";
         } else if (this.pairCountComputer < this.pairCountHuman){
             d.printPlayerWinner();
+            winner = "Player";
         } else {
             d.printTiedGame();
+            winner = "Tied";
         }
+        return winner;
     }
 
 }
