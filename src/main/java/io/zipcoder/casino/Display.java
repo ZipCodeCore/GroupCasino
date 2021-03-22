@@ -3,6 +3,8 @@ import io.zipcoder.casino.utilities.Console;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import java.util.Scanner;
@@ -65,10 +67,10 @@ public class Display {
         );
     }
 
-    public void printWelcomeBackMessage(String name, int getAccountBalance) {
+    public void printWelcomeMessage(String name, double getAccountBalance) {
         this.setPrintCurrentDisplay(
-            "Welcome back " + name + "!\n"+
-            "Your current account balance is " + getAccountBalance + "."
+            "Welcome " + name + "!\n"+
+            "Your current account balance is $" + getAccountBalance + "."
         );
     }
 
@@ -102,6 +104,8 @@ public class Display {
 
     // FUNDS MESSAGING
     public void printAccountBalance(double accountBalance) {
+        BigDecimal formattedBalance = new BigDecimal(accountBalance).setScale(2, RoundingMode.HALF_UP);
+        accountBalance = formattedBalance.doubleValue();
         this.setPrintCurrentDisplay(
            "Account Balance: " + accountBalance
         );
@@ -109,7 +113,7 @@ public class Display {
 
     public void printLowFundsWarning(double accountBalance){
         this.setPrintCurrentDisplay(
-            "WARNING: YOUR FUNDS ARE GETTING LOW!\n"+
+            "\n\nWARNING: YOUR FUNDS ARE GETTING LOW!\n"+
             "Please consider making a deposit.\n"
         );
         this.printAccountBalance(accountBalance);
@@ -118,7 +122,7 @@ public class Display {
 
     public void printZeroFundsWarning() {
         this.setPrintCurrentDisplay(
-            "WARNING: YOUR ACCOUNT BALANCE HAS REACHED $0.00.\n"+
+            "\n\nWARNING: YOUR ACCOUNT BALANCE HAS REACHED $0.00.\n"+
             "PLEASE MAKE A DEPOSIT TO CONTINUE PLAYING."
         );
     }

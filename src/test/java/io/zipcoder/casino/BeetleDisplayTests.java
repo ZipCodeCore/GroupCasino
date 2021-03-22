@@ -7,50 +7,6 @@ public class BeetleDisplayTests {
     Display d = new Display();
     BeetleDisplay bd = new BeetleDisplay();
 
-    @Test
-    public void welcomeTest() {
-        bd.welcome();
-        String actual = "WELCOME TO BEETLE!\n(1 dollar per player table minimum)\n";
-        String expected = bd.welcome();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void rulesTest() {
-        bd.welcome();
-        String actual = "WELCOME TO BEETLE!\n(1 dollar per player table minimum)\n";
-        String expected = bd.welcome();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void drewLegTest() {
-        bd.drewLeg();
-        String actual = "A leg was added to the beetle!";
-        String expected = bd.drewLeg();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void drewBodyTest() {
-        bd.drewBody();
-        String actual = "The beetle's body was drawn!";
-        String expected = bd.drewBody();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void drewHeadTest() {
-        bd.drewHead();
-        String actual = "This beetle has a head now!";
-        String expected = bd.drewHead();
-
-        Assert.assertEquals(expected, actual);
-    }
 
     @Test
     public void userBugIsCompleteTest() {
@@ -108,18 +64,18 @@ public class BeetleDisplayTests {
 
     @Test
     public void yourBeetle() {
-        bd.yourBeetle();
+        bd.yourBeetleTitleLine();
         String actual = "YOUR BEETLE";
-        String expected = bd.yourBeetle();
+        String expected = bd.yourBeetleTitleLine();
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void opponentsBeetle() {
-        bd.opponentsBeetle();
+        bd.opponentsBeetleTitleLine();
         String actual = "OPPONENTS BEETLE";
-        String expected = bd.opponentsBeetle();
+        String expected = bd.opponentsBeetleTitleLine();
 
         Assert.assertEquals(expected, actual);
     }

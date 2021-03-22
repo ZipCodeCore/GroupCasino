@@ -101,10 +101,10 @@ public class Casino {
              break;
 
          case 4:
-             GoFishEngine gofish = new GoFishEngine();
-             gofish.playGame();
-             break;
+             GoFishEngine goFish = new GoFishEngine(currentPlayer);
+             goFish.playGame();
 
+             break;
          case 5:
              d.printAccountBalance(currentPlayer.getWallet());
              break;
@@ -125,7 +125,7 @@ public class Casino {
     else if (currentPlayer.getWallet() <= 50.00) {
         d.printLowFundsWarning(currentPlayer.getWallet());
     } else {
-        System.out.println("Having fun? KEEP PLAYING!!");
+        System.out.println("\n\n\nHaving fun? KEEP PLAYING!!");
     }
     gamesMenu();
     }

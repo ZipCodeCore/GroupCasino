@@ -570,7 +570,7 @@ public class Craps extends DiceGame{
         return "Alright! Let's play Craps!";
     }
 
-    public Double acceptBetFrom(Double betAmount) {
+    public Double setPurse(Double betAmount) {
         return null;
     }
 
