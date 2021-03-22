@@ -2,6 +2,7 @@ package io.zipcoder.casino;
 
 public class GoFishDisplay extends Display{
 
+    // GAME START MESSAGING
     public void printGoFishRules(){
         setPrintCurrentDisplay("GO FISH RULES:\n"+
                 "Two players will be dealt 5 cards each to begin.\n"+
@@ -9,48 +10,88 @@ public class GoFishDisplay extends Display{
                 "A player creates a pair by asking the other player if they have cards of a specific rank in their hand.\n" +
                 "If the other player is holding cards of the requested rank, they must hand them over.\n"+
                 "You can only request card ranks that you already have in your hand.\n" +
-                "Game play continues until the deck is empty.\n");
+                "Game play continues until the deck is empty.\n"+
+                "Humans play first!\n");
     }
 
-    public void printPlayerHandHeader() {setPrintCurrentDisplay("\nCARDS IN YOUR HAND:");}
-
-    public void printFreeGame() {System.out.println("And don't worry - you won't be needing your money. This game is FREE!!!!\n");}
-
-    public void printGoFish(){
-        setPrintCurrentDisplay("\nYOUR OPPONENT SAYS: GO FISH!\nYou have now drawn a card from the deck.");
+    // TURN SEPARATORS
+    public void printTurnSeparator(int deckSize, String currentPlayer) {
+        setPrintCurrentDisplay("\n=================================================================================="+
+                "\nCARDS REMAINING IN DECK: " + deckSize+
+                "\nCURRENT PLAYER: " + currentPlayer);
     }
 
-    public void printTellComputerGoFish() {
-        setPrintCurrentDisplay("\nYOU TOLD YOUR OPPONENT TO GO FISH!\nYour opponent has drawn a card from the deck.");
+    // FOR PRINTING PLAYER'S CARDS
+    public void printPlayersHand(String playersHand) {
+        setPrintCurrentDisplay("\nCARDS IN YOUR HAND:\n"+
+                playersHand);
     }
 
-    public void printOpponentHasCard(){
-        setPrintCurrentDisplay("That card rank is in their hand! It will now be given to you!");
+    // ASKING FOR CARDS
+    public void printWhatRankYouWillAskFor(){
+        setPrintCurrentDisplay("\nWhat card rank will you ask for?");
     }
 
-    public void printRankNotInYourHand() {
+    public void printInvalidRankRequested() {
         setPrintCurrentDisplay("You must request a card rank that is already in your hand.");
     }
 
-    public void printCardNotFound(){
-        setPrintCurrentDisplay("Nope. They are not holding any cards of that rank.");
+    public void printComputerAskedFor(String rankRequested){
+        setPrintCurrentDisplay("\nComputer Requested Rank: " + rankRequested);
     }
 
-    public void printWhatRankYouWillAskFor(){setPrintCurrentDisplay("\nWhat card rank will you ask for?");}
-
-    public void printOpponentAskedFor(){setPrintCurrentDisplay("Your opponent asked for a...");}
-
-    public void printOpponentTookCard() {setPrintCurrentDisplay("Your opponent took a card from you!\n");}
-
-    public void printHumansFirst() {setPrintCurrentDisplay("Humans play first!\n");
+    // TAKING CARDS
+    public void printPlayerTookCard(){
+        setPrintCurrentDisplay("That card rank is in the computer's hand! It will now be given to you!\n"+
+                "You get to play another turn!");
     }
 
-    public void printMadePair() {setPrintCurrentDisplay("\nYou made a pair!");}
+    public void printComputerTookCard() {
+        setPrintCurrentDisplay("You have the requested rank in your hand! The computer has taken it from you!\n"+
+                "The computer gets to play another turn!");
+    }
 
-    public void printMadePairOpponent() {setPrintCurrentDisplay("\nYour opponent made a pair!");}
+    // GO FISH
+    public void printComputerSaysGoFish(String cardDrawnRank){
+        setPrintCurrentDisplay("\nTHE COMPUTER SAYS: GO FISH!\nRank Drawn: " + cardDrawnRank + ".");
+    }
 
-    public void printPairsHuman() {setPrintCurrentDisplay("\nCurrent Number of Pairs You Have: ");}
+    public void printTellComputerGoFish() {
+        setPrintCurrentDisplay("\nYOU TOLD THE COMPUTER TO GO FISH!\nThe Computer has drawn a card from the deck.");
+    }
 
-    public void printPairsComputer() {setPrintCurrentDisplay("\nCurrent Number of Pairs Opponent Has: ");}
+    public void printAnotherTurn() {
+        setPrintCurrentDisplay("\nCard drawn from deck is same rank as that requested. Current player gets another turn.");
+    }
+
+    // PAIRS
+    public void printNumPairsPlayer(String rankRemoved, int numPairsPlayer) {
+        setPrintCurrentDisplay("\nYay! You made a pair of rank " + rankRemoved + "!\nCurrent Number of Pairs You Have: " + numPairsPlayer);
+    }
+
+    public void printNumPairsComputer(String rankRemoved, int numPairsComputer) {
+        setPrintCurrentDisplay("\nThe Computer made a pair of rank " + rankRemoved + "!\nCurrent Number of Pairs Computer Has: " + numPairsComputer);
+    }
+
+    public void printRanOutOfCards() {
+        setPrintCurrentDisplay("\nEmpty hand - one card drawn from deck.");
+    }
+
+
+    // FINAL GAME RESULTS
+    public void printGameOver() {
+        setPrintCurrentDisplay("\nGAME OVER");
+    }
+    public void printPlayerWinner() {
+        setPrintCurrentDisplay("\nCongratulations, you WIN!!!");
+    }
+
+    public void printComputerWinner() {
+        setPrintCurrentDisplay("\nSorry, the computer BEAT you!");
+    }
+
+    public void printTiedGame() {
+        setPrintCurrentDisplay("\nYou TIED with the computer!");
+    }
 
 }
