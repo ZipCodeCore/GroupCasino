@@ -103,7 +103,6 @@ public class Casino {
          case 4:
              GoFishEngine goFish = new GoFishEngine(currentPlayer);
              goFish.playGame();
-             goFish.startGame();
              break;
          case 5:
              d.printAccountBalance(currentPlayer.getWallet());
