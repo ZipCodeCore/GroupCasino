@@ -1,0 +1,199 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Game <|-- GamblingGame
+Game <|-- CardGame
+GamblingPlayer <|-- Player
+GamblingGame <|-- Blackjack
+GamblingGame <|-- DiceGame
+
+DiceGame <|-- Beetle
+DiceGame <|-- Craps
+CardGame <|-- Blackjack
+CardGame <|-- GoFish
+
+
+Display <|-- BeetleDisplay
+Display <|-- CrapsDisplay
+Display <|-- BlackjackDisplay
+Display <|-- GoFishDisplay
+
+
+'INTERFACE
+interface Game {
+Random
+Boolean gameState
+checkForWinner()
+setPlayer()
+}
+
+interface GamblingGame {
+acceptBetFrom()
+calculateReward()
+calculateLoss()
+}
+
+interface GamblingPlayer {
+placeBet()
+}
+
+
+'ABSTRACT CLASS
+abstract class CardGame{
+Stack decksOfCards
+ArrayList playersHand
+ArrayList dealersHand
+shuffleCards()
+dealCards(Int numberOfCards)
+skipDeal()
+
+}
+
+abstract class DiceGame {
+rollDice(numberOfDice)
+}
+
+
+'CLASS
+class Main{
+
+}
+
+class CasinoEngine {
+runCasino()
+}
+
+class Player {
+String name
+Double accountBalance
+getName()
+getAccountBalance()
+setAccountBalance()
+}
+
+class GoFish {
+HashMap <Player, Hand>
+HashMap <Player, NumberOfPairs>
+exchangeCard()
+getNumberOfPairs()
+setNumberOfPairs()
+}
+
+class GoFishDisplay {
+chooseAPlayerToAsk()
+chooseACardtoAskFor()
+playerHasCard()
+goFish()
+pairMade()
+
+}
+
+class Blackjack {
+HashMap <String cardFaceValue, Int CardPointValue>
+gotBlackJack(int betPlaced)
+standOrHit()
+}
+
+class BlackjackDisplay {
+dealersFirstCard()
+bustMessage(String whoBusted)
+dealersTotal()
+dealerStands()
+dealerHits()
+chooseStandOrHit()
+}
+
+class Craps {
+Boolean isNatural()
+Boolean isCraps()
+Boolean isPoint()
+analyzeComeOutRoll()
+analyzeFollowingRolls()
+'comeBet()
+'dontComeBet()
+'passBet()
+'dontPassBet()
+'fieldBet()
+'bigSixOrEightBet()
+getTypeOfBet()
+}
+
+class CrapsDisplay {
+rulesMenu()
+optionsMenu()
+shooterScores()
+shooterSevenedOut()
+push()
+oneRollBetLoss()
+onRollBetWin()
+natural()
+craps()
+shooterRolled()
+setTypeOfBet()
+comeOutRoll()
+
+}
+
+class Beetle {
+createNextImage()
+}
+
+class BeetleDisplay {
+drawBugHead()
+drawBugBody()
+drawBugLeg1()
+drawBugLeg2()
+drawBugLeg3()
+drawBugLeg4()
+playerBugComplete()
+opponentBugComplete()
+repeatRoll()
+bodyPartValue()
+}
+
+class PlayerWarehouse {
+playerGroup <password, Player>
+getPlayer()
+}
+
+class Console {
+Scanner input
+PrintStream output
+print()
+println()
+getStringInput()
+getDoubleInput()
+getLongInput()
+getIntegerInput()
+}
+
+class Display {
+String currentDisplay
+
+errorMessage()
+
+'casino messages
+welcomeMessage()
+gamesMenu()
+lowFundsWarning()
+zeroFundsWarning()
+
+'game messages
+rollResult()
+dealResult()
+youWin()
+youLose()
+doYouWantToBet()
+
+'new user messages
+userId()
+requestUserId()
+initialDeposit()
+
+'returning user messages
+welcomeBack()
+
+}
+
+
+@enduml
