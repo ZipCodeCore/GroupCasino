@@ -35,7 +35,7 @@ public class BeetleGame implements GameInterface {
      * Calculate player's winning payout amount of bet x multiplier
      * @return (double) amount of money winnings
      */
-    public Double calculateWinnings(Double betAmount){
+    public Double calculateWinnings(Double multiplier, Double betAmount){
         return 0.00;
     }
 
@@ -55,7 +55,7 @@ public class BeetleGame implements GameInterface {
     }
 
     public void initGame(){
-        this.game = new Beetle(this.players.length);
+        this.game = new Beetle(this.players.size());
     }
 
 
