@@ -31,6 +31,9 @@ public class BeetleGame implements GameInterface {
         }
     }
 
+    public String test(){
+        return "NATHAN WAS HERE";
+    }
     /**
      * Calculate player's winning payout amount of bet x multiplier
      * @return (double) amount of money winnings

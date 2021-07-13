@@ -21,6 +21,35 @@ public class SlotsTest {
     }
 
     @Test
+    public void setSlotTest(){
+        //given
+        Slots slot = new Slots();
+        String[][] given =  {
+                {"Cherry", "Cherry", "Cherry"},
+                {"Diamond", "Plum", "Nine"},
+                {"Seven", "Peach", "Diamond"}};
+        //when
+        slot.setSlots(given);
+        String[][] retrieved = slot.getSlots();
+        //then
+        Assert.assertEquals(given,retrieved);
+    }
+
+    @Test
+    public void getSlotTest(){
+        //given
+        String[][] expected =  {
+                {"Peach", "Cherry", "Diamond"},
+                {"Diamond", "Plum", "Nine"},
+                {"Seven", "Peach", "Diamond"}};
+        //when
+        Slots slot = new Slots();
+        String[][] retrieved =  slot.getSlots();
+        //then
+        Assert.assertEquals(expected, retrieved);
+    }
+
+    @Test
     public void randomItemTest(){
         //given
         String[] given = {"Peach", "Cherry", "Diamond"};

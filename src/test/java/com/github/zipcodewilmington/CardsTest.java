@@ -12,7 +12,7 @@ public class CardsTest {
         Integer expected = 52;
 
         Card card = new Card();
-        Integer actual = card.getNumberOfCards();
+        Integer actual = card.getCardPool().size();
 
         Assert.assertEquals(expected, actual);
     }
@@ -20,19 +20,19 @@ public class CardsTest {
     @Test
     public void createDeckTest () {
         // Given
-        Card card = new Card();
-
         Integer expected = 52;
-        Integer actual = card.getNumberOfCards();
+
+        Card card = new Card();
+        Integer actual = card.getCardPool().size();
 
         Assert.assertEquals(expected, actual);
+
     }
 
     @Test
     public void polishDeckTest () {
         Card card = new Card();
 
-        card.createDeck(52);
         card.polishDeck();
         System.out.println(card.getCardPool().size());
         System.out.println(card.getCardPool());
@@ -43,9 +43,8 @@ public class CardsTest {
     public void shuffleDeckTest () {
         Card card = new Card();
 
-//        List<Integer> result = card.shuffleDeck();
-
-//        System.out.println(result); // Visual test
+        System.out.println(card.getCardPool().size());
+        System.out.println(card.getCardPool()); // Visual test
     }
 
     @Test

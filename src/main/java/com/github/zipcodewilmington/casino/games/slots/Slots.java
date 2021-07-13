@@ -2,6 +2,8 @@ package com.github.zipcodewilmington.casino.games.slots;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Slots {
@@ -20,42 +22,39 @@ public class Slots {
         return slots;
     }
 
+    public void setSlots(String[][] slots) {
+        this.slots = slots;
+    }
 
     public void spinSlots(){
-
+        String[][] newSlot = new String[3][3];
         for (int a = 0; a < 3; a++) {
-            this.slots[a][0] = ramdomSlotItem();
-            this.slots[a][1] = ramdomSlotItem();
-            this.slots[a][2] = ramdomSlotItem();
+            newSlot[a][0] = ramdomSlotItem();
+            newSlot[a][1] = ramdomSlotItem();
+            newSlot[a][2] = ramdomSlotItem();
         }
+        setSlots(newSlot);
     }
 
     public static String ramdomSlotItem(){
         int input = (int) ((Math.random() * (7 - 1)) + 1);
         String result;
-        switch(input){
-            case 1:
-                result = slotItems[0];
-                break;
-            case 2:
-                result = slotItems[1];
-                break;
-            case 3:
-                result = slotItems[2];
-                break;
-            case 4:
-                result = slotItems[3];
-                break;
-            case 5:
-                result = slotItems[4];
-                break;
-            case 6:
-                result = slotItems[5];
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + input);
-        }
+        result = slotItems[input -1];
         return result;
+    }
+
+    public static void findWinnings(){
+        HashMap<Integer, String> winningLines = new HashMap<>();
+        winningLines.put(1,"Lose");
+        winningLines.put(2,"Lose");
+        winningLines.put(3,"Lose");
+        winningLines.put(4,"Lose");
+        winningLines.put(5,"Lose");
+        winningLines.put(6,"Lose");
+        winningLines.put(7,"Lose");
+
+
+
     }
 
 
