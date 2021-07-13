@@ -3,12 +3,15 @@ package com.github.zipcodewilmington.casino.games.Beetle;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
+import java.util.ArrayList;
+
 public class BeetleGame implements GameInterface {
-    private PlayerInterface[] players;
+    private ArrayList<PlayerInterface> players = new ArrayList<PlayerInterface>();
     private Beetle game;
     private Boolean isRunning = false;
+    private PlayerInterface player;
     public void add(PlayerInterface player){
-
+        players.add(player);
     }
 
     /**
@@ -16,7 +19,7 @@ public class BeetleGame implements GameInterface {
      * @param player the player to be removed from the game
      */
     public void remove(PlayerInterface player){
-
+        players.remove(player);
     }
 
     /**
@@ -39,7 +42,9 @@ public class BeetleGame implements GameInterface {
     /**
      * Subtract the bet amount from player's balance
      */
-    public void subtractBetFromBalance(Double betAmount){}
+    public void subtractBetFromBalance(Double betAmount){
+
+    }
 
 
     /**
