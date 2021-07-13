@@ -12,6 +12,9 @@ public class Card {
         this.createDeck(numberOfCards);
     }
 
+    // Alter the loop to provide the correct amount of 10's
+    // Jack/Queen/King
+    // Should have 16 - 10 values in a 52 deck
 
     public List<Integer> createDeck (Integer numberOfCards) {
         for (int i = 0; i <= 4; i++) {
@@ -22,18 +25,16 @@ public class Card {
         return this.cardPool;
     }
 
-    public List<Integer> polishDeck () {
+    public void polishDeck () {
         for (int i = 0; i < this.cardPool.size(); i++) {
             if (this.cardPool.get(i) > 11) {
                 this.cardPool.set(i, 10);
             }
         }
-        return this.cardPool;
     }
 
-    public List<Integer> shuffleDeck () {
+    public void shuffleDeck () {
         Collections.shuffle(this.cardPool);
-        return this.cardPool;
     }
 
     public List<Integer> getCardPool() {

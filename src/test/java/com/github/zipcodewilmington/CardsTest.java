@@ -33,18 +33,19 @@ public class CardsTest {
         Card card = new Card();
 
         card.createDeck(52);
-        List<Integer> result = card.polishDeck();
-
-        System.out.println(result);
+        card.polishDeck();
+        System.out.println(card.getCardPool().size());
+        System.out.println(card.getCardPool());
+//        System.out.println(result);
     }
 
     @Test
     public void shuffleDeckTest () {
         Card card = new Card();
 
-        List<Integer> result = card.shuffleDeck();
+//        List<Integer> result = card.shuffleDeck();
 
-        System.out.println(result); // Visual test
+//        System.out.println(result); // Visual test
     }
 
     @Test
