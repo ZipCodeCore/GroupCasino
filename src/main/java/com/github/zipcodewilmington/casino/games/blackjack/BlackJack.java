@@ -39,6 +39,8 @@ public class BlackJack implements GameInterface, PlayerInterface {
         return sum;
     }
 
+    public void ahhWork () {}
+
     public List<Integer> getPlayersHand() {
         return playersHand;
     }
@@ -71,7 +73,7 @@ public class BlackJack implements GameInterface, PlayerInterface {
     }
 
     @Override
-    public Double calculateWinnings(Double betAmount) {
+    public Double calculateWinnings(Double multiplier, Double betAmount) {
         return null;
     }
 
