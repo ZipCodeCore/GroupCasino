@@ -14,7 +14,6 @@ public class SlotsGame implements GameInterface {
 Random generator = new Random();
 Scanner scanner = new Scanner(System.in);
 int slot1, slot2, slot3;
-
     @Override
     public void add(PlayerInterface player) {
 
