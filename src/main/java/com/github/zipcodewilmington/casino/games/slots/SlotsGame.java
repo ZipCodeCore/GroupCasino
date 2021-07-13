@@ -28,7 +28,7 @@ public class SlotsGame implements GameInterface {
     }
 
     @Override
-    public Double calculateWinnings(Double betAmount) {
+    public Double calculateWinnings(Double multiplier, Double betAmount) {
         return null;
     }
 

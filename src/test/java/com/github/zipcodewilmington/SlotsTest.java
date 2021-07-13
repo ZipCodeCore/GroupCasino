@@ -24,11 +24,23 @@ public class SlotsTest {
     public void randomItemTest(){
         //given
         String[] given = {"Peach", "Cherry", "Diamond"};
-        String[] retrieved = new String[3];
+        String[] retrieved = {"Peach", "Cherry", "Diamond"};
         //when
-        for(String element: retrieved){
-            element = Slots.ramdomSlotItem(); //Not updating retrieved
+        for (int i = 0; i < retrieved.length; i++) {
+            retrieved[i] = Slots.ramdomSlotItem();
         }
+        //then
+        Assert.assertFalse(given.equals(retrieved));
+    }
+
+    @Test
+    public void spinSlotsTest(){
+        //given
+        Slots slotMachine = new Slots();
+        String[][] given =  slotMachine.getSlots();
+        //when
+        slotMachine.spinSlots();
+        String[][] retrieved =  slotMachine.getSlots();
         //then
         Assert.assertFalse(given.equals(retrieved));
     }

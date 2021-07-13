@@ -26,7 +26,7 @@ public interface GameInterface extends Runnable {
      * Calculate player's winning payout amount of bet x multiplier
      * @return (double) amount of money winnings
      */
-    Double calculateWinnings(Double betAmount);
+    Double calculateWinnings(Double multiplier, Double betAmount);
 
     /**
      * Subtract the bet amount from player's balance
