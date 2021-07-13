@@ -37,4 +37,5 @@ public interface GameInterface extends Runnable {
      * Add winnings amount to player's balance
      */
     void addMoneyToBalance(PlayerInterface Player, Double winnings);
+
 }
