@@ -44,7 +44,16 @@ public class Slots {
     }
 
     public static void findWinnings(){
-        //HashMap<int, Boolean>;
+        HashMap<Integer, String> winningLines = new HashMap<>();
+        winningLines.put(1,"Lose");
+        winningLines.put(2,"Lose");
+        winningLines.put(3,"Lose");
+        winningLines.put(4,"Lose");
+        winningLines.put(5,"Lose");
+        winningLines.put(6,"Lose");
+        winningLines.put(7,"Lose");
+
+
 
     }
 
