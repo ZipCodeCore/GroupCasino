@@ -36,5 +36,8 @@ public class BlackJackTest {
     public void playersCurrentValueTest () {
         BlackJack bj = new BlackJack();
         // Solid stopping point = need to populate array for test
+        bj.givePlayerCard();
+        bj.givePlayerCard();
+        System.out.println(bj.playersCurrentValue());
     }
 }
