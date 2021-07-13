@@ -39,6 +39,10 @@ public class BlackJack implements GameInterface, PlayerInterface {
         return sum;
     }
 
+    public void pleaseWork () {
+
+    }
+
     public List<Integer> getPlayersHand() {
         return playersHand;
     }
