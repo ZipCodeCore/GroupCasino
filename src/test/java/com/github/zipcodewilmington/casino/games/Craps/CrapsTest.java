@@ -1,4 +1,4 @@
-package com.github.zipcodewilmington.casino.games.roulette;
+package com.github.zipcodewilmington.casino.games.Craps;
 
 import com.github.zipcodewilmington.casino.games.CrapsGame.Dice;
 import org.junit.Assert;
