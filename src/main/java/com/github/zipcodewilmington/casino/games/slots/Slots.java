@@ -1,10 +1,13 @@
 package com.github.zipcodewilmington.casino.games.slots;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Slots {
     private static final String[] slotItems = {"Peach", "Cherry", "Diamond", "Plum", "Seven", "Nine"};
     private String[][] slots = new String[3][3];
+    private List<String[]> slotsList = new ArrayList<>();
 
     public Slots(){
         this.slots = new String[][] {
@@ -18,14 +21,14 @@ public class Slots {
     }
 
 
+    public void spinSlots(){
 
-//    public void spinSlots(){
-//        for(String[] slot: slots){
-//            slot[0] = randomSlotItem();
-//            slot[1] = randomSlotItem();
-//            slot[2] = ramdomSlotItem();
-//        }
-//    }
+        for (int a = 0; a < 3; a++) {
+            this.slots[a][0] = ramdomSlotItem();
+            this.slots[a][1] = ramdomSlotItem();
+            this.slots[a][2] = ramdomSlotItem();
+        }
+    }
 
     public static String ramdomSlotItem(){
         int input = (int) ((Math.random() * (7 - 1)) + 1);
