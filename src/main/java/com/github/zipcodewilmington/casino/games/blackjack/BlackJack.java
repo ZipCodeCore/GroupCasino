@@ -55,7 +55,23 @@ public class BlackJack implements GameInterface, PlayerInterface {
     }
 
     public void playerBroke21 () {
-       
+        if (playersCurrentValue() > 21) {
+            subtractBetFromBalance(betAmount);
+        }
+    }
+
+    public void playerBlackJack () {
+        if (playersCurrentValue() == 21) {
+            calculateWinnings(3.0, betAmount);
+        }
+    }
+
+    public void dealerConditions () {
+        if (dealersCurrentValue() > 21) {
+            calculateWinnings(2.0, betAmount); //Players winnings, not dealers (Player won)
+        } else if (dealersCurrentValue() <= 21 && dealersCurrentValue() > playersCurrentValue()) {
+            subtractBetFromBalance(betAmount);
+        }
     }
 
     public List<Integer> getPlayersHand() {

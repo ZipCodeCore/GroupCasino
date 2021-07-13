@@ -70,7 +70,7 @@ public class BlackJackTest {
     }
 
     @Test
-    public void playerBroke21Test () {
+    public void playerBroke21orBlackJackTest () {
 
     }
 }
