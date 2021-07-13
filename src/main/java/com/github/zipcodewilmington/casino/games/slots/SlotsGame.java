@@ -1,7 +1,8 @@
 package com.github.zipcodewilmington.casino.games.slots;
 
 /**
- * Created by leon on 7/21/2020.
+ * Created by Nathan on 7/12/21
  */
 public class SlotsGame {
+
 }
