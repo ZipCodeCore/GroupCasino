@@ -7,7 +7,7 @@ public class RouletteGame {
     public RouletteGame(){
         String black;
         String red;
-        ArrayList<Integer> Roulette;
+        ArrayList<Integer> Roulett;
     }
 
 
