@@ -8,20 +8,19 @@ import com.github.zipcodewilmington.casino.models.Card;
 import java.util.*;
 
 public class BlackJack implements GameInterface, PlayerInterface {
-    Card card = new Card();
     List<Integer> playersHand;
     List<Integer> dealersHand;
-    Deque<Integer> deckOfCards = new LinkedList<>(generateNewDeck(52));
+    Deque<Integer> deckOfCards;
+    Double betAmount; // Equal to user input
 
     public BlackJack () {
         this.playersHand = new ArrayList<>();
         this.dealersHand = new ArrayList<>();
+        this.deckOfCards = new ArrayDeque<>(generateNewDeck());
     }
 
-    public List<Integer> generateNewDeck (Integer numberOfCards) {
-        card.createDeck(numberOfCards);
-        card.polishDeck();
-        card.shuffleDeck();
+    public List<Integer> generateNewDeck () {
+        Card card = new Card();
         return card.getCardPool();
     }
 
@@ -31,12 +30,48 @@ public class BlackJack implements GameInterface, PlayerInterface {
         return this.playersHand;
     }
 
+    public List<Integer> giveDealerCard () {
+        Integer valueOfCard = deckOfCards.pop();
+        this.dealersHand.add(valueOfCard);
+        return this.dealersHand;
+    }
+
     public Integer playersCurrentValue () {
+        givePlayerCard();
         Integer sum = 0;
         for (int i = 0; i < this.playersHand.size(); i++) {
            sum += this.playersHand.get(i);
         }
         return sum;
+    }
+
+    public Integer dealersCurrentValue () {
+        giveDealerCard();
+        Integer sum = 0;
+        for (int i = 0; i < this.dealersHand.size(); i++) {
+            sum += this.dealersHand.get(i);
+        }
+        return sum;
+    }
+
+    public void playerBroke21 () {
+        if (playersCurrentValue() > 21) {
+            subtractBetFromBalance(betAmount);
+        }
+    }
+
+    public void playerBlackJack () {
+        if (playersCurrentValue() == 21) {
+            calculateWinnings(3.0, betAmount);
+        }
+    }
+
+    public void dealerConditions () {
+        if (dealersCurrentValue() > 21) {
+            calculateWinnings(2.0, betAmount); //Players winnings, not dealers (Player won)
+        } else if (dealersCurrentValue() <= 21 && dealersCurrentValue() > playersCurrentValue()) {
+            subtractBetFromBalance(betAmount);
+        }
     }
 
     public List<Integer> getPlayersHand() {
