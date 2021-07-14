@@ -2,7 +2,7 @@ package com.github.zipcodewilmington.casino.player;
 
 import com.github.zipcodewilmington.casino.card.Hand;
 
-public class WarPlayer {
+public class WarPlayer extends Player {
 
     Player player;
     Hand hand = new Hand();
