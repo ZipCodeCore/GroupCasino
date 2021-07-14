@@ -7,45 +7,56 @@ import com.github.zipcodewilmington.casino.models.Card;
 
 import java.util.*;
 
-public class BlackJack implements GameInterface, PlayerInterface {
+public class BlackJack {
     List<Integer> playersHand;
+    List<Integer> playersHandOnSplit;
     List<Integer> dealersHand;
     Deque<Integer> deckOfCards;
-    Double betAmount; // Equal to user input
+    BlackJackGame theGame = new BlackJackGame();
+    boolean gameEnd = false;
 
-    public BlackJack () {
+    Integer betAmount; // Equal to user input
+
+    public BlackJack() {
         this.playersHand = new ArrayList<>();
+        this.playersHandOnSplit = new ArrayList<>();
         this.dealersHand = new ArrayList<>();
         this.deckOfCards = new ArrayDeque<>(generateNewDeck());
     }
 
-    public List<Integer> generateNewDeck () {
+    public List<Integer> generateNewDeck() {
         Card card = new Card();
         return card.getCardPool();
     }
 
-    public List<Integer> givePlayerCard () {
+    public List<Integer> givePlayerCard() {
         Integer valueOfCard = deckOfCards.pop();
         this.playersHand.add(valueOfCard);
         return this.playersHand;
     }
 
-    public List<Integer> giveDealerCard () {
+    public List<Integer> givePlayerCardOnSplit() {
+        Integer valueOfCard = deckOfCards.pop();
+        this.playersHandOnSplit.add(valueOfCard);
+        return this.playersHandOnSplit;
+    }
+
+    public List<Integer> giveDealerCard() {
         Integer valueOfCard = deckOfCards.pop();
         this.dealersHand.add(valueOfCard);
         return this.dealersHand;
     }
 
-    public Integer playersCurrentValue () {
+    public Integer playersCurrentValue() {
         givePlayerCard();
         Integer sum = 0;
         for (int i = 0; i < this.playersHand.size(); i++) {
-           sum += this.playersHand.get(i);
+            sum += this.playersHand.get(i);
         }
         return sum;
     }
 
-    public Integer dealersCurrentValue () {
+    public Integer dealersCurrentValue() {
         giveDealerCard();
         Integer sum = 0;
         for (int i = 0; i < this.dealersHand.size(); i++) {
@@ -54,23 +65,49 @@ public class BlackJack implements GameInterface, PlayerInterface {
         return sum;
     }
 
-    public void playerBroke21 () {
+
+
+
+    public void dealersGame() {
+        while (!gameEnd) {
+            System.out.println("The dealer has : " + dealersCurrentValue());
+            if (dealersCurrentValue() > 21) {
+                System.out.println("You win!");
+                theGame.calculateWinnings(2, theGame.userBet);
+                gameEnd = true;
+            } else if (dealersCurrentValue() == 21) {
+                System.out.println("The dealer has won!");
+                theGame.subtractBetFromBalance(theGame.userBet);
+                gameEnd = true;
+            } else if (dealersCurrentValue() > playersCurrentValue()) {
+                System.out.println("The dealer has won!");
+                theGame.subtractBetFromBalance(theGame.userBet);
+                gameEnd = true;
+            } else {
+                giveDealerCard();
+                System.out.println("The dealer has : " + dealersCurrentValue());
+            }
+        }
+    }
+
+
+
+
+    public boolean playerBreaks21() {
+
         if (playersCurrentValue() > 21) {
-            subtractBetFromBalance(betAmount);
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public void playerBlackJack () {
+    public boolean playerHitsBlackJack() {
         if (playersCurrentValue() == 21) {
-            calculateWinnings(3.0, betAmount);
-        }
-    }
-
-    public void dealerConditions () {
-        if (dealersCurrentValue() > 21) {
-            calculateWinnings(2.0, betAmount); //Players winnings, not dealers (Player won)
-        } else if (dealersCurrentValue() <= 21 && dealersCurrentValue() > playersCurrentValue()) {
-            subtractBetFromBalance(betAmount);
+            theGame.calculateWinnings(3, betAmount);
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -88,45 +125,5 @@ public class BlackJack implements GameInterface, PlayerInterface {
 
     public void setDealersHand(List<Integer> dealersHand) {
         this.dealersHand = dealersHand;
-    }
-
-    @Override
-    public void add(PlayerInterface player) {
-
-    }
-
-    @Override
-    public void remove(PlayerInterface player) {
-
-    }
-
-    @Override
-    public void run() {
-
-    }
-
-    @Override
-    public Double calculateWinnings(Double multiplier, Double betAmount) {
-        return null;
-    }
-
-    @Override
-    public void subtractBetFromBalance(Double betAmount) {
-
-    }
-
-    @Override
-    public void addMoneyToBalance(PlayerInterface Player, Double winnings) {
-
-    }
-
-    @Override
-    public CasinoAccount getArcadeAccount() {
-        return null;
-    }
-
-    @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
     }
 }
