@@ -31,6 +31,7 @@ do{
 
 
             System.out.println(slot1 + " " + slot2 + " " + slot3 + "\n");
+
             if (slot1 == "BIG WIN" && slot1 == slot2 && slot1 == slot3) {
                 System.out.println("Jackpot! You win 50 tokens!" + "\n");
             } else if (slot1 == slot2 && slot1 == slot3) {
@@ -42,5 +43,6 @@ do{
             }
         }
         while(input == 1);
+
     }
 }
