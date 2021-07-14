@@ -12,7 +12,6 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
     private PlayerInterface player;
     Integer userBet;
     IOConsole input = new IOConsole();
-    boolean isWinner = false;
     Integer totalWinnings = 0;
 
 
@@ -26,7 +25,7 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
     }
 
     public void run() {
-        while(isRunning) {
+        while(!isRunning) {
             // include betting range
             BlackJack bj = new BlackJack();
             Integer userInput = input.getIntegerInput("1. Start A Hand" + "\n" + "2. Quit" + "\n");
@@ -46,20 +45,22 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
     }
 
     public void startGame () {
+        boolean isWinner = false;
         BlackJack bj = new BlackJack();
         bj.givePlayerCard();
         System.out.println("Your starting card : " + bj.playersCurrentValue());
         System.out.println("Your second next card : " + bj.givePlayerCard());
         System.out.println("Hand value : " + bj.playersCurrentValue());
+
         while (!isWinner) {
             Integer userChoice = input.getIntegerInput("1. Hit" + "\n" + "2. Stay");
                 switch (userChoice) {
                     case 1:
                         bj.givePlayerCard();
-                        bj.playersCurrentValue();
-                        if(bj.playerBreaks21()) {
+                        System.out.println(bj.playersCurrentValue());
+                        if(bj.playersCurrentValue() > 21) {
                             System.out.println("Sorry bud, you got " + bj.playersCurrentValue() +
-                                    "better luck next time");
+                                    ", better luck next time");
                             subtractBetFromBalance(userBet);
                             isWinner = true;
                         } else if (bj.playerHitsBlackJack()) {
@@ -72,8 +73,8 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
                         bj.giveDealerCard();
                         System.out.println("The dealers first card : " + bj.dealersCurrentValue());
                         bj.giveDealerCard();
-                        System.out.println("The dealer has : " + bj.dealersCurrentValue());
                         bj.dealersGame();
+                        isWinner = true;
                         break;
                 }
             }
@@ -97,6 +98,6 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
 
 
     public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
-        
+
     }
 }
