@@ -10,6 +10,14 @@ public class BeetleGame implements GameInterface {
     private Beetle game;
     private Boolean isRunning = false;
     private PlayerInterface player;
+
+    public BeetleGame(PlayerInterface... players){
+        this.game = new Beetle(players.length);
+        for(int i = 0; i < players.length; i++){
+            this.add(players[i]);
+        }
+    }
+
     public void add(PlayerInterface player){
         players.add(player);
     }
@@ -27,14 +35,16 @@ public class BeetleGame implements GameInterface {
      */
     public void run(){
         Integer turnCount = 0;
-        if(isRunning){
+        game.setCurrentPlayer(-1);
+        this.isRunning = true;
+        while(isRunning){
             turnCount++;
             this.nextPlayer();
-            game.getDice().tossAndSum();
+            //game.getDice().tossAndSum();
             executeTurn();
              isGameOver(game.checkWinner(game.getCurrentPlayer()));
         }
-        System.out.println("game over after " + turnCount);
+        System.out.println("game over after, player " + game.getCurrentPlayer() + " wins");
     }
 
     public void isGameOver(boolean playerWon){
@@ -43,7 +53,6 @@ public class BeetleGame implements GameInterface {
         }
     }
     public void nextPlayer(){
-        game.setCurrentPlayer(-1);
         game.nextPlayer();
     }
 

@@ -1,9 +1,11 @@
 package com.github.zipcodewilmington.casino.games.Beetle;
 
-public class BeetlePlayer {
+import com.github.zipcodewilmington.casino.Player;
+
+public class BeetlePlayer extends Player {
     private Integer bet;
 
-    public BeetlePlayer(){
-
+    public BeetlePlayer(String name, Integer initialDeposit){
+        super(name, initialDeposit);
     }
 }

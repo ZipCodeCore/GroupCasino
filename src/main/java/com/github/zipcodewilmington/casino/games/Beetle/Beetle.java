@@ -56,7 +56,7 @@ public class Beetle{
     }
 
     public void setPlayerBeetles(Integer player, Integer diceRoll) {
-        this.playerBeetles[player][diceRoll]++;
+        this.playerBeetles[player][diceRoll - dice.getNumDice()]++;
         //return this.checkWinner(player);
     }
 

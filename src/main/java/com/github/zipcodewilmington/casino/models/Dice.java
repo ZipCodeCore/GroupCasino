@@ -10,9 +10,9 @@ public class Dice {
     public Dice(Integer numberOfDice){
         this.numDice = numberOfDice;
         this.maxRoll = numberOfDice * 6;
-        this.maxBinIndex = numberOfDice * 6 - numberOfDice - 1;
+        this.maxBinIndex = numberOfDice * 6 - numberOfDice;
         this.rollValues = new Integer[this.numDice];
-        this.bins = new Integer[numberOfDice * 6 - numberOfDice - 1];
+        this.bins = new Integer[numberOfDice * 6 - (numberOfDice - 1)] ;
         this.initializeDiceList();
         this.initializeBins();
     }
@@ -48,7 +48,7 @@ public class Dice {
     }
 
     public void initializeBins(){
-        for(int i = 0; i < maxBinIndex; i++){
+        for(int i = 0; i <= maxBinIndex; i++){
             this.bins[i] = 0;
         }
     }
@@ -56,7 +56,7 @@ public class Dice {
     public Integer tossAndSum(){
         int sum = 0;
         for(int i = 0; i < numDice; i++){
-            sum += (Math.random() * 7) + 1;
+            sum += (Math.random() * 6) + 1;
         }
         this.incrementBin(sum);
         return sum;
