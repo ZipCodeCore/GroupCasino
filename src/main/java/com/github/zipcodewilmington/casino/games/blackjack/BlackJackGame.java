@@ -12,8 +12,9 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
     private BlackJack game;
     private Boolean isRunning = false;
     private PlayerInterface player;
-    private Double userBet;
+    Double userBet;
     IOConsole input = new IOConsole();
+    boolean isWinner = false;
 
     @Override
     public void add(PlayerInterface player) {
@@ -49,9 +50,8 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
         System.out.println("Your starting card : " + bj.playersCurrentValue());
         bj.givePlayerCard();
         System.out.println("Your second next card : " + bj.playersCurrentValue());
-        boolean isWinner = false;
         Integer userChoice = input.getIntegerInput("1. Hit" + "\n" + "2. Stay");
-        while (isWinner) {
+        while (!isWinner) {
                 switch (userChoice) {
                     case 1:
                         bj.givePlayerCard();
@@ -68,9 +68,14 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
                         }
                         break;
                     case 2:
-
-                }
+                        bj.giveDealerCard();
+                        System.out.println("The dealers first card : " + bj.dealersCurrentValue());
+                        bj.giveDealerCard();
+                        System.out.println("The dealer has : " + bj.dealersCurrentValue());
+                        bj.dealersGame();
+                        break;
             }
+        }
     }
 
     @Override

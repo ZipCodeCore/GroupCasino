@@ -12,6 +12,8 @@ public class BlackJack  {
     List<Integer> playersHandOnSplit;
     List<Integer> dealersHand;
     Deque<Integer> deckOfCards;
+    BlackJackGame theGame = new BlackJackGame();
+    boolean gameEnd = false;
 
     public BlackJack () {
         this.playersHand = new ArrayList<>();
@@ -59,6 +61,28 @@ public class BlackJack  {
             sum += this.dealersHand.get(i);
         }
         return sum;
+    }
+
+    public void dealersGame () {
+        while(!gameEnd) {
+                System.out.println("The dealer has : " + dealersCurrentValue());
+            if (dealersCurrentValue() > 21) {
+                System.out.println("You win!");
+                theGame.calculateWinnings(2.0, theGame.userBet);
+                gameEnd = true;
+            } else if (dealersCurrentValue() == 21) {
+                System.out.println("The dealer has won!");
+                theGame.subtractBetFromBalance(theGame.userBet);
+                gameEnd = true;
+            } else if (dealersCurrentValue() > playersCurrentValue()) {
+                System.out.println("The dealer has won!");
+                theGame.subtractBetFromBalance(theGame.userBet);
+                gameEnd = true;
+            } else {
+                giveDealerCard();
+                System.out.println("The dealer has : " + dealersCurrentValue());
+            }
+        }
     }
 
     public boolean playerBreaks21 () {
