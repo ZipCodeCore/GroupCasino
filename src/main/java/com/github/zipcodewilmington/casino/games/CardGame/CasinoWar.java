@@ -1,12 +1,12 @@
-package com.github.zipcodewilmington.casino.games.Blackjack;
+package com.github.zipcodewilmington.casino.games.CardGame;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.utils.IOConsole;
 
-public class CasinoWar extends Deck {
+public class CasinoWar extends Deck implements GameInterface {
 
     CardHand playerHand;
     CardHand dealerHand;
-    Boolean Winner;
-    //player numberOfPlayers;
     Deck deck = new Deck(1);
 
     public CasinoWar(int numberOfDecks) {
@@ -30,40 +30,61 @@ public class CasinoWar extends Deck {
                 dealerHand = new CardHand(warDeck.dealCards(1));
                 input.println("Player hand is " + playerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue());
                 input.println("Dealer hand is " + dealerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue());
-                if (playerWins()) {
+                if (playerWins().equals("playerwon")) {
                     input.println("Congratulations!!! You won!!");
-                } else {
+                } else if(playerWins().equals("dealerwon")) {
                     input.println("So sad, you lost!!");
+                }else
+                {
+                    input.println("Its a tie!! Draw another card!");
                 }
-            } else {
+            } else{
                 return;
             }
         }
         while (true);
     }
 
-    public Boolean playerWins() {
-        Boolean result = true;
+    public String playerWins() {
+        String result = "playerwon";
         //Integer play = playerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue();
         if (playerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue() <
                 dealerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue()) {
-            result = false;
+            result = "dealerwon";
+        }
+        else if(playerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue() ==
+                dealerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue()){
+            result = "tie";
         }
         return result;
     }
 
+    @Override
+    public void add(PlayerInterface player) {
 
-    public Boolean tieBetweenPlayerAndDealer() {
-        Boolean result = playerWins();
-        if (playerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue() ==
-                dealerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue()) {
-            result = playerWins();
-        }
-        return result;
+    }
+
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void run() {
+
     }
 
 
-//playerHand.displayHand()
-//if (playerHand.displayHand().equals(""))
+//    public Boolean tieBetweenPlayerAndDealer() {
+//        Boolean result = playerWins();
+//        if (playerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue() ==
+//                dealerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue()) {
+//            result = playerWins();
+//        }
+//        return result;
+//    }
+
+}
+
 
 
