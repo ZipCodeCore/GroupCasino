@@ -6,14 +6,13 @@ import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.utils.IOConsole;
 
-import java.util.Scanner;
 
 public class BlackJackGame implements GameInterface, PlayerInterface {
-    private BlackJack game;
     private Boolean isRunning = false;
     private PlayerInterface player;
-    private Double userBet;
+    Double userBet;
     IOConsole input = new IOConsole();
+    boolean isWinner = false;
 
     @Override
     public void add(PlayerInterface player) {
@@ -29,12 +28,13 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
     public void run() {
         while(isRunning) {
             // include betting range
-
             BlackJack bj = new BlackJack();
             Integer userInput = input.getIntegerInput("1. Start A Hand" + "\n" + "2. Quit" + "\n");
 
             switch (userInput) {
-                case 1: // include betting forum in case 1
+                case 1:
+                    this.userBet = Double.valueOf(input.getIntegerInput("How much would you like to bet?"));
+                    // include betting forum in case 1
                     startGame();
                     break;
                 case 2:
@@ -47,11 +47,10 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
         BlackJack bj = new BlackJack();
         bj.givePlayerCard();
         System.out.println("Your starting card : " + bj.playersCurrentValue());
-        bj.givePlayerCard();
-        System.out.println("Your second next card : " + bj.playersCurrentValue());
-        boolean isWinner = false;
+        System.out.println("Your second next card : " + bj.givePlayerCard());
+        System.out.println("Hand value : " + bj.playersCurrentValue());
         Integer userChoice = input.getIntegerInput("1. Hit" + "\n" + "2. Stay");
-        while (isWinner) {
+        while (!isWinner) {
                 switch (userChoice) {
                     case 1:
                         bj.givePlayerCard();
@@ -69,8 +68,18 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
                         break;
                     case 2:
 
+                        bj.giveDealerCard();
+                        System.out.println("The dealers first card : " + bj.dealersCurrentValue());
+                        bj.giveDealerCard();
+                        System.out.println("The dealer has : " + bj.dealersCurrentValue());
+                        bj.dealersGame();
+                        break;
+
+
                 }
+
             }
+        }
     }
 
     @Override
