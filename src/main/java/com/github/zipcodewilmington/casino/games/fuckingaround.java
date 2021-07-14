@@ -13,7 +13,7 @@ public class fuckingaround{
    // private static int scoreToWin = 100;
     private int currentTurn;
     private int dieValue;
-   // private int rollCounter = 1;
+    private int rollCounter = 0;
     private int turnScore;
     private int pOneTotal;
     private int pTwoTotal;
@@ -33,30 +33,33 @@ public class fuckingaround{
 
     public int playerTurn () {
 
-        //  while (rollCounter <= 5)
-        System.out.println("Please enter 1 to roll or 0 to hold");
-        //input.nextLine();
-        rollAnswer = input.nextInt();
-        if (rollAnswer == 1) {
-            Random generator = new Random();
-            dieValue = generator.nextInt(6) + 1;
-            turnScore += dieValue;
-            // dieValue = ThreadLocalRandom.current().nextInt(1, 7);
-            if (dieValue == 1) {
-                currentTurn++;
-                turnScore = 0;
-                System.out.println("You rolled a 1; your turn is over and any banked points have been lost.");
-                switchingPlayers();
-            } else {
-                System.out.println("You rolled a " + dieValue);
-                //rollCounter += 1;
-                System.out.println("Player earned " + turnScore + " points.");
-                playerTurn();
+       do {
+            System.out.println("Please enter 1 to roll or 0 to hold");
+            //input.nextLine();
+            rollAnswer = input.nextInt();
+            if (rollAnswer == 1) {
+                Random generator = new Random();
+                dieValue = generator.nextInt(6) + 1;
+                turnScore += dieValue;
+                // dieValue = ThreadLocalRandom.current().nextInt(1, 7);
+                if (dieValue == 1) {
+                    currentTurn++;
+                    turnScore = 0;
+                    System.out.println("You rolled a 1; your turn is over and any banked points have been lost.");
+                    switchingPlayers();
+                } else {
+                    System.out.println("You rolled a " + dieValue);
+                    rollCounter++;
+                    System.out.println("Player earned " + turnScore + " points.");
+                    playerTurn();
                 }
-            }else if(rollAnswer == 0){
-            currentTurn++;
-            switchingPlayers();
-        } return turnScore;
+            } else if (rollAnswer == 0) {
+                currentTurn++;
+                switchingPlayers();
+            }
+        } while (currentTurn <= 5);
+
+        return turnScore;
     }
 
 
