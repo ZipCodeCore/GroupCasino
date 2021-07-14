@@ -45,4 +45,7 @@ public class Player implements PlayerInterface{
         return this.arcadeAccount;
     }
 
+    public void setArcadeAccount(CasinoAccount arcadeAccount) {
+        this.arcadeAccount = arcadeAccount;
+    }
 }

@@ -18,6 +18,11 @@ public class SlotsPlayer implements PlayerInterface  {
         return null;
     }
 
+    @Override
+    public void setArcadeAccount(CasinoAccount casinoAccount) {
+
+    }
+
     public void subtractFromTotal(Integer value){
         Integer newTotal = accountTotal - value;
         accountTotal = newTotal;
