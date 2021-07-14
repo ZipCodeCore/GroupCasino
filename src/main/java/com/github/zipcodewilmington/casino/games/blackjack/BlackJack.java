@@ -90,8 +90,11 @@ public class BlackJack {
         }
     }
 
+    public void playerSplit () {
+        if (playersHand.get(0) == playersHand.get(1)) {
 
-
+        }
+    }
 
     public boolean playerBreaks21() {
 

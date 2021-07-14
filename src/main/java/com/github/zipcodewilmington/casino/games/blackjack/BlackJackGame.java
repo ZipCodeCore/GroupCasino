@@ -15,17 +15,16 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
     boolean isWinner = false;
     Integer totalWinnings = 0;
 
-    @Override
-    public void add(PlayerInterface player) {
 
+    public void add(PlayerInterface player) {
+        this.player = player;
     }
 
-    @Override
+
     public void remove(PlayerInterface player) {
 
     }
 
-    @Override
     public void run() {
         while(isRunning) {
             // include betting range
@@ -52,8 +51,8 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
         System.out.println("Your starting card : " + bj.playersCurrentValue());
         System.out.println("Your second next card : " + bj.givePlayerCard());
         System.out.println("Hand value : " + bj.playersCurrentValue());
-        Integer userChoice = input.getIntegerInput("1. Hit" + "\n" + "2. Stay");
         while (!isWinner) {
+            Integer userChoice = input.getIntegerInput("1. Hit" + "\n" + "2. Stay");
                 switch (userChoice) {
                     case 1:
                         bj.givePlayerCard();
@@ -81,25 +80,23 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
         }
 
 
-    @Override
     public CasinoAccount getArcadeAccount() {
         return null;
     }
 
 
-    @Override
     public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
         totalWinnings = multiplier * betAmount;
         return totalWinnings;
     }
 
-    @Override
+
     public void subtractBetFromBalance(Integer betAmount) {
 
     }
 
-    @Override
-    public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
 
+    public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
+        
     }
 }
