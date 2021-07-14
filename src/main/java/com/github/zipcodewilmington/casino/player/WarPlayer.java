@@ -5,7 +5,7 @@ import com.github.zipcodewilmington.casino.card.Hand;
 public class WarPlayer {
 
     Player player;
-    Hand hand = new Hand()''
+    Hand hand = new Hand();
 
     public WarPlayer(Player player) {
         this.player = player;
