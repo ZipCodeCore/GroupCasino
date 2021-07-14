@@ -8,7 +8,7 @@ public class RouletteGame {
         String black;
         String red;
         ArrayList<Integer> Roulette;
-        //dojsojfdojdsfojmlsmkmsa;kflk,slam
+
     }
 
 
