@@ -21,6 +21,7 @@ public class CasinoAccount {
     }
 
 
+feature/CasinoAccount
     public String getPassword() {
         return password;
     }
@@ -28,4 +29,5 @@ public class CasinoAccount {
     public String getAccountName() {
         return accountName;
     }
+
 }
