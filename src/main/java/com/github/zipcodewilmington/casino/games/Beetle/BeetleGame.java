@@ -31,6 +31,24 @@ public class BeetleGame implements GameInterface {
         }
     }
 
+    @Override
+    public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
+        return null;
+    }
+
+    @Override
+    public void subtractBetFromBalance(Integer betAmount) {
+
+    }
+
+    @Override
+    public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
+
+    }
+
+    public String test(){
+        return "NATHAN WAS HERE";
+    }
     /**
      * Calculate player's winning payout amount of bet x multiplier
      * @return (double) amount of money winnings
