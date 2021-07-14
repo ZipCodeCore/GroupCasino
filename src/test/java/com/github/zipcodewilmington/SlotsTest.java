@@ -129,5 +129,13 @@ public class SlotsTest {
         Assert.assertEquals(expected, returned);
     }
 
+    @Test
+    public void displaySlotsTest(){
+        //given
+        Slots slot = new Slots();
+        //when
+        slot.displaySlots();
+        //then - check output
+    }
 
 }

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 
 public class Slots {
-    private static final String[] slotItems = {"Peach", "Cherry", "Diamond", "Plum", "Seven", "Nine"};
+    private static final String[] slotItems = {" Peach ", " Cherry", "Diamond", " Plum  ", " Seven ", "  Nine "};
     private String[][] slots = new String[3][3];
     private HashMap<Integer, String> winningLines = new HashMap<>();
 
@@ -91,7 +91,16 @@ public class Slots {
         return result;
     }
 
-    //new comment
+    public void displaySlots(){
+        System.out.println(
+                "\u001B[34m -------------------------------\n" +
+                "   "+ slots[0][0] +" | "+slots[0][1] + " | " +slots[0][2]+" \n" +
+                " -------------------------------\n" +
+                "   "+ slots[1][0] +" | "+slots[1][1] + " | " +slots[1][2]+ " \n"+
+                " -------------------------------\n" +
+                "   "+ slots[2][0] +" | "+slots[2][1] + " | " +slots[2][2]+" \n" +
+                " -------------------------------\n");
+    }
 
 
 }
