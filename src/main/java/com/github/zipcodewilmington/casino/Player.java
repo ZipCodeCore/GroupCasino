@@ -3,7 +3,6 @@ package com.github.zipcodewilmington.casino;
 
 public class Player implements PlayerInterface{
 
-public class Player{
     String name;
     Integer balance;
     Integer currentBet = 0;
