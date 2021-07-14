@@ -26,41 +26,44 @@ public class BeetleGame implements GameInterface {
      * specifies how the game will run
      */
     public void run(){
+        Integer turnCount = 0;
         if(isRunning){
+            turnCount++;
+            this.nextPlayer();
+            game.getDice().tossAndSum();
+            executeTurn();
+             isGameOver(game.checkWinner(game.getCurrentPlayer()));
+        }
+        System.out.println("game over after " + turnCount);
+    }
 
+    public void isGameOver(boolean playerWon){
+        if(playerWon){
+            isRunning = false;
         }
     }
-
-    @Override
-    public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
-        return null;
+    public void nextPlayer(){
+        game.setCurrentPlayer(-1);
+        game.nextPlayer();
     }
 
-    @Override
-    public void subtractBetFromBalance(Integer betAmount) {
-
+    public void executeTurn(){
+        Integer currentPlayer = game.getCurrentPlayer();
+        game.setPlayerBeetles(currentPlayer, game.getDice().tossAndSum());
     }
 
-    @Override
-    public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
-
-    }
-
-    public String test(){
-        return "NATHAN WAS HERE";
-    }
     /**
      * Calculate player's winning payout amount of bet x multiplier
      * @return (double) amount of money winnings
      */
-    public Double calculateWinnings(Double multiplier, Double betAmount){
-        return 0.00;
+    public Integer calculateWinnings(Integer multiplier, Integer betAmount){
+        return 0;
     }
 
     /**
      * Subtract the bet amount from player's balance
      */
-    public void subtractBetFromBalance(Double betAmount){
+    public void subtractBetFromBalance(Integer betAmount){
 
     }
 
@@ -68,14 +71,18 @@ public class BeetleGame implements GameInterface {
     /**
      * Add winnings amount to player's balance
      */
-    public void addMoneyToBalance(PlayerInterface Player, Double winnings){
+    public void addMoneyToBalance(PlayerInterface Player, Integer winnings){
 
     }
 
-    public void initGame(){
+    public void initGame(Integer players){
         this.game = new Beetle(this.players.size());
+        this.isRunning = true;
+        this.run();
     }
 
-
+    public Boolean getIsRunning(){
+        return this.isRunning;
+    }
 
 }

@@ -60,6 +60,10 @@ public class Beetle{
         //return this.checkWinner(player);
     }
 
+    public void nextPlayer(){
+        this.currentPlayer = (this.currentPlayer + 1) % this.numPlayers;
+    }
+
     public void refreshBeetle(Integer player){
         this.playerBeetles[player] = new Integer[] {0, 0, 0, 0, 0, 0};
     }

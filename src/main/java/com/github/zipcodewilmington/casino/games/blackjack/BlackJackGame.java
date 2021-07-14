@@ -13,6 +13,7 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
     Integer userBet;
     IOConsole input = new IOConsole();
     boolean isWinner = false;
+    Integer totalWinnings = 0;
 
     @Override
     public void add(PlayerInterface player) {
@@ -35,13 +36,11 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
                 case 1:
 
                     this.userBet = (input.getIntegerInput("How much would you like to bet?"));
-
-                    this.userBet = (input.getIntegerInput("How much would you like to bet?"));
-
                     // include betting forum in case 1
                     startGame();
                     break;
                 case 2:
+                    // include the subtractWinnings when players leave table
                     isRunning = true;
             }
         }
@@ -71,26 +70,15 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
                         }
                         break;
                     case 2:
-
-
-
-
                         bj.giveDealerCard();
                         System.out.println("The dealers first card : " + bj.dealersCurrentValue());
                         bj.giveDealerCard();
                         System.out.println("The dealer has : " + bj.dealersCurrentValue());
                         bj.dealersGame();
                         break;
-
-
-
-
                 }
-
             }
         }
-    
-
 
 
     @Override
@@ -98,14 +86,11 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
         return null;
     }
 
-    @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
-    }
 
     @Override
     public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
-        return null;
+        totalWinnings = multiplier * betAmount;
+        return totalWinnings;
     }
 
     @Override
