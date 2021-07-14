@@ -81,15 +81,17 @@ public class Slots {
         this.winningLines = newWinningLines;
     }
 
+    //Take an int[] of numbered lines to be on.
     public String[] compareBetVsWinningLines(Integer[] bets){
         String[] result = new String[bets.length];
         for (int i = 0; i < bets.length; i++) {
             result[i] = winningLines.get(bets[i]);
         }
+        //return a string[] of "WIN" or "LOSE"
         return result;
     }
 
-//new comment
+    //new comment
 
 
 }
