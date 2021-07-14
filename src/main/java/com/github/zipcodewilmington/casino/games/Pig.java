@@ -2,6 +2,7 @@ package com.github.zipcodewilmington.casino.games;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Pig {
 
@@ -15,7 +16,9 @@ public class Pig {
   private char startTurn;
   public Scanner input;
 
+
   public Pig() {
+
     Scanner input = new Scanner(System.in);
   }
 
@@ -33,14 +36,12 @@ public class Pig {
     }
 
     public int rollDie(){
-      Random randomNumber = new Random();
-      dieValue = randomNumber.nextInt(6);
-        if (dieValue == 0){
-            rollDie();
-        }
+      dieValue = ThreadLocalRandom.current().nextInt(1, 7);
       System.out.println("You rolled a " + dieValue);
       return dieValue;
     }
+
+
 
 
 
