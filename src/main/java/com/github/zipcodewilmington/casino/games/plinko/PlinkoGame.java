@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class PlinkoGame implements GameInterface,PlayerInterface {
+public class PlinkoGame {
     private Map<Integer,Double> moneyGenerator=new HashMap<Integer, Double>();
     public int initialPosition;
     private double betAmount;
-    public int randomNumber;
+    public int multiplier;
 
     public PlinkoGame(int initialPosition){
         this.initialPosition=initialPosition;
@@ -30,24 +30,13 @@ public class PlinkoGame implements GameInterface,PlayerInterface {
             return "Invalid Entry";
     }
 
-    @Override
-    public void add(PlayerInterface player) {
-
-    }
-
-    @Override
-    public void remove(PlayerInterface player) {
-
-    }
-
-    @Override
-    public void run() {
+    public void run2() {
         if (initialPosition < 10 && initialPosition > 0) {
             int max = 9;
             int min = 1;
             Random rand = new Random();
-            randomNumber = rand.nextInt(max - min + 1) + min;
-            System.out.println("Now your position is: " + randomNumber);
+            multiplier = rand.nextInt(max - min + 1) + min;
+            System.out.println("Now your position is: " + multiplier);
         }
         else
         {
@@ -55,8 +44,8 @@ public class PlinkoGame implements GameInterface,PlayerInterface {
         }
     }
 
-    @Override
-    public Double calculateWinnings(Double multiplier, Double betAmount) {
+
+    public Double calculateWinnings2(Integer multiplier, Double betAmount) {
         moneyGenerator.put(1,200.00);
         moneyGenerator.put(2,0.00);
         moneyGenerator.put(3,3000.00);
@@ -69,32 +58,12 @@ public class PlinkoGame implements GameInterface,PlayerInterface {
         Double moneyWon=0.0;
         for (Integer pos:moneyGenerator.keySet())
         {
-            if(pos.equals(randomNumber)){
+            if(pos.equals(multiplier)){
                 moneyWon=moneyGenerator.get(pos);
             }
         }
         return moneyWon;
     }
 
-
-    @Override
-    public void subtractBetFromBalance(Double betAmount) {
-
-    }
-
-    @Override
-    public void addMoneyToBalance(PlayerInterface Player, Double winnings) {
-
-    }
-
-    @Override
-    public CasinoAccount getArcadeAccount() {
-        return null;
-    }
-
-    @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
-    }
 }
 
