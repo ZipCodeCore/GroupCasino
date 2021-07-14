@@ -48,6 +48,12 @@ public class BlackJackTest {
     @Test
     public void playersCurrentValueTest () {
         BlackJack bj = new BlackJack();
+
+        // Solid stopping point = need to populate array for test
+        bj.givePlayerCard();
+        bj.givePlayerCard();
+        System.out.println(bj.playersCurrentValue());
+
         List<Integer> expected = bj.getPlayersHand();
 
         bj.playersCurrentValue();
@@ -71,6 +77,7 @@ public class BlackJackTest {
 
     @Test
     public void playerBroke21orBlackJackTest () {
+
 
     }
 }
