@@ -1,9 +1,7 @@
 package com.github.zipcodewilmington;
 
-import com.github.zipcodewilmington.casino.CasinoAccount;
-import com.github.zipcodewilmington.casino.CasinoAccountManager;
-import com.github.zipcodewilmington.casino.GameInterface;
-import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.*;
+import com.github.zipcodewilmington.casino.games.Beetle.BeetleGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
@@ -11,12 +9,15 @@ import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
+import java.util.Locale;
+
 /**
  * Created by leon on 7/21/2020.
  */
 public class Casino implements Runnable {
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
-
+    private CasinoAccount casinoAccount;
+    private PlayerInterface player;
     @Override
     public void run() {
         String arcadeDashBoardInput;
@@ -29,6 +30,9 @@ public class Casino implements Runnable {
                 CasinoAccount casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
                 boolean isValidLogin = casinoAccount != null;
                 if (isValidLogin) {
+                    this.casinoAccount = casinoAccount;
+                    this.player = new Player(accountName, 500);
+                    this.player.setArcadeAccount(casinoAccount);
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
                     if (gameSelectionInput.equals("SLOTS")) {
                         play(new SlotsGame(), new SlotsPlayer());
@@ -66,8 +70,22 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ NUMBERGUESS ]")
+                .append("\n\t[ SLOTS ], [ NUMBERGUESS ], [ PLINKO ], [ BEETLE ], [ BLACKJACK ]" +
+                        "[ KENO ]")
                 .toString());
+    }
+
+    private void processGameSelection(String input){
+        input = input.toLowerCase(Locale.ROOT);
+        GameInterface gameObject;
+        switch(input){
+            case "beetle":
+                gameObject = new BeetleGame();
+            default:
+                gameObject = new BeetleGame();
+        }
+
+        play(gameObject, player);
     }
 
     private void play(Object gameObject, Object playerObject) {
