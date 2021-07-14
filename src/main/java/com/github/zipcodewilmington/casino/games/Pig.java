@@ -41,9 +41,4 @@ public class Pig {
       return dieValue;
     }
 
-
-
-
-
-
 }
