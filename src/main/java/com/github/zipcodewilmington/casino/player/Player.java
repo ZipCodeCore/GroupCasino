@@ -8,6 +8,10 @@ public class Player {
         this.name = name;
         this.balance = 1000;
     }
+
+    public Player() {
+    }
+
     public String getPlayerName() {
         return name;
     }
