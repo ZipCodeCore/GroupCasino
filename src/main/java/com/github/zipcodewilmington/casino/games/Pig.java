@@ -28,6 +28,9 @@ public class Pig {
     input.nextLine();
     rollAnswer = input.nextLine();
     if(rollAnswer == "r"){
+      dieValue = ThreadLocalRandom.current().nextInt(1, 7);
+      System.out.println("You rolled a " + dieValue);
+    } if (dieValue == 1){
 
     }
 
