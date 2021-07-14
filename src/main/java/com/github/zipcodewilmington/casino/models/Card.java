@@ -6,7 +6,7 @@ public class Card {
     List<Integer> cardPool;
 
     // Let's hope this works! If you can see this, that'd be cool
-    // Boilage
+    // Boilage <== hack
 
     public Card() {
         this.cardPool = new ArrayList<>();
