@@ -46,6 +46,21 @@ public class PlinkoGame implements GameInterface,PlayerInterface {
     }
 
     @Override
+    public void add(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void run() {
+
+    }
+
+    @Override
     public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
         moneyGenerator.put(1,200);
         moneyGenerator.put(2,0);
@@ -81,11 +96,6 @@ public class PlinkoGame implements GameInterface,PlayerInterface {
 
     @Override
     public CasinoAccount getArcadeAccount() {
-        return null;
-    }
-
-    @Override
-    public <SomeReturnType> SomeReturnType play() {
         return null;
     }
 
