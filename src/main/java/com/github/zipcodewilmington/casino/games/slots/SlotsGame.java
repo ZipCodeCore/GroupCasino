@@ -175,6 +175,6 @@ public class SlotsGame implements GameInterface{
     }
 
     public void setCurrentPlayer(PlayerInterface currentPlayer) {
-        this.currentPlayer = currentPlayer;
+        this.currentPlayer = (SlotsPlayer) currentPlayer;
     }
 }
