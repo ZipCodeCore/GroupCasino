@@ -10,9 +10,10 @@ import java.util.Random;
 
 public class PlinkoGame implements GameInterface,PlayerInterface {
     private Map<Integer,Integer> moneyGenerator=new HashMap<Integer, Integer>();
+
     public int initialPosition;
     private double betAmount;
-    public int randomNumber;
+    public int multiplier;
 
     public PlinkoGame(int initialPosition){
         this.initialPosition=initialPosition;
@@ -30,24 +31,13 @@ public class PlinkoGame implements GameInterface,PlayerInterface {
             return "Invalid Entry";
     }
 
-    @Override
-    public void add(PlayerInterface player) {
-
-    }
-
-    @Override
-    public void remove(PlayerInterface player) {
-
-    }
-
-    @Override
-    public void run() {
+    public void run2() {
         if (initialPosition < 10 && initialPosition > 0) {
             int max = 9;
             int min = 1;
             Random rand = new Random();
-            randomNumber = rand.nextInt(max - min + 1) + min;
-            System.out.println("Now your position is: " + randomNumber);
+            multiplier = rand.nextInt(max - min + 1) + min;
+            System.out.println("Now your position is: " + multiplier);
         }
         else
         {
@@ -67,14 +57,16 @@ public class PlinkoGame implements GameInterface,PlayerInterface {
         moneyGenerator.put(8,750);
         moneyGenerator.put(9,0);
         Integer moneyWon=0;
+
         for (Integer pos:moneyGenerator.keySet())
         {
-            if(pos.equals(randomNumber)){
+            if(pos.equals(multiplier)){
                 moneyWon=moneyGenerator.get(pos);
             }
         }
         return moneyWon;
     }
+
 
 
     @Override
@@ -96,5 +88,6 @@ public class PlinkoGame implements GameInterface,PlayerInterface {
     public <SomeReturnType> SomeReturnType play() {
         return null;
     }
+
 }
 

@@ -9,13 +9,14 @@ public class PlinkoTest {
     @Test
     public void testCalculateWinnings() {
         //given
+
         Integer expectedValue=0;
         PlinkoGame plinkoGame=new PlinkoGame(7);
         plinkoGame.run();
         //when
         Integer actualValue=plinkoGame.calculateWinnings(2,200);
+
         //then
-        System.out.println(actualValue);
         Assert.assertEquals(expectedValue,actualValue);
     }
 
