@@ -7,9 +7,6 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
  * Created by Nathan on 7/12/21
  */
 public class SlotsGame implements GameInterface {
-    private static String[] slotItems = {"Peach", "Cherry", "Diamond", "Plum", "Seven", "Nine"};
-    private String[][] slots = new String[3][3];
-
 
 
     @Override
@@ -24,21 +21,26 @@ public class SlotsGame implements GameInterface {
 
     @Override
     public void run() {
+        Slots slotMachine = new Slots();
+        //Integer[] bets = takeBet();
+        slotMachine.spinSlots();
+        //slotMachine.compareBetVsWinningLines();
+
 
     }
 
     @Override
-    public Double calculateWinnings(Double multiplier, Double betAmount) {
+    public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
         return null;
     }
 
     @Override
-    public void subtractBetFromBalance(Double betAmount) {
+    public void subtractBetFromBalance(Integer betAmount) {
 
     }
 
     @Override
-    public void addMoneyToBalance(PlayerInterface Player, Double winnings) {
+    public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
 
     }
 }

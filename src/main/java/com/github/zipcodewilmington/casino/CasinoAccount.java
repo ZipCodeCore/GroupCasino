@@ -21,14 +21,6 @@ public class CasinoAccount {
     }
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-feature/CasinoAccount
->>>>>>> 215c282dea0773bd7aa0b3a7ddaf24f06beed64c
-=======
-feature/CasinoAccount
->>>>>>> 6f696bfd3d8b08440df417b0a383f72391cab149
     public String getPassword() {
         return password;
     }
@@ -36,12 +28,5 @@ feature/CasinoAccount
     public String getAccountName() {
         return accountName;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> 215c282dea0773bd7aa0b3a7ddaf24f06beed64c
-=======
-
->>>>>>> 6f696bfd3d8b08440df417b0a383f72391cab149
 }
