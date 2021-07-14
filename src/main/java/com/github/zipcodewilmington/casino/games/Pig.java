@@ -6,44 +6,43 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Pig {
 
-  private final int numOfDice = 1;
+  private static int scoreToWin = 100;
   private int dieValue;
   private int rollCounter;
   private int turnScore;
   private int pOneTotal;
   private int pTwoTotal;
-  private char rollAgainAnswer;
+  private String rollAnswer = "0";
   private char startTurn;
-  public Scanner input;
+  public Scanner input = new Scanner(System.in);
 
 
-  public Pig() {
-
-    Scanner input = new Scanner(System.in);
+  public void welcomeToPig(){
+    //welcome screen
+    //log player 2 in or create account
+    //the rules
   }
 
-  //will open with a welcome screen
-    //get player 2
-    //the rules
-    //s to start
-
-    public void pig(){
-
-    }
-
-    public void playPig(){
+  public void playerTurn(){
+    System.out.println("Please enter 'r' to roll or 'h' to hold");
+    input.nextLine();
+    rollAnswer = input.nextLine();
+    if(rollAnswer == "r"){
 
     }
 
-    public int rollDie(){
-      dieValue = ThreadLocalRandom.current().nextInt(1, 7);
-      System.out.println("You rolled a " + dieValue);
-      return dieValue;
-    }
+  }
 
 
 
 
 
 
-}
+
+
+
+
+
+
+  }
+
