@@ -68,7 +68,7 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
                         }
                         break;
                     case 2:
-                        
+
                 }
             }
     }
