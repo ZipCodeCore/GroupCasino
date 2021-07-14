@@ -5,9 +5,6 @@ import java.util.*;
 public class Card {
     List<Integer> cardPool;
 
-    // Let's hope this works! If you can see this, that'd be cool
-    // Boilage
-
     public Card() {
         this.cardPool = new ArrayList<>();
         this.createDeck();
