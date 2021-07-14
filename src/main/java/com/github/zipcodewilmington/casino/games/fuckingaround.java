@@ -31,8 +31,7 @@ public class fuckingaround{
         return "Player 1 has " + pOneTotal + " points. \n Player 2 has " + pTwoTotal + " points.";
     }
 
-    public void playerTurn () {
-        turnScore = 0;
+    public int playerTurn () {
 
         //  while (rollCounter <= 5)
         System.out.println("Please enter 1 to roll or 0 to hold");
@@ -54,10 +53,10 @@ public class fuckingaround{
                 System.out.println("Player earned " + turnScore + " points.");
                 playerTurn();
                 }
-            }else{
+            }else if(rollAnswer == 0){
             currentTurn++;
             switchingPlayers();
-        }
+        } return turnScore;
     }
 
 
@@ -69,11 +68,12 @@ public class fuckingaround{
             pTwoTotal += turnScore;
             System.out.println("It's Player 1's turn");
         }
+        turnScore = 0;
         System.out.println(currentStateOfTheGame());
         playerTurn();
     }
 
-    private boolean getWinner(){
+    public boolean getWinner(){
         if (pOneTotal == 100) {
             System.out.println("Player 1 won!");
         } else if (pTwoTotal == 100) {
