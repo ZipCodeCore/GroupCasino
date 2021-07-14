@@ -18,9 +18,11 @@ public class CasinoAccountManager {
     public CasinoAccount getAccount(String accountName, String accountPassword) {
         for(int i = 0; i < accountList.size(); i++){
             CasinoAccount currentAccount = accountList.get(i);
-            if(currentAccount.getAccountName() == accountName &&
-               currentAccount.getPassword() == accountPassword){
-                return currentAccount;
+            String pass = currentAccount.getPassword();
+            String name = currentAccount.getAccountName();
+            if(name.equals(accountName))
+               if(pass.equals(accountPassword)){
+                   return currentAccount;
             } else {
                 System.out.println("Account Name or Password does not match. Are you really you?");
                 return null;
