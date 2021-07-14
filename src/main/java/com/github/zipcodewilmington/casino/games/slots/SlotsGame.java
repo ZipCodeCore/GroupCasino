@@ -1,18 +1,25 @@
 package com.github.zipcodewilmington.casino.games.slots;
 
 import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
+import java.net.Inet4Address;
 import java.util.Scanner;
 
 /**
  * Created by Nathan on 7/12/21
  */
-public class SlotsGame implements GameInterface {
+public class SlotsGame implements GameInterface{
     private Integer playerBetAmount;
+    private Integer betTotal;
+    private Integer loseMultiplier;
+    private Integer winMultiplier;
+    private PlayerInterface player;
 
     @Override
     public void add(PlayerInterface player) {
+        this.player = player;
 
     }
 
@@ -23,15 +30,22 @@ public class SlotsGame implements GameInterface {
 
     @Override
     public void run() {
-        Slots slotMachine = new Slots();
-        getBetAmount();
-        Integer[] selectedBets = getBetSelections();
-        slotMachine.spinSlots();
-        String[] betResults =  slotMachine.compareBetVsWinningLines(selectedBets);
-        calculateMultiplier(betResults);
-
+        Boolean quitGame = false;
+        while(quitGame = false) {
+            Slots slotMachine = new Slots();
+            getBetAmount();
+            Integer[] selectedBets = getBetSelections();
+            //takeBetTotalFromPlayerBalance();
+            slotMachine.spinSlots();
+            String[] betResults = slotMachine.compareBetVsWinningLines(selectedBets);
+            calculateMultiplier(betResults);
+            Integer winnings = calculateWinnings(this.winMultiplier, playerBetAmount);
+            Integer losings = calculateWinnings(this.loseMultiplier, playerBetAmount);
+            Integer returnTotal = calculateReturnTotal(winnings, losings);
+            //addMoneyToBalance(, returnTotal);
+            
+        }
     }
-
 
 
     private void getBetAmount() {
@@ -45,6 +59,8 @@ public class SlotsGame implements GameInterface {
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many lines do you want to bet on?");
         Integer numberOfLines = scanner.nextInt();
+        Integer totalCost = playerBetAmount * numberOfLines;
+        System.out.println("The total cost to play is " + totalCost);
 
         System.out.println(
         "************************************************************************\n" +
@@ -64,28 +80,37 @@ public class SlotsGame implements GameInterface {
     }
 
     private void calculateMultiplier(String[] betResults) {
-        Integer count = 0;
+        Integer countWin = 0;
+        Integer countLose = 0;
+        //Integer[] winVsLose = new Integer[2];
         for(String outcome: betResults){
             if(outcome.equals("Win")){
-                count++;
+                countWin++;
             } else {
-                count--;
+                countLose--;
             }
         }
+        this.winMultiplier = countWin;
+        this.loseMultiplier = countLose;
+    }
+
+    public Integer calculateReturnTotal(Integer winnings, Integer losings){
+          Integer returnTotal = this.betTotal + winnings - losings;
+          return returnTotal;
     }
 
     @Override
     public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
-        return null;
+        return multiplier * betAmount;
     }
 
     @Override
-    public void subtractBetFromBalance(Integer betAmount) {
-
+    public void subtractBetFromBalance(Integer losings) {
     }
 
     @Override
     public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
 
     }
+
 }

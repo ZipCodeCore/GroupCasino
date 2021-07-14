@@ -1,7 +1,6 @@
 package com.github.zipcodewilmington.casino;
 
 public class Player{
-
     String name;
     Double balance;
     Double currentBet = 0.0;
@@ -11,11 +10,9 @@ public class Player{
         this.balance = initialDeposit;
     }
 
-
     public String getName() {
         return name;
     }
-
 
     public Double getBalance() {
         return balance;
@@ -28,7 +25,6 @@ public class Player{
     public void setBalance(Double deposit) {
         this.balance = balance + deposit;
     }
-
 
     public Double makeBet(Double betAmount) {
         currentBet = betAmount;
