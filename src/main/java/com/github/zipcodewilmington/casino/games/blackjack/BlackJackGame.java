@@ -10,7 +10,7 @@ import com.github.zipcodewilmington.utils.IOConsole;
 public class BlackJackGame implements GameInterface, PlayerInterface {
     private Boolean isRunning = false;
     private PlayerInterface player;
-    Double userBet;
+    Integer userBet;
     IOConsole input = new IOConsole();
     boolean isWinner = false;
 
@@ -33,7 +33,11 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
 
             switch (userInput) {
                 case 1:
-                    this.userBet = Double.valueOf(input.getIntegerInput("How much would you like to bet?"));
+
+                    this.userBet = (input.getIntegerInput("How much would you like to bet?"));
+
+                    this.userBet = (input.getIntegerInput("How much would you like to bet?"));
+
                     // include betting forum in case 1
                     startGame();
                     break;
@@ -62,11 +66,14 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
                             isWinner = true;
                         } else if (bj.playerHitsBlackJack()) {
                             System.out.println("BLACK JACK!!");
-                            calculateWinnings(3.0, userBet);
+                            calculateWinnings(3, userBet);
                             isWinner = true;
                         }
                         break;
                     case 2:
+
+
+
 
                         bj.giveDealerCard();
                         System.out.println("The dealers first card : " + bj.dealersCurrentValue());
@@ -76,26 +83,15 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
                         break;
 
 
+
+
                 }
 
             }
         }
-    }
+    
 
-    @Override
-    public Double calculateWinnings(Double multiplier, Double betAmount) {
-        return multiplier * betAmount;
-    }
 
-    @Override
-    public void subtractBetFromBalance(Double betAmount) {
-
-    }
-
-    @Override
-    public void addMoneyToBalance(PlayerInterface Player, Double winnings) {
-
-    }
 
     @Override
     public CasinoAccount getArcadeAccount() {
@@ -105,5 +101,20 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
     @Override
     public <SomeReturnType> SomeReturnType play() {
         return null;
+    }
+
+    @Override
+    public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
+        return null;
+    }
+
+    @Override
+    public void subtractBetFromBalance(Integer betAmount) {
+
+    }
+
+    @Override
+    public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
+
     }
 }
