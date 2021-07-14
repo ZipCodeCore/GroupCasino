@@ -81,6 +81,8 @@ public class BeetleGame implements GameInterface {
         this.run();
     }
 
-
+    public Boolean getIsRunning(){
+        return this.isRunning;
+    }
 
 }
