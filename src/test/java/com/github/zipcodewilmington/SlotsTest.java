@@ -4,6 +4,8 @@ import com.github.zipcodewilmington.casino.games.slots.Slots;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 public class SlotsTest {
 
     @Test
@@ -73,4 +75,59 @@ public class SlotsTest {
         //then
         Assert.assertFalse(given.equals(retrieved));
     }
+
+    @Test
+    public void initializeWinningLinesTest(){
+        //given
+        Slots slot = new Slots();
+        String[] expected = {"LOSE","LOSE","LOSE","LOSE","LOSE","LOSE","LOSE","LOSE",};
+        HashMap initialWinningLines = slot.getWinningLines();
+        String[] returned = new String[8];
+        for (int i = 0; i < initialWinningLines.size(); i++) {
+            returned[i] = (String) initialWinningLines.get(i + 1);
+        }
+        //then
+        Assert.assertEquals(expected, returned);
+
+    }
+
+    @Test
+    public void setWinningLinesTest(){
+        //given
+        String[][] given =  {
+                {"Peach", "Peach", "Peach"},
+                {"Peach", "Peach", "Peach"},
+                {"Peach", "Peach", "Peach"}};
+        Slots slot = new Slots(given);
+        String[] expected = {"WIN","WIN","WIN","WIN","WIN","WIN","WIN","WIN"};
+        //when
+        slot.setWinningLines();
+        HashMap winningLines = slot.getWinningLines();
+        String[] returned = new String[8];
+        for (int i = 0; i < winningLines.size(); i++) {
+            returned[i] = (String) winningLines.get(i + 1);
+        }
+        //then
+        Assert.assertEquals(expected,returned);
+
+    }
+
+    @Test
+    public void compareBetVsWinningLinesTest(){
+        //given
+        String[][] given =  {
+                {"Peach", "Peach", "Peach"},
+                {"Peach", "Peach", "Peach"},
+                {"Peach", "Peach", "Peach"}};
+        Slots slot = new Slots(given);
+        slot.setWinningLines();
+        String[] expected = {"WIN","WIN","WIN","WIN","WIN","WIN","WIN","WIN"};
+        Integer [] bets = {1,2,3,4,5,6,7,8};
+        //when
+        String[] returned = slot.compareBetVsWinningLines(bets);
+        //then
+        Assert.assertEquals(expected, returned);
+    }
+
+
 }

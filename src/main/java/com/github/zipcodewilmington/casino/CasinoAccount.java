@@ -22,6 +22,10 @@ public class CasinoAccount {
 
 
 
+<<<<<<< HEAD
+=======
+feature/CasinoAccount
+>>>>>>> eb43adc5aea6f2808ae5192219035b42dfc3e7ff
     public String getPassword() {
         return password;
     }
