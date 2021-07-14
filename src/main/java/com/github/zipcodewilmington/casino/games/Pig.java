@@ -9,6 +9,7 @@ public class Pig {
   private static int playerTwo = 2;
   private static int playerOne = 1;
   private static int scoreToWin = 100;
+  private int currentTurn;
   private int dieValue;
   private int rollCounter = 0;
   private int turnScore;
@@ -24,6 +25,12 @@ public class Pig {
     //log player 2 in or create account
     //the rules
   }
+
+ public String currentStateOfTheGame(){
+    return "It is Player " +
+
+ }
+
 
   public void playerTurn(){
     System.out.println("Please enter 'r' to roll or 'h' to hold");
