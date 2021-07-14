@@ -26,6 +26,8 @@ public class BlackJack {
 
     public List<Integer> generateNewDeck() {
         Card card = new Card();
+        card.polishDeck();
+        card.shuffleDeck();
         return card.getCardPool();
     }
 
@@ -48,7 +50,6 @@ public class BlackJack {
     }
 
     public Integer playersCurrentValue() {
-        givePlayerCard();
         Integer sum = 0;
         for (int i = 0; i < this.playersHand.size(); i++) {
             sum += this.playersHand.get(i);
@@ -57,7 +58,6 @@ public class BlackJack {
     }
 
     public Integer dealersCurrentValue() {
-        giveDealerCard();
         Integer sum = 0;
         for (int i = 0; i < this.dealersHand.size(); i++) {
             sum += this.dealersHand.get(i);
@@ -85,7 +85,6 @@ public class BlackJack {
                 gameEnd = true;
             } else {
                 giveDealerCard();
-                System.out.println("The dealer has : " + dealersCurrentValue());
             }
         }
     }
@@ -97,7 +96,6 @@ public class BlackJack {
     }
 
     public boolean playerBreaks21() {
-
         if (playersCurrentValue() > 21) {
             return true;
         } else {
