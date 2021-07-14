@@ -67,12 +67,17 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
                         }
                         break;
                     case 2:
+
                         bj.giveDealerCard();
                         System.out.println("The dealers first card : " + bj.dealersCurrentValue());
                         bj.giveDealerCard();
                         System.out.println("The dealer has : " + bj.dealersCurrentValue());
                         bj.dealersGame();
                         break;
+
+
+                }
+
             }
         }
     }
