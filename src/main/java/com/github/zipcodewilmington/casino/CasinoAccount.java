@@ -21,7 +21,6 @@ public class CasinoAccount {
     }
 
 
-feature/CasinoAccount
     public String getPassword() {
         return password;
     }

@@ -8,8 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class PlinkoGame {
-    private Map<Integer,Double> moneyGenerator=new HashMap<Integer, Double>();
+public class PlinkoGame implements GameInterface,PlayerInterface {
+    private Map<Integer,Integer> moneyGenerator=new HashMap<Integer, Integer>();
+
     public int initialPosition;
     private double betAmount;
     public int multiplier;
@@ -44,18 +45,19 @@ public class PlinkoGame {
         }
     }
 
+    @Override
+    public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
+        moneyGenerator.put(1,200);
+        moneyGenerator.put(2,0);
+        moneyGenerator.put(3,3000);
+        moneyGenerator.put(4,30);
+        moneyGenerator.put(5,0);
+        moneyGenerator.put(6,0);
+        moneyGenerator.put(7,1);
+        moneyGenerator.put(8,750);
+        moneyGenerator.put(9,0);
+        Integer moneyWon=0;
 
-    public Double calculateWinnings2(Integer multiplier, Double betAmount) {
-        moneyGenerator.put(1,200.00);
-        moneyGenerator.put(2,0.00);
-        moneyGenerator.put(3,3000.00);
-        moneyGenerator.put(4,30.50);
-        moneyGenerator.put(5,0.00);
-        moneyGenerator.put(6,0.00);
-        moneyGenerator.put(7,1.00);
-        moneyGenerator.put(8,750.50);
-        moneyGenerator.put(9,0.00);
-        Double moneyWon=0.0;
         for (Integer pos:moneyGenerator.keySet())
         {
             if(pos.equals(multiplier)){
@@ -63,6 +65,28 @@ public class PlinkoGame {
             }
         }
         return moneyWon;
+    }
+
+
+
+    @Override
+    public void subtractBetFromBalance(Integer betAmount) {
+
+    }
+
+    @Override
+    public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
+
+    }
+
+    @Override
+    public CasinoAccount getArcadeAccount() {
+        return null;
+    }
+
+    @Override
+    public <SomeReturnType> SomeReturnType play() {
+        return null;
     }
 
 }
