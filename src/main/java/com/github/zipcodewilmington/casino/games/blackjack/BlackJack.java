@@ -7,21 +7,21 @@ import com.github.zipcodewilmington.casino.models.Card;
 
 import java.util.*;
 
-public class BlackJack implements GameInterface, PlayerInterface {
-    Card card = new Card();
+public class BlackJack  {
     List<Integer> playersHand;
+    List<Integer> playersHandOnSplit;
     List<Integer> dealersHand;
-    Deque<Integer> deckOfCards = new LinkedList<>(generateNewDeck(52));
+    Deque<Integer> deckOfCards;
 
     public BlackJack () {
         this.playersHand = new ArrayList<>();
+        this.playersHandOnSplit = new ArrayList<>();
         this.dealersHand = new ArrayList<>();
+        this.deckOfCards = new ArrayDeque<>(generateNewDeck());
     }
 
-    public List<Integer> generateNewDeck (Integer numberOfCards) {
-        card.createDeck(numberOfCards);
-        card.polishDeck();
-        card.shuffleDeck();
+    public List<Integer> generateNewDeck () {
+        Card card = new Card();
         return card.getCardPool();
     }
 
@@ -31,12 +31,50 @@ public class BlackJack implements GameInterface, PlayerInterface {
         return this.playersHand;
     }
 
+    public List<Integer> givePlayerCardOnSplit () {
+        Integer valueOfCard = deckOfCards.pop();
+        this.playersHandOnSplit.add(valueOfCard);
+        return this.playersHandOnSplit;
+    }
+
+    public List<Integer> giveDealerCard () {
+        Integer valueOfCard = deckOfCards.pop();
+        this.dealersHand.add(valueOfCard);
+        return this.dealersHand;
+    }
+
     public Integer playersCurrentValue () {
+        givePlayerCard();
         Integer sum = 0;
         for (int i = 0; i < this.playersHand.size(); i++) {
            sum += this.playersHand.get(i);
         }
         return sum;
+    }
+
+    public Integer dealersCurrentValue () {
+        giveDealerCard();
+        Integer sum = 0;
+        for (int i = 0; i < this.dealersHand.size(); i++) {
+            sum += this.dealersHand.get(i);
+        }
+        return sum;
+    }
+
+    public boolean playerBreaks21 () {
+        if (playersCurrentValue() > 21) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean playerHitsBlackJack () {
+        if (playersCurrentValue() == 21) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public List<Integer> getPlayersHand() {
@@ -53,45 +91,5 @@ public class BlackJack implements GameInterface, PlayerInterface {
 
     public void setDealersHand(List<Integer> dealersHand) {
         this.dealersHand = dealersHand;
-    }
-
-    @Override
-    public void add(PlayerInterface player) {
-
-    }
-
-    @Override
-    public void remove(PlayerInterface player) {
-
-    }
-
-    @Override
-    public void run() {
-
-    }
-
-    @Override
-    public Double calculateWinnings(Double multiplier, Double betAmount) {
-        return null;
-    }
-
-    @Override
-    public void subtractBetFromBalance(Double betAmount) {
-
-    }
-
-    @Override
-    public void addMoneyToBalance(PlayerInterface Player, Double winnings) {
-
-    }
-
-    @Override
-    public CasinoAccount getArcadeAccount() {
-        return null;
-    }
-
-    @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
     }
 }
