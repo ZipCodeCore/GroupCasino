@@ -16,6 +16,16 @@ public class CasinoAccountManager {
      * @return `ArcadeAccount` with specified `accountName` and `accountPassword`
      */
     public CasinoAccount getAccount(String accountName, String accountPassword) {
+        for(int i = 0; i < accountList.size(); i++){
+            CasinoAccount currentAccount = accountList.get(i);
+            if(currentAccount.getAccountName() == accountName &&
+               currentAccount.getPassword() == accountPassword){
+                return currentAccount;
+            } else {
+                System.out.println("Account Name or Password does not match. Are you really you?");
+                return null;
+            }
+        }
         String currentMethodName = new Object(){}.getClass().getEnclosingMethod().getName();
         String currentClassName = getClass().getName();
         String errorMessage = "Method with name [ %s ], defined in class with name [ %s ] has  not yet been implemented";
