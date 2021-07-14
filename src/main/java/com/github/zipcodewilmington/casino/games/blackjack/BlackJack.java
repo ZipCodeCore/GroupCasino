@@ -13,6 +13,8 @@ public class BlackJack  {
     List<Integer> dealersHand;
     Deque<Integer> deckOfCards;
 
+    Integer betAmount; // Equal to user input
+
     public BlackJack () {
         this.playersHand = new ArrayList<>();
         this.playersHandOnSplit = new ArrayList<>();
@@ -71,6 +73,15 @@ public class BlackJack  {
 
     public boolean playerHitsBlackJack () {
         if (playersCurrentValue() == 21) {
+            calculateWinnings(3, betAmount);
+        }
+    }
+
+    public void dealerConditions () {
+        if (dealersCurrentValue() > 21) {
+            calculateWinnings(2, betAmount); //Players winnings, not dealers (Player won)
+        } else if (dealersCurrentValue() <= 21 && dealersCurrentValue() > playersCurrentValue()) {
+            subtractBetFromBalance(betAmount);
             return true;
         } else {
             return false;
@@ -92,4 +103,45 @@ public class BlackJack  {
     public void setDealersHand(List<Integer> dealersHand) {
         this.dealersHand = dealersHand;
     }
+
+    @Override
+    public void add(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void run() {
+
+    }
+
+    @Override
+    public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
+        return null;
+    }
+
+    @Override
+    public void subtractBetFromBalance(Integer betAmount) {
+
+    }
+
+    @Override
+    public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
+
+    }
+
+    @Override
+    public CasinoAccount getArcadeAccount() {
+        return null;
+    }
+
+    @Override
+    public <SomeReturnType> SomeReturnType play() {
+        return null;
+    }
+
 }
