@@ -8,8 +8,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-public class CrapsTest {}
-
 public class CrapsTest {
 
     @Test
