@@ -6,14 +6,16 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Pig {
 
+  private static int playerTwo = 2;
+  private static int playerOne = 1;
   private static int scoreToWin = 100;
   private int dieValue;
-  private int rollCounter;
+  private int rollCounter = 0;
   private int turnScore;
   private int pOneTotal;
   private int pTwoTotal;
   private String rollAnswer = "0";
-  private char startTurn;
+  private String startTurn = "0";
   public Scanner input = new Scanner(System.in);
 
 
@@ -29,9 +31,15 @@ public class Pig {
     rollAnswer = input.nextLine();
     if(rollAnswer == "r"){
       dieValue = ThreadLocalRandom.current().nextInt(1, 7);
-      System.out.println("You rolled a " + dieValue);
     } if (dieValue == 1){
-
+        System.out.println("You rolled a 1; your turn is over and any banked points have been lost.");
+        System.out.println("Next player enter 'r' to roll the die!");
+        input.nextLine();
+        startTurn = input.nextLine();
+    }else{
+      System.out.println("You rolled a " + dieValue);
+      turnScore += dieValue;
+      rollCounter += 1;
     }
 
   }
