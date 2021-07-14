@@ -86,10 +86,6 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
         return null;
     }
 
-    @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
-    }
 
     @Override
     public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
