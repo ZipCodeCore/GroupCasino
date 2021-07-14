@@ -13,7 +13,7 @@ public class SlotsGame implements GameInterface{
     private Integer betTotal;
     private Integer loseMultiplier;
     private Integer winMultiplier;
-    private PlayerInterface currentPlayer;
+    private SlotsPlayer currentPlayer;
     private Slots slotMachine;
 
     public SlotsGame(){
@@ -22,7 +22,7 @@ public class SlotsGame implements GameInterface{
 
     @Override
     public void add(PlayerInterface player) {
-        this.currentPlayer = player;
+        this.currentPlayer = (SlotsPlayer) player;
     }
 
     @Override
@@ -40,19 +40,23 @@ public class SlotsGame implements GameInterface{
 
     @Override
     public void run() {
+        Scanner scanner = new Scanner(System.in);
         printWelcome();
         Slots newSlotMachine = new Slots();
         slotMachine = newSlotMachine;
+        System.out.println("Make a deposit to your account!");
+        Integer deposit = scanner.nextInt();
+        //add deposit to currentPlayer account
+        currentPlayer.setAccountTotal(deposit);
         slotMachine.displaySlots();
-        //addPlayer
 
-        Scanner scanner = new Scanner(System.in);
         Boolean quitGame = false;
         while(!quitGame) {
             getBetAmount();
             Integer[] selectedBets = getBetSelections();
-            //take money from player object
 
+            //take money from player object
+            currentPlayer.subtractFromTotal(betTotal);
 
             slotMachine.spinSlots();
             slotMachine.displaySlots();
@@ -64,7 +68,7 @@ public class SlotsGame implements GameInterface{
             Integer returnTotal = calculateReturnTotal(winnings, losings);
             System.out.println("\u001B[31mYou won: " + winnings + " dollars!\n");
             //add winning to player object
-
+            currentPlayer.addToTotal(winnings);
             System.out.println("\u001B[36mWould you like to play again?\n" +
                     "1. Yes   2. No");
             Integer input = scanner.nextInt();
@@ -97,8 +101,6 @@ public class SlotsGame implements GameInterface{
         Integer numberOfLines = scanner.nextInt();
         Integer totalCost = playerBetAmount * numberOfLines;
         System.out.println("\u001B[31mTotal cost to play:       " + totalCost);
-        //function to subtract this total from player's wallet
-
         setBetTotal(totalCost);
 
         System.out.println(
