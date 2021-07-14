@@ -7,7 +7,7 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.utils.IOConsole;
 
 
-public class BlackJackGame implements GameInterface, PlayerInterface {
+public class BlackJackGame implements GameInterface { //, PlayerInterface {
     private Boolean isRunning = false;
     private PlayerInterface player;
     Integer userBet;

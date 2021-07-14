@@ -8,7 +8,7 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Keno implements GameInterface, PlayerInterface {
+public class Keno implements GameInterface{ //, PlayerInterface {
     int playerNumbers[] = new int[15];
     int computerGeneratedNumbers[] = new int[20];
     int kenoSpot, kenoCatch;
@@ -219,8 +219,8 @@ public class Keno implements GameInterface, PlayerInterface {
 
     }
 
-    @Override
-    public CasinoAccount getArcadeAccount() {
-        return null;
-    }
+//    @Override
+//    public CasinoAccount getArcadeAccount() {
+//        return null;
+//    }
 }
