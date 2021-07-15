@@ -8,6 +8,8 @@ public class Beetle{
     private Integer[][] playerBeetles;
     private Integer[] scoreboard;
     private Integer numPlayers;
+    private Integer lastDiceRolls[] = new Integer[2];
+
 
     public Beetle(Integer numPlayers){
         this.numPlayers = numPlayers;
@@ -57,7 +59,7 @@ public class Beetle{
 
     public void setPlayerBeetles(Integer player, Integer diceRoll) {
         this.playerBeetles[player][diceRoll - dice.getNumDice()]++;
-        //return this.checkWinner(player);
+        this.lastDiceRolls[player] = diceRoll;
     }
 
     public void nextPlayer(){
@@ -106,6 +108,10 @@ public class Beetle{
                 return false;
         }
         return true;
+    }
+
+    public Integer getLastDiceRoll(Integer index){
+        return this.lastDiceRolls[index];
     }
 
     public Integer getScore(Integer player){

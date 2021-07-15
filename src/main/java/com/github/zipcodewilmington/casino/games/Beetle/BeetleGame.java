@@ -41,9 +41,13 @@ public class BeetleGame implements GameInterface {
             this.executeTurn();
             this.isGameOver(this.game.checkWinner(this.game.getCurrentPlayer()));
         }
+        console.newLine();
+        console.println("Final Beetle results: ");
         this.printBeetleCards();
+        console.newLine();
         this.printWinnerMessage();
         console.println("Your payout is: " + this.determinePayout().toString());
+        console.pressEnterToProceed();
     }
 
     public void initGame(){
@@ -56,9 +60,11 @@ public class BeetleGame implements GameInterface {
     }
 
     public void printBeetleCards(){
-            console.print("\u001B[32m Your Beetle:  ");
+            console.print("\u001B[32m Your last dice roll: " + game.getLastDiceRoll(0));
+            console.print( "  Your Beetle:  ");
             console.println(game.printBeetle(0));
-            console.print("\u001B[32m Dealer's Beetle:  ");
+            console.print("\u001B[32m Dealer's last dice roll: " + game.getLastDiceRoll(1));
+            console.print("  Dealer's Beetle:  ");
             console.println(game.printBeetle(1));
     }
 
@@ -153,6 +159,7 @@ public class BeetleGame implements GameInterface {
         } else {
             console.println("Dealer wins...");
         }
+        console.newLine();
     }
 
 }
