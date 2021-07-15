@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class PlinkoGame implements GameInterface{
     private Map<Integer,Integer> moneyGenerator=new HashMap<Integer, Integer>();
-
+    private PlayerInterface playerInt;
     public int initialPosition;
     private int bet;
     public int multiplier;
@@ -34,6 +34,7 @@ public class PlinkoGame implements GameInterface{
         Scanner input = new Scanner(System.in);
         printWelcome();
         balance = 100; //Start the player off with some money
+        balance=playerInt.getArcadeAccount().getAccountBalance();
         boolean continueGame=true;
         Integer playerNumber;
         String userInput;
@@ -49,6 +50,7 @@ public class PlinkoGame implements GameInterface{
             System.out.println("\u001B[32mAfter playing, now your position is: "+plinkSpot);
             balance += payout(plinkSpot);
             subtractBetFromBalance(bet);
+            playerInt.getArcadeAccount().alterAccountBalance(balance);
             System.out.println("\u001B[32mYou now have: $" + balance);
             if (balance <= 0)
             {

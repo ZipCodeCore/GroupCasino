@@ -28,6 +28,7 @@ public class KenoGame implements GameInterface {
     public void run() {
         Scanner input = new Scanner(System.in);
         printWelcome();
+        balance=100;
         balance = playerInt.getArcadeAccount().getAccountBalance(); //Start the player off with some money
         int playerNums[] = new int[15];
         int computerNums[] = new int[20];
@@ -52,8 +53,8 @@ public class KenoGame implements GameInterface {
             System.out.println("\u001B[32mCatch: " + (kenoCatch + 1));
             System.out.println("\u001B[32mYou have won: $"+payout(kenoSpot,kenoCatch,bet));
             balance += payout(kenoSpot, kenoCatch, bet);
-
             subtractBetFromBalance(bet);
+            playerInt.getArcadeAccount().alterAccountBalance(balance);
             System.out.println("\u001B[32mYou now have: $" + balance);
             if (balance <= 0)
             {
@@ -129,7 +130,7 @@ public class KenoGame implements GameInterface {
                     else
                     {
                         invalidInput = true;
-                        System.out.println("\u001B[32mSorry, the number you entered is either less than 0 or greater than 79");
+                        System.out.println("\u001B[32mSorry, the number you entered is either less than 0 or greater than 80");
                         System.out.println("\u001B[32mTry again");
                         System.out.println("");
                     }
