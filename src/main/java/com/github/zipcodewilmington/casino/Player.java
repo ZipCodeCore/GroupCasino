@@ -2,6 +2,8 @@ package com.github.zipcodewilmington.casino;
 
 public class Player implements PlayerInterface{
     //retains the information about player including balance once game is over
+
+
      String name;
      String password;
      float balance;
@@ -14,6 +16,7 @@ public class Player implements PlayerInterface{
         this.currentBet = currentBet;
     }
 
+
     @Override
     public CasinoAccount getArcadeAccount() {
         return null;
@@ -23,6 +26,7 @@ public class Player implements PlayerInterface{
     public <SomeReturnType> SomeReturnType play() {
         return null;
     }
+
     public String getName() {
         return name;
     }
@@ -54,6 +58,7 @@ public class Player implements PlayerInterface{
     public void setCurrentBet(float currentBet) {
         this.currentBet = currentBet;
     }
+
 
 
 
