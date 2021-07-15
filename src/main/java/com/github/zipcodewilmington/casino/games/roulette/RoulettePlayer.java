@@ -59,11 +59,6 @@ public class RoulettePlayer implements GamblingPlayer {
         return 0;
     }
 
-    void placeOutsideBet(){}
 
-    void placeInsideBet(){}
-    public RouletteBet placeBet(){
-        return null;
-    }
 
 }

@@ -1,6 +1,8 @@
 package com.github.zipcodewilmington.casino.games.roulette;
 import com.github.zipcodewilmington.casino.GambleableGame;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+
+import java.awt.*;
 import java.util.List;
 import com.github.zipcodewilmington.casino.objects.RouletteBet;
 import com.github.zipcodewilmington.casino.objects.Wheel;
@@ -9,19 +11,37 @@ import java.util.Scanner;
 public class RouletteGame implements GambleableGame {
     String gameName;
     Wheel wheel;
-    List<PlayerInterface> activePlayers;
     RoulettePlayer player;
 
-    public RouletteGame(String gameName, List<PlayerInterface> activePlayers, RoulettePlayer player) {
+
+    public RouletteGame(String gameName, RoulettePlayer player) {
         this.gameName = gameName;
-        this.activePlayers = activePlayers;
         this.player = player;
+
     }
+
+
+    @Override
+    public void run() {
+
+
+    }
+
+    public int spinWheel(){
+        int winningNumber = wheel.getSpinValue();
+        return winningNumber;
+    }
+
+
+    public String getColorValue(int winningNum){
+        return null;
+
+    }
+
+
 
     @Override
     public void add(PlayerInterface player) {
-        activePlayers.add(this.player);
-
 
     }
 
@@ -30,12 +50,7 @@ public class RouletteGame implements GambleableGame {
 
     }
 
-    @Override
-    public void run() {
-        wheel.getSpinValue();
 
-
-    }
 
     @Override
     public int getNumberOfPlayers() {
@@ -44,7 +59,7 @@ public class RouletteGame implements GambleableGame {
 
     @Override
     public boolean playerWins() {
-        Scanner scanner = new Scanner(System.in);
+
         //return (userInput == wheel.getSpinValue());
         return false;
 
@@ -55,6 +70,11 @@ public class RouletteGame implements GambleableGame {
         return false;
     }
 
+    public int evaluateInsideBet(int bet){
+        return 0;
+
+
+    }
 
     public float calculateWinnings(RouletteBet bet){
        return 0;
