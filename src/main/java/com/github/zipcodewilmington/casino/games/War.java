@@ -15,12 +15,6 @@ import java.util.Scanner;
 
 public class War implements GameInterface {
 
-    public static void main(String[] args) {
-        System.out.println("taco");
-
-    }
-
-
     private Deck deck;
     private WarPlayer player1;
     private WarPlayer player2;
@@ -46,11 +40,28 @@ public class War implements GameInterface {
         //shuffle deck
         deck.shuffle();
 
-        //give players hands (26 cards or half the deck)
+        //create players hands
         player1.setWarHand(new Hand());
         player2.setWarHand(new Hand());
 
-//        public void dealWarHands() {
+        //deal cards (26 each hand/ (deck))
+        public void dealHand(){
+            for (int i = 0; i < 26; i++) {
+
+                 = array[i];
+
+            }
+        }
+
+        dealHand(player1.getWarHand());
+        dealHand(player2.getWarHand());
+
+
+
+        //initial game winner
+        WarPlayer winner = null;
+
+//          public void dealWarHands() {
 //            for (int i = 0; i < 26; i++) {
 //                if (i % 2 == 0) {
 //                    playerDeck[i / 2] = deck;
@@ -61,7 +72,7 @@ public class War implements GameInterface {
 //
 //        }
 
-        WarPlayer winner = null;
+
 
 
 

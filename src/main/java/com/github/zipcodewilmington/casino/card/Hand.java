@@ -22,6 +22,10 @@ public class Hand {
         this.warHand = warHand;
     }
 
+    public Hand getWarHand() {
+        return this.warHand;
+    }
+
     public ArrayList<Card> getHand() {
 
         return hand;
@@ -61,6 +65,12 @@ public class Hand {
 
     public void addCardsToTop(List<Card> warHand) { //add all cards to hand (deck) array
         this.warCards.addAll(warHand);
+    }
+
+    public void combineHand(Hand pile) {
+        for (Card warCard : pile.warCards) {
+            this.putCardOnBottom(warCard);
+        }
     }
 
     public List<Card> takeCards(int takeCards) {

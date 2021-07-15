@@ -21,6 +21,9 @@ public class WarPlayer extends Player {
         this.hand = hand;
     }
 
+    public Hand getWarHand() {
+        return this.warHand;
+
     public Player WarPlayer() {
         return this.player;
     }
