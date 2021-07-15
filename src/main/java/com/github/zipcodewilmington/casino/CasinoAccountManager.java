@@ -29,8 +29,10 @@ public class CasinoAccountManager {
             if (casinoAccount.getUsername().equals(accountName) && casinoAccount.getPassword().equals(accountPassword)) {
                 return casinoAccount;
             }
+            else if (!casinoAccounts.contains(casinoAccount.getUsername()) && !casinoAccounts.contains(casinoAccount.getPassword())) {
+                console.println("No account found with name of [ %s ] and password of [ %s ]", accountName, accountPassword);
+            }
         }
-        console.println("There is no Casino Account with that username and password");
         return casinoAccount;
     }
 
@@ -41,12 +43,13 @@ public class CasinoAccountManager {
      * @param accountPassword password of account to be created
      * @return new instance of `ArcadeAccount` with specified `accountName` and `accountPassword`
      */
-    public CasinoAccount createAccount(String accountName, String accountPassword, Integer accountAge, Double accountBalance) {
+    public CasinoAccount createAccount(String accountName, String accountPassword, Integer accountAge, Integer accountBalance) {
         //String currentMethodName = new Object(){}.getClass().getEnclosingMethod().getName();
         //String currentClassName = getClass().getName();
         //String errorMessage = "Method with name [ %s ], defined in class with name [ %s ] has  not yet been implemented";
         //throw new RuntimeException(String.format(errorMessage, currentMethodName, currentClassName));
-        casinoAccount = new CasinoAccount(accountName, accountPassword, accountAge, accountBalance);
+        CasinoAccount casinoAccount = new CasinoAccount(accountName, accountPassword, accountAge, accountBalance);
+        casinoAccounts.add(casinoAccount);
         return casinoAccount;
     }
 

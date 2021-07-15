@@ -12,8 +12,8 @@ public class KenoPlayerTest {
     @Test
     public void constructorTest() {
         // Given
-        CasinoAccount expectedCasinoAccount = new CasinoAccount("Zach", "Kitto", 22, 2000.0);
-        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000.0);
+        CasinoAccount expectedCasinoAccount = new CasinoAccount("Zach", "Kitto", 22, 2000);
+        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000);
         KenoGame kenoGame = new KenoGame();
         KenoPlayer kenoPlayer = new KenoPlayer(expectedCasinoAccount, kenoGame);
 
@@ -27,8 +27,8 @@ public class KenoPlayerTest {
     @Test
     public void checkHowManyMatchTest() {
         // Given
-        CasinoAccount casinoAccount1 = new CasinoAccount("Zach", "Kitto", 22, 2000.0);
-        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000.0);
+        CasinoAccount casinoAccount1 = new CasinoAccount("Zach", "Kitto", 22, 2000);
+        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000);
         KenoGame kenoGame = new KenoGame();
         KenoPlayer kenoPlayer = new KenoPlayer(casinoAccount1, kenoGame);
 
@@ -43,8 +43,8 @@ public class KenoPlayerTest {
     @Test
     public void outcomeOfGameTest() {
         // Given
-        CasinoAccount casinoAccount1 = new CasinoAccount("Zach", "Kitto", 22, 2000.0);
-        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000.0);
+        CasinoAccount casinoAccount1 = new CasinoAccount("Zach", "Kitto", 22, 2000);
+        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000);
         KenoGame kenoGame = new KenoGame();
         KenoPlayer kenoPlayer = new KenoPlayer(casinoAccount1, kenoGame);
 

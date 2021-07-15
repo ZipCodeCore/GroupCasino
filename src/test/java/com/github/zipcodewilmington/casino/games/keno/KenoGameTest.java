@@ -15,7 +15,7 @@ public class KenoGameTest {
     @Test
     public void addTest() {
         // Given
-        CasinoAccount casinoAccount = new CasinoAccount("Zach", "Kitto", 22, 2000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("Zach", "Kitto", 22, 2000);
         KenoGame kenoGame = new KenoGame();
         PlayerInterface expectedPlayer = new KenoPlayer(casinoAccount, kenoGame);
 
@@ -30,8 +30,8 @@ public class KenoGameTest {
     @Test
     public void removeTest() {
         // Given
-        CasinoAccount casinoAccount1 = new CasinoAccount("Zach", "Kitto", 22, 2000.0);
-        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000.0);
+        CasinoAccount casinoAccount1 = new CasinoAccount("Zach", "Kitto", 22, 2000);
+        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000);
         KenoGame kenoGame = new KenoGame();
         PlayerInterface player1 = new KenoPlayer(casinoAccount1, kenoGame);
         PlayerInterface player2 = new KenoPlayer(casinoAccount2, kenoGame);
@@ -50,8 +50,8 @@ public class KenoGameTest {
     /*@Test
     public void runTest() {
         // Given
-        CasinoAccount casinoAccount1 = new CasinoAccount("Zach", "Kitto", 22, 2000.0);
-        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000.0);
+        CasinoAccount casinoAccount1 = new CasinoAccount("Zach", "Kitto", 22, 2000);
+        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000);
         KenoGame kenoGame = new KenoGame();
         KenoPlayer player1 = new KenoPlayer(casinoAccount1, kenoGame);
         KenoPlayer player2 = new KenoPlayer(casinoAccount2, kenoGame);
@@ -73,8 +73,8 @@ public class KenoGameTest {
     @Test
     public void getPlayerTest() {
         // Given
-        CasinoAccount casinoAccount1 = new CasinoAccount("Zach", "Kitto", 22, 2000.0);
-        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000.0);
+        CasinoAccount casinoAccount1 = new CasinoAccount("Zach", "Kitto", 22, 2000);
+        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000);
         KenoGame kenoGame = new KenoGame();
         KenoPlayer player1 = new KenoPlayer(casinoAccount1, kenoGame);
         KenoPlayer player2 = new KenoPlayer(casinoAccount2, kenoGame);
@@ -93,8 +93,8 @@ public class KenoGameTest {
     @Test
     public void getPlayersTest() {
         // Given
-        CasinoAccount casinoAccount1 = new CasinoAccount("Zach", "Kitto", 22, 2000.0);
-        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000.0);
+        CasinoAccount casinoAccount1 = new CasinoAccount("Zach", "Kitto", 22, 2000);
+        CasinoAccount casinoAccount2 = new CasinoAccount("Mack", "Kitto", 22, 2000);
         KenoGame kenoGame = new KenoGame();
         KenoPlayer player1 = new KenoPlayer(casinoAccount1, kenoGame);
         KenoPlayer player2 = new KenoPlayer(casinoAccount2, kenoGame);
