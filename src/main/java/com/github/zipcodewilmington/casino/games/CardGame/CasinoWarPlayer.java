@@ -8,21 +8,27 @@ public class CasinoWarPlayer implements PlayerInterface {
     IOConsole console = new IOConsole();
     CasinoWar currentGame;
     String determineWinner;
+    private CasinoAccount casinoRobinAccount;
 
-    public CasinoWarPlayer(CasinoWar currentGame){
+    public CasinoWarPlayer(CasinoAccount casinoRobinAccount){
 
-        this.currentGame=currentGame;
+        this.casinoRobinAccount=casinoRobinAccount;
     }
 
 
     @Override
     public CasinoAccount getArcadeAccount() {
-        return null;
+        return this.casinoRobinAccount;
     }
 
     @Override
     public <SomeReturnType> void play() {
         determineWinner= currentGame.determineWinner();
+
+    }
+
+    @Override
+    public void setArcadeAccount(CasinoAccount casinoAccount) {
 
     }
 }
