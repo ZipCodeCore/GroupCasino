@@ -49,16 +49,9 @@ public class BlackJackGameTest {
 //        Assert.assertEquals(expected, actual);
 //    }
 
-    @Test
-    public void addMoneyToBalanceTest () {
-
-        BlackJackGame bj = new BlackJackGame();
-
-    }
 
     @Test
     public void splitPlayerHitsBlackJack () {
-        BlackJackGame bj = new BlackJackGame();
-
+        
     }
 }

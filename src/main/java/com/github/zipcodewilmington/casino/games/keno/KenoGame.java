@@ -1,12 +1,14 @@
 package com.github.zipcodewilmington.casino.games.keno;
 
 import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
 import java.util.Random;
 import java.util.Scanner;
 
 public class KenoGame implements GameInterface {
+    private PlayerInterface playerInt;
     Integer multiplier;
     KenoPlayer kenoPlayer;
     KenoGame kenoGame;
@@ -26,7 +28,7 @@ public class KenoGame implements GameInterface {
     public void run() {
         Scanner input = new Scanner(System.in);
         printWelcome();
-        balance = 100; //Start the player off with some money
+        balance = playerInt.getArcadeAccount().getAccountBalance(); //Start the player off with some money
         int playerNums[] = new int[15];
         int computerNums[] = new int[20];
         int kenoSpot, kenoCatch;
@@ -50,6 +52,7 @@ public class KenoGame implements GameInterface {
             System.out.println("\u001B[32mCatch: " + (kenoCatch + 1));
             System.out.println("\u001B[32mYou have won: $"+payout(kenoSpot,kenoCatch,bet));
             balance += payout(kenoSpot, kenoCatch, bet);
+
             subtractBetFromBalance(bet);
             System.out.println("\u001B[32mYou now have: $" + balance);
             if (balance <= 0)
