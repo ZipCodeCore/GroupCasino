@@ -1,7 +1,4 @@
 package com.github.zipcodewilmington.casino.games.cards;
-import com.github.zipcodewilmington.casino.*;
-import com.github.zipcodewilmington.casino.PlayerInterface;
-import com.github.zipcodewilmington.casino.objects.Card;
 import com.github.zipcodewilmington.casino.objects.Deck;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
