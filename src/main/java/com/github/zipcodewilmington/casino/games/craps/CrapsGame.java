@@ -10,6 +10,36 @@ import static com.github.zipcodewilmington.casino.objects.Dice.roll;
 public class CrapsGame implements GambleableGame {
 
     //public static void main(String[] args) {
+
+    @Override
+    public void add(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
+    @Override
+    public int getNumberOfPlayers() {
+        return 0;
+    }
+
+    @Override
+    public boolean playerWins() {
+        return false;
+    }
+
+    @Override
+    public boolean playerLoses() {
+        return false;
+    }
+
+    @Override
+    public void clearGame() {
+
+    }
         @Override
         public void run() {
 
@@ -47,35 +77,7 @@ public class CrapsGame implements GambleableGame {
                 }
             }
         }
-    @Override
-    public void add(PlayerInterface player) {
 
-    }
-
-    @Override
-    public void remove(PlayerInterface player) {
-
-    }
-
-    @Override
-    public int getNumberOfPlayers() {
-        return 0;
-    }
-
-    @Override
-    public boolean playerWins() {
-        return false;
-    }
-
-    @Override
-    public boolean playerLoses() {
-        return false;
-    }
-
-    @Override
-    public void clearGame() {
-
-    }
 
 
 }
