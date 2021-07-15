@@ -8,7 +8,7 @@ public class Beetle{
     private Integer[][] playerBeetles;
     private Integer[] scoreboard;
     private Integer numPlayers;
-    private Integer lastDiceRolls[] = new Integer[2];
+    private Integer lastDiceRolls[] = {0, 0};
 
 
     public Beetle(Integer numPlayers){
@@ -66,10 +66,6 @@ public class Beetle{
         this.currentPlayer = (this.currentPlayer + 1) % this.numPlayers;
     }
 
-    public void refreshBeetle(Integer player){
-        this.playerBeetles[player] = new Integer[] {0, 0, 0, 0, 0, 0};
-    }
-
     public String printBeetle(Integer player){
         Integer[] currentBeetle = this.getPlayerBeetles()[player];
         String output = "Body:";
@@ -91,12 +87,6 @@ public class Beetle{
     public Boolean checkWinner(Integer player){
         if(this.beetleIsComplete(player)){
             return true;
-            //this.scoreboard[player] += 6;
-            //if(this.getScore(player) == 30){
-                //return true;
-            //} else {
-                //this.refreshBeetle(player);
-            //}
         }
         return false;
     }
