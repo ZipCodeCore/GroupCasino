@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 public class KenoGame {
 
+
     private ArrayList<Integer> numbers = new ArrayList<>();  //list that holds numbers to guess from
     private ArrayList<Integer> winNumbers = new ArrayList<>();  //list that holds the winning numbers
 
@@ -17,25 +18,17 @@ public class KenoGame {
 
     Scanner sc = new Scanner(System.in);
 
-    public ArrayList<Integer> setKenoGame(){
-        //create the array of answers to guess from
-
+    //create the array of answers to guess from
+    //will create numbers from 1 to 80
+    public ArrayList<Integer> guessNumbers(){
         for(int i = 1; i <= 80; i++){
             numbers.add(i);
         }
         return numbers;
     }
-    //generate winning numbers to play
-    public ArrayList<Integer> generateNumbers(){
 
-        while (winNumbers.size() < 20){
-            int winNum = (int)(Math.random() * 80 + 1);
-            if (winNumbers.indexOf(winNum) == -1){
-                winNumbers.add(winNum);
-            }
-        }
-        return winNumbers;
-    }
+    //will be all of the numbers that the user entered this function initially sets all the numbers in the array to 0
+    //
      public int[] userInput(){
         boolean player = true;
         boolean invalidNumber = true;
@@ -57,11 +50,8 @@ public class KenoGame {
                     invalidNumber = true;
                 }
             }
-
         }
-
-
-         return playerNumbers;
+        return playerNumbers;
      }
 
     //check whether the number is unique or not
@@ -89,6 +79,22 @@ public class KenoGame {
             }
         }
         return computerNum;
+
+    }
+
+    //return the catch which is how many of user's number matched to the computer's
+    public int getCatch(int[] playerNumber, int[] computerNumber){
+
+        int kenoCatch = 0;
+        for (int i = 0; i < playerNumber.length; i++){
+            for (int j = 0; j < computerNumber.length; j++){
+                if(playerNumber[i] == computerNumber[j]){
+                    kenoCatch++;
+                }
+            }
+        }
+        return kenoCatch;
+
 
     }
 

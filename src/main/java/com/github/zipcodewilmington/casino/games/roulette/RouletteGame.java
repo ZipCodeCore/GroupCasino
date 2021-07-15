@@ -1,6 +1,6 @@
-package com.github.zipcodewilmington.casino.games.roulette;
+ package com.github.zipcodewilmington.casino.games.roulette;
 
-<<<<<<< HEAD
+
 import com.github.zipcodewilmington.casino.GambleableGame;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
@@ -12,7 +12,7 @@ public class RouletteGame implements GambleableGame {
 
     @Override
     public void add(PlayerInterface player) {
-=======
+
 import com.github.zipcodewilmington.casino.*;
 import com.github.zipcodewilmington.casino.objects.RouletteBet;
 import com.github.zipcodewilmington.casino.objects.Wheel;
@@ -35,7 +35,7 @@ public class RouletteGame implements GambleableGame {
     @Override
     public void add(PlayerInterface player) {
         activePlayers.add(this.player);
->>>>>>> 666a7ebd027305c66dc5c3332249a92bb4ffd763
+
 
     }
 
@@ -46,10 +46,10 @@ public class RouletteGame implements GambleableGame {
 
     @Override
     public void run() {
-<<<<<<< HEAD
-=======
+
+
         wheel.getSpinValue();
->>>>>>> 666a7ebd027305c66dc5c3332249a92bb4ffd763
+
 
     }
 
@@ -60,14 +60,14 @@ public class RouletteGame implements GambleableGame {
 
     @Override
     public boolean playerWins() {
-<<<<<<< HEAD
+
         return false;
-=======
+
         Scanner scanner = new Scanner(System.in);
         //return (userInput == wheel.getSpinValue());
         return false;
 
->>>>>>> 666a7ebd027305c66dc5c3332249a92bb4ffd763
+
     }
 
     @Override
@@ -75,20 +75,22 @@ public class RouletteGame implements GambleableGame {
         return false;
     }
 
-<<<<<<< HEAD
-=======
+
+
     public float calculateWinnings(RouletteBet bet){
        return 0;
     }
 
->>>>>>> 666a7ebd027305c66dc5c3332249a92bb4ffd763
+
     @Override
     public void clearGame() {
 
     }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 666a7ebd027305c66dc5c3332249a92bb4ffd763
+
+
+
 }
+
+

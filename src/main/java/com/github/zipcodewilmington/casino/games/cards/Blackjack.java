@@ -1,11 +1,11 @@
 package com.github.zipcodewilmington.casino.games.cards;
 
-<<<<<<< HEAD
+
 import com.github.zipcodewilmington.casino.*;
-=======
+
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
->>>>>>> JFeature
+
 import com.github.zipcodewilmington.casino.objects.Deck;
 
 import java.util.List;
