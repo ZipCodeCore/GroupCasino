@@ -2,6 +2,8 @@ package com.github.zipcodewilmington.casino.games.Beetle;
 
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.utils.AnsiColor;
+import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.ArrayList;
 
@@ -10,6 +12,7 @@ public class BeetleGame implements GameInterface {
     private Beetle game;
     private Boolean isRunning = false;
     private PlayerInterface player;
+    private IOConsole console = new IOConsole();
 
     public BeetleGame(PlayerInterface... players){
         this.game = new Beetle(players.length);
@@ -17,7 +20,14 @@ public class BeetleGame implements GameInterface {
             this.add(players[i]);
         }
     }
-
+    private void printWelcome() {
+        System.out.println(
+                AnsiColor.YELLOW + "***********************************\n" +
+                        "***                             ***\n" +
+                        "******   WELCOME TO BEETLE   ******\n" +
+                        "***                             ***\n" +
+                        "***********************************");
+    }
     public void add(PlayerInterface player){
         players.add(player);
     }
@@ -34,6 +44,7 @@ public class BeetleGame implements GameInterface {
      * specifies how the game will run
      */
     public void run(){
+        printWelcome();
         Integer turnCount = 0;
         game.setCurrentPlayer(-1);
         this.isRunning = true;
