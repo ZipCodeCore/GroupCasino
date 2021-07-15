@@ -3,6 +3,7 @@ package com.github.zipcodewilmington.casino.games.blackjack;
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
 
@@ -12,6 +13,7 @@ public class BlackJackGame implements GameInterface {
     Integer userBet;
     Integer splitBet;
     IOConsole input = new IOConsole();
+    IOConsole blue = new IOConsole(AnsiColor.BLUE);
     Integer winnings = 0;
     BlackJack bj;
 
@@ -28,14 +30,14 @@ public class BlackJackGame implements GameInterface {
     }
 
     public void run() {
-        System.out.println("\u001B[36m============================================================");
-        System.out.println("\u001B[36m=====                                                  =====");
-        System.out.println("\u001B[36m=====                     WELCOME                      =====");
-        System.out.println("\u001B[36m=====                       TO                         =====");
-        System.out.println("\u001B[36m=====                    B L A C K                     =====");
-        System.out.println("\u001B[36m=====                     J A C K                      =====");
-        System.out.println("\u001B[36m=====                                                  =====");
-        System.out.println("\u001B[36m============================================================");
+        blue.println("============================================================" + "\n" +
+         "=====                                                  =====" + "\n" +
+         "=====                     WELCOME                      =====" + "\n" +
+         "=====                       TO                         =====" + "\n" +
+         "=====                    B L A C K                     =====" + "\n" +
+         "=====                     J A C K                      =====" + "\n" +
+         "=====                                                  =====" + "\n" +
+         "============================================================");
         while(!isRunning) {
             // include betting range
             playerInt.getArcadeAccount().alterAccountBalance(winnings);
