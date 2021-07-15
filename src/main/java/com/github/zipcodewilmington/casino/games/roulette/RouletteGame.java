@@ -53,5 +53,9 @@ public class RouletteGame {
         }losings = bet - bet;
 
     }
-
-}
+    public void bettingOnASpecificNumber(int num){
+        if(ball==num){
+            winnings = bet + bet*2;
+        }losings = bet - bet;
+        }
+    }
