@@ -4,10 +4,13 @@ import com.github.zipcodewilmington.casino.GambleableGame;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
+import java.util.Scanner;
+
 import static com.github.zipcodewilmington.casino.objects.Dice.roll;
 
 //GambleableGame and GamblingPlayer
 public class CrapsGame implements GambleableGame {
+    Scanner playerInput = new Scanner(String.valueOf(System.console()));
 
     //public static void main(String[] args) {
 
@@ -43,7 +46,6 @@ public class CrapsGame implements GambleableGame {
         @Override
         public void run() {
 
-
             System.out.println("Shooter, Roll The Dice!");
             int score = roll();
 
@@ -61,7 +63,8 @@ public class CrapsGame implements GambleableGame {
                 int point = score;
                 System.out.println("\nPoint = " + point);
                 while (true) {
-                    System.out.println("\nNext Roll");
+                    System.out.println("\nEnter 1 to roll again" + "\nEnter 2 to quit game");
+                    this.playerInput.nextLine();
                     score = roll();
 
                     System.out.println("\nNew Score = " + score);
