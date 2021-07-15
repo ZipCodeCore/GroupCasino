@@ -16,10 +16,6 @@ public interface GameInterface extends Runnable {
      */
     void remove(PlayerInterface player);
 
-    /**
-     * specifies how the game will run
-     */
-    void run();
 
     int getNumberOfPlayers();
 

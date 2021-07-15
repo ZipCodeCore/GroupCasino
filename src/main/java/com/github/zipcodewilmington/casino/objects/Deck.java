@@ -5,10 +5,13 @@ import java.util.LinkedList;
 
 public class Deck {
 
+    private final int NUM_DECKS = 1;
     public LinkedList<Card> deck;
 
-    public Deck() {
+    public Deck(int NUM_DECKS) {
+        deck = new LinkedList<>();
     }
+
 
     public void populateDeck() {
         CardRank[] ranks = {CardRank.TWO, CardRank.THREE, CardRank.FOUR,
@@ -18,10 +21,13 @@ public class Deck {
         CardSuit[] suits = {CardSuit.CLUBS, CardSuit.DIAMONDS, CardSuit.HEARTS,
                 CardSuit.SPADES};
 
-        for (int i = 0; i < 52; i++) {
-                deck.add(new Card(ranks[i/4], suits[i%4]));
+
+        for (int i = 0; i < NUM_DECKS - 1; i++) {
+            for (int j = 0; j < 52; i++)
+                deck.add(new Card(ranks[i / 4], suits[i % 4]));
         }
     }
+
 
     public void shuffleDeck() {
         Collections.shuffle(deck);

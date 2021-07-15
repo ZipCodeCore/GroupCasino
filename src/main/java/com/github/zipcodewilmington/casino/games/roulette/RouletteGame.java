@@ -1,9 +1,14 @@
+
+ package com.github.zipcodewilmington.casino.games.roulette;
+
+
+
 package com.github.zipcodewilmington.casino.games.roulette;
 
 import com.github.zipcodewilmington.casino.GambleableGame;
 import com.github.zipcodewilmington.casino.PlayerInterface;
-
 import java.util.List;
+
 
 public class RouletteGame implements GambleableGame {
     List<RoulettePlayer> activePlayers;
@@ -11,6 +16,29 @@ public class RouletteGame implements GambleableGame {
 
     @Override
     public void add(PlayerInterface player) {
+
+import com.github.zipcodewilmington.casino.*;
+
+import com.github.zipcodewilmington.casino.objects.RouletteBet;
+import com.github.zipcodewilmington.casino.objects.Wheel;
+import java.util.Scanner;
+
+public class RouletteGame implements GambleableGame {
+    String gameName;
+    Wheel wheel;
+    List<PlayerInterface> activePlayers;
+    RoulettePlayer player;
+
+    public RouletteGame(String gameName, List<PlayerInterface> activePlayers, RoulettePlayer player) {
+        this.gameName = gameName;
+        this.activePlayers = activePlayers;
+        this.player = player;
+    }
+
+    @Override
+    public void add(PlayerInterface player) {
+        activePlayers.add(this.player);
+
 
     }
 
@@ -22,6 +50,12 @@ public class RouletteGame implements GambleableGame {
     @Override
     public void run() {
 
+
+
+
+        wheel.getSpinValue();
+
+
     }
 
     @Override
@@ -31,7 +65,18 @@ public class RouletteGame implements GambleableGame {
 
     @Override
     public boolean playerWins() {
+
+
         return false;
+
+
+        Scanner scanner = new Scanner(System.in);
+        //return (userInput == wheel.getSpinValue());
+        return false;
+
+
+
+
     }
 
     @Override
@@ -39,8 +84,26 @@ public class RouletteGame implements GambleableGame {
         return false;
     }
 
+
+
+
+
+    public float calculateWinnings(RouletteBet bet){
+       return 0;
+    }
+
+
     @Override
     public void clearGame() {
 
     }
+
+
+
+
+
+
+
 }
+
+
