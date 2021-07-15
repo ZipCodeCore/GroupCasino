@@ -1,13 +1,11 @@
 package com.github.zipcodewilmington.casino.games.cards;
 
-import com.github.zipcodewilmington.casino.GameInterface;
-import com.github.zipcodewilmington.casino.Player;
-import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.*;
 import com.github.zipcodewilmington.casino.objects.Deck;
 
 import java.util.ArrayList;
 
-public class Blackjack implements GameInterface {
+public class Blackjack implements GambleableGame, GamblingPlayer {
 
     ArrayList<Player> players;
     Deck deck;
@@ -56,4 +54,38 @@ public class Blackjack implements GameInterface {
     }
 
 
+    @Override
+    public void increaseBet(float raise) {
+
+    }
+
+    @Override
+    public void decreaseBet(float deposit) {
+
+    }
+
+    @Override
+    public float amountWagered() {
+        return 0;
+    }
+
+    @Override
+    public float amountWon() {
+        return 0;
+    }
+
+    @Override
+    public float payOut() {
+        return 0;
+    }
+
+    @Override
+    public CasinoAccount getArcadeAccount() {
+        return null;
+    }
+
+    @Override
+    public <SomeReturnType> SomeReturnType play() {
+        return null;
+    }
 }
