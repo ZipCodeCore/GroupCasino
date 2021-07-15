@@ -1,5 +1,8 @@
 package com.github.zipcodewilmington.casino.games.keno;
 
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -10,10 +13,7 @@ import java.util.Scanner;
 public class KenoGame {
 
 
-    private ArrayList<Integer> numbers = new ArrayList<>();  //list that holds numbers to guess from
-    private ArrayList<Integer> winNumbers = new ArrayList<>();  //list that holds the winning numbers
-
-
+    private ArrayList<Integer> nums = new ArrayList<>();  //list that holds numbers to guess from
 
 
     Scanner sc = new Scanner(System.in);
@@ -22,9 +22,9 @@ public class KenoGame {
     //will create numbers from 1 to 80
     public ArrayList<Integer> guessNumbers(){
         for(int i = 1; i <= 80; i++){
-            numbers.add(i);
+            nums.add(i);
         }
-        return numbers;
+        return nums;
     }
 
     //will be all of the numbers that the user entered this function initially sets all the numbers in the array to 0
