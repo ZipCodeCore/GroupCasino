@@ -17,6 +17,7 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
     Player player;
 
 
+
     public BlackJackGame () {
 
     }
@@ -27,7 +28,7 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
 
 
     public void remove(PlayerInterface player) {
-        player = null;
+
     }
 
 
@@ -42,15 +43,15 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
         System.out.println("\u001B[36m============================================================");
         while(!isRunning) {
             // include betting range
-
+            playerInt.getArcadeAccount().alterAccountBalance(winnings);
+            System.out.println("Your current balance is... " +  playerInt.getArcadeAccount().getAccountBalance());
             Integer userInput = input.getIntegerInput("\u001B[32m1. Start A Hand" + "\n" + "\u001B[31m2. Quit" + "\n");
             switch (userInput) {
                 case 1:
                     BlackJack freshHand = new BlackJack();
                     bj = freshHand;
-                    this.userBet = (input.getIntegerInput("\u001B[32mHow much would you like to bet?"));
-            //        subtractBetFromBalance(userBet);
-            //        System.out.println("You bet " + player.getBalance());
+                    userBet = (input.getIntegerInput("\u001B[32mHow much would you like to bet?"));
+                    playerInt.getArcadeAccount().alterAccountBalance(userBet * (-1));
                     startGame();
                     break;
                 case 2:
@@ -107,7 +108,7 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
 
 
     public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
-        winnings = multiplier * 4;
+        winnings = multiplier * betAmount;
         return winnings;
     }
 
@@ -118,20 +119,19 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
 
 
     public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
-        this.player.setBalance(player.getBalance() + winnings);
+
     }
 
     private void splitPlayerHitsBlackJack(Integer splitBet) {
         System.out.println("BLACK JACK!!");
         calculateWinnings(3, splitBet);
-        addMoneyToBalance(this.player, calculateWinnings(3, splitBet));
         standardGame();
     }
 
     private void splitPlayerBust(Integer splitBet) {
         System.out.println("Sorry bud, you got " + bj.splitPlayersCurrentValue() +
                 ", you still have one more hand!");
-        subtractBetFromBalance(splitBet);
+        calculateWinnings(0, splitBet);
         standardGame();
     }
 
@@ -141,11 +141,11 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
         if(bj.playersCurrentValue() > 21) {
             System.out.println("Sorry bud, you got " + bj.playersCurrentValue() +
                     ", better luck next time");
-            subtractBetFromBalance(userBet);
+            calculateWinnings(0, userBet);
             isWinner = true;
         } else if (bj.playerHitsBlackJack()) {
             System.out.println("BLACK JACK!!");
-            addMoneyToBalance(this.player, calculateWinnings(3, userBet));
+            calculateWinnings(3, userBet);
             isWinner = true;
         }
         return isWinner;

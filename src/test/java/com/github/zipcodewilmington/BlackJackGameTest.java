@@ -13,7 +13,6 @@ import java.util.List;
 public class BlackJackGameTest {
 
     @Test
-
     public void runTest () {
         //Player player = new Player("Roger", 5000);
     }
@@ -60,6 +59,6 @@ public class BlackJackGameTest {
     @Test
     public void splitPlayerHitsBlackJack () {
         BlackJackGame bj = new BlackJackGame();
-        
+
     }
 }
