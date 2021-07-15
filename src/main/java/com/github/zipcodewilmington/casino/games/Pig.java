@@ -1,6 +1,9 @@
 package com.github.zipcodewilmington.casino.games;
 //package com.github.zipcodewilmington.utils;
 
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -10,7 +13,9 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+
 import static com.github.zipcodewilmington.casino.PigMenus.welcomeScreen;
+
 
 public class Pig implements GameInterface {
   public static void main(String[] args){
@@ -129,7 +134,19 @@ public class Pig implements GameInterface {
     }
 
   }
+
+  public void add(PlayerInterface player) {
+
   }
+
+  public void remove(PlayerInterface player) {
+
+  }
+
+  public void run() {
+
+  }
+}
 
 
 
