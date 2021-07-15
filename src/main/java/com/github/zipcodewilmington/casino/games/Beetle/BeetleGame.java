@@ -20,7 +20,7 @@ public class BeetleGame implements GameInterface {
     }
 
     public void add(PlayerInterface player){
-        players.add(player);
+        this.player = player;
     }
 
     /**
@@ -35,20 +35,30 @@ public class BeetleGame implements GameInterface {
      * specifies how the game will run
      */
     public void run(){
+        this.initGame();
+        while(this.isRunning){
+            this.nextPlayer();
+            this.executeTurn();
+            this.isGameOver(this.game.checkWinner(this.game.getCurrentPlayer()));
+        }
+        this.printBeetleCards();
+        this.printWinnerMessage();
+    }
+
+    public void initGame(){
         printWelcome();
         console.newLine();
-        this.setBetAmt(console.getIntegerInput("Place your bet"));
+        this.setBetAmt(printBalanceAndBetText());
         Integer turnCount = 0;
         game.setCurrentPlayer(-1);
         this.isRunning = true;
-        while(isRunning){
-            turnCount++;
-            this.nextPlayer();
-            //game.getDice().tossAndSum();
-            executeTurn();
-             isGameOver(game.checkWinner(game.getCurrentPlayer()));
-        }
-        System.out.println("game over after, player " + game.getCurrentPlayer() + " wins");
+    }
+
+    public void printBeetleCards(){
+            console.print("\u001B[32m Your Beetle:  ");
+            console.println(game.printBeetle(0));
+            console.print("\u001B[32m Dealer's Beetle:  ");
+            console.println(game.printBeetle(1));
     }
 
     public void isGameOver(boolean playerWon){
@@ -62,6 +72,11 @@ public class BeetleGame implements GameInterface {
 
     public void executeTurn(){
         Integer currentPlayer = game.getCurrentPlayer();
+        if(game.getCurrentPlayer() == 0){
+            this.printBeetleCards();
+            console.println("Press enter to roll next dice");
+            console.pressEnterToProceed();
+        }
         game.setPlayerBeetles(currentPlayer, game.getDice().tossAndSum());
     }
 
@@ -116,11 +131,19 @@ public class BeetleGame implements GameInterface {
     }
 
 
-    public void printBalanceAndBetText(){
+    public Integer printBalanceAndBetText(){
         console.newLine();
         console.println("\u001B[35m Current account balance:        " + this.player.getArcadeAccount().getAccountBalance());
         console.newLine();
-        
+        return console.getIntegerInput("\u001B[34m How much do you want to bet?");
+    }
+
+    public void printWinnerMessage(){
+        if(this.game.getCurrentPlayer() == 0){
+            console.println("You win!");
+        } else {
+            console.println("Dealer wins...");
+        }
     }
 
 }

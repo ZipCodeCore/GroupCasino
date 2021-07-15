@@ -74,4 +74,8 @@ public class IOConsole {
     public void newLine(){
         this.output.println();
     }
+
+    public void pressEnterToProceed(){
+        this.input.nextLine();
+    }
 }

@@ -68,15 +68,33 @@ public class Beetle{
         this.playerBeetles[player] = new Integer[] {0, 0, 0, 0, 0, 0};
     }
 
+    public String printBeetle(Integer player){
+        Integer[] currentBeetle = this.getPlayerBeetles()[player];
+        String output = "Body:";
+        output += (currentBeetle[0].equals(0)) ? "0  " : "X  ";
+        output += "Head:";
+        output += (currentBeetle[1].equals(0)) ? "0  " : "X  ";
+        output += "Legs:";
+        output += (currentBeetle[2].equals(0)) ? "0  " : "X  ";
+        output += "Eyes:";
+        output += (currentBeetle[3].equals(0)) ? "0  " : "X  ";
+        output += "Antenna:";
+        output += (currentBeetle[4].equals(0)) ? "0  " : "X  ";
+        output += "Tail:";
+        output += (currentBeetle[5].equals(0)) ? "0  " : "X  ";
+
+        return output;
+    }
 
     public Boolean checkWinner(Integer player){
         if(this.beetleIsComplete(player)){
-            this.scoreboard[player] += 6;
-            if(this.getScore(player) == 30){
-                return true;
-            } else {
-                this.refreshBeetle(player);
-            }
+            return true;
+            //this.scoreboard[player] += 6;
+            //if(this.getScore(player) == 30){
+                //return true;
+            //} else {
+                //this.refreshBeetle(player);
+            //}
         }
         return false;
     }
