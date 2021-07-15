@@ -20,6 +20,8 @@ public class RouletteBoard {
             List<Integer> boardBlack = Arrays.asList(black);
             List<Integer> boardRed = Arrays.asList(red);
     }
+    public void
+
 
 
 
