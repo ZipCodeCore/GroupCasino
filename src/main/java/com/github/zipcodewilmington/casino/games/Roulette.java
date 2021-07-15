@@ -1,11 +1,13 @@
 package com.github.zipcodewilmington.casino.games;
 
 import com.github.zipcodewilmington.Casino;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.player.RoulettePlayer;
 
 import java.util.*;
 
-public class Roulette {
+public class Roulette implements GameInterface{
     public static void main(String[] arg) {
         Roulette roulette = new Roulette();
         playRoulette();
@@ -261,5 +263,17 @@ public class Roulette {
         playerSelection();
         keyboardInput.nextLine();
         playRoulette();
+    }
+
+    public void add(PlayerInterface player) {
+
+    }
+
+    public void remove(PlayerInterface player) {
+
+    }
+
+    public void run() { playRoulette();
+
     }
 }
