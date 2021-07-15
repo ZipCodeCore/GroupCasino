@@ -1,6 +1,7 @@
 package com.github.zipcodewilmington.casino.games.roulette;
 
 import com.github.zipcodewilmington.casino.*;
+import com.github.zipcodewilmington.casino.objects.RouletteBet;
 import com.github.zipcodewilmington.casino.objects.Wheel;
 
 import java.util.List;
@@ -42,12 +43,19 @@ public class RouletteGame implements GambleableGame {
 
     @Override
     public boolean playerWins() {
+        Scanner scanner = new Scanner(System.in);
+        //return (userInput == wheel.getSpinValue());
         return false;
+
     }
 
     @Override
     public boolean playerLoses() {
         return false;
+    }
+
+    public float calculateWinnings(RouletteBet bet){
+       return 0;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.github.zipcodewilmington.casino.games.roulette;
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GamblingPlayer;
 import com.github.zipcodewilmington.casino.Player;
+import com.github.zipcodewilmington.casino.objects.RouletteBet;
 
 public class RoulettePlayer implements GamblingPlayer {
     Player player;
@@ -47,6 +48,10 @@ public class RoulettePlayer implements GamblingPlayer {
     @Override
     public float payOut() {
         return 0;
+    }
+
+    public RouletteBet placeBet(){
+        return null;
     }
 
 
