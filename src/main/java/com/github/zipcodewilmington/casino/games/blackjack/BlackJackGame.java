@@ -17,10 +17,31 @@ public class BlackJackGame implements GameInterface {
 
 
     /* Stuck in loop from split back to main hand against dealer
+
+        run() -> hand -> standard game -> hit/stay -> dealersGame() ---- loop starts, dealers final value gets
+        returned as the "starting value" for the "next hand" - run through main to blackjack to see
+
+        somewhere in there the program isn't terminating to the originally starting point -- walk the program down
+
+        reorder the 'helper' methods for more clarity
+
+    * refine the format for the splitHandBet (potentially add it to the 'userBet')
+        * only condition - if one hand wins and the other loses
+        * maybe an if statement at the 'playerInt.getAccountBalance().alterAccountBalance()' to execute for splitBet as well
+    * betting restraints if the user falls below zero
+    * If time available, include the conditional on aces being 11 or 1 depending on the currentPlayerValue()
+        * if (currentPlayerValue() > 21) {
+            for (int i = 0; i < playersHand.size(); i++) {
+                if (playersHand.get(i).equalsTo(11)) {
+                    playersHand.set(i, 1);
+                }
+            }
+            return playersCurrentValue;---(playersCurrentValue should be under 21 if there was an 11 in there. however,
+                                            that changes all values that were 11 to 1; would need to change just one value
+        }
     * need formatting on splitHand
     * need refinement on formatting the beginning
     * make it flashy
-    * betting restraints if the user falls below zero
     */
 
     public BlackJackGame () {
