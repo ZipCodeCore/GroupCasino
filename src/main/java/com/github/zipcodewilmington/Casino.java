@@ -3,6 +3,7 @@ package com.github.zipcodewilmington;
 import com.github.zipcodewilmington.casino.*;
 import com.github.zipcodewilmington.casino.games.Beetle.BeetleGame;
 import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
+import com.github.zipcodewilmington.casino.games.keno.KenoGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
 import com.github.zipcodewilmington.casino.games.plinko.PlinkoGame;
@@ -100,6 +101,12 @@ public class Casino implements Runnable {
                 break;
             case "numberguess":
                 gameObject = new NumberGuessGame();
+                break;
+            case "plinko":
+                gameObject = new PlinkoGame();
+                break;
+            case "keno":
+                gameObject = new KenoGame();
                 break;
             default:
                 gameObject = new BeetleGame();
