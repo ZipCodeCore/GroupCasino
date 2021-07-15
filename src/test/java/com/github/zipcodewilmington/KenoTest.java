@@ -7,7 +7,7 @@ import org.junit.Test;
 public class KenoTest {
     @Test
     public void testRun(){
-        Player player=new Player("Dipinti",3000);
+        //Player player=new Player("Dipinti",3000);
         Keno keno=new Keno();
         int[] playerNums={80,23,31,14,54,36,72,18,91,1,11,12,13,14,44};
         keno.setPlayerNumbers(playerNums);
