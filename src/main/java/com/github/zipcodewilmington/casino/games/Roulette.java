@@ -74,18 +74,22 @@ public class Roulette {
                 playerBetsNumber();
                 placeBet();
                 getWinningsByNumber();
+                break;
             case 2:
                 playerBetsColumn();
                 placeBet();
                 getWinningsByColumn();
+                break;
             case 3:
                 playerBetsEvensOdds();
                 placeBet();
                 getWinningsByEvenOdds();
+                break;
             case 4:
                 playerBetsColor();
                 placeBet();
                 getWinningsByColor();
+                break;
             case 5:
                 ;
         }
@@ -113,8 +117,8 @@ public class Roulette {
     public static String playerBetsEvensOdds() {
         System.out.println("Please select even or odds");
         Scanner keyboardInput = new Scanner(System.in);
-        playerStringSelection = keyboardInput.nextLine();
-        if(playerStringSelection == "even" || playerStringSelection == "odds") {
+        playerStringSelection = keyboardInput.next();
+        if(playerStringSelection.equals("even") || playerStringSelection.equals("odds")) {
             playerEvenOrOddChoice = playerStringSelection;
         } else playerBetsEvensOdds();
         return playerEvenOrOddChoice;
@@ -123,8 +127,8 @@ public class Roulette {
     public static String playerBetsColor() {
         System.out.println("Please select red or black");
         Scanner keyboardInput = new Scanner(System.in);
-        playerStringSelection = keyboardInput.nextLine();
-        if(playerStringSelection == "red" || playerStringSelection == "black") {
+        playerStringSelection = keyboardInput.next();
+        if(playerStringSelection.equals("red") || playerStringSelection.equals("black")) {
             playerColorChoice = playerStringSelection;
         } else playerBetsColor();
         return playerColorChoice;
@@ -156,6 +160,14 @@ public class Roulette {
     }
 
     public static String spinWheelGetColor() {
+        Map<Integer, String> wheelValues = new HashMap<Integer, String>();
+        for (Integer i = 1; i <= 36; i++) {
+            if (i % 2 == 0) {
+                wheelValues.put(i, "red");
+            } else {
+                wheelValues.put(i, "black");
+            }
+        }
         int numberValue = spinWheelGetNumber();
         return wheelValues.get(numberValue);
     }
@@ -164,10 +176,10 @@ public class Roulette {
         int winningNumber = spinWheelGetNumber();
         if (winningNumber == playerNumberChoice) {
             bet = bet * 35;
-            System.out.printf("You win! $%f has been added to your balance", bet);
+            System.out.printf("You win! $%d has been added to your balance", bet);
         } else {
             bet = 0 - bet;
-            System.out.println("Bad luck. Try again next time.");
+            System.out.printf("Bad luck. The number was %d. Try again?", winningNumber);
         }
         return bet;
     }
@@ -182,53 +194,72 @@ public class Roulette {
         if(playerColumnChoice == 1) {
             if(Arrays.asList(column1Arr).contains(winningNumber)){
                 bet = bet*2;
-                System.out.printf("You win! $%f has been added to your balance", bet);
+                System.out.printf("You win! $%d has been added to your balance", bet);
             } else {
                 bet = 0 - bet;
-                System.out.println("Bad luck. Try again next time.");
+                System.out.printf("Bad luck. The number was %d. Try again?", winningNumber);
             }
         }
         if(playerColumnChoice == 2) {
             if(Arrays.asList(column2Arr).contains(winningNumber)) {
                 bet = bet*2;
-                System.out.printf("You win! $%f has been added to your balance", bet);
+                System.out.printf("You win! $%d has been added to your balance", bet);
             } else {
                 bet = 0 - bet;
-                System.out.println("Bad luck. Try again next time.");
+                System.out.printf("Bad luck. The number was %d. Try again?", winningNumber);
             }
         }
         if(playerColumnChoice == 3) {
             if(Arrays.asList(column3Arr).contains(winningNumber)) {
                 bet = bet*2;
-            } else bet = 0 - bet;
+                System.out.printf("You win! $%d has been added to your balance", bet);
+            } else {
+                bet = 0 - bet;
+                System.out.printf("Bad luck. The number was %d. Try again?", winningNumber);
+            }
         }
         return bet;
     }
 
     public static int getWinningsByEvenOdds() {
         int winningNumber = spinWheelGetNumber();
-        if(playerEvenOrOddChoice == "even") {
+        if(playerEvenOrOddChoice.equals("even")) {
             if(winningNumber % 2 == 0) {
-                return bet;
-            } else bet = 0 - bet;
-        } else if(playerEvenOrOddChoice == "odds") {
+                bet = bet;
+                System.out.printf("You win! $%d has been added to your balance", bet);
+            } else {
+                bet = 0 - bet;
+                System.out.printf("Bad luck. The number was %d. Try again?", winningNumber);
+            }
+        } else if(playerEvenOrOddChoice.equals("odds")) {
             if(winningNumber % 2 != 0) {
-                return bet;
-            } else bet = 0 - bet;
+                bet = bet;
+                System.out.printf("You win! $%d has been added to your balance", bet);
+            } else {
+                bet = 0 - bet;
+                System.out.printf("Bad luck. The number was %d. Try again?", winningNumber);
+            }
         }
         return bet;
     }
 
     public static int getWinningsByColor() {
         String winningColor = spinWheelGetColor();
-        if(playerColorChoice == winningColor) {
-            return bet;
-        } else bet = 0 - bet;
+        if(playerColorChoice.equals(winningColor)) {
+            bet = bet;
+            System.out.printf("You win! $%d has been added to your balance", bet);
+        } else {
+            bet = 0 - bet;
+            System.out.printf("Bad luck. The color was %s. Try again?", winningColor);
+        }
         return bet;
     }
 
     public static void playRoulette() {
+        Scanner keyboardInput = new Scanner(System.in);
         rouletteWelcomeScreen();
         playerSelection();
+        keyboardInput.nextLine();
+        playRoulette();
     }
 }

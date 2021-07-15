@@ -5,8 +5,6 @@ import com.github.zipcodewilmington.casino.games.Pig;
 
 public class PigPlayer extends Player{
 
-/*
-
 
     private Casino casino = new Casino();
     private Pig pigGame = new Pig();
@@ -32,5 +30,4 @@ public class PigPlayer extends Player{
         }
     }
 
-*/
 }
