@@ -31,11 +31,12 @@ public class Casino implements Runnable {
                 boolean isValidLogin = casinoAccount != null;
                 if (isValidLogin) {
                     this.casinoAccount = casinoAccount;
-                    this.player = new Player(accountName, 500);
+                    casinoAccount.alterAccountBalance(500);
+                    this.player = new Player(accountName, casinoAccount);
                     this.player.setArcadeAccount(casinoAccount);
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
                     if (gameSelectionInput.equals("SLOTS")) {
-                        play(new SlotsGame(), new SlotsPlayer());
+                        play(new SlotsGame(), new SlotsPlayer(this.player));
 
 
                     } else if (gameSelectionInput.equals("NUMBERGUESS")) {

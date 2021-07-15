@@ -9,7 +9,7 @@ public class BlackJackGameTest {
 
     @Test
     public void runTest () {
-        Player player = new Player("Roger", 5000);
+        //Player player = new Player("Roger", 5000);
         BlackJackGame bj = new BlackJackGame();
 
         Integer userInput = 1;
