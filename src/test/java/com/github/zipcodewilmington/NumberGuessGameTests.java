@@ -11,7 +11,6 @@ public class NumberGuessGameTests {
         NumberGuessGame game = new NumberGuessGame();
         Integer actual = game.getMaxNumber();
         Integer expected = 20;
-
         Assert.assertEquals(actual, expected);
     }
 
@@ -30,7 +29,7 @@ public class NumberGuessGameTests {
         NumberGuessGame game = new NumberGuessGame();
         Integer guessedNumber = 10;
         Integer actualNumber = 5;
-        Integer actual = game.getGuessRange(guessedNumber, actualNumber);
+        Double actual = game.getGuessRange(guessedNumber, actualNumber);
         Integer expected = 5;
 
         Assert.assertEquals(actual, expected);

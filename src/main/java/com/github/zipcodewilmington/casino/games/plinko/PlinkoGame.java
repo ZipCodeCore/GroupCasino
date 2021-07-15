@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class PlinkoGame implements GameInterface{ //,PlayerInterface {
+public class PlinkoGame implements GameInterface{
     private Map<Integer,Integer> moneyGenerator=new HashMap<Integer, Integer>();
 
     public int initialPosition;
