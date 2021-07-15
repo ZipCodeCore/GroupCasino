@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington.casino.objects;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -12,6 +13,11 @@ public class Deck {
         deck = new LinkedList<>();
     }
 
+    public static void main(String[] args) {
+        Deck deck = new Deck(1);
+        deck.populateDeck();
+        System.out.println(deck);
+    }
 
     public void populateDeck() {
         CardRank[] ranks = {CardRank.TWO, CardRank.THREE, CardRank.FOUR,
@@ -22,9 +28,9 @@ public class Deck {
                 CardSuit.SPADES};
 
 
-        for (int i = 0; i < NUM_DECKS - 1; i++) {
-            for (int j = 0; j < 52; i++)
-                deck.add(new Card(ranks[i / 4], suits[i % 4]));
+        for (int i = 0; i < NUM_DECKS; i++) {
+            for (int j = 0; j < 52; j++)
+                deck.add(new Card(ranks[j / 4], suits[j % 4]));
         }
     }
 
