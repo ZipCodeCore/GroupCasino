@@ -5,9 +5,9 @@ import com.github.zipcodewilmington.utils.IOConsole;
 
 public class CasinoWar extends Deck implements GameInterface {
 
-    CardHand playerHand;
-    CardHand dealerHand;
-    Deck deck = new Deck(1);
+   private CardHand playerHand;
+   private CardHand dealerHand;
+   Deck deck = new Deck(1);
 
     public CasinoWar(int numberOfDecks) {
         super(numberOfDecks);
