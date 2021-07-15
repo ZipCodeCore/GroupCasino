@@ -19,6 +19,10 @@ public class CasinoAccount {
         this.balance = balance;
     }
 
+    public CasinoAccount() {
+
+    }
+
     public String getUsername() {
         return username;
     }
