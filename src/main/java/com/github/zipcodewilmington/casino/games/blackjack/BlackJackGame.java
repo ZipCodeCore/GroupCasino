@@ -87,19 +87,16 @@ public class BlackJackGame implements GameInterface {
     }
 
     public void startGame () {
-        boolean blackJack = false;
-        while (!blackJack) {
             bj.givePlayerCard();
             System.out.println("Your starting card : " + bj.playersCurrentValue());
             System.out.println("Your second next card : " + bj.givePlayerCard());
             System.out.println("Hand value : " + bj.playersCurrentValue());
             if (twoCardBlackJack()) {
-                blackJack = true;
+                calculateWinnings(3, userBet);
             } else if (bj.playersHand.get(0).equals(bj.playersHand.get(1))) {  // include conditional on starting blackjack!
                 splitPlayer();
             } else {
                 standardGame();
-            }
         }
     }
 
@@ -118,8 +115,10 @@ public class BlackJackGame implements GameInterface {
             Integer userChoice = input.getIntegerInput("1. Hit" + "\n" + "2. Stay");
             switch (userChoice) {
                 case 1:
-                    checkStandardWinner(isWinner);
-                    isWinner = true;
+                    bj.givePlayerCard();
+                    if (checkStandardWinner()) {
+                        isWinner = true;
+                    }
                     break;
                 case 2:
                     bj.giveDealerCard();
@@ -179,20 +178,22 @@ public class BlackJackGame implements GameInterface {
         standardGame();
     }
 
-    private boolean checkStandardWinner(boolean isWinner) {
-        bj.givePlayerCard();
+    private boolean checkStandardWinner() {
+        boolean playerWon;
         System.out.println("Current hand value " + bj.playersCurrentValue());
         if(bj.playersCurrentValue() > 21) {
             System.out.println("Sorry bud, you got " + bj.playersCurrentValue() +
                     ", better luck next time");
             calculateWinnings(0, userBet);
-            isWinner = true;
+            playerWon = true;
         } else if (playerHitsBlackJack()) {
             System.out.println("BLACK JACK!!");
             calculateWinnings(3, userBet);
-            isWinner = true;
+            playerWon = true;
+        } else {
+            playerWon = false;
         }
-        return isWinner;
+        return playerWon;
     }
 
     private Integer secondHandBet() {
