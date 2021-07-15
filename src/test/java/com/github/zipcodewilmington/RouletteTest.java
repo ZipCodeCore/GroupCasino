@@ -1,21 +1,22 @@
 package com.github.zipcodewilmington;
 
+import com.github.zipcodewilmington.casino.games.Roulette;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class RouletteTest {
-    @Test
-    public void numberToColorValue() {
-        Map<Integer, String> wheelValues = new HashMap<Integer, String>();
-        for (Integer i = 1; i <= 36; i++) {
-            if (i % 2 == 0) {
-                wheelValues.put(i, "red");
-            } else {
-                wheelValues.put(i, "black");
-            }
-        }
-        System.out.println(wheelValues);
-    }
+//
+//    @Test
+//    public void testGetPlayerIntSelection() {
+//        //given
+//        int expected = 5;
+//        //when
+//        Roulette roulette = new Roulette("Roland");
+//        int actual = roulette.getPlayerIntSelection();
+//        //then
+//        Assert.assertEquals(expected, actual);
+//    }
 }
