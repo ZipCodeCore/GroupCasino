@@ -10,4 +10,9 @@ public class BlackJackPlayerTest {
     public void blackJackPlayerTest () {
 
     }
+
+    @Test
+    public void getArcadeAccountTest () {
+
+    }
 }
