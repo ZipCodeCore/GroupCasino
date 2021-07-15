@@ -2,12 +2,11 @@ package com.github.zipcodewilmington.casino.objects;
 
 public class RouletteBet {
 
-    private int insideBet;
-    private String outsideBet;
+    private int bet;
 
     public RouletteBet() {
-        this.insideBet = 0;
-        this.outsideBet = null;
+        this.bet = 0;
+
     }
 
 
@@ -65,5 +64,7 @@ public class RouletteBet {
         }
         return array;
     }
-
+    public Integer[] winningColumn(int outsideBet){
+    return null;
+    }
 }
