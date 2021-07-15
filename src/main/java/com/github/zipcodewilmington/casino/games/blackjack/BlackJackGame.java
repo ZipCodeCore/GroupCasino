@@ -2,21 +2,26 @@ package com.github.zipcodewilmington.casino.games.blackjack;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GameInterface;
-import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.utils.IOConsole;
 
 
-public class BlackJackGame implements GameInterface { //, PlayerInterface {
+public class BlackJackGame implements GameInterface {
     private Boolean isRunning = false;
     private PlayerInterface playerInt;
     Integer userBet;
+    Integer splitBet;
     IOConsole input = new IOConsole();
     Integer winnings = 0;
     BlackJack bj;
-    Player player;
 
 
+    /* Stuck in loop from split back to main hand against dealer
+    * need formatting on splitHand
+    * need refinement on formatting the beginning
+    * make it flashy
+    * betting restraints if the user falls below zero
+    */
 
     public BlackJackGame () {
 
@@ -44,13 +49,13 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
         while(!isRunning) {
             // include betting range
             playerInt.getArcadeAccount().alterAccountBalance(winnings);
-            System.out.println("Your current balance is... " +  playerInt.getArcadeAccount().getAccountBalance());
+            System.out.println("Your current balance is... " +  playerInt.getArcadeAccount().getAccountBalance() + "\n");
             Integer userInput = input.getIntegerInput("\u001B[32m1. Start A Hand" + "\n" + "\u001B[31m2. Quit" + "\n");
             switch (userInput) {
                 case 1:
                     BlackJack freshHand = new BlackJack();
                     bj = freshHand;
-                    userBet = (input.getIntegerInput("\u001B[32mHow much would you like to bet?"));
+                    userBet = (input.getIntegerInput("\u001B[32mHow much would you like to bet?" + "\n"));
                     playerInt.getArcadeAccount().alterAccountBalance(userBet * (-1));
                     startGame();
                     break;
@@ -61,15 +66,28 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
     }
 
     public void startGame () {
-        bj.givePlayerCard();
-        System.out.println("Your starting card : " + bj.playersCurrentValue());
-        System.out.println("Your second next card : " + bj.givePlayerCard());
-        System.out.println("Hand value : " + bj.playersCurrentValue());
-        if (bj.playersHand.get(0).equals(bj.playersHand.get(1))) {  // include conditional on starting blackjack!
-            splitPlayer();
-        } else {
-            standardGame();
+        boolean blackJack = false;
+        while (!blackJack) {
+            bj.givePlayerCard();
+            System.out.println("Your starting card : " + bj.playersCurrentValue());
+            System.out.println("Your second next card : " + bj.givePlayerCard());
+            System.out.println("Hand value : " + bj.playersCurrentValue());
+            if (twoCardBlackJack()) {
+                blackJack = true;
+            } else if (bj.playersHand.get(0).equals(bj.playersHand.get(1))) {  // include conditional on starting blackjack!
+                splitPlayer();
+            } else {
+                standardGame();
+            }
         }
+    }
+
+    public boolean twoCardBlackJack () {
+        if ((bj.playersHand.get(0) + bj.playersHand.get(1)) == 21) {
+            calculateWinnings(3, userBet);
+            return true;
+        }
+        return false;
     }
 
     public void standardGame () {
@@ -79,13 +97,14 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
             Integer userChoice = input.getIntegerInput("1. Hit" + "\n" + "2. Stay");
             switch (userChoice) {
                 case 1:
-                    isWinner = checkStandardWinner(isWinner);
+                    checkStandardWinner(isWinner);
+                    isWinner = true;
                     break;
                 case 2:
                     bj.giveDealerCard();
                     System.out.println("The dealers first card : " + bj.dealersCurrentValue());
                     bj.giveDealerCard();
-                    bj.dealersGame();
+                    dealersGame();
                     isWinner = true;
                     break;
             }
@@ -107,14 +126,18 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
     }
 
 
-    public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
-        winnings = multiplier * betAmount;
-        return winnings;
+    public Integer calculateWinnings(Integer multiplier, Integer userBet) {
+        if (multiplier == 0) {
+            return 0;
+        } else {
+            winnings = multiplier * userBet;
+            return winnings;
+        }
     }
 
 
     public void subtractBetFromBalance(Integer betAmount) {
-        this.player.makeBet(betAmount);
+
     }
 
 
@@ -143,7 +166,7 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
                     ", better luck next time");
             calculateWinnings(0, userBet);
             isWinner = true;
-        } else if (bj.playerHitsBlackJack()) {
+        } else if (playerHitsBlackJack()) {
             System.out.println("BLACK JACK!!");
             calculateWinnings(3, userBet);
             isWinner = true;
@@ -172,7 +195,7 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
                     if (bj.splitPlayersCurrentValue() > 21) {
                         splitPlayerBust(splitBet);
                         isWinnerSecondHand = true;
-                    } else if (bj.splitPlayerHitsBlackJack()) {
+                    } else if (splitPlayerHitsBlackJack()) {
                         splitPlayerHitsBlackJack(splitBet);
                         isWinnerSecondHand = true;
                     }
@@ -180,6 +203,44 @@ public class BlackJackGame implements GameInterface { //, PlayerInterface {
                 case 2:
                     standardGame();
             }
+        }
+    }
+    public void dealersGame() {
+        boolean gameEnd = false;
+        while (!gameEnd) {
+            System.out.println("The dealer has : " + bj.dealersCurrentValue());
+            if (bj.dealersCurrentValue() > 21) {
+                System.out.println("You win!");
+                calculateWinnings(2, userBet);
+                gameEnd = true;
+            } else if (bj.dealersCurrentValue() == 21) {
+                System.out.println("The dealer has won!");
+                calculateWinnings(0, userBet);
+                gameEnd = true;
+            } else if (bj.dealersCurrentValue() > bj.playersCurrentValue()) {
+                System.out.println("The dealer has won!");
+                calculateWinnings(0, userBet);
+                gameEnd = true;
+            } else {
+                bj.giveDealerCard();
+            }
+        }
+    }
+    public boolean splitPlayerHitsBlackJack () {
+        if (bj.splitPlayersCurrentValue() == 21) {
+            calculateWinnings(3, splitBet);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean playerHitsBlackJack() {
+        if (bj.playersCurrentValue() == 21) {
+            calculateWinnings(3, userBet);
+            return true;
+        } else {
+            return false;
         }
     }
 }
