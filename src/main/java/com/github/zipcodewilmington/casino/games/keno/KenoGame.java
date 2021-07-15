@@ -11,7 +11,7 @@ public class KenoGame {
     private ArrayList<Integer> numbers = new ArrayList<>();  //list that holds numbers to guess from
     private ArrayList<Integer> winNumbers = new ArrayList<>();  //list that holds the winning numbers
 
-    public KenoGame(ArrayList<Integer> numbers,ArrayList<Integer> winNumbers){
+    public KenoGame(){
         this.numbers =numbers;
         this.winNumbers = winNumbers;
     }
