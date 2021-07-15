@@ -43,6 +43,7 @@ public class BeetleGame implements GameInterface {
         }
         this.printBeetleCards();
         this.printWinnerMessage();
+        console.println("Your payout is: " + this.determinePayout().toString());
     }
 
     public void initGame(){
@@ -80,19 +81,27 @@ public class BeetleGame implements GameInterface {
         game.setPlayerBeetles(currentPlayer, game.getDice().tossAndSum());
     }
 
+    public Integer determinePayout(){
+        Integer payout = (int)(this.betAmt * 1.1);
+        if(this.game.getCurrentPlayer() == 0){
+            this.player.getArcadeAccount().alterAccountBalance(payout);
+            return payout;
+        }
+        return 0;
+    }
     /**
      * Calculate player's winning payout amount of bet x multiplier
      * @return (double) amount of money winnings
      */
     public Integer calculateWinnings(Integer multiplier, Integer betAmount){
-        return 0;
+        return multiplier * betAmount;
     }
 
     /**
      * Subtract the bet amount from player's balance
      */
     public void subtractBetFromBalance(Integer betAmount){
-
+        player.getArcadeAccount().alterAccountBalance(betAmount * -1);
     }
 
 
