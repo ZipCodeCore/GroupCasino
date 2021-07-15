@@ -73,7 +73,6 @@ public class PlinkoGame implements GameInterface{
         }
         System.out.println("\u001B[32mThanks for playing!");
         System.out.println("\u001B[32mOverall, you now have: $" + balance);
-        feature/DipintiTestFiles
     }
 
 
