@@ -72,56 +72,68 @@ public class Roulette {
 
     public int getPlayerIntSelection() { return this.playerIntSelection; }
 
-    public void playerSelection(int playerIntSelection) {
+    public void playerSelection() {
         Scanner keyboardInput = new Scanner(System.in);
         playerIntSelection = keyboardInput.nextInt();
         switch(getPlayerIntSelection()) {
             case 1:
                 playerBetsNumber();
+                placeBet();
+                getWinningsByNumber();
             case 2:
                 playerBetsColumn();
+                placeBet();
+                getWinningsByColumn();
             case 3:
                 playerBetsEvensOdds();
+                placeBet();
+                getWinningsByEvenOdds();
             case 4:
                 playerBetsColor();
+                placeBet();
+                getWinningsByColor();
             case 5:
-                casino.mainMenu();
+                ;
         }
     }
-    public void playerBetsNumber() {
+    public int playerBetsNumber() {
         System.out.println("Please select a number 1 - 36");
         Scanner keyboardInput = new Scanner(System.in);
         int playerIntSelection = keyboardInput.nextInt();
         if(playerIntSelection >= 1 && playerIntSelection <= 36) {
             playerNumberChoice = playerIntSelection;
         } else playerBetsNumber();
+        return playerNumberChoice;
     }
 
-    public void playerBetsColumn() {
+    public int playerBetsColumn() {
         System.out.println("Please select column 1, 2, or 3");
         Scanner keyboardInput = new Scanner(System.in);
         playerIntSelection = keyboardInput.nextInt();
         if(playerIntSelection >= 1 && playerIntSelection <= 3) {
             playerColumnChoice = playerIntSelection;
         } else playerBetsColumn();
+        return playerColumnChoice;
     }
 
-    public void playerBetsEvensOdds() {
+    public String playerBetsEvensOdds() {
         System.out.println("Please select even or odds");
         Scanner keyboardInput = new Scanner(System.in);
         playerStringSelection = keyboardInput.nextLine();
         if(playerStringSelection == "even" || playerStringSelection == "odds") {
             playerEvenOrOddChoice = playerStringSelection;
         } else playerBetsEvensOdds();
+        return playerEvenOrOddChoice;
     }
 
-    public void playerBetsColor() {
+    public String playerBetsColor() {
         System.out.println("Please select red or black");
         Scanner keyboardInput = new Scanner(System.in);
         playerStringSelection = keyboardInput.nextLine();
         if(playerStringSelection == "red" || playerStringSelection == "black") {
             playerColorChoice = playerStringSelection;
         } else playerBetsColor();
+        return playerColorChoice;
     }
 
     public int placeBet() {
@@ -133,11 +145,79 @@ public class Roulette {
 
 
 
-    public void spinWheelGetNumber() {
+    public int spinWheelGetNumber() {
         List<Integer> numberList = new ArrayList<>(wheelValues.keySet());
         Random random = new Random();
         int size = wheelValues.size();
-//        int randomNumber = wheelValues.get(numberList.get(random.nextInt(size)));
+        int randomNumber = numberList.get(random.nextInt(size));
+        return randomNumber;
+    }
+
+    public String spinWheelGetColor() {
+        int numberValue = spinWheelGetNumber();
+        return wheelValues.get(numberValue);
+    }
+
+    public int getWinningsByNumber() {
+        int winningNumber = spinWheelGetNumber();
+        if (winningNumber == playerNumberChoice) {
+            bet = bet * 35;
+        } else {
+            bet = 0 - bet;
+        }
+        return bet;
+    }
+
+    public int getWinningsByColumn() {
+        int winningNumber = spinWheelGetNumber();
+
+        Integer[] column1Arr = {1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34};
+        Integer[] column2Arr = {2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35};
+        Integer[] column3Arr = {3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36};
+
+        if(playerColumnChoice == 1) {
+            if(Arrays.asList(column1Arr).contains(winningNumber)){
+                bet = bet*2;
+            } else bet = 0 - bet;
+        }
+        if(playerColumnChoice == 2) {
+            if(Arrays.asList(column2Arr).contains(winningNumber)) {
+                bet = bet*2;
+            } else bet = 0 - bet;
+        }
+        if(playerColumnChoice == 3) {
+            if(Arrays.asList(column3Arr).contains(winningNumber)) {
+                bet = bet*2;
+            } else bet = 0 - bet;
+        }
+        return bet;
+    }
+
+    public int getWinningsByEvenOdds() {
+        int winningNumber = spinWheelGetNumber();
+        if(playerEvenOrOddChoice == "even") {
+            if(winningNumber % 2 == 0) {
+                return bet;
+            } else bet = 0 - bet;
+        } else if(playerEvenOrOddChoice == "odds") {
+            if(winningNumber % 2 != 0) {
+                return bet;
+            } else bet = 0 - bet;
+        }
+        return bet;
+    }
+
+    public int getWinningsByColor() {
+        String winningColor = spinWheelGetColor();
+        if(playerColorChoice == winningColor) {
+            return bet;
+        } else bet = 0 - bet;
+        return bet;
+    }
+
+    public void playRoulette() {
+        rouletteWelcomeScreen();
+        playerSelection();
     }
 
 }
