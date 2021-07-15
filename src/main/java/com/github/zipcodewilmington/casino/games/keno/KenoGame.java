@@ -13,6 +13,8 @@ public class KenoGame {
     private ArrayList<Integer> winNumbers = new ArrayList<>();  //list that holds the winning numbers
 
 
+
+
     Scanner sc = new Scanner(System.in);
 
     public ArrayList<Integer> setKenoGame(){
