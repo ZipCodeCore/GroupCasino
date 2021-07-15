@@ -16,29 +16,8 @@ public class BlackJackGame implements GameInterface {
     BlackJack bj;
 
 
-    /* Stuck in loop from split back to main hand against dealer
-
-        run() -> hand -> standard game -> hit/stay -> dealersGame() ---- loop starts, dealers final value gets
-        returned as the "starting value" for the "next hand" - run through main to blackjack to see
-
-        somewhere in there the program isn't terminating to the originally starting point -- walk the program down
-
+    /*
         reorder the 'helper' methods for more clarity
-
-    * refine the format for the splitHandBet (potentially add it to the 'userBet')
-        * only condition - if one hand wins and the other loses
-        * maybe an if statement at the 'playerInt.getAccountBalance().alterAccountBalance()' to execute for splitBet as well
-    * betting restraints if the user falls below zero
-    * If time available, include the conditional on aces being 11 or 1 depending on the currentPlayerValue()
-        * if (currentPlayerValue() > 21) {
-            for (int i = 0; i < playersHand.size(); i++) {
-                if (playersHand.get(i).equalsTo(11)) {
-                    playersHand.set(i, 1);
-                }
-            }
-            return playersCurrentValue;---(playersCurrentValue should be under 21 if there was an 11 in there. however,
-                                            that changes all values that were 11 to 1; would need to change just one value
-        }
     * need formatting on splitHand
     * need refinement on formatting the beginning
     * make it flashy
@@ -47,16 +26,6 @@ public class BlackJackGame implements GameInterface {
     public BlackJackGame () {
 
     }
-
-    public void add(PlayerInterface player) {
-        this.playerInt = player;
-    }
-
-
-    public void remove(PlayerInterface player) {
-
-    }
-
 
     public void run() {
         System.out.println("\u001B[36m============================================================");
@@ -77,6 +46,7 @@ public class BlackJackGame implements GameInterface {
                     BlackJack freshHand = new BlackJack();
                     bj = freshHand;
                     userBet = (input.getIntegerInput("\u001B[32mHow much would you like to bet?" + "\n"));
+                    userBetCondition();
                     playerInt.getArcadeAccount().alterAccountBalance(userBet * (-1));
                     startGame();
                     break;
@@ -111,7 +81,7 @@ public class BlackJackGame implements GameInterface {
     public void standardGame () {
         boolean isWinner = false;
         while (!isWinner) {
-            System.out.println("Your hand value " + bj.playersCurrentValue());
+            System.out.println("With the value of  " + bj.playersCurrentValue() + "\n");
             Integer userChoice = input.getIntegerInput("1. Hit" + "\n" + "2. Stay");
             switch (userChoice) {
                 case 1:
@@ -147,23 +117,10 @@ public class BlackJackGame implements GameInterface {
 
 
     public Integer calculateWinnings(Integer multiplier, Integer userBet) {
-        if (multiplier == 0) {
-            return 0;
-        } else {
             winnings = multiplier * userBet;
             return winnings;
-        }
     }
 
-
-    public void subtractBetFromBalance(Integer betAmount) {
-
-    }
-
-
-    public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
-
-    }
 
     private void splitPlayerHitsBlackJack(Integer splitBet) {
         System.out.println("BLACK JACK!!");
@@ -180,14 +137,19 @@ public class BlackJackGame implements GameInterface {
 
     private boolean checkStandardWinner() {
         boolean playerWon;
-        System.out.println("Current hand value " + bj.playersCurrentValue());
+        System.out.println("Current hand value " + bj.playersCurrentValue() + "\n");
         if(bj.playersCurrentValue() > 21) {
-            System.out.println("Sorry bud, you got " + bj.playersCurrentValue() +
-                    ", better luck next time");
-            calculateWinnings(0, userBet);
-            playerWon = true;
+            playerBustButHasAces();
+            if (bj.playersCurrentValue() > 21) {
+                System.out.println("Sorry bud, you got " + bj.playersCurrentValue() +
+                        ", better luck next time" + "\n");
+                calculateWinnings(0, userBet);
+                playerWon = true;
+            } else {
+                playerWon = false;
+            }
         } else if (playerHitsBlackJack()) {
-            System.out.println("BLACK JACK!!");
+            System.out.println("BLACK JACK!!" + "\n");
             calculateWinnings(3, userBet);
             playerWon = true;
         } else {
@@ -196,11 +158,14 @@ public class BlackJackGame implements GameInterface {
         return playerWon;
     }
 
+
     private Integer secondHandBet() {
         Integer splitValue = bj.playersHand.get(1);
         bj.playersHandOnSplit.add(splitValue);
         bj.playersHand.set(1, 0);
-        Integer splitBet = input.getIntegerInput("Please place your bet for the second hand");
+        Integer splitBet = input.getIntegerInput("Please place your bet for the second hand" + "\n");
+        splitHandBetConditions();
+        playerInt.getArcadeAccount().alterAccountBalance(splitBet * (-1));
         System.out.println("Your hand has been split! Current value " + bj.splitPlayersCurrentValue() + "\n" + "\n");
         return splitBet;
     }
@@ -215,8 +180,13 @@ public class BlackJackGame implements GameInterface {
                     bj.givePlayerCardOnSplit();
                     System.out.println("Current hand value " + bj.splitPlayersCurrentValue());
                     if (bj.splitPlayersCurrentValue() > 21) {
-                        splitPlayerBust(splitBet);
-                        isWinnerSecondHand = true;
+                        splitHandBustHasAces();
+                        if (bj.splitPlayersCurrentValue() > 21) {
+                            splitPlayerBust(splitBet);
+                            isWinnerSecondHand = true;
+                        } else {
+                            isWinnerSecondHand = false;
+                        }
                     } else if (splitPlayerHitsBlackJack()) {
                         splitPlayerHitsBlackJack(splitBet);
                         isWinnerSecondHand = true;
@@ -248,6 +218,36 @@ public class BlackJackGame implements GameInterface {
             }
         }
     }
+
+    public void playerBustButHasAces () {
+        for (int i = 0; i < bj.playersHand.size(); i++) {
+            if (bj.playersHand.get(i).equals(11)) {
+                bj.playersHand.set(i, 1);
+                System.out.println("You had an Ace - we reduced that 11 to a 1! Keep going!" + "\n" );
+                break;
+            }
+        }
+    }
+
+    public void dealerBustButHasAces () {
+        for (int i = 0; i < bj.dealersHand.size(); i++) {
+            if (bj.dealersHand.get(i).equals(11)) {
+                bj.dealersHand.set(i, 1);
+                break;
+            }
+        }
+    }
+
+    public void splitHandBustHasAces () {
+        for (int i = 0; i < bj.playersHandOnSplit.size(); i++) {
+            if (bj.playersHandOnSplit.get(i).equals(11)) {
+                bj.playersHandOnSplit.set(i, 1);
+                System.out.println("You had an Ace - we reduced that 11 to a 1! Keep going!" + "\n" );
+                break;
+            }
+        }
+    }
+
     public boolean splitPlayerHitsBlackJack () {
         if (bj.splitPlayersCurrentValue() == 21) {
             calculateWinnings(3, splitBet);
@@ -265,4 +265,38 @@ public class BlackJackGame implements GameInterface {
             return false;
         }
     }
+
+    public void userBetCondition () {
+        while (userBet > playerInt.getArcadeAccount().getAccountBalance()) {
+            System.out.println("Oh no! You're trying to place a bet with more money than you have...");
+            userBet = (input.getIntegerInput("\u001B[32mHow much would you like to bet?" + "\n"));
+        }
+    }
+
+    public void splitHandBetConditions () {
+        while (secondHandBet() > playerInt.getArcadeAccount().getAccountBalance()) {
+            System.out.println("You don't have enough money for that, Silly!");
+            secondHandBet();
+        }
+    }
+
+    public void subtractBetFromBalance(Integer betAmount) {
+
+    }
+
+
+    public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
+
+    }
+
+    public void add(PlayerInterface player) {
+        this.playerInt = player;
+    }
+
+
+    public void remove(PlayerInterface player) {
+
+    }
+
+
 }
