@@ -1,6 +1,7 @@
 package com.github.zipcodewilmington.casino.games.CardGame;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
 public class CasinoWar extends Deck implements GameInterface {
@@ -18,7 +19,7 @@ public class CasinoWar extends Deck implements GameInterface {
     }
 
     public void playCasinoWarHands() {
-        IOConsole input = new IOConsole();
+        IOConsole input = new IOConsole(AnsiColor.YELLOW);
         Deck warDeck = new Deck(1);
         warDeck.shuffle();
         input.println("Welcome to Casino Wars!!!!");
@@ -30,9 +31,9 @@ public class CasinoWar extends Deck implements GameInterface {
                 dealerHand = new CardHand(warDeck.dealCards(1));
                 input.println("Player hand is " + playerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue());
                 input.println("Dealer hand is " + dealerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue());
-                if (playerWins().equals("playerwon")) {
+                if (determineWinner().equals("playerwon")) {
                     input.println("Congratulations!!! You won!!");
-                } else if(playerWins().equals("dealerwon")) {
+                } else if(determineWinner().equals("dealerwon")) {
                     input.println("So sad, you lost!!");
                 }else
                 {
@@ -45,7 +46,7 @@ public class CasinoWar extends Deck implements GameInterface {
         while (true);
     }
 
-    public String playerWins() {
+    public String determineWinner() {
         String result = "playerwon";
         //Integer play = playerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue();
         if (playerHand.userHand.get(0).faceValueOfCard.getCardIntegerValue() <
