@@ -5,6 +5,7 @@ import com.github.zipcodewilmington.casino.games.Beetle.BeetleGame;
 import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
+import com.github.zipcodewilmington.casino.games.plinko.PlinkoGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
@@ -82,6 +83,9 @@ public class Casino implements Runnable {
                 break;
             case "blackjack":
                 gameObject = new BlackJackGame();
+                break;
+            case "numberguess":
+                gameObject = new NumberGuessGame();
                 break;
             default:
                 gameObject = new BeetleGame();
