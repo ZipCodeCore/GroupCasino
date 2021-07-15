@@ -2,16 +2,22 @@ package com.github.zipcodewilmington.casino.games.CardGame;
 
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.games.keno.KenoPlayer;
+import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 import com.github.zipcodewilmington.casino.games.CardGame.CardHand;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BlackJack extends Deck implements GameInterface {
 CardHand playerHand;
 CardHand dealerHand;
 Deck deck =new Deck();
 Integer minimumWager=20;
+Set<BlackJackPlayer> players = new HashSet<>();
+BlackJackPlayer blackJackPlayer;
 
 public BlackJack(){
     super();
@@ -20,8 +26,17 @@ public BlackJack(int numberOfDecks){
     super(numberOfDecks);
 }
 
+    public BlackJackPlayer getPlayer(String playerUsername) {
+        for (BlackJackPlayer player : players) {
+            if (player.getArcadeAccount().getUsername().equals(playerUsername)) {
+                return player;
+            }
+        }
+        return null;
+    }
+
 public void playBlackjack(){
-    IOConsole input = new IOConsole();
+    IOConsole input = new IOConsole(AnsiColor.PURPLE);
     Deck blackjackDeck= new Deck(1);
     double playerMoney = 100.0;
     blackjackDeck.shuffle();
@@ -140,13 +155,13 @@ public Boolean checkBust(Integer totalValue)
         return false;
 
 }
-public Boolean gotBlackJack(Integer totalValue)
-{
-    if(totalValue == 21)
-        return true;
-    else
-        return false;
-}
+//public Boolean gotBlackJack(Integer totalValue)
+//{
+//    if(totalValue == 21)
+//        return true;
+//    else
+//        return false;
+//}
 
     public Integer checkHandValue(CardHand hand) {
         Integer totalValue = 0;
@@ -177,25 +192,17 @@ public Boolean gotBlackJack(Integer totalValue)
     }
 
 
-public Integer sumOfCardsInHand(CardHand hand){
-    Integer sumOfCards=0;
-    for (Card card : hand.userHand) {
-        FaceValueOfCard faceValueOfCard = card.getFaceValueOfCard();
-        sumOfCards+= Integer.valueOf(String.valueOf(faceValueOfCard));
+
+
+    @Override
+    public void add(PlayerInterface player) {
+        players.add((BlackJackPlayer) player);
     }
-return null;
-}
 
-
-@Override
-public void add(PlayerInterface player) {
-
-}
-
-@Override
-public void remove(PlayerInterface player) {
-
-}
+    @Override
+    public void remove(PlayerInterface player) {
+        players.remove(player);
+    }
 
 @Override
 public void run() {
