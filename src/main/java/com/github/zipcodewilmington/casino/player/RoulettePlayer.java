@@ -1,12 +1,12 @@
 package com.github.zipcodewilmington.casino.player;
 
-import com.github.zipcodewilmington.Casino;
+//import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.games.Roulette;
 
 import java.io.Console;
 
 public class RoulettePlayer extends Player{
-/*
+
     private Casino casino = new Casino();
     private Roulette roulette = new Roulette();
     Player player;
@@ -55,5 +55,5 @@ public class RoulettePlayer extends Player{
     public void playerWinsNumber() {
         player.setPlayerBalance(player.getPlayerBalance() + (35 * bet));
     }
-*/
+
 }

@@ -1,4 +1,4 @@
 package com.github.zipcodewilmington.casino;
 
-public interface GamblingInterface{
+public class PigMenus {
 }
