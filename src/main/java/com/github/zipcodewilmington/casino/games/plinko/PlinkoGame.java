@@ -18,6 +18,7 @@ public class PlinkoGame implements GameInterface{
     public int balance;
 
 
+
     @Override
     public void add(PlayerInterface player) {
 
@@ -72,7 +73,9 @@ public class PlinkoGame implements GameInterface{
         }
         System.out.println("\u001B[32mThanks for playing!");
         System.out.println("\u001B[32mOverall, you now have: $" + balance);
+        feature/DipintiTestFiles
     }
+
 
     private void printWelcome() {
         System.out.println(
@@ -85,7 +88,6 @@ public class PlinkoGame implements GameInterface{
 
     @Override
     public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
-
         return this.multiplier*betAmount;
     }
 
@@ -109,6 +111,7 @@ public class PlinkoGame implements GameInterface{
         }
         return moneyWon;
     }
+
 
 
     public int getPlinkoSpot() {
@@ -152,6 +155,7 @@ public class PlinkoGame implements GameInterface{
         int numberEntered;
         int playerNums=0;
         String enterString;
+
 
 
         while(invalidInput)

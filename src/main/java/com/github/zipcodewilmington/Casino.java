@@ -5,11 +5,14 @@ import com.github.zipcodewilmington.casino.games.Beetle.BeetleGame;
 import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
+import com.github.zipcodewilmington.casino.games.plinko.PlinkoGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
+import com.github.zipcodewilmington.utils.CSVUtils;
 import com.github.zipcodewilmington.utils.IOConsole;
 
+import java.io.IOException;
 import java.util.Locale;
 
 /**
@@ -31,10 +34,8 @@ public class Casino implements Runnable {
                 CasinoAccount casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
                 boolean isValidLogin = casinoAccount != null;
                 if (isValidLogin) {
-                    this.casinoAccount = casinoAccount;
-                    casinoAccount.alterAccountBalance(500);
-                    this.player = new Player(accountName, casinoAccount);
-                    this.player.setArcadeAccount(casinoAccount);
+
+
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
                     processGameSelection(gameSelectionInput);
                 } else {
@@ -48,6 +49,21 @@ public class Casino implements Runnable {
                 String accountPassword = console.getStringInput("Enter your account password:");
                 CasinoAccount newAccount = casinoAccountManager.createAccount(accountName, accountPassword);
                 casinoAccountManager.registerAccount(newAccount);
+                this.casinoAccount = newAccount;
+                casinoAccount.alterAccountBalance(500);
+                this.player = new Player(accountName, casinoAccount);
+                this.player.setArcadeAccount(casinoAccount);
+            } else if("save-account".equals(arcadeDashBoardInput)){
+                try {
+                    CSVUtils.csvFileSaver(this.player.getArcadeAccount());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    console.println("Save unsuccessful, refer to error message above for more information");
+                }
+            } else if("load-saved-account".equals(arcadeDashBoardInput)){
+                this.casinoAccount = CSVUtils.loadData();
+                this.player = new Player(this.casinoAccount.getAccountName(), this.casinoAccount);
+                casinoAccountManager.registerAccount(this.casinoAccount);
             }
         } while (!"logout".equals(arcadeDashBoardInput));
     }
@@ -56,7 +72,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Arcade Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ create-account ], [ select-game ]")
+                .append("\n\t[ create-account ], [ select-game ], [ load-saved-account ], [ save-account ]")
                 .toString());
     }
 
@@ -81,6 +97,9 @@ public class Casino implements Runnable {
                 break;
             case "blackjack":
                 gameObject = new BlackJackGame();
+                break;
+            case "numberguess":
+                gameObject = new NumberGuessGame();
                 break;
             default:
                 gameObject = new BeetleGame();

@@ -20,7 +20,7 @@ public class BeetleGame implements GameInterface {
     }
 
     public void add(PlayerInterface player){
-        players.add(player);
+        this.player = player;
     }
 
     /**
@@ -35,20 +35,37 @@ public class BeetleGame implements GameInterface {
      * specifies how the game will run
      */
     public void run(){
+        this.initGame();
+        while(this.isRunning){
+            this.nextPlayer();
+            this.executeTurn();
+            this.isGameOver(this.game.checkWinner(this.game.getCurrentPlayer()));
+        }
+        console.newLine();
+        console.println("Final Beetle results: ");
+        this.printBeetleCards();
+        console.newLine();
+        this.printWinnerMessage();
+        console.println("Your payout is: " + this.determinePayout().toString());
+        console.pressEnterToProceed();
+    }
+
+    public void initGame(){
         printWelcome();
         console.newLine();
-        this.setBetAmt(console.getIntegerInput("Place your bet"));
+        this.setBetAmt(printBalanceAndBetText());
         Integer turnCount = 0;
         game.setCurrentPlayer(-1);
         this.isRunning = true;
-        while(isRunning){
-            turnCount++;
-            this.nextPlayer();
-            //game.getDice().tossAndSum();
-            executeTurn();
-             isGameOver(game.checkWinner(game.getCurrentPlayer()));
-        }
-        System.out.println("game over after, player " + game.getCurrentPlayer() + " wins");
+    }
+
+    public void printBeetleCards(){
+            console.print("\u001B[32m Your last dice roll: " + game.getLastDiceRoll(0));
+            console.print( "  Your Beetle:  ");
+            console.println(game.printBeetle(0));
+            console.print("\u001B[32m Dealer's last dice roll: " + game.getLastDiceRoll(1));
+            console.print("  Dealer's Beetle:  ");
+            console.println(game.printBeetle(1));
     }
 
     public void isGameOver(boolean playerWon){
@@ -62,22 +79,35 @@ public class BeetleGame implements GameInterface {
 
     public void executeTurn(){
         Integer currentPlayer = game.getCurrentPlayer();
+        if(game.getCurrentPlayer() == 0){
+            this.printBeetleCards();
+            console.println("Press enter to roll next dice");
+            console.pressEnterToProceed();
+        }
         game.setPlayerBeetles(currentPlayer, game.getDice().tossAndSum());
     }
 
+    public Integer determinePayout(){
+        Integer payout = (int)(this.betAmt * 1.1);
+        if(this.game.getCurrentPlayer() == 0){
+            this.player.getArcadeAccount().alterAccountBalance(payout);
+            return payout;
+        }
+        return 0;
+    }
     /**
      * Calculate player's winning payout amount of bet x multiplier
      * @return (double) amount of money winnings
      */
     public Integer calculateWinnings(Integer multiplier, Integer betAmount){
-        return 0;
+        return multiplier * betAmount;
     }
 
     /**
      * Subtract the bet amount from player's balance
      */
     public void subtractBetFromBalance(Integer betAmount){
-
+        player.getArcadeAccount().alterAccountBalance(betAmount * -1);
     }
 
 
@@ -116,11 +146,20 @@ public class BeetleGame implements GameInterface {
     }
 
 
-    public void printBalanceAndBetText(){
+    public Integer printBalanceAndBetText(){
         console.newLine();
         console.println("\u001B[35m Current account balance:        " + this.player.getArcadeAccount().getAccountBalance());
         console.newLine();
-        
+        return console.getIntegerInput("\u001B[34m How much do you want to bet?");
+    }
+
+    public void printWinnerMessage(){
+        if(this.game.getCurrentPlayer() == 0){
+            console.println("You win!");
+        } else {
+            console.println("Dealer wins...");
+        }
+        console.newLine();
     }
 
 }
