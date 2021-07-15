@@ -7,10 +7,9 @@ public class RouletteGamePlayer implements PlayerInterface {
     String input="";
     int money;
 
-    public choosingABet(String input){
+    public void choosingABet(String input){ }
 
 
-    }
     @Override
     public CasinoAccount getArcadeAccount() {
         return null;
