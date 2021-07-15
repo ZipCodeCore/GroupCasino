@@ -5,7 +5,6 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,82 +14,84 @@ public class RouletteGame implements GameInterface {
     Integer[] black;
     int money;
     int bet;
-    String input;
+    int input;
+    private PlayerInterface player;
 
     public RouletteGame() {
         ball = (int) (Math.random() * 36 + 1);
         red = new Integer[]{1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
         black = new Integer[]{2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
-        bet = 0;
-        money = 0;
-        input = "";
     }
-
-    public void choosingABet() {
-        IOConsole console = new IOConsole(AnsiColor.WHITE);
+    public int choosingABet() {
+        IOConsole console = new IOConsole(AnsiColor.YELLOW);
         console.println("Welcome to The Roulette Table!");
         console.println("Make your bets below <3");
-        input = console.getStringInput("(Red) (Black) (Odds) (Even) (Specific Number)");
+        this.input = console.getIntegerInput("1.(Red) 2.(Black) 3.(Odds) 4.(Evens) 5.(Specific Number)");
+    return input;
     }
-
-    public int bettingOnRed(String input) {
-        List<Integer> redNum = Arrays.asList(red);
-        if (input == "(Red)") {
-            for (Integer num : redNum) {
-                if (ball == num) {
-                    money = bet * 2;
+    public int theRouletteGame(int input) {
+        IOConsole console = new IOConsole(AnsiColor.AUTO);
+        if (input == 1) {
+            List<Integer> redNum = Arrays.asList(red);
+            if (input == 1) {
+                for (Integer num : redNum) {
+                    if (ball == num) {
+                        money = bet * 2;
+                    }
+                    money = bet - bet;
                 }
-                money = bet - bet;
             }
 
-        }
-        return money;
-    }
-
-    public void bettingOnBlack() {
-        List<Integer> blackNum = Arrays.asList(black);
-        for (Integer num : blackNum) {
-            if (ball == num) {
+        } else if (input == 2) {
+            List<Integer> blackNum = Arrays.asList(black);
+            if (input == 2) {
+                for (Integer num : blackNum) {
+                    if (ball == num) {
+                        money = bet + bet;
+                    }
+                    money = bet - bet;
+                }
+            }
+        } else if (input == 3) {
+            if (ball % 2 == 0) {
+                money = bet - bet;
+            }
+            money = bet + bet;
+        } else if (input == 4) {
+            if (ball % 2 == 0) {
                 money = bet + bet;
             }
             money = bet - bet;
-        }
-    }
-
-    public void bettingOnOdd() {
-        if (ball % 2 == 0) {
+        } else if (input == 5) {
+            int num = 0;
+            num = console.getIntegerInput("Pick a number between 1-36 that you would like to bet on!");
+            if (ball == num) {
+                money = bet + bet * 2;
+            }
             money = bet - bet;
+
+        }return money;
+    }
+
+
+
+        @Override
+        public void add (PlayerInterface player){
+            this.player = player;
+
         }
-        money = bet + bet;
-    }
 
-    public void bettingOnEven() {
-        if (ball % 2 == 0) {
-            money = bet + bet;
+        @Override
+        public void remove (PlayerInterface player){
+            this.player = null;
         }
-        money = bet - bet;
-    }
 
-    public void bettingOnASpecificNumber(String input, int num) {
-        num = 0;
-        if (ball == num) {
-            money = bet + bet * 2;
+        @Override
+        public void run () {
+RouletteGame game = new RouletteGame();
+int input=game.choosingABet();
+int money=game.theRouletteGame(input);
+
         }
-        money = bet - bet;
     }
 
-    @Override
-    public void add(PlayerInterface player) {
-
-    }
-
-    @Override
-    public void remove(PlayerInterface player) {
-
-    }
-
-    @Override
-    public void run() {
-
-    }
-}

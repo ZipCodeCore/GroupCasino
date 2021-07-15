@@ -2,6 +2,9 @@ package com.github.zipcodewilmington.casino.games.CrapsGame;
 
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.utils.IOConsole;
+
+import java.io.Console;
 
 public class CrapsGame implements GameInterface {
     Dice dice = new Dice();
@@ -37,6 +40,7 @@ public class CrapsGame implements GameInterface {
     @Override
     public void add(PlayerInterface player) {
 
+
     }
 
     @Override
@@ -46,6 +50,15 @@ public class CrapsGame implements GameInterface {
 
     @Override
     public void run() {
+        IOConsole console = new IOConsole();
+        int input = 0;
+
+        while(input==1){
+            console.println("Welcome to the Craps Table!");
+
+            input = console.getIntegerInput("Press 1 to roll or press 2 to quit");
+
+        }
 
     }
 }
