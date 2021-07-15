@@ -2,6 +2,7 @@ package com.github.zipcodewilmington.casino.games.keno;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Created by leon on 7/21/2020.
@@ -11,34 +12,8 @@ public class KenoGame {
     private ArrayList<Integer> numbers = new ArrayList<>();  //list that holds numbers to guess from
     private ArrayList<Integer> winNumbers = new ArrayList<>();  //list that holds the winning numbers
 
-    public KenoGame(){
-        this.numbers =numbers;
-        this.winNumbers = winNumbers;
-    }
 
-    public KenoGame() {
-
-    }
-
-    public ArrayList<Integer> getNumbers() {
-        return numbers;
-    }
-
-    public void setNumbers(ArrayList<Integer> numbers) {
-        this.numbers = numbers;
-    }
-
-    public ArrayList<Integer> getWinNumbers() {
-        return winNumbers;
-    }
-
-    public void setWinNumbers(ArrayList<Integer> winNumbers) {
-        this.winNumbers = winNumbers;
-    }
-
-    void getKenoGame(){
-
-    }
+    Scanner sc = new Scanner(System.in);
 
     public ArrayList<Integer> setKenoGame(){
         //create the array of answers to guess from
@@ -59,6 +34,33 @@ public class KenoGame {
         }
         return winNumbers;
     }
+     public int[] userInput(){
+        boolean player = true;
+        boolean invalidNumber = true;
+        int playerNumbers[] = new int[20];
+        int numberEntered;
+
+        for (int i = 0; i < playerNumbers.length; i++){
+            playerNumbers[i] = 0;
+        }
+        int i = 0;
+        while (player && i < 20){
+            numberEntered = sc.nextInt();
+
+            if(numberEntered > 1 && numberEntered < 80){
+                if(isUnique(numberEntered,playerNumbers)){
+                    invalidNumber = false;
+                    playerNumbers[i] = numberEntered;
+                }else {
+                    invalidNumber = true;
+                }
+            }
+
+        }
+
+
+         return playerNumbers;
+     }
 
     //check whether the number is unique or not
     public boolean isUnique(int number,int[] array){

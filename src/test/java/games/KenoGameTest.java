@@ -35,6 +35,13 @@ class KenoGameTest {
 
     }
     @Test
+    public void userInputTest(){
+        int[] expected = {17,24,73,80,34,51,11,28,33,71,45,15,31,22,3,10,1,8,4,20};
+        int[] actual = kGame.userInput();
+
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
     public void isUniqueTest(){
         int[] i = {5,4,3,2,9,8,7,6,10};
 
