@@ -49,6 +49,14 @@ public class BlackJack {
         return this.dealersHand;
     }
 
+    public Integer splitPlayersCurrentValue () {
+        Integer sum = 0;
+        for (int i = 0; i < this.playersHandOnSplit.size(); i++) {
+            sum += this.playersHandOnSplit.get(i);
+        }
+        return sum;
+    }
+
     public Integer playersCurrentValue() {
         Integer sum = 0;
         for (int i = 0; i < this.playersHand.size(); i++) {
@@ -65,15 +73,12 @@ public class BlackJack {
         return sum;
     }
 
-
-
-
     public void dealersGame() {
         while (!gameEnd) {
             System.out.println("The dealer has : " + dealersCurrentValue());
             if (dealersCurrentValue() > 21) {
                 System.out.println("You win!");
-                theGame.calculateWinnings(2, theGame.userBet);
+                theGame.addMoneyToBalance(theGame.player, theGame.calculateWinnings(2, theGame.userBet));
                 gameEnd = true;
             } else if (dealersCurrentValue() == 21) {
                 System.out.println("The dealer has won!");
@@ -89,14 +94,17 @@ public class BlackJack {
         }
     }
 
-    public void playerSplit () {
-        if (playersHand.get(0) == playersHand.get(1)) {
-
+    public boolean playerBreaks21() {
+        if (playersCurrentValue() > 21) {
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public boolean playerBreaks21() {
-        if (playersCurrentValue() > 21) {
+    public boolean splitPlayerHitsBlackJack () {
+        if (splitPlayersCurrentValue() == 21) {
+            theGame.calculateWinnings(3, betAmount);
             return true;
         } else {
             return false;
