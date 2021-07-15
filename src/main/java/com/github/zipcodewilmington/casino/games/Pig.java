@@ -1,34 +1,49 @@
 package com.github.zipcodewilmington.casino.games;
+//package com.github.zipcodewilmington.utils;
 
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
 import java.util.Random;
 import java.util.Scanner;
+
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PigMenus;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+
 import java.util.concurrent.ThreadLocalRandom;
+
+
+import static com.github.zipcodewilmington.casino.PigMenus.welcomeScreen;
+
 
 public class Pig implements GameInterface {
   public static void main(String[] args){
-    Pig Pig = new Pig();
+    Pig pig = new Pig();
+    pig.run();
   }
+
   // private static int playerTwo = 2;
   // private static int playerOne = 1;
   // private static int scoreToWin = 100;
   private int currentTurn;
   private int dieValue;
-  private int rollCounter = 0;
   private int turnScore;
   private int pOneTotal;
   private int pTwoTotal;
-  private int  rollAnswer;
+  private String  rollAnswer;
+  private int rollCounter;
   public Scanner input = new Scanner(System.in);
   //Random generator = new Random();
   // ThreadLocalRandom current = ThreadLocalRandom.current();
-  //public void welcomeToPig () {
-  //welcome screen
-  //log player 2 in or create account
-  //the rules
-  // }
+
+  public Pig() {
+
+  }
+
+//  public void welcomeToPig () {
+//  PigMenus.welcomeMenu();
+//  }
 
   public String currentStateOfTheGame () {
     return "Player 1 has " + pOneTotal + " points. \n Player 2 has " + pTwoTotal + " points.";
@@ -36,11 +51,11 @@ public class Pig implements GameInterface {
 
   public int playerTurn () {
 
-    do {
-      System.out.println("Please enter 1 to roll or 0 to hold");
+
+      System.out.println("Please enter 'r' to roll or 'h' to hold");
       //input.nextLine();
-      rollAnswer = input.nextInt();
-      if (rollAnswer == 1) {
+      rollAnswer = input.next();
+      if (rollAnswer == "r'") {
         Random generator = new Random();
         dieValue = generator.nextInt(6) + 1;
         turnScore += dieValue;
@@ -56,11 +71,11 @@ public class Pig implements GameInterface {
           System.out.println("Player earned " + turnScore + " points.");
           playerTurn();
         }
-      } else if (rollAnswer == 0) {
+      } else if (rollAnswer == "h") {
         currentTurn++;
         switchingPlayers();
       }
-    } while (currentTurn <= 5);
+
 
     return turnScore;
   }
@@ -69,34 +84,55 @@ public class Pig implements GameInterface {
   public void switchingPlayers () {
     if (currentTurn % 2 == 0) {
       pOneTotal += turnScore;
-      System.out.println("It's Player 2's turn.");
     } else {
       pTwoTotal += turnScore;
-      System.out.println("It's Player 1's turn");
     }
-    turnScore = 0;
-    System.out.println(currentStateOfTheGame());
-    playerTurn();
+    getWinner();
+    if (getWinner() == false) {
+      turnScore = 0;
+      System.out.println(currentStateOfTheGame());
+      playerTurn();
+    }
   }
 
+
   public boolean getWinner(){
-    if (pOneTotal == 100) {
+    if (pOneTotal >= 15) {
       System.out.println("Player 1 won!");
-    } else if (pTwoTotal == 100) {
+      return true;
+    } else if (pTwoTotal >= 15) {
       System.out.println("Player 2 won!");
+      return true;
     } return false;
   }
 
 
-  public Pig() {
 
-    currentTurn = 1;
-    pOneTotal = 0;
-    pTwoTotal = 0;
 
-    while (!getWinner()) {
-      playerTurn();
+  @Override
+  public void add(PlayerInterface player) {
+
+  }
+
+  @Override
+  public void remove(PlayerInterface player) {
+
+  }
+
+  public void run(){
+      //welcomeToPig();
+
+      currentTurn = 1;
+      pOneTotal = 0;
+      pTwoTotal = 0;
+
+
+
+      while (getWinner() == false) {
+        playerTurn();
+
     }
+
   }
 
   public void add(PlayerInterface player) {

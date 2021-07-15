@@ -65,6 +65,7 @@ public class War implements GameInterface {
 
     public void add(PlayerInterface player) {
 
+
 }
 
     public void remove(PlayerInterface player) {
