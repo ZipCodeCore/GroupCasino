@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * Created by leon on 7/21/2020.
  */
-public class SlotsGame implements GameInterface, PlayerInterface {
+public class SlotsGame implements GameInterface{//, PlayerInterface {
 
     @Override
     public void add(PlayerInterface player) {
@@ -47,15 +47,15 @@ public class SlotsGame implements GameInterface, PlayerInterface {
         new SlotReels().playSlots();
     }
 
-    @Override
-    public CasinoAccount getArcadeAccount() {
-        return null;
-    }
-
-    @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
-    }
+//    @Override
+//    public CasinoAccount getArcadeAccount() {
+//        return null;
+//    }
+//
+//    @Override
+//    public <SomeReturnType> SomeReturnType play() {
+//        return null;
+//    }
 }
 
 
