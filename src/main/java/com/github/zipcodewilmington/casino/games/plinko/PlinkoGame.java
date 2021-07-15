@@ -15,7 +15,7 @@ public class PlinkoGame implements GameInterface{
     public int initialPosition;
     private int bet;
     public int multiplier;
-    private int balance;
+    public int balance;
 
 
     @Override
@@ -85,6 +85,7 @@ public class PlinkoGame implements GameInterface{
 
     @Override
     public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
+
         return this.multiplier*betAmount;
     }
 
@@ -110,7 +111,7 @@ public class PlinkoGame implements GameInterface{
     }
 
 
-    private int getPlinkoSpot() {
+    public int getPlinkoSpot() {
         int max = 9;
         int min = 1;
         Random rand = new Random();
