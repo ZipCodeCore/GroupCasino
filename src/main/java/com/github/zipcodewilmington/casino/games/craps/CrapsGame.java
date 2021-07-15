@@ -1,48 +1,42 @@
 package com.github.zipcodewilmington.casino.games.craps;
 
-
-import com.github.zipcodewilmington.utils.AnsiColor;
-import com.github.zipcodewilmington.utils.IOConsole;
-
-import java.util.Scanner;
+import com.github.zipcodewilmington.casino.GambleableGame;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 
 import static com.github.zipcodewilmington.casino.objects.Dice.roll;
 
 //GambleableGame and GamblingPlayer
-public class CrapsGame {
-   public static class IOConsole {
+public class CrapsGame implements GambleableGame {
+
+    //public static void main(String[] args) {
+        @Override
+        public void run() {
 
 
-
-       public static void main (String[]args){
-            IOConsole console = new IOConsole();
             System.out.println("Shooter, Roll The Dice!");
-
             int score = roll();
 
             if (score == 7 || score == 11) {
                 System.out.println("\nScore = " + score);
-
                 System.out.println("\nNatural! You Win");
 
 
             } else if (score == 2 || score == 3 || score == 12) {
-                System.out.println("\nScore = " + score);
-
+                System.out.println("\n Score = " + score);
                 System.out.println("\nCraps! You Lose");
 
 
             } else {
                 int point = score;
-
                 System.out.println("\nPoint = " + point);
                 while (true) {
-                    System.out.println(console.nextLine());
                     System.out.println("\nNext Roll");
                     score = roll();
 
                     System.out.println("\nNew Score = " + score);
                     if (score == point) {
+
                         System.out.println("\nYou made your point, You Win");
                         break;
                     }
@@ -53,10 +47,39 @@ public class CrapsGame {
                 }
             }
         }
-
+    @Override
+    public void add(PlayerInterface player) {
 
     }
+
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
+    @Override
+    public int getNumberOfPlayers() {
+        return 0;
+    }
+
+    @Override
+    public boolean playerWins() {
+        return false;
+    }
+
+    @Override
+    public boolean playerLoses() {
+        return false;
+    }
+
+    @Override
+    public void clearGame() {
+
+    }
+
+
 }
+
 
 
 
@@ -88,41 +111,6 @@ public class CrapsGame {
     * */
 
 
-//public class CrapsGame {
-//
-//    public static void main(String[] args)  {
-//
-//        System.out.println("roll the die");
-//        int score = roll();
-//
-//        if (score == 7 || score == 11) {
-//            System.out.println("\n Score = " + score);
-//            System.out.println("you win");
-//
-//
-//        } else if (score == 2 || score == 3 || score == 12) {
-//            System.out.println("\n Score = " + score);
-//            System.out.println("you lose");
-//
-//
-//        } else {
-//            int point = score;
-//            System.out.println("\n Point = " + point);
-//            while (true) {
-//                System.out.println("\n Next Roll");
-//                score = roll();
-//
-//                System.out.println("\n New Score = " + score);
-//                if (score == point) {
-//                    System.out.println("\n  You Win");
-//                    break;
-//                }
-//                if (score == 7) {
-//                    System.out.println("\n  You Lose");
-//                    break;
-//                }
-//            }
-//        }
-//    }
+
 
 
