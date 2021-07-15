@@ -16,6 +16,12 @@ public class Player implements PlayerInterface{
         this.currentBet = currentBet;
     }
 
+    public  Player (String name, String password){
+         this.name = name;
+         this.password = password;
+         this.balance = 0;
+         this.currentBet = 0;
+    }
 
     @Override
     public CasinoAccount getArcadeAccount() {
