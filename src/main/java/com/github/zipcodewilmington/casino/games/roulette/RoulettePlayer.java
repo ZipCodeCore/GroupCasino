@@ -3,13 +3,14 @@ package com.github.zipcodewilmington.casino.games.roulette;
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GamblingPlayer;
 import com.github.zipcodewilmington.casino.Player;
-
-import java.util.Scanner;
+import com.github.zipcodewilmington.casino.objects.RouletteBet;
 
 public class RoulettePlayer implements GamblingPlayer {
-
     Player player;
-    float playerWinnings;
+
+    public RoulettePlayer(Player player) {
+        this.player = player;
+    }
 
     @Override
     public CasinoAccount getArcadeAccount() {
@@ -18,22 +19,24 @@ public class RoulettePlayer implements GamblingPlayer {
 
     @Override
     public <SomeReturnType> SomeReturnType play() {
-
         return null;
     }
-
-
-    public void increaseBet(float raise){
+    @Override
+    public void increaseBet(float raise) {
+        player.setCurrentBet(player.getCurrentBet() + raise);
+        player.setBalance(player.getBalance()-raise);
 
     }
 
     @Override
     public void decreaseBet(float deposit) {
-
+        player.setCurrentBet(player.getCurrentBet()-deposit);
+        player.setBalance(player.getBalance()+deposit);
     }
 
     @Override
     public float amountWagered() {
+
         return 0;
     }
 
@@ -47,13 +50,10 @@ public class RoulettePlayer implements GamblingPlayer {
         return 0;
     }
 
-    void placeOutsideBet(){}
-
-    void placeInsideBet(){}
-
-    public boolean finalizeBet(){
-        return false;
+    public RouletteBet placeBet(){
+        return null;
     }
+
 
 
 }

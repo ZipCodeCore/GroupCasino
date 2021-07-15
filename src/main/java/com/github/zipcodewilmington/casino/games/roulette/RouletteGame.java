@@ -1,30 +1,27 @@
 package com.github.zipcodewilmington.casino.games.roulette;
 
-import com.github.zipcodewilmington.casino.CasinoAccount;
-import com.github.zipcodewilmington.casino.GambleableGame;
-import com.github.zipcodewilmington.casino.GamblingPlayer;
-import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.*;
+import com.github.zipcodewilmington.casino.objects.RouletteBet;
 import com.github.zipcodewilmington.casino.objects.Wheel;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class RouletteGame implements GambleableGame, GamblingPlayer {
+public class RouletteGame implements GambleableGame {
+    String gameName;
     Wheel wheel;
+    List<PlayerInterface> activePlayers;
+    RoulettePlayer player;
 
-    @Override
-    public CasinoAccount getArcadeAccount() {
-        return null;
-    }
-
-    @Override
-    public <SomeReturnType> SomeReturnType play() {
-        Scanner scanner = new Scanner(System.in);
-        return null;
+    public RouletteGame(String gameName, List<PlayerInterface> activePlayers, RoulettePlayer player) {
+        this.gameName = gameName;
+        this.activePlayers = activePlayers;
+        this.player = player;
     }
 
     @Override
     public void add(PlayerInterface player) {
+        activePlayers.add(this.player);
 
     }
 
@@ -46,7 +43,10 @@ public class RouletteGame implements GambleableGame, GamblingPlayer {
 
     @Override
     public boolean playerWins() {
+        Scanner scanner = new Scanner(System.in);
+        //return (userInput == wheel.getSpinValue());
         return false;
+
     }
 
     @Override
@@ -54,34 +54,13 @@ public class RouletteGame implements GambleableGame, GamblingPlayer {
         return false;
     }
 
+    public float calculateWinnings(RouletteBet bet){
+       return 0;
+    }
+
     @Override
     public void clearGame() {
 
-    }
-
-    @Override
-    public void increaseBet(float raise) {
-
-    }
-
-    @Override
-    public void decreaseBet(float deposit) {
-
-    }
-
-    @Override
-    public float amountWagered() {
-        return 0;
-    }
-
-    @Override
-    public float amountWon() {
-        return 0;
-    }
-
-    @Override
-    public float payOut() {
-        return 0;
     }
 
 
