@@ -17,18 +17,17 @@ import java.util.List;
 // if the player HOLDs and their total is higher than the dealer, then they win
 // if the player gets exactly 21 they win 2x the total bet
 
-public class Blackjack implements GambleableGame, GamblingPlayer {
+public class Blackjack implements GambleableGame{
 
 
     ArrayList<Card> hand;
     Deck deck;
-    private final List<Player> blackjackPlayers;
+    private final List<Player> blackjackPlayers= new ArrayList<>();
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
 
 
-    public Blackjack(Deck deck, List<Player> blackjackPlayers, ArrayList<Card> hand) {
+    public Blackjack(Deck deck, ArrayList<Card> hand) {
         this.deck = deck;
-        this.blackjackPlayers = blackjackPlayers;
         this.hand = hand;
     }
 
@@ -40,10 +39,9 @@ public class Blackjack implements GambleableGame, GamblingPlayer {
         System.out.println("Have a seat and get ready for an adventure!");
         Double bet = console.getDoubleInput("How much would you like to bet?");
         System.out.println("Your bet is " + bet + "\nThe dealer will now shuffle and deal out your cards.");
-        Blackjack blackjack = new Blackjack(deck, blackjackPlayers, hand);
+        Blackjack blackjack = new Blackjack(deck, hand);
         deck.populateDeck();
         deck.shuffleDeck();
-        blackjack.amountWagered();
 
 
     }
@@ -84,39 +82,4 @@ public class Blackjack implements GambleableGame, GamblingPlayer {
 
     }
 
-
-    @Override
-    public void increaseBet(float raise) {
-
-    }
-
-    @Override
-    public void decreaseBet(float deposit) {
-
-    }
-
-    @Override
-    public float amountWagered() {
-        return 0;
-    }
-
-    @Override
-    public float amountWon() {
-        return 0;
-    }
-
-    @Override
-    public float payOut() {
-        return 0;
-    }
-
-    @Override
-    public CasinoAccount getArcadeAccount() {
-        return null;
-    }
-
-    @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
-    }
 }
