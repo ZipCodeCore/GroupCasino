@@ -30,4 +30,9 @@ public class Deck {
         }
         this.cards=tempD;
     }
+
+    public void draw(Deck deck) {
+        this.cards.add(deck.cards.get(0));
+        deck.cards.remove(0);
+    }
 }

@@ -1,5 +1,4 @@
 package com.github.zipcodewilmington.casino;
 
-public interface GamblingInterface {
-
+public interface GamblingInterface{
 }
