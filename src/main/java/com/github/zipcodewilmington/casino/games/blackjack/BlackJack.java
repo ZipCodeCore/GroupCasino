@@ -78,15 +78,15 @@ public class BlackJack {
             System.out.println("The dealer has : " + dealersCurrentValue());
             if (dealersCurrentValue() > 21) {
                 System.out.println("You win!");
-                theGame.addMoneyToBalance(theGame.player, theGame.calculateWinnings(2, theGame.userBet));
+                theGame.calculateWinnings(2, theGame.userBet);
                 gameEnd = true;
             } else if (dealersCurrentValue() == 21) {
                 System.out.println("The dealer has won!");
-                theGame.subtractBetFromBalance(theGame.userBet);
+                theGame.calculateWinnings(0, theGame.userBet);
                 gameEnd = true;
             } else if (dealersCurrentValue() > playersCurrentValue()) {
                 System.out.println("The dealer has won!");
-                theGame.subtractBetFromBalance(theGame.userBet);
+                theGame.calculateWinnings(0, theGame.userBet);
                 gameEnd = true;
             } else {
                 giveDealerCard();
@@ -104,7 +104,7 @@ public class BlackJack {
 
     public boolean splitPlayerHitsBlackJack () {
         if (splitPlayersCurrentValue() == 21) {
-            theGame.calculateWinnings(3, betAmount);
+            theGame.calculateWinnings(3, theGame.userBet);
             return true;
         } else {
             return false;
@@ -113,7 +113,7 @@ public class BlackJack {
 
     public boolean playerHitsBlackJack() {
         if (playersCurrentValue() == 21) {
-            theGame.calculateWinnings(3, betAmount);
+            theGame.calculateWinnings(3, theGame.userBet);
             return true;
         } else {
             return false;
