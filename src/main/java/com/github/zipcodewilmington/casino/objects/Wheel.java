@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington.casino.objects;
 
+import java.awt.*;
 import java.util.List;
 
 public class Wheel {
@@ -13,5 +14,6 @@ public class Wheel {
     public int getSpinValue(){
         return (int) (Math.random() * numberOfPositions); //European wheel with one 0 value
     }
+
 
 }
