@@ -23,10 +23,10 @@ public class Card{
         return suit;
     }
     public String getFaceValueAndSuit() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(faceValueOfCard+"-"+suit);
-        sb.append("\n");
-        return sb.toString();
+        StringBuilder faceValuesb = new StringBuilder();
+        faceValuesb.append(faceValueOfCard+"-"+suit);
+        faceValuesb.append("\n");
+        return faceValuesb.toString();
     }
 
     public void setSuit(Suit suit) {

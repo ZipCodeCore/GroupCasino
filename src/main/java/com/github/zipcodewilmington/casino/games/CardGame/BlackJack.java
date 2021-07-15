@@ -38,9 +38,13 @@ public BlackJack(int numberOfDecks){
 public void playBlackjack(){
     IOConsole input = new IOConsole(AnsiColor.PURPLE);
     Deck blackjackDeck= new Deck(1);
-    double playerMoney = 100.0;
+    Integer playerMoney = 100;
     blackjackDeck.shuffle();
-
+    String blackJackPlayerID = input.getStringInput("Enter your User ID");
+    String blackJackPlayerPwd = input.getStringInput("Enter your password");
+    input.println("Validating....");
+    BlackJackPlayer blackJackPlayer = new BlackJackPlayer(blackJackPlayerID,blackJackPlayerPwd,playerMoney);
+    //blackJackPlayer.
     input.println("Lets play Blackjack!!! You have "+playerMoney+"$");
     {
         while(playerMoney > 0) {
