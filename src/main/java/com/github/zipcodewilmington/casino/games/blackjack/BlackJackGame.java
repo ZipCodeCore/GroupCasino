@@ -14,7 +14,7 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
     IOConsole input = new IOConsole();
     Integer winnings = 0;
     BlackJack bj;
-    Player player = new Player("Allen", 5000);
+    Player player;
 
 
     public BlackJackGame () {
@@ -60,8 +60,6 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
     }
 
     public void startGame () {
-        boolean isWinner = false;
-
         bj.givePlayerCard();
         System.out.println("Your starting card : " + bj.playersCurrentValue());
         System.out.println("Your second next card : " + bj.givePlayerCard());
@@ -69,7 +67,7 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
         if (bj.playersHand.get(0).equals(bj.playersHand.get(1))) {  // include conditional on starting blackjack!
             splitPlayer();
         } else {
-            standardGame();       // Apparently the dealer can win with 12 without conditional above
+            standardGame();
         }
     }
 
@@ -103,29 +101,6 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
     }
 
 
-    private void splitPlayerHitsBlackJack(Integer splitBet) {
-        System.out.println("BLACK JACK!!");
-        calculateWinnings(3, splitBet);
-        addMoneyToBalance(this.player, calculateWinnings(3, splitBet));
-        standardGame();
-    }
-
-    private void splitPlayerBust(Integer splitBet) {
-        System.out.println("Sorry bud, you got " + bj.splitPlayersCurrentValue() +
-                ", you still have one more hand!");
-        subtractBetFromBalance(splitBet);
-        standardGame();
-    }
-
-    private Integer secondHandBet() {
-        Integer splitValue = bj.playersHand.get(1);
-        bj.playersHandOnSplit.add(splitValue);
-        bj.playersHand.set(1, 0);
-        Integer splitBet = input.getIntegerInput("Please place your bet for the second hand");
-        System.out.println("Your hand has been split! Current value " + bj.splitPlayersCurrentValue() + "\n" + "\n");
-        return splitBet;
-    }
-
     public CasinoAccount getArcadeAccount() {
         return null;
     }
@@ -138,12 +113,26 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
 
 
     public void subtractBetFromBalance(Integer betAmount) {
-        this.player.setBalance(player.getBalance() - betAmount);
+        this.player.makeBet(betAmount);
     }
 
 
     public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
         this.player.setBalance(player.getBalance() + winnings);
+    }
+
+    private void splitPlayerHitsBlackJack(Integer splitBet) {
+        System.out.println("BLACK JACK!!");
+        calculateWinnings(3, splitBet);
+        addMoneyToBalance(this.player, calculateWinnings(3, splitBet));
+        standardGame();
+    }
+
+    private void splitPlayerBust(Integer splitBet) {
+        System.out.println("Sorry bud, you got " + bj.splitPlayersCurrentValue() +
+                ", you still have one more hand!");
+        subtractBetFromBalance(splitBet);
+        standardGame();
     }
 
     private boolean checkStandardWinner(boolean isWinner) {
@@ -160,6 +149,15 @@ public class BlackJackGame implements GameInterface, PlayerInterface {
             isWinner = true;
         }
         return isWinner;
+    }
+
+    private Integer secondHandBet() {
+        Integer splitValue = bj.playersHand.get(1);
+        bj.playersHandOnSplit.add(splitValue);
+        bj.playersHand.set(1, 0);
+        Integer splitBet = input.getIntegerInput("Please place your bet for the second hand");
+        System.out.println("Your hand has been split! Current value " + bj.splitPlayersCurrentValue() + "\n" + "\n");
+        return splitBet;
     }
 
     private void splitHandRound() {
