@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington.casino.games.CardGame;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,10 +27,17 @@ class BlackJackTest {
 
     @Test
     void checkBust() {
+        Integer totalValue =22;
+
+        Assert.assertTrue(true);
+
     }
 
     @Test
     void checkHandValue() {
+
+
+
     }
 
     @Test

@@ -3,18 +3,43 @@ package com.github.zipcodewilmington.casino.games.CardGame;
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BlackJackPlayer implements PlayerInterface {
-
+private ArrayList<BlackJackPlayer> players= new ArrayList<BlackJackPlayer>();
+    Integer balance;
     private BlackJack currentGame;
-    private CasinoAccount casinoAccount;
-    protected String ID;
-    protected String pwd;
-    protected Integer balance;
+    private CasinoAccount casinoRobinAccount;
+     String ID;
+     String pwd;
 
-    public BlackJackPlayer(String ID, String password){
+public BlackJackPlayer(){
+}
+
+//public BlackJackPlayer(final List<String>players){
+//    players.addAll(players);
+//}
+//    public void add(BlackJackPlayer player)
+//    {
+//        players.add(player);
+//    }
+//public void add(PlayerInterface...players){
+//    for(PlayerInterface player: players){
+//        this.players.get(player.getArcadeAccount());
+//    }
+//}
+
+//    private BlackJack currentGame;
+//    private CasinoAccount casinoAccount;
+//    protected String ID;
+//    protected String pwd;
+//    protected
+
+    public BlackJackPlayer(String ID, String password,Integer balance){
         this.ID = ID;
         this.pwd = password;
-        this.balance = 0;
+        this.balance = balance;
     }
 
     public String getID() {
@@ -45,49 +70,19 @@ public class BlackJackPlayer implements PlayerInterface {
 
     @Override
     public CasinoAccount getArcadeAccount() {
-        return null;
+        return this.casinoRobinAccount;
+    }
+    public void setArcadeAccount(CasinoAccount casinoRobinAccount) {
+        this.casinoRobinAccount = casinoRobinAccount;
     }
 
     @Override
     public <SomeReturnType> void play() {
 
     }
-        public BlackJackPlayer(CasinoAccount casinoAccount,BlackJack currentGame){
-        this.casinoAccount=casinoAccount;
-        this.currentGame=currentGame;
-    }
-}
-//    IOConsole console = new IOConsole();
-//    CasinoAccount casinoAccount;
-//    BlackJack currentGame;
-//
-//    public Integer getPlayerAmount() {
-//        return playerAmount;
-//    }
-//
-//    public void setPlayerAmount(Integer playerAmount) {
-//        this.playerAmount = playerAmount;
-//    }
-//
-//    Integer playerAmount;
-//
-//
-//    public BlackJackPlayer(CasinoAccount casinoAccount,BlackJack currentGame){
+//        public BlackJackPlayer(CasinoAccount casinoAccount,BlackJack currentGame){
 //        this.casinoAccount=casinoAccount;
 //        this.currentGame=currentGame;
 //    }
-//
-//
-//
-//
-//
-//    @Override
-//    public CasinoAccount getArcadeAccount() {
-//        return null;
-//    }
-//
-//    @Override
-//    public <SomeReturnType> void play() {
-//
-//
-//    }
+}
+
