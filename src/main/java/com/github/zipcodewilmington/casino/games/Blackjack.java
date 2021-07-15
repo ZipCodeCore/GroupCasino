@@ -1,6 +1,8 @@
 package com.github.zipcodewilmington.casino.games;
 
 import com.github.zipcodewilmington.casino.GamblingInterface;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.card.Card;
 import com.github.zipcodewilmington.casino.card.Deck;
 import com.github.zipcodewilmington.casino.card.Hand;
@@ -12,7 +14,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class Blackjack {
+public class Blackjack implements GameInterface {
+
 //    private static String displayWelcome = "Welcome to BLackJack!";
 //    private BlackJackPlayer player;
 //    private BlackJackPlayer dealer;
@@ -166,5 +169,16 @@ public class Blackjack {
 //        System.out.println("Leave my casino, you are out of money!");
 //    }
 
+    public void add(PlayerInterface player) {
+
+}
+
+    public void remove(PlayerInterface player) {
+
+    }
+
+    public void run() {
+
+    }
 
 }
