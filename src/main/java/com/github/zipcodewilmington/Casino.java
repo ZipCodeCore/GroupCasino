@@ -35,6 +35,7 @@ public class Casino implements Runnable {
                     casinoAccount.alterAccountBalance(500);
                     this.player = new Player(accountName, casinoAccount);
                     this.player.setArcadeAccount(casinoAccount);
+
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
                     processGameSelection(gameSelectionInput);
                 } else {

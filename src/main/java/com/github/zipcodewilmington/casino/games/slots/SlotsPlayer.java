@@ -23,23 +23,4 @@ public class SlotsPlayer implements PlayerInterface  {
     public void setArcadeAccount(CasinoAccount casinoAccount) {
 
     }
-
-//    public void subtractFromTotal(Integer value){
-//        Integer newTotal = accountTotal - value;
-//        accountTotal = newTotal;
-//    }
-//
-//    public void addToTotal(Integer value){
-//        Integer newTotal = accountTotal + value;
-//        accountTotal = newTotal;
-//    }
-//
-//    public Integer getAccountTotal() {
-//        return accountTotal;
-//    }
-//
-//    public void setAccountTotal(Integer accountTotal) {
-//        this.accountTotal = accountTotal;
-//    }
-
 }
