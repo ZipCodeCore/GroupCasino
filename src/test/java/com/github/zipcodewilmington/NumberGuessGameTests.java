@@ -29,8 +29,8 @@ public class NumberGuessGameTests {
         NumberGuessGame game = new NumberGuessGame();
         Integer guessedNumber = 10;
         Integer actualNumber = 5;
-        Double actual = game.getGuessRange(guessedNumber, actualNumber);
-        Integer expected = 5;
+        Integer actual = game.getGuessRange(guessedNumber, actualNumber);
+        Integer expected = 25;
 
         Assert.assertEquals(actual, expected);
     }
@@ -42,8 +42,8 @@ public class NumberGuessGameTests {
         Integer max = game.getMaxNumber();
         Integer actualNumber = 5;
         Integer range = Math.abs(guessedNumber - actualNumber);
-        Double actual = game.guessRangePercentage(range);
-        Double expected = 0.25;
+        Integer actual = game.guessRangePercentage(range);
+        Integer expected = 25;
 
         Assert.assertEquals(actual, expected);
     }
