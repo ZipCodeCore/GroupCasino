@@ -4,6 +4,8 @@ import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GamblingPlayer;
 import com.github.zipcodewilmington.casino.Player;
 
+import java.util.Scanner;
+
 public class RoulettePlayer implements GamblingPlayer {
 
     Player player;
@@ -16,12 +18,10 @@ public class RoulettePlayer implements GamblingPlayer {
 
     @Override
     public <SomeReturnType> SomeReturnType play() {
+
         return null;
     }
 
-    public boolean finalizeBet(){
-        return false;
-    }
 
     public void increaseBet(float raise){
 
@@ -50,4 +50,10 @@ public class RoulettePlayer implements GamblingPlayer {
     void placeOutsideBet(){}
 
     void placeInsideBet(){}
+
+    public boolean finalizeBet(){
+        return false;
+    }
+
+
 }
