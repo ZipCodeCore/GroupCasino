@@ -2,6 +2,9 @@ package com.github.zipcodewilmington.casino;
 
 public class Player implements PlayerInterface{
     //retains the information about player including balance once game is over
+
+
+
     @Override
     public CasinoAccount getArcadeAccount() {
         return null;
@@ -11,4 +14,6 @@ public class Player implements PlayerInterface{
     public <SomeReturnType> SomeReturnType play() {
         return null;
     }
+
+
 }
