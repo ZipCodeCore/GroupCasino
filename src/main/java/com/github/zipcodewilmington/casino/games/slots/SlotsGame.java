@@ -13,7 +13,7 @@ public class SlotsGame implements GameInterface{
     private Integer betTotal;
     private Integer loseMultiplier;
     private Integer winMultiplier;
-    private SlotsPlayer currentPlayer;
+    private PlayerInterface currentPlayer;
     private Slots slotMachine;
 
     public SlotsGame(){
@@ -22,7 +22,7 @@ public class SlotsGame implements GameInterface{
 
     @Override
     public void add(PlayerInterface player) {
-        this.currentPlayer = (SlotsPlayer) player;
+        this.currentPlayer = player;
     }
 
     @Override
@@ -44,19 +44,25 @@ public class SlotsGame implements GameInterface{
         printWelcome();
         Slots newSlotMachine = new Slots();
         slotMachine = newSlotMachine;
-        System.out.println("Make a deposit to your account!");
-        Integer deposit = scanner.nextInt();
+//        System.out.println("Make a deposit to your account!");
+//        Integer deposit = scanner.nextInt();
         //add deposit to currentPlayer account
-        currentPlayer.setAccountTotal(deposit);
+//        currentPlayer.getArcadeAccount().alterAccountBalance(deposit);
+        slotMachine.spinSlots();
+        //Display first slots
         slotMachine.displaySlots();
 
         Boolean quitGame = false;
         while(!quitGame) {
+
+            //print initial account balance
+            System.out.println("\u001B[35mCurrent account balance:       " + currentPlayer.getArcadeAccount().getAccountBalance() + "\n");
+
             getBetAmount();
             Integer[] selectedBets = getBetSelections();
 
             //take money from player object
-            currentPlayer.subtractFromTotal(betTotal);
+            currentPlayer.getArcadeAccount().alterAccountBalance(betTotal * (-1));
 
             slotMachine.spinSlots();
             slotMachine.displaySlots();
@@ -68,7 +74,7 @@ public class SlotsGame implements GameInterface{
             Integer returnTotal = calculateReturnTotal(winnings, losings);
             System.out.println("\u001B[31mYou won: " + winnings + " dollars!\n");
             //add winning to player object
-            currentPlayer.addToTotal(winnings);
+            currentPlayer.getArcadeAccount().alterAccountBalance(winnings);
             System.out.println("\u001B[36mWould you like to play again?\n" +
                     "1. Yes   2. No");
             Integer input = scanner.nextInt();

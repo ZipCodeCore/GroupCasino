@@ -8,9 +8,9 @@ public class Player implements PlayerInterface{
     Integer currentBet = 0;
     CasinoAccount arcadeAccount;
 
-    public Player(String name, Integer initialDeposit) {
+    public Player(String name, CasinoAccount account) {
         this.name = name;
-        this.balance = initialDeposit;
+        this.arcadeAccount = account;
     }
 
     public String getName() {

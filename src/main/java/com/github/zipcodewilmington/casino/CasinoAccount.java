@@ -13,13 +13,12 @@ import java.util.List;
 public class CasinoAccount {
     private String password;
     private String accountName;
-
+    private Integer accountBalance = 0;
 
     public CasinoAccount(String accountName, String accountPassword){
         this.accountName = accountName;
         this.password = accountPassword;
     }
-
 
     public String getPassword() {
         return password;
@@ -29,4 +28,11 @@ public class CasinoAccount {
         return accountName;
     }
 
+    public Integer getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void alterAccountBalance(Integer value) {
+        this.accountBalance += value;
+    }
 }

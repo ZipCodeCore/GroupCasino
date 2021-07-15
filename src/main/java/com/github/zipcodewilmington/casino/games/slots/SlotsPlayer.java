@@ -8,14 +8,15 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
  * Created by leon on 7/21/2020.
  */
 public class SlotsPlayer implements PlayerInterface  {
-    private Integer accountTotal;
+    private PlayerInterface player;
 
-    public SlotsPlayer(){
+    public SlotsPlayer(PlayerInterface player){
+        this.player = player;
     }
 
     @Override
     public CasinoAccount getArcadeAccount() {
-        return null;
+        return player.getArcadeAccount();
     }
 
     @Override
@@ -23,22 +24,22 @@ public class SlotsPlayer implements PlayerInterface  {
 
     }
 
-    public void subtractFromTotal(Integer value){
-        Integer newTotal = accountTotal - value;
-        accountTotal = newTotal;
-    }
-
-    public void addToTotal(Integer value){
-        Integer newTotal = accountTotal + value;
-        accountTotal = newTotal;
-    }
-
-    public Integer getAccountTotal() {
-        return accountTotal;
-    }
-
-    public void setAccountTotal(Integer accountTotal) {
-        this.accountTotal = accountTotal;
-    }
+//    public void subtractFromTotal(Integer value){
+//        Integer newTotal = accountTotal - value;
+//        accountTotal = newTotal;
+//    }
+//
+//    public void addToTotal(Integer value){
+//        Integer newTotal = accountTotal + value;
+//        accountTotal = newTotal;
+//    }
+//
+//    public Integer getAccountTotal() {
+//        return accountTotal;
+//    }
+//
+//    public void setAccountTotal(Integer accountTotal) {
+//        this.accountTotal = accountTotal;
+//    }
 
 }
