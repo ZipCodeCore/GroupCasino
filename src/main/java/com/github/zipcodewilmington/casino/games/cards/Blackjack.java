@@ -52,7 +52,6 @@ public class Blackjack implements GambleableGame, GamblingPlayer {
         System.out.println("Welcome to the Sirius Blackjack table.");
         System.out.println("Have a seat and get ready for an adventure!");
         System.out.println("How much would you like to bet?");
-        System.out.println("25 Chips || 50 Chips");
 
 
 
