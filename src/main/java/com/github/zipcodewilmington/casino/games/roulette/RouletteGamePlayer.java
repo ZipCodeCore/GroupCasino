@@ -1,12 +1,23 @@
 package com.github.zipcodewilmington.casino.games.roulette;
 
-public class RouletteGamePlayer {
-    private String player1="";
-    int bet=0;
+import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 
-    public int bettingOnRed(){
+public class RouletteGamePlayer implements PlayerInterface {
+    String input="";
+    int money;
+
+    public choosingABet(String input){
+
 
     }
+    @Override
+    public CasinoAccount getArcadeAccount() {
+        return null;
+    }
 
+    @Override
+    public <SomeReturnType> void play() {
 
+    }
 }
