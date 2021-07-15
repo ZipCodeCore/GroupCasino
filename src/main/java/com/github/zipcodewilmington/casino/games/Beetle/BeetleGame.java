@@ -13,21 +13,12 @@ public class BeetleGame implements GameInterface {
     private Boolean isRunning = false;
     private PlayerInterface player;
     private IOConsole console = new IOConsole();
+    private Integer betAmt;
 
-    public BeetleGame(PlayerInterface... players){
-        this.game = new Beetle(players.length);
-        for(int i = 0; i < players.length; i++){
-            this.add(players[i]);
-        }
+    public BeetleGame(){
+        this.game = new Beetle(2);
     }
-    private void printWelcome() {
-        System.out.println(
-                AnsiColor.YELLOW + "***********************************\n" +
-                        "***                             ***\n" +
-                        "******   WELCOME TO BEETLE   ******\n" +
-                        "***                             ***\n" +
-                        "***********************************");
-    }
+
     public void add(PlayerInterface player){
         players.add(player);
     }
@@ -45,6 +36,8 @@ public class BeetleGame implements GameInterface {
      */
     public void run(){
         printWelcome();
+        console.newLine();
+        this.setBetAmt(console.getIntegerInput("Place your bet"));
         Integer turnCount = 0;
         game.setCurrentPlayer(-1);
         this.isRunning = true;
@@ -103,6 +96,31 @@ public class BeetleGame implements GameInterface {
 
     public Boolean getIsRunning(){
         return this.isRunning;
+    }
+
+    public Integer getBetAmt() {
+        return betAmt;
+    }
+
+    public void setBetAmt(Integer betAmt) {
+        this.betAmt = betAmt;
+    }
+
+    public void printWelcome() {
+        console.print(
+                "\u001B[33m***********************************\n" +
+                        "***                             ***\n" +
+                        "******   WELCOME TO BEETLE   ******\n" +
+                        "***                             ***\n" +
+                        "***********************************");
+    }
+
+
+    public void printBalanceAndBetText(){
+        console.newLine();
+        console.println("\u001B[35m Current account balance:        " + this.player.getArcadeAccount().getAccountBalance());
+        console.newLine();
+        
     }
 
 }
