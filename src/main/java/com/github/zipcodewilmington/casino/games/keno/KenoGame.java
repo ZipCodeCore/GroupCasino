@@ -38,7 +38,7 @@ public class KenoGame extends RandomNumberGenerator implements GameInterface {
             kenoPlayer.play();
         }
         for (KenoPlayer kenoPlayer : players) {
-            console.println("Congratulations Player #%s!  %s", count, kenoPlayer.chosenNumbers);
+            console.println("Player #%s:  %s", count, kenoPlayer.chosenNumbers);
             kenoPlayer.outcomeOfGame(kenoPlayer.amountToBet);
             kenoPlayer.casinoAccount.addToBalance(kenoPlayer.prizeMoney);
             count++;

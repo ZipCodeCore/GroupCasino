@@ -10,9 +10,9 @@ public class CasinoAccount {
     String username;
     String password;
     Integer age;
-    Double balance;
+    Integer balance;
 
-    public CasinoAccount(String username, String password, Integer age, Double balance) {
+    public CasinoAccount(String username, String password, Integer age, Integer balance) {
         this.username = username;
         this.password = password;
         this.age = age;
@@ -47,11 +47,11 @@ public class CasinoAccount {
         age++;
     }
 
-    public Double getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
 

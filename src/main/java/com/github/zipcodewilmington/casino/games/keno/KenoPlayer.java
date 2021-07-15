@@ -26,6 +26,12 @@ public class KenoPlayer implements PlayerInterface {
     }
 
     @Override
+    public void setArcadeAccount(CasinoAccount casinoAccount) {
+        this.casinoAccount = casinoAccount;
+    }
+
+
+    @Override
     public void play() {
         chosenNumbers = gameCurrentlyPlaying.getChosenNumbers();
         checkHowManyMatch();
@@ -47,38 +53,38 @@ public class KenoPlayer implements PlayerInterface {
         Integer numberOfMatches = checkHowManyMatch();
         switch (numberOfMatches) {
             case 1:
-                console.println("You got 1 match! You win $%s", amountBet * 2);
-                prizeMoney = amountBet * 2;
+                console.println("You got 1 match, You lose!");
+                prizeMoney = 0;
                 return prizeMoney;
 
             case 2:
-                console.println("You got 2 matches! You win $%s", amountBet * 5);
-                prizeMoney = amountBet * 5;
+                console.println("You got 2 matches, You lose!");
+                prizeMoney = 0;
                 return prizeMoney;
 
             case 3:
-                console.println("You got 3 matches! You win $%s", amountBet * 10);
-                prizeMoney = amountBet * 10;
+                console.println("You got 3 matches, You lose!");
+                prizeMoney = 0;
                 return prizeMoney;
 
             case 4:
-                console.println("You got 4 matches! You win $%s", amountBet * 20);
-                prizeMoney = amountBet * 20;
+                console.println("You got 4 matches, You lose!");
+                prizeMoney = 0;
                 return prizeMoney;
 
             case 5:
-                console.println("You got 5 matches! You win $%s", amountBet * 40);
-                prizeMoney = amountBet * 40;
+                console.println("You got 5 matches! You win $%s", amountBet * 3);
+                prizeMoney = amountBet * 3;
                 return prizeMoney;
 
             case 6:
-                console.println("You got 6 matches! You win $%s", amountBet * 80);
-                prizeMoney = amountBet * 80;
+                console.println("You got 6 matches! You win $%s", amountBet * 10);
+                prizeMoney = amountBet * 10;
                 return prizeMoney;
 
             case 7:
-                console.println("You got 7 matches! You win $%s", amountBet * 200);
-                prizeMoney = amountBet * 200;
+                console.println("You got 7 matches! You win $%s", amountBet * 50);
+                prizeMoney = amountBet * 50;
                 return prizeMoney;
 
             case 8:
@@ -87,15 +93,15 @@ public class KenoPlayer implements PlayerInterface {
                 return prizeMoney;
 
             case 9:
-                console.println("You got 9 matches! You win $%s", amountBet * 4000);
-                prizeMoney = amountBet * 4000;
+                console.println("You got 9 matches! You win $%s", amountBet * 10000);
+                prizeMoney = amountBet * 10000;
                 return prizeMoney;
 
             case 10:
-                console.println("You got 10 matches! You win $%s", amountBet * 10000);
-                prizeMoney = amountBet * 10000;
+                console.println("You got 10 matches! You win $%s", amountBet * 100000);
+                prizeMoney = amountBet * 100000;
                 return prizeMoney;
         }
-        return null;
+        return prizeMoney;
     }
 }

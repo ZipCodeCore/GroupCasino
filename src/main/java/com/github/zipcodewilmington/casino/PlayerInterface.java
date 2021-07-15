@@ -17,4 +17,6 @@ public interface PlayerInterface {
      * @param <SomeReturnType> specify any return type you would like here
      */
     <SomeReturnType> void play();
+
+    void setArcadeAccount(CasinoAccount casinoAccount);
 }
