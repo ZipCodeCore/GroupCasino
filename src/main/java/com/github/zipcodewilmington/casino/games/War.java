@@ -1,5 +1,7 @@
 package com.github.zipcodewilmington.casino.games;
 
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.card.Card;
 import com.github.zipcodewilmington.casino.card.Deck;
 import com.github.zipcodewilmington.casino.card.Hand;
@@ -10,7 +12,8 @@ import com.github.zipcodewilmington.casino.player.WarPlayer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class War {
+public class War implements GameInterface {
+
 
 //    private Deck deck;
 //    private WarPlayer warPlayer;
@@ -60,5 +63,16 @@ public class War {
 //
 //    }
 
+    public void add(PlayerInterface player) {
+
+}
+
+    public void remove(PlayerInterface player) {
+
+    }
+
+    public void run() {
+
+    }
 
 }
