@@ -1,4 +1,5 @@
 package com.github.zipcodewilmington.casino.games.cards;
+<<<<<<< HEAD
 
 
 import com.github.zipcodewilmington.casino.*;
@@ -6,6 +7,10 @@ import com.github.zipcodewilmington.casino.*;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
+=======
+import com.github.zipcodewilmington.casino.*;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+>>>>>>> 37ece5a5914c44edd1e5995214cab2a1876cb55e
 import com.github.zipcodewilmington.casino.objects.Deck;
 
 import java.util.List;
@@ -52,7 +57,6 @@ public class Blackjack implements GambleableGame, GamblingPlayer {
         System.out.println("Welcome to the Sirius Blackjack table.");
         System.out.println("Have a seat and get ready for an adventure!");
         System.out.println("How much would you like to bet?");
-        System.out.println("25 Chips || 50 Chips");
 
 
 
