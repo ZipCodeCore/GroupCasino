@@ -12,9 +12,6 @@ public class BlackJack {
     List<Integer> playersHandOnSplit;
     List<Integer> dealersHand;
     Deque<Integer> deckOfCards;
-    BlackJackGame theGame = new BlackJackGame();
-    boolean gameEnd = false;
-
     Integer betAmount; // Equal to user input
 
     public BlackJack() {
@@ -73,26 +70,7 @@ public class BlackJack {
         return sum;
     }
 
-    public void dealersGame() {
-        while (!gameEnd) {
-            System.out.println("The dealer has : " + dealersCurrentValue());
-            if (dealersCurrentValue() > 21) {
-                System.out.println("You win!");
-                theGame.calculateWinnings(2, theGame.userBet);
-                gameEnd = true;
-            } else if (dealersCurrentValue() == 21) {
-                System.out.println("The dealer has won!");
-                theGame.calculateWinnings(0, theGame.userBet);
-                gameEnd = true;
-            } else if (dealersCurrentValue() > playersCurrentValue()) {
-                System.out.println("The dealer has won!");
-                theGame.calculateWinnings(0, theGame.userBet);
-                gameEnd = true;
-            } else {
-                giveDealerCard();
-            }
-        }
-    }
+
 
     public boolean playerBreaks21() {
         if (playersCurrentValue() > 21) {
@@ -102,23 +80,7 @@ public class BlackJack {
         }
     }
 
-    public boolean splitPlayerHitsBlackJack () {
-        if (splitPlayersCurrentValue() == 21) {
-            theGame.calculateWinnings(3, theGame.userBet);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
-    public boolean playerHitsBlackJack() {
-        if (playersCurrentValue() == 21) {
-            theGame.calculateWinnings(3, theGame.userBet);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public List<Integer> getPlayersHand() {
         return playersHand;
