@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class PigTests {
-    private Pig testPig;
+ /*   private Pig testPig;
 
     @Test
     public void testRollDie(){
@@ -16,7 +16,7 @@ public class PigTests {
        Assertions.assertNotEquals(expected, actual);
 
     }
-
+*/
 
 
 }
