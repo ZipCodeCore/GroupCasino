@@ -11,12 +11,11 @@ public class BeetlePlayer implements PlayerInterface {
         this.player = player;
     }
 
-    @Override
+
     public CasinoAccount getArcadeAccount() {
         return null;
     }
 
-    @Override
     public void setArcadeAccount(CasinoAccount casinoAccount) {
 
     }

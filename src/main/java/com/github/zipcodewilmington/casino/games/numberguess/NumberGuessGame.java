@@ -1,16 +1,23 @@
 package com.github.zipcodewilmington.casino.games.numberguess;
-
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.utils.AnsiColor;
+import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.Scanner;
 
 
 /**
- * Authors: Zack, Nathan
+ * Created by Nathan on 7/14/2021
  */
 
 public class NumberGuessGame implements GameInterface {
+    private final IOConsole consoleR = new IOConsole(AnsiColor.RED);
+    private final IOConsole consoleG = new IOConsole(AnsiColor.GREEN);
+    private final IOConsole consoleY = new IOConsole(AnsiColor.YELLOW);
+    private final IOConsole consoleB = new IOConsole(AnsiColor.BLUE);
+    private final IOConsole consoleP = new IOConsole(AnsiColor.PURPLE);
+    private final IOConsole consoleC = new IOConsole(AnsiColor.CYAN);
     private Integer maxNumber;
     private PlayerInterface currentPlayer;
     private Integer betAmount;
@@ -32,13 +39,13 @@ public class NumberGuessGame implements GameInterface {
             //print instruction for game
             printInstructions();
             //print player's current account balance
-            System.out.println("Your current account balance is:   $" + this.currentPlayer.getArcadeAccount().getAccountBalance() + "\n");
+            consoleG.println("Your current account balance is:   $" + this.currentPlayer.getArcadeAccount().getAccountBalance() + "\n");
             //ask for a bet amount
             takeBet();
             //subtract bet amount from player's account
             subtractBetFromBalance(betAmount);
             calcPotentialEarnings();
-            System.out.println("You bet:  $"+betAmount+ "\n\nBut WAIT!\nFeeling lucky??\nIncrease the difficulty and increase your earnings!\n");
+            consoleR.println("You bet:  $"+betAmount+ "\n\nBut WAIT!\nFeeling lucky??\nIncrease the difficulty and increase your earnings!\n");
             //print difficulty levels and ask user to choose
             setDifficultyLevel();
             setMultiplier(maxNumber);
@@ -52,11 +59,11 @@ public class NumberGuessGame implements GameInterface {
             //calculate amount player won
             Integer payout = calculatePayout(multiplier, guessRange, betAmount);
             //print winnings
-            System.out.println("You won:   $"+payout);
+            consoleR.println("You won:   $"+payout);
             //add winnings to player's account
             addMoneyToBalance(currentPlayer,payout);
             //ask if player wants to play again
-            System.out.println("\u001B[36m\nWould you like to play again?\n" +
+            consoleC.println("\u001B[36m\nWould you like to play again?\n" +
                     "1. Yes   2. No");
             Integer input = scanner.nextInt();
             if(input == 2){
@@ -66,13 +73,13 @@ public class NumberGuessGame implements GameInterface {
     }
 
     private void printGuessVsActual() {
-        System.out.println("Lets compare results!");
-        System.out.println("You guessed: " + guessNumber);
-        System.out.println("Actual Number: " + randomNumber);
+        consoleG.println("Lets compare results!");
+        consoleY.println("You guessed: " + guessNumber);
+        consoleY.println("Actual Number: " + randomNumber);
     }
 
     private void printInstructions() {
-        System.out.println("Guess a number between 0 and 20.\n" +
+        consoleB.println("Guess a number between 0 and 20.\n" +
                 "Guess close enough and win a prize!\n" +
                 "Pick the right number to double your bets!\n");
     }
@@ -104,18 +111,18 @@ public class NumberGuessGame implements GameInterface {
     }
 
     private void takeGuess() {
-        System.out.println("Pick a number between 0 and " + maxNumber);
+        consoleP.println("Pick a number between 0 and " + maxNumber);
         this.guessNumber = scanner.nextInt();
 
     }
 
     private void takeBet() {
-        System.out.println("How much do you want to bet?");
+        consoleB.println("How much do you want to bet?");
         this.betAmount = scanner.nextInt();
     }
 
     private void printWelcome() {
-        System.out.println(
+        consoleY.println(
                 "************************************\n" +
                 "***                              ***\n" +
                 "******   !!  WELCOME TO  !!   ******\n" +
@@ -133,7 +140,7 @@ public class NumberGuessGame implements GameInterface {
     }
 
     private void setDifficultyLevel() {
-        System.out.println(
+        consoleC.println(
                 "1. Start max at 20 and win up to " + potentialEarnings[0] + "!\n" +
                 "2. Change max to 30 and Triple your winnings up to " + potentialEarnings[1] + "!\n"+
                 "3. Change max to 40 and QUADRUPLE your winnings up to " + potentialEarnings[2] + "!\n"+

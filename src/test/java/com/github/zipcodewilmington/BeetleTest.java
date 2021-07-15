@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.github.zipcodewilmington.casino.games.Beetle.Beetle;
 import org.junit.Assert;
 import org.junit.Test;
@@ -81,7 +82,7 @@ public class BeetleTest {
     public void beetleIsCompleteTest1(){
         Beetle beetle = new Beetle(2);
         Boolean expected = true;
-        for(int i = 0; i < 6; i++) {
+        for(int i = 1; i <= 6; i++) {
             beetle.setPlayerBeetles(0, i);
         }
         Boolean actual = beetle.beetleIsComplete(0);
@@ -102,12 +103,10 @@ public class BeetleTest {
     public void checkWinnerTest1(){
         Beetle beetle = new Beetle(2);
         Boolean actual = false;
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 6; j++){
+            for(int j = 1; j <= 6; j++){
                 beetle.setPlayerBeetles(0, j);
             }
             actual = beetle.checkWinner(0);
-        }
         Assert.assertTrue(actual);
     }
 
@@ -115,48 +114,47 @@ public class BeetleTest {
     public void checkWinnerTest2(){
         Beetle beetle = new Beetle(2);
         Boolean actual = false;
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 6; j++){
+            for(int j = 1; j <= 5; j++){
                 beetle.setPlayerBeetles(0, j);
             }
             actual = beetle.checkWinner(0);
-        }
         Assert.assertFalse(actual);
     }
 
     @Test
-    public void getScoreTest1(){
+    public void nextPlayerTest1(){
         Beetle beetle = new Beetle(2);
-        for(int j = 0; j < 6; j++){
-            beetle.setPlayerBeetles(0, j);
-        }
-        beetle.checkWinner(0);
-        Integer expected = 6;
-        Integer actual = beetle.getScore(0);
-
-        Assert.assertEquals(expected, actual);
+        beetle.nextPlayer();
+        Integer actual = beetle.getCurrentPlayer();
+        Integer expected = 1;
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
-    public void getScoreTest2(){
+    public void nextPlayerTest2(){
         Beetle beetle = new Beetle(2);
-
+        beetle.nextPlayer();
+        beetle.nextPlayer();
+        Integer actual = beetle.getCurrentPlayer();
         Integer expected = 0;
-        Integer actual = beetle.getScore(0);
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void printBeetleTest1(){
+        Beetle beetle = new Beetle(2);
+        String expected = "Body:0  Head:0  Legs:0  Eyes:0  Antenna:0  Tail:0  ";
+        String actual = beetle.printBeetle(0);
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void refreshBeetleTest(){
+    public void getLastDiceRollTest(){
         Beetle beetle = new Beetle(2);
-        for(int j = 0; j < 6; j++){
-            beetle.setPlayerBeetles(0, j);
-        }
-        beetle.refreshBeetle(0);
-        Integer[] actual = beetle.getPlayerCard(0);
-        Integer[] expected = new Integer[] {0, 0, 0, 0, 0, 0};
+        Integer actual = beetle.getLastDiceRoll(0);
+        Integer expected = 0;
 
-        Assert.assertArrayEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 }

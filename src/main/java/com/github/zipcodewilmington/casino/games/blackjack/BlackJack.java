@@ -97,4 +97,12 @@ public class BlackJack {
     public void setDealersHand(List<Integer> dealersHand) {
         this.dealersHand = dealersHand;
     }
+
+    public List<Integer> getPlayersHandOnSplit() {
+        return playersHandOnSplit;
+    }
+
+    public void setPlayersHandOnSplit(List<Integer> playersHandOnSplit) {
+        this.playersHandOnSplit = playersHandOnSplit;
+    }
 }
