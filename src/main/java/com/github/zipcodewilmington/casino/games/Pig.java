@@ -91,9 +91,10 @@ public class Pig{
     pOneTotal = 0;
     pTwoTotal = 0;
 
-    while (!getWinner()) {
+    while (getWinner() == false) {
       playerTurn();
     }
+
   }
   }
 
