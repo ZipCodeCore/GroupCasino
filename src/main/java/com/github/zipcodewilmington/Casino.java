@@ -2,6 +2,7 @@ package com.github.zipcodewilmington;
 
 import com.github.zipcodewilmington.casino.*;
 import com.github.zipcodewilmington.casino.games.Beetle.BeetleGame;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
@@ -36,17 +37,7 @@ public class Casino implements Runnable {
                     this.player.setArcadeAccount(casinoAccount);
 
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
-                    if (gameSelectionInput.equals("SLOTS")) {
-                        play(new SlotsGame(), new SlotsPlayer(this.player));
-
-                    } else if (gameSelectionInput.equals("NUMBERGUESS")) {
-                        play(new NumberGuessGame(), new NumberGuessPlayer(this.player));
-
-                    } else {
-                        // TODO - implement better exception handling
-                        String errorMessage = "[ %s ] is an invalid game selection";
-                        throw new RuntimeException(String.format(errorMessage, gameSelectionInput));
-                    }
+                    processGameSelection(gameSelectionInput);
                 } else {
                     // TODO - implement better exception handling
                     String errorMessage = "No account found with name of [ %s ] and password of [ %s ]";
@@ -85,6 +76,13 @@ public class Casino implements Runnable {
         switch(input){
             case "beetle":
                 gameObject = new BeetleGame();
+                break;
+            case "slots":
+                gameObject = new SlotsGame();
+                break;
+            case "blackjack":
+                gameObject = new BlackJackGame();
+                break;
             default:
                 gameObject = new BeetleGame();
         }
