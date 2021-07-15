@@ -7,14 +7,16 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
  * Created by leon on 7/21/2020.
  */
 public class SlotsPlayer implements PlayerInterface {
+    CasinoAccount casinoAccount;
+    SlotsGame gameCurrentlyPlaying;
 
     @Override
     public CasinoAccount getArcadeAccount() {
-        return null;
+        return casinoAccount;
     }
 
     @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
+    public void play() {
+        gameCurrentlyPlaying.run();
     }
 }
