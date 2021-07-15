@@ -1,6 +1,9 @@
 package com.github.zipcodewilmington.casino.player;
 
-public class Player {
+import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+
+public class Player implements PlayerInterface {
     private String name;
     private int balance;
 
@@ -28,4 +31,12 @@ public class Player {
         this.balance = balance;
     }
 
+
+    public CasinoAccount getArcadeAccount() {
+        return null;
+    }
+
+    public <SomeReturnType> SomeReturnType play() {
+        return null;
+    }
 }

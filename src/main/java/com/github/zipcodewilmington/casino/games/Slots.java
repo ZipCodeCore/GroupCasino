@@ -1,5 +1,8 @@
 package com.github.zipcodewilmington.casino.games;
 
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -7,7 +10,7 @@ import java.util.Scanner;
 /**
  * Created by leon on 7/21/2020.
  */
-public class Slots {
+public class Slots implements GameInterface {
 
      public static void main(String[] arg) {
          Random generator = new Random();
@@ -78,7 +81,17 @@ public class Slots {
          }
 
 
+    public void add(PlayerInterface player) {
 
+    }
+
+    public void remove(PlayerInterface player) {
+
+    }
+
+    public void run() {
+
+    }
 }
 
 

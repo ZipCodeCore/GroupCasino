@@ -65,6 +65,8 @@ public class IOConsole {
         }
     }
 
+    public void pressEnterToProceed() {this.input.nextLine();}
+
     public Integer getIntegerInput(String prompt, Object... args) {
         return getLongInput(prompt, args).intValue();
     }
