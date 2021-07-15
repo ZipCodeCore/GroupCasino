@@ -16,4 +16,7 @@ public class KenoPlayer implements PlayerInterface {
     public void setArcadeAccount(CasinoAccount casinoAccount) {
 
     }
+
 }
+
+

@@ -15,7 +15,8 @@ public class PlinkoGame implements GameInterface{
     public int initialPosition;
     private int bet;
     public int multiplier;
-    private int balance;
+    public int balance;
+
 
 
     @Override
@@ -72,7 +73,9 @@ public class PlinkoGame implements GameInterface{
         }
         System.out.println("\u001B[32mThanks for playing!");
         System.out.println("\u001B[32mOverall, you now have: $" + balance);
-        }
+        feature/DipintiTestFiles
+    }
+
 
     private void printWelcome() {
         System.out.println(
@@ -110,7 +113,8 @@ public class PlinkoGame implements GameInterface{
     }
 
 
-    private int getPlinkoSpot() {
+
+    public int getPlinkoSpot() {
         int max = 9;
         int min = 1;
         Random rand = new Random();
@@ -153,23 +157,24 @@ public class PlinkoGame implements GameInterface{
         String enterString;
 
 
-            while(invalidInput)
-            {
-                System.out.println("Enter number :");
-                numberEntered = input.nextInt();
 
-                if ((numberEntered > 0) && (numberEntered < 10)){
-                    invalidInput = false;
-                    playerNums = numberEntered;
-                    break;
-                }
-                else{
-                    invalidInput = true;
-                    System.out.println("Sorry, the number you entered is either less than 0 or greater than 9");
-                    System.out.println("Try again");
-                    System.out.println("");
-                }
+        while(invalidInput)
+        {
+            System.out.println("Enter number :");
+            numberEntered = input.nextInt();
+
+            if ((numberEntered > 0) && (numberEntered < 10)){
+                invalidInput = false;
+                playerNums = numberEntered;
+                break;
             }
+            else{
+                invalidInput = true;
+                System.out.println("Sorry, the number you entered is either less than 0 or greater than 9");
+                System.out.println("Try again");
+                System.out.println("");
+            }
+        }
         return playerNums;
     }
 
@@ -191,4 +196,5 @@ public class PlinkoGame implements GameInterface{
 //    }
 
 }
+
 

@@ -48,6 +48,9 @@ public class KenoGame implements GameInterface {
             kenoSpot = getSpot(playerNums);
             kenoCatch = getCatch(playerNums, computerNums);
             System.out.println("\u001B[32mCatch: " + (kenoCatch + 1));
+
+            System.out.println("\u001B[32mYou have won: $"+payout(kenoSpot,kenoCatch,bet));
+
             balance += payout(kenoSpot, kenoCatch, bet);
             subtractBetFromBalance(bet);
             System.out.println("\u001B[32mYou now have: $" + balance);
@@ -299,11 +302,12 @@ public class KenoGame implements GameInterface {
 
     @Override
     public void subtractBetFromBalance(Integer betAmount) {
-      balance-=bet;
+        this.balance-=bet;
     }
 
     @Override
     public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
-        balance+=calculateWinnings(multiplier,bet);
+
+        this.balance+=calculateWinnings(multiplier,bet);
     }
 }
