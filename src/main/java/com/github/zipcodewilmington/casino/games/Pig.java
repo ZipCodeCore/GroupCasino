@@ -1,4 +1,5 @@
 package com.github.zipcodewilmington.casino.games;
+package com.github.zipcodewilmington.utils;
 
 import java.util.Random;
 import java.util.Scanner;
