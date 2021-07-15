@@ -31,7 +31,7 @@ public class CSVUtils {
     }
 
     public static void csvFileSaver(CasinoAccount account) throws IOException {
-        String csvFile = "/accounts.csv";
+        String csvFile = "accounts.csv";
         FileWriter writer = new FileWriter(csvFile);
         Integer nextId = 1;
         CSVUtils.writeLine(writer, new ArrayList<String>(Arrays.asList(String.valueOf(nextId))));
