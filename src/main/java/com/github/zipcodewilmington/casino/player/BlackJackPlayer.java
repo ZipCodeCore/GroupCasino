@@ -5,8 +5,8 @@ import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.card.Deck;
 import com.github.zipcodewilmington.casino.card.Hand;
 import com.github.zipcodewilmington.casino.games.Blackjack;
-//
-//public class BlackJackPlayer extends Player {
+
+public class BlackJackPlayer extends Player {
 //    private Hand hand = new Hand();
 //    private Deck deck = new Deck();
 //    private Blackjack blackjack = new Blackjack();
@@ -54,7 +54,7 @@ import com.github.zipcodewilmington.casino.games.Blackjack;
 //        player.setPlayerBalance(player.getPlayerBalance() + sumOfPot);
 //    }
 //
-//
-//}
+
+}
 
 
