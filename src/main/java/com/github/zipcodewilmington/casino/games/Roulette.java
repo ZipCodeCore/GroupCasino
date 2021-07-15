@@ -3,6 +3,7 @@ package com.github.zipcodewilmington.casino.games;
 import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+
 import com.github.zipcodewilmington.casino.player.RoulettePlayer;
 
 import java.util.*;
@@ -268,6 +269,7 @@ public class Roulette implements GameInterface{
     public void add(PlayerInterface player) {
 
     }
+
 
     public void remove(PlayerInterface player) {
 

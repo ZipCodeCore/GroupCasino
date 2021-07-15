@@ -6,6 +6,7 @@ import com.github.zipcodewilmington.casino.card.Hand;
 import java.util.ArrayList;
 
 public class WarPlayer extends Player {
+
     Player player;
     Hand hand;
 
@@ -27,4 +28,6 @@ public class WarPlayer extends Player {
     public Player WarPlayer() {
         return this.player;
     }
+
+
 }
