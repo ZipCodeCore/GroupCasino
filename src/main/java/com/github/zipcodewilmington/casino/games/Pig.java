@@ -33,7 +33,7 @@ public class Pig{
 
   public int playerTurn () {
 
-    do {
+
       System.out.println("Please enter 1 to roll or 0 to hold");
       //input.nextLine();
       rollAnswer = input.nextInt();
@@ -57,7 +57,7 @@ public class Pig{
         currentTurn++;
         switchingPlayers();
       }
-    } while (currentTurn <= 5);
+
 
     return turnScore;
   }
@@ -77,10 +77,12 @@ public class Pig{
   }
 
   public boolean getWinner(){
-    if (pOneTotal == 100) {
+    if (pOneTotal >= 100) {
       System.out.println("Player 1 won!");
-    } else if (pTwoTotal == 100) {
+      return true;
+    } else if (pTwoTotal >= 100) {
       System.out.println("Player 2 won!");
+      return true;
     } return false;
   }
 

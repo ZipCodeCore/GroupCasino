@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class War {
 
-    private Deck deck;
+  /*  private Deck deck;
     private WarPlayer warPlayer;
     private WarPlayer dealerCPU;
 
@@ -60,5 +60,5 @@ public class War {
 
     }
 
-
+*/
 }

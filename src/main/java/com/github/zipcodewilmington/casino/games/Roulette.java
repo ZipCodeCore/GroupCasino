@@ -7,6 +7,8 @@ import com.github.zipcodewilmington.casino.player.RoulettePlayer;
 import java.util.*;
 
 public class Roulette {
+  /*
+
     Integer number;
     String color;
     int bet;
@@ -219,5 +221,5 @@ public class Roulette {
         rouletteWelcomeScreen();
         playerSelection();
     }
-
+*/
 }

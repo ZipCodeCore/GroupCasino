@@ -4,7 +4,7 @@ import com.github.zipcodewilmington.casino.card.Hand;
 
 public class WarPlayer extends Player {
 
-    Player player;
+ /*   Player player;
     Hand hand = new Hand();
 
     public WarPlayer(Player player) {
@@ -21,5 +21,5 @@ public class WarPlayer extends Player {
 
     public Player WarPlayer() {
         return this.player;
-    }
+    } */
 }
