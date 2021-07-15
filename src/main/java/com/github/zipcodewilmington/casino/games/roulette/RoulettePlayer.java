@@ -1,236 +1,67 @@
 
-//package com.github.zipcodewilmington.casino.games.roulette;
-//
-//import com.github.zipcodewilmington.casino.CasinoAccount;
-//import com.github.zipcodewilmington.casino.GamblingPlayer;
-//import com.github.zipcodewilmington.casino.Player;
-//
-//public class RoulettePlayer implements GamblingPlayer {
-//
-//    Player player;
-//    float playerWinnings;
 
-//import com.github.zipcodewilmington.casino.objects.RouletteBet;
-//
-//public class RoulettePlayer implements GamblingPlayer {
-//    Player player;
-//
-//    public RoulettePlayer(Player player) {
-//        this.player = player;
-//    }
+package com.github.zipcodewilmington.casino.games.roulette;
 
-//
-//    @Override
-//    public CasinoAccount getArcadeAccount() {
-//        return null;
-//    }
-//
-//    @Override
-//    public <SomeReturnType> SomeReturnType play() {
-//        return null;
-//    }
-//
-//    public boolean finalizeBet(){
-//        return false;
-//    }
-//
-//    public void increaseBet(float raise){
+import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.GamblingPlayer;
+import com.github.zipcodewilmington.casino.Player;
+import com.github.zipcodewilmington.casino.objects.RouletteBet;
 
-//    @Override
-//    public void increaseBet(float raise) {
-//        player.setCurrentBet(player.getCurrentBet() + raise);
-//        player.setBalance(player.getBalance()-raise);
+public class RoulettePlayer implements GamblingPlayer {
 
-//
-//    }
-//
-//    @Override
-//    public void decreaseBet(float deposit) {
-
-//        player.setCurrentBet(player.getCurrentBet()-deposit);
-//        player.setBalance(player.getBalance()+deposit);
-
-//    }
-//
-//    @Override
-//    public float amountWagered() {
-
-//        return 0;
-//    }
-//
-//    @Override
-//    public float amountWon() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public float payOut() {
-//        return 0;
-//    }
-//
-
-//    void placeOutsideBet(){}
-//
-//    void placeInsideBet(){}
-
-//    public RouletteBet placeBet(){
-//        return null;
-//    }
-// }
-//package com.github.zipcodewilmington.casino.games.roulette;
-//
-//import com.github.zipcodewilmington.casino.CasinoAccount;
-//import com.github.zipcodewilmington.casino.GamblingPlayer;
-//import com.github.zipcodewilmington.casino.Player;
-//import com.github.zipcodewilmington.casino.objects.RouletteBet;
-//
-//public class RoulettePlayer implements GamblingPlayer {
-//
-//    Player player;
-//    float playerWinnings;
-//
-//
-//    public RoulettePlayer(Player player) {
-//        this.player = player;
-//    }
-//
-//    @Override
-//    public CasinoAccount getArcadeAccount() {
-//        return null;
-//    }
-//
-//    @Override
-//    public <SomeReturnType> SomeReturnType play() {
-//        return null;
-//    }
-//
-//    public boolean finalizeBet(){
-//        return false;
-//    }
-//
-//
-//    @Override
-//    public void increaseBet(float raise) {
-//        player.setCurrentBet(player.getCurrentBet() + raise);
-//        player.setBalance(player.getBalance()-raise);
-//
-//    }
-//
-//    @Override
-//    public void decreaseBet(float deposit) {
-//        player.setCurrentBet(player.getCurrentBet()-deposit);
-//        player.setBalance(player.getBalance()+deposit);
-//    }
-//
-//    @Override
-//    public float amountWagered() {
-//
-//        return 0;
-//    }
-//
-//    @Override
-//    public float amountWon() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public float payOut() {
-//        return 0;
-//    }
-//
-//    void placeOutsideBet(){}
-//
-//    void placeInsideBet(){}
-//    public RouletteBet placeBet(){
-//        return null;
-//    }
-//
-//}
-
-//package com.github.zipcodewilmington.casino.games.roulette;
-//
-//import com.github.zipcodewilmington.casino.CasinoAccount;
-//import com.github.zipcodewilmington.casino.GamblingPlayer;
-//import com.github.zipcodewilmington.casino.Player;
-
-//import com.github.zipcodewilmington.casino.objects.RouletteBet;
-
-//public class RoulettePlayer implements GamblingPlayer {
-//
-//    Player player;
-//    float playerWinnings;
-
-//import com.github.zipcodewilmington.casino.objects.RouletteBet;
+    Player player;
+    float playerWinnings;
 
 
-//    public RoulettePlayer(Player player) {
-//        this.player = player;
-//    }
+    public RoulettePlayer(Player player) {
+        this.player = player;
+    }
 
-//    @Override
-//    public CasinoAccount getArcadeAccount() {
-//        return null;
-//    }
-//
-//    @Override
-//    public <SomeReturnType> SomeReturnType play() {
-//        return null;
-//    }
+    @Override
+    public CasinoAccount getArcadeAccount() {
+        return null;
+    }
 
-//    public boolean finalizeBet(){
-//        return false;
-//    }
-//
+    @Override
+    public <SomeReturnType> SomeReturnType play() {
+        return null;
+    }
 
-//    public void increaseBet(float raise){
-//
-//    @Override
-//    public void increaseBet(float raise) {
-//        player.setCurrentBet(player.getCurrentBet() + raise);
-//        player.setBalance(player.getBalance()-raise);
-//
-//    }
-//
-//    @Override
-//    public void decreaseBet(float deposit) {
-//
-//
-//
-//        player.setCurrentBet(player.getCurrentBet()-deposit);
-//        player.setBalance(player.getBalance()+deposit);
-//
-//        player.setCurrentBet(player.getCurrentBet()-deposit);
-//        player.setBalance(player.getBalance()+deposit);
-//    }
-//
-//    @Override
-//    public float amountWagered() {
-//
-//        return 0;
-//    }
-//
-//    @Override
-//    public float amountWon() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public float payOut() {
-//        return 0;
-//    }
+    public boolean finalizeBet(){
+        return false;
+    }
 
-//
-//    void placeOutsideBet(){}
-//
-//    void placeInsideBet(){}
-//
 
-//    void placeOutsideBet(){}
-//
-//    void placeInsideBet(){}
-//    public RouletteBet placeBet(){
-//        return null;
-//    }
-//
-//}
+    @Override
+    public void increaseBet(float raise) {
+        player.setCurrentBet(player.getCurrentBet() + raise);
+        player.setBalance(player.getBalance()-raise);
+
+    }
+
+    @Override
+    public void decreaseBet(float deposit) {
+        player.setCurrentBet(player.getCurrentBet()-deposit);
+        player.setBalance(player.getBalance()+deposit);
+    }
+
+    @Override
+    public float amountWagered() {
+
+        return 0;
+    }
+
+    @Override
+    public float amountWon() {
+        return 0;
+    }
+
+    @Override
+    public float payOut() {
+        return 0;
+    }
+
+
+
+}
 
