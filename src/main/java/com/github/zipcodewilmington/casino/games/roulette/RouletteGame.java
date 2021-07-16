@@ -24,7 +24,7 @@ public class RouletteGame implements GambleableGame {
     String gameName;
     Wheel wheel;
     RoulettePlayer player;
-    RouletteBet bet;
+    RouletteBet bet = new RouletteBet();
     int streetBet;
     int singleBet;
     int columnBet;
@@ -35,15 +35,18 @@ public class RouletteGame implements GambleableGame {
     private final IOConsole console = new IOConsole(AnsiColor.YELLOW);
 
 
-    public RouletteGame(String gameName, RoulettePlayer player) {
+    public RouletteGame(String gameName, RoulettePlayer player, Wheel wheel) {
         this.gameName = gameName;
         this.player = player;
+        this.wheel = new Wheel();
 
     }
 
     public RouletteGame(){
         this.gameName = "Rowena's Roulette";
         this.player = new RoulettePlayer();
+        this.wheel = new Wheel();
+        this.bet = new RouletteBet();
     }
 
 
@@ -51,7 +54,9 @@ public class RouletteGame implements GambleableGame {
     public void run() {
         console.println("Welcome to %s !", gameName);
         console.println("Place your bet!");
+        console.println("*=*=*=*=*=*=*=*=*=*=*=*=*=*");
         console.getStringInput("Select Inside or Outside");
+        console.println("*=*=*=*=*=*=*=*=*=*=*=*");
         String betSelectionInput = getBetSelection().toUpperCase();
         if (betSelectionInput.equals("INSIDE")) {
             String insideBet = selectStreetorSingle().toUpperCase();
@@ -60,9 +65,13 @@ public class RouletteGame implements GambleableGame {
                 spinWheel();
                 Integer[] check = bet.winningStreetArray(streetBet); //check array
                 console.println(getWinningString(check));
+                console.println("-----------0v0------------");
+                exitCode();
             } else {
                 selectSingleNumber();
                 spinWheel();
+                console.println(getWinningString(singleBet));
+
 
 
             }
@@ -77,11 +86,17 @@ public class RouletteGame implements GambleableGame {
 
 
     }
+    public String exitCode(){
+        return console.getStringInput(new StringBuilder()
+                .append("Care to play again?")
+                .append(" Y / N ")
+                .toString());
+    }
 
     public void spinWheel(){
         console.println("Spinning...");
         int winningNumber = wheel.getSpinValue();
-         this.winningNum= winningNumber;
+        this.winningNum = winningNumber;
     }
 
 
@@ -114,6 +129,28 @@ public class RouletteGame implements GambleableGame {
 
     }
 
+    public String getWinningString(Integer[] win){
+        List<Integer> winArray = new ArrayList<Integer>(Arrays.asList(win));
+        if (winArray.contains(winningNum)){
+            return "Winner, Winner! Chicken Dinner!" ;
+        }
+        return "Avada Kadavra! You're done.";
+    }
+
+    public String getWinningString(Integer win){
+        if (singleBet == winningNum){
+            return "Winner, Winner! Chicken Dinner!" ;
+        }
+        return "Wingardium, you lose.";
+    }
+
+
+
+
+    @Override
+    public void clearGame() {
+
+    }
     @Override
     public void add(PlayerInterface player) {
 
@@ -150,19 +187,5 @@ public class RouletteGame implements GambleableGame {
 
     }
 
-    public String getWinningString(Integer[] win){
-        List<Integer> winArray = new ArrayList<Integer>(Arrays.asList(win));
-        if (winArray.contains(winningNum)){
-       return "Winner, Winner! Chicken Dinner!" ;
-        }
-      return "Bang, bang. You're done.";
-    }
 
-
-
-
-    @Override
-    public void clearGame() {
-
-    }
 }
