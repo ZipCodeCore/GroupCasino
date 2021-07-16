@@ -1,6 +1,11 @@
+
 package com.github.zipcodewilmington;
 
 import com.github.zipcodewilmington.casino.*;
+import com.github.zipcodewilmington.casino.games.cards.BlackjackGame;
+import com.github.zipcodewilmington.casino.games.cards.BlackjackPlayer;
+import com.github.zipcodewilmington.casino.games.cards.TexasHoldEmGame;
+import com.github.zipcodewilmington.casino.games.cards.TexasHoldEmPlayer;
 import com.github.zipcodewilmington.casino.games.craps.CrapsGame;
 import com.github.zipcodewilmington.casino.games.games.craps.CrapsPlayer;
 import com.github.zipcodewilmington.casino.games.keno.KenoGame;
@@ -34,9 +39,16 @@ public class Casino implements Runnable {
                     if (gameSelectionInput.equals("SLOTS")) {
                         play(new SlotsGame(), new SlotsPlayer());
                     } else if (gameSelectionInput.equals("CRAPS")) {
-                        play(new CrapsGame(), new CrapsPlayer());
-                    }else if (gameSelectionInput.equals("KENO")){
-                        play(new KenoGame(),new KenoPlayer());
+                       play(new CrapsGame(), new CrapsPlayer());
+                    } else if (gameSelectionInput.equals("BLACKJACK")) {
+                        play(new BlackjackGame(), new BlackjackPlayer());
+                    } else if (gameSelectionInput.equals("KENO")) {
+                        play(new KenoGame(), new KenoPlayer());
+                    //} else if (gameSelectionInput.equals("ROULETTE")) {
+                    //    play(new RouletteGame(), new RoulettePlayer());
+                    } else if (gameSelectionInput.equals("TEXASHOLDEM")) {
+                        play(new TexasHoldEmGame(), new TexasHoldEmPlayer());
+
                     } else {
                         // TODO - implement better exception handling
                         String errorMessage = "[ %s ] is an invalid game selection";
@@ -62,7 +74,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Arcade Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ create-account ], [ select-game ]")
+                .append("\n\t[ create-account ] [ select-game ]")
                 .toString());
     }
 
@@ -70,7 +82,8 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ CRAPS ] ,[ KENO ]")
+                .append("\n\t[ SLOTS ], [ CRAPS ], [ BLACKJACK ], [ KENO ], [ ROULETTE ], [TEXASHOLDEM]")
+
                 .toString());
     }
 
