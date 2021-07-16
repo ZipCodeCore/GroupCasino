@@ -3,7 +3,6 @@ package com.github.zipcodewilmington.casino.games.craps;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
-import java.util.Scanner;
 
 import static com.github.zipcodewilmington.casino.objects.Dice.roll;
 

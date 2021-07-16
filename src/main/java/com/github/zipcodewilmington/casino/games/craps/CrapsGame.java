@@ -12,7 +12,6 @@ import static com.github.zipcodewilmington.casino.objects.Dice.roll;
 public class CrapsGame implements GambleableGame {
 
 
-    //public static void main(String[] args) {
 
     @Override
     public void add(PlayerInterface player) {
@@ -43,12 +42,13 @@ public class CrapsGame implements GambleableGame {
     public void clearGame() {
 
     }
-        @Override
-        public void run() {
+
+
+    @Override
+    public void run() {
         new CrapsTable().playCraps();
-        }
 
-
+    }
 
 }
 
