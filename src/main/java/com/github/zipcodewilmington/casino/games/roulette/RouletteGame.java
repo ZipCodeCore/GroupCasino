@@ -56,7 +56,7 @@ public class RouletteGame implements GambleableGame {
         console.println("Place your bet!");
         console.println("*=*=*=*=*=*=*=*=*=*=*=*=*=*");
         console.getStringInput("Select Inside or Outside");
-        console.println("*=*=*=*=*=*=*=*=*=*=*=*");
+        console.println("Scared, Potter?");
         String betSelectionInput = getBetSelection().toUpperCase();
         if (betSelectionInput.equals("INSIDE")) {
             String insideBet = selectStreetorSingle().toUpperCase();
@@ -72,12 +72,36 @@ public class RouletteGame implements GambleableGame {
                 spinWheel();
                 console.println(getWinningString(singleBet));
 
-
-
             }
         }
         if (betSelectionInput.equals("OUTSIDE")){
-            String outsideBet = getOutBetSelection().toString();
+            String outsideBet = getOutBetSelection().toUpperCase();
+            switch (outsideBet){
+                case "COLUMN":
+                    selectColumnNumber();
+                    spinWheel();
+                    Integer[] column = bet.winningColumn(columnBet);
+                    console.println(getWinningColumnPhrase(column));
+                    console.println("-----------0v0------------");
+                    exitCode();
+                    break;
+                case "EVEN" :
+                    spinWheel();
+                    console.println(getWinningEvenPhrase());
+                    console.println("-----------0v0------------");
+                    exitCode();
+                    break;
+                case "ODD" :
+                    spinWheel();
+                    console.println(getWinningOddPhrase());
+                    console.println("-----------0v0------------");
+                    exitCode();
+                    break;
+                default:
+                    break;
+
+            }
+            run();
             placeBet();
         }
 
@@ -107,6 +131,7 @@ public class RouletteGame implements GambleableGame {
     }
     public String getOutBetSelection(){
         return console.getStringInput(new StringBuilder()
+                .append("Options: Column, Even, or Odd")
             .toString());
     }
 
@@ -123,29 +148,52 @@ public class RouletteGame implements GambleableGame {
         this.singleBet = console.getIntegerInput("Pick Your Number");
     }
 
-    public int placeBet(){
+    public void selectColumnNumber() {
+        this.columnBet = console.getIntegerInput("Pick Your Number");
+    }
+
+    public double placeBet(){
         String input = console.getStringInput("How much?");
-        return Integer.parseInt(input);
+        return Double.parseDouble(input);
 
     }
 
     public String getWinningString(Integer[] win){
         List<Integer> winArray = new ArrayList<Integer>(Arrays.asList(win));
         if (winArray.contains(winningNum)){
-            return "Winner, Winner! Chicken Dinner!" ;
+            return "Merlin's Beard! You WIN!" ;
         }
         return "Avada Kadavra! You're done.";
     }
 
     public String getWinningString(Integer win){
         if (singleBet == winningNum){
-            return "Winner, Winner! Chicken Dinner!" ;
+            return "Felix Felicus! You WIN!" ;
         }
         return "Wingardium, you lose.";
     }
 
+    public String getWinningColumnPhrase(Integer[] win){
+        List<Integer> winArray = new ArrayList<Integer>(Arrays.asList(win));
+        if (winArray.contains(winningNum)){
+            return "Felix Felicus! You WIN!" ;
+        }
+        return "Riddikulus! Be gone!";
+    }
 
+    public  String getWinningEvenPhrase(){
+        if (winningNum % 2 == 0) {
+            return "Enchanting! You've won";
+        }
+        return "Expelliarmus! You're done";
+    }
 
+    public  String getWinningOddPhrase(){
+        if (winningNum % 2 == 1) {
+            return "Enchanting! You've won";
+        }
+        return "Accio Funds! You're done!";
+    }
 
     @Override
     public void clearGame() {
