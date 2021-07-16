@@ -7,8 +7,11 @@ import com.github.zipcodewilmington.casino.objects.Deck;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 // Blackjack is a game that a player plays against a dealer
 // The first card is placed face down for the player and dealer
@@ -20,11 +23,13 @@ import java.util.List;
 
 public class BlackjackGame implements GambleableGame {
 
-
+    String playerInput;
     ArrayList<Card> hand;
     Deck deck;
     private final List<BlackjackPlayer> blackjackPlayers= new ArrayList<>();
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
+    PlayerInterface playerBlackJack;
+    
 
 
     public BlackjackGame(Deck deck, ArrayList<Card> hand) {
@@ -41,6 +46,9 @@ public class BlackjackGame implements GambleableGame {
 
     @Override
     public void run() {
+        final int MAX = 21;
+
+
         BlackjackGame blackjackGame = new BlackjackGame(deck, hand);
         System.out.println("Welcome to the Sirius Blackjack table.");
         blackjackGame.getNumberOfPlayers();
@@ -53,27 +61,30 @@ public class BlackjackGame implements GambleableGame {
         hand.add(deck.dealCard());
         hand.add(deck.dealCard());
 
-        System.out.println(hand.toString());
-        console.getStringInput("What would you like to do? \n [HIT] [STAY]");
+        Card[] playerHand = hand.toArray(new Card[0]);
+
+        System.out.println(Arrays.toString(playerHand));
+
+        playerInput = console.getStringInput("What would you like to do? \n [HIT] [STAY]");
+
+        if(playerInput == "hit".toLowerCase(Locale.ROOT)){
+            hand.add(deck.dealCard());
+
+            int handValue = (deck.cardValue(hand.get(0)) + deck.cardValue(hand.get(1)));
+
+        // need to convert hand size to value of cards within hand
+            if(handValue > MAX ){
+                console.getStringInput("Bust! You lose. Would you like to play again? \n [ YES ] [ NO ]");
+
+            }
+
+        } else if(playerInput == "stay".toLowerCase(Locale.ROOT)) {
+            System.out.println("Dealer's turn.");
+        }
+
 
 
     }
-// how do i add the cards together?
-
-    public void hit() {
-
-    }
-
-    public void stay() {
-
-    }
-
-
-
-
-
-
-
 
 
     @Override
