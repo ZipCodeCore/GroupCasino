@@ -22,15 +22,12 @@ public class PigMenus {
                 "|*       \\  \\/  \\/  /  _ \\  |/ __| / _ \\ | ' _`  _  \\ / __ \\          *|\n" +
                 "|*        \\   / \\  /   __/  | (__ | (_) ||  | | | | ||   __/          *|\n" +
                 "|*         \\ /   \\/ \\___||__|\\___| \\___/ |__| |_| |_| \\___|           *|\n" +
-                "|*                                                                    *|\n" +
                 "|*	  				   __                                             *|\n" +
                 "|*					  |  |                                            *|\n" +
                 "|*					  |  |_____                                       *|\n" +
                 "|*					  |  __/ _ \\                                      *|\n" +
                 "|*					  |  || (_) |                                     *|\n" +
                 "|* 				      \\__| \\___/                                      *|\n" +
-                "|*                                                                    *|\n" +
-                "|*                                                                    *|\n" +
                 "|*        ___                                                         *|\n" +
                 "|*        ',_`''\\        .---,,,                                      *|\n" +
                 "|*           \\   :-''``/`      |                                      *|\n" +
@@ -57,7 +54,6 @@ public class PigMenus {
                 "|*                    /   | |  |__.`'—'_;'-.     .-'``                *|\n" +
                 "|*                   //___/ /  |    .-'``     _.-'`                   *|\n" +
                 "|*                         //__/   //___/.--''`                       *|\n" +
-                "|*                                                                    *|\n" +
                 "|*	       							 _                                *|\n" +
                 "|*     						 	    (_)                               *|\n" +
                 "|*							  __ __  _  __ _                          *|\n" +
@@ -79,9 +75,9 @@ public class PigMenus {
         welcomeScreen();
         Scanner input = new Scanner(System.in);
         String areYouGonnaPlay = input.next();
-        if (areYouGonnaPlay == "q") {
+        if (areYouGonnaPlay.equals("q")) {
           //  mainMenu();
-        } else if (areYouGonnaPlay == "y") {
+        } else if (areYouGonnaPlay.equals("y")) {
             //secondPlayerLogin();
         }
 
@@ -99,9 +95,9 @@ public class PigMenus {
                 "|**********************************************************************|\n" +
                 "|**********************************************************************|\n" +
                 "|*                                                                    *|\n" +
-                "|*                <`---'\\>______       <`---'\\>______               *|\n" +
-                "|*                /. . `'        \\      /. . `'       \\             *|\n" +
-                "|*               (`')  ,          @     (`')  ,         @             *|\n" +
+                "|*                <`---'\\>______        <`---'\\>______                *|\n" +
+                "|*                /. . `'        \\      /. . `'        \\              *|\n" +
+                "|*               (`')  ,          @    (`')  ,          @             *|\n" +
                 "|*                `-._,          /      `-._,          /              *|\n" +
                 "|*                   )-)_/---(  >          )-)_/---(  >               *|\n" +
                 "|*                   '''      '''          '''      '''               *|\n" +
@@ -113,11 +109,11 @@ public class PigMenus {
         secondPlayerMenu();
         input.nextLine();
         String loginOrCreate = input.next();
-        if (loginOrCreate == "l") {
+        if (loginOrCreate.equals("l")) {
           //  playerTwoLogin();
-        } else if (loginOrCreate == "c") {
+        } else if (loginOrCreate.equals("c")) {
           //  creatAcount();
-        }else if (loginOrCreate == "q"){
+        }else if (loginOrCreate.equals("q")){
           //  mainMenu();
         }
         pigRules();
@@ -157,9 +153,9 @@ public class PigMenus {
         pigRules();
         input.nextLine();
         String start = input.next();
-        if (start == "s"){
+        if (start.equals("s")){
             new Pig();
-        }else if (start == "q"){
+        }else if (start.equals("q")){
            // mainMenu();
         }
     }
