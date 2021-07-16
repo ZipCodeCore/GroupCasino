@@ -6,14 +6,18 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 /**
  * Created by leon on 7/21/2020.
  */
-public class KenoPlayer {
 
+import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+public class KenoPlayer implements PlayerInterface {
 
-   public CasinoAccount getArcadeAccount(){
+    @Override
+    public CasinoAccount getArcadeAccount(){
         return null;
     }
+    @Override
+    public   <SomeReturnType> SomeReturnType play(){
 
-    public <SomeReturnType> SomeReturnType play(){
         return null;
     }
 }

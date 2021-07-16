@@ -13,9 +13,10 @@ public class RoulettePlayer implements GamblingPlayer {
     Player player;
     float playerWinnings;
 
-    public RoulettePlayer(Player player) {
-        this.player = player;
+    public RoulettePlayer() {
+        
     }
+
 
     @Override
     public CasinoAccount getArcadeAccount() {
