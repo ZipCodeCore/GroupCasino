@@ -1,57 +1,55 @@
 package com.github.zipcodewilmington.casino.games;
-//package com.github.zipcodewilmington.utils;
 
+
+import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+
+
 
 import java.util.Random;
 import java.util.Scanner;
 
-import com.github.zipcodewilmington.casino.GameInterface;
-import com.github.zipcodewilmington.casino.PigMenus;
-import com.github.zipcodewilmington.casino.PlayerInterface;
 
-import java.util.concurrent.ThreadLocalRandom;
-
-
-import static com.github.zipcodewilmington.casino.PigMenus.welcomeScreen;
+import static com.github.zipcodewilmington.casino.PigMenus.*;
 
 
 public class Pig implements GameInterface {
+
+  Casino casino;
+
   public static void main(String[] args){
     Pig pig = new Pig();
     pig.run();
   }
 
-  // private static int playerTwo = 2;
-  // private static int playerOne = 1;
-  // private static int scoreToWin = 100;
   private int currentTurn;
   private int dieValue;
   private int turnScore;
-  private int pOneTotal;
-  private int pTwoTotal;
+  public int pOneTotal;
+  public int pTwoTotal;
   private String  rollAnswer;
   private int rollCounter;
   public Scanner input = new Scanner(System.in);
-  //Random generator = new Random();
   // ThreadLocalRandom current = ThreadLocalRandom.current();
 
   public Pig() {
-
   }
 
-//  public void welcomeToPig () {
-//  PigMenus.welcomeMenu();
-//  }
+public void welcomeToPig () {
+  playerTwoWon();
+ }
 
   public String currentStateOfTheGame () {
-    return "Player 1 has " + pOneTotal + " points. \n Player 2 has " + pTwoTotal + " points.";
+   currentStateScreen();
+    return  "|*****                    Player 1 has " + pOneTotal + " points.                  *****|\n" +
+            "|*****                    Player 2 has " + pTwoTotal + " points.                  *****|\n" +
+            "|**********************************************************************|\n" +
+            "|**********************************************************************|\n";
+
   }
 
   public int playerTurn () {
-
-
       System.out.println("Please enter 'r' to roll or 'h' to hold");
       //input.nextLine();
       rollAnswer = input.next();
@@ -63,10 +61,10 @@ public class Pig implements GameInterface {
         if (dieValue == 1) {
           currentTurn++;
           turnScore = 0;
-          System.out.println("You rolled a 1; your turn is over and any banked points have been lost.");
+          youRolledAOne();
           switchingPlayers();
         } else {
-          System.out.println("You rolled a " + dieValue);
+
           rollCounter++;
           System.out.println("Player earned " + turnScore + " points.");
           playerTurn();
@@ -75,11 +73,8 @@ public class Pig implements GameInterface {
         currentTurn++;
         switchingPlayers();
       }
-
-
     return turnScore;
   }
-
 
   public void switchingPlayers () {
     if (currentTurn % 2 == 0) {
@@ -95,18 +90,50 @@ public class Pig implements GameInterface {
     }
   }
 
-
   public boolean getWinner(){
-    if (pOneTotal >= 15) {
-      System.out.println("Player 1 won!");
+    if (pOneTotal >= 10) {
+      player1Wins();
       return true;
-    } else if (pTwoTotal >= 15) {
-      System.out.println("Player 2 won!");
+    } else if (pTwoTotal >= 10) {
+      player2Wins();
       return true;
     } return false;
   }
 
+  public void player1Wins(){
+    playerOneWon();
+    System.out.println( "|*****                    Player 1 has " + pOneTotal + " points.                 *****|\n" +
+            "|*****                    Player 2 has " + pTwoTotal + " points.                  *****|\n" +
+            "|**********************************************************************|\n" +
+            "|**********************************************************************|\n");
 
+  }
+
+  public void player2Wins(){
+    playerTwoWon();
+    System.out.println( "|*****                    Player 1 has " + pOneTotal + " points.                  *****|\n" +
+            "|*****                    Player 2 has " + pTwoTotal + " points.                 *****|\n" +
+            "|**********************************************************************|\n" +
+            "|**********************************************************************|\n");
+
+  }
+
+  public void doYouWantToPlayAgain(){
+    System.out.println("Do you want to play again?\n" + "Enter 'y' to start again\n" + "Enter 'q' to quit to the main menu\n");
+    String playAgain = input.next();
+    if (playAgain.equals("y")){
+      pOneTotal = 0;
+      pTwoTotal = 0;
+      currentTurn =0;
+      playerTurn();
+    } else if (playAgain.equals("q")){
+      casino.run();
+    }
+  }
+
+  public int roll(){
+    return 1;
+  }
 
 
   @Override
@@ -120,21 +147,16 @@ public class Pig implements GameInterface {
   }
 
   public void run(){
-      //welcomeToPig();
-
+    welcomeToPig();
       currentTurn = 1;
       pOneTotal = 0;
       pTwoTotal = 0;
-
-
 
       while (getWinner() == false) {
         playerTurn();
 
     }
-
   }
-
 }
 
 
