@@ -1,6 +1,8 @@
 package com.github.zipcodewilmington;
 
 import com.github.zipcodewilmington.casino.*;
+import com.github.zipcodewilmington.casino.games.craps.CrapsGame;
+import com.github.zipcodewilmington.casino.games.games.craps.CrapsPlayer;
 import com.github.zipcodewilmington.casino.games.keno.KenoGame;
 import com.github.zipcodewilmington.casino.games.keno.KenoPlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
@@ -31,8 +33,8 @@ public class Casino implements Runnable {
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
                     if (gameSelectionInput.equals("SLOTS")) {
                         play(new SlotsGame(), new SlotsPlayer());
-                    //} else if (gameSelectionInput.equals("NUMBERGUESS")) {
-                      //  play(new KenoGame(), new KenoPlayer());
+                    } else if (gameSelectionInput.equals("CRAPS")) {
+                       play(new CrapsGame(), new CrapsPlayer());
                     } else {
                         // TODO - implement better exception handling
                         String errorMessage = "[ %s ] is an invalid game selection";
@@ -66,7 +68,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ NUMBERGUESS ]")
+                .append("\n\t[ SLOTS ], [ CRAPS ]")
                 .toString());
     }
 

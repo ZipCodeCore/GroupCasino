@@ -47,15 +47,15 @@ public class SlotsGame implements GameInterface{//, PlayerInterface {
         new SlotReels().playSlots();
     }
 
-    @Override
-    public CasinoAccount getArcadeAccount() {
-        return null;
-    }
-
-    @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
-    }
+//    @Override
+//    public CasinoAccount getArcadeAccount() {
+//        return null;
+//    }
+//
+//    @Override
+//    public <SomeReturnType> SomeReturnType play() {
+//        return null;
+//    }
 }
 
 

@@ -1,9 +1,11 @@
+
+
 package com.github.zipcodewilmington.casino.games.roulette;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GamblingPlayer;
 import com.github.zipcodewilmington.casino.Player;
-
+import com.github.zipcodewilmington.casino.objects.RouletteBet;
 
 
 public class RoulettePlayer implements GamblingPlayer {
@@ -11,14 +13,9 @@ public class RoulettePlayer implements GamblingPlayer {
     Player player;
     float playerWinnings;
 
-
-import com.github.zipcodewilmington.casino.objects.RouletteBet;
-
-
     public RoulettePlayer(Player player) {
         this.player = player;
     }
-
 
     @Override
     public CasinoAccount getArcadeAccount() {
@@ -30,47 +27,34 @@ import com.github.zipcodewilmington.casino.objects.RouletteBet;
         return null;
     }
 
-
     public boolean finalizeBet() {
         return false;
     }
 
 
+    @Override
     public void increaseBet(float raise) {
+        player.setCurrentBet(player.getCurrentBet() + raise);
+        player.setBalance(player.getBalance() - raise);
+    }
 
 
-        @Override
-        public void increaseBet ( float raise){
-            player.setCurrentBet(player.getCurrentBet() + raise);
-            player.setBalance(player.getBalance() - raise);
+    @Override
+    public void decreaseBet(float deposit) {
+        player.setCurrentBet(player.getCurrentBet()-deposit);
+        player.setBalance(player.getBalance()+deposit);
+    }
 
-
-        }
-
-        @Override
-        public void decreaseBet ( float deposit){
-
-
-            player.setCurrentBet(player.getCurrentBet() - deposit);
-            player.setBalance(player.getBalance() + deposit);
-
-
-            player.setCurrentBet(player.getCurrentBet() - deposit);
-            player.setBalance(player.getBalance() + deposit);
-
-        }
-
-        @Override
+    @Override
         public float amountWagered () {
 
+        return 0;
+    }
 
-            return 0;
-        }
-
-        @Override
+    @Override
         public float amountWon () {
-            return 0;
-        }
+        return 0;
+    }
 
         @Override
         public float payOut () {
@@ -79,6 +63,5 @@ import com.github.zipcodewilmington.casino.objects.RouletteBet;
 
 
 
-
-    }
 }
+
