@@ -9,7 +9,6 @@ public class Dice {
         int dice1 = randomGenerator.nextInt(6) + 1;
         int dice2 = randomGenerator.nextInt(6) + 1;
         System.out.printf("\nShooter rolled %d and %d", dice1, dice2);
-        int sum = dice1 + dice2;
-        return sum;
+        return dice1 + dice2;
     }
 }

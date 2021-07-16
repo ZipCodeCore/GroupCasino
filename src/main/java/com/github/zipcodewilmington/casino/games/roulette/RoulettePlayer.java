@@ -7,11 +7,11 @@ import com.github.zipcodewilmington.casino.GamblingPlayer;
 import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.casino.objects.RouletteBet;
 
+
 public class RoulettePlayer implements GamblingPlayer {
 
     Player player;
     float playerWinnings;
-
 
     public RoulettePlayer(Player player) {
         this.player = player;
@@ -27,7 +27,7 @@ public class RoulettePlayer implements GamblingPlayer {
         return null;
     }
 
-    public boolean finalizeBet(){
+    public boolean finalizeBet() {
         return false;
     }
 
@@ -35,9 +35,9 @@ public class RoulettePlayer implements GamblingPlayer {
     @Override
     public void increaseBet(float raise) {
         player.setCurrentBet(player.getCurrentBet() + raise);
-        player.setBalance(player.getBalance()-raise);
-
+        player.setBalance(player.getBalance() - raise);
     }
+
 
     @Override
     public void decreaseBet(float deposit) {
@@ -46,20 +46,20 @@ public class RoulettePlayer implements GamblingPlayer {
     }
 
     @Override
-    public float amountWagered() {
+        public float amountWagered () {
 
         return 0;
     }
 
     @Override
-    public float amountWon() {
+        public float amountWon () {
         return 0;
     }
 
-    @Override
-    public float payOut() {
-        return 0;
-    }
+        @Override
+        public float payOut () {
+            return 0;
+        }
 
 
 
