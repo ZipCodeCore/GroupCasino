@@ -1,21 +1,25 @@
 package com.github.zipcodewilmington.casino.games.slots;
+import com.github.zipcodewilmington.utils.AnsiColor;
+import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.HashMap;
 
+/**
+ * Created by Nathan on 7/12/21
+ */
 
 public class Slots {
     private static final String[] slotItems = {" Peach ", " Cherry", "Diamond", " Plum  ", " Seven ", "  Nine "};
     private String[][] slots = new String[3][3];
     private HashMap<Integer, String> winningLines = new HashMap<>();
+    private final IOConsole consoleB = new IOConsole(AnsiColor.BLUE);
 
     public Slots(String[][] slots) {
-        //this.winningLines = new HashMap<>();
         this.slots = slots;
         initializeWinningLines();
     }
 
     public Slots(){
-        //this.winningLines = new HashMap<>();
         this.slots = new String[][] {
                 {"Peach", "Cherry", "Diamond"},
                 {"Diamond", "Plum", "Nine"},
@@ -63,11 +67,11 @@ public class Slots {
         HashMap<Integer, String> newWinningLines = new HashMap<>();
         for (int i = 0; i < 3; i++) {
             //setting horizontally
-            if(currentSlots[i][0].equals(currentSlots[i][1]) && currentSlots[i][0].equals(currentSlots[i][2])){
+            if(currentSlots[i][0].equals(currentSlots[i][1]) && currentSlots[i][1].equals(currentSlots[i][2])){
                 newWinningLines.put((i+1),"WIN");
             }
             //setting vertically
-            if(currentSlots[0][i].equals(currentSlots[1][i]) && currentSlots[2][i].equals(currentSlots[i][2])){
+            if(currentSlots[0][i].equals(currentSlots[1][i]) && currentSlots[1][i].equals(currentSlots[2][i])){
                 newWinningLines.put((i+4),"WIN");
             }
         }
@@ -92,8 +96,8 @@ public class Slots {
     }
 
     public void displaySlots(){
-        System.out.println(
-                "\u001B[34m -------------------------------\n" +
+        consoleB.println(
+                " -------------------------------\n" +
                 "   "+ slots[0][0] +" | "+slots[0][1] + " | " +slots[0][2]+" \n" +
                 " -------------------------------\n" +
                 "   "+ slots[1][0] +" | "+slots[1][1] + " | " +slots[1][2]+ " \n"+
@@ -102,5 +106,4 @@ public class Slots {
                 " -------------------------------\n");
     }
 
-//
 }

@@ -47,4 +47,5 @@ public class NumberGuessGameTests {
 
         Assert.assertEquals(actual, expected);
     }
+
 }
