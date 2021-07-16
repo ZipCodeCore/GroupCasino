@@ -1,6 +1,4 @@
-
 package com.github.zipcodewilmington;
-
 import com.github.zipcodewilmington.casino.*;
 import com.github.zipcodewilmington.casino.games.cards.BlackjackGame;
 import com.github.zipcodewilmington.casino.games.cards.BlackjackPlayer;
@@ -33,7 +31,7 @@ public class Casino implements Runnable {
         CasinoAccountManager casinoAccountManager = new CasinoAccountManager();
         do {
             arcadeDashBoardInput = getArcadeDashboardInput();
-            if ("select-game".equals(arcadeDashBoardInput)) {
+            if ("game".equals(arcadeDashBoardInput)) {
                 String accountName = console.getStringInput("Enter your account name:");
                 String accountPassword = console.getStringInput("Enter your account password:");
                 //CasinoAccount casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
@@ -63,7 +61,7 @@ public class Casino implements Runnable {
                     String errorMessage = "No account found with name of [ %s ] and password of [ %s ]";
                     throw new RuntimeException(String.format(errorMessage, accountPassword, accountName));
                 }
-            } else if ("create-account".equals(arcadeDashBoardInput)) {
+            } else if ("new account".equals(arcadeDashBoardInput)) {
                 console.println("Welcome to the account-creation screen.");
                 String accountName = console.getStringInput("Enter your account name:");
                 String accountPassword = console.getStringInput("Enter your account password:");
@@ -78,7 +76,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Arcade Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ create-account ] [ select-game ]")
+                .append("\n\t[ new account ] [ game ]")
                 .toString());
     }
 
@@ -86,7 +84,8 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ CRAPS ], [ BLACKJACK ], [ KENO ], [ ROULETTE ], [TEXASHOLDEM]")
+                .append("\n\t[ SLOTS ], [ CRAPS ], [ BLACKJACK ]" +
+                        "\n\t [ KENO ], [ ROULETTE ], [ TEXASHOLDEM ]")
 
                 .toString());
     }
