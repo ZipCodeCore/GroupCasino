@@ -25,6 +25,7 @@ public class CrapsTable {
                 "\n Watch out though! If you roll a 7 before you make your point, you will eat slugs! And lose the game.");
 
         System.out.println("Shooter, Roll The Dice!");
+        console.getStringInput("\nWave your wand and enter a number to roll");
         int score = roll();
 
         if (score == 7 || score == 11) {
@@ -41,8 +42,8 @@ public class CrapsTable {
             int point = score;
             System.out.println("\nPoint = " + point);
             while (true) {
-                console.getStringInput("\nEnter 1 to roll again");
-                //this.playerInput.nextLine();
+                console.getStringInput("\nave your wand and enter a number to roll again");
+
                 score = roll();
 
                 System.out.println("\nNew Score = " + score);
