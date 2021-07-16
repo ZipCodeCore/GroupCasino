@@ -55,7 +55,7 @@ public class Pig implements GameInterface {
       System.out.println("Please enter 'r' to roll or 'h' to hold");
       //input.nextLine();
       rollAnswer = input.next();
-      if (rollAnswer == "r'") {
+      if (rollAnswer.equals("r")) {
         Random generator = new Random();
         dieValue = generator.nextInt(6) + 1;
         turnScore += dieValue;
@@ -71,7 +71,7 @@ public class Pig implements GameInterface {
           System.out.println("Player earned " + turnScore + " points.");
           playerTurn();
         }
-      } else if (rollAnswer == "h") {
+      } else if (rollAnswer.equals("h")) {
         currentTurn++;
         switchingPlayers();
       }

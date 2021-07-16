@@ -133,9 +133,10 @@ public class Blackjack implements GameInterface {
         }
         System.out.println("Leave my casino, you are out of money!");
     }
-    public static void playBlackJack() {
+    public void playBlackJack() {
         Scanner keyboardInput = new Scanner(System.in);
         welcomeDisplay();
+        startGame();
         keyboardInput.nextLine();
         playBlackJack();
     }

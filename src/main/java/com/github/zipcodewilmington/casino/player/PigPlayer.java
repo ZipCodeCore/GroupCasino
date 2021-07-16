@@ -1,33 +1,40 @@
 package com.github.zipcodewilmington.casino.player;
 
 //import com.github.zipcodewilmington.Casino;
+import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.games.Pig;
 
-public class PigPlayer extends Player{
+public class PigPlayer extends Player implements PlayerInterface {
 
-//
-//    private Casino casino = new Casino();
-//    private Pig pigGame = new Pig();
-//    Player player;
-//
-//    public PigPlayer(Player player) {
-//        this.player = player;
-//    }
-//
-//    public PigPlayer() {
-//    }
-//
-//    public Player getPlayer() {
-//        return this.player;
-//    }
-//
-//    public void nextRoll() {
-//        if(casino.continueRoll == true) {
-//            pigGame.rollDice();
-//            casino.continueRoll();
-//        } else {
-//            pigGame.dealerRoll();
-//        }
-//    }
 
+    private Pig pigGame = new Pig();
+    Player player;
+    CasinoAccount casinoAccount;
+
+    public PigPlayer(Player player, CasinoAccount casinoAccount) {
+        this.player = player;
+        this.casinoAccount = casinoAccount;
+    }
+
+    public PigPlayer() {
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    @Override
+    public CasinoAccount getArcadeAccount() {
+        return casinoAccount;
+    }
+
+    public void setArcadeAccount() {
+        this.casinoAccount = casinoAccount;
+    }
+
+    @Override
+    public <SomeReturnType> SomeReturnType play() {
+        return null;
+    }
 }
