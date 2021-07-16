@@ -16,10 +16,6 @@ import java.util.List;
 
 public class RouletteGame implements GambleableGame {
 
-    public static void main(String[] args) {
-        RouletteGame game = new RouletteGame();
-        game.run();
-    }
 
     String gameName;
     Wheel wheel;
@@ -101,11 +97,10 @@ public class RouletteGame implements GambleableGame {
                     break;
 
             }
-            run();
             placeBet();
+            run();
+
         }
-
-
 
 
 
