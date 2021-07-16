@@ -14,82 +14,76 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class War implements GameInterface {
+    public static void main(String[] args) {
+
+    }
+
+    private Deck deck;
+    private WarPlayer player;
+
+    private Integer cardIndex = 0;
+    private boolean isRunning;
+    public Scanner input;
 
 
+    public void startGame() {
 
-//    private Deck deck;
-//    private WarPlayer player1;
-//    private WarPlayer player2;
-//    private Integer cardIndex = 0;
-//    private boolean isRunning;
-//    public Scanner input;
-//
-//
-//
-//    public void startGame() {
-//
-//        System.out.println("War - Collect all cards to win!"); //opening title
-//
-//        //set players
-//        Scanner console = new Scanner(System.in);
-//        this.player1 = new WarPlayer();
-//        this.player2 = new WarPlayer();
-//
-//        //make deck
-//        Deck deck = new Deck();
-//        deck.buildDeck();
-//
-//        //shuffle deck
-//        deck.shuffle();
-//
-//
-////        //create players hands
-////        player1.setWarHand(new Hand());
-////        player2.setWarHand(new Hand());
-////
-////        //deal cards (26 each hand/ (deck))
-////        public void dealHand(){
-////            for (int i = 0; i < 26; i++) {
-////
-////                 = array[i];
-////
-////            }
-////        }
-////
-////        dealHand(player1.getWarHand());
-////        dealHand(player2.getWarHand());
-//
-//
-//
-//
-//        //initial game winner
-//        WarPlayer winner = null;
+        System.out.println("War - Collect all cards to win!"); //opening title
+
+        //set players
+        Scanner console = new Scanner(System.in);
+        this.player = new WarPlayer();
+        this.player = new WarPlayer();
+
+        //make deck
+        Deck deck = new Deck();
+        deck.buildDeck();
+
+        //shuffle deck
+        deck.shuffle();
+
+        //split deck in half and deal to players
+        Deck cpuHalf = deck.splitFirst();
+        Deck playerHalf = deck.splitSecond();
+        //System.out.println(cpuHalf);
+        //System.out.println(cpuHalf.getSize());
+        //System.out.println(playerHalf);
+        //System.out.println(playerHalf.getSize());
+
+        Hand cpuHand = new Hand();
+        cpuHand.setHand(cpuHalf);
+        Hand playerHand = new Hand();
+        playerHand.setHand(playerHalf);
+        int rounds = 0;
+
+        //game start
+        while (cpuHand.getHand().getSize() > 0 && playerHand.getHand().getSize() > 0 && rounds <= 26) {
+            System.out.println("Game running currently on round: " + rounds);
+            Card cpuCard = cpuHand.drawSingleCard();
+            Card playerCard = playerHand.drawSingleCard();
+            System.out.println("CPU draws... " + cpuCard);
+            cpuHand.removeCard(cpuCard);
+            System.out.println("Player draws... " + playerCard);
+            playerHand.removeCard(playerCard);
+            rounds++;
+
+        }
 
 
-//          public void dealWarHands() {
-//            for (int i = 0; i < 26; i++) {
-//                if (i % 2 == 0) {
-//                    playerDeck[i / 2] = deck;
-//                } else {
-//                    dealerDeck[i / 2] = deck;
-//            }
-//        }
-//
-//        }
-//
-//
-//
-//
-//
-//
-//    }
+    }
 
+    @Override
+    public void add(PlayerInterface player) {
 
-    public void add(PlayerInterface player){};
+    }
 
-    public void remove(PlayerInterface player){};
+    @Override
+    public void remove(PlayerInterface player) {
 
-    public void run(){};
-        //while loop exit conition game ends
-//    };
+    }
+
+    @Override
+    public void run() {
+        startGame();
+    }
 }
