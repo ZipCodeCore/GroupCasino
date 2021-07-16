@@ -7,20 +7,22 @@ import java.util.ArrayList;
 
 public class WarPlayer extends Player {
 
-    Player player;
-    Hand hand;
+//
+//    Player player;
+//    Hand hand;
+//
+//    public WarPlayer(Player player) {
+//        this.player = player;
+//    }
+//
+//    public WarPlayer() {
+//
+//    }
+//
+//    public void setWarHand(Hand hand) {
+//        this.hand = hand;
+//    }
 
-    public WarPlayer(Player player) {
-        this.player = player;
-    }
-
-    public WarPlayer() {
-
-    }
-
-    public void setWarHand(Hand hand) {
-        this.hand = hand;
-    }
 //
 //    public Hand getWarHand() {
 //        return this.warHand;

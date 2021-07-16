@@ -15,31 +15,34 @@ import java.util.Scanner;
 
 public class War implements GameInterface {
 
-//    private Deck deck;
-//    private WarPlayer player1;
-//    private WarPlayer player2;
-//    private Integer cardIndex = 0;
-//    private boolean isRunning;
-//    public Scanner input;
-//
-//
-//
-//    public void startGame() {
-//
-//        System.out.println("War - Collect all cards to win!"); //opening title
-//
-//        //set players
-//        Scanner console = new Scanner(System.in);
-//        this.player1 = new WarPlayer();
-//        this.player2 = new WarPlayer();
-//
-//        //make deck
-//        Deck deck = new Deck();
-//        deck.buildDeck();
-//
-//        //shuffle deck
-//        deck.shuffle();
-//
+
+
+    private Deck deck;
+    private WarPlayer player1;
+    private WarPlayer player2;
+    private Integer cardIndex = 0;
+    private boolean isRunning;
+    public Scanner input;
+
+
+
+    public void startGame() {
+
+        System.out.println("War - Collect all cards to win!"); //opening title
+
+        //set players
+        Scanner console = new Scanner(System.in);
+        this.player1 = new WarPlayer();
+        this.player2 = new WarPlayer();
+
+        //make deck
+        Deck deck = new Deck();
+        deck.buildDeck();
+
+        //shuffle deck
+        deck.shuffle();
+
+
 //        //create players hands
 //        player1.setWarHand(new Hand());
 //        player2.setWarHand(new Hand());
@@ -55,12 +58,14 @@ public class War implements GameInterface {
 //
 //        dealHand(player1.getWarHand());
 //        dealHand(player2.getWarHand());
-//
-//
-//
-//        //initial game winner
-//        WarPlayer winner = null;
-//
+
+
+
+
+        //initial game winner
+        WarPlayer winner = null;
+
+
 //          public void dealWarHands() {
 //            for (int i = 0; i < 26; i++) {
 //                if (i % 2 == 0) {
