@@ -2,10 +2,12 @@ package com.github.zipcodewilmington.casino.games.craps;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GamblingPlayer;
+import com.github.zipcodewilmington.casino.Player;
 
 
 public class CrapsPlayer implements GamblingPlayer {
-    Player player;
+//    Player player;
+//    private Object amountWon;
 
     @Override
     public CasinoAccount getArcadeAccount() {
@@ -30,6 +32,8 @@ public class CrapsPlayer implements GamblingPlayer {
 
     @Override
     public float amountWagered() {
+//        int amountWagered;
+//        amountWon += 2 * amountWagered;
         return 0;
     }
 
