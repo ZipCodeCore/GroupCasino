@@ -46,8 +46,8 @@ public BlackJackPlayer(){
         return ID;
     }
 
-    public void addAmount(Integer balance) {
-        this.balance += balance;
+    public void addAmount(Integer moneyToAdd) {
+        this.balance += moneyToAdd;
     }
 
         private BlackJackPlayer blackJackPlayer;
@@ -56,7 +56,7 @@ public BlackJackPlayer(){
             this.blackJackPlayer = user;
         }
 
-        public Boolean placeWager(Integer wagerAmount) {
+        public Boolean reduceBalance(Integer wagerAmount) {
             if (blackJackPlayer.balance < wagerAmount) { return false; }
             else if ( wagerAmount < 0 ) { return false;}
             else {
@@ -75,7 +75,6 @@ public BlackJackPlayer(){
     public void setArcadeAccount(CasinoAccount casinoRobinAccount) {
         this.casinoRobinAccount = casinoRobinAccount;
     }
-
     @Override
     public <SomeReturnType> void play() {
 

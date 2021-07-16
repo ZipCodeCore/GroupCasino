@@ -54,6 +54,7 @@ public class IOConsole {
     }
 
     public Long getLongInput(String prompt, Object... args) {
+
         String stringInput = getStringInput(prompt, args);
         try {
             Long longInput = Long.parseLong(stringInput);
