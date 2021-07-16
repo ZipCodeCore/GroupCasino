@@ -52,8 +52,9 @@ public class KenoGame implements GameInterface {
         if( x > 0)
         {
             System.out.println("********************************");
-            System.out.println("Congratulation,You have " + x + " Number Matching");
+            System.out.println("Congratulation,You have " + x + " Number Matched");
             System.out.println("********************************");
+            System.out.println("Thanks for playing!");
         }else{
             System.out.println("********************************");
             System.out.println("Sorry, Better luck next time");
@@ -65,9 +66,12 @@ public class KenoGame implements GameInterface {
         //create the array of answers to guess from
         //will create numbers from 1 to 80
         public ArrayList<Integer> guessNumbers() {
-            System.out.println("Welcome to Keno Game");
+            System.out.println("Hello, and welcome to the game Quidditch Keno!");
             System.out.println("***       *** ***      ***");
             System.out.println("***       *** ***      ***");
+
+            System.out.println("Let's get some numbers to begin.");
+            System.out.println("You may enter up to 5 numbers");
             ArrayList<Integer> nums = new ArrayList<>(); //list that holds numbers to guess from
             for (int i = 1; i <= 80; i++) {
                 nums.add(i);
@@ -87,8 +91,9 @@ public class KenoGame implements GameInterface {
             int i = 0;
 
                 while (player && i < playerNumbers.length) {
+
                     System.out.println("Enter your Number");
-                    //System.out.println("Enter number " + (i + 1));
+
                 numberEntered = Integer.parseInt(sc.nextLine());
                 if (numberEntered > 0 && numberEntered < 80) {
                     if (isUnique(numberEntered, playerNumbers)) {
