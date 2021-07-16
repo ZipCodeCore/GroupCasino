@@ -11,7 +11,7 @@ import static com.github.zipcodewilmington.casino.PigMenus.*;
 
 public class Pig implements GameInterface {
 
-    Casino casino;
+    Casino casino = new Casino();
 
     public static void main(String[] args) {
 
@@ -34,9 +34,11 @@ public class Pig implements GameInterface {
     public void welcomeToPig() throws InterruptedException {
         welcomeScreen();
         Scanner input = new Scanner(System.in);
+        input.nextLine();
+        System.out.println("Would you like to play? Press [ y ] to play and [ q ] to quit");
         String areYouGonnaPlay = input.next();
         if (areYouGonnaPlay.equals("q")) {
-            casino.getGameSelectionInput();
+            casino.run();
         } else if (areYouGonnaPlay.equals("y")) {
             secondPlayerLoginOrCreate();
         }
@@ -44,27 +46,30 @@ public class Pig implements GameInterface {
 
     public void secondPlayerLoginOrCreate() throws InterruptedException {
         secondPlayerMenu();
+        Scanner input = new Scanner(System.in);
+        input.nextLine();
+        System.out.println("Please create your character. Press [ c ] to create or [ q ] to quit.");
         String loginOrCreate = input.next();
         if (loginOrCreate.equals("l")) {
             playerTwoLogin();
         } else if (loginOrCreate.equals("c")) {
             playerTwoCreate();
             } else if (loginOrCreate.equals("q")) {
-            casino.getGameSelectionInput();
+            casino.run();
             }
         }
 
 
     public void theRules() throws InterruptedException {
         pigRules();
-        input.nextLine();
+        Scanner input = new Scanner(System.in);
         String start = input.next();
         if (start.equals("s")) {
             itsPlayerOnesTurn();
             Thread.sleep(2000);
             new Pig();
         } else if (start.equals("q")) {
-            casino.getGameSelectionInput();
+            casino.run();
         }
     }
 
@@ -107,7 +112,7 @@ public class Pig implements GameInterface {
             currentTurn++;
             switchingPlayers();
         } else if (rollAnswer.equals("q")){
-            casino.getGameSelectionInput();
+            casino.run();
         }
         return turnScore;
     }
@@ -198,7 +203,7 @@ public class Pig implements GameInterface {
             Thread.sleep(2000);
             playerTurn();
         } else if (playAgain.equals("q")) {
-            casino.getGameSelectionInput();
+            casino.run();
         }
     }
 
