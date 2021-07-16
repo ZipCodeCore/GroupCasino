@@ -10,7 +10,7 @@ public class Card {
     }
 
     public String toString(){
-        return this.suitValue.toString() + ":" + this.cardValue.toString();
+        return this.suitValue.toString() + "-" + this.cardValue.toString();
     }
 
     public cardValue getCardValue(){

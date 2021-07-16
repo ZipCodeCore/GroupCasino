@@ -15,6 +15,8 @@ import java.util.Scanner;
 
 public class War implements GameInterface {
 
+
+
     private Deck deck;
     private WarPlayer player1;
     private WarPlayer player2;
@@ -40,6 +42,7 @@ public class War implements GameInterface {
         //shuffle deck
         deck.shuffle();
 
+
 //        //create players hands
 //        player1.setWarHand(new Hand());
 //        player2.setWarHand(new Hand());
@@ -58,8 +61,10 @@ public class War implements GameInterface {
 
 
 
+
         //initial game winner
         WarPlayer winner = null;
+
 
 //          public void dealWarHands() {
 //            for (int i = 0; i < 26; i++) {
@@ -71,13 +76,13 @@ public class War implements GameInterface {
 //        }
 //
 //        }
-
-
-
-
-
-
-    }
+//
+//
+//
+//
+//
+//
+//    }
 
     //implement interface and all methods associated w it
     public void add(PlayerInterface player){};
