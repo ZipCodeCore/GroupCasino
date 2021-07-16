@@ -13,9 +13,7 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-
-import static com.github.zipcodewilmington.casino.PigMenus.secondPlayerMenu;
-import static com.github.zipcodewilmington.casino.PigMenus.welcomeScreen;
+import static com.github.zipcodewilmington.casino.PigMenus.*;
 
 
 public class Pig implements GameInterface {
@@ -27,8 +25,8 @@ public class Pig implements GameInterface {
   private int currentTurn;
   private int dieValue;
   private int turnScore;
-  private int pOneTotal;
-  private int pTwoTotal;
+  public int pOneTotal;
+  public int pTwoTotal;
   private String  rollAnswer;
   private int rollCounter;
   public Scanner input = new Scanner(System.in);
@@ -38,12 +36,16 @@ public class Pig implements GameInterface {
   }
 
 public void welcomeToPig () {
-  PigMenus.welcomeMenu();
-  secondPlayerMenu();
+  youRolledAThree();
   }
 
   public String currentStateOfTheGame () {
-    return "Player 1 has " + pOneTotal + " points. \n Player 2 has " + pTwoTotal + " points.";
+   currentStateScreen();
+    return  "|*****                    Player 1 has " + pOneTotal + " points.                  *****|\n" +
+            "|*****                    Player 2 has " + pTwoTotal + " points.                  *****|\n" +
+            "|**********************************************************************|\n" +
+            "|**********************************************************************|\n";
+
   }
 
   public int playerTurn () {
@@ -58,10 +60,10 @@ public void welcomeToPig () {
         if (dieValue == 1) {
           currentTurn++;
           turnScore = 0;
-          System.out.println("You rolled a 1; your turn is over and any banked points have been lost.");
+          youRolledAOne();
           switchingPlayers();
         } else {
-          System.out.println("You rolled a " + dieValue);
+
           rollCounter++;
           System.out.println("Player earned " + turnScore + " points.");
           playerTurn();
@@ -113,7 +115,7 @@ public void welcomeToPig () {
   }
 
   public void run(){
-      secondPlayerMenu();
+     welcomeToPig();
       currentTurn = 1;
       pOneTotal = 0;
       pTwoTotal = 0;
