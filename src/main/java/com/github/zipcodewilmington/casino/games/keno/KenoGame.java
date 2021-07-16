@@ -9,14 +9,13 @@ import java.util.Scanner;
 
 public class KenoGame implements GameInterface {
     private PlayerInterface playerInt;
-    Integer multiplier;
     KenoPlayer kenoPlayer;
     KenoGame kenoGame;
     Integer bet;
     int balance;
     @Override
     public void add(PlayerInterface player) {
-
+        this.playerInt=player;
     }
 
     @Override
@@ -28,8 +27,7 @@ public class KenoGame implements GameInterface {
     public void run() {
         Scanner input = new Scanner(System.in);
         printWelcome();
-        balance=100;
-        balance = playerInt.getArcadeAccount().getAccountBalance(); //Start the player off with some money
+        balance = playerInt.getArcadeAccount().getAccountBalance();
         int playerNums[] = new int[15];
         int computerNums[] = new int[20];
         int kenoSpot, kenoCatch;
@@ -42,7 +40,8 @@ public class KenoGame implements GameInterface {
         while(continueGame)
         {
             System.out.println();
-            System.out.println("\u001B[32mYou currently have: $" + balance);
+            System.out.println("\u001B[32mYou currently have: $" + playerInt.getArcadeAccount().getAccountBalance());
+            balance=playerInt.getArcadeAccount().getAccountBalance();
             System.out.println("\u001B[32mLet's get some numbers to begin.");
             System.out.println("\u001B[32mYou may enter up to 15 numbers");
             playerNums = getUserInput();
@@ -53,7 +52,7 @@ public class KenoGame implements GameInterface {
             System.out.println("\u001B[32mCatch: " + (kenoCatch + 1));
             System.out.println("\u001B[32mYou have won: $"+payout(kenoSpot,kenoCatch,bet));
             balance += payout(kenoSpot, kenoCatch, bet);
-            subtractBetFromBalance(bet);
+            balance-=bet;
             playerInt.getArcadeAccount().alterAccountBalance(balance);
             System.out.println("\u001B[32mYou now have: $" + balance);
             if (balance <= 0)
@@ -264,9 +263,11 @@ public class KenoGame implements GameInterface {
         return kenoCatch;
     }
 
-    public double payout(int kenoSpot, int kenoCatch, int betAmount)
+    public Integer payout(int kenoSpot, int kenoCatch, Integer betAmount)
     {
         Integer payoutAmount = 0;
+
+        Integer multiplier;
         Integer payout[][] =
                 {
                         {3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //1
@@ -274,20 +275,20 @@ public class KenoGame implements GameInterface {
                         {1, 2, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  //3
                         {0, 2, 6, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //4
                         {0, 1, 3, 15, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},//5
-                        {1, 1, 2, 3, 30, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0},//6
-                        {2, 0, 1, 6, 12, 36, 100, 0, 0, 0, 0, 0, 0, 0, 0},//7
-                        {0, 1, 1, 3, 6, 19, 90, 720, 0, 0, 0, 0, 0, 0, 0},//8
-                        {0, 1, 1, 2, 4, 8, 20, 80, 1200, 0, 0, 0, 0, 0, 0},//9
-                        {0, 1, 1, 2, 3, 5, 10, 30, 600, 1800, 0, 0, 0, 0, 0},//10
+                        {0, 1, 2, 3, 30, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0},//6
+                        {0, 0, 1, 6, 12, 36, 100, 0, 0, 0, 0, 0, 0, 0, 0},//7
+                        {0, 0, 1, 3, 6, 19, 90, 720, 0, 0, 0, 0, 0, 0, 0},//8
+                        {0, 0, 1, 2, 4, 8, 20, 80, 1200, 0, 0, 0, 0, 0, 0},//9
+                        {0, 0, 1, 2, 3, 5, 10, 30, 600, 1800, 0, 0, 0, 0, 0},//10
                         {0, 0, 1, 1, 2, 6, 15, 25, 180, 1000, 3000, 0, 0, 0, 0},//11
                         {0, 0, 0, 1, 2, 4, 24, 72, 250, 500, 2000, 4000, 0, 0, 0},//12
-                        {0, 0, 0, 1, 3, 4, 5, 20, 80, 240, 500, 3000, 6000, 0, 0},//13
+                        {0, 0, 0, 0, 3, 4, 5, 20, 80, 240, 500, 3000, 6000, 0, 0},//13
                         {0, 0, 0, 0, 2, 3, 5, 12, 50, 150, 500, 1000, 2000, 7500, 0},//14
                         {0, 0, 0, 0, 1, 2, 5, 15, 50, 150, 300, 600, 1200, 2500, 10000}//15
                 };
         if(kenoCatch < 0)
         {
-            this.multiplier = 0;
+            multiplier = 0;
         }
         else
         {
@@ -299,7 +300,7 @@ public class KenoGame implements GameInterface {
 
     @Override
     public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
-        return this.multiplier*betAmount;
+        return null;
     }
 
     @Override
@@ -310,6 +311,5 @@ public class KenoGame implements GameInterface {
     @Override
     public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
 
-        this.balance+=calculateWinnings(multiplier,bet);
     }
 }

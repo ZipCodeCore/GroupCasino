@@ -21,7 +21,7 @@ public class PlinkoGame implements GameInterface{
 
     @Override
     public void add(PlayerInterface player) {
-
+        this.playerInt=player;
     }
 
     @Override
@@ -33,7 +33,6 @@ public class PlinkoGame implements GameInterface{
     public void run() {
         Scanner input = new Scanner(System.in);
         printWelcome();
-        balance = 100; //Start the player off with some money
         balance=playerInt.getArcadeAccount().getAccountBalance();
         boolean continueGame=true;
         Integer playerNumber;
@@ -41,7 +40,7 @@ public class PlinkoGame implements GameInterface{
 
         System.out.println("\u001B[32mHello, and welcome to the game Plinko!");
         while(continueGame){
-            System.out.println("\u001B[32mYou currently have: $" + balance);
+            System.out.println("\u001B[32mYou currently have: $" + playerInt.getArcadeAccount().getAccountBalance());
             System.out.println("\u001B[32mPlease enter a number position of your choice: ");
             playerNumber = getUserInput();
             bet = (int) getBet(balance);

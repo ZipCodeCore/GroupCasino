@@ -14,7 +14,7 @@ public class KenoPlayer implements PlayerInterface {
 
     @Override
     public void setArcadeAccount(CasinoAccount casinoAccount) {
-
+        CasinoAccount casinoAccount1;
     }
 
 }
