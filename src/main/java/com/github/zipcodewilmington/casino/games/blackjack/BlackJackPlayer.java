@@ -1,21 +1,22 @@
-package com.github.zipcodewilmington.casino.games.Beetle;
+package com.github.zipcodewilmington.casino.games.blackjack;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
-public class BeetlePlayer implements PlayerInterface {
+public class BlackJackPlayer implements PlayerInterface {
     private PlayerInterface player;
 
-    public BeetlePlayer(PlayerInterface player){
+    public BlackJackPlayer(PlayerInterface player) {
         this.player = player;
     }
 
-
+    @Override
     public CasinoAccount getArcadeAccount() {
-        return null;
+        return player.getArcadeAccount();
     }
 
+    @Override
     public void setArcadeAccount(CasinoAccount casinoAccount) {
 
     }

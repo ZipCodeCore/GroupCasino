@@ -10,7 +10,7 @@ public class BlackJackTest {
     @Test
     public void generateNewDeckTest() {
         BlackJack bj = new BlackJack();
-        Integer expected = 165;
+        Integer expected = 52;
 
         Integer actual1 = bj.generateNewDeck().size();
         List<Integer> actual = bj.generateNewDeck();
@@ -48,6 +48,12 @@ public class BlackJackTest {
     @Test
     public void playersCurrentValueTest () {
         BlackJack bj = new BlackJack();
+
+        // Solid stopping point = need to populate array for test
+        bj.givePlayerCard();
+        bj.givePlayerCard();
+        System.out.println(bj.playersCurrentValue());
+
         List<Integer> expected = bj.getPlayersHand();
 
         bj.playersCurrentValue();
@@ -70,7 +76,23 @@ public class BlackJackTest {
     }
 
     @Test
-    public void playerBroke21orBlackJackTest () {
+    public void givePlayerCardOnSplitTest () {
+        BlackJack bj = new BlackJack();
+        List<Integer> expected = bj.getPlayersHandOnSplit();
 
+        List<Integer> actual = bj.givePlayerCardOnSplit();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void splitPlayersCurrentValueTest () {
+        BlackJack bj = new BlackJack();
+        Integer expected = 0;
+
+        bj.getPlayersHandOnSplit().add(0);
+        Integer actual = bj.splitPlayersCurrentValue();
+
+        Assert.assertEquals(expected, actual);
     }
 }

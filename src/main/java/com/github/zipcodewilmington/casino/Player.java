@@ -1,42 +1,51 @@
 package com.github.zipcodewilmington.casino;
 
-public class Player{
+
+public class Player implements PlayerInterface{
 
     String name;
-    Double balance;
-    Double currentBet = 0.0;
+    Integer balance;
+    Integer currentBet = 0;
+    CasinoAccount arcadeAccount;
 
-    public Player(String name, Double initialDeposit) {
+    public Player(String name, CasinoAccount account) {
         this.name = name;
-        this.balance = initialDeposit;
+        this.arcadeAccount = account;
     }
-
 
     public String getName() {
         return name;
     }
 
 
-    public Double getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    private void setCurrentBet(Double currentBet) {
+    public void setCurrentBet(Integer currentBet) {
         this.currentBet = currentBet;
     }
 
-    public void setBalance(Double deposit) {
+    public void setBalance(Integer deposit) {
         this.balance = balance + deposit;
     }
 
 
-    public Double makeBet(Double betAmount) {
+    public Integer makeBet(Integer betAmount) {
         currentBet = betAmount;
         balance = balance - currentBet;
         return currentBet;
     }
 
-    private Double getCurrentBet() {
+    public Integer getCurrentBet() {
         return currentBet;
+    }
+
+    public CasinoAccount getArcadeAccount(){
+        return this.arcadeAccount;
+    }
+
+    public void setArcadeAccount(CasinoAccount arcadeAccount) {
+        this.arcadeAccount = arcadeAccount;
     }
 }

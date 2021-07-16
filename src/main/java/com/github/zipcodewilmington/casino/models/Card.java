@@ -5,6 +5,7 @@ import java.util.*;
 public class Card {
     List<Integer> cardPool;
 
+
     public Card() {
         this.cardPool = new ArrayList<>();
         this.createDeck();

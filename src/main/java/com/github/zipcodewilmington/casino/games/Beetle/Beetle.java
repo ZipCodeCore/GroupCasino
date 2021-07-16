@@ -8,6 +8,8 @@ public class Beetle{
     private Integer[][] playerBeetles;
     private Integer[] scoreboard;
     private Integer numPlayers;
+    private Integer lastDiceRolls[] = {0, 0};
+
 
     public Beetle(Integer numPlayers){
         this.numPlayers = numPlayers;
@@ -56,23 +58,35 @@ public class Beetle{
     }
 
     public void setPlayerBeetles(Integer player, Integer diceRoll) {
-        this.playerBeetles[player][diceRoll]++;
-        //return this.checkWinner(player);
+        this.playerBeetles[player][diceRoll - dice.getNumDice()]++;
+        this.lastDiceRolls[player] = diceRoll;
     }
 
-    public void refreshBeetle(Integer player){
-        this.playerBeetles[player] = new Integer[] {0, 0, 0, 0, 0, 0};
+    public void nextPlayer(){
+        this.currentPlayer = (this.currentPlayer + 1) % this.numPlayers;
     }
 
+    public String printBeetle(Integer player){
+        Integer[] currentBeetle = this.getPlayerBeetles()[player];
+        String output = "\u001B[36mBody:";
+        output += (currentBeetle[0].equals(0)) ? "0  " : "X  ";
+        output += "Head:";
+        output += (currentBeetle[1].equals(0)) ? "0  " : "X  ";
+        output += "Legs:";
+        output += (currentBeetle[2].equals(0)) ? "0  " : "X  ";
+        output += "Eyes:";
+        output += (currentBeetle[3].equals(0)) ? "0  " : "X  ";
+        output += "Antenna:";
+        output += (currentBeetle[4].equals(0)) ? "0  " : "X  ";
+        output += "Tail:";
+        output += (currentBeetle[5].equals(0)) ? "0  " : "X  ";
+
+        return output;
+    }
 
     public Boolean checkWinner(Integer player){
         if(this.beetleIsComplete(player)){
-            this.scoreboard[player] += 6;
-            if(this.getScore(player) == 30){
-                return true;
-            } else {
-                this.refreshBeetle(player);
-            }
+            return true;
         }
         return false;
     }
@@ -84,6 +98,10 @@ public class Beetle{
                 return false;
         }
         return true;
+    }
+
+    public Integer getLastDiceRoll(Integer index){
+        return this.lastDiceRolls[index];
     }
 
     public Integer getScore(Integer player){
