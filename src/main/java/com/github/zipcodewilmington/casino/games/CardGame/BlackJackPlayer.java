@@ -10,31 +10,14 @@ public class BlackJackPlayer implements PlayerInterface {
 private ArrayList<BlackJackPlayer> players= new ArrayList<BlackJackPlayer>();
     Integer balance;
     private BlackJack currentGame;
-    private CasinoAccount casinoRobinAccount;
+     CasinoAccount casinoRobinAccount;
      String ID;
      String pwd;
 
 public BlackJackPlayer(){
 }
 
-//public BlackJackPlayer(final List<String>players){
-//    players.addAll(players);
-//}
-//    public void add(BlackJackPlayer player)
-//    {
-//        players.add(player);
-//    }
-//public void add(PlayerInterface...players){
-//    for(PlayerInterface player: players){
-//        this.players.get(player.getArcadeAccount());
-//    }
-//}
 
-//    private BlackJack currentGame;
-//    private CasinoAccount casinoAccount;
-//    protected String ID;
-//    protected String pwd;
-//    protected
 
     public BlackJackPlayer(String ID, String password,Integer balance){
         this.ID = ID;
@@ -52,7 +35,8 @@ public BlackJackPlayer(){
 
         private BlackJackPlayer blackJackPlayer;
 
-        public BlackJackPlayer(BlackJackPlayer user) {
+        public BlackJackPlayer(CasinoAccount casinoRobinAccount, BlackJackPlayer user) {
+            this.casinoRobinAccount=casinoRobinAccount;
             this.blackJackPlayer = user;
         }
 
@@ -61,7 +45,7 @@ public BlackJackPlayer(){
             else if ( wagerAmount < 0 ) { return false;}
             else {
                 blackJackPlayer.balance -= wagerAmount;
-                //this.pot += wagerAmount;
+
                 return true;
             }
         }

@@ -16,7 +16,7 @@ Deck deck =new Deck();
 Integer minimumWager=20;
 Set<BlackJackPlayer> players = new HashSet<>();
 BlackJackPlayer blackJackPlayer;
-CasinoAccount casinoRobinAccount = new CasinoAccount();
+//CasinoAccount casinoAccount=new CasinoAccount();
 
 
 public BlackJack(){
@@ -26,24 +26,22 @@ public BlackJack(int numberOfDecks){
     super(numberOfDecks);
 }
 
-    public BlackJackPlayer getPlayer(String playerUsername) {
-        for (BlackJackPlayer player : players) {
-            if (player.getArcadeAccount().getUsername().equals(playerUsername)) {
-                return player;
-            }
-        }
-        return null;
-    }
+//    public BlackJackPlayer getPlayer(String playerUsername) {
+//        for (BlackJackPlayer player : players) {
+//            if (player.getArcadeAccount().getUsername().equals(playerUsername)) {
+//                return player;
+//            }
+//        }
+//        return null;
+//    }
 
 public void playBlackjack(){
     IOConsole input = new IOConsole(AnsiColor.PURPLE);
     Deck blackjackDeck= new Deck(1);
     Integer playerMoney = 100;
     blackjackDeck.shuffle();
-    String blackJackPlayerID ;
-    String blackJackPlayerPwd ;
-    casinoRobinAccount.addToBalance(5000);
-    input.println("Lets play Blackjack!!! You have "+playerMoney+"$");
+
+    input.println("Lets play   ♣♦♥♠ BLACKJACK ♣♦♥♠    !!! You have \"$\""+playerMoney);
     {
         while(playerMoney > 0) {
             Integer playerWager = input.getIntegerInput("How much would you like to play for?");
@@ -67,21 +65,21 @@ public void playBlackjack(){
                     playerHandValue = checkHandValue(playerHand);
                     dealerHandValue = checkHandValue(dealerHand);
                     input.println("Player Hand:\n" + playerHand.displayHand());
-                    input.println("Player total hand value is :" + playerHandValue);
+                    input.println("Player total hand value is :\n" + playerHandValue);
                     input.println("Dealer Hand:\n" + dealerHand.displayHand());
-                    input.println("Dealer total hand value is :" + dealerHandValue);
+                    input.println("Dealer total hand value is :\n" + dealerHandValue);
                     if(dealerHandValue==21){
                         playerMoney -= playerWager;
                         blackJackPlayer.reduceBalance(playerWager);
-                        casinoRobinAccount.addToBalance(playerWager);
+                        blackJackPlayer.getArcadeAccount().addToBalance(playerWager);
                         input.println("Dealer got BlackJack!Better luck next time!");
                         endGame=true;
                         break;
                     }
                     else if(playerHandValue==21){
                         playerMoney += playerWager;
-                        blackJackPlayer.addAmount(playerWager);
-                        casinoRobinAccount.reduceBalance(playerWager);
+                       // blackJackPlayer.addAmount(playerWager);
+                        blackJackPlayer.getArcadeAccount().reduceBalance(playerWager);
                         input.println("You got BlackJack!Poor Dealer");
                         endGame=true;
                         break;
@@ -97,8 +95,8 @@ public void playBlackjack(){
                         {
                             input.println("Busted!! You lose!!");
                             playerMoney -= playerWager;
-                            blackJackPlayer.reduceBalance(playerWager);
-                            casinoRobinAccount.addToBalance(playerWager);
+                            //blackJackPlayer.reduceBalance(playerWager);
+                            blackJackPlayer.getArcadeAccount().addToBalance(playerWager);
                             endGame = true;
                             break;
                         }
@@ -114,8 +112,8 @@ public void playBlackjack(){
                 {
                     input.println("Dealer won.. You Lost!!");
                     playerMoney -= playerWager;
-                    blackJackPlayer.reduceBalance(playerWager);
-                    casinoRobinAccount.addToBalance(playerWager);
+                    //blackJackPlayer.reduceBalance(playerWager);
+                    blackJackPlayer.getArcadeAccount().addToBalance(playerWager);
                     endGame = true;
                 }
                 while(dealerHandValue <= 16 && endGame == false)
@@ -130,8 +128,8 @@ public void playBlackjack(){
                 {
                     input.println("Dealer Busted!! You won!!");
                     playerMoney += playerWager;
-                    blackJackPlayer.addAmount(playerWager);
-                    casinoRobinAccount.reduceBalance(playerWager);
+                    //blackJackPlayer.addAmount(playerWager);
+                    blackJackPlayer.getArcadeAccount().reduceBalance(playerWager);
                     endGame = true;
                 }
                 if(playerHandValue == dealerHandValue && endGame == false)
@@ -143,22 +141,22 @@ public void playBlackjack(){
                 {
                     input.println("You won this round");
                     playerMoney += playerWager;
-                    blackJackPlayer.addAmount(playerWager);
-                    casinoRobinAccount.reduceBalance(playerWager);
+                    //blackJackPlayer.addAmount(playerWager);
+                    blackJackPlayer.getArcadeAccount().reduceBalance(playerWager);
                     endGame = true;
                 }
                 else if(endGame == false)
                 {
                     input.println("You lost this round");
                     playerMoney -= playerWager;
-                    blackJackPlayer.reduceBalance(playerWager);
-                    casinoRobinAccount.addToBalance(playerWager);
+                    //blackJackPlayer.reduceBalance(playerWager);
+                    blackJackPlayer.getArcadeAccount().addToBalance(playerWager);
                     endGame = true;
                 }
 
                 input.println("You have  "+playerMoney+"$ left!!");
-                input.println("balance test :"+blackJackPlayer.getBalance());
-                input.println("Casino balance"+casinoRobinAccount.getBalance());
+                //input.println("balance test :"+blackJackPlayer.getBalance());
+                input.println("Casino balance"+blackJackPlayer.getArcadeAccount().getBalance());
 
             }
         }
