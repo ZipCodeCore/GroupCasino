@@ -74,9 +74,15 @@ public class Casino implements Runnable {
 
     private String getArcadeDashboardInput() {
         return console.getStringInput(new StringBuilder()
-                .append("Welcome to the Arcade Dashboard!")
+                .append(  "~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~~*~*~*~\n"
+                        + "~*~*~                                      ~*~*~\n"
+                        + " $$$   WELCOME TO THE GOLDEN SNITCH CASINO  $$$ \n"
+                        + "~*~*~                                      ~*~*~\n"
+                        + "~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n")
+
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ new account ] [ game ]")
+                .append("\n\t[ new account ] [ game ]\n")
+                .append(">")
                 .toString());
     }
 
