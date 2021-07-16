@@ -16,14 +16,18 @@ import com.github.zipcodewilmington.casino.objects.Deck;
 // Dealer reveals the Turn - (fourth community card revealed)
 // Play loops through
 
-public class TexasHoldEm implements GambleableGame, GamblingPlayer {
+public class TexasHoldEmGame implements GambleableGame, GamblingPlayer {
 
 
 
     Deck deck;
 
-    public TexasHoldEm(Deck deck) {
+    public TexasHoldEmGame(Deck deck) {
         this.deck = deck;
+    }
+
+    public TexasHoldEmGame() {
+
     }
 
 
