@@ -108,13 +108,10 @@ public class Pig implements GameInterface {
 
 
 
-
-  @Override
   public void add(PlayerInterface player) {
 
   }
 
-  @Override
   public void remove(PlayerInterface player) {
 
   }
@@ -132,18 +129,6 @@ public class Pig implements GameInterface {
         playerTurn();
 
     }
-
-  }
-
-  public void add(PlayerInterface player) {
-
-  }
-
-  public void remove(PlayerInterface player) {
-
-  }
-
-  public void run() {
 
   }
 }

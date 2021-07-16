@@ -40,21 +40,21 @@ public class War implements GameInterface {
         //shuffle deck
         deck.shuffle();
 
-        //create players hands
-        player1.setWarHand(new Hand());
-        player2.setWarHand(new Hand());
-
-        //deal cards (26 each hand/ (deck))
-        public void dealHand(){
-            for (int i = 0; i < 26; i++) {
-
-                 = array[i];
-
-            }
-        }
-
-        dealHand(player1.getWarHand());
-        dealHand(player2.getWarHand());
+//        //create players hands
+//        player1.setWarHand(new Hand());
+//        player2.setWarHand(new Hand());
+//
+//        //deal cards (26 each hand/ (deck))
+//        public void dealHand(){
+//            for (int i = 0; i < 26; i++) {
+//
+//                 = array[i];
+//
+//            }
+//        }
+//
+//        dealHand(player1.getWarHand());
+//        dealHand(player2.getWarHand());
 
 
 
