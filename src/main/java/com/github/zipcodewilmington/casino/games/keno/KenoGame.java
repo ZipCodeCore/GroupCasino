@@ -61,6 +61,7 @@ public class KenoGame implements GameInterface {
         //will create numbers from 1 to 80
         public ArrayList<Integer> guessNumbers() {
             System.out.println("Welcome to Keno Game");
+            System.out.println("***       *** ***      ***");
             ArrayList<Integer> nums = new ArrayList<>(); //list that holds numbers to guess from
             for (int i = 1; i <= 80; i++) {
                 nums.add(i);
