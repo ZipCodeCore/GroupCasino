@@ -12,7 +12,9 @@ import java.util.Scanner;
  */
 public class Slots implements GameInterface {
 
-     public static void main(String[] arg) {
+     public static void main(String[] arg) { playSlots(); }
+
+    public static void playSlots() {
          Random generator = new Random();
          Scanner console = new Scanner(System.in);
 
@@ -89,9 +91,7 @@ public class Slots implements GameInterface {
 
     }
 
-    public void run() {
-
-    }
+    public void run() { playSlots(); }
 }
 
 

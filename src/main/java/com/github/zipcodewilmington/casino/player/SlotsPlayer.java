@@ -3,7 +3,7 @@ package com.github.zipcodewilmington.casino.player;
 /**
  * Created by leon on 7/21/2020.
  */
-public class SlotsPlayer {
+public class SlotsPlayer extends Player{
 
     Player player;
     private int bet;
