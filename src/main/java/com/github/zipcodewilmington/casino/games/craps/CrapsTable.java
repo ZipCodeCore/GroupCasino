@@ -12,6 +12,17 @@ public class CrapsTable {
 
 
     public void playCraps() {
+        System.out.println("˜˜˜˜˜˜˜˜˜˜˜˜˜˜NNN˜˜˜˜˜˜˜˜˜˜˜˜˜˜");
+        System.out.println(" ∆ Welcome to Cauldron Craps ∆ ");
+        System.out.println("˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜");
+        System.out.println("Cauldron Craps is a fun dice game for wizards and witches of age." +
+                " \n You will roll two dice each time you take a turn. " +
+                "\n To win on your first roll, you must roll either a 7 or an 11." +
+                "\n Be careful though! " +
+                "\n If you roll a 2, 3, or 12 on your first roll you will lose the game and be cursed!!" +
+                "\n If you roll a 4, 5, 6, 8, 9, or 10 this is called your point number." +
+                "\n Your objective is to roll repeatedly until you roll your point number again." +
+                "\n Watch out though! If you roll a 7 before you make your point, you will eat slugs! And lose the game.");
 
         System.out.println("Shooter, Roll The Dice!");
         int score = roll();
