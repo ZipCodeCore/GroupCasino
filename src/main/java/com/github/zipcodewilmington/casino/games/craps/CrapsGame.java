@@ -10,7 +10,7 @@ import static com.github.zipcodewilmington.casino.objects.Dice.roll;
 
 //GambleableGame and GamblingPlayer
 public class CrapsGame implements GambleableGame {
-    Scanner playerInput = new Scanner(String.valueOf(System.console()));
+
 
     //public static void main(String[] args) {
 
@@ -45,40 +45,7 @@ public class CrapsGame implements GambleableGame {
     }
         @Override
         public void run() {
-
-            System.out.println("Shooter, Roll The Dice!");
-            int score = roll();
-
-            if (score == 7 || score == 11) {
-                System.out.println("\nScore = " + score);
-                System.out.println("\nNatural! You Win");
-
-
-            } else if (score == 2 || score == 3 || score == 12) {
-                System.out.println("\n Score = " + score);
-                System.out.println("\nCraps! You Lose");
-
-
-            } else {
-                int point = score;
-                System.out.println("\nPoint = " + point);
-                while (true) {
-                    System.out.println("\nEnter 1 to roll again" + "\nEnter 2 to quit game");
-                    this.playerInput.nextLine();
-                    score = roll();
-
-                    System.out.println("\nNew Score = " + score);
-                    if (score == point) {
-
-                        System.out.println("\nYou made your point, You Win");
-                        break;
-                    }
-                    if (score == 7) {
-                        System.out.println("\nYou rolled a 7, House Wins");
-                        break;
-                    }
-                }
-            }
+        new CrapsTable().playCraps();
         }
 
 
