@@ -135,17 +135,6 @@ public class Pig implements GameInterface {
 
   }
 
-  public void add(PlayerInterface player) {
-
-  }
-
-  public void remove(PlayerInterface player) {
-
-  }
-
-  public void run() {
-
-  }
 }
 
 

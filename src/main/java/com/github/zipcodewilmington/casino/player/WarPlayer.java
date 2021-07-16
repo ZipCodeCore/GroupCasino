@@ -21,13 +21,13 @@ public class WarPlayer extends Player {
     public void setWarHand(Hand hand) {
         this.hand = hand;
     }
-
-    public Hand getWarHand() {
-        return this.warHand;
-
-    public Player WarPlayer() {
-        return this.player;
-    }
+//
+//    public Hand getWarHand() {
+//        return this.warHand;
+//
+//    public Player WarPlayer() {
+//        return this.player;
+//    }
 
 
 }
