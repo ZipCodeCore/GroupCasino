@@ -12,6 +12,8 @@ import com.github.zipcodewilmington.casino.games.craps.CrapsPlayer;
 
 import com.github.zipcodewilmington.casino.games.keno.KenoGame;
 import com.github.zipcodewilmington.casino.games.keno.KenoPlayer;
+import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
+import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
@@ -46,8 +48,8 @@ public class Casino implements Runnable {
                         play(new BlackjackGame(), new BlackjackPlayer());
                     } else if (gameSelectionInput.equals("KENO")) {
                         play(new KenoGame(), new KenoPlayer());
-                    //} else if (gameSelectionInput.equals("ROULETTE")) {
-                    //    play(new RouletteGame(), new RoulettePlayer());
+                    } else if (gameSelectionInput.equals("ROULETTE")) {
+                       play(new RouletteGame(), new RoulettePlayer());
                     } else if (gameSelectionInput.equals("TEXASHOLDEM")) {
                         play(new TexasHoldEmGame(), new TexasHoldEmPlayer());
 
@@ -74,7 +76,16 @@ public class Casino implements Runnable {
 
     private String getArcadeDashboardInput() {
         return console.getStringInput(new StringBuilder()
+<<<<<<< Updated upstream
                 .append("Welcome to the Arcade Dashboard!")
+=======
+                .append(  "~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~~*~*~*~\n"
+                        + "~*~*~                                      ~*~*~\n"
+                        + " $$$   WELCOME TO THE GOLDEN FINCH CASINO  $$$ \n"
+                        + "~*~*~                                      ~*~*~\n"
+                        + "~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n")
+
+>>>>>>> Stashed changes
                 .append("\nFrom here, you can select any of the following options:")
                 .append("\n\t[ new account ] [ game ]")
                 .toString());
