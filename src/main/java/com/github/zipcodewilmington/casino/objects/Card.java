@@ -13,6 +13,9 @@ public class Card implements Comparable<Card>{
         this.rank = rank;
         this.suit = suit;
     }
+    public CardRank getCardValue() {
+        return this.rank;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -43,5 +46,12 @@ public class Card implements Comparable<Card>{
         return (this.suit.ordinal() * CardRank.values().length +
                 this.rank.ordinal()) - (other.getSuit().ordinal() *
                 CardRank.values().length + other.getRank().ordinal());
+
+
+    }
+
+    @Override
+    public String toString() {
+        return rankNames[rank.ordinal()] + " of " + suitNames[suit.ordinal()];
     }
 }

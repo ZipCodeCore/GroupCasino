@@ -33,4 +33,18 @@ public class RouletteBetTest {
         //then
         Assert.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void testColumn(){
+        //given
+        int testBet = 6;
+        RouletteBet bet = new RouletteBet();
+        Integer[] expected = {3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36};
+
+        //when
+        Integer[] actual = bet.winningColumn(testBet);
+
+        //then
+        Assert.assertArrayEquals(expected, actual);
+    }
 }
