@@ -5,7 +5,7 @@ import com.github.zipcodewilmington.casino.GamblingPlayer;
 
 
 public class CrapsPlayer implements GamblingPlayer {
-
+    Player player;
 
     @Override
     public CasinoAccount getArcadeAccount() {

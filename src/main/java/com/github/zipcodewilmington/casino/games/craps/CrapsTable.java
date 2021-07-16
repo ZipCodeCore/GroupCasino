@@ -9,9 +9,12 @@ import static com.github.zipcodewilmington.casino.objects.Dice.roll;
 public class CrapsTable {
 
     private final IOConsole console = new IOConsole(AnsiColor.CYAN);
+    private Double amountWon;
 
-
+    //Double bet = console.getDoubleInput("How much would you like to bet?");
+//        System.out.println("Your bet is " + bet + "\nThe dealer will now shuffle and deal out your cards.");
     public void playCraps() {
+        
         console.println("     ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜");
         console.println("         ∆ Welcome to Cauldron Craps ∆ ");
         console.println("     ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜");
@@ -48,6 +51,8 @@ public class CrapsTable {
 //                "\nWatch out though! If you roll a 7 before you make your point, you will eat slugs! And lose the game.");
 
         //System.out.println("\nShooter, Roll The Dice!");
+        Double amountWagered = console.getDoubleInput("How many galleons would you like to wager?");
+        System.out.println("You've wagered " + amountWagered);
         console.println("\nShooter, Roll The Dice!");
         console.getStringInput("\nWave your wand and enter a number to roll");
         int score = roll();
@@ -55,7 +60,7 @@ public class CrapsTable {
         if (score == 7 || score == 11) {
             System.out.println("\nScore = " + score);
             System.out.println("\nNatural! You Win");
-
+            amountWon += amountWagered;
 
         } else if (score == 2 || score == 3 || score == 12) {
             System.out.println("\n Score = " + score);
