@@ -1,7 +1,6 @@
 package com.github.zipcodewilmington.casino.games.craps;
 
 import com.github.zipcodewilmington.casino.GambleableGame;
-import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
 import java.util.Scanner;
