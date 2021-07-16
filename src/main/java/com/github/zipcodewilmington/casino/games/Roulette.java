@@ -250,7 +250,6 @@ public class Roulette implements GameInterface{
         if(playerColorChoice.equals(winningColor)) {
             bet = bet;
             int newBalance = roulettePlayerAccount.getArcadeAccount().getPlayerBalance();
-            newBalance = bet;
             System.out.printf("You win! $%d has been added to your balance\n" + "Your remaining balance is: ", bet, newBalance);
         } else {
             bet = 0 - bet;

@@ -2,6 +2,7 @@ package com.github.zipcodewilmington.casino.games;
 
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.player.SlotsPlayer;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -11,6 +12,8 @@ import java.util.Scanner;
  * Created by leon on 7/21/2020.
  */
 public class Slots implements GameInterface {
+    static PlayerInterface slotPlayerAccount;
+    static SlotsPlayer slotsPlayer;
 
      public static void main(String[] arg) { playSlots(); }
 
