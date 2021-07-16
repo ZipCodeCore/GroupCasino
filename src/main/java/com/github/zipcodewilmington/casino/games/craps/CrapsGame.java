@@ -1,61 +1,53 @@
-package com.github.zipcodewilmington.casino.games.games.craps;
+package com.github.zipcodewilmington.casino.games.craps;
 
+import com.github.zipcodewilmington.casino.GambleableGame;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 
+import java.util.Scanner;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Random;
+import static com.github.zipcodewilmington.casino.objects.Dice.roll;
 
 //GambleableGame and GamblingPlayer
-public class CrapsGame {
-
-    public static void main(String[] args)  {
-        int wins = 0;
-        int loss = 0;
+public class CrapsGame implements GambleableGame {
 
 
 
-        //for (int i = 0; i < 10; i++) {
-            System.out.println("roll the die");
-            int score = roll();
-        //System.out.println("\n score " + score);
+    @Override
+    public void add(PlayerInterface player) {
 
-            if (score == 7 || score == 11) {
-                System.out.println("\n Score = " + score);
-                System.out.println("you win");
-
-
-            } else if (score == 2 || score == 3 || score == 12) {
-                System.out.println("\n Score = " + score);
-                System.out.println("you lose");
-
-
-            } else {
-                int point = score;
-                System.out.println("\n Point = " + point);
-                while (true) {
-                    System.out.println("\n Next Roll");
-                    score = roll();
-                    System.out.println("\n New Point = " + score);
-                    if (score == point) {
-                        System.out.println("\n  You win");
-                        break;
-                    }
-                    if (score == 7) {
-                        System.out.println("\n  You lose");
-                        break;
-                    }
-                }
-            }
-        //}
     }
 
-    public static int roll() {
-        Random randomGenerator = new Random();
-        int dice1 = randomGenerator.nextInt(6) + 1;
-        int dice2 = randomGenerator.nextInt(6) + 1;
-        System.out.println("\n dice1 = " + dice1 + " dice2 = " + dice2);
-        return dice1 +  dice2; // this will make roll return sum of die
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
+    @Override
+    public int getNumberOfPlayers() {
+        return 0;
+    }
+
+    @Override
+    public boolean playerWins() {
+        return false;
+    }
+
+    @Override
+    public boolean playerLoses() {
+        return false;
+    }
+
+    @Override
+    public void clearGame() {
+
+    }
+
+
+    @Override
+    public void run() {
+        new CrapsTable().playCraps();
+
     }
 
 }
@@ -90,21 +82,7 @@ public class CrapsGame {
     * 2, 3, 11, or 12 do not have an affect on the pass or don't pass lines after the point has been established
     * */
 
-//    public class Craps extends Game implements TableGame {
-//        private ArrayList<Player> players;
-//        private double betMinimum;
-//        private double betMaximum;
-//
-//        @Override
-//        public void play(ArrayList<Player> players) {
-//            play(players, BigDecimal.valueOf(5, 2), BigDecimal.valueOf(1000, 2));
-//        }
-//
-//        @Override
-//        public void play(ArrayList<Player> players, BigDecimal betMinimum,
-//                         BigDecimal betMaximum) {
-//            this.players = players;
-//            this.betMinimum = betMinimum;
-//            this.betMaximum = betMaximum;
-//        }
+
+
+
 
