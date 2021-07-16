@@ -1,18 +1,12 @@
 package com.github.zipcodewilmington.casino;
 
-
 import java.util.Scanner;
 import com.github.zipcodewilmington.casino.games.Pig;
-
-import static com.github.zipcodewilmington.utils.AnsiColor.PURPLE;
-import static com.github.zipcodewilmington.utils.AnsiColor.RED;
-
 
 public class PigMenus {
     public static final String PURPLE = "\u001B[35m";
     public static final String RED = "\u001B[31m";
     public Scanner input = new Scanner(System.in);
-
 
     public static void welcomeScreen() {
         System.out.println(PURPLE + "" +
@@ -67,23 +61,12 @@ public class PigMenus {
                 "|**********************************************************************|\n" +
                 "|**********************************************************************|\n" +
                 "|*****                  This games requires 2 players             *****|\n" +
-                "|*****            Enter 'y' to login or create a 2nd player       *****|\n" +
+                "|*****             Enter 'y' if you have a a second player        *****|\n" +
                 "|*****                Enter 'q' to quit to the main menu          *****|\n" +
                 "|**********************************************************************|\n" +
                 "|**********************************************************************|\n");
     }
 
-    public static void welcomeMenu() {
-        welcomeScreen();
-        Scanner input = new Scanner(System.in);
-        String areYouGonnaPlay = input.next();
-        if (areYouGonnaPlay.equals("q")) {
-            //  mainMenu();
-        } else if (areYouGonnaPlay.equals("y")) {
-            //secondPlayerLogin();
-        }
-
-    }
 
 
     public static void secondPlayerMenu() {
@@ -107,19 +90,7 @@ public class PigMenus {
                 "|**********************************************************************|\n");
     }
 
-    public void secondPlayerLogin() {
-        secondPlayerMenu();
-        input.nextLine();
-        String loginOrCreate = input.next();
-        if (loginOrCreate.equals("l")) {
-            //  playerTwoLogin();
-        } else if (loginOrCreate.equals("c")) {
-            //  creatAcount();
-        } else if (loginOrCreate.equals("q")) {
-            //  mainMenu();
-        }
-        pigRules();
-    }
+
 
     public static void pigRules() {
         System.out.println(PURPLE + "" +
@@ -136,7 +107,7 @@ public class PigMenus {
                 "|*                              \\______\\/                             *|\n" +
                 "|**********************************************************************|\n" +
                 "|**********************************************************************|\n" +
-                "|*****                       Here are the rules:                  *****|\n" +
+                "|*****                      Here are the rules:                   *****|\n" +
                 "|*****     ~Players take turns rolling a die                      *****|\n" +
                 "|*****     ~Each player can roll the die however many times       *****|\n" +
                 "|*****       they want during their turn                          *****|\n" +
@@ -146,22 +117,13 @@ public class PigMenus {
                 "|*****     ~BUT if at anytime a 1 is rolled their turn is over    *****|\n" +
                 "|*****       and they lose all points banked during that turn     *****|\n" +
                 "|*****     ~The first player to reach 100 wins!                   *****|\n" +
-                "|*****                    Please enter 's' to start               *****|\n" +
-                "|*****             or enter 'q' to quit to the main menu          *****|\n" +
+                "|*****                  Please 's' any value to start             *****|\n" +
+                "|*****              or enter 'q' to quit to the main menu         *****|\n" +
                 "|**********************************************************************|\n" +
                 "|**********************************************************************|\n");
     }
 
-    public void theRules() {
-        pigRules();
-        input.nextLine();
-        String start = input.next();
-        if (start.equals("s")) {
-            new Pig();
-        } else if (start.equals("q")) {
-            // mainMenu();
-        }
-    }
+
 
     public static void currentStateScreen() {
         System.out.println(PURPLE + "" +
@@ -241,7 +203,7 @@ public class PigMenus {
                 "|*            (_|              \\ *  *  \\   /                          *|\n" +
                 "|*                              \\_______\\ /                           *|\n" +
                 "|**********************************************************************|\n" +
-                "|**********************************************************************|\n");
+                "|**********************************************************************|");
     }
 
     public static void youRolledAThree() {
@@ -258,7 +220,7 @@ public class PigMenus {
                 "|*            (_|              \\ *     \\   /                          *|\n" +
                 "|*                              \\_______\\ /                           *|\n" +
                 "|**********************************************************************|\n" +
-                "|**********************************************************************|\n");
+                "|**********************************************************************|");
     }
 
     public static void youRolledAFour() {
@@ -275,7 +237,7 @@ public class PigMenus {
                 "|*            (_|              \\     * \\   /                          *|\n" +
                 "|*                              \\_______\\ /                           *|\n" +
                 "|**********************************************************************|\n" +
-                "|**********************************************************************|\n");
+                "|**********************************************************************|");
     }
 
     public static void youRolledAFive() {
@@ -292,7 +254,7 @@ public class PigMenus {
                 "|*            (_|              \\     * \\   /                          *|\n" +
                 "|*                              \\_______\\ /                           *|\n" +
                 "|**********************************************************************|\n" +
-                "|**********************************************************************|\n");
+                "|**********************************************************************|");
     }
 
     public static void youRolledASix() {
@@ -309,7 +271,7 @@ public class PigMenus {
                 "|*            (_|              \\ *     \\   /                          *|\n" +
                 "|*                              \\_______\\ /                           *|\n" +
                 "|**********************************************************************|\n" +
-                "|**********************************************************************|\n");
+                "|**********************************************************************|");
     }
 
     public static void itsPlayerOnesTurn() {
@@ -381,9 +343,6 @@ public class PigMenus {
                 "|**********************************************************************|\n" +
                 "|**********************************************************************|\n" +
                 "|*****                      The final score was                   *****|");
-
-
-
     }
 
     public static void playerTwoWon(){
