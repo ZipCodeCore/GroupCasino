@@ -25,7 +25,7 @@ public class SlotReels {
         final IOConsole console = new IOConsole(AnsiColor.WHITE);
         Scanner scanner = new Scanner(System.in);
 
-        int playerInput = 1; // research how to use enums to substitute for numbers
+        int playerInput = 0; // research how to use enums to substitute for numbers
         float playerReward = 0; // non gambling game, if player wins they get a few cents towards their account balance?
         String slot1;  // Dobby's Sock
         String slot2; // Broom Stick
@@ -49,6 +49,14 @@ public class SlotReels {
 
             playerInput = scanner.nextInt();
 
+            if(playerInput == 2) {
+                System.out.println("~*~ DOBBY SAYS... THANK YOU FOR PLAYING MY SOCK SLOTS ~*~");
+                System.out.println("                              ");
+                System.out.println("TOTAL REWARDS: $$$ ~ " + playerReward + " ~ $$$");
+                System.out.println("                              ");
+                break;
+            }
+
             slot1 = reelValue.get(randomizer.nextInt(size));
             slot2 = reelValue.get(randomizer.nextInt(size));
             slot3 = reelValue.get(randomizer.nextInt(size));
@@ -71,17 +79,14 @@ public class SlotReels {
                 System.out.println("                                     ");
                 playerReward += 0.25;
 
-            } else if (!slot1.equals(slot2) && !slot2.equals(slot3)) {
+            } else {
                 System.out.println(":( NO LUCK... DOBBY SAYS TRY AGAIN ! :)");
                 System.out.println("                                        ");
-                break;
             }
         }
         while (playerInput == 1);
 
-        if (playerInput == 2) {
-            System.out.println("TOTAL REWARDS: " + playerReward);
-            System.out.println("                              ");
-        }
+//        System.out.println("TOTAL REWARDS: " + playerReward);
+//        System.out.println("                              ");
     }
 }
