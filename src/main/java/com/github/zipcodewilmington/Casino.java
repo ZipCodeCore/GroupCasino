@@ -34,7 +34,9 @@ public class Casino implements Runnable {
                     if (gameSelectionInput.equals("SLOTS")) {
                         play(new SlotsGame(), new SlotsPlayer());
                     } else if (gameSelectionInput.equals("CRAPS")) {
-                       play(new CrapsGame(), new CrapsPlayer());
+                        play(new CrapsGame(), new CrapsPlayer());
+                    }else if (gameSelectionInput.equals("KENO")){
+                        play(new KenoGame(),new KenoPlayer());
                     } else {
                         // TODO - implement better exception handling
                         String errorMessage = "[ %s ] is an invalid game selection";
@@ -68,7 +70,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ CRAPS ]")
+                .append("\n\t[ SLOTS ], [ CRAPS ] ,[ KENO ]")
                 .toString());
     }
 
