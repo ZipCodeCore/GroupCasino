@@ -6,6 +6,10 @@ import java.util.Random;
 public class Deck {
     private ArrayList<Card> cards;
 
+    public Deck(ArrayList<Card> deck) {
+        this.cards = deck;
+    }
+
     public Deck(){
         this.cards = new ArrayList<Card>();
     }
@@ -24,7 +28,7 @@ public class Deck {
         int randomIndex = 0;
         int originSize = this.cards.size();
         for(int i = 0; i < originSize; i++){
-            randomIndex = random.nextInt((originSize - 1) + 1); //rand.nextInt((max-min) + 1) + min;
+            randomIndex = random.nextInt((this.cards.size() - 1) + 1); //rand.nextInt((max-min) + 1) + min;
             tempD.add(this.cards.get(randomIndex));
             this.cards.remove(randomIndex);
         }
@@ -35,6 +39,34 @@ public class Deck {
         this.cards.add(deck.cards.get(0));
         deck.cards.remove(0);
     }
+
+    public Card drawCard(){
+        return this.cards.get(0);
+    }
+
+    public Deck splitFirst() {
+        ArrayList<Card> first = new ArrayList<Card>(this.cards.subList(0, (this.cards.size()) / 2));
+        Deck firstHalf = new Deck(first);
+
+        return firstHalf;
+    }
+
+    public Deck splitSecond() {
+        ArrayList<Card> second = new ArrayList<Card>(this.cards.subList((this.cards.size()) / 2, this.cards.size()));
+        Deck secondHalf = new Deck(second);
+
+        return secondHalf;
+
+    }
+
+    public Integer getSize(){
+        return this.cards.size();
+    }
+
+    public void cardRemove(Card card) {
+        this.cards.remove(card);
+    }
+
 
     public int cardValue() {
         int totalValue = 0;
