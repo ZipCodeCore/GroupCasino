@@ -38,7 +38,7 @@ class KenoGameTest {
         int kenoCatch=9;
         KenoGame kenoGame=new KenoGame();
         //when
-        Double expectedValue=kenoGame.payout(11,9,200);
+        Integer expectedValue=kenoGame.payout(11,9,200);
         //then
         Assert.assertTrue(String.valueOf(expectedValue),true);
     }

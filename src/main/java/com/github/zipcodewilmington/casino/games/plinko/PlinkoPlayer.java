@@ -5,6 +5,8 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 
 public class PlinkoPlayer implements PlayerInterface {
     private PlayerInterface player;
+
+    public PlinkoPlayer(PlayerInterface player){this.player=player;}
     @Override
     public CasinoAccount getArcadeAccount() {
         return player.getArcadeAccount();
@@ -12,6 +14,6 @@ public class PlinkoPlayer implements PlayerInterface {
 
     @Override
     public void setArcadeAccount(CasinoAccount casinoAccount) {
-
+        CasinoAccount casinoAccount1;
     }
 }
