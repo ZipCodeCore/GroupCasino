@@ -12,10 +12,10 @@ public class CrapsTable {
 
 
     public void playCraps() {
-        System.out.println("     ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜");
-        System.out.println("\n         ∆ Welcome to Cauldron Craps ∆ ");
-        System.out.println("\n     ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜");
-        System.out.println("A fun dice game for wizards and witches of age." +
+        console.println("     ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜");
+        console.println("         ∆ Welcome to Cauldron Craps ∆ ");
+        console.println("     ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜");
+        console.println("A fun dice game for wizards and witches of age." +
                 "\n" +
                 " \nYou will roll two dice each time you take a turn." +
                 "\n" +
@@ -29,8 +29,26 @@ public class CrapsTable {
                 "\nYour objective is to roll repeatedly until you roll your point number again." +
                 "\n" +
                 "\nWatch out though! If you roll a 7 before you make your point, you will eat slugs! And lose the game.");
+        //System.out.println("     ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜");
+        //System.out.println("         ∆ Welcome to Cauldron Craps ∆ ");
+        //System.out.println("\n     ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜");
+        //System.out.println("A fun dice game for wizards and witches of age." +
+//                "\n" +
+//                " \nYou will roll two dice each time you take a turn." +
+//                "\n" +
+//                "\nTo win on your first roll, you must roll either a 7 or an 11." +
+//                "\n" +
+//                "\nBe careful though! " +
+//                "\nIf you roll a 2, 3, or 12 on your first roll you will lose the game and be cursed!!" +
+//                "\n" +
+//                "\nIf you roll a 4, 5, 6, 8, 9, or 10 this is called your point number." +
+//                "\n" +
+//                "\nYour objective is to roll repeatedly until you roll your point number again." +
+//                "\n" +
+//                "\nWatch out though! If you roll a 7 before you make your point, you will eat slugs! And lose the game.");
 
-        System.out.println("\nShooter, Roll The Dice!");
+        //System.out.println("\nShooter, Roll The Dice!");
+        console.println("\nShooter, Roll The Dice!");
         console.getStringInput("\nWave your wand and enter a number to roll");
         int score = roll();
 
