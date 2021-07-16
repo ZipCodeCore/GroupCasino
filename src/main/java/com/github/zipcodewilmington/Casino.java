@@ -7,7 +7,7 @@ import com.github.zipcodewilmington.casino.games.cards.BlackjackPlayer;
 import com.github.zipcodewilmington.casino.games.cards.TexasHoldEmGame;
 import com.github.zipcodewilmington.casino.games.cards.TexasHoldEmPlayer;
 import com.github.zipcodewilmington.casino.games.craps.CrapsGame;
-import com.github.zipcodewilmington.casino.games.games.craps.CrapsPlayer;
+import com.github.zipcodewilmington.casino.games.craps.CrapsPlayer;
 import com.github.zipcodewilmington.casino.games.keno.KenoGame;
 import com.github.zipcodewilmington.casino.games.keno.KenoPlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
