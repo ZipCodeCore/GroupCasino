@@ -51,7 +51,7 @@ IOConsole console = new IOConsole(AnsiColor.PURPLE);
 
     @Override
     public void run() {
-        IOConsole console = new IOConsole();
+        IOConsole console = new IOConsole(AnsiColor.PURPLE);
         int input = 0;
         CrapsGame craps = new CrapsGame();
 
