@@ -10,11 +10,6 @@ import org.junit.Test;
 
 public class SlotsGameTest {
 
-    //    @Test
-//    public void Test(){
-//
-//    }
-
     @Test
     public void slotsConstructorTest(){
         //when
