@@ -36,7 +36,7 @@ public class Pig implements GameInterface {
   }
 
 public void welcomeToPig () {
-  youRolledAFour();
+  youRolledAFive();
   }
 
   public String currentStateOfTheGame () {
