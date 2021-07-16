@@ -12,6 +12,7 @@ import static com.github.zipcodewilmington.casino.objects.Dice.roll;
 public class CrapsGame implements GambleableGame {
 
 
+
     @Override
     public void add(PlayerInterface player) {
 
@@ -41,6 +42,7 @@ public class CrapsGame implements GambleableGame {
     public void clearGame() {
 
     }
+
 
     @Override
     public void run() {
