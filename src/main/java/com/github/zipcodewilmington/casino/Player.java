@@ -23,6 +23,7 @@ public class Player implements PlayerInterface{
          this.currentBet = 0;
     }
 
+
     @Override
     public CasinoAccount getArcadeAccount() {
         return null;
