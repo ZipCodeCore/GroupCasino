@@ -3,9 +3,10 @@ package com.github.zipcodewilmington.casino.player;
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
-public class Player implements PlayerInterface {
-    private String name;
-    private int balance;
+public class Player {
+    public String name;
+    public static int balance;
+    CasinoAccount casinoAccount;
 
     public Player(String name) {
         this.name = name;
@@ -16,27 +17,20 @@ public class Player implements PlayerInterface {
     }
 
     public String getPlayerName() {
-        return name;
+        return casinoAccount.getAccountName();
     }
 
-    public void setPlayerName(String name) {
-        this.name = name;
-    }
-
-    public int getPlayerBalance() {
+    public static int getPlayerBalance() {
         return balance;
     }
 
     public void setPlayerBalance(int balance) {
         this.balance = balance;
     }
-
-
-    public CasinoAccount getArcadeAccount() {
-        return null;
-    }
-
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
-    }
 }
+
+//blackjackPlayer.getArcadeAccount.getBalance();
+//PlayerInterface playerBlackJack;
+
+//return casinoAccount
+//setArcadeAccount(CasinoAccount casinoAccount) { this.casinoAccount = casinoAccount; }

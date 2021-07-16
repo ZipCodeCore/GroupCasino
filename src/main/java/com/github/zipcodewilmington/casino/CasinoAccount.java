@@ -1,7 +1,5 @@
 package com.github.zipcodewilmington.casino;
 
-import com.github.zipcodewilmington.casino.player.Player;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,14 +10,15 @@ import java.util.Map;
  */
 public class CasinoAccount {
 
-    String password;
-    String accountName;
-    Map<String, String> account;
-    Integer accountBalance = 0;
+    static String password;
+    static String accountName;
+    static Map<String, String> account;
+    int accountBalance = 1000;
 
     public CasinoAccount(String password, String accountName) {
         this.password = password;
         this.accountName = accountName;
+        this.accountBalance = accountBalance;
     }
 
     public Map<String, String> createAccount() {
@@ -28,7 +27,7 @@ public class CasinoAccount {
         return account;
     }
 
-    public String getAccount() {
+    public static String getAccount() {
         return account.get(password);
     }
 
@@ -40,7 +39,7 @@ public class CasinoAccount {
         this.password = password;
     }
 
-    public String getAccountName() {
+    public static String getAccountName() {
         return accountName;
     }
 
@@ -48,6 +47,7 @@ public class CasinoAccount {
         this.accountName = playerName;
     }
 
+    public int getPlayerBalance() { return accountBalance; }
 }
 //    String password;
 //    Player newPlayer;

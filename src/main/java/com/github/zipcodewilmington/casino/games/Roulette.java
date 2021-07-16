@@ -4,40 +4,39 @@ import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
+import com.github.zipcodewilmington.casino.player.Player;
 import com.github.zipcodewilmington.casino.player.RoulettePlayer;
 
 import java.util.*;
 
 public class Roulette implements GameInterface{
-    public static void main(String[] arg) {
-        Roulette roulette = new Roulette();
-        playRoulette();
-    }
+
 
     Integer number;
     String color;
-    static int bet;
-    static int playerIntSelection;
-    static String playerStringSelection;
-    static int playerNumberChoice;
-    static int playerColumnChoice;
-    static String playerColorChoice;
-    static String playerEvenOrOddChoice;
-    static Map<Integer, String> wheelValues;
+    int bet;
+    int playerIntSelection;
+    String playerStringSelection;
+    int playerNumberChoice;
+    int playerColumnChoice;
+    String playerColorChoice;
+    String playerEvenOrOddChoice;
+    Map<Integer, String> wheelValues;
     Casino casino = new Casino();
-    private RoulettePlayer player;
+    RoulettePlayer roulettePlayer;
+    PlayerInterface roulettePlayerAccount;
 
 
 
-    public Roulette(RoulettePlayer player) {
-        this.player = player;
+    public Roulette(RoulettePlayer roulettePlayer) {
+        this.roulettePlayer = roulettePlayer;
     }
 
     public Roulette() {
 
     }
 
-    public static void rouletteWelcomeScreen() {
+    public void rouletteWelcomeScreen() {
 
 
         System.out.println(
@@ -67,9 +66,9 @@ public class Roulette implements GameInterface{
     }
 
 
-    public static int getPlayerIntSelection() { return playerIntSelection; }
+    public int getPlayerIntSelection() { return playerIntSelection; }
 
-    public static void playerSelection() {
+    public void playerSelection() {
         Scanner keyboardInput = new Scanner(System.in);
         playerIntSelection = keyboardInput.nextInt();
         switch(getPlayerIntSelection()) {
@@ -94,10 +93,10 @@ public class Roulette implements GameInterface{
                 getWinningsByColor();
                 break;
             case 5:
-                ;
+                casino.run();
         }
     }
-    public static int playerBetsNumber() {
+    public int playerBetsNumber() {
         System.out.println("Please select a number 1 - 36");
         Scanner keyboardInput = new Scanner(System.in);
         int playerIntSelection = keyboardInput.nextInt();
@@ -107,7 +106,7 @@ public class Roulette implements GameInterface{
         return playerNumberChoice;
     }
 
-    public static int playerBetsColumn() {
+    public int playerBetsColumn() {
         System.out.println("Please select column 1, 2, or 3");
         Scanner keyboardInput = new Scanner(System.in);
         playerIntSelection = keyboardInput.nextInt();
@@ -117,7 +116,7 @@ public class Roulette implements GameInterface{
         return playerColumnChoice;
     }
 
-    public static String playerBetsEvensOdds() {
+    public String playerBetsEvensOdds() {
         System.out.println("Please select even or odds");
         Scanner keyboardInput = new Scanner(System.in);
         playerStringSelection = keyboardInput.next();
@@ -127,7 +126,7 @@ public class Roulette implements GameInterface{
         return playerEvenOrOddChoice;
     }
 
-    public static String playerBetsColor() {
+    public String playerBetsColor() {
         System.out.println("Please select red or black");
         Scanner keyboardInput = new Scanner(System.in);
         playerStringSelection = keyboardInput.next();
@@ -137,7 +136,7 @@ public class Roulette implements GameInterface{
         return playerColorChoice;
     }
 
-    public static int placeBet() {
+    public int placeBet() {
         System.out.println("Please place your bet");
         Scanner keyboardInput = new Scanner(System.in);
         bet = keyboardInput.nextInt();
@@ -146,7 +145,7 @@ public class Roulette implements GameInterface{
 
 
 
-    public static int spinWheelGetNumber() {
+    public int spinWheelGetNumber() {
         Map<Integer, String> wheelValues = new HashMap<Integer, String>();
         for (Integer i = 1; i <= 36; i++) {
             if (i % 2 == 0) {
@@ -162,7 +161,7 @@ public class Roulette implements GameInterface{
         return randomNumber;
     }
 
-    public static String spinWheelGetColor() {
+    public String spinWheelGetColor() {
         Map<Integer, String> wheelValues = new HashMap<Integer, String>();
         for (Integer i = 1; i <= 36; i++) {
             if (i % 2 == 0) {
@@ -175,7 +174,7 @@ public class Roulette implements GameInterface{
         return wheelValues.get(numberValue);
     }
 
-    public static int getWinningsByNumber() {
+    public int getWinningsByNumber() {
         int winningNumber = spinWheelGetNumber();
         if (winningNumber == playerNumberChoice) {
             bet = bet * 35;
@@ -187,7 +186,7 @@ public class Roulette implements GameInterface{
         return bet;
     }
 
-    public static int getWinningsByColumn() {
+    public int getWinningsByColumn() {
         int winningNumber = spinWheelGetNumber();
 
         Integer[] column1Arr = {1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34};
@@ -224,7 +223,7 @@ public class Roulette implements GameInterface{
         return bet;
     }
 
-    public static int getWinningsByEvenOdds() {
+    public int getWinningsByEvenOdds() {
         int winningNumber = spinWheelGetNumber();
         if(playerEvenOrOddChoice.equals("even")) {
             if(winningNumber % 2 == 0) {
@@ -246,11 +245,13 @@ public class Roulette implements GameInterface{
         return bet;
     }
 
-    public static int getWinningsByColor() {
+    public int getWinningsByColor() {
         String winningColor = spinWheelGetColor();
         if(playerColorChoice.equals(winningColor)) {
             bet = bet;
-            System.out.printf("You win! $%d has been added to your balance", bet);
+            int newBalance = roulettePlayerAccount.getArcadeAccount().getPlayerBalance();
+            newBalance = bet;
+            System.out.printf("You win! $%d has been added to your balance\n" + "Your remaining balance is: ", bet, newBalance);
         } else {
             bet = 0 - bet;
             System.out.printf("Bad luck. The color was %s. Try again?", winningColor);
@@ -258,7 +259,7 @@ public class Roulette implements GameInterface{
         return bet;
     }
 
-    public static void playRoulette() {
+    public void playRoulette() {
         Scanner keyboardInput = new Scanner(System.in);
         rouletteWelcomeScreen();
         playerSelection();
