@@ -68,7 +68,7 @@ public class Beetle{
 
     public String printBeetle(Integer player){
         Integer[] currentBeetle = this.getPlayerBeetles()[player];
-        String output = "Body:";
+        String output = "\u001B[36mBody:";
         output += (currentBeetle[0].equals(0)) ? "0  " : "X  ";
         output += "Head:";
         output += (currentBeetle[1].equals(0)) ? "0  " : "X  ";
