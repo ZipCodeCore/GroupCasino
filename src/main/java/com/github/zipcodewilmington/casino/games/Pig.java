@@ -1,22 +1,23 @@
 package com.github.zipcodewilmington.casino.games;
-//package com.github.zipcodewilmington.utils;
 
+
+import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+
+
 
 import java.util.Random;
 import java.util.Scanner;
 
-import com.github.zipcodewilmington.casino.GameInterface;
-import com.github.zipcodewilmington.casino.PigMenus;
-import com.github.zipcodewilmington.casino.PlayerInterface;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 import static com.github.zipcodewilmington.casino.PigMenus.*;
 
 
 public class Pig implements GameInterface {
+
+  Casino casino;
+
   public static void main(String[] args){
     Pig pig = new Pig();
     pig.run();
@@ -36,8 +37,8 @@ public class Pig implements GameInterface {
   }
 
 public void welcomeToPig () {
-  playerOneWon();
-  }
+  playerTwoWon();
+ }
 
   public String currentStateOfTheGame () {
    currentStateScreen();
@@ -91,12 +92,43 @@ public void welcomeToPig () {
 
   public boolean getWinner(){
     if (pOneTotal >= 10) {
-      System.out.println("Player 1 won!");
+      player1Wins();
       return true;
     } else if (pTwoTotal >= 10) {
-      System.out.println("Player 2 won!");
+      player2Wins();
       return true;
     } return false;
+  }
+
+  public void player1Wins(){
+    playerOneWon();
+    System.out.println( "|*****                    Player 1 has " + pOneTotal + " points.                 *****|\n" +
+            "|*****                    Player 2 has " + pTwoTotal + " points.                  *****|\n" +
+            "|**********************************************************************|\n" +
+            "|**********************************************************************|\n");
+
+  }
+
+  public void player2Wins(){
+    playerTwoWon();
+    System.out.println( "|*****                    Player 1 has " + pOneTotal + " points.                  *****|\n" +
+            "|*****                    Player 2 has " + pTwoTotal + " points.                 *****|\n" +
+            "|**********************************************************************|\n" +
+            "|**********************************************************************|\n");
+
+  }
+
+  public void doYouWantToPlayAgain(){
+    System.out.println("Do you want to play again?\n" + "Enter 'y' to start again\n" + "Enter 'q' to quit to the main menu\n");
+    String playAgain = input.next();
+    if (playAgain.equals("y")){
+      pOneTotal = 0;
+      pTwoTotal = 0;
+      currentTurn =0;
+      playerTurn();
+    } else if (playAgain.equals("q")){
+      casino.run();
+    }
   }
 
   public int roll(){
@@ -115,7 +147,7 @@ public void welcomeToPig () {
   }
 
   public void run(){
-     welcomeToPig();
+    welcomeToPig();
       currentTurn = 1;
       pOneTotal = 0;
       pTwoTotal = 0;
