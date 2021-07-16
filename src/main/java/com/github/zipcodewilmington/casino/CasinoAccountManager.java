@@ -17,8 +17,13 @@ public class CasinoAccountManager {
      * @return `ArcadeAccount` with specified `accountName` and `accountPassword`
      */
     public CasinoAccount getAccount(String accountName, String accountPassword) {
-        CasinoAccount casinoAccount = new CasinoAccount(accountPassword, accountName);
-        return casinoAccount;
+        int accountIndex = 0;
+        for(CasinoAccount account : accountList) {
+            if(account.getPassword().equals(accountPassword)) {
+                accountIndex = accountList.indexOf(account);
+            }
+        }
+        return accountList.get(accountIndex);
 //        String currentMethodName = new Object(){}.getClass().getEnclosingMethod().getName();
 //        String currentClassName = getClass().getName();
 //        String errorMessage = "Method with name [ %s ], defined in class with name [ %s ] has  not yet been implemented";
@@ -33,7 +38,7 @@ public class CasinoAccountManager {
      * @return new instance of `ArcadeAccount` with specified `accountName` and `accountPassword`
      */
     public CasinoAccount createAccount(String accountName, String accountPassword) {
-        CasinoAccount casinoAccount = new CasinoAccount(accountPassword, accountName);
+        CasinoAccount casinoAccount = new CasinoAccount(accountName, accountPassword);
         return casinoAccount;
 //        String currentMethodName = new Object(){}.getClass().getEnclosingMethod().getName();
 //        String currentClassName = getClass().getName();

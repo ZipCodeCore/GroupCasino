@@ -17,7 +17,7 @@ public class Player {
     }
 
     public String getPlayerName() {
-        return casinoAccount.getAccountName();
+        return this.name;
     }
 
     public static int getPlayerBalance() {

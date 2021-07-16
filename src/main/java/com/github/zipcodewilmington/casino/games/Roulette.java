@@ -12,8 +12,6 @@ import java.util.*;
 public class Roulette implements GameInterface{
 
 
-    Integer number;
-    String color;
     int bet;
     int playerIntSelection;
     String playerStringSelection;
@@ -249,8 +247,8 @@ public class Roulette implements GameInterface{
         String winningColor = spinWheelGetColor();
         if(playerColorChoice.equals(winningColor)) {
             bet = bet;
-            int newBalance = roulettePlayerAccount.getArcadeAccount().getPlayerBalance();
-            System.out.printf("You win! $%d has been added to your balance\n" + "Your remaining balance is: ", bet, newBalance);
+//            int newBalance = roulettePlayerAccount.getArcadeAccount().getPlayerBalance();
+            System.out.printf("You win! $%d has been added to your balance", bet);
         } else {
             bet = 0 - bet;
             System.out.printf("Bad luck. The color was %s. Try again?", winningColor);

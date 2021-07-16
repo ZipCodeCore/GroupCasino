@@ -21,11 +21,11 @@ public class CasinoAccount {
         this.accountBalance = accountBalance;
     }
 
-    public Map<String, String> createAccount() {
-        Map<String, String> account = new HashMap<>();
-        account.put(password, accountName);
-        return account;
-    }
+//    public Map<String, String> createAccount() {
+//        Map<String, String> account = new HashMap<>();
+//        account.put(password, accountName);
+//        return account;
+//    }
 
     public static String getAccount() {
         return account.get(password);
@@ -48,6 +48,7 @@ public class CasinoAccount {
     }
 
     public int getPlayerBalance() { return accountBalance; }
+
 }
 //    String password;
 //    Player newPlayer;

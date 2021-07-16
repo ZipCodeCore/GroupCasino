@@ -47,10 +47,10 @@ public class BlackJackPlayer extends Player implements PlayerInterface {
         this.casinoAccount = casinoAccount;
     }
 
-    @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
-    }
+//    @Override
+//    public <SomeReturnType> SomeReturnType play() {
+//        return null;
+//    }
 }
 
 
