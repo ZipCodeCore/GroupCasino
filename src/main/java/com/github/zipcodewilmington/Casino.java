@@ -16,6 +16,9 @@ import javax.management.relation.Role;
  */
 public class Casino implements Runnable {
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
+    public static void main(String[] args) {
+
+    }
 
     @Override
     public void run() {
@@ -38,8 +41,8 @@ public class Casino implements Runnable {
                         play(new Roulette(), new RoulettePlayer());
                     }else if (gameSelectionInput.equals("PIG")) {
                         play(new Pig(), new PigPlayer());
-                    }else if (gameSelectionInput.equals("WAR")) {
-                        play(new War(), new WarPlayer());
+//                    }else if (gameSelectionInput.equals("WAR")) {
+//                        play(new War(), new WarPlayer());
                     }else if (gameSelectionInput.equals("YAHTZEE")){
                         play(new Yahtzee(), new YahtzeePlayer());
                     } else {
@@ -62,7 +65,7 @@ public class Casino implements Runnable {
         } while (!"logout".equals(arcadeDashBoardInput));
     }
 
-    private String getArcadeDashboardInput() {
+    public String getArcadeDashboardInput() {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Casino Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
@@ -70,7 +73,7 @@ public class Casino implements Runnable {
                 .toString());
     }
 
-    private String getGameSelectionInput() {
+    public String getGameSelectionInput() {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
