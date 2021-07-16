@@ -47,10 +47,10 @@ public class RoulettePlayer extends Player implements PlayerInterface {
         return casinoAccount;
     }
 
-    @Override
-    public <SomeReturnType> SomeReturnType play() {
-        return null;
-    }
+//    @Override
+//    public <SomeReturnType> SomeReturnType play() {
+//        return null;
+//    }
 
     public void setArcadeAccount() {
         this.casinoAccount = casinoAccount;
