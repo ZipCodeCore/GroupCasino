@@ -5,7 +5,11 @@ import com.github.zipcodewilmington.casino.games.cards.BlackjackPlayer;
 import com.github.zipcodewilmington.casino.games.cards.TexasHoldEmGame;
 import com.github.zipcodewilmington.casino.games.cards.TexasHoldEmPlayer;
 import com.github.zipcodewilmington.casino.games.craps.CrapsGame;
+
+//import com.github.zipcodewilmington.casino.games.games.craps.CrapsPlayer;
+
 import com.github.zipcodewilmington.casino.games.craps.CrapsPlayer;
+
 import com.github.zipcodewilmington.casino.games.keno.KenoGame;
 import com.github.zipcodewilmington.casino.games.keno.KenoPlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
@@ -37,7 +41,7 @@ public class Casino implements Runnable {
                     if (gameSelectionInput.equals("SLOTS")) {
                         play(new SlotsGame(), new SlotsPlayer());
                     } else if (gameSelectionInput.equals("CRAPS")) {
-                       play(new CrapsGame(), new CrapsPlayer());
+                       //play(new CrapsGame(), new CrapsPlayer());
                     } else if (gameSelectionInput.equals("BLACKJACK")) {
                         play(new BlackjackGame(), new BlackjackPlayer());
                     } else if (gameSelectionInput.equals("KENO")) {
