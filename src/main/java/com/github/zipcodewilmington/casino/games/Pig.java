@@ -23,9 +23,6 @@ public class Pig implements GameInterface {
     pig.run();
   }
 
-  // private static int playerTwo = 2;
-  // private static int playerOne = 1;
-  // private static int scoreToWin = 100;
   private int currentTurn;
   private int dieValue;
   private int turnScore;
@@ -34,14 +31,12 @@ public class Pig implements GameInterface {
   private String  rollAnswer;
   private int rollCounter;
   public Scanner input = new Scanner(System.in);
-  //Random generator = new Random();
   // ThreadLocalRandom current = ThreadLocalRandom.current();
 
   public Pig() {
-
   }
 
-//  public void welcomeToPig () {
+//public void welcomeToPig () {
 //  PigMenus.welcomeMenu();
 //  }
 
@@ -50,12 +45,10 @@ public class Pig implements GameInterface {
   }
 
   public int playerTurn () {
-
-
       System.out.println("Please enter 'r' to roll or 'h' to hold");
       //input.nextLine();
       rollAnswer = input.next();
-      if (rollAnswer == "r'") {
+      if (rollAnswer == "r") {
         Random generator = new Random();
         dieValue = generator.nextInt(6) + 1;
         turnScore += dieValue;
@@ -75,11 +68,8 @@ public class Pig implements GameInterface {
         currentTurn++;
         switchingPlayers();
       }
-
-
     return turnScore;
   }
-
 
   public void switchingPlayers () {
     if (currentTurn % 2 == 0) {
@@ -95,7 +85,6 @@ public class Pig implements GameInterface {
     }
   }
 
-
   public boolean getWinner(){
     if (pOneTotal >= 15) {
       System.out.println("Player 1 won!");
@@ -106,7 +95,9 @@ public class Pig implements GameInterface {
     } return false;
   }
 
-
+  public int roll(){
+    return 1;
+  }
 
 
   @Override
@@ -121,20 +112,15 @@ public class Pig implements GameInterface {
 
   public void run(){
       //welcomeToPig();
-
       currentTurn = 1;
       pOneTotal = 0;
       pTwoTotal = 0;
-
-
 
       while (getWinner() == false) {
         playerTurn();
 
     }
-
   }
-
 }
 
 
