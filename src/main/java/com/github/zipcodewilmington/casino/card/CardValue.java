@@ -1,6 +1,6 @@
 package com.github.zipcodewilmington.casino.card;
 
-public enum cardValue {
+public enum CardValue {
     TWO,
     THREE,
     FOUR,

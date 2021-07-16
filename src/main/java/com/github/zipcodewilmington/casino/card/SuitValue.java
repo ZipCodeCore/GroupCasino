@@ -1,6 +1,6 @@
 package com.github.zipcodewilmington.casino.card;
 
-public enum suitValue {
+public enum SuitValue {
     CLUBS,
     DIAMOND,
     SPADE,

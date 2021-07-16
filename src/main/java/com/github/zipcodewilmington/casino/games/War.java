@@ -21,6 +21,8 @@ public class War implements GameInterface {
     private Deck deck;
     private WarPlayer player;
 
+    Card cpuCard;
+    Card playerCard;
     private Integer cardIndex = 0;
     private boolean isRunning;
     public Scanner input;
@@ -59,8 +61,8 @@ public class War implements GameInterface {
         //game start
         while (cpuHand.getHand().getSize() > 0 && playerHand.getHand().getSize() > 0 && rounds <= 26) {
             System.out.println("Game running currently on round: " + rounds);
-            Card cpuCard = cpuHand.drawSingleCard();
-            Card playerCard = playerHand.drawSingleCard();
+            cpuCard = cpuHand.drawSingleCard();
+            playerCard = playerHand.drawSingleCard();
             System.out.println("CPU draws... " + cpuCard);
             cpuHand.removeCard(cpuCard);
             System.out.println("Player draws... " + playerCard);
@@ -71,6 +73,12 @@ public class War implements GameInterface {
 
 
     }
+
+//    public void getWinner() {
+//        if(playerCard.getCardValue() > cpuCard.getCardValue()) {
+//
+//        }
+//    }
 
     @Override
     public void add(PlayerInterface player) {

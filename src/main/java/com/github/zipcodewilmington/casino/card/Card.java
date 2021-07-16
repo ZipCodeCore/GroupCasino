@@ -1,10 +1,10 @@
 package com.github.zipcodewilmington.casino.card;
 
 public class Card {
-    private cardValue cardValue;
-    private suitValue suitValue;
+    private CardValue cardValue;
+    private SuitValue suitValue;
 
-    public Card(suitValue suitValue, cardValue cardValue){
+    public Card(SuitValue suitValue, CardValue cardValue){
         this.cardValue = cardValue;
         this.suitValue = suitValue;
     }
@@ -13,7 +13,7 @@ public class Card {
         return this.suitValue.toString() + "-" + this.cardValue.toString();
     }
 
-    public cardValue getCardValue(){
+    public CardValue getCardValue(){
         return this.cardValue;
     }
 
