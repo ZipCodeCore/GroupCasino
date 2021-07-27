@@ -83,7 +83,7 @@ public class KenoGame implements GameInterface {
         //
         public int[] userInput() {
             boolean player = true;
-            boolean invalidNumber = true;
+            boolean invalidNumber;
             int playerNumbers[] = new int[5];
             int numberEntered;
             Scanner sc = new Scanner(System.in);
@@ -103,7 +103,7 @@ public class KenoGame implements GameInterface {
                         } else {
                         System.out.println("Sorry, you already entered that number before");
                         System.out.println("Try again! ");
-                            invalidNumber = true;
+                        invalidNumber = true;
                         }
                 }
             }

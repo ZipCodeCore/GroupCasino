@@ -23,14 +23,6 @@ class KenoGameTest {
       Assert.assertEquals(expected,actual);
 
     }
-
-    @Test
-    public void userInputTest(){
-        int[] expected = {17,24,73,80,34,51,11,28,33,71,45,15,31,22,3,10,1,8,4,20};
-        int[] actual = kGame.userInput();
-
-        Assert.assertEquals(expected,actual);
-    }
     @Test
     public void isUniqueTest(){
         int[] i = {5,4,3,2,9,8,7,6,10};
@@ -42,7 +34,7 @@ class KenoGameTest {
     @Test
     public void getComputerNumTest(){
 
-        //int[] expected = {30,22,42,10,21,13,38,74,29,11,27,20,17,44,55,52,76,80,15,77};
+        int[] expected = {30,22,42,10,21,13,38,74,29,11,27,20,17,44,55,52,76,80,15,77};
         int[] actual;
 
         actual = kGame.getComputerNum();
@@ -54,7 +46,10 @@ class KenoGameTest {
         int[] playerNumber = {23,49,45};
         int[] computerNumber = {64,49,45};
         int expected = 2;
+
+
         int actual = kGame.getCatch(playerNumber,computerNumber);
+
         Assert.assertEquals(expected,actual);
     }
 
