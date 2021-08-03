@@ -3,10 +3,10 @@ package com.github.zipcodewilmington.casino;
 
 public class Player implements PlayerInterface{
 
-    String name;
-    Integer balance;
-    Integer currentBet = 0;
-    CasinoAccount arcadeAccount;
+    private String name;
+    private Integer balance = 0;
+    private Integer currentBet = 0;
+    private CasinoAccount arcadeAccount;
 
     public Player(String name, CasinoAccount account) {
         this.name = name;

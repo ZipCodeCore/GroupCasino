@@ -20,4 +20,8 @@ public class BlackJackPlayer implements PlayerInterface {
     public void setArcadeAccount(CasinoAccount casinoAccount) {
 
     }
+
+    public PlayerInterface getPlayer() {
+        return player;
+    }
 }

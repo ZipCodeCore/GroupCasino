@@ -4,6 +4,8 @@ import com.github.zipcodewilmington.casino.games.blackjack.BlackJack;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BlackJackTest {
@@ -94,5 +96,83 @@ public class BlackJackTest {
         Integer actual = bj.splitPlayersCurrentValue();
 
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void setPlayersHandTest(){
+        BlackJack bj = new BlackJack();
+        List<Integer> playersHand = new ArrayList<>();
+
+        playersHand.add(10);
+        bj.setPlayersHand(playersHand);
+        List<Integer> actual = bj.getPlayersHand();
+
+        Assert.assertArrayEquals(playersHand.toArray(new Integer[0]), actual.toArray(new Integer[0]));
+    }
+
+    @Test
+    public void setDealersHandTest(){
+        BlackJack bj = new BlackJack();
+        List<Integer> playersHand = new ArrayList<>();
+
+        playersHand.add(10);
+        bj.setDealersHand(playersHand);
+        List<Integer> actual = bj.getDealersHand();
+
+        Assert.assertArrayEquals(playersHand.toArray(new Integer[0]), actual.toArray(new Integer[0]));
+    }
+
+    @Test
+    public void setPlayersHandOnSplitTest(){
+        BlackJack bj = new BlackJack();
+        List<Integer> playersHand = new ArrayList<>();
+        playersHand.add(11);
+        playersHand.add(11);
+        bj.setPlayersHandOnSplit(playersHand);
+        Integer actual = bj.getPlayersHandOnSplit().size();
+        Integer expected = 2;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void playerBreaks21Test1(){
+        BlackJack bj = new BlackJack();
+        List<Integer> playersHand = new ArrayList<>();
+        playersHand.add(11);
+        playersHand.add(9);
+        playersHand.add(9);
+
+        bj.setPlayersHand(playersHand);
+        Boolean actual = bj.playerBreaks21();
+        Boolean expected = true;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void playerBreaks21Test2(){
+        BlackJack bj = new BlackJack();
+        List<Integer> playersHand = new ArrayList<>();
+        playersHand.add(9);
+        playersHand.add(9);
+
+        bj.setPlayersHand(playersHand);
+        Boolean actual = bj.playerBreaks21();
+        Boolean expected = false;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void dealersCurrentValueTest2(){
+        BlackJack bj = new BlackJack();
+        List<Integer> dealersHand = new ArrayList<>();
+
+        dealersHand.add(10);
+        bj.setDealersHand(dealersHand);
+
+        Integer expected = 10;
+        Integer actual = bj.dealersCurrentValue();
+
+       Assert.assertEquals(expected, actual);
     }
 }

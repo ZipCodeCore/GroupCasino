@@ -14,6 +14,6 @@ public class PlinkoPlayer implements PlayerInterface {
 
     @Override
     public void setArcadeAccount(CasinoAccount casinoAccount) {
-        CasinoAccount casinoAccount1;
+        this.player.setArcadeAccount(casinoAccount);
     }
 }

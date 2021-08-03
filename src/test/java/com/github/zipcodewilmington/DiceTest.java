@@ -26,7 +26,7 @@ public class DiceTest {
     @Test
     public void diceConstructorTest3() {
         Dice dice = new Dice(3);
-        Integer expected = 14;
+        Integer expected = 15;
         Integer actual = dice.getMaxBinIndex();
 
         Assert.assertEquals(expected, actual);
@@ -44,7 +44,7 @@ public class DiceTest {
     @Test
     public void diceConstructorTest5() {
         Dice dice = new Dice(2);
-        Integer expected = 10;
+        Integer expected = 11;
         Integer actual = dice.getBins().length;
 
         Assert.assertEquals(expected, actual);
@@ -62,7 +62,7 @@ public class DiceTest {
     @Test
     public void diceConstructorTest7(){
         Dice dice = new Dice(2);
-        Integer[] expected = {0,0,0,0,0,0,0,0,0};
+        Integer[] expected = {0,0,0,0,0,0,0,0,0,0,0};
         Integer[] actual = dice.getBins();
 
         Assert.assertArrayEquals(expected, actual);
@@ -74,7 +74,7 @@ public class DiceTest {
         dice.tossAndSum();
         Integer[] bins = dice.getBins();
         Integer actual = 0;
-        for(int i = 2; i < dice.getMaxBinIndex(); i++){
+        for(int i = 2; i <= dice.getMaxBinIndex(); i++){
             if(dice.getBin(i) > 0){
                 actual = dice.getBin(i);
                 break;

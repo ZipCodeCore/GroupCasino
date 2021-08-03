@@ -143,7 +143,7 @@ public class BeetleTest {
     @Test
     public void printBeetleTest1(){
         Beetle beetle = new Beetle(2);
-        String expected = "Body:0  Head:0  Legs:0  Eyes:0  Antenna:0  Tail:0  ";
+        String expected = "\u001B[36mBody:0  Head:0  Legs:0  Eyes:0  Antenna:0  Tail:0  ";
         String actual = beetle.printBeetle(0);
 
         Assert.assertEquals(expected, actual);

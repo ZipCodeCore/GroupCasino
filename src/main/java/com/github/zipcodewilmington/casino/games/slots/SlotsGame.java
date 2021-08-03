@@ -23,6 +23,7 @@ public class SlotsGame implements GameInterface{
     private Integer loseMultiplier;
     private Integer winMultiplier;
     private PlayerInterface currentPlayer;
+    private Integer numberOfLines;
 
     public SlotsGame(){
     }
@@ -48,7 +49,7 @@ public class SlotsGame implements GameInterface{
     @Override
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        printWelcome();
+        Yellow.println(printWelcome());
         Slots slotMachine = new Slots();
         slotMachine.spinSlots();
         //Display first slots
@@ -58,13 +59,14 @@ public class SlotsGame implements GameInterface{
         while(!quitGame) {
 
             //print initial account balance
-            Green.println("Current account balance:    $" + currentPlayer.getArcadeAccount().getAccountBalance() + "\n");
+            Green.println("Current account balance:    $" + getPlayerBalance() + "\n");
 
             getBetAmount();
-            Integer[] selectedBets = getBetSelections();
-
+            calculateTotalCost();
+            userBetCondition();
             //take money from player account
             subtractBetFromBalance(betTotal);
+            Integer[] selectedBets = getBetSelections();
 
             slotMachine.spinSlots();
             slotMachine.displaySlots();
@@ -76,52 +78,54 @@ public class SlotsGame implements GameInterface{
             //add winnings to player object
             addMoneyToBalance(currentPlayer, winnings);
             //show current balance
-            Green.println("Current Account Balance:    $" + currentPlayer.getArcadeAccount().getAccountBalance());
-            //Continue game?
-            Integer userInput = input.getIntegerInput("Would you like to play again?\n" +
-                    "1. Yes   2. No");
-            if(userInput.equals(2)){
+            Green.println("Current Account Balance:    $" + getPlayerBalance());
+            if(getPlayerBalance() == 0) {
+                Red.println("Oh No! You've ran out of money. Goodbye");
                 quitGame = true;
+            } else {
+                //Continue game?
+                Integer userInput = input.getIntegerInput("Would you like to play again?\n" +
+                        "1. Yes   2. No");
+                if(userInput.equals(2)){
+                    quitGame = true;
+                }
             }
-
         }
     }
 
-    public void printWelcome() {
-        Yellow.println(
-                "***********************************\n" +
+    public String printWelcome() {
+        return "***********************************\n" +
                 "***                             ***\n" +
                 "******    WELCOME TO SLOTS   ******\n" +
                 "***                             ***\n" +
-                "***********************************");
+                "***********************************";
+
     }
 
+    public Integer getPlayerBalance(){
+        return currentPlayer.getArcadeAccount().getAccountBalance();
+    }
     public void getBetAmount() {
-        Scanner scanner = new Scanner(System.in);
-        Purple.println("How much you do want to bet?");
-        playerBetAmount = scanner.nextInt();
+        playerBetAmount = Purple.getIntegerInput("How much you do want to bet?");
+    }
+
+    public void calculateTotalCost(){
+        numberOfLines = Blue.getIntegerInput("How many lines do you want to bet on?");
+        betTotal = playerBetAmount * numberOfLines;
+        Red.println("Total cost to play:       " + betTotal);
     }
 
     public Integer[] getBetSelections() {
-        Scanner scanner = new Scanner(System.in);
-        Blue.println("How many lines do you want to bet on?");
-        Integer numberOfLines = scanner.nextInt();
-        Integer totalCost = playerBetAmount * numberOfLines;
-        Red.println("Total cost to play:       " + totalCost);
-        setBetTotal(totalCost);
-
-        Cyan.println(
-        "************************************************************************\n" +
-        "**                 Select the lines you want to bet on!               **\n" +
-        "**   1. Top Horizontal  2. Middle Horizontal   3. Bottom Horizontal   **\n" +
-        "**   4. Left Vertical    5. Middle Vertical      6. Right Vertical    **\n" +
-        "**           7. Down Diagonal              8. Up Diagonal             **\n" +
-        "************************************************************************");
+        Cyan.println(lineChoices());
         int count = 0;
         Integer[] selectedLines = new Integer[numberOfLines];
         while (count < numberOfLines){
-            Blue.println("Select your line #" + (count + 1));
-            selectedLines[count] = scanner.nextInt();
+            Integer userInput;
+            userInput = Blue.getIntegerInput("Select your line #" + (count + 1));
+            while(userInput <= (0)  && userInput > 8){
+                userInput = Red.getIntegerInput("Select a number between 1 and 8!");
+            }
+            selectedLines[count] = userInput;
             count++;
         }
         return selectedLines;
@@ -143,6 +147,15 @@ public class SlotsGame implements GameInterface{
 
     public Integer calculateReturnTotal(Integer winnings, Integer losings){
         return this.betTotal + winnings - losings;
+    }
+
+    public String lineChoices(){
+        return "************************************************************************\n" +
+                "**                 Select the lines you want to bet on!               **\n" +
+                "**   1. Top Horizontal  2. Middle Horizontal   3. Bottom Horizontal   **\n" +
+                "**   4. Left Vertical    5. Middle Vertical      6. Right Vertical    **\n" +
+                "**           7. Down Diagonal              8. Up Diagonal             **\n" +
+                "************************************************************************";
     }
 
     @Override
@@ -171,6 +184,13 @@ public class SlotsGame implements GameInterface{
 
     public PlayerInterface getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public void userBetCondition () {
+        while (betTotal > currentPlayer.getArcadeAccount().getAccountBalance()) {
+            Red.println("Oh no! You're trying to place a bet with more money than you have...");
+            betTotal = Green.getIntegerInput("How much would you like to bet?\n");
+        }
     }
 
 }

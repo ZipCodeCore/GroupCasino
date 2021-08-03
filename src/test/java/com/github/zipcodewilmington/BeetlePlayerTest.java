@@ -3,21 +3,20 @@ package com.github.zipcodewilmington;
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.casino.PlayerInterface;
-import com.github.zipcodewilmington.casino.games.blackjack.BlackJack;
-import com.github.zipcodewilmington.casino.games.blackjack.BlackJackPlayer;
+import com.github.zipcodewilmington.casino.games.Beetle.BeetlePlayer;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class BlackJackPlayerTest {
+public class BeetlePlayerTest {
 
     @Test
     public void constructorTest(){
         CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
         PlayerInterface player = new Player("Bjork", account);
-        BlackJackPlayer bj = new BlackJackPlayer(player);
+        BeetlePlayer beetlePlayer = new BeetlePlayer(player);
 
         PlayerInterface expected = player;
-        PlayerInterface actual = bj.getPlayer();
+        PlayerInterface actual = beetlePlayer.getPlayer();
 
         Assert.assertEquals(expected, actual);
     }
@@ -26,9 +25,9 @@ public class BlackJackPlayerTest {
     public void getArcadeAccountTest(){
         CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
         PlayerInterface player = new Player("Bjork", account);
-        BlackJackPlayer bj = new BlackJackPlayer(player);
+        BeetlePlayer beetlePlayer = new BeetlePlayer(player);
 
-        CasinoAccount actual = bj.getArcadeAccount();
+        CasinoAccount actual = beetlePlayer.getArcadeAccount();
         CasinoAccount expected = account;
 
         Assert.assertEquals(actual, expected);
@@ -38,10 +37,10 @@ public class BlackJackPlayerTest {
     public void setArcadeAccountTest(){
         CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
         PlayerInterface player = new Player("Bjork", account);
-        BlackJackPlayer bj = new BlackJackPlayer(player);
-        bj.setArcadeAccount(account);
+        BeetlePlayer beetlePlayer = new BeetlePlayer(player);
+        beetlePlayer.setArcadeAccount(account);
 
-        CasinoAccount actual = bj.getArcadeAccount();
+        CasinoAccount actual = beetlePlayer.getArcadeAccount();
         CasinoAccount expected = account;
 
         Assert.assertEquals(actual, expected);

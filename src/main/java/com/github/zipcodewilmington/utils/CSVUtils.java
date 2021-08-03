@@ -35,12 +35,16 @@ public class CSVUtils {
         FileWriter writer = new FileWriter(csvFile);
         Integer nextId = 1;
         CSVUtils.writeLine(writer, new ArrayList<String>(Arrays.asList(String.valueOf(nextId))));
-
+        Integer[] boards = account.getScoreboard().createCSVArray();
         List<String> list = new ArrayList<>();
         list.add(account.getAccountName());
         list.add(account.getPassword());
         list.add(String.valueOf(account.getAccountBalance()));
+        //list.add(String.valueOf(account.getScoreboard()));
 
+        for(int i = 0; i < boards.length; i++){
+            list.add(String.valueOf(boards[i]));
+        }
         CSVUtils.writeLine(writer, list);
 
 
@@ -65,11 +69,17 @@ public class CSVUtils {
                 String accountName = account[0];
                 String password = account[1];
                 String accountBalance = account[2];
-
-
+                Scoreboard scoreboard = new Scoreboard();
+                Integer count = 3;
+                for(int i = 0; i < 5; i++){
+                    scoreboard.getBoards()[i].addToLifetimeBets(Integer.parseInt(account[count]));
+                    scoreboard.getBoards()[i].addToLifetimeWinnings(Integer.parseInt(account[count + 1]));
+                    scoreboard.getBoards()[i].addToLifetimeLosses(Integer.parseInt(account[count + 2]));
+                    count += 3;
+                }
                 // (5)
                 //inventory.add(new Sneaker(id, name, brand, sport, size, qty, price));
-                CasinoAccount loadedAccount = new CasinoAccount(accountName, password);
+                CasinoAccount loadedAccount = new CasinoAccount(accountName, password, scoreboard);
                 loadedAccount.alterAccountBalance(Integer.parseInt(accountBalance));
                 return loadedAccount;
             }

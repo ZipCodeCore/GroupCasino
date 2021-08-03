@@ -85,16 +85,6 @@ public class SlotsGameTest {
 
     }
 
-
-    @Test
-    public void printWelcomeTest(){
-        //given
-        SlotsGame slotGame = new SlotsGame();
-        //when
-        slotGame.printWelcome();
-        //confirm with printout
-    }
-
     @Test
     public void subtractBetFromBalanceTest(){
         //given
@@ -136,5 +126,97 @@ public class SlotsGameTest {
         Integer retrieved = slotGame.getBetTotal();
         //
         Assert.assertEquals(expected, retrieved);
+    }
+
+    @Test
+    public void lineChoiceTest(){
+        //given
+        SlotsGame slotGame = new SlotsGame();
+        String expected = "************************************************************************\n" +
+                "**                 Select the lines you want to bet on!               **\n" +
+                "**   1. Top Horizontal  2. Middle Horizontal   3. Bottom Horizontal   **\n" +
+                "**   4. Left Vertical    5. Middle Vertical      6. Right Vertical    **\n" +
+                "**           7. Down Diagonal              8. Up Diagonal             **\n" +
+                "************************************************************************";
+        //when
+        String actual = slotGame.lineChoices();
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void printWelcomeTest() {
+        //given
+        SlotsGame slotGame = new SlotsGame();
+        String expected =
+                "***********************************\n" +
+                "***                             ***\n" +
+                "******    WELCOME TO SLOTS   ******\n" +
+                "***                             ***\n" +
+                "***********************************";
+        //when
+        String actual = slotGame.printWelcome();
+        //then
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void add() {
+    }
+
+    @Test
+    public void remove() {
+    }
+
+    @Test
+    public void getLoseMultiplier() {
+    }
+
+    @Test
+    public void getWinMultiplier() {
+    }
+
+    @Test
+    public void run() {
+    }
+
+    @Test
+    public void printWelcome() {
+    }
+
+    @Test
+    public void getBetAmount() {
+    }
+
+    @Test
+    public void getBetSelections() {
+    }
+
+    @Test
+    public void calculateMultiplier() {
+    }
+
+    @Test
+    public void lineChoices() {
+    }
+
+    @Test
+    public void calculateWinnings() {
+    }
+
+    @Test
+    public void subtractBetFromBalance() {
+    }
+
+    @Test
+    public void addMoneyToBalance() {
+    }
+
+    @Test
+    public void getBetTotal() {
+    }
+
+    @Test
+    public void getCurrentPlayer() {
     }
 }

@@ -19,6 +19,10 @@ public class SlotsPlayer implements PlayerInterface  {
 
     @Override
     public void setArcadeAccount(CasinoAccount casinoAccount) {
+        this.player.setArcadeAccount(casinoAccount);
+    }
 
+    public PlayerInterface getPlayer() {
+        return this.player;
     }
 }

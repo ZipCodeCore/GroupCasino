@@ -1,6 +1,7 @@
 package com.github.zipcodewilmington.casino;
 
 import com.github.zipcodewilmington.Casino;
+import com.github.zipcodewilmington.utils.Scoreboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +15,18 @@ public class CasinoAccount {
     private String password;
     private String accountName;
     private Integer accountBalance = 0;
+    private Scoreboard scoreboard;
 
     public CasinoAccount(String accountName, String accountPassword){
         this.accountName = accountName;
         this.password = accountPassword;
+        this.scoreboard = new Scoreboard();
+    }
+
+    public CasinoAccount(String accountName, String accountPassword, Scoreboard scoreboard){
+        this.accountName = accountName;
+        this.password = accountPassword;
+        this.scoreboard = scoreboard;
     }
 
     public String getPassword() {
@@ -35,4 +44,6 @@ public class CasinoAccount {
     public void alterAccountBalance(Integer value) {
         this.accountBalance += value;
     }
+
+    public Scoreboard getScoreboard(){ return scoreboard; }
 }

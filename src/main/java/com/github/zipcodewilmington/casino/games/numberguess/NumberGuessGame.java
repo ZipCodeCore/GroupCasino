@@ -12,13 +12,13 @@ import java.util.Scanner;
  */
 
 public class NumberGuessGame implements GameInterface {
-    private final IOConsole consoleR = new IOConsole(AnsiColor.RED);
-    private final IOConsole consoleG = new IOConsole(AnsiColor.GREEN);
-    private final IOConsole consoleY = new IOConsole(AnsiColor.YELLOW);
-    private final IOConsole consoleB = new IOConsole(AnsiColor.BLUE);
-    private final IOConsole consoleP = new IOConsole(AnsiColor.PURPLE);
-    private final IOConsole consoleC = new IOConsole(AnsiColor.CYAN);
-    private Integer maxNumber;
+    private final IOConsole Red = new IOConsole(AnsiColor.RED);
+    private final IOConsole Green = new IOConsole(AnsiColor.GREEN);
+    private final IOConsole Yellow = new IOConsole(AnsiColor.YELLOW);
+    private final IOConsole Blue = new IOConsole(AnsiColor.BLUE);
+    private final IOConsole Purple = new IOConsole(AnsiColor.PURPLE);
+    private final IOConsole Cyan = new IOConsole(AnsiColor.CYAN);
+    private Integer maxNumber = 20;
     private PlayerInterface currentPlayer;
     private Integer betAmount;
     private Integer multiplier;
@@ -32,20 +32,19 @@ public class NumberGuessGame implements GameInterface {
 
     @Override
     public void run() {
-        Scanner scanner = new Scanner(System.in);
-        printWelcome();
+        Yellow.println(printWelcome());
         Boolean quitGame = false;
         while(!quitGame) {
             //print instruction for game
             printInstructions();
             //print player's current account balance
-            consoleG.println("Your current account balance is:   $" + this.currentPlayer.getArcadeAccount().getAccountBalance() + "\n");
+            Green.println("Your current account balance is:   $" + this.currentPlayer.getArcadeAccount().getAccountBalance() + "\n");
             //ask for a bet amount
             takeBet();
             //subtract bet amount from player's account
             subtractBetFromBalance(betAmount);
             calcPotentialEarnings();
-            consoleR.println("You bet:  $"+betAmount+ "\n\nBut WAIT!\nFeeling lucky??\nIncrease the difficulty and increase your earnings!\n");
+            Red.println("You bet:  $"+betAmount+ "\n\nBut WAIT!\nFeeling lucky??\nIncrease the difficulty and increase your earnings!\n");
             //print difficulty levels and ask user to choose
             setDifficultyLevel();
             setMultiplier(maxNumber);
@@ -59,13 +58,12 @@ public class NumberGuessGame implements GameInterface {
             //calculate amount player won
             Integer payout = calculatePayout(multiplier, guessRange, betAmount);
             //print winnings
-            consoleR.println("You won:   $"+payout);
+            Red.println("You won:   $"+payout);
             //add winnings to player's account
             addMoneyToBalance(currentPlayer,payout);
             //ask if player wants to play again
-            consoleC.println("\u001B[36m\nWould you like to play again?\n" +
+            Integer input = Cyan.getIntegerInput("Would you like to play again?\n" +
                     "1. Yes   2. No");
-            Integer input = scanner.nextInt();
             if(input == 2){
                 quitGame = true;
             }
@@ -73,18 +71,18 @@ public class NumberGuessGame implements GameInterface {
     }
 
     private void printGuessVsActual() {
-        consoleG.println("Lets compare results!");
-        consoleY.println("You guessed: " + guessNumber);
-        consoleY.println("Actual Number: " + randomNumber);
+        Green.println("Lets compare results!");
+        Yellow.println("You guessed: " + guessNumber);
+        Yellow.println("Actual Number: " + randomNumber);
     }
 
-    private void printInstructions() {
-        consoleB.println("Guess a number between 0 and 20.\n" +
+    public void printInstructions() {
+        Blue.println("Guess a number between 0 and 20.\n" +
                 "Guess close enough and win a prize!\n" +
                 "Pick the right number to double your bets!\n");
     }
 
-    private Integer calculatePayout(Integer multiplier, Integer guessRange,Integer betAmount) {
+    public Integer calculatePayout(Integer multiplier, Integer guessRange,Integer betAmount) {
         Integer payout;
         Double percent = 0.0;
         Double multiplierAsDouble = multiplier.doubleValue();
@@ -104,34 +102,32 @@ public class NumberGuessGame implements GameInterface {
         return payout;
     }
 
-    private void pickRandomNumber() {
+    public void pickRandomNumber() {
         Integer random = (int) ((Math.random() * (maxNumber - 0)) + 0);
         this.randomNumber = random;
 
     }
 
     private void takeGuess() {
-        consoleP.println("Pick a number between 0 and " + maxNumber);
+        Purple.println("Pick a number between 0 and " + maxNumber);
         this.guessNumber = scanner.nextInt();
-
     }
 
     private void takeBet() {
-        consoleB.println("How much do you want to bet?");
-        this.betAmount = scanner.nextInt();
+        this.betAmount = Blue.getIntegerInput("How much do you want to bet?");
     }
 
-    private void printWelcome() {
-        consoleY.println(
+    public String printWelcome() {
+        return
                 "************************************\n" +
                 "***                              ***\n" +
                 "******   !!  WELCOME TO  !!   ******\n" +
                 "******  !!! GUESS NUMBER !!!  ******\n" +
                 "***                              ***\n" +
-                "************************************\n");
+                "************************************\n";
     }
 
-    private void calcPotentialEarnings(){
+    public void calcPotentialEarnings(){
         Integer[] calcPotentialEarnings = new Integer[4];
         for (int i = 0; i < 4; i++) {
             calcPotentialEarnings[i] = betAmount * (i + 2);
@@ -140,12 +136,10 @@ public class NumberGuessGame implements GameInterface {
     }
 
     private void setDifficultyLevel() {
-        consoleC.println(
-                "1. Start max at 20 and win up to " + potentialEarnings[0] + "!\n" +
+        Integer input = Cyan.getIntegerInput("1. Start max at 20 and win up to " + potentialEarnings[0] + "!\n" +
                 "2. Change max to 30 and Triple your winnings up to " + potentialEarnings[1] + "!\n"+
                 "3. Change max to 40 and QUADRUPLE your winnings up to " + potentialEarnings[2] + "!\n"+
                 "4. Change max to 50! SEND IT TO THE MOON AND WIN UP TO " + potentialEarnings[3] + "!\n");
-        Integer input = scanner.nextInt();
         switch (input){
             case 1:
                 setMaxNumber(20);
@@ -196,6 +190,22 @@ public class NumberGuessGame implements GameInterface {
         }
     }
 
+    public void setBetAmount(Integer betAmount) {
+        this.betAmount = betAmount;
+    }
+
+    public Integer[] getPotentialEarnings() {
+        return potentialEarnings;
+    }
+
+    public Integer getMultiplier() {
+        return multiplier;
+    }
+
+    public int getRandomNumber() {
+        return randomNumber;
+    }
+
     @Override
     public void add(PlayerInterface player) {
         this.currentPlayer = player;
@@ -220,4 +230,5 @@ public class NumberGuessGame implements GameInterface {
     public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
         Player.getArcadeAccount().alterAccountBalance(winnings);
     }
+
 }

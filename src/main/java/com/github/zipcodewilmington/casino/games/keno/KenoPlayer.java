@@ -6,7 +6,10 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 public class KenoPlayer implements PlayerInterface {
     private PlayerInterface player;
 
-    public KenoPlayer(PlayerInterface player){this.player=player;}
+    public KenoPlayer(PlayerInterface player){
+        this.player = player;
+    }
+
     @Override
     public CasinoAccount getArcadeAccount() {
         return player.getArcadeAccount();
@@ -14,9 +17,12 @@ public class KenoPlayer implements PlayerInterface {
 
     @Override
     public void setArcadeAccount(CasinoAccount casinoAccount) {
-        CasinoAccount casinoAccount1;
+        this.player.setArcadeAccount(casinoAccount);
     }
 
+    public PlayerInterface getPlayer() {
+        return this.player;
+    }
 }
 
 

@@ -3,6 +3,7 @@ package com.github.zipcodewilmington.utils;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author leonhunter
@@ -34,6 +35,15 @@ public class IOConsole {
 
     public void println(String val, Object... vals) {
         print(val + "\n", vals);
+    }
+
+    public void setWait(int milliseconds){
+        try {
+            TimeUnit.MILLISECONDS.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            this.println("Wait unsuccessful, refer to error message");
+        }
     }
 
     public String getStringInput(String prompt, Object... args) {
