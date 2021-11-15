@@ -66,6 +66,7 @@ public class IOConsole {
     }
 
     public Integer getIntegerInput(String prompt, Object... args) {
+
         return getLongInput(prompt, args).intValue();
     }
 }
