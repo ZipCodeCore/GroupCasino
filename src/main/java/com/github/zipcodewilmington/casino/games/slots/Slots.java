@@ -10,11 +10,11 @@ public class Slots {
 
     public static void main(String[] args) {
 
-        // todo place all of this into a run() method and then call elsewhere???
+
 
         // instance fields (need for uml)
         int tokens = 100;
-//        int amountWon;
+
         int amountWagered;
         int slot1;
         int slot2;
@@ -23,7 +23,6 @@ public class Slots {
         Random randomNumber = new Random();
         IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
         IOConsole consoleGreen = new IOConsole(AnsiColor.GREEN);
-//        IOConsole consolePurple = new IOConsole(AnsiColor.PURPLE);
         IOConsole consoleRed = new IOConsole(AnsiColor.RED);
         IOConsole consoleBlack = new IOConsole(AnsiColor.BLACK);
 

@@ -28,13 +28,12 @@ public class SlotsGame {
 //            System.out.println("You currently have " + tokens + " tokens.");
 //            System.out.println("How many tokens would you like to wager?");
 //
-//            // todo can't let wager be more htna current tokens count
+//
 //
 //            amountWagered = console.nextInt();
 //
 //            // hoe many tokens?
-//            // todo need to account for negative wager amount
-//            // todo need to account for how to keep user from entering incorrect wager twice in a row or more
+//
 //
 //            if (amountWagered < 0) {
 //                System.out.println("Sorry, but that is not a valid wager amount. Please enter a positive amount.");
@@ -98,7 +97,7 @@ public class SlotsGame {
 //                    break;
 //            }
 //
-//            System.out.println(slot1 + " " + slot2 + " " + slot3); // todo will need to remove when finished
+//
 //        }
 //    }
 
