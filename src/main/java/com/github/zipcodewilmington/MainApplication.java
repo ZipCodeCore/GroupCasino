@@ -2,7 +2,9 @@ package com.github.zipcodewilmington;
 
 
 import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
+import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -12,7 +14,10 @@ public class MainApplication {
      //new RouletteGame().run();
 
        // System.out.println(Arrays.toString(new RouletteGame().getRed()) );
-      new RouletteGame().pickNumberChoice();
+//     Double balance =  new RouletteGame().getBalance();
+//        System.out.println(balance);
+
+        new RouletteGame().printBalance();
 
     }
 }

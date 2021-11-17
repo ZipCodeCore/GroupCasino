@@ -13,7 +13,13 @@ public class CasinoAccount {
     public CasinoAccount(String username, String password){
         this.username = username;
         this.password = password;
+        this.balance = 500.00;
 
+    }
+
+    public CasinoAccount(){
+
+     this.balance = 500.00;
     }
     public CasinoAccount(String username, String password, Double balance) {
         this.username = username;

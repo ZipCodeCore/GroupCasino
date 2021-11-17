@@ -19,16 +19,25 @@ public class RouletteGame implements GameInterface {
     private Double betAmount;
     private Double balance;
     private Integer rouletteNumber;
+    private RoulettePlayer roulettePlayer = new RoulettePlayer();
 
 
-    private final IOConsole consoleRed = new IOConsole(AnsiColor.RED);
+    private final IOConsole consoleRed = new IOConsole(AnsiColor.PURPLE);
     // private final IOConsole console2 = new IOConsole(AnsiColor.GREEN);
 
     public RouletteGame() {
+        this.balance = roulettePlayer.getArcadeAccount().getBalance();
         this.rouletteNumber = new Random().nextInt((36 - 1) + 1) + 1;
         this.red = new Integer[]{1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
         this.black = new Integer[]{2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
     }
+
+
+    public void printBalance(){
+        System.out.println(getBalance());
+
+    }
+
 
     public void evenChoice() {
 
@@ -106,25 +115,56 @@ public class RouletteGame implements GameInterface {
      consoleRed.println(result);
     }
 
+    public void betweenOneAndEighteen(){
+     String result ="" ;
+      System.out.println("Roulette Number: " + this.rouletteNumber);
+     if(this.rouletteNumber >= 1 && this.rouletteNumber <= 18){
+        result = "you won";
 
-    public Integer rouletteMenu() {
-        consoleRed.println("Welcome to the Roulette Game!!!");
-        this.betAmount = consoleRed.getDoubleInput("Please enter amount you would like to bet");
-        consoleRed.println("PLease choose from the options below");
-        this.choice = consoleRed.getIntegerInput("(1)Red  (2)Black  (3)Even  (4)Odd  (5)Pick Number (6) 1 to 18  (7) 19 to 36");
-        return choice;
+     }else {
+
+       result = "you lost"  ;
+     }
+
+     consoleRed.println(result);
+    }
+
+    public void betweenNineteenAndThirtySix(){
+        String result ="" ;
+        System.out.println("Roulette Number: " + this.rouletteNumber);
+        if(this.rouletteNumber >= 19 && this.rouletteNumber <= 36){
+            result = "you won";
+
+        }else {
+
+            result = "you lost"  ;
+        }
+
+        consoleRed.println(result);
     }
 
 
-    public Double rouletteGame(int choice) {
+//    public Integer rouletteMenu() {
+//        consoleRed.println("Welcome to the Roulette Game!!!");
+//        this.betAmount = consoleRed.getDoubleInput("Please enter amount you would like to bet");
+//        consoleRed.println("PLease choose from the options below");
+//        this.choice = consoleRed.getIntegerInput("(1)Red  (2)Black  (3)Even  (4)Odd  (5)Pick Number (6) 1 to 18  (7) 19 to 36");
+//        return choice;
+//    }
+
+
+    public Double rouletteGame() {
+        consoleRed.println("Welcome to the Roulette Game!!!");
+        this.betAmount = consoleRed.getDoubleInput("Please enter amount you would like to bet");
+        consoleRed.println("PLease choose from the options below");
+        choice = consoleRed.getIntegerInput("(1)Red  (2)Black  (3)Even  (4)Odd  (5)Pick Number (6) 1 to 18  (7) 19 to 36");
+
         while (choice < 0 || choice > 7) {
             consoleRed.println("PLease choose from the options below");
             choice = consoleRed.getIntegerInput("(1)Red  (2)Black  (3)Even  (4)Odd  (5)Pick Number (6) 1 to 18  (7) 19 to 36");
-
         }
 
         if (choice == 1) {
-
             redChoice();
 
         } else if (choice == 2) {
@@ -140,15 +180,16 @@ public class RouletteGame implements GameInterface {
             pickNumberChoice();
 
         } else if (choice == 6) {
-            consoleRed.println("1 to 18 Chosen");
+            betweenOneAndEighteen();
 
         } else if (choice == 7) {
-            consoleRed.println("19 to 36 Chosen");
+            betweenNineteenAndThirtySix();
         }
 
 
         return null;
     }
+
 
     public Integer[] getRed() {
         return red;
@@ -224,7 +265,6 @@ public class RouletteGame implements GameInterface {
     @Override
     public void run() {
         RouletteGame rouletteGame = new RouletteGame();
-        Integer choice = rouletteGame.rouletteMenu();
-        Double money = rouletteGame.rouletteGame(choice);
+        Double money = rouletteGame.rouletteGame();
     }
 }
