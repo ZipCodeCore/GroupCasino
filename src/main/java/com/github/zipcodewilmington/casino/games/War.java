@@ -66,7 +66,7 @@ public class War {
     }
 
 
-    public static void
+//    public static void
 
     public static void runGame() {
 
