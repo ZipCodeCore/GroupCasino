@@ -1,7 +1,5 @@
 # Casino Simulation
-John branch
-
-
+Created branch Junior
 * **Objective** - To create an casino simulation
 * **Purpose** - To gain familiarity with general object orientation and design principles
 
