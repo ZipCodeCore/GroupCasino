@@ -4,7 +4,7 @@ import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
 public class RoulettePlayer implements PlayerInterface {
-    CasinoAccount casinoAccount = new CasinoAccount();
+    CasinoAccount casinoAccount = new CasinoAccount("junior", "junior", 20.);
 
     @Override
     public CasinoAccount getArcadeAccount() {
