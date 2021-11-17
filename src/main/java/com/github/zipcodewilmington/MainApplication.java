@@ -17,7 +17,13 @@ public class MainApplication {
 //     Double balance =  new RouletteGame().getBalance();
 //        System.out.println(balance);
 
-        new RouletteGame().printBalance();
+//   RouletteGame rouletteGame =    new RouletteGame();
+//   rouletteGame.printBalance();
+//   rouletteGame.setBalance(2000.);
+//   rouletteGame.printBalance();
+
+
+       new RouletteGame().run();
 
     }
 }

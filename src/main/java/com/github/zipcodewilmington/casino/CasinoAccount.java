@@ -19,7 +19,7 @@ public class CasinoAccount {
 
     public CasinoAccount(){
 
-     this.balance = 500.00;
+     this.balance = 1000.0;
     }
     public CasinoAccount(String username, String password, Double balance) {
         this.username = username;
