@@ -1,44 +1,50 @@
 package com.github.zipcodewilmington.casino.games.cardGames;
 
 
-
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.Collections;
-import java.util.Locale;
 import java.util.Random;
 
-public class War {
+public class War implements GameInterface {
 
-    private static IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
-    private static int numberOfPlayers;
-    private static String player1Name;
-    private static String player2Name;
-    private static int player1Score;
-    private static int player2Score;
-    private static boolean player1Card;
-    private static boolean player2Card;
+    private com.github.zipcodewilmington.casino.games.war.WarPlayer warplayer;
+    private IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
+    private int numberOfPlayers;
+    private String player1Name;
+    private String player2Name;
+    private int player1Score;
+    private int player2Score;
+    private Cards player1Card;
+    private Cards player2Card;
+    createDeck deck = new createDeck();
+//    War war = new War();
     //    int tokens = 100;
-//    int amountWagered;
+
     Random randomNumber = new Random();
     IOConsole consoleGreen = new IOConsole(AnsiColor.GREEN);
     IOConsole consoleRed = new IOConsole(AnsiColor.RED);
     IOConsole consoleBlack = new IOConsole(AnsiColor.BLACK);
 
     public static void main(String[] args) {
+        War war = new War();
 
-//        warRules(); // WORX
-//        howManyPlayers(); // WORX
-//        enterNames(); // WORX
-//        callDeck(); // need to figure out how to deal cards to players
-//        determineRoundWinner(); // need to figure out ranks so can compare and determine winner
-//        determineGameWinner(); // WORX
-//        keepPlaying(); // needs more work
+        war.warRules(); // WORX
+        war.howManyPlayers(); // WORX
+        war.enterNames(); // WORX
+        war.shuffle(); //
+        war.determineRoundWinner(); //
+        war.determineGameWinner(); // WORX
+        war.keepPlaying(); //
+
     }
 
+
     // this method states the rules of the game
-    public static void warRules() {
+    public void warRules() {
         System.out.println("Welcome to the game of War.\n\nEach player will get dealt a " +
                 "card. Whoever has the higher \nvalue card wins that round, and gets awarded " +
                 "one point. In \nthe event of a tie, no points will be rewarded and both " +
@@ -49,12 +55,10 @@ public class War {
     }
 
     // this method determines how many players will play
-    // keeping this in?
     // if 1 player, then player 2 is "computer".
-    // need to change enterNames() method
-    public static int howManyPlayers() {
+    public void howManyPlayers() {
 
-        IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
+//        IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
 
 
         int userInput;
@@ -73,12 +77,11 @@ public class War {
         }
         while (numberOfPlayers == 0);
 
-        return numberOfPlayers;
     }
 
 
     // this method takes in and set players names
-    public static void enterNames() {
+    public void enterNames() {
 
         if (numberOfPlayers == 2) {
             player1Name = consoleAuto.getStringInput("Player 1, please enter your name:");
@@ -95,36 +98,50 @@ public class War {
     }
 
     // this method creates a new deck and shuffles
-    // todo still need to figure out how to print the actual card, not memory
-    public static void callDeck() {
-        createDeck deck = new createDeck();
+    public void shuffle() {
         Collections.shuffle(deck.cardsStack);
-        for (Cards card : deck.cardsStack) {
-            System.out.println(card.toString());
-        }
     }
 
+
     // this method determines winner of each individual round
-    // todo need to figure out deck issues, then figure out how to rank them in order to compare
-//    public static void determineRoundWinner () {
-//
-//        if (player1Card > player2Card) {
-//                consoleAuto.println("\nPlayer 1 has won this round.\n");
-//                player1Score++;
-//                consoleAuto.println("Player 1 now has " + player1Score + " points.");
-//            } else if (player2Card > player1Card) {
-//                // if 2 is higher than 1, 2 wins, and one point added to score for player 2
-//                consoleAuto.println("\nPlayer 2 has won this round.\n");
-//                player2Score++;
-//                consoleAuto.println("Player 2 now has " + player2Score + " points.");
-//            } else if (player1Card == player2Card) {
-//                // this is a tie. neither players gets a point
-//                consoleAuto.println("\nIt was a tie. Let's deal again.\n");
-//            }
-//    }
+    public void determineRoundWinner() {
+
+        Cards player1Card = deck.cardsStack.pop();
+        Cards player2Card = deck.cardsStack.pop();
+
+        System.out.println(player1Name + " draws a " + player1Card); // print player1card
+        System.out.println(player2Name + " draws a " + player2Card); // print player2card
+
+        Rank player1CardRank = player1Card.getRank();
+        Rank player2CardRank = player2Card.getRank();
+
+//        System.out.println(player1CardRank); // print player1card rank
+//        System.out.println(player2CardRank); // print player2card rank
+
+
+        if (player1CardRank.compareTo(player2CardRank) > 0) {
+            consoleAuto.println("\nPlayer 1 has won this round.\n");
+            player1Score++;
+            consoleAuto.println("Player 1 now has " + player1Score + " points.");
+
+        } else if (player1CardRank.compareTo(player2CardRank) < 0) {
+            // if 2 is higher than 1, 2 wins, and one point added to score for player 2
+            consoleAuto.println("\nPlayer 2 has won this round.\n");
+            player2Score++;
+            consoleAuto.println("Player 2 now has " + player2Score + " points.");
+
+        } else if (player1CardRank.compareTo(player2CardRank) == 0) {
+            // this is a tie. neither players gets a point
+            consoleAuto.println("\nIt was a tie. Let's deal again.\n");
+            player1Card = deck.cardsStack.pop();
+            player2Card = deck.cardsStack.pop();
+        }
+
+
+    }
 
     // this method declares a winner for whoever reached 10 points first
-    public static void determineGameWinner() {
+    public void determineGameWinner() {
         if (player1Score >= 10) {
             consoleAuto.println("\nPlayer 1 has won the game!\n");
         } else if (player2Score >= 10) {
@@ -132,25 +149,23 @@ public class War {
         }
     }
 
-    public static void keepPlaying() {
+    public void keepPlaying() {
         consoleAuto.println("Would you like to play again?");
         String answer = consoleAuto.getStringInput("Please type in YES or NO.");
 
-        if (answer == "YES") {
+        if (answer.equalsIgnoreCase("YES")) {
             System.out.println("play game again");
-            // todo run game again at the top (maybe? do we need rules again?)
-        } else if (answer == "NO") {
+
+        } else if (answer.equalsIgnoreCase("NO")) {
             System.out.println("should quit here");
             // todo quit game return to main menu
         } else {
             do {
                 consoleAuto.println("Would you like to play again?");
-                answer = consoleAuto.getStringInput("Please type in YES or NO.").toLowerCase();
+                answer = consoleAuto.getStringInput("Please type in YES or NO.");
             }
-            while (answer == "yes" || answer == "no");
+            while (!answer.equalsIgnoreCase("yes") && !answer.equalsIgnoreCase("no"));
         }
-// NEEDS WORK--CANT FIGURE OUT HOW TO EXIT THE LOOP. NEED HELP
-
 
 
 
@@ -158,4 +173,19 @@ public class War {
     }
 
 
+    @Override
+    public void add(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void run() {
+        // where you have game running
+        War warGame = new War();
+    }
 } // class War closing bracket

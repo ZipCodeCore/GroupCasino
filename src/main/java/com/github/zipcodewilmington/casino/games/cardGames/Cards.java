@@ -23,9 +23,6 @@ public class Cards {
 
     @Override
     public String toString() {
-        return "Cards{" +
-                "suit=" + suit +
-                ", rank=" + rank +
-                '}';
+        return rank + " of " + suit;
     }
 }
