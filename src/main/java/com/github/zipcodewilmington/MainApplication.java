@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class MainApplication {
     public static void main(String[] args) {
-      // new Casino().run();
+     //new Casino().run();
      //new RouletteGame().run();
 
        // System.out.println(Arrays.toString(new RouletteGame().getRed()) );
@@ -23,7 +23,8 @@ public class MainApplication {
 //   rouletteGame.printBalance();
 
 
-       new RouletteGame().run();
+    new RouletteGame().run();
+     //   new RouletteGame().evenChoice();
 
     }
 }
