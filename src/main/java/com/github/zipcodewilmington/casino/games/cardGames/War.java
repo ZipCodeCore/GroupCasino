@@ -4,39 +4,55 @@ import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 import com.sun.tools.javac.code.Lint;
 
+import java.util.Collections;
 import java.util.Random;
 
 public class War {
-    public static void main(String[] args) {
 
-        howManyPlayers();
-//        getPlayerName();
-//        deckOfCards();
-    }
-
-    // todo these variables and methods are all outside of psv main but inside class War
-
-    //        Deck deck; //we need a new deck of cards
-    int tokens = 100;
-    int amountWagered;
-    String player1Name = "";
-    String player2Name = "";
-    int player1Score;
-    int player2Score;
-    //        Card player1Card;
-//        Card player2Card;
+    private static IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
+    private static int numberOfPlayers;
+    private static String player1Name;
+    private static String player2Name;
+    private static int player1Score;
+    private static int player2Score;
+    private static boolean player1Card;
+    private static boolean player2Card;
+//    int tokens = 100;
+//    int amountWagered;
     Random randomNumber = new Random();
-    IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
     IOConsole consoleGreen = new IOConsole(AnsiColor.GREEN);
     IOConsole consoleRed = new IOConsole(AnsiColor.RED);
     IOConsole consoleBlack = new IOConsole(AnsiColor.BLACK);
 
+    public static void main(String[] args) {
 
+//        warRules();
+        howManyPlayers();
+        enterNames();
+//        callDeck();
+//        deckOfCards();
+    }
+
+    // this method states the rules of the game
+    // todo not returning any text? why?
+    public static String warRules() {
+        String rules = "Welcome to the game of War.\n\nEach player will get dealt a " +
+                "card. Whoever has the higher \nvalue card wins that round, and gets awarded " +
+                "one point. In the event of a \ntie, no points will be rewarded and both " +
+                "players will play againThe \nwinner is the first player to score ten points.";
+
+        return rules;
+    }
+
+    // this method determines how many players will play
+    // keeping this in?
+    // if 1 player, then player 2 is "computer".
+    // need to change enterNames() method
     public static int howManyPlayers() {
 
         IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
 
-        int numberOfPlayers = 0;
+
         int userInput;
 
         do {
@@ -53,111 +69,68 @@ public class War {
         }
         while (numberOfPlayers == 0);
 
-return 0;
-
+        return numberOfPlayers;
     }
 
-//
-//    public static void getPlayerName() {
-//
-//        IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
-//
-//        String player1Name = ""; // empty name String
-//        String player2Name = ""; // empty name String
-//
-//
-//        do {  // sets the input to name.
-//            player1Name = consoleAuto.getStringInput("What is your name, player 1?");
-//        }
-//        while (player1Name.length() <= 12); // checks if user entered anything or not
-//    }
-//
-//        do
-//
-//    {  // sets the input to name.
-//            player2Name = consoleAuto.getStringInput("What is your name, player 2?");
-//    }
-//        while (player2Name.length() <= 12); // checks if user entered anything or not
-//}
 
+    // this method takes in and set players names
+    public static void enterNames() {
 
-//    public static void runGame() {
-////            IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
-//        int numberOfPlayers = howManyPlayers();
-//        Card player1Card;
-//        Card player2Card;
+        if (numberOfPlayers == 2) {
+        player1Name = consoleAuto.getStringInput("Player 1, please enter your name:");
+        player2Name = consoleAuto.getStringInput("Player 2, please enter your name:");
+            consoleAuto.println(player1Name);
+            consoleAuto.println(player2Name);
+        // only prints player 1 name ??? todo
+    } else if (numberOfPlayers == 1) {
+            player1Name = consoleAuto.getStringInput("Player 1, please enter your name:");
+            player2Name = "Computer";
+            consoleAuto.println(player1Name);
+            consoleAuto.println(player2Name);
+        }
+        }
+
+    // this method creates a new deck and shuffles
+    // todo still need to figure out how to print the actual card, not memory
+    public static void callDeck() {
+        createDeck deck = new createDeck();
+        Collections.shuffle(deck.cardsStack);
+        for (Cards card : deck.cardsStack) {
+            System.out.println(card.toString());
+        }
+    }
+
+    // this method determines winner of each individual round
+    // todo need to figure out deck issues, then figure out how to rank them
+//    public static void determineRoundWinner () {
 //
-//
-//        // create new deck
-//        // shuffle deck
-//        consoleAuto.println("Welcome to the game of War.\n\nEach player will get dealt a " +
-//                "card. Whoever has the higher value card wins that round, and gets awarded " +
-//                "one point. The winner is the first player to score ten points.");
-//
-//        // perform this gameplay loop while neither player has yet scored ten points.
-//        while (player1Score < 10 && player2Score < 10) {
-//            // introduction to game and rules
-//            consoleAuto.println("\nLet's get started.");
-//            // create new deck method
-//            // shuffle deck method
-//
-//            // players get assigned cards
-//            player1Card = deck.getNextCard(); // player1 gets next card
-//            player2Card = deck.getNextCard(); // player2 gets next card
-//
-//            // displaying results
-//            consoleAuto.println("Let's see the results.");
-//            consoleRed.println("Player 1: " + player1Card);
-//            consoleGreen.println("Player 2: " + player2Card);
-//
-//            // if 1 is higher than 2, 1 wins, and add 1 to player1 score
-//            if (player1Score > player2Score) {
+//        if (player1Card > player2Card) {
 //                consoleAuto.println("\nPlayer 1 has won this round.\n");
 //                player1Score++;
 //                consoleAuto.println("Player 1 now has " + player1Score + " points.");
-//            } else if (player2Score > player1Score) {
+//            } else if (player2Card > player1Card) {
 //                // if 2 is higher than 1, 2 wins, and one point added to score for player 2
 //                consoleAuto.println("\nPlayer 2 has won this round.\n");
 //                player2Score++;
 //                consoleAuto.println("Player 2 now has " + player2Score + " points.");
-//            } else if (player1Score == player2Score) {
+//            } else if (player1Card == player2Card) {
 //                // this is a tie. neither players gets a point
-//                consoleAuto.println("\nIt was a tie. Let's deal again\n");
+//                consoleAuto.println("\nIt was a tie. Let's deal again.\n");
 //            }
-//
-//        if (player1score >= 10 || player2score < 10) {
-//            consoleAuto.println("Congratulations to Player 1! You have won by a score of " + player1Score + )
-//        }
-//        }
-
-
-//
-//        // run howManyPlayers() to set number of players
-//        howManyPlayers();
-//        // players each get dealt a card
-//
-//
-//        // compare cards
-//
-//
-//        // determine who has higher value card
-//        // winner will be awarded one point
-//        // todo what about a tie?
-//        // maybe deal and go again. no points awarded
-//
-//        // deal next cards
-//        // repeat process of comparing cards and determining winner
-// award one point to winner each time
-//
-//        // continue until one user reaches 10 points
-//
-//        // higher score is the winner
-//        // announce winner
-//
 //    }
 
+    // this method declares a winner for whoever reached 10 points first
+    public static void determineGameWinner() {
+        if (player1Score == 10) {
+            consoleAuto.println("\nPlayer 1 has won the game!\n");
+        } else if (player2Score == 10) {
+            consoleAuto.println("\nPlayer 2 has won the game!\n");
+        }
+    }
 
-    } // class War closing bracket
+
+
+} // class War closing bracket
 
 
 
