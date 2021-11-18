@@ -27,10 +27,11 @@ public class War {
     public static void main(String[] args) {
 
 //        warRules();
-        howManyPlayers();
-        enterNames();
+        howManyPlayers(); // tested and works
+        enterNames(); // tested and works
 //        callDeck();
-//        deckOfCards();
+//        determineRoundWinner();
+        determineGameWinner(); // tested and works
     }
 
     // this method states the rules of the game
@@ -121,9 +122,9 @@ public class War {
 
     // this method declares a winner for whoever reached 10 points first
     public static void determineGameWinner() {
-        if (player1Score == 10) {
+        if (player1Score >= 10) {
             consoleAuto.println("\nPlayer 1 has won the game!\n");
-        } else if (player2Score == 10) {
+        } else if (player2Score >= 10) {
             consoleAuto.println("\nPlayer 2 has won the game!\n");
         }
     }
