@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class createDeck {
-    List<Cards> cardsStack = new ArrayList<>();
+    Stack<Cards> cardsStack = new Stack<>();
 
     public createDeck() {
         for (Suit suit : Suit.values()) {
