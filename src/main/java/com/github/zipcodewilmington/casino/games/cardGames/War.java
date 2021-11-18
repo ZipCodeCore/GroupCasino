@@ -4,6 +4,7 @@ import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Random;
 
 public class War {
@@ -16,7 +17,7 @@ public class War {
     private static int player2Score;
     private static boolean player1Card;
     private static boolean player2Card;
-//    int tokens = 100;
+    //    int tokens = 100;
 //    int amountWagered;
     Random randomNumber = new Random();
     IOConsole consoleGreen = new IOConsole(AnsiColor.GREEN);
@@ -25,16 +26,16 @@ public class War {
 
     public static void main(String[] args) {
 
-        warRules();
-        howManyPlayers(); // tested and works
-        enterNames(); // tested and works
-//        callDeck();
-//        determineRoundWinner();
-        determineGameWinner(); // tested and works
+//        warRules(); // WORX
+//        howManyPlayers(); // WORX
+//        enterNames(); // WORX
+//        callDeck(); // need to figure out how to deal cards to players
+//        determineRoundWinner(); // need to figure out ranks so can compare and determine winner
+//        determineGameWinner(); // WORX
+//        keepPlaying(); // needs more work
     }
 
     // this method states the rules of the game
-    // todo not returning any text? why?
     public static void warRules() {
         System.out.println("Welcome to the game of War.\n\nEach player will get dealt a " +
                 "card. Whoever has the higher \nvalue card wins that round, and gets awarded " +
@@ -78,18 +79,18 @@ public class War {
     public static void enterNames() {
 
         if (numberOfPlayers == 2) {
-        player1Name = consoleAuto.getStringInput("Player 1, please enter your name:");
-        player2Name = consoleAuto.getStringInput("Player 2, please enter your name:");
+            player1Name = consoleAuto.getStringInput("Player 1, please enter your name:");
+            player2Name = consoleAuto.getStringInput("Player 2, please enter your name:");
             consoleAuto.println("Player 1 name is saved as: " + player1Name); // todo take out
-            consoleAuto.println(" Player 2 name is saved as: " +player2Name); // todo take out
+            consoleAuto.println(" Player 2 name is saved as: " + player2Name); // todo take out
 
-    } else if (numberOfPlayers == 1) {
+        } else if (numberOfPlayers == 1) {
             player1Name = consoleAuto.getStringInput("Player 1, please enter your name:");
             player2Name = "Computer";
             consoleAuto.println("Player 1 name is saved as: " + player1Name); // todo take out
             consoleAuto.println("Player 2 name is saved as: " + player2Name); // todo take out
         }
-        }
+    }
 
     // this method creates a new deck and shuffles
     // todo still need to figure out how to print the actual card, not memory
@@ -102,7 +103,7 @@ public class War {
     }
 
     // this method determines winner of each individual round
-    // todo need to figure out deck issues, then figure out how to rank them
+    // todo need to figure out deck issues, then figure out how to rank them in order to compare
 //    public static void determineRoundWinner () {
 //
 //        if (player1Card > player2Card) {
@@ -129,6 +130,30 @@ public class War {
         }
     }
 
+    public static void keepPlaying() {
+        consoleAuto.println("Would you like to play again?");
+        String answer = consoleAuto.getStringInput("Please type in YES or NO.");
+
+        if (answer == "YES") {
+            System.out.println("play game again");
+            // todo run game again at the top (maybe? do we need rules again?)
+        } else if (answer == "NO") {
+            System.out.println("should quit here");
+            // todo quit game return to main menu
+        } else {
+            do {
+                consoleAuto.println("Would you like to play again?");
+                answer = consoleAuto.getStringInput("Please type in YES or NO.").toLowerCase();
+            }
+            while (answer == "yes" || answer == "no");
+        }
+// NEEDS WORK--CANT FIGURE OUT HOW TO EXIT THE LOOP. NEED HELP
+
+
+
+
+//        return;
+    }
 
 
 } // class War closing bracket
