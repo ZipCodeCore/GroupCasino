@@ -1,4 +1,4 @@
-package com.github.zipcodewilmington.casino.games;
+package com.github.zipcodewilmington.casino.games.cardGames;
 
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;

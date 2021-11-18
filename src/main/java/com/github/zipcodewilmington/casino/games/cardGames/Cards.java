@@ -1,7 +1,31 @@
 package com.github.zipcodewilmington.casino.games.cardGames;
 
 public class Cards {
-    public Cards(Suit suit, Rank rank) {
+    private final Suit suit;
+    private final Rank rank;
 
+    public Cards(Suit suit, Rank rank) {
+        this.suit = suit;
+        this.rank = rank;
+    }
+
+    public Suit getSuit() {
+        return suit;
+    }
+
+    public Rank getRank() {
+        return rank;
+    }
+
+    public Integer value() {
+        return rank.getFirstValue();
+    }
+
+    @Override
+    public String toString() {
+        return "Cards{" +
+                "suit=" + suit +
+                ", rank=" + rank +
+                '}';
     }
 }
