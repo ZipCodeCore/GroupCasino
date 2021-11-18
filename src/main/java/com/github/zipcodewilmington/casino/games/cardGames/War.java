@@ -2,7 +2,6 @@ package com.github.zipcodewilmington.casino.games.cardGames;
 
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
-import com.sun.tools.javac.code.Lint;
 
 import java.util.Collections;
 import java.util.Random;
@@ -26,7 +25,7 @@ public class War {
 
     public static void main(String[] args) {
 
-//        warRules();
+        warRules();
         howManyPlayers(); // tested and works
         enterNames(); // tested and works
 //        callDeck();
@@ -36,13 +35,14 @@ public class War {
 
     // this method states the rules of the game
     // todo not returning any text? why?
-    public static String warRules() {
-        String rules = "Welcome to the game of War.\n\nEach player will get dealt a " +
+    public static void warRules() {
+        System.out.println("Welcome to the game of War.\n\nEach player will get dealt a " +
                 "card. Whoever has the higher \nvalue card wins that round, and gets awarded " +
-                "one point. In the event of a \ntie, no points will be rewarded and both " +
-                "players will play againThe \nwinner is the first player to score ten points.";
+                "one point. In \nthe event of a tie, no points will be rewarded and both " +
+                "\nplayers will play again. The winner is the first player to \nscore ten points.\n");
 
-        return rules;
+        return;
+
     }
 
     // this method determines how many players will play
@@ -80,14 +80,14 @@ public class War {
         if (numberOfPlayers == 2) {
         player1Name = consoleAuto.getStringInput("Player 1, please enter your name:");
         player2Name = consoleAuto.getStringInput("Player 2, please enter your name:");
-            consoleAuto.println(player1Name);
-            consoleAuto.println(player2Name);
-        // only prints player 1 name ??? todo
+            consoleAuto.println("Player 1 name is saved as: " + player1Name); // todo take out
+            consoleAuto.println(" Player 2 name is saved as: " +player2Name); // todo take out
+
     } else if (numberOfPlayers == 1) {
             player1Name = consoleAuto.getStringInput("Player 1, please enter your name:");
             player2Name = "Computer";
-            consoleAuto.println(player1Name);
-            consoleAuto.println(player2Name);
+            consoleAuto.println("Player 1 name is saved as: " + player1Name); // todo take out
+            consoleAuto.println("Player 2 name is saved as: " + player2Name); // todo take out
         }
         }
 
