@@ -10,13 +10,13 @@ import java.util.Collections;
 public class BlackJack implements GameInterface {
     private IOConsole input = new IOConsole(AnsiColor.AUTO);
     createDeck deck = new createDeck();
-    Cards dealer;
+    Cards dealer = deck.cardsStack.pop();
     private Rank dealerRank;
-    private Integer dealerValue;
+    private Integer dealerValue = 0;
     Integer totalDealerValue = 0;
-    Cards player;
+    Cards player = deck.cardsStack.pop();
     private Rank playerRank;
-    private Integer playerValue;
+    private Integer playerValue = 0;
     Integer totalPlayerValue = 0;
 
     public static void main(String[] args) {
@@ -39,23 +39,23 @@ public class BlackJack implements GameInterface {
     }
 
     public void dealCards() {
-        dealer = deck.cardsStack.pop();
-        player = deck.cardsStack.pop();
-
         System.out.println("The dealer drew a " + dealer + "\n" + "You drew a " + player);
     }
 
-    public void valueChecking() {
+    public Integer valueChecking(Cards dealer, Cards player) {
         dealerRank = dealer.getRank();
         dealerValue = dealerRank.getFirstValue();
         playerRank = player.getRank();
         playerValue = playerRank.getFirstValue();
+        Integer value = 0;
 
         if (dealerRank.equals(Rank.ACE)) {
             if ((totalDealerValue + 11) < 17) {
                 dealerValue = Rank.ACE.getFirstValue();
+                value = dealerValue;
             } else if ((totalDealerValue + 11) <= 21) {
                 dealerValue = Rank.ACE.getSecondValue();
+                value = dealerValue;
             }
         }
 
@@ -64,21 +64,27 @@ public class BlackJack implements GameInterface {
 
             if (choice.equals("1")) {
                 playerValue = Rank.ACE.getFirstValue();
+                value = playerValue;
             } else if (choice.equals("11")) {
                 playerValue = Rank.ACE.getSecondValue();
+                value = playerValue;
             } else {
                 System.out.println("Please choose 1 or 11.");
-                valueChecking();
+                valueChecking(dealer, player);
             }
         }
 
         if (dealerRank.equals(Rank.JACK) || dealerRank.equals(Rank.QUEEN) || dealerRank.equals(Rank.KING)) {
             dealerValue = Rank.TEN.getFirstValue();
+            value = dealerValue;
         }
 
         if (playerRank.equals(Rank.JACK) || playerRank.equals(Rank.QUEEN) || playerRank.equals(Rank.KING)) {
             playerValue = Rank.TEN.getFirstValue();
+            value = playerValue;
         }
+
+        return value;
     }
 
     public void userAction() {
@@ -88,7 +94,7 @@ public class BlackJack implements GameInterface {
         switch (action.toLowerCase()) {
             case "hit":
                 player = deck.cardsStack.pop();
-                valueChecking();
+                valueChecking(dealer, player);
                 System.out.println("You drew a " + player + ".");
                 break;
             case "stand":
@@ -101,35 +107,46 @@ public class BlackJack implements GameInterface {
         }
     }
 
-    public void dealerAction() {
+    public String dealerAction(Integer totalDealerValue) {
+        String action = "";
+
         if (totalDealerValue <= 16) {
             dealer = deck.cardsStack.pop();
-            valueChecking();
+            valueChecking(dealer, player);
             System.out.println("The dealer drew a " + dealer + ".");
+            action = "The dealer drew a " + dealer + ".";
         } else {
             System.out.println("The dealer has a " + dealer + ".");
+            action = "The dealer has a " + dealer + ".";
         }
+
+        return action;
     }
 
-    public void checkWinner() {
+    public String checkWinner(Integer totalDealerValue, Integer totalPlayerValue) {
+        String winner = "";
 
         if (totalDealerValue > 21) {
             totalDealerValue = 0;
             totalPlayerValue = 0;
 
             System.out.println("You are the winner!");
+            winner = "You are the winner!";
         } else if (totalPlayerValue > 21) {
             totalDealerValue = 0;
             totalPlayerValue = 0;
 
             System.out.println("The dealer won this game.");
+            winner = "The dealer won this game.";
         } else {
             totalDealerValue += dealerValue;
             totalPlayerValue += playerValue;
             userAction();
-            dealerAction();
-            checkWinner();
+            dealerAction(totalDealerValue);
+            checkWinner(totalDealerValue, totalPlayerValue);
         }
+
+        return winner;
     }
 
     public boolean continuePlaying() {
@@ -166,8 +183,8 @@ public class BlackJack implements GameInterface {
             deck = new createDeck();
             blackJack.shuffleDeck();
             blackJack.dealCards();
-            blackJack.valueChecking();
-            blackJack.checkWinner();
+            blackJack.valueChecking(dealer, player);
+            blackJack.checkWinner(totalDealerValue, totalPlayerValue);
         } while (blackJack.continuePlaying());
     }
 }
