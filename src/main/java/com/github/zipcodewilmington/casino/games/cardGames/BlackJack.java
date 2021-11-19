@@ -134,6 +134,8 @@ public class BlackJack implements GameInterface {
 
     public String checkWinner(Integer totalDealerValue, Integer totalPlayerValue) {
         String winner = "";
+        totalDealerValue += dealerValue;
+        totalPlayerValue += playerValue;
 
         if (totalDealerValue > 21) {
             totalDealerValue = 0;
@@ -148,8 +150,6 @@ public class BlackJack implements GameInterface {
             System.out.println("The dealer won this game.");
             winner = "The dealer won this game.";
         } else {
-            totalDealerValue += dealerValue;
-            totalPlayerValue += playerValue;
             userAction();
             dealerAction(totalDealerValue);
             checkWinner(totalDealerValue, totalPlayerValue);
