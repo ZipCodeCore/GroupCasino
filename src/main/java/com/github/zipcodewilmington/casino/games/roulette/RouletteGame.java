@@ -4,8 +4,10 @@ import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
+import com.sun.org.apache.bcel.internal.generic.ARETURN;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -43,142 +45,155 @@ public class RouletteGame implements GameInterface {
     }
 
 
-    public void evenChoice() {
-      this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
-        System.out.println("Roulette Number: " + this.rouletteNumber);
+    public String evenChoice(Integer randomNumber, Double betAmount) {
+
+      //this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+       consoleRed.println("Roulette Number: " + randomNumber);
         String result = "";
 
-        if (rouletteNumber % 2 == 0) {
-           this.balance += betAmount * 2;
+        if (randomNumber % 2 == 0) {
+           balance += betAmount * 2;
             result = ("you won $" + betAmount * 2);
 
 
         } else {
-           this.balance -= betAmount;
-            result = "you lost";
+           balance -= betAmount;
+            result = "you lost $" + (betAmount);
         }
 
-        consoleRed.println(result);
-        System.out.println("your balance is: " + this.balance);
+//        consoleRed.println(result);
+//        consoleRed.println("your balance is: " + balance);
+        return  (result + "\nYour balance is: $" + balance);
     }
 
-    public void oddChoice() {
-        this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
-        System.out.println("Roulette Number: " + this.rouletteNumber);
+    public String oddChoice(Integer randomNumber, Double betAmount) {
+       // this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+        consoleRed.println("Roulette Number: " + randomNumber);
         String result = "";
 
-        if (rouletteNumber % 2 == 1) {
-            this.balance += betAmount * 2;
-            result = "you won $" + betAmount * 2;
+        if (randomNumber % 2 == 1) {
+            balance += betAmount * 2;
+            result = "you won $" + (betAmount * 2);
 
         } else {
-            this.balance -= betAmount;
-            result = "you lost ";
+            balance -= betAmount;
+            result = "you lost $" + (betAmount);
         }
 
-        consoleRed.print(result);
-       consoleRed.println("Your Balance is: $" + this.balance);
+//      consoleRed.print(result);
+//       consoleRed.println("\nYour Balance is: $" + balance);
+       return (result + "\nYour balance is: $"+ balance);
     }
 
-    public void redChoice() {
-        this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
-        System.out.println("Roulette Number: " + this.rouletteNumber);
+    public String redChoice(Integer randomNumber, Double betAmount) {
+     //   this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+        consoleRed.println("Roulette Number: " + randomNumber);
         String result = "";
 
 
-        for (Integer num : this.red) {
-            if (num == this.rouletteNumber) {
-                this.balance += betAmount * 2;
-                result = "you won $" + betAmount * 2;
+       // for (Integer num : getRed()) {
 
-                break;
+
+            if (Arrays.asList(this.red).contains(randomNumber)) {
+                balance += betAmount * 2;
+                result = "you won $" + (betAmount * 2);
+            } else {
+                balance -= betAmount;
+                result = "you lost $" + (betAmount);
+
+
+            }
+
+        //}
+
+//        consoleRed.println(result);
+//        consoleRed.println("Your Balance is: $" + balance);
+        return (result + "\nYour balance is: $" + balance);
+    }
+
+    public String blackChoice(Integer randomNumber, Double betAmount) {
+      //  this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+        String result = "";
+        consoleRed.println("Roulette Number: " + randomNumber);
+
+            if (Arrays.asList(this.black).contains(randomNumber)) {
+                balance += betAmount * 2;
+                result = "you won $" + (betAmount * 2);
+
             }
             else {
-                this.balance -= betAmount;
-                result = "you lost";
-                break;
+                balance -= betAmount;
+                result = "you lost $" + (betAmount);
+
             }
-        }
-        consoleRed.println(result);
-        System.out.println("Your Balance is: $" + this.balance);
+
+//        consoleRed.println(result);
+//        consoleRed.println("Your Balance is: $" + balance);
+        return (result + "\nYour balance is: $" + balance);
     }
 
-    public void blackChoice() {
-        this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+    public String pickNumberChoice(Integer randomNumber, Double betAmount, Integer pickedNumber){
+      //  this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
         String result = "";
-        System.out.println("Roulette Number: " + this.rouletteNumber);
-        for (Integer num : this.black) {
-            if (num == this.rouletteNumber) {
-                this.balance += betAmount * 2;
-                result = "you won $" + betAmount * 2;
-                break;
-            } else {
-                this.balance -= betAmount;
-                result = "you lost";
-                break;
-            }
-        }
-        consoleRed.println(result);
-        System.out.println("Your Balance is: $" + this.balance);
-    }
 
-    public void pickNumberChoice(){
-        this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
-        String result = "";
-        System.out.println(this.rouletteNumber); // to test if number matches
-        Integer number = consoleRed.getIntegerInput("Place your bet on number(1-36): ");
+        Integer number = pickedNumber;
 
-        if(this.rouletteNumber == number){
-         this.balance += betAmount * 35;
+        if(randomNumber == number){
+         balance += betAmount * 35;
             result = ("you won $" + betAmount * 35);
 
         } else {
-      this.balance -= betAmount;
-            result = "you lost";
+        balance -= betAmount;
+            result = "you lost $" + (betAmount);
         }
-     consoleRed.println(result);
-        System.out.println("Your Balance is: $" + this.balance);
+//     consoleRed.println(result);
+//     consoleRed.println("Your Balance is: $" + balance);
+     return (result + "\nYour balance is: $" + balance);
     }
 
-    public void betweenOneAndEighteen(){
-        this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+    public String betweenOneAndEighteen(Integer randomNumber, Double betAmount){
+     //   this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
      String result ="" ;
-      System.out.println("Roulette Number: " + this.rouletteNumber);
-     if(this.rouletteNumber >= 1 && this.rouletteNumber <= 18){
-         this.balance += betAmount * 2;
+      consoleRed.println("Roulette Number: " + randomNumber);
+     if(randomNumber >= 1 && randomNumber <= 18){
+         balance += betAmount * 2;
         result = "you won $" + (betAmount * 2);
 
      }else {
-         this.balance -= betAmount;
-       result = "you lost"  ;
+         balance -= betAmount;
+       result = "you lost $" + (betAmount)  ;
      }
 
-     consoleRed.println(result);
-        System.out.println("Your Balance is: $" + this.balance);
+//     consoleRed.println(result);
+//        consoleRed.println("Your Balance is: $" + balance);
+        return (result + "\nYour balance is: $" + balance);
     }
 
-    public void betweenNineteenAndThirtySix(){
-        this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+    public String betweenNineteenAndThirtySix(Integer randomNumber, Double betAmount){
+      //  this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
         String result ="" ;
-        System.out.println("Roulette Number: " + this.rouletteNumber);
+        consoleRed.println("Roulette Number: " + randomNumber);
 
-        if(this.rouletteNumber >= 19 && this.rouletteNumber <= 36){
-            this.balance += betAmount * 2;
+        if(randomNumber >= 19 && randomNumber <= 36){
+            balance += betAmount * 2;
             result = "you won $" + (betAmount *2);
 
         }else {
-            this.balance -= betAmount;
-            result = "you lost"  ;
+            balance -= betAmount;
+            result = "you lost $" + (betAmount)  ;
         }
 
-        consoleRed.println(result);
-        System.out.println("Your Balance is: $" + this.balance);
+//        consoleRed.println(result);
+//        consoleRed.println("Your Balance is: $" + balance);
+        return (result + "\nYour balance is: $" + balance);
     }
 
 
     public Double rouletteGame() {
+        consoleRed.println("Welcome to the Roulette Game!!!");
+        this.balance = consoleRed.getDoubleInput("Please make deposit to your account ");
      do {
-            consoleRed.println("Welcome to the Roulette Game!!!");
+
             this.betAmount = consoleRed.getDoubleInput("Please enter amount you would like to bet");
             consoleRed.println("PLease choose from the options below");
             choice = consoleRed.getIntegerInput("(1)Red  (2)Black  (3)Even  (4)Odd  (5)Pick Number (6)Low 1 to 18  (7)High 19 to 36");
@@ -189,25 +204,33 @@ public class RouletteGame implements GameInterface {
             }
 
             if (choice == 1) {
-                redChoice();
+                this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+               consoleRed.println(redChoice(this.rouletteNumber, this.betAmount));
 
             } else if (choice == 2) {
-                blackChoice();
+                this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+              consoleRed.println(blackChoice(this.rouletteNumber, this.betAmount));
 
             } else if (choice == 3) {
-                evenChoice();
+                this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+               consoleRed.println(evenChoice(this.rouletteNumber, this.betAmount));
 
             } else if (choice == 4) {
-                oddChoice();
+                this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+               consoleRed.println(oddChoice(this.rouletteNumber, this.betAmount));
 
             } else if (choice == 5) {
-                pickNumberChoice();
+                this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+                //System.out.println(rouletteNumber); //to test if number matches
+              consoleRed.println(pickNumberChoice(this.rouletteNumber, this.betAmount, consoleRed.getIntegerInput("Place your bet on number(1-36): ")));
 
             } else if (choice == 6) {
-                betweenOneAndEighteen();
+                this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+               consoleRed.println(betweenOneAndEighteen(this.rouletteNumber, this.betAmount));
 
             } else if (choice == 7) {
-                betweenNineteenAndThirtySix();
+                this.rouletteNumber = ThreadLocalRandom.current().nextInt(1, 36);
+               consoleRed.println(betweenNineteenAndThirtySix(this.rouletteNumber, this.betAmount));
             }
 
 
@@ -218,6 +241,7 @@ public class RouletteGame implements GameInterface {
 
         }while (true);
 
+     consoleRed.println("THANK YOU!!!");
         return null;
     }
 
