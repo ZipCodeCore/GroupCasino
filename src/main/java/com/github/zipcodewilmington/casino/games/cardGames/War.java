@@ -32,8 +32,23 @@ public class War implements GameInterface {
     public static void main(String[] args) {
         War war = new War();
 
-        war.warRules(); // WORX
-        war.howManyPlayers(); // WORX
+//        war.warRules(); // WORX
+//        war.howManyPlayers(); // WORX
+//        war.enterNames(); // WORX
+//        war.shuffle(); //
+//        war.determineRoundWinner(); //
+//        war.determineGameWinner(); // WORX
+//        war.keepPlaying(); //
+        war.runGame();
+    }
+
+
+    // todo game needs to retain number of players, names of players, and each players' score.
+    public void runGame() {
+
+        War war = new War();
+
+        war.howManyPlayers();
         war.enterNames(); // WORX
         war.shuffle(); //
         war.determineRoundWinner(); //
@@ -87,7 +102,7 @@ public class War implements GameInterface {
             player1Name = consoleAuto.getStringInput("Player 1, please enter your name:");
             player2Name = consoleAuto.getStringInput("Player 2, please enter your name:");
             consoleAuto.println("Player 1 name is saved as: " + player1Name); // todo take out
-            consoleAuto.println(" Player 2 name is saved as: " + player2Name); // todo take out
+            consoleAuto.println("Player 2 name is saved as: " + player2Name); // todo take out
 
         } else if (numberOfPlayers == 1) {
             player1Name = consoleAuto.getStringInput("Player 1, please enter your name:");
@@ -106,11 +121,12 @@ public class War implements GameInterface {
     // this method determines winner of each individual round
     public void determineRoundWinner() {
 
+        consoleAuto.println("Let's flip over our cards.");
         Cards player1Card = deck.cardsStack.pop();
         Cards player2Card = deck.cardsStack.pop();
 
-        System.out.println(player1Name + " draws a " + player1Card); // print player1card
-        System.out.println(player2Name + " draws a " + player2Card); // print player2card
+        consoleAuto.println("\n" + player1Name + " draws a " + player1Card); // print player1card
+        consoleAuto.println("\n" + player2Name + " draws a " + player2Card); // print player2card
 
         Rank player1CardRank = player1Card.getRank();
         Rank player2CardRank = player2Card.getRank();
@@ -120,19 +136,19 @@ public class War implements GameInterface {
 
 
         if (player1CardRank.compareTo(player2CardRank) > 0) {
-            consoleAuto.println("\nPlayer 1 has won this round.\n");
+            consoleAuto.println("\n" + player1Name + " has won this round.");
             player1Score++;
-            consoleAuto.println("Player 1 now has " + player1Score + " points.");
+            consoleAuto.println("\n" + player1Name + " now has " + player1Score + " points.\n");
 
         } else if (player1CardRank.compareTo(player2CardRank) < 0) {
             // if 2 is higher than 1, 2 wins, and one point added to score for player 2
-            consoleAuto.println("\nPlayer 2 has won this round.\n");
+            consoleAuto.println("\n" + player2Name + " has won this round.");
             player2Score++;
-            consoleAuto.println("Player 2 now has " + player2Score + " points.");
+            consoleAuto.println("\n" + player2Name + " now has " + player2Score + " points.\n");
 
         } else if (player1CardRank.compareTo(player2CardRank) == 0) {
             // this is a tie. neither players gets a point
-            consoleAuto.println("\nIt was a tie. Let's deal again.\n");
+            consoleAuto.println("\nIt was a tie.\n");
             player1Card = deck.cardsStack.pop();
             player2Card = deck.cardsStack.pop();
         }
@@ -143,9 +159,9 @@ public class War implements GameInterface {
     // this method declares a winner for whoever reached 10 points first
     public void determineGameWinner() {
         if (player1Score >= 10) {
-            consoleAuto.println("\nPlayer 1 has won the game!\n");
+            consoleAuto.println("\n" + player1Name + " has won the game!\n");
         } else if (player2Score >= 10) {
-            consoleAuto.println("\nPlayer 2 has won the game!\n");
+            consoleAuto.println("\n" + player2Name + " has won the game!\n");
         }
     }
 
@@ -154,10 +170,10 @@ public class War implements GameInterface {
         String answer = consoleAuto.getStringInput("Please type in YES or NO.");
 
         if (answer.equalsIgnoreCase("YES")) {
-            System.out.println("play game again");
-
+            System.out.println(" ");
+            runGame();
         } else if (answer.equalsIgnoreCase("NO")) {
-            System.out.println("should quit here");
+            System.out.println(" ");
             // todo quit game return to main menu
         } else {
             do {
@@ -166,7 +182,6 @@ public class War implements GameInterface {
             }
             while (!answer.equalsIgnoreCase("yes") && !answer.equalsIgnoreCase("no"));
         }
-
 
 
 //        return;
