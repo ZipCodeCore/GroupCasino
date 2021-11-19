@@ -6,10 +6,8 @@ import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.Collections;
-import java.util.Scanner;
 
 public class BlackJack implements GameInterface {
-    private com.github.zipcodewilmington.casino.games.war.WarPlayer warplayer;
     private IOConsole input = new IOConsole(AnsiColor.AUTO);
     createDeck deck = new createDeck();
     Cards dealer;
@@ -44,7 +42,7 @@ public class BlackJack implements GameInterface {
         dealer = deck.cardsStack.pop();
         player = deck.cardsStack.pop();
 
-        System.out.println("The dealer drew a " + dealer + "\n" + "The player drew a " + player);
+        System.out.println("The dealer drew a " + dealer + "\n" + "You drew a " + player);
     }
 
     public void valueChecking() {
@@ -54,15 +52,10 @@ public class BlackJack implements GameInterface {
         playerValue = playerRank.getFirstValue();
 
         if (dealerRank.equals(Rank.ACE)) {
-            String choice = input.getStringInput("Is the value of your ACE a 1 or an 11: ");
-
-            if (choice.equals("1")) {
+            if ((totalDealerValue + 11) < 17) {
                 dealerValue = Rank.ACE.getFirstValue();
-            } else if (choice.equals("11")) {
+            } else if ((totalDealerValue + 11) <= 21) {
                 dealerValue = Rank.ACE.getSecondValue();
-            } else {
-                System.out.println("Please choose 1 or 11.");
-                valueChecking();
             }
         }
 
@@ -81,13 +74,10 @@ public class BlackJack implements GameInterface {
 
         if (dealerRank.equals(Rank.JACK) || dealerRank.equals(Rank.QUEEN) || dealerRank.equals(Rank.KING)) {
             dealerValue = Rank.TEN.getFirstValue();
-            totalDealerValue += dealerValue;
-        } else if (playerRank.equals(Rank.JACK) || playerRank.equals(Rank.QUEEN) || playerRank.equals(Rank.KING)) {
+        }
+
+        if (playerRank.equals(Rank.JACK) || playerRank.equals(Rank.QUEEN) || playerRank.equals(Rank.KING)) {
             playerValue = Rank.TEN.getFirstValue();
-            totalPlayerValue += playerValue;
-        } else {
-            totalDealerValue += dealerValue;
-            totalPlayerValue += playerValue;
         }
     }
 
@@ -111,8 +101,35 @@ public class BlackJack implements GameInterface {
         }
     }
 
+    public void dealerAction() {
+        if (totalDealerValue <= 16) {
+            dealer = deck.cardsStack.pop();
+            valueChecking();
+            System.out.println("The dealer drew a " + dealer + ".");
+        } else {
+            System.out.println("The dealer has a " + dealer + ".");
+        }
+    }
+
     public void checkWinner() {
 
+        if (totalDealerValue > 21) {
+            totalDealerValue = 0;
+            totalPlayerValue = 0;
+
+            System.out.println("You are the winner!");
+        } else if (totalPlayerValue > 21) {
+            totalDealerValue = 0;
+            totalPlayerValue = 0;
+
+            System.out.println("The dealer won this game.");
+        } else {
+            totalDealerValue += dealerValue;
+            totalPlayerValue += playerValue;
+            userAction();
+            dealerAction();
+            checkWinner();
+        }
     }
 
     public boolean continuePlaying() {
@@ -146,12 +163,11 @@ public class BlackJack implements GameInterface {
         BlackJack blackJack = new BlackJack();
 
         do {
+            deck = new createDeck();
             blackJack.shuffleDeck();
             blackJack.dealCards();
             blackJack.valueChecking();
-            blackJack.userAction();
-            //blackJack.checkWinner();
+            blackJack.checkWinner();
         } while (blackJack.continuePlaying());
     }
 }
-
