@@ -11,6 +11,7 @@ public class BlackJack implements GameInterface {
     private IOConsole input = new IOConsole(AnsiColor.AUTO);
     createDeck deck = new createDeck();
     Cards dealer = deck.cardsStack.pop();
+    Integer ACEValue = 1;
     private Rank dealerRank;
     private Integer dealerValue = 0;
     Integer totalDealerValue = 0;
@@ -42,7 +43,20 @@ public class BlackJack implements GameInterface {
         System.out.println("The dealer drew a " + dealer + "\n" + "You drew a " + player);
     }
 
-    public Integer valueChecking(Cards dealer, Cards player) {
+    public void valueOfACE() {
+        String choice = input.getStringInput("Is the value of your ACE a 1 or an 11: ");
+
+        if (choice.equals("1")) {
+            ACEValue = 1;
+        } else if (choice.equals("11")) {
+            ACEValue = 11;
+        } else {
+            System.out.println("Please choose 1 or 11.");
+            valueOfACE();
+        }
+    }
+
+    public Integer valueChecking(Cards dealer, Cards player, Integer ACEValue) {
         dealerRank = dealer.getRank();
         dealerValue = dealerRank.getFirstValue();
         playerRank = player.getRank();
@@ -60,17 +74,12 @@ public class BlackJack implements GameInterface {
         }
 
         if (playerRank.equals(Rank.ACE)) {
-            String choice = input.getStringInput("Is the value of your ACE a 1 or an 11: ");
-
-            if (choice.equals("1")) {
+            if (ACEValue == 1) {
                 playerValue = Rank.ACE.getFirstValue();
                 value = playerValue;
-            } else if (choice.equals("11")) {
+            } else if (ACEValue == 11) {
                 playerValue = Rank.ACE.getSecondValue();
                 value = playerValue;
-            } else {
-                System.out.println("Please choose 1 or 11.");
-                valueChecking(dealer, player);
             }
         }
 
@@ -94,7 +103,7 @@ public class BlackJack implements GameInterface {
         switch (action.toLowerCase()) {
             case "hit":
                 player = deck.cardsStack.pop();
-                valueChecking(dealer, player);
+                valueChecking(dealer, player, ACEValue);
                 System.out.println("You drew a " + player + ".");
                 break;
             case "stand":
@@ -112,7 +121,7 @@ public class BlackJack implements GameInterface {
 
         if (totalDealerValue <= 16) {
             dealer = deck.cardsStack.pop();
-            valueChecking(dealer, player);
+            valueChecking(dealer, player, ACEValue);
             System.out.println("The dealer drew a " + dealer + ".");
             action = "The dealer drew a " + dealer + ".";
         } else {
@@ -183,7 +192,8 @@ public class BlackJack implements GameInterface {
             deck = new createDeck();
             blackJack.shuffleDeck();
             blackJack.dealCards();
-            blackJack.valueChecking(dealer, player);
+            blackJack.valueOfACE();
+            blackJack.valueChecking(dealer, player, ACEValue);
             blackJack.checkWinner(totalDealerValue, totalPlayerValue);
         } while (blackJack.continuePlaying());
     }
