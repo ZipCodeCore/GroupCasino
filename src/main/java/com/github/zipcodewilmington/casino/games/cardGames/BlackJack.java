@@ -1,24 +1,30 @@
 package com.github.zipcodewilmington.casino.games.cardGames;
 
-import java.util.Collections;
-import java.util.Scanner;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.utils.AnsiColor;
+import com.github.zipcodewilmington.utils.IOConsole;
 
-public class BlackJack {
+import java.util.Collections;
+
+public class BlackJack implements GameInterface {
+    private IOConsole input = new IOConsole(AnsiColor.AUTO);
+    createDeck deck = new createDeck();
+    Cards dealer = deck.cardsStack.pop();
+    private Rank dealerRank;
+    private Integer dealerValue = 0;
+    Integer totalDealerValue = 0;
+    Cards player = deck.cardsStack.pop();
+    private Rank playerRank;
+    private Integer playerValue = 0;
+    Integer totalPlayerValue = 0;
 
     public static void main(String[] args) {
         BlackJack blackJack = new BlackJack();
 
         System.out.println(blackJack.rules());
 
-        do {
-            blackJack.callDeck();
-            //dealCards();
-            //dealersHand();
-            //usersHand();
-            //userAction();
-            //checkWinner();
-            //continuePlaying();
-        } while (blackJack.continuePlaying());
+        blackJack.run();
     }
 
     public String rules() {
@@ -28,60 +34,157 @@ public class BlackJack {
                 " totaling closer to 21, without going over, than the dealer's cards.";
     }
 
-    public void callDeck() {
-        createDeck deck = new createDeck();
+    public void shuffleDeck() {
         Collections.shuffle(deck.cardsStack);
-        for (Cards card : deck.cardsStack) {
-            System.out.println(card.toString());
-        }
     }
 
     public void dealCards() {
-        System.out.println("How many people are playing?");
-
+        System.out.println("The dealer drew a " + dealer + "\n" + "You drew a " + player);
     }
 
-    public void dealersHand() {
+    public Integer valueChecking(Cards dealer, Cards player) {
+        dealerRank = dealer.getRank();
+        dealerValue = dealerRank.getFirstValue();
+        playerRank = player.getRank();
+        playerValue = playerRank.getFirstValue();
+        Integer value = 0;
 
-    }
+        if (dealerRank.equals(Rank.ACE)) {
+            if ((totalDealerValue + 11) < 17) {
+                dealerValue = Rank.ACE.getFirstValue();
+                value = dealerValue;
+            } else if ((totalDealerValue + 11) <= 21) {
+                dealerValue = Rank.ACE.getSecondValue();
+                value = dealerValue;
+            }
+        }
 
-    public void usersHand() {
+        if (playerRank.equals(Rank.ACE)) {
+            String choice = input.getStringInput("Is the value of your ACE a 1 or an 11: ");
 
+            if (choice.equals("1")) {
+                playerValue = Rank.ACE.getFirstValue();
+                value = playerValue;
+            } else if (choice.equals("11")) {
+                playerValue = Rank.ACE.getSecondValue();
+                value = playerValue;
+            } else {
+                System.out.println("Please choose 1 or 11.");
+                valueChecking(dealer, player);
+            }
+        }
+
+        if (dealerRank.equals(Rank.JACK) || dealerRank.equals(Rank.QUEEN) || dealerRank.equals(Rank.KING)) {
+            dealerValue = Rank.TEN.getFirstValue();
+            value = dealerValue;
+        }
+
+        if (playerRank.equals(Rank.JACK) || playerRank.equals(Rank.QUEEN) || playerRank.equals(Rank.KING)) {
+            playerValue = Rank.TEN.getFirstValue();
+            value = playerValue;
+        }
+
+        return value;
     }
 
     public void userAction() {
-        String action = "";
+        String action = input.getStringInput("What do you want to do?\n" +
+                                            "[HIT], [STAND], [DOUBLE DOWN]");
 
-        switch (action) {
+        switch (action.toLowerCase()) {
             case "hit":
-                System.out.println("you said hit");
+                player = deck.cardsStack.pop();
+                valueChecking(dealer, player);
+                System.out.println("You drew a " + player + ".");
                 break;
             case "stand":
-                System.out.println("you said stand");
                 break;
             case "double down":
                 System.out.println("you said double down");
-                break;
-            case "split":
-                System.out.println("you said split");
-                break;
-            case "insurance":
-                System.out.println("you said insurance");
                 break;
             default:
                 System.out.println("Please choose a valid option.");
         }
     }
 
-    public void checkWinner() {
+    public String dealerAction(Integer totalDealerValue) {
+        String action = "";
 
+        if (totalDealerValue <= 16) {
+            dealer = deck.cardsStack.pop();
+            valueChecking(dealer, player);
+            System.out.println("The dealer drew a " + dealer + ".");
+            action = "The dealer drew a " + dealer + ".";
+        } else {
+            System.out.println("The dealer has a " + dealer + ".");
+            action = "The dealer has a " + dealer + ".";
+        }
+
+        return action;
+    }
+
+    public String checkWinner(Integer totalDealerValue, Integer totalPlayerValue) {
+        String winner = "";
+
+        if (totalDealerValue > 21) {
+            totalDealerValue = 0;
+            totalPlayerValue = 0;
+
+            System.out.println("You are the winner!");
+            winner = "You are the winner!";
+        } else if (totalPlayerValue > 21) {
+            totalDealerValue = 0;
+            totalPlayerValue = 0;
+
+            System.out.println("The dealer won this game.");
+            winner = "The dealer won this game.";
+        } else {
+            totalDealerValue += dealerValue;
+            totalPlayerValue += playerValue;
+            userAction();
+            dealerAction(totalDealerValue);
+            checkWinner(totalDealerValue, totalPlayerValue);
+        }
+
+        return winner;
     }
 
     public boolean continuePlaying() {
         boolean answer = false;
-        //System.out.println("Would you like to keep playing?");
+        String choice = input.getStringInput("Do you want to play again: (Yes or No)");
+
+        if (choice.equalsIgnoreCase("yes")) {
+            answer = true;
+        } else if (choice.equalsIgnoreCase("no")) {
+            answer = false;
+        } else {
+            System.out.println("Please say yes or no.");
+            continuePlaying();
+        }
 
         return answer;
     }
-}
 
+    @Override
+    public void add(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void run() {
+        BlackJack blackJack = new BlackJack();
+
+        do {
+            deck = new createDeck();
+            blackJack.shuffleDeck();
+            blackJack.dealCards();
+            blackJack.valueChecking(dealer, player);
+            blackJack.checkWinner(totalDealerValue, totalPlayerValue);
+        } while (blackJack.continuePlaying());
+    }
+}

@@ -150,7 +150,7 @@ public class War implements GameInterface {
 //        System.out.println(player2CardRank); // print player2card rank
 
 
-        if (player1CardRank.compareTo(player2CardRank) > 0) {
+        if (this.player1CardRank.compareTo(this.player2CardRank) > 0) {
             consoleAuto.println("\n" + player1Name + " has won this round!");
             result = "\n" + player1Name + " has won this round!";
             player1Score++;
@@ -158,7 +158,7 @@ public class War implements GameInterface {
             consoleAuto.println("\n" + player1Name + " now has a balance of " + balance);
             consoleAuto.println("\n" + player1Name + " now has won " + player1Score + " rounds.\n");
 
-        } else if (player1CardRank.compareTo(player2CardRank) < 0) {
+        } else if (this.player1CardRank.compareTo(this.player2CardRank) < 0) {
             // if 2 is higher than 1, 2 wins, and one point added to score for player 2
             consoleAuto.println("\n" + player2Name + " has won this round!");
             result = "\n" + player2Name + " has won this round!";
@@ -167,7 +167,7 @@ public class War implements GameInterface {
             consoleAuto.println("\n" + player1Name + " now has a balance of " + balance);
             consoleAuto.println("\n" + player2Name + " now has won " + player2Score + " rounds.\n");
 
-        } else if (player1CardRank.compareTo(player2CardRank) == 0) {
+        } else if (this.player1CardRank.compareTo(this.player2CardRank) == 0) {
             // this is a tie. neither players gets a point
             consoleAuto.println("\nIt was a tie.\n");
             result = "\nIt was a tie.\n";
