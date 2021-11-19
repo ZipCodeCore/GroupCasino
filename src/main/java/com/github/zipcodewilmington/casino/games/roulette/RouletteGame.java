@@ -35,7 +35,7 @@ public class RouletteGame implements GameInterface {
     public RouletteGame() {
 
         this.roulettePlayer = new RoulettePlayer(); //Composition
-
+        this.balance = roulettePlayer.getArcadeAccount().getBalance();
         this.rouletteNumber = null;
         this.red = new Integer[]{1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
         this.black = new Integer[]{2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
@@ -196,7 +196,7 @@ public class RouletteGame implements GameInterface {
 
 
     public void rouletteGame() {
-        this.balance = roulettePlayer.getArcadeAccount().getBalance();
+
         consoleRed.println("Welcome to the Roulette Game!!!");
         //this.balance = consoleRed.getDoubleInput("Please make deposit to your account ");
      do {
@@ -328,6 +328,7 @@ public class RouletteGame implements GameInterface {
     public void run() {
 
         RouletteGame rouletteGame = new RouletteGame();
+
         rouletteGame.rouletteGame();
     }
 }

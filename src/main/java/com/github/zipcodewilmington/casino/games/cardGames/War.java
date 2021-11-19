@@ -151,8 +151,9 @@ public class War implements GameInterface {
 
 
         if (this.player1CardRank.compareTo(this.player2CardRank) > 0) {
-            consoleAuto.println("\n" + player1Name + " has won this round!");
+
             result = "\n" + player1Name + " has won this round!";
+            consoleAuto.println(result);
             player1Score++;
             balance = balance + amountWagered;
             consoleAuto.println("\n" + player1Name + " now has a balance of " + balance);
@@ -160,8 +161,9 @@ public class War implements GameInterface {
 
         } else if (this.player1CardRank.compareTo(this.player2CardRank) < 0) {
             // if 2 is higher than 1, 2 wins, and one point added to score for player 2
-            consoleAuto.println("\n" + player2Name + " has won this round!");
+
             result = "\n" + player2Name + " has won this round!";
+            consoleAuto.println(result);
             player2Score++;
             balance = balance - amountWagered;
             consoleAuto.println("\n" + player1Name + " now has a balance of " + balance);
@@ -169,8 +171,9 @@ public class War implements GameInterface {
 
         } else if (this.player1CardRank.compareTo(this.player2CardRank) == 0) {
             // this is a tie. neither players gets a point
-            consoleAuto.println("\nIt was a tie.\n");
+
             result = "\nIt was a tie.\n";
+            consoleAuto.println(result);
             player1Card = deck.cardsStack.pop();
             player2Card = deck.cardsStack.pop();
         }
@@ -241,9 +244,10 @@ public class War implements GameInterface {
 
         do {
             war.shuffle();
+           war.dealCards();
             war.placeWager();
-            war.dealCards();
-            war.determineRoundWinner(player1CardRank, player2CardRank);
+
+            war.determineRoundWinner(this.player1CardRank, this.player2CardRank);
             war.determineGameWinner(this.player1Score, this.player2Score);
             String keepPlaying = "";
             keepPlaying = consoleAuto.getStringInput("Would you like to play again? Please press any key to continue, or type [no] to quit.");
