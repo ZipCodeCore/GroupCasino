@@ -1,7 +1,6 @@
 package com.github.zipcodewilmington;
 
-import com.github.zipcodewilmington.casino.games.cardGames.BlackJack;
-import com.github.zipcodewilmington.casino.games.cardGames.War;
+import com.github.zipcodewilmington.casino.games.cardGames.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -52,12 +51,15 @@ public class BlackJackTest {
         Assert.assertEquals(expected, actual);
     }
 
-    /*@Test
+    @Test
     public void dealerActionTest1() {
         //given
         BlackJack blackJack = new BlackJack();
+        Rank rank = Rank.JACK;
+        Suit suit = Suit.SPADES;
+        Cards card = new Cards(suit, rank);
         Integer totalDealerValue = 15;
-        String expected = "The dealer drew a " + dealer + ".";
+        String expected = "The dealer drew a " + card + ".";
 
         //when
         String actual = blackJack.dealerAction(totalDealerValue);
@@ -70,8 +72,11 @@ public class BlackJackTest {
     public void dealerActionTest2() {
         //given
         BlackJack blackJack = new BlackJack();
+        Rank rank = Rank.KING;
+        Suit suit = Suit.SPADES;
+        Cards card = new Cards(suit, rank);
         Integer totalDealerValue = 18;
-        String expected = "The dealer has a " + dealer + ".";
+        String expected = "The dealer has a " + card + ".";
 
         //when
         String actual = blackJack.dealerAction(totalDealerValue);
@@ -84,12 +89,17 @@ public class BlackJackTest {
     public void valueChecking1() {
         //given
         BlackJack blackJack = new BlackJack();
-        Integer totalPlayerValue = 22;
-        Integer totalDealerValue = 0;
-        String expected = "The dealer won this game.";
+        Rank pRank = Rank.ACE;
+        Suit pSuit = Suit.SPADES;
+        Rank dRank = Rank.SIX;
+        Suit dSuit = Suit.SPADES;
+        Integer ACEValue = 1;
+        Cards dealer = new Cards(dSuit, dRank);
+        Cards player = new Cards(pSuit, pRank);
+        Integer expected = 1;
 
         //when
-        String actual = blackJack.checkWinner(totalDealerValue, totalPlayerValue);
+        Integer actual = blackJack.valueChecking(dealer, player, ACEValue);
 
         //then
         Assert.assertEquals(expected, actual);
@@ -99,12 +109,17 @@ public class BlackJackTest {
     public void valueChecking2() {
         //given
         BlackJack blackJack = new BlackJack();
-        Integer totalPlayerValue = 22;
-        Integer totalDealerValue = 0;
-        String expected = "The dealer won this game.";
+        Rank pRank = Rank.ACE;
+        Suit pSuit = Suit.SPADES;
+        Rank dRank = Rank.SIX;
+        Suit dSuit = Suit.SPADES;
+        Integer ACEValue = 11;
+        Cards dealer = new Cards(dSuit, dRank);
+        Cards player = new Cards(pSuit, pRank);
+        Integer expected = 11;
 
         //when
-        String actual = blackJack.checkWinner(totalDealerValue, totalPlayerValue);
+        Integer actual = blackJack.valueChecking(dealer, player, ACEValue);
 
         //then
         Assert.assertEquals(expected, actual);
@@ -114,12 +129,17 @@ public class BlackJackTest {
     public void valueChecking3() {
         //given
         BlackJack blackJack = new BlackJack();
-        Integer totalPlayerValue = 22;
-        Integer totalDealerValue = 0;
-        String expected = "The dealer won this game.";
+        Rank pRank = Rank.JACK;
+        Suit pSuit = Suit.SPADES;
+        Rank dRank = Rank.SIX;
+        Suit dSuit = Suit.SPADES;
+        Integer ACEValue = 1;
+        Cards dealer = new Cards(dSuit, dRank);
+        Cards player = new Cards(pSuit, pRank);
+        Integer expected = 10;
 
         //when
-        String actual = blackJack.checkWinner(totalDealerValue, totalPlayerValue);
+        Integer actual = blackJack.valueChecking(dealer, player, ACEValue);
 
         //then
         Assert.assertEquals(expected, actual);
@@ -129,12 +149,17 @@ public class BlackJackTest {
     public void valueChecking4() {
         //given
         BlackJack blackJack = new BlackJack();
-        Integer totalPlayerValue = 22;
-        Integer totalDealerValue = 0;
-        String expected = "The dealer won this game.";
+        Rank pRank = Rank.QUEEN;
+        Suit pSuit = Suit.SPADES;
+        Rank dRank = Rank.SIX;
+        Suit dSuit = Suit.SPADES;
+        Integer ACEValue = 1;
+        Cards dealer = new Cards(dSuit, dRank);
+        Cards player = new Cards(pSuit, pRank);
+        Integer expected = 10;
 
         //when
-        String actual = blackJack.checkWinner(totalDealerValue, totalPlayerValue);
+        Integer actual = blackJack.valueChecking(dealer, player, ACEValue);
 
         //then
         Assert.assertEquals(expected, actual);
@@ -144,12 +169,17 @@ public class BlackJackTest {
     public void valueChecking5() {
         //given
         BlackJack blackJack = new BlackJack();
-        Integer totalPlayerValue = 22;
-        Integer totalDealerValue = 0;
-        String expected = "The dealer won this game.";
+        Rank pRank = Rank.KING;
+        Suit pSuit = Suit.SPADES;
+        Rank dRank = Rank.SIX;
+        Suit dSuit = Suit.SPADES;
+        Integer ACEValue = 1;
+        Cards dealer = new Cards(dSuit, dRank);
+        Cards player = new Cards(pSuit, pRank);
+        Integer expected = 10;
 
         //when
-        String actual = blackJack.checkWinner(totalDealerValue, totalPlayerValue);
+        Integer actual = blackJack.valueChecking(dealer, player, ACEValue);
 
         //then
         Assert.assertEquals(expected, actual);
@@ -159,14 +189,59 @@ public class BlackJackTest {
     public void valueChecking6() {
         //given
         BlackJack blackJack = new BlackJack();
-        Integer totalPlayerValue = 22;
-        Integer totalDealerValue = 0;
-        String expected = "The dealer won this game.";
+        Rank pRank = Rank.SIX;
+        Suit pSuit = Suit.SPADES;
+        Rank dRank = Rank.JACK;
+        Suit dSuit = Suit.SPADES;
+        Integer ACEValue = 1;
+        Cards dealer = new Cards(dSuit, dRank);
+        Cards player = new Cards(pSuit, pRank);
+        Integer expected = 10;
 
         //when
-        String actual = blackJack.checkWinner(totalDealerValue, totalPlayerValue);
+        Integer actual = blackJack.valueChecking(dealer, player, ACEValue);
 
         //then
         Assert.assertEquals(expected, actual);
-    }*/
+    }
+
+    @Test
+    public void valueChecking7() {
+        //given
+        BlackJack blackJack = new BlackJack();
+        Rank pRank = Rank.SIX;
+        Suit pSuit = Suit.SPADES;
+        Rank dRank = Rank.QUEEN;
+        Suit dSuit = Suit.SPADES;
+        Integer ACEValue = 1;
+        Cards dealer = new Cards(dSuit, dRank);
+        Cards player = new Cards(pSuit, pRank);
+        Integer expected = 10;
+
+        //when
+        Integer actual = blackJack.valueChecking(dealer, player, ACEValue);
+
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void valueChecking8() {
+        //given
+        BlackJack blackJack = new BlackJack();
+        Rank pRank = Rank.SIX;
+        Suit pSuit = Suit.SPADES;
+        Rank dRank = Rank.KING;
+        Suit dSuit = Suit.SPADES;
+        Integer ACEValue = 1;
+        Cards dealer = new Cards(dSuit, dRank);
+        Cards player = new Cards(pSuit, pRank);
+        Integer expected = 10;
+
+        //when
+        Integer actual = blackJack.valueChecking(dealer, player, ACEValue);
+
+        //then
+        Assert.assertEquals(expected, actual);
+    }
 }
