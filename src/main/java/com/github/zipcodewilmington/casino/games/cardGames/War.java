@@ -16,9 +16,9 @@ public class War implements GameInterface {
     private Double amountWagered;
     private Double player2Bet;
     private IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
-    private IOConsole consoleGreen = new IOConsole(AnsiColor.GREEN);
-    private IOConsole consoleRed = new IOConsole(AnsiColor.RED);
-    private IOConsole consoleBlack = new IOConsole(AnsiColor.BLACK);
+//    private IOConsole consoleGreen = new IOConsole(AnsiColor.GREEN);
+//    private IOConsole consoleRed = new IOConsole(AnsiColor.RED);
+//    private IOConsole consoleBlack = new IOConsole(AnsiColor.BLACK);
     private int numberOfPlayers;
     private String player1Name;
     private String player2Name;
@@ -34,13 +34,6 @@ public class War implements GameInterface {
 
         War war = new War();
         war.run();
-
-//        war.howManyPlayers(); // WORX
-//        war.enterNames(); // WORX
-//        war.shuffle(); //
-//        war.determineRoundWinner(); //
-//        war.determineGameWinner(); // WORX
-////        war.keepPlaying(); //
 
     }
 
@@ -86,7 +79,7 @@ public class War implements GameInterface {
 
 
     // this method takes in and set players names
-    public void enterNames() {
+    public String enterNames() {
 
         player1Name = consoleAuto.getStringInput("Player, please enter your name:");
         player2Name = "Computer";
@@ -103,6 +96,7 @@ public class War implements GameInterface {
 //            consoleAuto.println("Player 1 name is saved as: " + player1Name); // todo take out
 //            consoleAuto.println("Player 2 name is saved as: " + player2Name); // todo take out
 //        }
+        return null;
     }
 
     // this method creates a new deck and shuffles

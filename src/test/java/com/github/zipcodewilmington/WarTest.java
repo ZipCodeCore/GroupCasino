@@ -21,4 +21,19 @@ public class WarTest {
         //then
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testEnterNames() {
+        //given
+        War war = new War();
+        String expected = "Computer";
+
+        //when
+        String actual = war.enterNames();
+
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
+
 }
