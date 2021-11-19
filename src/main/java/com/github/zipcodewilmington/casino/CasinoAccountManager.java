@@ -44,12 +44,14 @@ public class CasinoAccountManager {
      * @param accountPassword password of account to be created
      * @return new instance of `ArcadeAccount` with specified `accountName` and `accountPassword`
      */
-    public CasinoAccount createAccount(String accountName, String accountPassword) {
+    public CasinoAccount createAccount(String accountName, String accountPassword , Double accountBalance) {
 //        String currentMethodName = new Object(){}.getClass().getEnclosingMethod().getName();
 //        String currentClassName = getClass().getName();
 //        String errorMessage = "Method with name [ %s ], defined in class with name [ %s ] has  not yet been implemented";
 //        throw new RuntimeException(String.format(errorMessage, currentMethodName, currentClassName));
-        CasinoAccount createAcct = new CasinoAccount(accountName, accountPassword);
+
+        CasinoAccount createAcct = new CasinoAccount(accountName, accountPassword, accountBalance);
+
         return createAcct;
     }
 

@@ -7,12 +7,15 @@ import com.github.zipcodewilmington.utils.IOConsole;
 import com.sun.org.apache.bcel.internal.generic.ARETURN;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 
 public class RouletteGame implements GameInterface {
+    private List<PlayerInterface> players = new ArrayList<>();
     private Integer[] red;
     private Integer[] black;
     private Integer choice;
@@ -23,7 +26,7 @@ public class RouletteGame implements GameInterface {
     private Double balance;
     private String response;
     private Integer rouletteNumber;
-    private RoulettePlayer roulettePlayer;
+    private PlayerInterface roulettePlayer;
 
 
     private final IOConsole consoleRed = new IOConsole(AnsiColor.PURPLE);
@@ -32,7 +35,7 @@ public class RouletteGame implements GameInterface {
     public RouletteGame() {
 
         this.roulettePlayer = new RoulettePlayer(); //Composition
-        this.balance = roulettePlayer.getArcadeAccount().getBalance();
+
         this.rouletteNumber = null;
         this.red = new Integer[]{1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
         this.black = new Integer[]{2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
@@ -52,18 +55,21 @@ public class RouletteGame implements GameInterface {
         String result = "";
 
         if (randomNumber % 2 == 0) {
-           balance += betAmount * 2;
+           // balance += betAmount * 2;
+          roulettePlayer.getArcadeAccount().setBalance( balance += betAmount * 2);
             result = ("you won $" + betAmount * 2);
 
 
         } else {
-           balance -= betAmount;
+          // balance -= betAmount;
+           roulettePlayer.getArcadeAccount().setBalance( balance -= betAmount);
             result = "you lost $" + (betAmount);
         }
 
 //        consoleRed.println(result);
 //        consoleRed.println("your balance is: " + balance);
-        return  (result + "\nYour balance is: $" + balance);
+        Double balance = roulettePlayer.getArcadeAccount().getBalance();
+        return  (result + "\nYour balance is: $" + getBalance());
     }
 
     public String oddChoice(Integer randomNumber, Double betAmount) {
@@ -189,9 +195,10 @@ public class RouletteGame implements GameInterface {
     }
 
 
-    public Double rouletteGame() {
+    public void rouletteGame() {
+        this.balance = roulettePlayer.getArcadeAccount().getBalance();
         consoleRed.println("Welcome to the Roulette Game!!!");
-        this.balance = consoleRed.getDoubleInput("Please make deposit to your account ");
+        //this.balance = consoleRed.getDoubleInput("Please make deposit to your account ");
      do {
 
             this.betAmount = consoleRed.getDoubleInput("Please enter amount you would like to bet");
@@ -242,7 +249,7 @@ public class RouletteGame implements GameInterface {
         }while (true);
 
      consoleRed.println("THANK YOU!!!");
-        return null;
+
     }
 
 
@@ -309,17 +316,18 @@ public class RouletteGame implements GameInterface {
 
     @Override
     public void add(PlayerInterface player) {
-
+    this.roulettePlayer = player;
     }
 
     @Override
     public void remove(PlayerInterface player) {
-
+    this.roulettePlayer = null;
     }
 
     @Override
     public void run() {
+
         RouletteGame rouletteGame = new RouletteGame();
-        Double money = rouletteGame.rouletteGame();
+        rouletteGame.rouletteGame();
     }
 }
