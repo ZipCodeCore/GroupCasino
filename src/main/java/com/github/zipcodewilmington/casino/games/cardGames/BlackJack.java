@@ -1,24 +1,32 @@
 package com.github.zipcodewilmington.casino.games.cardGames;
 
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.utils.AnsiColor;
+import com.github.zipcodewilmington.utils.IOConsole;
+
 import java.util.Collections;
 import java.util.Scanner;
 
-public class BlackJack {
+public class BlackJack implements GameInterface {
+    private com.github.zipcodewilmington.casino.games.war.WarPlayer warplayer;
+    private IOConsole input = new IOConsole(AnsiColor.AUTO);
+    createDeck deck = new createDeck();
+    Cards dealer;
+    private Rank dealerRank;
+    private Integer dealerValue;
+    Integer totalDealerValue = 0;
+    Cards player;
+    private Rank playerRank;
+    private Integer playerValue;
+    Integer totalPlayerValue = 0;
 
     public static void main(String[] args) {
         BlackJack blackJack = new BlackJack();
 
         System.out.println(blackJack.rules());
 
-        do {
-            blackJack.callDeck();
-            //dealCards();
-            //dealersHand();
-            //usersHand();
-            //userAction();
-            //checkWinner();
-            //continuePlaying();
-        } while (blackJack.continuePlaying());
+        blackJack.run();
     }
 
     public String rules() {
@@ -28,45 +36,75 @@ public class BlackJack {
                 " totaling closer to 21, without going over, than the dealer's cards.";
     }
 
-    public void callDeck() {
-        createDeck deck = new createDeck();
+    public void shuffleDeck() {
         Collections.shuffle(deck.cardsStack);
-        for (Cards card : deck.cardsStack) {
-            System.out.println(card.toString());
-        }
     }
 
     public void dealCards() {
-        System.out.println("How many people are playing?");
+        dealer = deck.cardsStack.pop();
+        player = deck.cardsStack.pop();
 
+        System.out.println("The dealer drew a " + dealer + "\n" + "The player drew a " + player);
     }
 
-    public void dealersHand() {
+    public void valueChecking() {
+        dealerRank = dealer.getRank();
+        dealerValue = dealerRank.getFirstValue();
+        playerRank = player.getRank();
+        playerValue = playerRank.getFirstValue();
 
-    }
+        if (dealerRank.equals(Rank.ACE)) {
+            String choice = input.getStringInput("Is the value of your ACE a 1 or an 11: ");
 
-    public void usersHand() {
+            if (choice.equals("1")) {
+                dealerValue = Rank.ACE.getFirstValue();
+            } else if (choice.equals("11")) {
+                dealerValue = Rank.ACE.getSecondValue();
+            } else {
+                System.out.println("Please choose 1 or 11.");
+                valueChecking();
+            }
+        }
 
+        if (playerRank.equals(Rank.ACE)) {
+            String choice = input.getStringInput("Is the value of your ACE a 1 or an 11: ");
+
+            if (choice.equals("1")) {
+                playerValue = Rank.ACE.getFirstValue();
+            } else if (choice.equals("11")) {
+                playerValue = Rank.ACE.getSecondValue();
+            } else {
+                System.out.println("Please choose 1 or 11.");
+                valueChecking();
+            }
+        }
+
+        if (dealerRank.equals(Rank.JACK) || dealerRank.equals(Rank.QUEEN) || dealerRank.equals(Rank.KING)) {
+            dealerValue = Rank.TEN.getFirstValue();
+            totalDealerValue += dealerValue;
+        } else if (playerRank.equals(Rank.JACK) || playerRank.equals(Rank.QUEEN) || playerRank.equals(Rank.KING)) {
+            playerValue = Rank.TEN.getFirstValue();
+            totalPlayerValue += playerValue;
+        } else {
+            totalDealerValue += dealerValue;
+            totalPlayerValue += playerValue;
+        }
     }
 
     public void userAction() {
-        String action = "";
+        String action = input.getStringInput("What do you want to do?\n" +
+                                            "[HIT], [STAND], [DOUBLE DOWN]");
 
-        switch (action) {
+        switch (action.toLowerCase()) {
             case "hit":
-                System.out.println("you said hit");
+                player = deck.cardsStack.pop();
+                valueChecking();
+                System.out.println("You drew a " + player + ".");
                 break;
             case "stand":
-                System.out.println("you said stand");
                 break;
             case "double down":
                 System.out.println("you said double down");
-                break;
-            case "split":
-                System.out.println("you said split");
-                break;
-            case "insurance":
-                System.out.println("you said insurance");
                 break;
             default:
                 System.out.println("Please choose a valid option.");
@@ -79,9 +117,41 @@ public class BlackJack {
 
     public boolean continuePlaying() {
         boolean answer = false;
-        //System.out.println("Would you like to keep playing?");
+        String choice = input.getStringInput("Do you want to play again: (Yes or No)");
+
+        if (choice.equalsIgnoreCase("yes")) {
+            answer = true;
+        } else if (choice.equalsIgnoreCase("no")) {
+            answer = false;
+        } else {
+            System.out.println("Please say yes or no.");
+            continuePlaying();
+        }
 
         return answer;
+    }
+
+    @Override
+    public void add(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void run() {
+        BlackJack blackJack = new BlackJack();
+
+        do {
+            blackJack.shuffleDeck();
+            blackJack.dealCards();
+            blackJack.valueChecking();
+            blackJack.userAction();
+            //blackJack.checkWinner();
+        } while (blackJack.continuePlaying());
     }
 }
 
