@@ -111,14 +111,11 @@ public class War implements GameInterface {
         while (true) {
             if (amountWagered > balance) {
                 amountWagered = consoleAuto.getDoubleInput("You do not have enough money for that wager. Please place wager again.");
-            }
-            else if (amountWagered < 0) {
+            } else if (amountWagered < 0) {
                 amountWagered = consoleAuto.getDoubleInput("Sorry, but that is not a valid amount to wager. Please enter a wager more than zero.");
-            }
-            else if (amountWagered == 0) {
+            } else if (amountWagered == 0) {
                 amountWagered = consoleAuto.getDoubleInput("C'mon, that's no fun. Please enter a valid wager amount.");
-            }
-            else if (amountWagered <= balance) {
+            } else if (amountWagered <= balance) {
                 break;
             }
         }
@@ -177,7 +174,7 @@ public class War implements GameInterface {
             player1Card = deck.cardsStack.pop();
             player2Card = deck.cardsStack.pop();
         }
-    return result;
+        return result;
 
     }
 
@@ -195,7 +192,7 @@ public class War implements GameInterface {
             player2Score = 0;
             player1Score = 0;
         }
-    return result;
+        return result;
     }
 
 //    public void keepPlaying() {
@@ -244,8 +241,8 @@ public class War implements GameInterface {
 
         do {
             war.shuffle();
-           war.dealCards();
             war.placeWager();
+            war.dealCards();
 
             war.determineRoundWinner(this.player1CardRank, this.player2CardRank);
             war.determineGameWinner(this.player1Score, this.player2Score);

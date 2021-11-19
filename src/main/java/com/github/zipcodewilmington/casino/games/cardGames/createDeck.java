@@ -1,4 +1,4 @@
-package com.github.zipcodewilmington.casino.games.cardGames;git pull
+package com.github.zipcodewilmington.casino.games.cardGames;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
