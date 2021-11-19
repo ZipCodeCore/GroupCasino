@@ -31,41 +31,38 @@ public class War implements GameInterface {
 
     public static void main(String[] args) {
         War war = new War();
-
-//        war.warRules(); // WORX
+//
+//         // WORX
 //        war.howManyPlayers(); // WORX
 //        war.enterNames(); // WORX
 //        war.shuffle(); //
 //        war.determineRoundWinner(); //
 //        war.determineGameWinner(); // WORX
-//        war.keepPlaying(); //
-        war.runGame();
+////        war.keepPlaying(); //
+        war.run();
     }
 
 
     // todo game needs to retain number of players, names of players, and each players' score.
     public void runGame() {
 
-        War war = new War();
 
-        war.howManyPlayers();
-        war.enterNames(); // WORX
-        war.shuffle(); //
-        war.determineRoundWinner(); //
-        war.determineGameWinner(); // WORX
-        war.keepPlaying(); //
 
     }
 
 
+
     // this method states the rules of the game
-    public void warRules() {
-        System.out.println("Welcome to the game of War.\n\nEach player will get dealt a " +
+    public String warRules() {
+//        System.out.println("Welcome to the game of War.\n\nEach player will get dealt a " +
+//                "card. Whoever has the higher \nvalue card wins that round, and gets awarded " +
+//                "one point. In \nthe event of a tie, no points will be rewarded and both " +
+//                "\nplayers will play again. The winner is the first player to \nscore ten points.\n");
+
+        return ("Welcome to the game of War.\n\nEach player will get dealt a " +
                 "card. Whoever has the higher \nvalue card wins that round, and gets awarded " +
                 "one point. In \nthe event of a tie, no points will be rewarded and both " +
                 "\nplayers will play again. The winner is the first player to \nscore ten points.\n");
-
-        return;
 
     }
 
@@ -160,8 +157,12 @@ public class War implements GameInterface {
     public void determineGameWinner() {
         if (player1Score >= 10) {
             consoleAuto.println("\n" + player1Name + " has won the game!\n");
+            player1Score = 0;
+            player2Score = 0;
         } else if (player2Score >= 10) {
             consoleAuto.println("\n" + player2Name + " has won the game!\n");
+            player2Score = 0;
+            player1Score = 0;
         }
     }
 
@@ -182,8 +183,6 @@ public class War implements GameInterface {
             }
             while (!answer.equalsIgnoreCase("yes") && !answer.equalsIgnoreCase("no"));
         }
-
-
 //        return;
     }
 
@@ -201,6 +200,24 @@ public class War implements GameInterface {
     @Override
     public void run() {
         // where you have game running
-        War warGame = new War();
+
+        War war = new War();
+
+        System.out.println(war.warRules());
+        war.howManyPlayers();
+        war.enterNames();
+
+
+        do {
+            war.shuffle();
+            war.determineRoundWinner();
+            war.determineGameWinner();
+            String keepPlaying = "";
+            keepPlaying = consoleAuto.getStringInput("Would you like to play again? Please press any key to continue, or type [no] to quit.");
+            if (keepPlaying.equalsIgnoreCase("no")) {
+                break;
+            }
+        } while (true);
+
     }
 } // class War closing bracket
