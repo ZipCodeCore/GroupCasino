@@ -13,20 +13,19 @@ public class War implements GameInterface {
 
     createDeck deck = new createDeck();
     private Double balance;
+    private Double wager;
     private PlayerInterface warPlayer;
-    private double amountWagered;
     private Double player2Bet;
     private IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
     private int numberOfPlayers;
     private String player1Name;
-    private String player2Name;
     private int player1Score;
     private int player2Score;
     Cards player1Card = deck.cardsStack.pop();
     Cards player2Card = deck.cardsStack.pop();
     private Rank player1CardRank;
     private Rank player2CardRank;
-
+    private String choice;
 
 
     public War(CasinoAccount casinoAccount) {
@@ -74,33 +73,23 @@ public class War implements GameInterface {
     public String enterNames(String player1) {
 
         player1Name = player1;
-        player2Name = "Computer";
 
-//        if (numberOfPlayers == 2) {
-//            player1Name = consoleAuto.getStringInput("Player 1, please enter your name:");
-//            player2Name = consoleAuto.getStringInput("Player 2, please enter your name:");
-//            consoleAuto.println("Player 1 name is saved as: " + player1Name); // todo take out
-//            consoleAuto.println("Player 2 name is saved as: " + player2Name); // todo take out
-//
-//        } else if (numberOfPlayers == 1) {
-//            player1Name = consoleAuto.getStringInput("Player 1, please enter your name:");
-//            player2Name = "Computer";
-//            consoleAuto.println("Player 1 name is saved as: " + player1Name); // todo take out
-//            consoleAuto.println("Player 2 name is saved as: " + player2Name); // todo take out
-//        }
-        return null;
+        return player1Name;
     }
 
     // this method creates a new deck and shuffles
-    public void shuffle() {
+    public createDeck shuffle(createDeck deck) {
         Collections.shuffle(deck.cardsStack);
+
+        return deck;
     }
 
-    public void placeWager() {
+    public Double placeWager(Double balance, String choice) {
+
 
         consoleAuto.println(player1Name + ", your current balance is " + balance);
-        amountWagered = consoleAuto.getDoubleInput(player1Name + ", please enter your wager amount.");
-        while (true) {
+        Double amountWagered = Double.parseDouble(choice); // converting choice to a Double called amountWagered
+
             if (amountWagered > balance) {
                 amountWagered = consoleAuto.getDoubleInput("You do not have enough money for that wager. Please place wager again.");
             } else if (amountWagered < 0) {
@@ -108,47 +97,50 @@ public class War implements GameInterface {
             } else if (amountWagered == 0) {
                 amountWagered = consoleAuto.getDoubleInput("C'mon, that's no fun. Please enter a valid wager amount.");
             } else if (amountWagered <= balance) {
-                break;
+                wager = amountWagered; // setting amountWagered to global var wager in order to use in other methods
             }
-        }
+
+        return amountWagered;
     }
 
 
-    public void dealCards() {
+    public String dealCards(String deal) {
 
         consoleAuto.println("Let's flip over our cards.");
         consoleAuto.println("\n" + player1Name + " draws a " + player1Card); // print player1card
-        consoleAuto.println(player2Name + " draws a " + player2Card); // print player2card
+        consoleAuto.println("Computer draws a " + player2Card); // print player2card
 
+        return "";
     }
 
     // this method determines winner of each individual round
-    public String determineRoundWinner(Cards player1Card, Cards player2Card) {
+    public String determineRoundWinner(Cards player1Card, Cards player2Card, Double wager) {
 
         String result = "";
         player1CardRank = player1Card.getRank();
         player2CardRank = player2Card.getRank();
         Integer player1Value = player1CardRank.getFirstValue();
         Integer player2Value = player2CardRank.getFirstValue();
+        this.wager = wager;
 
         if (player1Value > player2Value) {
 
             result = "\n" + player1Name + " has won this round!";
             consoleAuto.println(result);
             player1Score++;
-            balance = balance + amountWagered;
+            balance = balance + wager;
             consoleAuto.println("\n" + player1Name + " now has a balance of " + balance);
             consoleAuto.println("\n" + player1Name + " now has won " + player1Score + " rounds.\n");
 
         } else if (player1Value < player2Value) {
             // if 2 is higher than 1, 2 wins, and one point added to score for player 2
 
-            result = "\n" + player2Name + " has won this round!";
+            result = "\nComputer has won this round!";
             consoleAuto.println(result);
             player2Score++;
-            balance = balance - amountWagered;
+            balance = balance - wager;
             consoleAuto.println("\n" + player1Name + " now has a balance of " + balance);
-            consoleAuto.println("\n" + player2Name + " now has won " + player2Score + " rounds.\n");
+            consoleAuto.println("\nComputer now has won " + player2Score + " rounds.\n");
 
         } else if (player1Value == player2Value) {
             // this is a tie. neither players gets a point
@@ -171,8 +163,8 @@ public class War implements GameInterface {
             player1Score = 0;
             player2Score = 0;
         } else if (player2Score >= 10) {
-            consoleAuto.println("\n" + player2Name + " has won the game!\n");
-            result = "\n" + player2Name + " has won the game!\n";
+            consoleAuto.println("\nComputer has won the game!\n");
+            result = "\nComputer has won the game!\n";
             player2Score = 0;
             player1Score = 0;
         }
@@ -202,12 +194,12 @@ public class War implements GameInterface {
 
     @Override
     public void add(PlayerInterface player) {
-
+        this.warPlayer = player;
     }
 
     @Override
     public void remove(PlayerInterface player) {
-
+        this.warPlayer = null;
     }
 
     @Override
@@ -220,19 +212,18 @@ public class War implements GameInterface {
 
         System.out.println(war.warRules());
 //        war.howManyPlayers();
-        war.enterNames(consoleAuto.getStringInput("Player, please enter your name:"));
+        this.choice = consoleAuto.getStringInput("Player, please enter your name:");
+        war.enterNames(choice);
 
 
         do {
-            war.shuffle();
-            war.placeWager();
+            war.shuffle(deck);
+            this.choice = consoleAuto.getStringInput(player1Name + ", please enter your wager amount.");
+            war.placeWager(5000.0, choice);
+            war.dealCards("");
+            war.dealCards("");
 
-            war.dealCards();
-
-            war.dealCards();
-
-
-            war.determineRoundWinner(player1Card, player2Card);
+            war.determineRoundWinner(player1Card, player2Card, wager);
             war.determineGameWinner(player1Score, player2Score);
             String keepPlaying = "";
             keepPlaying = consoleAuto.getStringInput("Would you like to play again? Please press any key to continue, or type [no] to quit.");

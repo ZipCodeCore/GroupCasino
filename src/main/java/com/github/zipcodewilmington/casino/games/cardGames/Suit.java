@@ -11,8 +11,4 @@ public enum Suit {
     Suit(String graphic) {
         this.graphic = graphic;
     }
-
-    public String getGraphic() {
-        return graphic;
-    }
 }
