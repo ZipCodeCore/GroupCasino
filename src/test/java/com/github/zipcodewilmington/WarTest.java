@@ -1,6 +1,7 @@
 package com.github.zipcodewilmington;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.games.cardGames.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -205,5 +206,34 @@ public class WarTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testAdd() {
+        //given
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 5000.0);
+        War war = new War(casinoAccount);
+        PlayerInterface player = new WarPlayer(casinoAccount);
+
+        //when
+        war.add(player);
+        CasinoAccount actual = player.getArcadeAccount();
+
+        //then
+        Assert.assertNotNull(actual);
+    }
+
+    @Test
+    public void testRemove() {
+        //given
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 5000.0);
+        War war = new War(casinoAccount);
+        PlayerInterface player = new BlackJackPlayer(casinoAccount);
+
+        //when
+        war.remove(player);
+        CasinoAccount actual = player.getArcadeAccount();
+
+        //then
+        Assert.assertNotNull(actual);
+    }
 
 }

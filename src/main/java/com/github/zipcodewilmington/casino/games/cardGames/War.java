@@ -209,6 +209,25 @@ public class War implements GameInterface {
         balance = warPlayer.getArcadeAccount().getBalance();
 
         War war = new War(warPlayer.getArcadeAccount());
+        consoleAuto.println("\n" +
+                "                                                                                                \n" +
+                "                                                                                                \n" +
+                "WWWWWWWW                           WWWWWWWW               AAA               RRRRRRRRRRRRRRRRR   \n" +
+                "W::::::W                           W::::::W              A:::A              R::::::::::::::::R  \n" +
+                "W::::::W                           W::::::W             A:::::A             R::::::RRRRRR:::::R \n" +
+                "W::::::W                           W::::::W            A:::::::A            RR:::::R     R:::::R\n" +
+                " W:::::W           WWWWW           W:::::W            A:::::::::A             R::::R     R:::::R\n" +
+                "  W:::::W         W:::::W         W:::::W            A:::::A:::::A            R::::R     R:::::R\n" +
+                "   W:::::W       W:::::::W       W:::::W            A:::::A A:::::A           R::::RRRRRR:::::R \n" +
+                "    W:::::W     W:::::::::W     W:::::W            A:::::A   A:::::A          R:::::::::::::RR  \n" +
+                "     W:::::W   W:::::W:::::W   W:::::W            A:::::A     A:::::A         R::::RRRRRR:::::R \n" +
+                "      W:::::W W:::::W W:::::W W:::::W            A:::::AAAAAAAAA:::::A        R::::R     R:::::R\n" +
+                "       W:::::W:::::W   W:::::W:::::W            A:::::::::::::::::::::A       R::::R     R:::::R\n" +
+                "        W:::::::::W     W:::::::::W            A:::::AAAAAAAAAAAAA:::::A      R::::R     R:::::R\n" +
+                "         W:::::::W       W:::::::W            A:::::A             A:::::A   RR:::::R     R:::::R\n" +
+                "          W:::::W         W:::::W            A:::::A               A:::::A  R::::::R     R:::::R\n" +
+                "           W:::W           W:::W            A:::::A                 A:::::A R::::::R     R:::::R\n" +
+                "            WWW             WWW            AAAAAAA                   AAAAAAARRRRRRRR     RRRRRRR\n");
 
         System.out.println(war.warRules());
 //        war.howManyPlayers();
