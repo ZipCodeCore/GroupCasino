@@ -1,6 +1,7 @@
 package com.github.zipcodewilmington;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.games.cardGames.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -442,5 +443,35 @@ public class BlackJackTest {
 
         //then
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void addTest() {
+        //given
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
+        PlayerInterface player = new BlackJackPlayer(casinoAccount);
+
+        //when
+        blackJack.add(player);
+        CasinoAccount actual = player.getArcadeAccount();
+
+        //then
+        Assert.assertNotNull(actual);
+    }
+
+    @Test
+    public void removeTest() {
+        //given
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
+        PlayerInterface player = new BlackJackPlayer(casinoAccount);
+
+        //when
+        blackJack.remove(player);
+        CasinoAccount actual = player.getArcadeAccount();
+
+        //then
+        Assert.assertNotNull(actual);
     }
 }
