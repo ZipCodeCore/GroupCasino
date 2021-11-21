@@ -35,12 +35,15 @@ public class BlackJack implements GameInterface {
                 " totaling closer to 21, without going over, than the dealer's cards.";
     }
 
-    public void shuffleDeck() {
+    public createDeck shuffleDeck(createDeck deck) {
         Collections.shuffle(deck.cardsStack);
+
+        return deck;
     }
 
-    public void dealCards() {
+    public String dealCards(Cards dealer, Cards player) {
         System.out.println("The dealer drew a " + dealer + "\n" + "You drew a " + player);
+        return "The dealer drew a " + dealer + "\n" + "You drew a " + player;
     }
 
     public void valueOfACE() {
@@ -166,6 +169,7 @@ public class BlackJack implements GameInterface {
             answer = true;
         } else if (choice.equalsIgnoreCase("no")) {
             answer = false;
+            System.out.println("Thank you for playing.");
         } else {
             System.out.println("Please say yes or no.");
             continuePlaying();
@@ -190,8 +194,8 @@ public class BlackJack implements GameInterface {
 
         do {
             deck = new createDeck();
-            blackJack.shuffleDeck();
-            blackJack.dealCards();
+            blackJack.shuffleDeck(deck);
+            blackJack.dealCards(dealer, player);
             blackJack.valueOfACE();
             blackJack.valueChecking(dealer, player, ACEValue);
             blackJack.checkWinner(totalDealerValue, totalPlayerValue);
