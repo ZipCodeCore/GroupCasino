@@ -1,5 +1,7 @@
 package com.github.zipcodewilmington.casino.games.roulette;
 
+import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.utils.AnsiColor;
@@ -23,29 +25,30 @@ public class RouletteGame implements GameInterface {
     private Integer loses;
     private Integer spins;
     private Double betAmount;
-    private Double balance;
+
     private String response;
     private Integer rouletteNumber;
     private PlayerInterface roulettePlayer;
+    private Double balance;
+   //private CasinoAccount casinoAccount = new CasinoAccount("j","j", 1500.0);
 
 
     private final IOConsole consoleRed = new IOConsole(AnsiColor.PURPLE);
     // private final IOConsole console2 = new IOConsole(AnsiColor.GREEN);
 
-    public RouletteGame() {
-
-        this.roulettePlayer = new RoulettePlayer(); //Composition
-        this.balance = roulettePlayer.getArcadeAccount().getBalance();
+    public RouletteGame(CasinoAccount casinoAccount) {
+        roulettePlayer = new RoulettePlayer(casinoAccount);
         this.rouletteNumber = null;
         this.red = new Integer[]{1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
         this.black = new Integer[]{2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
+        balance = roulettePlayer.getArcadeAccount().getBalance();
     }
 
 
-    public void printBalance(){
-        System.out.println(getBalance());
-
-    }
+//    public void printBalance(){
+//        System.out.println(getBalance());
+//
+//    }
 
 
     public String evenChoice(Integer randomNumber, Double betAmount) {
@@ -253,65 +256,13 @@ public class RouletteGame implements GameInterface {
     }
 
 
-    public Integer[] getRed() {
-        return red;
-    }
 
-    public Integer[] getBlack() {
-        return black;
-    }
-
-    public Integer getChoice() {
-        return choice;
-    }
-
-    public void setChoice(Integer choice) {
-        this.choice = choice;
-    }
-
-    public Integer getWins() {
-        return wins;
-    }
-
-    public void setWins(Integer wins) {
-        this.wins = wins;
-    }
-
-    public Integer getLoses() {
-        return loses;
-    }
-
-    public void setLoses(Integer loses) {
-        this.loses = loses;
-    }
-
-    public Integer getSpins() {
-        return spins;
-    }
-
-    public void setSpins(Integer spins) {
-        this.spins = spins;
-    }
-
-    public Double getBetAmount() {
-        return betAmount;
-    }
-
-    public void setBetAmount(Double betAmount) {
-        this.betAmount = betAmount;
-    }
 
     public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
 
-    public Integer getRouletteNumber() {
-        return rouletteNumber;
-    }
 
 
     @Override
@@ -327,7 +278,7 @@ public class RouletteGame implements GameInterface {
     @Override
     public void run() {
 
-        RouletteGame rouletteGame = new RouletteGame();
+        RouletteGame rouletteGame = new RouletteGame(roulettePlayer.getArcadeAccount());
 
         rouletteGame.rouletteGame();
     }

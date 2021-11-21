@@ -8,8 +8,10 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 public class RoulettePlayer implements PlayerInterface {
     private CasinoAccount arcadeAccount;
 
-    public  RoulettePlayer(){
-        this.arcadeAccount = new CasinoAccount();
+
+    public  RoulettePlayer( CasinoAccount casinoAccount){
+        this.arcadeAccount = casinoAccount;
+
     }
 
     @Override
@@ -21,8 +23,4 @@ public class RoulettePlayer implements PlayerInterface {
     public <SomeReturnType> SomeReturnType play() {
         return null;
     }
-
-   public Double getBalance(){
-        return this.getArcadeAccount().getBalance();
-   }
 }

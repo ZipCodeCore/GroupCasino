@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class War implements GameInterface {
 
-
+ private  PlayerInterface warPlayer;
     private Double balance = 1000.0;
     private double amountWagered;
     private Double player2Bet;
@@ -232,7 +232,7 @@ public class War implements GameInterface {
     @Override
     public void run() {
         // where you have game running
-        WarPlayer warPlayer = new WarPlayer();
+
         balance = warPlayer.getArcadeAccount().getBalance();
 
         War war = new War();
@@ -244,8 +244,9 @@ public class War implements GameInterface {
 
         do {
             war.shuffle();
-           war.dealCards();
             war.placeWager();
+           war.dealCards();
+
 
             war.determineRoundWinner(this.player1CardRank, this.player2CardRank);
             war.determineGameWinner(this.player1Score, this.player2Score);
