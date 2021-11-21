@@ -1,6 +1,8 @@
 package com.github.zipcodewilmington;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.games.cardGames.BlackJackPlayer;
 import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
 import org.junit.Assert;
 import org.junit.Test;
@@ -230,6 +232,35 @@ public class RouletteTest {
         String actual = rouletteGame.betweenNineteenAndThirtySix(18, 700.0);
         //Then
         Assert.assertEquals(expected, actual);
+    }
+    @Test
+    public void addRoulettePlayerTest() {
+        //given
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+        PlayerInterface player = new BlackJackPlayer(casinoAccount);
+
+        //when
+        rouletteGame.add(player);
+        CasinoAccount actual = player.getArcadeAccount();
+
+        //then
+        Assert.assertNotNull(actual);
+    }
+
+    @Test
+    public void removeRoulettePlayerTest() {
+        //given
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+        PlayerInterface player = new BlackJackPlayer(casinoAccount);
+
+        //when
+        rouletteGame.remove(player);
+        CasinoAccount actual = player.getArcadeAccount();
+
+        //then
+        Assert.assertNotNull(actual);
     }
 
 }

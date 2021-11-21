@@ -33,7 +33,14 @@ public class RouletteGame implements GameInterface {
             "░█──░█ ░█▀▀▀ ░█─── ░█▀▀█ ░█▀▀▀█ ░█▀▄▀█ ░█▀▀▀ 　 ▀▀█▀▀ ░█▀▀▀█ 　 ░█▀▀█ ░█▀▀▀█ ░█─░█ ░█─── ░█▀▀▀ ▀▀█▀▀ ▀▀█▀▀ ░█▀▀▀ █ █ █ \n" +
             "░█░█░█ ░█▀▀▀ ░█─── ░█─── ░█──░█ ░█░█░█ ░█▀▀▀ 　 ─░█── ░█──░█ 　 ░█▄▄▀ ░█──░█ ░█─░█ ░█─── ░█▀▀▀ ─░█── ─░█── ░█▀▀▀ ▀ ▀ ▀ \n" +
             "░█▄▀▄█ ░█▄▄▄ ░█▄▄█ ░█▄▄█ ░█▄▄▄█ ░█──░█ ░█▄▄▄ 　 ─░█── ░█▄▄▄█ 　 ░█─░█ ░█▄▄▄█ ─▀▄▄▀ ░█▄▄█ ░█▄▄▄ ─░█── ─░█── ░█▄▄▄ ▄ ▄ ▄";
-    private String outOfMoneyMessage = "\uD83C\uDD48\uD83C\uDD3E\uD83C\uDD44 \uD83C\uDD30\uD83C\uDD41\uD83C\uDD34 \uD83C\uDD31\uD83C\uDD41\uD83C\uDD3E\uD83C\uDD3A\uD83C\uDD34❕❕❕ \uD83C\uDD36\uD83C\uDD34\uD83C\uDD43 \uD83C\uDD3E\uD83C\uDD44\uD83C\uDD43 \uD83C\uDD3E\uD83C\uDD35 \uD83C\uDD3C\uD83C\uDD48 \uD83C\uDD32\uD83C\uDD30\uD83C\uDD42\uD83C\uDD38\uD83C\uDD3D\uD83C\uDD3E❕❕❕";
+    private String outOfMoneyMessage = "\n" +
+            "█░░█ █▀▀█ █░░█ 　 █▀▀█ █▀▀█ █▀▀ 　 █▀▀▄ █▀▀█ █▀▀█ █░█ █▀▀ █ █ █ 　 　 　 　 　 　 　 　 　 \n" +
+            "█▄▄█ █░░█ █░░█ 　 █▄▄█ █▄▄▀ █▀▀ 　 █▀▀▄ █▄▄▀ █░░█ █▀▄ █▀▀ ▀ ▀ ▀ 　 　 　 　 　 　 　 　 　 \n" +
+            "▄▄▄█ ▀▀▀▀ ░▀▀▀ 　 ▀░░▀ ▀░▀▀ ▀▀▀ 　 ▀▀▀░ ▀░▀▀ ▀▀▀▀ ▀░▀ ▀▀▀ ▄ ▄ ▄ 　 　 　 　 　 　 　 　 　 \n" +
+            "\n" +
+            "█▀▀▀ █▀▀ ▀▀█▀▀ 　 █▀▀█ █░░█ ▀▀█▀▀ 　 █▀▀█ █▀▀ 　 █▀▄▀█ █░░█ 　 █▀▀ █▀▀█ █▀▀ ░▀░ █▀▀▄ █▀▀█ █ █ █ \n" +
+            "█░▀█ █▀▀ ░░█░░ 　 █░░█ █░░█ ░░█░░ 　 █░░█ █▀▀ 　 █░▀░█ █▄▄█ 　 █░░ █▄▄█ ▀▀█ ▀█▀ █░░█ █░░█ ▀ ▀ ▀ \n" +
+            "▀▀▀▀ ▀▀▀ ░░▀░░ 　 ▀▀▀▀ ░▀▀▀ ░░▀░░ 　 ▀▀▀▀ ▀░░ 　 ▀░░░▀ ▄▄▄█ 　 ▀▀▀ ▀░░▀ ▀▀▀ ▀▀▀ ▀░░▀ ▀▀▀▀ ▄ ▄ ▄";
 
 
     private final IOConsole consolePurple = new IOConsole(AnsiColor.PURPLE);
@@ -183,7 +190,7 @@ public class RouletteGame implements GameInterface {
     }
 
 
-    public void rouletteGame() {
+    public void rouletteGame() { // GAME ENGINE
 
         consolePurple.println(welcomeMessage);
 

@@ -8,6 +8,15 @@ import java.util.Arrays;
 
 public class MainApplication {
     public static void main(String[] args) {
+
+
         new Casino().run();
+
+
+//RouletteGame rouletteGame = new RouletteGame(new CasinoAccount("j","j", 100.0));
+//rouletteGame.run();
+
+
+
     }
 }
