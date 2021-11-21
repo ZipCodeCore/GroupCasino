@@ -13,11 +13,9 @@ public class War implements GameInterface {
 
     createDeck deck = new createDeck();
     private Double balance;
-    private Double wager;
+    private Double wager = 0.0;
     private PlayerInterface warPlayer;
-    private Double player2Bet;
     private IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
-    private int numberOfPlayers;
     private String player1Name;
     private int player1Score;
     private int player2Score;
@@ -72,7 +70,7 @@ public class War implements GameInterface {
     // this method takes in and set players names
     public String enterNames(String player1) {
 
-        player1Name = player1;
+        this.player1Name = player1;
 
         return player1Name;
     }
@@ -84,7 +82,7 @@ public class War implements GameInterface {
         return deck;
     }
 
-    public Double placeWager(Double balance, String choice) {
+    public Double placeWager(Double balance, String choice, Double wager) {
 
 
         consoleAuto.println(player1Name + ", your current balance is " + balance);
@@ -100,7 +98,7 @@ public class War implements GameInterface {
                 wager = amountWagered; // setting amountWagered to global var wager in order to use in other methods
             }
 
-        return amountWagered;
+        return wager;
     }
 
 
@@ -121,7 +119,6 @@ public class War implements GameInterface {
         player2CardRank = player2Card.getRank();
         Integer player1Value = player1CardRank.getFirstValue();
         Integer player2Value = player2CardRank.getFirstValue();
-        this.wager = wager;
 
         if (player1Value > player2Value) {
 
@@ -157,12 +154,12 @@ public class War implements GameInterface {
     // this method declares a winner for whoever reached 10 points first
     public String determineGameWinner(int player1Score, int player2Score) {
         String result = "";
-        if (player1Score >= 10) {
+        if (player1Score == 10) {
             consoleAuto.println("\n" + player1Name + " has won the game!\n");
             result = "\n" + player1Name + " has won the game!\n";
             player1Score = 0;
             player2Score = 0;
-        } else if (player2Score >= 10) {
+        } else if (player2Score == 10) {
             consoleAuto.println("\nComputer has won the game!\n");
             result = "\nComputer has won the game!\n";
             player2Score = 0;
@@ -206,31 +203,44 @@ public class War implements GameInterface {
     public void run() {
         // where you have game running
 
-        balance = warPlayer.getArcadeAccount().getBalance();
+       // balance = warPlayer.getArcadeAccount().getBalance();
 
         War war = new War(warPlayer.getArcadeAccount());
+        consoleAuto.println("\n" +
+                "                                                                                                \n" +
+                "                                                                                                \n" +
+                "WWWWWWWW                           WWWWWWWW               AAA               RRRRRRRRRRRRRRRRR   \n" +
+                "W::::::W                           W::::::W              A:::A              R::::::::::::::::R  \n" +
+                "W::::::W                           W::::::W             A:::::A             R::::::RRRRRR:::::R \n" +
+                "W::::::W                           W::::::W            A:::::::A            RR:::::R     R:::::R\n" +
+                " W:::::W           WWWWW           W:::::W            A:::::::::A             R::::R     R:::::R\n" +
+                "  W:::::W         W:::::W         W:::::W            A:::::A:::::A            R::::R     R:::::R\n" +
+                "   W:::::W       W:::::::W       W:::::W            A:::::A A:::::A           R::::RRRRRR:::::R \n" +
+                "    W:::::W     W:::::::::W     W:::::W            A:::::A   A:::::A          R:::::::::::::RR  \n" +
+                "     W:::::W   W:::::W:::::W   W:::::W            A:::::A     A:::::A         R::::RRRRRR:::::R \n" +
+                "      W:::::W W:::::W W:::::W W:::::W            A:::::AAAAAAAAA:::::A        R::::R     R:::::R\n" +
+                "       W:::::W:::::W   W:::::W:::::W            A:::::::::::::::::::::A       R::::R     R:::::R\n" +
+                "        W:::::::::W     W:::::::::W            A:::::AAAAAAAAAAAAA:::::A      R::::R     R:::::R\n" +
+                "         W:::::::W       W:::::::W            A:::::A             A:::::A   RR:::::R     R:::::R\n" +
+                "          W:::::W         W:::::W            A:::::A               A:::::A  R::::::R     R:::::R\n" +
+                "           W:::W           W:::W            A:::::A                 A:::::A R::::::R     R:::::R\n" +
+                "            WWW             WWW            AAAAAAA                   AAAAAAARRRRRRRR     RRRRRRR\n");
 
         System.out.println(war.warRules());
-//        war.howManyPlayers();
-        this.choice = consoleAuto.getStringInput("Player, please enter your name:");
+        choice = consoleAuto.getStringInput("Player, please enter your name:");
         war.enterNames(choice);
-
 
         do {
             war.shuffle(deck);
-            this.choice = consoleAuto.getStringInput(player1Name + ", please enter your wager amount.");
-            war.placeWager(5000.0, choice);
+            choice = consoleAuto.getStringInput(player1Name + ", please enter your wager amount.");
+            war.placeWager(balance, choice, wager);
             war.dealCards("");
             war.dealCards("");
 
             war.determineRoundWinner(player1Card, player2Card, wager);
             war.determineGameWinner(player1Score, player2Score);
-            String keepPlaying = "";
-            keepPlaying = consoleAuto.getStringInput("Would you like to play again? Please press any key to continue, or type [no] to quit.");
-            if (keepPlaying.equalsIgnoreCase("no")) {
-                break;
-            }
-        } while (true);
 
+            choice = consoleAuto.getStringInput("Would you like to play again? Please press any key to continue, or type [no] to quit.");
+        } while (!choice.equalsIgnoreCase("no"));
     }
 } // class War closing bracket

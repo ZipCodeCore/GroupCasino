@@ -150,23 +150,25 @@ public class BlackJack implements GameInterface {
         totalPlayerValue += playerValue;
         this.wager = wager;
 
-        if (totalDealerValue > 21) {
+        if (totalDealerValue > 21 || (totalDealerValue >= 17 && totalPlayerValue > totalDealerValue)) {
             totalDealerValue = 0;
             totalPlayerValue = 0;
-            balance = balance + wager;
+            this.balance = balance + wager;
 
             System.out.println("\nYou are the winner!");
-            System.out.println("\nYour new balance is " + balance + ".\n");
+            System.out.println("\nYour new balance is " + this.balance + ".\n");
             winner = "You are the winner!";
         } else if (totalPlayerValue > 21) {
             totalDealerValue = 0;
             totalPlayerValue = 0;
-            balance = balance - wager;
+            this.balance = balance - wager;
 
             System.out.println("\nThe dealer won this game.");
-            System.out.println("\nYour new balance is " + balance + ".\n");
+            System.out.println("\nYour new balance is " + this.balance + ".\n");
             winner = "The dealer won this game.";
         } else {
+            System.out.println("\nThe total value of your cards is: " + totalPlayerValue);
+            System.out.println("The total value of the dealer's cards is: " + totalDealerValue);
             this.choice = input.getStringInput("\nWhat do you want to do?\n" +
                     "[HIT], [STAND], [DOUBLE DOWN]");
             userAction(choice, player, dealer, deck, ACEValue, wager);
@@ -206,6 +208,13 @@ public class BlackJack implements GameInterface {
     @Override
     public void run() {
         BlackJack blackJack = new BlackJack(blackJackPlayer.getArcadeAccount());
+
+        System.out.println("   ___     _       ___     ___    _  __       _    ___     ___    _  __  \n" +
+                "  | _ )   | |     /   \\   / __|  | |/ /    _ | |  /   \\   / __|  | |/ /  \n" +
+                "  | _ \\   | |__   | - |  | (__   | ' <    | || |  | - |  | (__   | ' <   \n" +
+                "  |___/   |____|  |_|_|   \\___|  |_|\\_\\   _\\__/   |_|_|   \\___|  |_|\\_\\  \n" +
+                "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| \n" +
+                "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' ");
 
         do {
             deck = new createDeck();
