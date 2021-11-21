@@ -8,6 +8,21 @@ import org.junit.Test;
 public class RouletteTest {
 
     @Test
+    public void testBalanceConstructor(){
+        //Given
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+        Double expectedBalance = 1500.0;
+        //When
+        Double actualBalance = rouletteGame.getBalance();
+        //Then
+        Assert.assertEquals(expectedBalance, actualBalance);
+
+    }
+
+
+
+    @Test
     public void testEvenWin() {
         //Given
         CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
