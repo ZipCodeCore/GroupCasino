@@ -220,6 +220,4 @@ public class BlackJack implements GameInterface {
             this.choice = input.getStringInput("\nDo you want to play again: (Yes or No)");
         } while (blackJack.continuePlaying(choice));
     }
-
-
 }
