@@ -12,6 +12,7 @@ public class War implements GameInterface {
 
 
     private Double balance;
+    private PlayerInterface warPlayer;
     private double amountWagered;
     private Double player2Bet;
     private IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
@@ -25,7 +26,6 @@ public class War implements GameInterface {
     private Rank player1CardRank;
     private Rank player2CardRank;
     createDeck deck = new createDeck();
-
 
 
     public static void main(String[] args) {
@@ -219,7 +219,7 @@ public class War implements GameInterface {
     @Override
     public void run() {
         // where you have game running
-        WarPlayer warPlayer = new WarPlayer();
+
         balance = warPlayer.getArcadeAccount().getBalance();
 
         War war = new War();
@@ -232,7 +232,11 @@ public class War implements GameInterface {
         do {
             war.shuffle();
             war.placeWager();
+
             war.dealCards();
+
+            war.dealCards();
+
 
             war.determineRoundWinner(this.player1CardRank, this.player2CardRank);
             war.determineGameWinner(this.player1Score, this.player2Score);

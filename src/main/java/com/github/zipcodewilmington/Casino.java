@@ -19,6 +19,8 @@ import com.github.zipcodewilmington.utils.IOConsole;
 public class Casino implements Runnable {
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
 
+
+
     @Override
     public void run() {
         String arcadeDashBoardInput;
@@ -34,13 +36,13 @@ public class Casino implements Runnable {
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
 
                     if (gameSelectionInput.equalsIgnoreCase("WAR")) {
-                        play(new War(), new WarPlayer());
+                        play(new War(), new WarPlayer(casinoAccount));
                     }
                     else if (gameSelectionInput.equalsIgnoreCase("BLACKJACK")) {
-                        play(new BlackJack(), new BlackJackPlayer());
+                        play(new BlackJack(), new BlackJackPlayer(casinoAccount));
                     }
                     else if (gameSelectionInput.equalsIgnoreCase("ROULETTE")) {
-                        play(new RouletteGame(), new RoulettePlayer());}
+                        play(new RouletteGame(casinoAccount), new RoulettePlayer(casinoAccount));}
                         else {
                         // TODO - implement better exception handling
                         String errorMessage = "[ %s ] is an invalid game selection";
@@ -66,7 +68,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Arcade Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ create-account ], [ select-game ]")
+                .append("\n\t[ create-account ], [ select-game ] [ logout ]")
                 .toString());
     }
 
@@ -74,7 +76,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ WAR ], [ BLACKJACK ], [ ROULETTE ]")
+                .append("\n\t[ WAR ], [ BLACKJACK ], [ ROULETTE ]")
                 .toString());
     }
 

@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington;
 
+import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,8 +10,9 @@ public class RouletteTest {
     @Test
     public void testEvenWin() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you won $200.0\n" +
                 "Your balance is: $1200.0";
 
@@ -25,8 +27,9 @@ public class RouletteTest {
     @Test
     public void testEvenLoss() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you lost $100.0\n" +
                 "Your balance is: $900.0";
         //When
@@ -38,8 +41,9 @@ public class RouletteTest {
     @Test
     public void testOddWin() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you won $400.0\n" +
                 "Your balance is: $1400.0";
 
@@ -54,8 +58,9 @@ public class RouletteTest {
     @Test
     public void testOddLoss() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you lost $200.0\n" +
                 "Your balance is: $800.0";
         //When
@@ -67,8 +72,9 @@ public class RouletteTest {
     @Test
     public void testRedWin() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you won $800.0\n" +
                 "Your balance is: $1800.0";
         //When
@@ -80,8 +86,9 @@ public class RouletteTest {
     @Test
     public void testRedLoss() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you lost $300.0\n" +
                 "Your balance is: $700.0";
         //When
@@ -93,8 +100,9 @@ public class RouletteTest {
     @Test
     public void testBlackWin() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you won $1000.0\n" +
                 "Your balance is: $2000.0";
         //When
@@ -106,8 +114,9 @@ public class RouletteTest {
     @Test
     public void testBlackLoss() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you lost $400.0\n" +
                 "Your balance is: $600.0";
         //When
@@ -120,8 +129,9 @@ public class RouletteTest {
     @Test
     public void testPickNumberWin() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you won $3500.0\n" +
                 "Your balance is: $4500.0";
         //When
@@ -134,8 +144,9 @@ public class RouletteTest {
     @Test
     public void testPickNumberLoss() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you lost $500.0\n" +
                 "Your balance is: $500.0";
 
@@ -148,8 +159,9 @@ public class RouletteTest {
     @Test
     public void testLowWin() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you won $800.0\n" +
                 "Your balance is: $1800.0";
 
@@ -162,8 +174,9 @@ public class RouletteTest {
     @Test
     public void testLowLoss() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you lost $500.0\n" +
                 "Your balance is: $500.0";
         //When
@@ -175,27 +188,29 @@ public class RouletteTest {
     @Test
     public void testHighWin() {
         //Given
-        RouletteGame rouletteGame = new RouletteGame();
-        rouletteGame.setBalance(1000.0);
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
         String expected = "you won $800.0\n" +
                 "Your balance is: $1800.0";
         //When
-String actual = rouletteGame.betweenNineteenAndThirtySix(21,400.0);
+        String actual = rouletteGame.betweenNineteenAndThirtySix(21, 400.0);
         //Then
         Assert.assertEquals(expected, actual);
 
     }
 
     @Test
-    public void testHighLoss(){
-     //Given
-     RouletteGame rouletteGame = new RouletteGame();
-     rouletteGame.setBalance(1000.0);
-     String expected = "you lost $700.0\n" +
-             "Your balance is: $300.0";
-     //When
-     String actual = rouletteGame.betweenNineteenAndThirtySix(18,700.0);
-     //Then
+    public void testHighLoss() {
+        //Given
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1000.0);
+        RouletteGame rouletteGame = new RouletteGame(casinoAccount);
+
+        String expected = "you lost $700.0\n" +
+                "Your balance is: $300.0";
+        //When
+        String actual = rouletteGame.betweenNineteenAndThirtySix(18, 700.0);
+        //Then
         Assert.assertEquals(expected, actual);
     }
 
