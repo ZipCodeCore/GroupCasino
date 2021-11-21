@@ -429,17 +429,18 @@ public class BlackJackTest {
         Assert.assertNotEquals(expected, actual);
     }
 
-//    @Test
-//    public void constructorTest() {
-//        //given
-//        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
-//        BlackJack blackJack = new BlackJack(casinoAccount);
-//        BlackJack expected = ;
-//
-//        //when
-//        BlackJack actual = blackJack;
-//
-//        //then
-//        Assert.assertNotEquals(expected, actual);
-//    }
+    @Test
+    public void rankValueTest() {
+        //given
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
+        Cards dealer = new Cards(Suit.SPADES, Rank.SIX);
+        Integer expected = 6;
+
+        //when
+        Integer actual = dealer.value();
+
+        //then
+        Assert.assertEquals(expected, actual);
+    }
 }
