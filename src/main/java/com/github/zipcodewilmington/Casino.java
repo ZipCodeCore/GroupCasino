@@ -20,7 +20,6 @@ public class Casino implements Runnable {
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
 
 
-
     @Override
     public void run() {
         String arcadeDashBoardInput;
@@ -32,6 +31,7 @@ public class Casino implements Runnable {
                 String accountPassword = console.getStringInput("Enter your account password:");
                 CasinoAccount casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
                 boolean isValidLogin = casinoAccount != null;
+
                 if (isValidLogin) {
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
 
