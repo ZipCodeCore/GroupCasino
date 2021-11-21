@@ -3,14 +3,13 @@ package com.github.zipcodewilmington.casino.games.cardGames;
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
-import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.Collections;
 
 public class BlackJack implements GameInterface {
-    private IOConsole input = new IOConsole(AnsiColor.AUTO);
+    private IOConsole input = new IOConsole(AnsiColor.BLUE);
     createDeck deck = new createDeck();
     Cards dealer = deck.cardsStack.pop();
     Integer ACEValue = 1;
@@ -23,6 +22,8 @@ public class BlackJack implements GameInterface {
     Integer totalPlayerValue = 0;
     private PlayerInterface blackJackPlayer;
     private Double balance;
+    private Double wager = 0.0;
+    private String choice;
 
     public BlackJack(CasinoAccount casinoAccount) {
         blackJackPlayer = new BlackJackPlayer(casinoAccount);
@@ -33,7 +34,13 @@ public class BlackJack implements GameInterface {
         return "Blackjack is played with one or more standard 52-card decks, with each denomination assigned a\n " +
                 "point value. The cards 2 through 10 are worth their face value. Kings, queens, and jacks are each\n" +
                 " worth 10, and aces may be used as either 1 or 11. The object for the player is to draw cards\n" +
-                " totaling closer to 21, without going over, than the dealer's cards.";
+                " totaling closer to 21, without going over, than the dealer's cards.\n";
+    }
+
+    public Double makeWager(String choice) {
+        wager = Double.parseDouble(choice);
+
+        return wager;
     }
 
     public createDeck shuffleDeck(createDeck deck) {
@@ -43,21 +50,21 @@ public class BlackJack implements GameInterface {
     }
 
     public String dealCards(Cards dealer, Cards player) {
-        System.out.println("The dealer drew a " + dealer + "\n" + "You drew a " + player);
+        System.out.println("\nThe dealer drew a " + dealer + "\n" + "You drew a " + player);
         return "The dealer drew a " + dealer + "\n" + "You drew a " + player;
     }
 
-    public void valueOfACE() {
-        String choice = input.getStringInput("Is the value of your ACE a 1 or an 11: ");
-
+    public Integer valueOfACE(String choice) {
         if (choice.equals("1")) {
             ACEValue = 1;
         } else if (choice.equals("11")) {
             ACEValue = 11;
         } else {
-            System.out.println("Please choose 1 or 11.");
-            valueOfACE();
+            System.out.println("\nPlease choose 1 or 11.");
+            valueOfACE(choice);
         }
+
+        return ACEValue;
     }
 
     public Integer valueChecking(Cards dealer, Cards player, Integer ACEValue) {
@@ -100,24 +107,25 @@ public class BlackJack implements GameInterface {
         return value;
     }
 
-    public void userAction() {
-        String action = input.getStringInput("What do you want to do?\n" +
-                                            "[HIT], [STAND], [DOUBLE DOWN]");
-
-        switch (action.toLowerCase()) {
+    public String userAction(String choice, Cards player, Cards dealer, createDeck deck, Integer ACEValue, Double wager) {
+        switch (choice.toLowerCase()) {
             case "hit":
                 player = deck.cardsStack.pop();
                 valueChecking(dealer, player, ACEValue);
-                System.out.println("You drew a " + player + ".");
-                break;
+                System.out.println("\nYou drew a " + player + ".");
+                return "You said hit.";
             case "stand":
-                break;
+                return "You said stand.";
             case "double down":
-                System.out.println("you said double down");
-                break;
+                wager = (wager * 2);
+                System.out.println("\nYour new wager is " + wager + ".");
+                return "You said double down.";
             default:
-                System.out.println("Please choose a valid option.");
+                System.out.println("\nPlease choose a valid option.");
+                userAction(choice, player, dealer, deck, ACEValue, wager);
         }
+
+        return choice;
     }
 
     public String dealerAction(Integer totalDealerValue) {
@@ -126,54 +134,60 @@ public class BlackJack implements GameInterface {
         if (totalDealerValue <= 16) {
             dealer = deck.cardsStack.pop();
             valueChecking(dealer, player, ACEValue);
-            System.out.println("The dealer drew a " + dealer + ".");
+            System.out.println("\nThe dealer drew a " + dealer + ".");
             action = "The dealer drew a " + dealer + ".";
         } else {
-            System.out.println("The dealer has a " + dealer + ".");
+            System.out.println("\nThe dealer has a " + dealer + ".");
             action = "The dealer has a " + dealer + ".";
         }
 
         return action;
     }
 
-    public String checkWinner(Integer totalDealerValue, Integer totalPlayerValue) {
+    public String checkWinner(Integer totalDealerValue, Integer totalPlayerValue, Double balance, Double wager) {
         String winner = "";
         totalDealerValue += dealerValue;
         totalPlayerValue += playerValue;
+        this.wager = wager;
 
         if (totalDealerValue > 21) {
             totalDealerValue = 0;
             totalPlayerValue = 0;
+            balance = balance + wager;
 
-            System.out.println("You are the winner!");
+            System.out.println("\nYou are the winner!");
+            System.out.println("\nYour new balance is " + balance + ".\n");
             winner = "You are the winner!";
         } else if (totalPlayerValue > 21) {
             totalDealerValue = 0;
             totalPlayerValue = 0;
+            balance = balance - wager;
 
-            System.out.println("The dealer won this game.");
+            System.out.println("\nThe dealer won this game.");
+            System.out.println("\nYour new balance is " + balance + ".\n");
             winner = "The dealer won this game.";
         } else {
-            userAction();
+            this.choice = input.getStringInput("\nWhat do you want to do?\n" +
+                    "[HIT], [STAND], [DOUBLE DOWN]");
+            userAction(choice, player, dealer, deck, ACEValue, wager);
             dealerAction(totalDealerValue);
-            checkWinner(totalDealerValue, totalPlayerValue);
+            checkWinner(totalDealerValue, totalPlayerValue, balance, wager);
         }
 
         return winner;
     }
 
-    public boolean continuePlaying() {
+    public boolean continuePlaying(String choice) {
         boolean answer = false;
-        String choice = input.getStringInput("Do you want to play again: (Yes or No)");
 
         if (choice.equalsIgnoreCase("yes")) {
             answer = true;
         } else if (choice.equalsIgnoreCase("no")) {
             answer = false;
-            System.out.println("Thank you for playing.");
+            System.out.println("\nThank you for playing.\n");
         } else {
-            System.out.println("Please say yes or no.");
-            continuePlaying();
+            System.out.println("\nPlease say yes or no.");
+            continuePlaying(choice);
         }
 
         return answer;
@@ -186,7 +200,7 @@ public class BlackJack implements GameInterface {
 
     @Override
     public void remove(PlayerInterface player) {
-        this.blackJackPlayer = null;
+        this.blackJackPlayer = player;
     }
 
     @Override
@@ -195,11 +209,15 @@ public class BlackJack implements GameInterface {
 
         do {
             deck = new createDeck();
+            this.choice = input.getStringInput("How much would you like to wager: ");
+            blackJack.makeWager(choice);
             blackJack.shuffleDeck(deck);
             blackJack.dealCards(dealer, player);
-            blackJack.valueOfACE();
+            this.choice = input.getStringInput("\nIs the value of your ACE a 1 or an 11: ");
+            blackJack.valueOfACE(choice);
             blackJack.valueChecking(dealer, player, ACEValue);
-            blackJack.checkWinner(totalDealerValue, totalPlayerValue);
-        } while (blackJack.continuePlaying());
+            blackJack.checkWinner(totalDealerValue, totalPlayerValue, balance, wager);
+            this.choice = input.getStringInput("\nDo you want to play again: (Yes or No)");
+        } while (blackJack.continuePlaying(choice));
     }
 }
