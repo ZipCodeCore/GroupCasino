@@ -1,7 +1,9 @@
 package com.github.zipcodewilmington.casino.games.cardGames;
 
+import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -19,13 +21,12 @@ public class BlackJack implements GameInterface {
     private Rank playerRank;
     private Integer playerValue = 0;
     Integer totalPlayerValue = 0;
+    private PlayerInterface blackJackPlayer;
+    private Double balance;
 
-    public static void main(String[] args) {
-        BlackJack blackJack = new BlackJack();
-
-        System.out.println(blackJack.rules());
-
-        blackJack.run();
+    public BlackJack(CasinoAccount casinoAccount) {
+        blackJackPlayer = new BlackJackPlayer(casinoAccount);
+        balance = blackJackPlayer.getArcadeAccount().getBalance();
     }
 
     public String rules() {
@@ -35,12 +36,15 @@ public class BlackJack implements GameInterface {
                 " totaling closer to 21, without going over, than the dealer's cards.";
     }
 
-    public void shuffleDeck() {
+    public createDeck shuffleDeck(createDeck deck) {
         Collections.shuffle(deck.cardsStack);
+
+        return deck;
     }
 
-    public void dealCards() {
+    public String dealCards(Cards dealer, Cards player) {
         System.out.println("The dealer drew a " + dealer + "\n" + "You drew a " + player);
+        return "The dealer drew a " + dealer + "\n" + "You drew a " + player;
     }
 
     public void valueOfACE() {
@@ -134,6 +138,8 @@ public class BlackJack implements GameInterface {
 
     public String checkWinner(Integer totalDealerValue, Integer totalPlayerValue) {
         String winner = "";
+        totalDealerValue += dealerValue;
+        totalPlayerValue += playerValue;
 
         if (totalDealerValue > 21) {
             totalDealerValue = 0;
@@ -148,8 +154,6 @@ public class BlackJack implements GameInterface {
             System.out.println("The dealer won this game.");
             winner = "The dealer won this game.";
         } else {
-            totalDealerValue += dealerValue;
-            totalPlayerValue += playerValue;
             userAction();
             dealerAction(totalDealerValue);
             checkWinner(totalDealerValue, totalPlayerValue);
@@ -166,6 +170,7 @@ public class BlackJack implements GameInterface {
             answer = true;
         } else if (choice.equalsIgnoreCase("no")) {
             answer = false;
+            System.out.println("Thank you for playing.");
         } else {
             System.out.println("Please say yes or no.");
             continuePlaying();
@@ -176,22 +181,22 @@ public class BlackJack implements GameInterface {
 
     @Override
     public void add(PlayerInterface player) {
-
+        this.blackJackPlayer = player;
     }
 
     @Override
     public void remove(PlayerInterface player) {
-
+        this.blackJackPlayer = null;
     }
 
     @Override
     public void run() {
-        BlackJack blackJack = new BlackJack();
+        BlackJack blackJack = new BlackJack(blackJackPlayer.getArcadeAccount());
 
         do {
             deck = new createDeck();
-            blackJack.shuffleDeck();
-            blackJack.dealCards();
+            blackJack.shuffleDeck(deck);
+            blackJack.dealCards(dealer, player);
             blackJack.valueOfACE();
             blackJack.valueChecking(dealer, player, ACEValue);
             blackJack.checkWinner(totalDealerValue, totalPlayerValue);
