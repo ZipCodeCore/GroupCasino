@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington;
 
+import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.games.cardGames.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,7 +9,8 @@ public class BlackJackTest {
     @Test
     public void testRules() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         String expected = "Blackjack is played with one or more standard 52-card decks, with each denomination assigned a\n " +
                 "point value. The cards 2 through 10 are worth their face value. Kings, queens, and jacks are each\n" +
                 " worth 10, and aces may be used as either 1 or 11. The object for the player is to draw cards\n" +
@@ -24,7 +26,8 @@ public class BlackJackTest {
     @Test
     public void checkWinnerTest1() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         Integer totalPlayerValue = 0;
         Integer totalDealerValue = 22;
         String expected = "You are the winner!";
@@ -39,7 +42,8 @@ public class BlackJackTest {
     @Test
     public void checkWinnerTest2() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         Integer totalPlayerValue = 22;
         Integer totalDealerValue = 0;
         String expected = "The dealer won this game.";
@@ -54,7 +58,8 @@ public class BlackJackTest {
     @Test
     public void dealerActionTest1() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         Rank rank = Rank.JACK;
         Suit suit = Suit.SPADES;
         Cards card = new Cards(suit, rank);
@@ -71,7 +76,8 @@ public class BlackJackTest {
     @Test
     public void dealerActionTest2() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         Rank rank = Rank.KING;
         Suit suit = Suit.SPADES;
         Cards card = new Cards(suit, rank);
@@ -88,7 +94,8 @@ public class BlackJackTest {
     @Test
     public void valueChecking1() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         Rank pRank = Rank.ACE;
         Suit pSuit = Suit.SPADES;
         Rank dRank = Rank.SIX;
@@ -108,7 +115,8 @@ public class BlackJackTest {
     @Test
     public void valueChecking2() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         Rank pRank = Rank.ACE;
         Suit pSuit = Suit.SPADES;
         Rank dRank = Rank.SIX;
@@ -128,7 +136,8 @@ public class BlackJackTest {
     @Test
     public void valueChecking3() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         Rank pRank = Rank.JACK;
         Suit pSuit = Suit.SPADES;
         Rank dRank = Rank.SIX;
@@ -148,7 +157,8 @@ public class BlackJackTest {
     @Test
     public void valueChecking4() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         Rank pRank = Rank.QUEEN;
         Suit pSuit = Suit.SPADES;
         Rank dRank = Rank.SIX;
@@ -168,7 +178,8 @@ public class BlackJackTest {
     @Test
     public void valueChecking5() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         Rank pRank = Rank.KING;
         Suit pSuit = Suit.SPADES;
         Rank dRank = Rank.SIX;
@@ -188,7 +199,8 @@ public class BlackJackTest {
     @Test
     public void valueChecking6() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         Rank pRank = Rank.SIX;
         Suit pSuit = Suit.SPADES;
         Rank dRank = Rank.JACK;
@@ -208,7 +220,8 @@ public class BlackJackTest {
     @Test
     public void valueChecking7() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         Rank pRank = Rank.SIX;
         Suit pSuit = Suit.SPADES;
         Rank dRank = Rank.QUEEN;
@@ -228,7 +241,8 @@ public class BlackJackTest {
     @Test
     public void valueChecking8() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
         Rank pRank = Rank.SIX;
         Suit pSuit = Suit.SPADES;
         Rank dRank = Rank.KING;
@@ -248,7 +262,8 @@ public class BlackJackTest {
     @Test
     public void dealCardsTest() {
         //given
-        BlackJack blackJack = new BlackJack();
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
 
         Cards dealer = new Cards(Suit.SPADES, Rank.SIX);
         Cards player = new Cards(Suit.CLUBS, Rank.FIVE);

@@ -39,7 +39,7 @@ public class Casino implements Runnable {
                         play(new War(), new WarPlayer(casinoAccount));
                     }
                     else if (gameSelectionInput.equalsIgnoreCase("BLACKJACK")) {
-                        play(new BlackJack(), new BlackJackPlayer(casinoAccount));
+                        play(new BlackJack(casinoAccount), new BlackJackPlayer(casinoAccount));
                     }
                     else if (gameSelectionInput.equalsIgnoreCase("ROULETTE")) {
                         play(new RouletteGame(casinoAccount), new RoulettePlayer(casinoAccount));}
