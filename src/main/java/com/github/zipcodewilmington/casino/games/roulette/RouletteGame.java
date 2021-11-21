@@ -60,19 +60,13 @@ public class RouletteGame implements GameInterface {
         String result = "";
 
         if (randomNumber % 2 == 0) {
-
-
             roulettePlayer.getArcadeAccount().setBalance(balance += betAmount * 2);
             result = (AnsiGreen + "you won $" + betAmount * 2 + AnsiReset);
 
-
         } else {
-
             roulettePlayer.getArcadeAccount().setBalance(balance -= betAmount);
             result = (AnsiRed + "you lost $" + (betAmount) + AnsiReset);
         }
-
-
         return (result + "\nYour balance is: $" + getBalance());
     }
 
@@ -97,7 +91,6 @@ public class RouletteGame implements GameInterface {
     public String redChoice(Integer randomNumber, Double betAmount) {
         consolePurple.println("Roulette Number: " + randomNumber);
         String result = "";
-
 
         if (Arrays.asList(this.red).contains(randomNumber)) {
             roulettePlayer.getArcadeAccount().setBalance(balance += betAmount * 2);
@@ -129,7 +122,6 @@ public class RouletteGame implements GameInterface {
     }
 
     public String pickNumberChoice(Integer randomNumber, Double betAmount, Integer pickedNumber) {
-
         String result = "";
         Integer number = pickedNumber;
 
