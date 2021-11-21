@@ -51,56 +51,6 @@ public class WarTest {
     }
 
     @Test
-    public void testPlaceWager() {
-        //given
-        CasinoAccount casinoAccount = new CasinoAccount("lance", "dog", 1000.0);
-        War war = new War(casinoAccount);
-        Double balance = 5000.0;
-        String choice = "2000";
-        Double expected = 2000.0;
-
-        //when
-        Double actual = war.placeWager(balance, choice);
-
-        //then
-        Assert.assertEquals(expected, actual);
-    }
-
-//    @Test
-//    public void testPlaceWager1() {
-//        //given
-//        CasinoAccount casinoAccount = new CasinoAccount("lance", "dog", 1000.0);
-//        War war = new War(casinoAccount);
-//        Double balance = 5000.0;
-//        String choice = "7000";
-//        Double expected = 7000.0;
-//
-//        //when
-//        Double actual = war.placeWager(balance, choice);
-//
-//        //then
-//        Assert.assertEquals(expected, actual);
-//    }
-//
-//    @Test
-//    public void testPlaceWager2() {
-//        //given
-//        CasinoAccount casinoAccount = new CasinoAccount("lance", "dog", 1000.0);
-//        War war = new War(casinoAccount);
-//        Double balance = 5000.0;
-//        String choice = "5000";
-//        Double expected = 5000.0;
-//
-//        //when
-//        Double actual = war.placeWager(balance, choice);
-//
-//        //then
-//        Assert.assertEquals(expected, actual);
-//    }
-
-
-
-    @Test
     public void testRules() {
         //given
         CasinoAccount casinoAccount = new CasinoAccount("john", "ellis", 1000.0);
