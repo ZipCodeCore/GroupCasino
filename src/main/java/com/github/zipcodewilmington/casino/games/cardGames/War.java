@@ -26,7 +26,7 @@ public class War implements GameInterface {
     Cards player2Card = deck.cardsStack.pop();
     private Rank player1CardRank;
     private Rank player2CardRank;
-
+    private String choice;
 
 
     public War(CasinoAccount casinoAccount) {
@@ -88,7 +88,7 @@ public class War implements GameInterface {
 //            consoleAuto.println("Player 1 name is saved as: " + player1Name); // todo take out
 //            consoleAuto.println("Player 2 name is saved as: " + player2Name); // todo take out
 //        }
-        return null;
+        return player1Name;
     }
 
     // this method creates a new deck and shuffles
@@ -96,7 +96,7 @@ public class War implements GameInterface {
         Collections.shuffle(deck.cardsStack);
     }
 
-    public void placeWager() {
+    public Double placeWager(Double wager) {
 
         consoleAuto.println(player1Name + ", your current balance is " + balance);
         amountWagered = consoleAuto.getDoubleInput(player1Name + ", please enter your wager amount.");
@@ -111,15 +111,17 @@ public class War implements GameInterface {
                 break;
             }
         }
+        return wager;
     }
 
 
-    public void dealCards() {
+    public String dealCards(String deal) {
 
         consoleAuto.println("Let's flip over our cards.");
         consoleAuto.println("\n" + player1Name + " draws a " + player1Card); // print player1card
         consoleAuto.println(player2Name + " draws a " + player2Card); // print player2card
 
+        return "";
     }
 
     // this method determines winner of each individual round
@@ -202,12 +204,12 @@ public class War implements GameInterface {
 
     @Override
     public void add(PlayerInterface player) {
-
+        this.warPlayer = player;
     }
 
     @Override
     public void remove(PlayerInterface player) {
-
+        this.warPlayer = null;
     }
 
     @Override
@@ -225,12 +227,9 @@ public class War implements GameInterface {
 
         do {
             war.shuffle();
-            war.placeWager();
-
-            war.dealCards();
-
-            war.dealCards();
-
+            war.placeWager(5000.0);
+            war.dealCards("");
+            war.dealCards("");
 
             war.determineRoundWinner(player1Card, player2Card);
             war.determineGameWinner(player1Score, player2Score);

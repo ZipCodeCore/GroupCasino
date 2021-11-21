@@ -8,6 +8,47 @@ import org.junit.Test;
 public class WarTest {
 
     @Test
+    public void testEnterNamesPlayer1() {
+        // given
+        CasinoAccount casinoAccount = new CasinoAccount("lance", "dog", 1000.0);
+        War war = new War(casinoAccount);
+        String expected = "John";
+
+        // when
+        String actual = war.enterNames("John");
+        // then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEnterNamesComputer() {
+        // given
+        CasinoAccount casinoAccount = new CasinoAccount("lance", "dog", 1000.0);
+        War war = new War(casinoAccount);
+        String expected = "Computer";
+
+        // when
+        String actual = war.enterNames("Computer");
+        // then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testDealCards() {
+        //given
+        CasinoAccount casinoAccount = new CasinoAccount("lance", "dog", 1000.0);
+        War war = new War(casinoAccount);
+        String expected = "";
+
+        //when
+        String actual = war.dealCards("");
+        //then
+        Assert.assertEquals(expected, actual);
+
+    }
+
+
+    @Test
     public void testRules() {
         //given
         CasinoAccount casinoAccount = new CasinoAccount("john", "ellis", 1000.0);
