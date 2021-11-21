@@ -11,23 +11,25 @@ import java.util.Collections;
 public class BlackJack implements GameInterface {
     private IOConsole input = new IOConsole(AnsiColor.BLUE);
     createDeck deck = new createDeck();
-    Cards dealer = deck.cardsStack.pop();
+    private Cards dealer;
     Integer ACEValue = 1;
     private Rank dealerRank;
     private Integer dealerValue = 0;
     Integer totalDealerValue = 0;
-    Cards player = deck.cardsStack.pop();
+    private Cards player;
     private Rank playerRank;
     private Integer playerValue = 0;
     Integer totalPlayerValue = 0;
     private PlayerInterface blackJackPlayer;
     private Double balance;
-    private Double wager = 0.0;
+    private Double wager;
     private String choice;
 
     public BlackJack(CasinoAccount casinoAccount) {
         blackJackPlayer = new BlackJackPlayer(casinoAccount);
         balance = blackJackPlayer.getArcadeAccount().getBalance();
+        dealer = deck.cardsStack.pop();
+        player = deck.cardsStack.pop();
     }
 
     public String rules() {
@@ -37,19 +39,16 @@ public class BlackJack implements GameInterface {
                 " totaling closer to 21, without going over, than the dealer's cards.\n";
     }
 
-    public Double makeWager(String choice) {
-        wager = Double.parseDouble(choice);
-
-        return wager;
-    }
-
     public createDeck shuffleDeck(createDeck deck) {
-        Collections.shuffle(deck.cardsStack);
+        Collections.shuffle(this.deck.cardsStack);
 
         return deck;
     }
 
     public String dealCards(Cards dealer, Cards player) {
+        dealer = deck.cardsStack.pop();
+        player = deck.cardsStack.pop();
+
         System.out.println("\nThe dealer drew a " + dealer + "\n" + "You drew a " + player);
         return "The dealer drew a " + dealer + "\n" + "You drew a " + player;
     }
@@ -148,28 +147,27 @@ public class BlackJack implements GameInterface {
         String winner = "";
         totalDealerValue += dealerValue;
         totalPlayerValue += playerValue;
-        this.wager = wager;
 
         if (totalDealerValue > 21 || (totalDealerValue >= 17 && totalPlayerValue > totalDealerValue)) {
             totalDealerValue = 0;
             totalPlayerValue = 0;
-            this.balance = balance + wager;
+            blackJackPlayer.getArcadeAccount().setBalance(balance += wager);
 
             System.out.println("\nYou are the winner!");
-            System.out.println("\nYour new balance is " + this.balance + ".\n");
+            System.out.println("\nYour new balance is " + balance + ".\n");
             winner = "You are the winner!";
         } else if (totalPlayerValue > 21) {
             totalDealerValue = 0;
             totalPlayerValue = 0;
-            this.balance = balance - wager;
+            blackJackPlayer.getArcadeAccount().setBalance(balance -= wager);
 
             System.out.println("\nThe dealer won this game.");
-            System.out.println("\nYour new balance is " + this.balance + ".\n");
+            System.out.println("\nYour new balance is " + balance + ".\n");
             winner = "The dealer won this game.";
         } else {
             System.out.println("\nThe total value of your cards is: " + totalPlayerValue);
             System.out.println("The total value of the dealer's cards is: " + totalDealerValue);
-            this.choice = input.getStringInput("\nWhat do you want to do?\n" +
+            choice = input.getStringInput("\nWhat do you want to do?\n" +
                     "[HIT], [STAND], [DOUBLE DOWN]");
             userAction(choice, player, dealer, deck, ACEValue, wager);
             dealerAction(totalDealerValue);
@@ -216,17 +214,17 @@ public class BlackJack implements GameInterface {
                 "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| \n" +
                 "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' ");
 
+        blackJack.rules();
+
         do {
-            deck = new createDeck();
-            this.choice = input.getStringInput("How much would you like to wager: ");
-            blackJack.makeWager(choice);
-            blackJack.shuffleDeck(deck);
+            wager = input.getDoubleInput("How much would you like to wager: ");
+            blackJack.shuffleDeck(deck = new createDeck());
             blackJack.dealCards(dealer, player);
-            this.choice = input.getStringInput("\nIs the value of your ACE a 1 or an 11: ");
+            choice = input.getStringInput("\nIs the value of your ACE a 1 or an 11: ");
             blackJack.valueOfACE(choice);
             blackJack.valueChecking(dealer, player, ACEValue);
             blackJack.checkWinner(totalDealerValue, totalPlayerValue, balance, wager);
-            this.choice = input.getStringInput("\nDo you want to play again: (Yes or No)");
+            choice = input.getStringInput("\nDo you want to play again: (Yes or No)");
         } while (blackJack.continuePlaying(choice));
     }
 }

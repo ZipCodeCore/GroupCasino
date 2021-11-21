@@ -264,21 +264,21 @@ public class BlackJackTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void dealCardsTest() {
-        //given
-        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
-        BlackJack blackJack = new BlackJack(casinoAccount);
-        Cards dealer = new Cards(Suit.SPADES, Rank.SIX);
-        Cards player = new Cards(Suit.CLUBS, Rank.FIVE);
-        String expected = "The dealer drew a " + dealer + "\n" + "You drew a " + player;
-
-        //when
-        String actual = blackJack.dealCards(dealer, player);
-
-        //then
-        Assert.assertEquals(expected, actual);
-    }
+//    @Test
+//    public void dealCardsTest() {
+//        //given
+//        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+//        BlackJack blackJack = new BlackJack(casinoAccount);
+//        Cards dealer = new Cards(Suit.SPADES, Rank.SIX);
+//        Cards player = new Cards(Suit.CLUBS, Rank.FIVE);
+//        String expected = "The dealer drew a " + dealer + "\n" + "You drew a " + player;
+//
+//        //when
+//        String actual = blackJack.dealCards(dealer, player);
+//
+//        //then
+//        Assert.assertEquals(expected, actual);
+//    }
 
     @Test
     public void valueOfACETest1() {
@@ -335,21 +335,6 @@ public class BlackJackTest {
 
         //when
         Boolean actual = blackJack.continuePlaying(choice);
-
-        //then
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void makeWagerTest() {
-        //given
-        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
-        BlackJack blackJack = new BlackJack(casinoAccount);
-        Double expected = 500.0;
-        String choice = "500";
-
-        //when
-        Double actual = blackJack.makeWager(choice);
 
         //then
         Assert.assertEquals(expected, actual);
