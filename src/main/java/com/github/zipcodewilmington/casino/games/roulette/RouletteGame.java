@@ -29,6 +29,11 @@ public class RouletteGame implements GameInterface {
     private String AnsiGreen = "\u001B[32m";
     private String AnsiReset =   "\u001B[0m";
     private String AnsiRed  = "\u001B[31m";
+    private String welcomeMessage = "\n" +
+            "░█──░█ ░█▀▀▀ ░█─── ░█▀▀█ ░█▀▀▀█ ░█▀▄▀█ ░█▀▀▀ 　 ▀▀█▀▀ ░█▀▀▀█ 　 ░█▀▀█ ░█▀▀▀█ ░█─░█ ░█─── ░█▀▀▀ ▀▀█▀▀ ▀▀█▀▀ ░█▀▀▀ █ █ █ \n" +
+            "░█░█░█ ░█▀▀▀ ░█─── ░█─── ░█──░█ ░█░█░█ ░█▀▀▀ 　 ─░█── ░█──░█ 　 ░█▄▄▀ ░█──░█ ░█─░█ ░█─── ░█▀▀▀ ─░█── ─░█── ░█▀▀▀ ▀ ▀ ▀ \n" +
+            "░█▄▀▄█ ░█▄▄▄ ░█▄▄█ ░█▄▄█ ░█▄▄▄█ ░█──░█ ░█▄▄▄ 　 ─░█── ░█▄▄▄█ 　 ░█─░█ ░█▄▄▄█ ─▀▄▄▀ ░█▄▄█ ░█▄▄▄ ─░█── ─░█── ░█▄▄▄ ▄ ▄ ▄";
+    private String outOfMoneyMessage = "\uD83C\uDD48\uD83C\uDD3E\uD83C\uDD44 \uD83C\uDD30\uD83C\uDD41\uD83C\uDD34 \uD83C\uDD31\uD83C\uDD41\uD83C\uDD3E\uD83C\uDD3A\uD83C\uDD34❕❕❕ \uD83C\uDD36\uD83C\uDD34\uD83C\uDD43 \uD83C\uDD3E\uD83C\uDD44\uD83C\uDD43 \uD83C\uDD3E\uD83C\uDD35 \uD83C\uDD3C\uD83C\uDD48 \uD83C\uDD32\uD83C\uDD30\uD83C\uDD42\uD83C\uDD38\uD83C\uDD3D\uD83C\uDD3E❕❕❕";
 
 
     private final IOConsole consolePurple = new IOConsole(AnsiColor.PURPLE);
@@ -180,13 +185,13 @@ public class RouletteGame implements GameInterface {
 
     public void rouletteGame() {
 
-        consolePurple.println("Welcome to the Roulette Game!!!");
+        consolePurple.println(welcomeMessage);
 
      do {
 
             this.betAmount = consolePurple.getDoubleInput("Please enter amount you would like to bet");
             if(this.betAmount > this.balance){
-                consoleRed.println("YOU ARE BROKE!!! GET OUT OF MY CASINO!!!");
+                consoleRed.println(outOfMoneyMessage);
               break;
             }
             consolePurple.println("PLease choose from the options below");
