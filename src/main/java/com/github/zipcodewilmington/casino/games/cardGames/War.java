@@ -7,12 +7,11 @@ import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.Collections;
-import java.util.Random;
 
 public class War implements GameInterface {
 
 
-    private Double balance = 1000.0;
+    private Double balance;
     private double amountWagered;
     private Double player2Bet;
     private IOConsole consoleAuto = new IOConsole(AnsiColor.AUTO);
@@ -26,7 +25,7 @@ public class War implements GameInterface {
     private Rank player1CardRank;
     private Rank player2CardRank;
     createDeck deck = new createDeck();
-//    Random randomNumber = new Random();
+
 
 
     public static void main(String[] args) {
@@ -39,10 +38,6 @@ public class War implements GameInterface {
 
     // this method states the rules of the game
     public String warRules() {
-//        System.out.println("Welcome to the game of War.\n\nEach player will get dealt a " +
-//                "card. Whoever has the higher \nvalue card wins that round, and gets awarded " +
-//                "one point. In \nthe event of a tie, no points will be rewarded and both " +
-//                "\nplayers will play again. The winner is the first player to \nscore ten points.\n");
 
         return ("Welcome to the game of War.\n\nEach player will get dealt a " +
                 "card. Whoever has the higher \nvalue card wins that round, and gets awarded " +
@@ -141,11 +136,6 @@ public class War implements GameInterface {
     public String determineRoundWinner(Rank player1CardRank, Rank player2CardRank) {
 
         String result = "";
-
-
-//        System.out.println(player1CardRank); // print player1card rank
-//        System.out.println(player2CardRank); // print player2card rank
-
 
         if (this.player1CardRank.compareTo(this.player2CardRank) > 0) {
 

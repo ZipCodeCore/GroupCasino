@@ -8,13 +8,8 @@ import com.github.zipcodewilmington.casino.games.cardGames.BlackJack;
 import com.github.zipcodewilmington.casino.games.cardGames.BlackJackPlayer;
 import com.github.zipcodewilmington.casino.games.cardGames.War;
 import com.github.zipcodewilmington.casino.games.cardGames.WarPlayer;
-import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
-import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
 import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
 import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
-import com.github.zipcodewilmington.casino.games.slots.Slots;
-import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
-import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -37,10 +32,8 @@ public class Casino implements Runnable {
                 boolean isValidLogin = casinoAccount != null;
                 if (isValidLogin) {
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
-                    if (gameSelectionInput.equalsIgnoreCase("SLOTS")) {
-                        play(new Slots(), new SlotsPlayer());
-                    }
-                    else if (gameSelectionInput.equalsIgnoreCase("WAR")) {
+
+                    if (gameSelectionInput.equalsIgnoreCase("WAR")) {
                         play(new War(), new WarPlayer());
                     }
                     else if (gameSelectionInput.equalsIgnoreCase("BLACKJACK")) {

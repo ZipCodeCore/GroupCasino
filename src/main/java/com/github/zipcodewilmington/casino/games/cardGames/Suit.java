@@ -1,10 +1,10 @@
 package com.github.zipcodewilmington.casino.games.cardGames;
 
 public enum Suit {
-    HEARTS(""),
-    CLUBS(""),
-    DIAMONDS(""),
-    SPADES("");
+    HEARTS("♡"),
+    CLUBS("♧"),
+    DIAMONDS("♢"),
+    SPADES("♤");
 
     private final String graphic;
 
