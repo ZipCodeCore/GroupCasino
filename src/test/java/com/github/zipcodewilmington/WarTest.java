@@ -55,12 +55,13 @@ public class WarTest {
         //given
         CasinoAccount casinoAccount = new CasinoAccount("lance", "dog", 1000.0);
         War war = new War(casinoAccount);
+        Double wager = 0.0;
         Double balance = 5000.0;
         String choice = "2000";
         Double expected = 2000.0;
 
         //when
-        Double actual = war.placeWager(balance, choice);
+        Double actual = war.placeWager(balance, choice, wager);
 
         //then
         Assert.assertEquals(expected, actual);
