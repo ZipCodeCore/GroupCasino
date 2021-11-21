@@ -36,7 +36,7 @@ public class Casino implements Runnable {
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
 
                     if (gameSelectionInput.equalsIgnoreCase("WAR")) {
-                        play(new War(), new WarPlayer(casinoAccount));
+                        play(new War(casinoAccount), new WarPlayer(casinoAccount));
                     }
                     else if (gameSelectionInput.equalsIgnoreCase("BLACKJACK")) {
                         play(new BlackJack(casinoAccount), new BlackJackPlayer(casinoAccount));

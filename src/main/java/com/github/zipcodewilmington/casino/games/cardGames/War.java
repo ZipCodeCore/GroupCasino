@@ -1,6 +1,7 @@
 package com.github.zipcodewilmington.casino.games.cardGames;
 
 
+import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.utils.AnsiColor;
@@ -10,7 +11,7 @@ import java.util.Collections;
 
 public class War implements GameInterface {
 
-
+    createDeck deck = new createDeck();
     private Double balance;
     private PlayerInterface warPlayer;
     private double amountWagered;
@@ -21,20 +22,17 @@ public class War implements GameInterface {
     private String player2Name;
     private int player1Score;
     private int player2Score;
-    private Cards player1Card;
-    private Cards player2Card;
+    Cards player1Card = deck.cardsStack.pop();
+    Cards player2Card = deck.cardsStack.pop();
     private Rank player1CardRank;
     private Rank player2CardRank;
-    createDeck deck = new createDeck();
 
 
-    public static void main(String[] args) {
 
-        War war = new War();
-        war.run();
-
+    public War(CasinoAccount casinoAccount) {
+        warPlayer = new WarPlayer(casinoAccount);
+        balance = warPlayer.getArcadeAccount().getBalance();
     }
-
 
     // this method states the rules of the game
     public String warRules() {
@@ -96,7 +94,6 @@ public class War implements GameInterface {
     // this method creates a new deck and shuffles
     public void shuffle() {
         Collections.shuffle(deck.cardsStack);
-
     }
 
     public void placeWager() {
@@ -120,24 +117,21 @@ public class War implements GameInterface {
     public void dealCards() {
 
         consoleAuto.println("Let's flip over our cards.");
-        Cards player1Card = deck.cardsStack.pop();
-        Cards player2Card = deck.cardsStack.pop();
-
         consoleAuto.println("\n" + player1Name + " draws a " + player1Card); // print player1card
         consoleAuto.println(player2Name + " draws a " + player2Card); // print player2card
-
-        player1CardRank = player1Card.getRank();
-        player2CardRank = player2Card.getRank();
-
 
     }
 
     // this method determines winner of each individual round
-    public String determineRoundWinner(Rank player1CardRank, Rank player2CardRank) {
+    public String determineRoundWinner(Cards player1Card, Cards player2Card) {
 
         String result = "";
+        player1CardRank = player1Card.getRank();
+        player2CardRank = player2Card.getRank();
+        Integer player1Value = player1CardRank.getFirstValue();
+        Integer player2Value = player2CardRank.getFirstValue();
 
-        if (this.player1CardRank.compareTo(this.player2CardRank) > 0) {
+        if (player1Value > player2Value) {
 
             result = "\n" + player1Name + " has won this round!";
             consoleAuto.println(result);
@@ -146,7 +140,7 @@ public class War implements GameInterface {
             consoleAuto.println("\n" + player1Name + " now has a balance of " + balance);
             consoleAuto.println("\n" + player1Name + " now has won " + player1Score + " rounds.\n");
 
-        } else if (this.player1CardRank.compareTo(this.player2CardRank) < 0) {
+        } else if (player1Value < player2Value) {
             // if 2 is higher than 1, 2 wins, and one point added to score for player 2
 
             result = "\n" + player2Name + " has won this round!";
@@ -156,7 +150,7 @@ public class War implements GameInterface {
             consoleAuto.println("\n" + player1Name + " now has a balance of " + balance);
             consoleAuto.println("\n" + player2Name + " now has won " + player2Score + " rounds.\n");
 
-        } else if (this.player1CardRank.compareTo(this.player2CardRank) == 0) {
+        } else if (player1Value == player2Value) {
             // this is a tie. neither players gets a point
 
             result = "\nIt was a tie.\n";
@@ -222,7 +216,7 @@ public class War implements GameInterface {
 
         balance = warPlayer.getArcadeAccount().getBalance();
 
-        War war = new War();
+        War war = new War(warPlayer.getArcadeAccount());
 
         System.out.println(war.warRules());
 //        war.howManyPlayers();
@@ -238,8 +232,8 @@ public class War implements GameInterface {
             war.dealCards();
 
 
-            war.determineRoundWinner(this.player1CardRank, this.player2CardRank);
-            war.determineGameWinner(this.player1Score, this.player2Score);
+            war.determineRoundWinner(player1Card, player2Card);
+            war.determineGameWinner(player1Score, player2Score);
             String keepPlaying = "";
             keepPlaying = consoleAuto.getStringInput("Would you like to play again? Please press any key to continue, or type [no] to quit.");
             if (keepPlaying.equalsIgnoreCase("no")) {
