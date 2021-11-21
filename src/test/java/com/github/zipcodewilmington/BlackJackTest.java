@@ -244,4 +244,34 @@ public class BlackJackTest {
         //then
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void dealCardsTest() {
+        //given
+        BlackJack blackJack = new BlackJack();
+
+        Cards dealer = new Cards(Suit.SPADES, Rank.SIX);
+        Cards player = new Cards(Suit.CLUBS, Rank.FIVE);
+        String expected = "The dealer drew a " + dealer + "\n" + "You drew a " + player;
+
+        //when
+        String actual = blackJack.dealCards(dealer, player);
+
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
+//    @Test
+//    public void shuffleDeckTest() {
+//        //given
+//        BlackJack blackJack = new BlackJack();
+//        createDeck deck = new createDeck();
+//        createDeck expected;
+//
+//        //when
+//        createDeck actual = blackJack.shuffleDeck(deck);
+//
+//        //then
+//        Assert.assertEquals(expected, actual);
+//    }
 }
