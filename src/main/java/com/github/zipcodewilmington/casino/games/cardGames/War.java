@@ -128,6 +128,7 @@ public class War implements GameInterface {
             result = "\n" + player1Name + " has won this round!";
             consoleAuto.println(result);
             player1Score++;
+//            System.out.println(player1Score);
             balance = balance + wager;
             consoleAuto.println("\n" + player1Name + " now has a balance of " + balance);
             consoleAuto.println("\n" + player1Name + " now has won " + player1Score + " rounds.\n");
@@ -237,7 +238,7 @@ public class War implements GameInterface {
 
         do {
             war.shuffle(deck);
-            this.choice = consoleAuto.getStringInput(player1Name + ", please enter your wager amount.");
+            this.choice = consoleAuto.getStringInput("Please enter your wager amount.");
             war.placeWager(5000.0, choice);
             war.dealCards("");
             war.dealCards("");
