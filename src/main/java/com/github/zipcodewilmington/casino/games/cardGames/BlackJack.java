@@ -1,7 +1,9 @@
 package com.github.zipcodewilmington.casino.games.cardGames;
 
+import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -19,13 +21,12 @@ public class BlackJack implements GameInterface {
     private Rank playerRank;
     private Integer playerValue = 0;
     Integer totalPlayerValue = 0;
+    private PlayerInterface blackJackPlayer;
+    private Double balance;
 
-    public static void main(String[] args) {
-        BlackJack blackJack = new BlackJack();
-
-        System.out.println(blackJack.rules());
-
-        blackJack.run();
+    public BlackJack(CasinoAccount casinoAccount) {
+        blackJackPlayer = new BlackJackPlayer(casinoAccount);
+        balance = blackJackPlayer.getArcadeAccount().getBalance();
     }
 
     public String rules() {
@@ -180,17 +181,17 @@ public class BlackJack implements GameInterface {
 
     @Override
     public void add(PlayerInterface player) {
-
+        this.blackJackPlayer = player;
     }
 
     @Override
     public void remove(PlayerInterface player) {
-
+        this.blackJackPlayer = null;
     }
 
     @Override
     public void run() {
-        BlackJack blackJack = new BlackJack();
+        BlackJack blackJack = new BlackJack(blackJackPlayer.getArcadeAccount());
 
         do {
             deck = new createDeck();
