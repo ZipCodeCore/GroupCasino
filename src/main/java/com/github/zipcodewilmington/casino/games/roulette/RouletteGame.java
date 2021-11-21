@@ -154,7 +154,7 @@ public class RouletteGame implements GameInterface {
      }
 
 //     consoleRed.println(result);
-//        consoleRed.println("Your Balance is: $" + balance);
+//     consoleRed.println("Your Balance is: $" + balance);
         return (result + "\nYour balance is: $" + balance);
     }
 
