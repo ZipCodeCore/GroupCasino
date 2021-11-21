@@ -413,4 +413,33 @@ public class BlackJackTest {
         //then
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void shuffleDeckTest() {
+        //given
+        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+        BlackJack blackJack = new BlackJack(casinoAccount);
+        createDeck deck = new createDeck();
+        createDeck expected = new createDeck();
+
+        //when
+        createDeck actual = blackJack.shuffleDeck(deck);
+
+        //then
+        Assert.assertNotEquals(expected, actual);
+    }
+
+//    @Test
+//    public void constructorTest() {
+//        //given
+//        CasinoAccount casinoAccount = new CasinoAccount("j", "j", 1500.0);
+//        BlackJack blackJack = new BlackJack(casinoAccount);
+//        BlackJack expected = ;
+//
+//        //when
+//        BlackJack actual = blackJack;
+//
+//        //then
+//        Assert.assertNotEquals(expected, actual);
+//    }
 }
